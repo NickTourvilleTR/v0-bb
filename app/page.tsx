@@ -11,6 +11,10 @@ import { BriefBuilderDetailsCard } from "@/components/brief-builder-details-card
 import { BriefBuilderAdditionalCard } from "@/components/brief-builder-additional-card";
 import { BriefBuilderProgressCard } from "@/components/brief-builder-progress-card";
 import { BriefBuilderReadyCard } from "@/components/brief-builder-ready-card";
+import { BriefBuilderGeneratingCard } from "@/components/brief-builder-generating-card";
+import { BriefStepperNav } from "@/components/brief-stepper-nav";
+import { ArgumentsPanel } from "@/components/arguments-panel";
+import { ChatDrawer } from "@/components/chat-drawer";
 import { Sparkles } from "lucide-react";
 import * as React from "react";
 
@@ -23,7 +27,8 @@ type Screen =
   | "case-details"
   | "additional-details"
   | "context-provided"
-  | "analyzing";
+  | "generating"
+  | "builder";
 
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
@@ -61,7 +66,10 @@ export default function BriefBuilderPrototype() {
   };
 
   const handleSkipAdditional = () => {
-    setCurrentScreen("analyzing");
+    setCurrentScreen("generating");
+    setTimeout(() => {
+      setCurrentScreen("builder");
+    }, 3000);
   };
 
   const handleAdditionalContextSubmit = () => {
@@ -69,7 +77,11 @@ export default function BriefBuilderPrototype() {
   };
 
   const handleReadyToBuild = () => {
-    setCurrentScreen("analyzing");
+    setCurrentScreen("generating");
+    // Simulate generating arguments, then show builder
+    setTimeout(() => {
+      setCurrentScreen("builder");
+    }, 3000);
   };
 
   const handleReset = () => {
@@ -86,11 +98,36 @@ export default function BriefBuilderPrototype() {
     "case-details": 5,
     "additional-details": 6,
     "context-provided": 7,
-    analyzing: 8,
+    "generating": 8,
+    "builder": 9,
   };
 
   const isAtOrPast = (screen: Screen) =>
     screenIndex[currentScreen] >= screenIndex[screen];
+
+  // Builder layout (split view with chat drawer)
+  if (currentScreen === "builder") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="argue" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Arguments Panel */}
+            <div className="relative flex-1 overflow-y-auto bg-[#fcfcfc]">
+              <ArgumentsPanel />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-white">
@@ -248,7 +285,7 @@ export default function BriefBuilderPrototype() {
                 )}
 
                 {/* Ready to Build Card */}
-                {isAtOrPast("context-provided") && currentScreen !== "analyzing" && (
+                {isAtOrPast("context-provided") && !isAtOrPast("generating") && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:36 a.m."
@@ -258,14 +295,26 @@ export default function BriefBuilderPrototype() {
                   </CocoChatMessage>
                 )}
 
-                {/* Progress Card */}
-                {currentScreen === "analyzing" && (
+                {/* User "Start building" message */}
+                {isAtOrPast("generating") && (
                   <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10a.m."
+                    type="user"
+                    userName="Jane Lawson"
+                    timestamp="9:42 a.m."
                     className="mb-6"
                   >
-                    <BriefBuilderProgressCard progress={40} />
+                    <p className="text-[#212223]">Start building my brief.</p>
+                  </CocoChatMessage>
+                )}
+
+                {/* Generating Card */}
+                {currentScreen === "generating" && (
+                  <CocoChatMessage
+                    type="assistant"
+                    timestamp="9:42 a.m."
+                    className="mb-6"
+                  >
+                    <BriefBuilderGeneratingCard progress={40} />
                   </CocoChatMessage>
                 )}
               </div>
