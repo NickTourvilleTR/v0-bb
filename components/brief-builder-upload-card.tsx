@@ -53,7 +53,7 @@ export function BriefBuilderUploadCard({
         </div>
         {showTags && (
           <div className="flex items-center gap-2">
-            <span className="rounded-full border border-[#e5e5e5] bg-white px-3 py-1 text-xs text-[#404040]">
+            <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
               Motion to dismiss
             </span>
             <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">

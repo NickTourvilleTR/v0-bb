@@ -85,10 +85,10 @@ export function ChatDrawer({ className, onClose }: ChatDrawerProps) {
               <span className="font-semibold text-[#212223]">Brief Builder</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="rounded-md bg-[#f2f2f2] px-2 py-1 text-xs text-[#212223]">
+              <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
                 Motion to dismiss
               </span>
-              <span className="rounded-md bg-[#eaffe5] px-2 py-1 text-xs text-[#212223]">
+              <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
                 Primary brief
               </span>
             </div>
