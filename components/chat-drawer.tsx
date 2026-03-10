@@ -3,7 +3,8 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
-import { Sparkles, Paperclip, Image, ArrowUp, PanelRightClose, PanelRightOpen, RotateCcw, FileText, ExternalLink, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { Sparkles, Paperclip, Image, ArrowUp, PanelRightClose, PanelRightOpen, RotateCcw, FileText, ExternalLink, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -11,21 +12,43 @@ interface ChatDrawerProps {
   className?: string;
   isOpen?: boolean;
   onToggle?: () => void;
+  onArgumentAdded?: () => void;
 }
 
-export function ChatDrawer({ className, isOpen = true, onToggle }: ChatDrawerProps) {
+type ChatState = "initial" | "adding" | "added";
+
+export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "versions" | "sources">("chat");
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
   const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
+  const [chatState, setChatState] = React.useState<ChatState>("initial");
+  const [addingProgress, setAddingProgress] = React.useState(0);
+  const [researchExpanded, setResearchExpanded] = React.useState(false);
   const chatScrollRef = React.useRef<HTMLDivElement>(null);
 
-  // Auto-scroll chat to bottom on mount
+  // Auto-scroll chat to bottom on mount and when chat state changes
   React.useEffect(() => {
     if (isOpen && activeTab === "chat" && chatScrollRef.current) {
       chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
     }
-  }, [isOpen, activeTab]);
+  }, [isOpen, activeTab, chatState]);
+
+  // Handle message submission
+  const handleSubmit = () => {
+    if (!inputValue.trim()) return;
+    setInputValue("");
+    setChatState("adding");
+    
+    // Animate progress
+    setTimeout(() => setAddingProgress(40), 100);
+    
+    // Complete after delay
+    setTimeout(() => {
+      setChatState("added");
+      onArgumentAdded?.();
+    }, 3000);
+  };
 
   // Collapsed state - just show toggle button
   if (!isOpen) {
@@ -396,6 +419,138 @@ export function ChatDrawer({ className, isOpen = true, onToggle }: ChatDrawerPro
             </Button>
           </div>
         </div>
+
+        {/* User Add Argument Message */}
+        {(chatState === "adding" || chatState === "added") && (
+          <div className="mt-4 flex items-start gap-2">
+            <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
+              JL
+            </div>
+            <div>
+              <p className="text-xs text-[#737373]">Jane Lawson - 9:50 a.m.</p>
+              <p className="text-sm text-[#212223]">
+                Add one more argument that applies to multiple claims: waiver applies because the plaintiff's written agreement allowing the defendant to review the document bars her from asserting claims inconsistent with that agreement. Use conditional phrasing if needed.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* CoCounsel Adding Response */}
+        {chatState === "adding" && (
+          <>
+            <div className="mt-4 flex items-start gap-2">
+              <div className="shrink-0">
+                <Logo icon className="size-7" />
+              </div>
+              <div>
+                <p className="text-xs text-[#737373]">CoCounsel - 9:50 a.m.</p>
+              </div>
+            </div>
+
+            {/* Adding Argument Card */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#212223]" />
+                  <span className="font-semibold text-[#212223]">Brief Builder</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Motion to dismiss
+                  </span>
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Primary brief
+                  </span>
+                </div>
+              </div>
+
+              {/* Progress */}
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm text-[#212223]">Adding argument...</span>
+                <span className="text-sm text-[#212223]">{addingProgress}%</span>
+              </div>
+              <div className="mb-4 h-1.5 w-full rounded-full bg-[#e5e5e5]">
+                <div
+                  className="h-1.5 rounded-full bg-[#2e6b5c] transition-all duration-1000 ease-out"
+                  style={{ width: `${addingProgress}%` }}
+                />
+              </div>
+
+              {/* Checkbox */}
+              <div className="mb-4 flex items-center gap-2">
+                <Checkbox className="border-[#737373]" />
+                <span className="text-sm text-[#212223]">Checkbox text label</span>
+              </div>
+
+              {/* Research Steps */}
+              <button
+                onClick={() => setResearchExpanded(!researchExpanded)}
+                className="flex w-full items-center justify-between border-t border-[#e5e5e5] pt-3"
+              >
+                <span className="font-medium text-[#212223]">Research steps</span>
+                {researchExpanded ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+            </div>
+          </>
+        )}
+
+        {/* CoCounsel Added Response */}
+        {chatState === "added" && (
+          <>
+            <div className="mt-4 flex items-start gap-2">
+              <div className="shrink-0">
+                <Logo icon className="size-7" />
+              </div>
+              <div>
+                <p className="text-xs text-[#737373]">CoCounsel - 9:57 a.m.</p>
+              </div>
+            </div>
+
+            {/* Added Argument Card */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#212223]" />
+                  <span className="font-semibold text-[#212223]">Brief Builder</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Motion to dismiss
+                  </span>
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Primary brief
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-sm text-[#212223]">
+                All set. I've added the argument to your draft brief.
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              >
+                Next: Supporting authority
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              >
+                Skip to generate draft
+              </Button>
+            </div>
+          </>
+        )}
           </>
         )}
       </div>
@@ -422,6 +577,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle }: ChatDrawerPro
             <Button
               size="icon"
               className="size-7 rounded-full bg-[#2e6b5c] text-white hover:bg-[#24594c]"
+              onClick={handleSubmit}
             >
               <ArrowUp className="size-4" />
             </Button>

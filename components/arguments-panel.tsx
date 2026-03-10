@@ -10,6 +10,7 @@ interface Argument {
   title: string;
   points: string[];
   appliesTo?: string;
+  userAdded?: boolean;
 }
 
 const defaultArguments: Argument[] = [
@@ -65,12 +66,28 @@ const defaultArguments: Argument[] = [
   },
 ];
 
+const userAddedArgument: Argument = {
+  id: "6",
+  title: "Lack of access defeats the copyright claim because defendant likely did not see the work.",
+  points: [
+    "No evidence provided that defendant saw or had any access to the work.",
+    "Tenuous relationship between defendants at best.",
+  ],
+  appliesTo: "Cause of Action 1 (Copyright Infringement)",
+  userAdded: true,
+};
+
 interface ArgumentsPanelProps {
   className?: string;
+  showUserArgument?: boolean;
 }
 
-export function ArgumentsPanel({ className }: ArgumentsPanelProps) {
+export function ArgumentsPanel({ className, showUserArgument = false }: ArgumentsPanelProps) {
   const [selectedArgs, setSelectedArgs] = React.useState<string[]>(["1", "2", "3"]);
+  
+  const allArguments = showUserArgument 
+    ? [...defaultArguments, userAddedArgument] 
+    : defaultArguments;
 
   const toggleArgument = (id: string) => {
     setSelectedArgs((prev) =>
@@ -79,12 +96,19 @@ export function ArgumentsPanel({ className }: ArgumentsPanelProps) {
   };
 
   const toggleAll = () => {
-    if (selectedArgs.length === defaultArguments.length) {
+    if (selectedArgs.length === allArguments.length) {
       setSelectedArgs([]);
     } else {
-      setSelectedArgs(defaultArguments.map((a) => a.id));
+      setSelectedArgs(allArguments.map((a) => a.id));
     }
   };
+  
+  // Auto-select user added argument when it appears
+  React.useEffect(() => {
+    if (showUserArgument && !selectedArgs.includes("6")) {
+      setSelectedArgs((prev) => [...prev, "6"]);
+    }
+  }, [showUserArgument]);
 
   return (
     <div className={cn("flex flex-1 flex-col", className)}>
@@ -108,7 +132,7 @@ export function ArgumentsPanel({ className }: ArgumentsPanelProps) {
         <div className="mb-4 flex items-center gap-3">
           <Checkbox
             id="select-all"
-            checked={selectedArgs.length === defaultArguments.length}
+            checked={selectedArgs.length === allArguments.length}
             onCheckedChange={toggleAll}
             className="border-[#737373] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c]"
           />
@@ -122,7 +146,7 @@ export function ArgumentsPanel({ className }: ArgumentsPanelProps) {
 
         {/* Arguments List */}
         <div className="space-y-4">
-          {defaultArguments.map((arg, index) => (
+          {allArguments.map((arg, index) => (
             <div
               key={arg.id}
               className={cn(
@@ -140,12 +164,19 @@ export function ArgumentsPanel({ className }: ArgumentsPanelProps) {
                   className="mt-1 border-[#737373] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c]"
                 />
                 <div className="flex-1">
-                  <label
-                    htmlFor={`arg-${arg.id}`}
-                    className="cursor-pointer text-base font-semibold text-[#212223]"
-                  >
-                    {index + 1}. {arg.title}
-                  </label>
+                  <div className="flex items-start justify-between">
+                    <label
+                      htmlFor={`arg-${arg.id}`}
+                      className="cursor-pointer text-base font-semibold text-[#212223]"
+                    >
+                      {index + 1}. {arg.title}
+                    </label>
+                    {arg.userAdded && (
+                      <span className="ml-2 shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#2e6b5c]">
+                        User added
+                      </span>
+                    )}
+                  </div>
                   <ul className="mt-2 ml-4 list-disc space-y-1 text-sm text-[#212223]">
                     {arg.points.map((point, i) => (
                       <li key={i}>{point}</li>
@@ -153,8 +184,10 @@ export function ArgumentsPanel({ className }: ArgumentsPanelProps) {
                   </ul>
                   {arg.appliesTo && (
                     <div className="mt-3">
-                      <p className="text-sm font-medium text-[#212223]">Applies to</p>
-                      <p className="text-sm text-[#212223]">{arg.appliesTo}</p>
+                      <p className="text-sm font-medium text-[#212223]">Applies to:</p>
+                      <ul className="ml-4 list-disc">
+                        <li className="text-sm text-[#212223]">{arg.appliesTo}</li>
+                      </ul>
                     </div>
                   )}
                 </div>

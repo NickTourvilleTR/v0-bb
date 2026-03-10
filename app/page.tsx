@@ -33,6 +33,7 @@ type Screen =
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
   const [drawerOpen, setDrawerOpen] = React.useState(true);
+  const [showUserArgument, setShowUserArgument] = React.useState(false);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
 
@@ -126,7 +127,7 @@ export default function BriefBuilderPrototype() {
             {/* Arguments Panel */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <div className="flex-1 overflow-y-auto">
-                <ArgumentsPanel />
+                <ArgumentsPanel showUserArgument={showUserArgument} />
               </div>
               
               {/* Footer with buttons and input - shown when drawer is collapsed */}
@@ -154,7 +155,8 @@ export default function BriefBuilderPrototype() {
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              onArgumentAdded={() => setShowUserArgument(true)}
             />
           </div>
         </div>
