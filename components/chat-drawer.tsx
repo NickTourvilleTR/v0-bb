@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
-import { Sparkles, Paperclip, Image, ArrowUp, PanelRightClose } from "lucide-react";
+import { Sparkles, Paperclip, Image, ArrowUp, PanelRightClose, RotateCcw, FileText, ExternalLink, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -15,6 +15,8 @@ interface ChatDrawerProps {
 export function ChatDrawer({ className, onClose }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "versions" | "sources">("chat");
   const [inputValue, setInputValue] = React.useState("");
+  const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
+  const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
 
   return (
     <div className={cn("flex h-full w-[420px] flex-col border-l border-[#e5e5e5] bg-white", className)}>
@@ -44,8 +46,169 @@ export function ChatDrawer({ className, onClose }: ChatDrawerProps) {
         </div>
       </div>
 
-      {/* Chat Content */}
+      {/* Tab Content */}
       <div className="flex-1 overflow-y-auto p-4">
+        {/* Versions Tab */}
+        {activeTab === "versions" && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
+              <div>
+                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
+                  2 Arguments selected and edited
+                </a>
+                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:24 PM</p>
+              </div>
+              <button className="text-[#737373] hover:text-[#212223]">
+                <RotateCcw className="size-4" />
+              </button>
+            </div>
+            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
+              <div>
+                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
+                  2 Arguments selected and edited
+                </a>
+                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:25 PM</p>
+              </div>
+              <button className="text-[#737373] hover:text-[#212223]">
+                <RotateCcw className="size-4" />
+              </button>
+            </div>
+            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
+              <div>
+                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
+                  3 Arguments selected and edited
+                </a>
+                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:20 PM</p>
+              </div>
+              <button className="text-[#737373] hover:text-[#212223]">
+                <RotateCcw className="size-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Sources Tab */}
+        {activeTab === "sources" && (
+          <div>
+            {/* View Dropdown */}
+            <div className="mb-4 flex items-center gap-2">
+              <span className="text-sm text-[#212223]">View:</span>
+              <div className="relative">
+                <button
+                  onClick={() => setSourcesDropdownOpen(!sourcesDropdownOpen)}
+                  className="flex items-center gap-2 rounded-md border border-[#cccccc] bg-white px-3 py-1.5 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                >
+                  {sourcesView === "uploaded" ? "Uploaded documents" : "Cases & Statues"}
+                  <ChevronDown className="size-4" />
+                </button>
+                {sourcesDropdownOpen && (
+                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-[#e5e5e5] bg-white py-1 shadow-lg">
+                    <button
+                      onClick={() => { setSourcesView("uploaded"); setSourcesDropdownOpen(false); }}
+                      className="w-full px-3 py-2 text-left text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                    >
+                      Uploaded documents
+                    </button>
+                    <button
+                      onClick={() => { setSourcesView("cases"); setSourcesDropdownOpen(false); }}
+                      className="w-full px-3 py-2 text-left text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                    >
+                      Cases & Statues
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Uploaded Documents View */}
+            {sourcesView === "uploaded" && (
+              <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
+                <div className="flex items-start gap-3">
+                  <FileText className="mt-0.5 size-5 text-[#737373]" />
+                  <div>
+                    <p className="font-medium text-[#212223]">Love v. Airbnb - First Amended Complaint.pdf</p>
+                    <p className="text-xs text-[#737373]">Uploaded at 9:07 a.m.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Cases & Statues View */}
+            {sourcesView === "cases" && (
+              <div className="space-y-4">
+                {/* Case 1 */}
+                <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
+                  <div className="mb-2 flex items-start justify-between">
+                    <div>
+                      <a href="#" className="font-medium text-[#2e6b5c] hover:underline">Shaw v. Lindheim</a>
+                      <p className="text-xs text-[#737373]">919 F.2d 1353 (9th Cir. 2024)</p>
+                    </div>
+                    <ExternalLink className="size-4 text-[#737373]" />
+                  </div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-xs font-medium text-[#212223]">Snippet</span>
+                    <div className="flex items-center gap-1 text-xs text-[#737373]">
+                      <ChevronLeft className="size-3" />
+                      <span>1 of 1</span>
+                      <ChevronRight className="size-3" />
+                    </div>
+                  </div>
+                  <p className="text-sm text-[#212223]">
+                    ...establishing that accountants can face primary liability under securities laws for material misstatements when they know statements will be communicated to investors...
+                  </p>
+                </div>
+
+                {/* Case 2 */}
+                <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
+                  <div className="mb-2 flex items-start justify-between">
+                    <div>
+                      <a href="#" className="font-medium text-[#2e6b5c] hover:underline">Swirsky v. Carey</a>
+                      <p className="text-xs text-[#737373]">376 F.3d 841 (9th Cir. 2004)</p>
+                    </div>
+                    <ExternalLink className="size-4 text-[#737373]" />
+                  </div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-xs font-medium text-[#212223]">Snippet</span>
+                    <div className="flex items-center gap-1 text-xs text-[#737373]">
+                      <ChevronLeft className="size-3" />
+                      <span>1 of 1</span>
+                      <ChevronRight className="size-3" />
+                    </div>
+                  </div>
+                  <p className="text-sm text-[#212223]">
+                    ...establishing that accountants can face primary liability under securities laws for material misstatements when they know statements will be communicated to investors...
+                  </p>
+                </div>
+
+                {/* Case 3 */}
+                <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
+                  <div className="mb-2 flex items-start justify-between">
+                    <div>
+                      <a href="#" className="font-medium text-[#2e6b5c] hover:underline">In re Enron Corp. Sec., Derivative & ERISA Litig.</a>
+                      <p className="text-xs text-[#737373]">235 F. Supp. 2d 549 (S.D. Tex. 2002)</p>
+                    </div>
+                    <ExternalLink className="size-4 text-[#737373]" />
+                  </div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-xs font-medium text-[#212223]">Snippet</span>
+                    <div className="flex items-center gap-1 text-xs text-[#737373]">
+                      <ChevronLeft className="size-3" />
+                      <span>1 of 1</span>
+                      <ChevronRight className="size-3" />
+                    </div>
+                  </div>
+                  <p className="text-sm text-[#212223]">
+                    ...establishing that accountants can face primary liability under securities laws for material misstatements when they know statements will be communicated to investors...
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Chat Tab */}
+        {activeTab === "chat" && (
+          <>
         {/* Initial User Message */}
         <div className="mb-4 flex items-start gap-2">
           <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
@@ -210,9 +373,12 @@ export function ChatDrawer({ className, onClose }: ChatDrawerProps) {
             </Button>
           </div>
         </div>
+          </>
+        )}
       </div>
 
-      {/* Chat Input */}
+      {/* Chat Input - only show on Chat tab */}
+      {activeTab === "chat" && (
       <div className="border-t border-[#e5e5e5] p-3">
         <div className="relative rounded-lg border border-[#e5e5e5] bg-white">
           <Textarea
@@ -246,6 +412,7 @@ export function ChatDrawer({ className, onClose }: ChatDrawerProps) {
           .
         </p>
       </div>
+      )}
     </div>
   );
 }
