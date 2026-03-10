@@ -84,6 +84,7 @@ interface ArgumentsPanelProps {
 
 export function ArgumentsPanel({ className, showUserArgument = false }: ArgumentsPanelProps) {
   const [selectedArgs, setSelectedArgs] = React.useState<string[]>(["1", "2", "3"]);
+  const scrollEndRef = React.useRef<HTMLDivElement>(null);
   
   const allArguments = showUserArgument 
     ? [...defaultArguments, userAddedArgument] 
@@ -103,10 +104,14 @@ export function ArgumentsPanel({ className, showUserArgument = false }: Argument
     }
   };
   
-  // Auto-select user added argument when it appears
+  // Auto-select user added argument when it appears and scroll to it
   React.useEffect(() => {
     if (showUserArgument && !selectedArgs.includes("6")) {
       setSelectedArgs((prev) => [...prev, "6"]);
+      // Scroll to the new argument after a short delay
+      setTimeout(() => {
+        scrollEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+      }, 100);
     }
   }, [showUserArgument]);
 
@@ -145,7 +150,7 @@ export function ArgumentsPanel({ className, showUserArgument = false }: Argument
         </div>
 
         {/* Arguments List */}
-        <div className="space-y-4">
+        <div className="space-y-4 pb-4">
           {allArguments.map((arg, index) => (
             <div
               key={arg.id}
@@ -194,6 +199,8 @@ export function ArgumentsPanel({ className, showUserArgument = false }: Argument
               </div>
             </div>
           ))}
+          {/* Scroll anchor for new arguments */}
+          <div ref={scrollEndRef} />
         </div>
       </div>
     </div>
