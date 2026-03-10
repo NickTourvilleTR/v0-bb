@@ -17,6 +17,7 @@ type Screen =
   | "motion-search"
   | "brief-type"
   | "file-upload"
+  | "uploading"
   | "case-details"
   | "additional-details"
   | "analyzing";
@@ -45,7 +46,11 @@ export default function BriefBuilderPrototype() {
   };
 
   const handleFileUpload = () => {
-    setCurrentScreen("case-details");
+    setCurrentScreen("uploading");
+    // Simulate analyzing documents, then show case details
+    setTimeout(() => {
+      setCurrentScreen("case-details");
+    }, 3000);
   };
 
   const handleCaseDetailsDone = () => {
@@ -66,9 +71,10 @@ export default function BriefBuilderPrototype() {
     "motion-search": 1,
     "brief-type": 2,
     "file-upload": 3,
-    "case-details": 4,
-    "additional-details": 5,
-    analyzing: 6,
+    "uploading": 4,
+    "case-details": 5,
+    "additional-details": 6,
+    analyzing: 7,
   };
 
   const isAtOrPast = (screen: Screen) =>
@@ -169,10 +175,21 @@ export default function BriefBuilderPrototype() {
                     className="mb-6"
                   >
                     <BriefBuilderUploadCard
-                      showFile={isAtOrPast("case-details")}
-                      disabled={isAtOrPast("case-details")}
+                      showFile={isAtOrPast("uploading")}
+                      disabled={isAtOrPast("uploading")}
                       onUpload={handleFileUpload}
                     />
+                  </CocoChatMessage>
+                )}
+
+                {/* Uploading/Analyzing Progress Card */}
+                {currentScreen === "uploading" && (
+                  <CocoChatMessage
+                    type="assistant"
+                    timestamp="9:10a.m."
+                    className="mb-6"
+                  >
+                    <BriefBuilderProgressCard progress={40} />
                   </CocoChatMessage>
                 )}
 
