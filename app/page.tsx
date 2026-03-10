@@ -18,6 +18,8 @@ import { SupportingAuthoritiesPanel } from "@/components/supporting-authorities-
 import { SupportLoadingScreen } from "@/components/support-loading-screen";
 import { ContraryAuthoritiesPanel } from "@/components/contrary-authorities-panel";
 import { OutlineScreen } from "@/components/outline-screen";
+import { OutlineLoadingScreen } from "@/components/outline-loading-screen";
+import { OutlineEditor } from "@/components/outline-editor";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Sparkles } from "lucide-react";
 import * as React from "react";
@@ -36,7 +38,9 @@ type Screen =
   | "support-loading"
   | "support"
   | "distinguish"
-  | "outline";
+  | "outline"
+  | "outline-loading"
+  | "outline-ready";
 
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
@@ -119,6 +123,13 @@ export default function BriefBuilderPrototype() {
     setCurrentScreen("outline");
   };
 
+  const handleGenerateOutline = () => {
+    setCurrentScreen("outline-loading");
+    setTimeout(() => {
+      setCurrentScreen("outline-ready");
+    }, 3000);
+  };
+
   // Screen indices for comparison
   const screenIndex = {
     start: 0,
@@ -135,6 +146,8 @@ export default function BriefBuilderPrototype() {
     "support": 11,
     "distinguish": 12,
     "outline": 13,
+    "outline-loading": 14,
+    "outline-ready": 15,
   };
 
   const isAtOrPast = (screen: Screen) =>
@@ -154,13 +167,69 @@ export default function BriefBuilderPrototype() {
           <div className="flex flex-1 overflow-hidden">
             {/* Outline Screen */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <OutlineScreen />
+              <OutlineScreen onGenerateOutline={handleGenerateOutline} />
             </div>
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
               onToggle={() => setDrawerOpen(!drawerOpen)}
               currentStep="outline"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Outline Loading layout
+  if (currentScreen === "outline-loading") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="outline" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Loading Screen */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <OutlineLoadingScreen progress={70} />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="outline-loading"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Outline Ready layout (editor)
+  if (currentScreen === "outline-ready") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="outline" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Outline Editor */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <OutlineEditor />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="outline-ready"
             />
           </div>
         </div>
