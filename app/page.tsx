@@ -17,6 +17,7 @@ import { ArgumentsPanel } from "@/components/arguments-panel";
 import { SupportingAuthoritiesPanel } from "@/components/supporting-authorities-panel";
 import { SupportLoadingScreen } from "@/components/support-loading-screen";
 import { ContraryAuthoritiesPanel } from "@/components/contrary-authorities-panel";
+import { OutlineScreen } from "@/components/outline-screen";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Sparkles } from "lucide-react";
 import * as React from "react";
@@ -34,7 +35,8 @@ type Screen =
   | "builder"
   | "support-loading"
   | "support"
-  | "distinguish";
+  | "distinguish"
+  | "outline";
 
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
@@ -113,6 +115,10 @@ export default function BriefBuilderPrototype() {
     setCurrentScreen("distinguish");
   };
 
+  const handleNextOutline = () => {
+    setCurrentScreen("outline");
+  };
+
   // Screen indices for comparison
   const screenIndex = {
     start: 0,
@@ -128,10 +134,39 @@ export default function BriefBuilderPrototype() {
     "support-loading": 10,
     "support": 11,
     "distinguish": 12,
+    "outline": 13,
   };
 
   const isAtOrPast = (screen: Screen) =>
     screenIndex[currentScreen] >= screenIndex[screen];
+
+  // Outline layout
+  if (currentScreen === "outline") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="outline" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Outline Screen */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <OutlineScreen />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="outline"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Distinguish layout (contrary authorities)
   if (currentScreen === "distinguish") {
@@ -178,6 +213,7 @@ export default function BriefBuilderPrototype() {
               isOpen={drawerOpen} 
               onToggle={() => setDrawerOpen(!drawerOpen)}
               currentStep="distinguish"
+              onNextOutline={handleNextOutline}
             />
           </div>
         </div>

@@ -15,12 +15,13 @@ interface ChatDrawerProps {
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
-  currentStep?: "argue" | "support-loading" | "support" | "distinguish";
+  onNextOutline?: () => void;
+  currentStep?: "argue" | "support-loading" | "support" | "distinguish" | "outline";
 }
 
 type ChatState = "initial" | "adding" | "added";
 
-export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, currentStep = "argue" }: ChatDrawerProps) {
+export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, currentStep = "argue" }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "versions" | "sources">("chat");
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
@@ -731,6 +732,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   variant="outline"
                   size="sm"
                   className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                  onClick={onNextOutline}
                 >
                   Next: Outline brief
                 </Button>
@@ -742,6 +744,108 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   Skip to generate draft
                 </Button>
               </div>
+            </div>
+          </>
+        )}
+
+        {/* Outline Step Messages */}
+        {currentStep === "outline" && (
+          <>
+            {/* User Next Message */}
+            <div className="mt-4 flex items-start gap-2">
+              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
+                JL
+              </div>
+              <div>
+                <p className="text-xs text-[#737373]">Jane Lawson - 11:30 a.m.</p>
+                <p className="text-sm text-[#212223]">Next: Contrary authorities</p>
+              </div>
+            </div>
+
+            {/* CoCounsel Distinguish Response */}
+            <div className="mt-4 flex items-start gap-2">
+              <div className="shrink-0">
+                <Logo icon className="size-7" />
+              </div>
+              <div>
+                <p className="text-xs text-[#737373]">CoCounsel - 11:45 a.m.</p>
+              </div>
+            </div>
+
+            {/* Distinguish Ready Card */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#212223]" />
+                  <span className="font-semibold text-[#212223]">Brief Builder</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Motion to dismiss
+                  </span>
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Primary brief
+                  </span>
+                </div>
+              </div>
+
+              <div className="mb-3 flex items-center gap-2">
+                <span className="text-sm text-[#212223]">Contrary authorities are ready for review:</span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Go to Distinguish
+                </Button>
+              </div>
+
+              <p className="mb-2 text-sm text-[#212223]">
+                Select the contrary authorities to distinguish in your motion. You can tell me if you want to:
+              </p>
+              <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                <li>Add or modify a contrary authority</li>
+                <li>Edit how a contrary authority is used</li>
+                <li>Select or remove a contrary authority</li>
+              </ul>
+
+              <p className="font-medium text-[#212223]">
+                What would you like to do next?
+              </p>
+            </div>
+
+            {/* User Brief Outline Message */}
+            <div className="mt-4 flex items-start gap-2">
+              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
+                JL
+              </div>
+              <div>
+                <p className="text-xs text-[#737373]">Jane Lawson - 12:30 p.m.</p>
+                <p className="text-sm text-[#212223]">Next: Brief outline</p>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              >
+                <svg className="mr-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              >
+                Next: Generate draft
+              </Button>
             </div>
           </>
         )}
