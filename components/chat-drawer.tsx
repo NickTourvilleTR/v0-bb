@@ -18,6 +18,14 @@ export function ChatDrawer({ className, isOpen = true, onToggle }: ChatDrawerPro
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
   const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
+  const chatScrollRef = React.useRef<HTMLDivElement>(null);
+
+  // Auto-scroll chat to bottom on mount
+  React.useEffect(() => {
+    if (isOpen && activeTab === "chat" && chatScrollRef.current) {
+      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
+    }
+  }, [isOpen, activeTab]);
 
   // Collapsed state - just show toggle button
   if (!isOpen) {
@@ -62,7 +70,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle }: ChatDrawerPro
       </div>
 
       {/* Tab Content */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div ref={chatScrollRef} className="flex-1 overflow-y-auto p-4">
         {/* Versions Tab */}
         {activeTab === "versions" && (
           <div className="space-y-3">
