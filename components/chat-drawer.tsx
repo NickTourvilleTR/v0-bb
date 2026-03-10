@@ -3,20 +3,35 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
-import { Sparkles, Paperclip, Image, ArrowUp, PanelRightClose, RotateCcw, FileText, ExternalLink, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { Sparkles, Paperclip, Image, ArrowUp, PanelRightClose, PanelRightOpen, RotateCcw, FileText, ExternalLink, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 interface ChatDrawerProps {
   className?: string;
-  onClose?: () => void;
+  isOpen?: boolean;
+  onToggle?: () => void;
 }
 
-export function ChatDrawer({ className, onClose }: ChatDrawerProps) {
+export function ChatDrawer({ className, isOpen = true, onToggle }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "versions" | "sources">("chat");
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
   const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
+
+  // Collapsed state - just show toggle button
+  if (!isOpen) {
+    return (
+      <div className={cn("flex h-full flex-col items-center border-l border-[#e5e5e5] bg-white py-3 px-2", className)}>
+        <button
+          className="flex size-10 items-center justify-center rounded-md border border-[#e5e5e5] text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+          onClick={onToggle}
+        >
+          <PanelRightOpen className="size-5" />
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={cn("flex h-full w-[420px] flex-col border-l border-[#e5e5e5] bg-white", className)}>
@@ -24,7 +39,7 @@ export function ChatDrawer({ className, onClose }: ChatDrawerProps) {
       <div className="flex items-center border-b border-[#e5e5e5]">
         <button
           className="p-3 text-[#737373] hover:text-[#212223]"
-          onClick={onClose}
+          onClick={onToggle}
         >
           <PanelRightClose className="size-5" />
         </button>

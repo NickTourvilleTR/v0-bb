@@ -32,6 +32,7 @@ type Screen =
 
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
+  const [drawerOpen, setDrawerOpen] = React.useState(true);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
 
@@ -123,11 +124,38 @@ export default function BriefBuilderPrototype() {
           <BriefStepperNav currentStep="argue" />
           <div className="flex flex-1 overflow-hidden">
             {/* Arguments Panel */}
-            <div className="relative flex-1 overflow-y-auto bg-[#fcfcfc]">
-              <ArgumentsPanel />
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <div className="flex-1 overflow-y-auto">
+                <ArgumentsPanel />
+              </div>
+              
+              {/* Footer with buttons and input - shown when drawer is collapsed */}
+              {!drawerOpen && (
+                <div className="border-t border-[#e5e5e5] bg-white">
+                  {/* Action buttons */}
+                  <div className="flex justify-end gap-2 px-6 py-3">
+                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
+                      Next: Supporting authority
+                    </button>
+                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
+                      Skip to generate draft
+                    </button>
+                  </div>
+                  {/* Chat input */}
+                  <div className="border-t border-[#e5e5e5] px-6 py-4">
+                    <CocoChatInput
+                      placeholder="Ask CoCounsel..."
+                      variant="conversation"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
             {/* Chat Drawer */}
-            <ChatDrawer />
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)} 
+            />
           </div>
         </div>
       </div>
