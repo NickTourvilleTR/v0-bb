@@ -33,11 +33,16 @@ type Screen =
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
   const scrollRef = React.useRef<HTMLDivElement>(null);
+  const scrollEndRef = React.useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom when screen changes
+  // Auto-scroll to bottom when screen changes with smooth animation
   React.useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    if (scrollEndRef.current) {
+      // Small delay to ensure new content is rendered before scrolling
+      const timer = setTimeout(() => {
+        scrollEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [currentScreen]);
 
@@ -317,6 +322,9 @@ export default function BriefBuilderPrototype() {
                     <BriefBuilderGeneratingCard progress={40} />
                   </CocoChatMessage>
                 )}
+
+                {/* Scroll anchor for smooth scrolling */}
+                <div ref={scrollEndRef} />
               </div>
 
               {/* Bottom Chat Input */}
