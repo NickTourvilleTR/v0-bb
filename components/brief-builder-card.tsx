@@ -11,6 +11,8 @@ interface BriefBuilderCardProps {
   searchPlaceholder?: string;
   onSubmit?: (value: string) => void;
   className?: string;
+  disabled?: boolean;
+  defaultValue?: string;
 }
 
 export function BriefBuilderCard({
@@ -18,8 +20,10 @@ export function BriefBuilderCard({
   searchPlaceholder = "Search for a motion type",
   onSubmit,
   className,
+  disabled = false,
+  defaultValue = "",
 }: BriefBuilderCardProps) {
-  const [searchValue, setSearchValue] = React.useState("");
+  const [searchValue, setSearchValue] = React.useState(defaultValue);
 
   const handleSubmit = () => {
     if (onSubmit) {
@@ -54,21 +58,24 @@ export function BriefBuilderCard({
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder={searchPlaceholder}
-            className="h-11 border-[#cccccc] bg-white pr-10 text-[#212223] placeholder:text-[#737373] focus-visible:ring-[#2e6b5c]"
+            disabled={disabled}
+            className="h-11 border-[#cccccc] bg-white pr-10 text-[#212223] placeholder:text-[#737373] focus-visible:ring-[#2e6b5c] disabled:opacity-100 disabled:cursor-default"
           />
           <Search className="absolute right-3 top-1/2 size-4 -translate-y-1/2 text-[#737373]" />
         </div>
       </div>
 
       {/* Submit Button */}
-      <Button
-        onClick={handleSubmit}
-        variant="outline"
-        className="h-10 border-[#cccccc] bg-white px-6 text-[#404040] hover:bg-[#f2f2f2]"
-        disabled={!searchValue.trim()}
-      >
-        Submit
-      </Button>
+      {!disabled && (
+        <Button
+          onClick={handleSubmit}
+          variant="outline"
+          className="h-10 border-[#cccccc] bg-white px-6 text-[#404040] hover:bg-[#f2f2f2]"
+          disabled={!searchValue.trim()}
+        >
+          Submit
+        </Button>
+      )}
     </div>
   );
 }
