@@ -34,12 +34,24 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
   const [researchExpanded, setResearchExpanded] = React.useState(false);
   const chatScrollRef = React.useRef<HTMLDivElement>(null);
 
-  // Auto-scroll chat to bottom on mount and when chat state changes
-  React.useEffect(() => {
-    if (isOpen && activeTab === "chat" && chatScrollRef.current) {
-      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
+  // Auto-scroll chat to bottom with smooth animation when content changes
+  const scrollToBottom = React.useCallback(() => {
+    if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTo({
+        top: chatScrollRef.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
-  }, [isOpen, activeTab, chatState]);
+  }, []);
+
+  // Auto-scroll chat to bottom on mount and when chat state or step changes
+  React.useEffect(() => {
+    if (isOpen && activeTab === "chat") {
+      // Small delay to ensure DOM has updated
+      const timeoutId = setTimeout(scrollToBottom, 100);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isOpen, activeTab, chatState, currentStep, scrollToBottom]);
 
   // Handle message submission
   const handleSubmit = () => {
