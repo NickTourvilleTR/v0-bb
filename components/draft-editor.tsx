@@ -29,7 +29,7 @@ export function DraftEditor({ className }: DraftEditorProps) {
   const [fontSize, setFontSize] = React.useState(36);
 
   return (
-    <div className={cn("flex flex-1 flex-col", className)}>
+    <div className={cn("flex min-h-0 flex-1 flex-col", className)}>
       {/* Formatting Toolbar */}
       <div className="flex items-center gap-1 border-b border-[#e5e5e5] bg-white px-4 py-2">
         {/* Undo/Redo */}

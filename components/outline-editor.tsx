@@ -32,7 +32,7 @@ export function OutlineEditor({ className }: OutlineEditorProps) {
   };
 
   return (
-    <div className={cn("flex flex-1 flex-col", className)}>
+    <div className={cn("flex min-h-0 flex-1 flex-col", className)}>
       {/* Toolbar */}
       <div className="flex items-center gap-1 border-b border-[#e5e5e5] bg-white px-4 py-2">
         <Button variant="ghost" size="icon" className="size-8 text-[#737373] hover:text-[#212223]">
