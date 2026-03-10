@@ -20,6 +20,9 @@ import { ContraryAuthoritiesPanel } from "@/components/contrary-authorities-pane
 import { OutlineScreen } from "@/components/outline-screen";
 import { OutlineLoadingScreen } from "@/components/outline-loading-screen";
 import { OutlineEditor } from "@/components/outline-editor";
+import { DraftScreen } from "@/components/draft-screen";
+import { DraftLoadingScreen } from "@/components/draft-loading-screen";
+import { DraftEditor } from "@/components/draft-editor";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Sparkles } from "lucide-react";
 import * as React from "react";
@@ -40,7 +43,10 @@ type Screen =
   | "distinguish"
   | "outline"
   | "outline-loading"
-  | "outline-ready";
+  | "outline-ready"
+  | "draft"
+  | "draft-loading"
+  | "draft-ready";
 
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
@@ -130,6 +136,17 @@ export default function BriefBuilderPrototype() {
     }, 3000);
   };
 
+  const handleNextDraft = () => {
+    setCurrentScreen("draft");
+  };
+
+  const handleGenerateDraft = () => {
+    setCurrentScreen("draft-loading");
+    setTimeout(() => {
+      setCurrentScreen("draft-ready");
+    }, 3000);
+  };
+
   // Screen indices for comparison
   const screenIndex = {
     start: 0,
@@ -148,6 +165,9 @@ export default function BriefBuilderPrototype() {
     "outline": 13,
     "outline-loading": 14,
     "outline-ready": 15,
+    "draft": 16,
+    "draft-loading": 17,
+    "draft-ready": 18,
   };
 
   const isAtOrPast = (screen: Screen) =>
@@ -230,6 +250,91 @@ export default function BriefBuilderPrototype() {
               isOpen={drawerOpen} 
               onToggle={() => setDrawerOpen(!drawerOpen)}
               currentStep="outline-ready"
+              onNextDraft={handleNextDraft}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Draft layout (initial)
+  if (currentScreen === "draft") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="draft" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Draft Screen */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <DraftScreen onGenerateDraft={handleGenerateDraft} />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="draft"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Draft Loading layout
+  if (currentScreen === "draft-loading") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="draft" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Loading Screen */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <DraftLoadingScreen progress={70} />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="draft-loading"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Draft Ready layout (editor)
+  if (currentScreen === "draft-ready") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="draft" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Draft Editor */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <DraftEditor />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="draft-ready"
             />
           </div>
         </div>
