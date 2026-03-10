@@ -18,12 +18,13 @@ interface ChatDrawerProps {
   onNextOutline?: () => void;
   onNextDraft?: () => void;
   onNextVerify?: () => void;
-  currentStep?: "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify";
+  onNextFinalize?: () => void;
+  currentStep?: "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize";
 }
 
 type ChatState = "initial" | "adding" | "added";
 
-export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, currentStep = "argue" }: ChatDrawerProps) {
+export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, currentStep = "argue" }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "versions" | "sources">("chat");
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
@@ -1184,8 +1185,84 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 variant="outline"
                 size="sm"
                 className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                onClick={onNextFinalize}
               >
                 Next: Finalize
+              </Button>
+            </div>
+          </>
+        )}
+
+        {/* Finalize Step Messages */}
+        {currentStep === "finalize" && (
+          <>
+            {/* User Finalize Message */}
+            <div className="mt-4 flex items-start gap-2">
+              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
+                JL
+              </div>
+              <div>
+                <p className="text-xs text-[#737373]">Jane Lawson - 4:30 p.m.</p>
+                <p className="text-sm text-[#212223]">Next: Finalize brief</p>
+              </div>
+            </div>
+
+            {/* CoCounsel Finalize Response */}
+            <div className="mt-4 flex items-start gap-2">
+              <div className="shrink-0">
+                <Logo icon className="size-7" />
+              </div>
+              <div>
+                <p className="text-xs text-[#737373]">CoCounsel - 4:35 p.m.</p>
+              </div>
+            </div>
+
+            {/* Finalize Ready Card */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#212223]" />
+                  <span className="font-semibold text-[#212223]">Brief Builder</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Motion to dismiss
+                  </span>
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Primary brief
+                  </span>
+                </div>
+              </div>
+
+              <div className="mb-3 flex items-center gap-2">
+                <span className="text-sm text-[#212223]">The brief finalization summary is ready for review:</span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Go to Finalize
+                </Button>
+              </div>
+
+              <p className="font-medium text-[#212223]">
+                {"{"}What would you like to do next?{"}"}
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              >
+                <svg className="mr-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Next: Download
               </Button>
             </div>
           </>

@@ -24,6 +24,7 @@ import { DraftScreen } from "@/components/draft-screen";
 import { DraftLoadingScreen } from "@/components/draft-loading-screen";
 import { DraftEditor } from "@/components/draft-editor";
 import { VerifyPanel } from "@/components/verify-panel";
+import { FinalizePanel } from "@/components/finalize-panel";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Sparkles } from "lucide-react";
 import * as React from "react";
@@ -48,7 +49,8 @@ type Screen =
   | "draft"
   | "draft-loading"
   | "draft-ready"
-  | "verify";
+  | "verify"
+  | "finalize";
 
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
@@ -153,6 +155,10 @@ export default function BriefBuilderPrototype() {
     setCurrentScreen("verify");
   };
 
+  const handleNextFinalize = () => {
+    setCurrentScreen("finalize");
+  };
+
   // Screen indices for comparison
   const screenIndex = {
     start: 0,
@@ -175,6 +181,7 @@ export default function BriefBuilderPrototype() {
     "draft-loading": 17,
     "draft-ready": 18,
     "verify": 19,
+    "finalize": 20,
   };
 
   const isAtOrPast = (screen: Screen) =>
@@ -371,6 +378,35 @@ export default function BriefBuilderPrototype() {
               isOpen={drawerOpen} 
               onToggle={() => setDrawerOpen(!drawerOpen)}
               currentStep="verify"
+              onNextFinalize={handleNextFinalize}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Finalize layout
+  if (currentScreen === "finalize") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="finalize" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Finalize Panel */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <FinalizePanel />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="finalize"
             />
           </div>
         </div>
