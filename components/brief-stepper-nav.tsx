@@ -48,9 +48,9 @@ export function BriefStepperNav({
           <div key={step.id} className="flex items-center">
             <button
               className={cn(
-                "flex flex-col items-center gap-1 px-3 py-1 rounded-md transition-colors",
+                "flex flex-col items-center gap-1 px-3 py-2 rounded-md transition-colors",
                 currentStep === step.id
-                  ? "text-[#2e6b5c]"
+                  ? "bg-[#1f1f1f] text-white"
                   : "text-[#737373] hover:text-[#212223]"
               )}
             >
