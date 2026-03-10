@@ -171,7 +171,7 @@ export function OutlineEditor({ className }: OutlineEditorProps) {
                 </div>
 
                 {/* Subsection B */}
-                <div>
+                <div className="mb-6">
                   <h3 className="mb-2 text-base font-semibold text-[#212223]">
                     B. The Alleged Conspiracy
                   </h3>
@@ -192,6 +192,61 @@ export function OutlineEditor({ className }: OutlineEditorProps) {
                     <li className="list-disc">
                       28 defendants sued including S&S
                     </li>
+                  </ul>
+                </div>
+
+                {/* Subsection C */}
+                <div className="mb-6">
+                  <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                    C. The Two Works Compared
+                  </h3>
+                  
+                  <p className="mb-2 text-sm text-[#737373]">Paragraph 3:</p>
+                  <p className="mb-2 ml-2 text-sm font-medium text-[#212223]">1. <em>Eat the Lemon</em></p>
+                  <ul className="ml-8 mb-4 space-y-1 text-sm text-[#212223]">
+                    <li className="list-disc">Personal memoir describing true experiences</li>
+                    <li className="list-disc">Centers on coming to terms with tumultuous family life and mother's death (decade prior)</li>
+                    <li className="list-disc">Begins with Love traveling Amalfi Coast with boyfriend Brad</li>
+                    <li className="list-disc">Mother died from cancer; briefly studied cooking on Amalfi Coast when Love was child</li>
+                    <li className="list-disc">Details romantic adventures, flashbacks to family life</li>
+                    <li className="list-disc">Love returns to Italy alone to locate mother's cooking teacher</li>
+                    <li className="list-disc">Befriends Adele and her family; receives warmth from Rosa (Adele's mother)</li>
+                    <li className="list-disc">Locates assistant to mother's cooking teacher; learns mother was happy during that period</li>
+                    <li className="list-disc">Ends with Love reveling in meeting "magical elderly woman" and kissing Rosa's shoulder</li>
+                  </ul>
+
+                  <p className="mb-2 text-sm text-[#737373]">Paragraph 4:</p>
+                  <p className="mb-2 ml-2 text-sm font-medium text-[#212223]">2. <em>One Italian Summer</em></p>
+                  <ul className="ml-8 space-y-1 text-sm text-[#212223]">
+                    <li className="list-disc">Avowed work of fiction incorporating magical realism</li>
+                    <li className="list-disc">Narrator Katy just lost mother to cancer</li>
+                    <li className="list-disc">Mother was "great love of her life"; tells husband she doesn't know if she can stay married</li>
+                    <li className="list-disc">Travels alone to Positano for trip originally planned with mother</li>
+                    <li className="list-disc">Meets handsome American Adam who pursues her</li>
+                    <li className="list-disc">Central device: Katy travels back in time, meets 30-year-old version of her mother</li>
+                    <li className="list-disc">Discovers mother abandoned her as infant to travel to Italy</li>
+                    <li className="list-disc">Mother pursuing interior design job; Adam considering purchasing hotels</li>
+                    <li className="list-disc">Katy realizes she's in 1992 timeline</li>
+                    <li className="list-disc">Confronts whether to force mother to return to family</li>
+                    <li className="list-disc">Returns to present; husband Eric joins her</li>
+                    <li className="list-disc">Re-commits to marriage</li>
+                    <li className="list-disc">Central message: Seeing mother as independent person empowers Katy to see herself same way</li>
+                    <li className="list-disc">Ends with spreading mother's ashes in Italian sea</li>
+                  </ul>
+                </div>
+
+                {/* Subsection D */}
+                <div>
+                  <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                    D. Procedural History
+                  </h3>
+                  <p className="mb-2 text-sm text-[#737373]">Paragraph 5:</p>
+                  <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                    <li className="list-disc">Original Complaint filed February 28, 2025</li>
+                    <li className="list-disc">S&S filed Motion to Dismiss June 30, 2025</li>
+                    <li className="list-disc">Love filed Opposition August 18, 2025</li>
+                    <li className="list-disc">First Amended Complaint filed August 20, 2025</li>
+                    <li className="list-disc">Current Motion to Dismiss filed September 12, 2025</li>
                   </ul>
                 </div>
               </div>
