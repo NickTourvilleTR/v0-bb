@@ -18,6 +18,15 @@ export function BriefBuilderProgressCard({
   className,
 }: BriefBuilderProgressCardProps) {
   const [emailMe, setEmailMe] = React.useState(false);
+  const [animatedProgress, setAnimatedProgress] = React.useState(0);
+
+  // Animate progress bar
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimatedProgress(progress);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [progress]);
 
   return (
     <div
@@ -48,12 +57,14 @@ export function BriefBuilderProgressCard({
       <div className="mb-4">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-[#212223]">Analyzing documents</span>
-          <span className="text-[#212223]">{progress}% complete</span>
+          <span className="text-[#212223]">{Math.round(animatedProgress)}% complete</span>
         </div>
-        <Progress
-          value={progress}
-          className="h-1.5 bg-[#e5e5e5]"
-        />
+        <div className="h-1.5 w-full rounded-full bg-[#e5e5e5]">
+          <div
+            className="h-1.5 rounded-full bg-[#2e6b5c] transition-all duration-1000 ease-out"
+            style={{ width: `${animatedProgress}%` }}
+          />
+        </div>
       </div>
 
       {/* Email Checkbox */}

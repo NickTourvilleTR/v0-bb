@@ -18,6 +18,15 @@ export function BriefBuilderGeneratingCard({
 }: BriefBuilderGeneratingCardProps) {
   const [emailNotify, setEmailNotify] = React.useState(false);
   const [researchExpanded, setResearchExpanded] = React.useState(false);
+  const [animatedProgress, setAnimatedProgress] = React.useState(0);
+
+  // Animate progress bar
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimatedProgress(progress);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [progress]);
 
   return (
     <div
@@ -55,12 +64,12 @@ export function BriefBuilderGeneratingCard({
       {/* Progress */}
       <div className="mb-2 flex items-center justify-between">
         <span className="text-sm text-[#212223]">Generating arguments...</span>
-        <span className="text-sm text-[#212223]">{progress}% complete</span>
+        <span className="text-sm text-[#212223]">{Math.round(animatedProgress)}% complete</span>
       </div>
       <div className="mb-4 h-1.5 w-full rounded-full bg-[#e5e5e5]">
         <div
-          className="h-1.5 rounded-full bg-[#2e6b5c] transition-all"
-          style={{ width: `${progress}%` }}
+          className="h-1.5 rounded-full bg-[#2e6b5c] transition-all duration-1000 ease-out"
+          style={{ width: `${animatedProgress}%` }}
         />
       </div>
 
