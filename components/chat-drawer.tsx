@@ -409,10 +409,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               variant="outline"
               size="sm"
               className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-              onClick={() => {
-                console.log("[v0] Next: Supporting authority clicked from initial state, handler:", onNextSupportingAuthority);
-                onNextSupportingAuthority?.();
-              }}
+              onClick={onNextSupportingAuthority}
             >
               Next: Supporting authority
             </Button>
@@ -544,10 +541,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 variant="outline"
                 size="sm"
                 className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                onClick={() => {
-                  console.log("[v0] Next: Supporting authority clicked from added state, handler:", onNextSupportingAuthority);
-                  onNextSupportingAuthority?.();
-                }}
+                onClick={onNextSupportingAuthority}
               >
                 Next: Supporting authority
               </Button>

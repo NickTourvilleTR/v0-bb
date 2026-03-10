@@ -42,12 +42,13 @@ const defaultAuthorities: ArgumentAuthority[] = [
         id: "swirsky",
         name: "Swirsky v. Carey",
         citation: "376 F.3d 841 (9th Cir. 2004)",
-        badges: ["Frequently cited"],
+        badges: ["Similar facts"],
         description:
-          "Established framework for analyzing substantial similarity in copyright cases involving creative works",
+          'This case dealt with "total concept and feel" and parallel structure in plot/character relationships can defeat early dismissal with respect to similarity.',
         supportPoints: [
-          "Swirsky reinforced that similarities must be evaluated at the level of protected expression, not mere ideas or concepts.",
-          "The court emphasized that common themes and stock elements cannot form the basis of infringement claims.",
+          "Swirsky was about musical works and relied heavily on expert musicology. That's very different from a literary comparison, where the judge can simply read the two works.",
+          "The selection-and-arrangement logic in Swirsky concerned specific combinations of melodic, harmonic, and rhythmic elements. Here, plaintiff doesn't identify any analogous, protectable combination—only standard elements of a grief journey and real-life facts.",
+          'Later authorities warn against using Swirsky as a license to bundle any number of unprotectable details. Defendants\' position is that plaintiff\'s alleged overlaps are exactly the sort of "random similarities" Cavalier and Litchfield say are insufficient.',
         ],
       },
     ],
@@ -65,7 +66,6 @@ export function SupportingAuthoritiesPanel({
     "shaw",
     "swirsky",
   ]);
-  const [expandedArgument, setExpandedArgument] = React.useState<string>("1");
 
   const toggleCitation = (citationId: string) => {
     setSelectedCitations((prev) =>
@@ -75,13 +75,11 @@ export function SupportingAuthoritiesPanel({
     );
   };
 
-  const currentAuthority = defaultAuthorities.find(
-    (a) => a.id === expandedArgument
-  );
+  const currentAuthority = defaultAuthorities[0];
 
   return (
     <div className={cn("flex h-full flex-col", className)}>
-      {/* Sidebar Toggle - matching ArgumentsPanel */}
+      {/* Sidebar Toggle */}
       <div className="absolute left-0 top-0 z-10 p-4">
         <button className="flex size-10 items-center justify-center rounded-md border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f2f2f2]">
           <svg
@@ -108,126 +106,118 @@ export function SupportingAuthoritiesPanel({
             SUPPORTING AUTHORITIES
           </p>
           <h1 className="text-2xl font-semibold text-[#212223]">
-            Select the desired authorities
+            Select the desired authories
           </h1>
         </div>
 
         {/* Argument Section */}
-        {currentAuthority && (
-          <div>
-            <h2 className="mb-4 text-lg font-semibold text-[#212223]">
-              1. {currentAuthority.title}
-            </h2>
+        <h2 className="mb-4 text-lg font-semibold text-[#212223]">
+          1. {currentAuthority.title}
+        </h2>
 
-            {/* Two Column Layout */}
-            <div className="flex gap-4">
-              {/* Left Column - Citations */}
-              <div className="w-1/2 rounded-lg border border-[#e5e5e5] bg-white">
-                {/* Header */}
-                <div className="flex items-center gap-3 border-b border-[#e5e5e5] p-4">
+        {/* Table Container */}
+        <div className="rounded-lg border border-[#e5e5e5] bg-white">
+          {/* Table Header */}
+          <div className="flex border-b border-[#e5e5e5]">
+            <div className="flex w-1/2 items-center gap-3 p-4">
+              <Checkbox
+                checked={selectedCitations.length === currentAuthority.citations.length}
+                onCheckedChange={() => {
+                  if (selectedCitations.length === currentAuthority.citations.length) {
+                    setSelectedCitations([]);
+                  } else {
+                    setSelectedCitations(currentAuthority.citations.map((c) => c.id));
+                  }
+                }}
+                className="border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
+              />
+              <span className="font-medium text-[#212223]">Citations</span>
+              <span className="text-sm text-[#737373]">
+                • {selectedCitations.length} selected
+              </span>
+            </div>
+            <div className="w-1/2 border-l border-dashed border-[#d2d2d2] p-4">
+              <span className="font-medium text-[#212223]">
+                How this supports the argument
+              </span>
+            </div>
+          </div>
+
+          {/* Citation Rows */}
+          {currentAuthority.citations.map((citation, index) => (
+            <div
+              key={citation.id}
+              className={cn(
+                "flex",
+                index < currentAuthority.citations.length - 1 && "border-b border-[#e5e5e5]"
+              )}
+            >
+              {/* Left Column - Citation Details */}
+              <div
+                className={cn(
+                  "w-1/2 p-4",
+                  selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white"
+                )}
+              >
+                <div className="flex items-start gap-3">
                   <Checkbox
-                    checked={
-                      selectedCitations.length ===
-                      currentAuthority.citations.length
-                    }
-                    onCheckedChange={() => {
-                      if (
-                        selectedCitations.length ===
-                        currentAuthority.citations.length
-                      ) {
-                        setSelectedCitations([]);
-                      } else {
-                        setSelectedCitations(
-                          currentAuthority.citations.map((c) => c.id)
-                        );
-                      }
-                    }}
-                    className="border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
+                    checked={selectedCitations.includes(citation.id)}
+                    onCheckedChange={() => toggleCitation(citation.id)}
+                    className="mt-0.5 border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
                   />
-                  <span className="font-medium text-[#212223]">Citations</span>
-                  <span className="text-sm text-[#737373]">
-                    • {selectedCitations.length} selected
-                  </span>
-                </div>
-
-                {/* Citation Items */}
-                <div className="divide-y divide-[#e5e5e5]">
-                  {currentAuthority.citations.map((citation) => (
-                    <div
-                      key={citation.id}
-                      className={cn(
-                        "p-4 transition-colors",
-                        selectedCitations.includes(citation.id)
-                          ? "bg-[#f5f7f6]"
-                          : "bg-white"
-                      )}
-                    >
-                      <div className="flex items-start gap-3">
-                        <Checkbox
-                          checked={selectedCitations.includes(citation.id)}
-                          onCheckedChange={() => toggleCitation(citation.id)}
-                          className="mt-1 border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
-                        />
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <a
-                              href="#"
-                              className="font-medium text-[#2e6b5c] hover:underline"
-                            >
-                              {citation.name}
-                            </a>
-                            <ExternalLink className="size-3.5 text-[#2e6b5c]" />
-                          </div>
-                          <p className="text-xs text-[#737373]">
-                            {citation.citation}
-                          </p>
-                          {/* Badges */}
-                          <div className="mt-2 flex flex-wrap gap-1">
-                            {citation.badges.map((badge) => (
-                              <span
-                                key={badge}
-                                className="rounded border border-[#e5e5e5] bg-white px-2 py-0.5 text-xs text-[#212223]"
-                              >
-                                {badge}
-                              </span>
-                            ))}
-                          </div>
-                          {/* Description */}
-                          <div className="mt-3">
-                            <p className="text-sm font-medium text-[#212223]">
-                              What this case is about:
-                            </p>
-                            <p className="mt-1 text-sm text-[#212223]">
-                              {citation.description}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+                  <div className="flex-1">
+                    {/* Case Name with Link */}
+                    <div className="flex items-center gap-1.5">
+                      <a
+                        href="#"
+                        className="font-medium text-[#2e6b5c] hover:underline"
+                      >
+                        {citation.name}
+                      </a>
+                      <ExternalLink className="size-3.5 text-[#2e6b5c]" />
                     </div>
-                  ))}
+                    
+                    {/* Citation Reference */}
+                    <p className="text-sm text-[#737373]">{citation.citation}</p>
+                    
+                    {/* Badges */}
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {citation.badges.map((badge) => (
+                        <span
+                          key={badge}
+                          className="rounded bg-[#ebf0ed] px-2 py-0.5 text-xs text-[#1d4b34]"
+                        >
+                          {badge}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* What this case is about */}
+                    <div className="mt-4">
+                      <p className="text-sm font-semibold text-[#212223]">
+                        What this case is about:
+                      </p>
+                      <p className="mt-1 text-sm text-[#212223]">
+                        {citation.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Right Column - How this supports */}
-              <div className="w-1/2 rounded-lg border-l-4 border-dashed border-[#2e6b5c] bg-[#f5f7f6] p-4">
-                <h3 className="mb-4 font-medium text-[#212223]">
-                  How this supports the argument
-                </h3>
-                <ul className="space-y-4">
-                  {currentAuthority.citations
-                    .filter((c) => selectedCitations.includes(c.id))
-                    .flatMap((c) => c.supportPoints)
-                    .map((point, index) => (
-                      <li key={index} className="flex gap-2">
-                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#212223]" />
-                        <p className="text-sm text-[#212223]">{point}</p>
-                      </li>
-                    ))}
+              {/* Right Column - Support Points */}
+              <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-white p-4 pl-6">
+                <ul className="list-disc space-y-4 pl-4 marker:text-[#212223]">
+                  {citation.supportPoints.map((point, pointIndex) => (
+                    <li key={pointIndex} className="text-sm leading-relaxed text-[#212223]">
+                      {point}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
       </div>
     </div>
   );
