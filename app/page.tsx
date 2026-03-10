@@ -22,10 +22,14 @@ export default function BriefBuilderPrototype() {
     console.log("Motion type selected:", value);
   };
 
+  const handleReset = () => {
+    setCurrentScreen("start");
+  };
+
   return (
     <div className="flex h-screen bg-white">
       {/* Side Navigation */}
-      <CocoSideNav />
+      <CocoSideNav onLogoClick={handleReset} />
 
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col">

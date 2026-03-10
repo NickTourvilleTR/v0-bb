@@ -33,9 +33,10 @@ interface NavItem {
 
 interface CocoSideNavProps {
   className?: string;
+  onLogoClick?: () => void;
 }
 
-export function CocoSideNav({ className }: CocoSideNavProps) {
+export function CocoSideNav({ className, onLogoClick }: CocoSideNavProps) {
   const topNavItems: NavItem[] = [
     { icon: <ArrowRightFromLine className="size-5" />, label: "Expand", href: "#" },
     { icon: <MessageSquarePlus className="size-5" />, label: "New Chat", href: "#", active: true },
@@ -62,9 +63,13 @@ export function CocoSideNav({ className }: CocoSideNavProps) {
         )}
       >
         {/* Logo */}
-        <div className="mb-4">
+        <button
+          onClick={onLogoClick}
+          className="mb-4 cursor-pointer rounded-full transition-opacity hover:opacity-80"
+          aria-label="Reset prototype"
+        >
           <Logo icon />
-        </div>
+        </button>
 
         {/* Top Navigation */}
         <nav className="flex flex-1 flex-col items-center gap-1">
