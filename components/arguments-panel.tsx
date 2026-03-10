@@ -21,7 +21,7 @@ const defaultArguments: Argument[] = [
       "No Substantial Similarity Even If Treated as Fiction",
       "Random Similarities Cannot Establish Infringement",
     ],
-    appliesTo: "Applies to Cause of Action 1 (Copyright Infringement)",
+    appliesTo: "Cause of Action 1 (Copyright Infringement)",
   },
   {
     id: "2",
@@ -41,6 +41,27 @@ const defaultArguments: Argument[] = [
       "The Conspiracy Allegations Are Fundamentally Implausible",
       "B. No Specific Conduct Alleged Against S&S",
     ],
+    appliesTo: "Causes of Action 5-14",
+  },
+  {
+    id: "4",
+    title: "Plaintiff Cannot Establish the Elements of Her Tort Claims",
+    points: [
+      "No Duty of Care Owed to Plaintiff",
+      "No Causal Connection Between Alleged Conduct and Harm",
+      "Damages Are Speculative and Unsubstantiated",
+    ],
+    appliesTo: "Causes of Action 6-9 (Negligence, IIED, Stalking, Conspiracy)",
+  },
+  {
+    id: "5",
+    title: "The First Amendment Bars Plaintiff's Claims",
+    points: [
+      "Protected Expression Under the First Amendment",
+      "No Actual Malice Shown by Plaintiff",
+      "Public Interest Defense Applies",
+    ],
+    appliesTo: "All Causes of Action",
   },
 ];
 

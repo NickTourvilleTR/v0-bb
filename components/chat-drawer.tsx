@@ -46,7 +46,66 @@ export function ChatDrawer({ className, onClose }: ChatDrawerProps) {
 
       {/* Chat Content */}
       <div className="flex-1 overflow-y-auto p-4">
-        {/* Previous Context Message (truncated) */}
+        {/* Initial User Message */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
+            JL
+          </div>
+          <div>
+            <p className="text-xs text-[#737373]">Jane Lawson - 9:07 a.m.</p>
+            <p className="text-sm text-[#212223]">
+              Help me draft a legal brief for a standard motion to dismiss for the California district court.
+            </p>
+          </div>
+        </div>
+
+        {/* CoCounsel - Motion Type */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="shrink-0">
+            <Logo icon className="size-7" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-[#737373]">CoCounsel - 9:10 a.m.</p>
+            <p className="mt-1 text-sm text-[#212223]">Motion to dismiss selected.</p>
+          </div>
+        </div>
+
+        {/* CoCounsel - Brief Type */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="shrink-0">
+            <Logo icon className="size-7" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-[#737373]">CoCounsel - 9:10 a.m.</p>
+            <p className="mt-1 text-sm text-[#212223]">Primary brief selected.</p>
+          </div>
+        </div>
+
+        {/* CoCounsel - File Uploaded */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="shrink-0">
+            <Logo icon className="size-7" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-[#737373]">CoCounsel - 9:10 a.m.</p>
+            <p className="mt-1 text-sm text-[#212223]">Document uploaded: Love v. Airbnb - First Amended Complaint.</p>
+          </div>
+        </div>
+
+        {/* CoCounsel - Case Details */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="shrink-0">
+            <Logo icon className="size-7" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-[#737373]">CoCounsel - 9:25 a.m.</p>
+            <p className="mt-1 text-sm text-[#212223]">
+              Extracted case details. Representing defendant party 2: Simon and Schuster, LLC.
+            </p>
+          </div>
+        </div>
+
+        {/* Additional Context Card (truncated) */}
         <div className="mb-4 rounded-lg border border-[#e5e5e5] bg-white p-3">
           <p className="text-sm text-[#212223]">
             If you prefer, <strong>you can add more context</strong> to provide any
@@ -55,7 +114,20 @@ export function ChatDrawer({ className, onClose }: ChatDrawerProps) {
           </p>
         </div>
 
-        {/* User Message */}
+        {/* User Context Message */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
+            JL
+          </div>
+          <div>
+            <p className="text-xs text-[#737373]">Jane Lawson - 9:36 a.m.</p>
+            <p className="text-sm text-[#212223]">
+              I want to move to dismiss an amended complaint, arguing there is no substantial similarity...
+            </p>
+          </div>
+        </div>
+
+        {/* User Start Building Message */}
         <div className="mb-4 flex items-start gap-2">
           <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
             JL
