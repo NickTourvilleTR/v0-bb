@@ -119,7 +119,7 @@ export function SupportingAuthoritiesPanel({
         <div className="rounded-lg border border-[#e5e5e5] bg-white">
           {/* Table Header */}
           <div className="flex border-b border-[#e5e5e5]">
-            <div className="flex w-1/2 items-center gap-3 p-4">
+            <div className="flex w-1/2 items-center gap-3 bg-[#f5f7f6] px-4 py-3">
               <Checkbox
                 checked={selectedCitations.length === currentAuthority.citations.length}
                 onCheckedChange={() => {
@@ -131,13 +131,13 @@ export function SupportingAuthoritiesPanel({
                 }}
                 className="border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
               />
-              <span className="font-medium text-[#212223]">Citations</span>
+              <span className="font-semibold text-[#212223]">Citations</span>
               <span className="text-sm text-[#737373]">
                 • {selectedCitations.length} selected
               </span>
             </div>
-            <div className="w-1/2 border-l border-dashed border-[#d2d2d2] p-4">
-              <span className="font-medium text-[#212223]">
+            <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-white px-6 py-3">
+              <span className="font-medium text-[#737373]">
                 How this supports the argument
               </span>
             </div>

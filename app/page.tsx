@@ -16,6 +16,7 @@ import { BriefStepperNav } from "@/components/brief-stepper-nav";
 import { ArgumentsPanel } from "@/components/arguments-panel";
 import { SupportingAuthoritiesPanel } from "@/components/supporting-authorities-panel";
 import { SupportLoadingScreen } from "@/components/support-loading-screen";
+import { ContraryAuthoritiesPanel } from "@/components/contrary-authorities-panel";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Sparkles } from "lucide-react";
 import * as React from "react";
@@ -32,7 +33,8 @@ type Screen =
   | "generating"
   | "builder"
   | "support-loading"
-  | "support";
+  | "support"
+  | "distinguish";
 
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
@@ -107,6 +109,10 @@ export default function BriefBuilderPrototype() {
     }, 3000);
   };
 
+  const handleNextContraryAuthorities = () => {
+    setCurrentScreen("distinguish");
+  };
+
   // Screen indices for comparison
   const screenIndex = {
     start: 0,
@@ -121,10 +127,63 @@ export default function BriefBuilderPrototype() {
     "builder": 9,
     "support-loading": 10,
     "support": 11,
+    "distinguish": 12,
   };
 
   const isAtOrPast = (screen: Screen) =>
     screenIndex[currentScreen] >= screenIndex[screen];
+
+  // Distinguish layout (contrary authorities)
+  if (currentScreen === "distinguish") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="distinguish" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Contrary Authorities Panel */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <div className="flex-1 overflow-y-auto">
+                <ContraryAuthoritiesPanel />
+              </div>
+              
+              {/* Footer with buttons and input - shown when drawer is collapsed */}
+              {!drawerOpen && (
+                <div className="border-t border-[#e5e5e5] bg-white">
+                  {/* Action buttons */}
+                  <div className="flex justify-end gap-2 px-6 py-3">
+                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
+                      Next: Outline brief
+                    </button>
+                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
+                      Skip to generate draft
+                    </button>
+                  </div>
+                  {/* Chat input */}
+                  <div className="border-t border-[#e5e5e5] px-6 py-4">
+                    <CocoChatInput
+                      placeholder="Ask CoCounsel..."
+                      variant="conversation"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="distinguish"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Support Loading layout
   if (currentScreen === "support-loading") {
@@ -199,6 +258,7 @@ export default function BriefBuilderPrototype() {
               isOpen={drawerOpen} 
               onToggle={() => setDrawerOpen(!drawerOpen)}
               currentStep="support"
+              onNextContraryAuthorities={handleNextContraryAuthorities}
             />
           </div>
         </div>

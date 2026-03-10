@@ -14,12 +14,13 @@ interface ChatDrawerProps {
   onToggle?: () => void;
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
-  currentStep?: "argue" | "support-loading" | "support";
+  onNextContraryAuthorities?: () => void;
+  currentStep?: "argue" | "support-loading" | "support" | "distinguish";
 }
 
 type ChatState = "initial" | "adding" | "added";
 
-export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, currentStep = "argue" }: ChatDrawerProps) {
+export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, currentStep = "argue" }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "versions" | "sources">("chat");
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
@@ -643,8 +644,95 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   variant="outline"
                   size="sm"
                   className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                  onClick={onNextContraryAuthorities}
                 >
                   Next: Review contrary authorities
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to generate draft
+                </Button>
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Distinguish Step Messages */}
+        {currentStep === "distinguish" && (
+          <>
+            {/* User Next Message */}
+            <div className="mt-4 flex items-start gap-2">
+              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
+                JL
+              </div>
+              <div>
+                <p className="text-xs text-[#737373]">Jane Lawson - 10:00 a.m.</p>
+                <p className="text-sm text-[#212223]">Next: Supporting authority</p>
+              </div>
+            </div>
+
+            {/* CoCounsel Support Response (reusing from support step) */}
+            <div className="mt-4 flex items-start gap-2">
+              <div className="shrink-0">
+                <Logo icon className="size-7" />
+              </div>
+              <div>
+                <p className="text-xs text-[#737373]">CoCounsel - 10:15 a.m.</p>
+              </div>
+            </div>
+
+            {/* Support Ready Card */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#212223]" />
+                  <span className="font-semibold text-[#212223]">Brief Builder</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Motion to dismiss
+                  </span>
+                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                    Primary brief
+                  </span>
+                </div>
+              </div>
+
+              <div className="mb-3 flex items-center gap-2">
+                <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Go to Support
+                </Button>
+              </div>
+
+              <p className="mb-2 text-sm text-[#212223]">
+                I've pre-selected the stronger supporting authorities for your brief. You can tell me if you want to:
+              </p>
+              <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                <li>Add a supporting authority</li>
+                <li>Edit how a supporting authority is used</li>
+                <li>Select or remove a supporting authority</li>
+              </ul>
+
+              <p className="mb-3 font-medium text-[#212223]">
+                What would you like to do next?
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Next: Outline brief
                 </Button>
                 <Button
                   variant="outline"
