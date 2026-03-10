@@ -159,6 +159,23 @@ export default function BriefBuilderPrototype() {
     setCurrentScreen("finalize");
   };
 
+  // Handler for stepper navigation
+  const handleStepperClick = (stepId: string) => {
+    const stepToScreen: Record<string, ScreenType> = {
+      argue: "builder",
+      support: "support",
+      distinguish: "distinguish",
+      outline: "outline",
+      draft: "draft",
+      verify: "verify",
+      finalize: "finalize",
+    };
+    const targetScreen = stepToScreen[stepId];
+    if (targetScreen) {
+      setCurrentScreen(targetScreen);
+    }
+  };
+
   // Screen indices for comparison
   const screenIndex = {
     start: 0,
@@ -197,7 +214,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="outline" />
+          <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Outline Screen */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -225,7 +242,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="outline" />
+          <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Loading Screen */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -253,7 +270,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="outline" />
+          <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Outline Editor */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -282,7 +299,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="draft" />
+          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Draft Screen */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -310,7 +327,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="draft" />
+          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Loading Screen */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -338,7 +355,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="draft" />
+          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Draft Editor */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -367,7 +384,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="verify" />
+          <BriefStepperNav currentStep="verify" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Verify Panel */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -396,7 +413,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="finalize" />
+          <BriefStepperNav currentStep="finalize" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Finalize Panel */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -424,7 +441,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="distinguish" />
+          <BriefStepperNav currentStep="distinguish" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Contrary Authorities Panel */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -477,7 +494,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="support" />
+          <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Loading Screen */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -505,7 +522,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="support" />
+          <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Supporting Authorities Panel */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
@@ -558,7 +575,7 @@ export default function BriefBuilderPrototype() {
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
-          <BriefStepperNav currentStep="argue" />
+          <BriefStepperNav currentStep="argue" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Arguments Panel */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">

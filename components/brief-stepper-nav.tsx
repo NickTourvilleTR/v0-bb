@@ -35,11 +35,13 @@ const steps: Step[] = [
 interface BriefStepperNavProps {
   currentStep?: string;
   className?: string;
+  onStepClick?: (stepId: string) => void;
 }
 
 export function BriefStepperNav({
   currentStep = "argue",
   className,
+  onStepClick,
 }: BriefStepperNavProps) {
   return (
     <div className={cn("flex items-center justify-center border-b border-[#e5e5e5] bg-white px-4 py-3", className)}>
@@ -47,11 +49,12 @@ export function BriefStepperNav({
         {steps.map((step, index) => (
           <div key={step.id} className="flex items-center">
             <button
+              onClick={() => onStepClick?.(step.id)}
               className={cn(
-                "flex flex-col items-center gap-1 px-3 py-2 rounded-md transition-colors",
+                "flex flex-col items-center gap-1 px-3 py-2 rounded-md transition-colors cursor-pointer",
                 currentStep === step.id
                   ? "bg-[#1f1f1f] text-white"
-                  : "text-[#737373] hover:text-[#212223]"
+                  : "text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
               )}
             >
               {step.icon}
