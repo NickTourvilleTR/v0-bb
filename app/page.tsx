@@ -10,6 +10,8 @@ import { BriefBuilderUploadCard } from "@/components/brief-builder-upload-card";
 import { BriefBuilderDetailsCard } from "@/components/brief-builder-details-card";
 import { BriefBuilderAdditionalCard } from "@/components/brief-builder-additional-card";
 import { BriefBuilderProgressCard } from "@/components/brief-builder-progress-card";
+import { BriefBuilderReadyCard } from "@/components/brief-builder-ready-card";
+import { Sparkles } from "lucide-react";
 import * as React from "react";
 
 type Screen =
@@ -20,6 +22,7 @@ type Screen =
   | "uploading"
   | "case-details"
   | "additional-details"
+  | "context-provided"
   | "analyzing";
 
 export default function BriefBuilderPrototype() {
@@ -61,6 +64,14 @@ export default function BriefBuilderPrototype() {
     setCurrentScreen("analyzing");
   };
 
+  const handleAdditionalContextSubmit = () => {
+    setCurrentScreen("context-provided");
+  };
+
+  const handleReadyToBuild = () => {
+    setCurrentScreen("analyzing");
+  };
+
   const handleReset = () => {
     setCurrentScreen("start");
   };
@@ -74,7 +85,8 @@ export default function BriefBuilderPrototype() {
     "uploading": 4,
     "case-details": 5,
     "additional-details": 6,
-    analyzing: 7,
+    "context-provided": 7,
+    analyzing: 8,
   };
 
   const isAtOrPast = (screen: Screen) =>
@@ -209,13 +221,40 @@ export default function BriefBuilderPrototype() {
                 )}
 
                 {/* Additional Details Card */}
-                {isAtOrPast("additional-details") && currentScreen !== "analyzing" && (
+                {isAtOrPast("additional-details") && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:32 a.m."
                     className="mb-6"
                   >
                     <BriefBuilderAdditionalCard />
+                  </CocoChatMessage>
+                )}
+
+                {/* User Context Message */}
+                {isAtOrPast("context-provided") && (
+                  <CocoChatMessage
+                    type="user"
+                    userName="Jane Lawson"
+                    timestamp="9:36 a.m."
+                    className="mb-6"
+                  >
+                    <p className="text-[#212223]">
+                      I want to move to dismiss an amended complaint, arguing there
+                      is no substantial similarity of protected expression between
+                      her memoir and the plaintiff's novel One Italian Summer.
+                    </p>
+                  </CocoChatMessage>
+                )}
+
+                {/* Ready to Build Card */}
+                {isAtOrPast("context-provided") && currentScreen !== "analyzing" && (
+                  <CocoChatMessage
+                    type="assistant"
+                    timestamp="9:36 a.m."
+                    className="mb-6"
+                  >
+                    <BriefBuilderReadyCard />
                   </CocoChatMessage>
                 )}
 
@@ -245,10 +284,26 @@ export default function BriefBuilderPrototype() {
                       </button>
                     </div>
                   )}
+                  {/* Ready Button - shown only on context-provided screen */}
+                  {currentScreen === "context-provided" && (
+                    <div className="mb-3 flex justify-end">
+                      <button
+                        onClick={handleReadyToBuild}
+                        className="flex items-center gap-2 rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                      >
+                        <Sparkles className="size-4 text-[#d64000]" />
+                        I'm ready, let's start building
+                      </button>
+                    </div>
+                  )}
                   <CocoChatInput
                     placeholder="Ask CoCounsel..."
                     variant="conversation"
-                    onSubmit={handleStartSubmit}
+                    onSubmit={
+                      currentScreen === "additional-details"
+                        ? handleAdditionalContextSubmit
+                        : handleStartSubmit
+                    }
                   />
                 </div>
               </div>
