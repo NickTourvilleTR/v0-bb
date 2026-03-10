@@ -252,6 +252,257 @@ export function OutlineEditor({ className }: OutlineEditorProps) {
               </div>
             )}
           </div>
+
+          {/* Section III: ARGUMENT */}
+          <div className="border-b border-[#e5e5e5]">
+            <button
+              onClick={() => toggleSection("argument")}
+              className="flex w-full items-center justify-between px-1 py-3 text-left"
+            >
+              <h2 className="text-lg font-bold text-[#212223]">
+                III. ARGUMENT
+              </h2>
+              {expandedSections.includes("argument") ? (
+                <ChevronUp className="size-5 text-[#737373]" />
+              ) : (
+                <ChevronDown className="size-5 text-[#737373]" />
+              )}
+            </button>
+            {expandedSections.includes("argument") && (
+              <div className="space-y-6 pb-6 pl-4">
+                {/* Subsection A: Copyright Infringement */}
+                <div>
+                  <h3 className="mb-4 text-base font-bold text-[#212223]">
+                    A. Copyright Infringement Claim Fails as Matter of Law
+                  </h3>
+                  
+                  {/* Paragraph 6 */}
+                  <div className="mb-4">
+                    <p className="mb-2 text-sm text-[#737373]">Paragraph 6:</p>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
+                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
+                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
+                    </ul>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
+                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">Plaintiff must prove: (1) copying of copyrighted material; (2) unlawful appropriation <a href="#" className="text-[#0062c4] hover:underline">Benay v. Warner Bros. Ent., Inc., 607 F.3d 620 (9th Cir. 2010)</a></li>
+                      <li className="list-disc">Unlawful appropriation requires "substantial similarity" in protected expression</li>
+                      <li className="list-disc">Extrinsic test may be decided as matter of law at motion to dismiss stage <a href="#" className="text-[#0062c4] hover:underline">Berkic v. Crichton, 761 F.2d 1289 (9th Cir. 1985)</a></li>
+                      <li className="list-disc">Court may consider works where judicially noticed and no substantial similarity exists <a href="#" className="text-[#0062c4] hover:underline">Biasi v. Sheehan Networks, Inc., ... 2025 WL 2086047 (Sept. 8, 2025)</a></li>
+                    </ul>
+                  </div>
+
+                  {/* Paragraph 7 */}
+                  <div className="mb-4">
+                    <p className="mb-2 text-sm text-[#737373]">Paragraph 7:</p>
+                    <p className="mb-2 text-sm font-medium text-[#212223]">2. Biographical Facts Are Not Protectable</p>
+                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">Love characterizes <em>Eat the Lemon</em> as "personal memoir based on her own life"</li>
+                      <li className="list-disc">Alleges <em>One Italian Summer</em> contains "intricate personal details from Love's life"</li>
+                      <li className="list-disc">Facts of one's life are not subject to copyright protection <a href="#" className="text-[#0062c4] hover:underline">Blatty v. Warner Bros. Ent., 2011 WL 13217379 (C.D. Cal. Apr. 21, 2011)</a></li>
+                      <li className="list-disc">Courts reject copyright claims based on similarities between autobiographies and other works <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
+                      <li className="list-disc">Example: <em>Corbello (Four Seasons autobiography)</em>, <em>Vollejo (Escobar mistress memoir)</em>, <em>Hathaway</em>, <em>Newt</em>, <em>Idema</em>, <em>Egleston</em></li>
+                    </ul>
+                  </div>
+
+                  {/* Paragraph 8 */}
+                  <div className="mb-4">
+                    <p className="mb-2 text-sm text-[#737373]">Paragraph 8:</p>
+                    <p className="mb-2 text-sm font-medium text-[#212223]">3. Even if Treated as Fiction, No Substantial Similarity</p>
+                    
+                    {/* a. Plot and Sequence */}
+                    <div className="mb-3 ml-4">
+                      <p className="mb-1 text-sm font-medium text-[#212223]">a. Plot and Sequence of Events</p>
+                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                        <li className="list-disc">General plot ideas not protected; must compare concrete elements <a href="#" className="text-[#0062c4] hover:underline">Cavalier v. Random House, Inc., 297 F.3d 815 (9th Cir. 2002)</a></li>
+                        <li className="list-disc">Only shared unprotectable premise: woman travels alone to Amalfi Coast seeking connection with deceased mother; <a href="#" className="text-[#0062c4] hover:underline">Capella Chef's Toa, LLC v. Macy's, Inc., 2016 WL 1122946 (C.S. Cal. Aug. 10, 2016)</a></li>
+                        <li className="list-disc">Central developments vastly different:
+                          <ul className="ml-6 mt-1 space-y-1">
+                            <li className="list-disc"><em>One Italian Summer</em>: Time travel, meeting young mother, discovering abandonment, confronting mother's independence</li>
+                            <li className="list-disc"><em>Eat the Lemon</em>: Finding surrogate family, meeting person who knew happy mother</li>
+                          </ul>
+                        </li>
+                        <li className="list-disc">Timing different: Katy leaves within week of death; Love travels decade later</li>
+                        <li className="list-disc">Superficial similarities are scenes a faire flowing from premise</li>
+                        <li className="list-disc">Storylines develop differently:
+                          <ul className="ml-6 mt-1 space-y-1">
+                            <li className="list-disc">Reconciliation with husband (Katy) vs. no reunion (Love/Brad)</li>
+                            <li className="list-disc">Prominent romance subplot (Katy/Adam) vs. peripheral relationship (Love/Peppe)</li>
+                            <li className="list-disc">Cooking with literal mother (Katy) vs. mother figure (Love/Rosa)</li>
+                          </ul>
+                        </li>
+                        <li className="list-disc">Random similarities cannot establish substantial similarity <a href="#" className="text-[#0062c4] hover:underline">Blatty v. Warner Bros. Ent., 2011 WL 13217379 (C.D. Cal. Apr. 21, 2011)</a></li>
+                      </ul>
+                    </div>
+
+                    {/* b. Characters */}
+                    <div className="mb-3 ml-4">
+                      <p className="mb-1 text-sm text-[#737373]">Paragraph 9:</p>
+                      <p className="mb-1 text-sm font-medium text-[#212223]">b. Characters</p>
+                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                        <li className="list-disc">Characters generally not protected unless "especially distinctive" <a href="#" className="text-[#0062c4] hover:underline">Berkic v. Crichton, 761 F.2d 1289 (9th Cir. 1985)</a></li>
+                        <li className="list-disc">Both protagonists grieve mother lost to cancer (unprotectable general plot point)</li>
+                        <li className="list-disc">Characters portrayed quite differently:
+                          <ul className="ml-6 mt-1 space-y-1">
+                            <li className="list-disc">Family context: Tumultuous upbringing (Love) vs. loving, happy family (Katy)</li>
+                            <li className="list-disc">Mother relationships: Cold, unhappy memories (Love) vs. warm, close bond (Katy)</li>
+                          </ul>
+                        </li>
+                        <li className="list-disc">Mother characters differ significantly:
+                          <ul className="ml-6 mt-1 space-y-1">
+                            <li className="list-disc">Cooking relationship to Italy differs</li>
+                            <li className="list-disc">Personality: Warm/happy (Katy's mother) vs. cold/unhappy (Love's mother)</li>
+                          </ul>
+                        </li>
+                        <li className="list-disc">Minor character similarities unremarkable or scenes-a-faire</li>
+                      </ul>
+                    </div>
+
+                    {/* c. Dialogue */}
+                    <div className="mb-3 ml-4">
+                      <p className="mb-1 text-sm text-[#737373]">Paragraph 10:</p>
+                      <p className="mb-1 text-sm font-medium text-[#212223]">c. Dialogue</p>
+                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                        <li className="list-disc">No similar dialogue alleged</li>
+                      </ul>
+                    </div>
+
+                    {/* d. Setting */}
+                    <div className="mb-3 ml-4">
+                      <p className="mb-1 text-sm text-[#737373]">Paragraph 11:</p>
+                      <p className="mb-1 text-sm font-medium text-[#212223]">d. Setting</p>
+                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                        <li className="list-disc">Both set on Amalfi Coast (not protectable) <a href="#" className="text-[#0062c4] hover:underline">Blatty v. Warner Bros. Ent., 2011 WL 13217379 (C.D. Cal. Apr. 21, 2011)</a></li>
+                        <li className="list-disc">Misleading characterization: Katy stays in Positano; Love travels widely</li>
+                        <li className="list-disc">Love stays in rental apartment, not family-run hotel</li>
+                        <li className="list-disc">Same city setting insufficient for substantial similarity</li>
+                        <li className="list-disc">Temporal setting different: Present with flashbacks (Eat the Lemon) vs. dual timelines present/1992 (One Italian Summer)</li>
+                      </ul>
+                    </div>
+
+                    {/* e. Theme */}
+                    <div className="mb-3 ml-4">
+                      <p className="mb-1 text-sm text-[#737373]">Paragraph 12:</p>
+                      <p className="mb-1 text-sm font-medium text-[#212223]">e. Theme</p>
+                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                        <li className="list-disc">General theme of connection to deceased mother not protectable <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
+                        <li className="list-disc">Specific themes differ:
+                          <ul className="ml-6 mt-1 space-y-1">
+                            <li className="list-disc"><em>One Italian Summer</em>: Seeing mother as independent person empowers self-realization</li>
+                            <li className="list-disc"><em>Eat the Lemon</em>: Overcoming unhappy memories, experiencing real family for first time</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* f. Mood and Pace */}
+                    <div className="mb-3 ml-4">
+                      <p className="mb-1 text-sm text-[#737373]">Paragraph 13:</p>
+                      <p className="mb-1 text-sm font-medium text-[#212223]">f. Mood and Pace</p>
+                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                        <li className="list-disc">Mood significantly different:
+                          <ul className="ml-6 mt-1 space-y-1">
+                            <li className="list-disc"><em>One Italian Summer</em>: Drama and suspense through plot twists</li>
+                            <li className="list-disc"><em>Eat the Lemon</em>: Series of vignettes, much darker tone, trauma from cancer and abuse</li>
+                          </ul>
+                        </li>
+                        <li className="list-disc">Pace different:
+                          <ul className="ml-6 mt-1 space-y-1">
+                            <li className="list-disc"><em>One Italian Summer</em>: Few weeks, steady movement toward resolution</li>
+                            <li className="list-disc"><em>Eat the Lemon</em>: Year and a half across three visits, no speeding toward resolution</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Paragraph 14 */}
+                  <div className="mb-4">
+                    <p className="mb-2 text-sm text-[#737373]">Paragraph 14:</p>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
+                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
+                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
+                    </ul>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
+                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">No substantial similarity in protected expression <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
+                      <li className="list-disc">Dismissal with prejudice warranted where deficiencies stem from fundamental characteristics of works <a href="#" className="text-[#0062c4] hover:underline">Blatty v. Warner Bros. Ent., 2011 WL 13217379 (C.D. Cal. Apr. 21, 2011)</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Subsection B: State Law Claims */}
+                <div>
+                  <h3 className="mb-4 text-base font-bold text-[#212223]">
+                    B. State Law Claims Fail as Matter of Law
+                  </h3>
+
+                  {/* Paragraph 15 */}
+                  <div className="mb-4">
+                    <p className="mb-2 text-sm text-[#737373]">Paragraph 15:</p>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
+                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
+                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
+                    </ul>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
+                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">All state law claims premised on conspiracy to infringe and intimidate <a href="#" className="text-[#0062c4] hover:underline">Benay v. Warner Bros. Ent., Inc., 607 F.3d 620 (9th Cir. 2010)</a></li>
+                      <li className="list-disc">No copyright infringement occurred</li>
+                      <li className="list-disc">Implausible that complex conspiracy existed to conceal non-existent infringement</li>
+                    </ul>
+                  </div>
+
+                  {/* Paragraph 16 */}
+                  <div className="mb-4">
+                    <p className="mb-2 text-sm text-[#737373]">Paragraph 16:</p>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
+                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
+                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
+                    </ul>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
+                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">Only allegations: Published book, editor married to former agent, editor rejected manuscript</li>
+                      <li className="list-disc">Conclusory assertion S&S was "agent" insufficient</li>
+                    </ul>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Specific defenses by claim:</p>
+                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc"><strong>Breach of Fiduciary Duty:</strong> Possessing/reviewing manuscript cannot create fiduciary duty <a href="#" className="text-[#0062c4] hover:underline">Benay v. Warner Bros. Ent., Inc., 607 F.3d 620 (9th Cir. 2010)</a></li>
+                      <li className="list-disc"><strong>Intentional Interference (Contractual/Business):</strong> No facts showing S&S knowledge or intentional disruption</li>
+                      <li className="list-disc"><strong>Misrepresentation (Intentional/Negligent):</strong> No misrepresentation to Love alleged or reliance</li>
+                      <li className="list-disc"><strong>Negligence:</strong> No duty or breach alleged specifically as to S&S</li>
+                      <li className="list-disc"><strong>Intentional Infliction of Emotional Distress:</strong> No extreme/outrageous conduct by S&S alleged</li>
+                      <li className="list-disc"><strong>Stalking:</strong> No pattern of conduct by S&S alleged</li>
+                      <li className="list-disc"><strong>Conspiracy:</strong> No underlying tortious act or agreement by S&S alleged</li>
+                      <li className="list-disc"><strong>Unfair Business Practices:</strong> No predicate violation by S&S adequately alleged</li>
+                      <li className="list-disc"><strong>Accounting/Constructive Trust:</strong> Depend on copyright claim which fails</li>
+                      <li className="list-disc"><strong>Declaratory Judgment:</strong> No agreements with S&S alleged</li>
+                      <li className="list-disc">"Everyone did everything" allegations improper and warrant dismissal <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
+                    </ul>
+                  </div>
+
+                  {/* Paragraph 17 */}
+                  <div>
+                    <p className="mb-2 text-sm text-[#737373]">Paragraph 17:</p>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
+                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
+                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
+                    </ul>
+                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
+                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
+                      <li className="list-disc">S&S joins CAA's Motion to Dismiss on these additional grounds</li>
+                      <li className="list-disc"><strong>Time-barred claims:</strong> Constructive trust, intentional interference with contractual relations, tortious interference with business advantage, negligence, intentional infliction of emotional distress, intentional and negligent misrepresentation <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
+                      <li className="list-disc"><strong>Preempted claims:</strong> Breach of fiduciary duty, intentional interference with contractual relationships, tortious interference with prospective business advantage, negligence, intentional infliction of emotional distress, conspiracy, <a href="#" className="text-[#0062c4] hover:underline">Business & Professions Code § 17200</a>, accounting, constructive trust</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
