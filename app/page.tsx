@@ -23,6 +23,7 @@ import { OutlineEditor } from "@/components/outline-editor";
 import { DraftScreen } from "@/components/draft-screen";
 import { DraftLoadingScreen } from "@/components/draft-loading-screen";
 import { DraftEditor } from "@/components/draft-editor";
+import { VerifyPanel } from "@/components/verify-panel";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Sparkles } from "lucide-react";
 import * as React from "react";
@@ -46,7 +47,8 @@ type Screen =
   | "outline-ready"
   | "draft"
   | "draft-loading"
-  | "draft-ready";
+  | "draft-ready"
+  | "verify";
 
 export default function BriefBuilderPrototype() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
@@ -147,6 +149,10 @@ export default function BriefBuilderPrototype() {
     }, 3000);
   };
 
+  const handleNextVerify = () => {
+    setCurrentScreen("verify");
+  };
+
   // Screen indices for comparison
   const screenIndex = {
     start: 0,
@@ -168,6 +174,7 @@ export default function BriefBuilderPrototype() {
     "draft": 16,
     "draft-loading": 17,
     "draft-ready": 18,
+    "verify": 19,
   };
 
   const isAtOrPast = (screen: Screen) =>
@@ -335,6 +342,35 @@ export default function BriefBuilderPrototype() {
               isOpen={drawerOpen} 
               onToggle={() => setDrawerOpen(!drawerOpen)}
               currentStep="draft-ready"
+              onNextVerify={handleNextVerify}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Verify layout
+  if (currentScreen === "verify") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="{Motion to Dismiss}" />
+          <BriefStepperNav currentStep="verify" />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Verify Panel */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <VerifyPanel />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="verify"
             />
           </div>
         </div>
