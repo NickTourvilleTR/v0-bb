@@ -102,10 +102,10 @@ export function BriefBuilderDetailsCard({
               id="plaintiff1"
               checked={selectedParty === "plaintiff1"}
               onCheckedChange={disabled ? undefined : () => setSelectedParty("plaintiff1")}
-              disabled={disabled}
-              className="border-[#737373] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c]"
+              disabled={true}
+              className="border-[#737373] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c] disabled:opacity-50"
             />
-            <label htmlFor="plaintiff1" className="text-[#212223] cursor-pointer">
+            <label htmlFor="plaintiff1" className="text-[#737373] cursor-not-allowed">
               <strong>Plaintiff party 1:</strong> Adrienne Love
             </label>
           </div>
