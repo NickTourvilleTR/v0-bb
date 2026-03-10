@@ -1,18 +1,15 @@
 "use client";
 
 import { Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 
 interface BriefBuilderAdditionalCardProps {
-  onSkip?: () => void;
   showTags?: boolean;
   className?: string;
 }
 
 export function BriefBuilderAdditionalCard({
-  onSkip,
   showTags = true,
   className,
 }: BriefBuilderAdditionalCardProps) {
@@ -48,7 +45,7 @@ export function BriefBuilderAdditionalCard({
       </p>
 
       {/* Bullet List */}
-      <ul className="mb-6 ml-6 list-disc space-y-1 text-[#212223]">
+      <ul className="ml-6 list-disc space-y-1 text-[#212223]">
         <li>Pertinent facts</li>
         <li>Relevant context</li>
         <li>Theory of the case</li>
@@ -56,17 +53,6 @@ export function BriefBuilderAdditionalCard({
         <li>Contested facts and issues</li>
         <li>Strategic objectives or considerations</li>
       </ul>
-
-      {/* Skip Button - positioned to the right */}
-      <div className="flex justify-end">
-        <Button
-          onClick={onSkip}
-          variant="outline"
-          className="h-10 border-[#cccccc] bg-white px-6 text-[#212223] hover:bg-[#f2f2f2]"
-        >
-          Skip this step
-        </Button>
-      </div>
     </div>
   );
 }
