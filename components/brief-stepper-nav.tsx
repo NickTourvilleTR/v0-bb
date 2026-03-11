@@ -45,7 +45,7 @@ export function BriefStepperNav({
 }: BriefStepperNavProps) {
   return (
     <div className={cn("flex items-center justify-center border-b border-[#e5e5e5] bg-white px-4 py-3", className)}>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 w-full justify-between">
         {steps.map((step, index) => (
           <div key={step.id} className="flex items-center">
             <button
