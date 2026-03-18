@@ -289,74 +289,277 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           <div>
             <p className="text-xs text-[#737373]">Jane Lawson - 9:07 a.m.</p>
             <p className="text-sm text-[#212223]">
-              Help me draft a legal brief for a standard motion to dismiss for the California district court.
+              Draft a motion for summary judgment in Gyant Properties, LLC v. NFM Insurance
             </p>
-          </div>
-        </div>
-
-        {/* CoCounsel - Motion Type */}
-        <div className="mb-4 flex items-start gap-2">
-          <div className="shrink-0">
-            <Logo icon className="size-7" />
-          </div>
-          <div className="flex-1">
-            <p className="text-xs text-[#737373]">CoCounsel - 9:10 a.m.</p>
-            <p className="mt-1 text-sm text-[#212223]">Motion to dismiss selected.</p>
-          </div>
-        </div>
-
-        {/* CoCounsel - Brief Type */}
-        <div className="mb-4 flex items-start gap-2">
-          <div className="shrink-0">
-            <Logo icon className="size-7" />
-          </div>
-          <div className="flex-1">
-            <p className="text-xs text-[#737373]">CoCounsel - 9:10 a.m.</p>
-            <p className="mt-1 text-sm text-[#212223]">Primary brief selected.</p>
-          </div>
-        </div>
-
-        {/* CoCounsel - File Uploaded */}
-        <div className="mb-4 flex items-start gap-2">
-          <div className="shrink-0">
-            <Logo icon className="size-7" />
-          </div>
-          <div className="flex-1">
-            <p className="text-xs text-[#737373]">CoCounsel - 9:10 a.m.</p>
-            <p className="mt-1 text-sm text-[#212223]">Document uploaded: Love v. Airbnb - First Amended Complaint.</p>
-          </div>
-        </div>
-
-        {/* CoCounsel - Case Details */}
-        <div className="mb-4 flex items-start gap-2">
-          <div className="shrink-0">
-            <Logo icon className="size-7" />
-          </div>
-          <div className="flex-1">
-            <p className="text-xs text-[#737373]">CoCounsel - 9:25 a.m.</p>
             <p className="mt-1 text-sm text-[#212223]">
-              Extracted case details. Representing defendant party 2: Simon and Schuster, LLC.
+              ur brief or memo supporting?
             </p>
           </div>
         </div>
 
-        {/* Additional Context Card with document types */}
-        <div className="mb-4 text-sm text-[#212223]">
-          <p className="mb-2">
-            your scenario. Use the chat to enter additional information or upload documents or such as:
-          </p>
-          <ul className="ml-4 list-disc space-y-1">
-            <li>Discovery requests and responses</li>
-            <li>Deposition transcripts</li>
-            <li>Expert reports</li>
-            <li>Other motions and filings</li>
-            <li>Correspondence</li>
-            <li>Internal memos</li>
-            <li>Other relevant facts or context</li>
-          </ul>
+        {/* CoCounsel - Brief Type Selection */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="shrink-0">
+            <Logo icon className="size-7" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-[#737373]">CoCounsel - 9:10 a.m.</p>
+            {/* Brief Builder Card - Brief Type */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <Sparkles className="size-4 text-[#212223]" />
+                <span className="font-semibold text-[#212223]">Brief Builder</span>
+              </div>
+              <p className="mb-3 text-sm text-[#212223]">
+                I can help you draft a memorandum of law in support of a Motion for Summary Judgment. To ensure the draft fits your scenario, are you drafting a <strong>Primary</strong>, <strong>Opposition</strong>, or <strong>Reply</strong> brief?
+              </p>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <div className="flex size-4 items-center justify-center rounded-full border-2 border-[#1d4b34]">
+                    <div className="size-2 rounded-full bg-[#1d4b34]" />
+                  </div>
+                  <span className="text-sm text-[#212223]">Primary</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="size-4 rounded-full border border-[#cccccc]" />
+                  <span className="text-sm text-[#737373]">Opposition</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="size-4 rounded-full border border-[#cccccc]" />
+                  <span className="text-sm text-[#737373]">Reply</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* User Context Message */}
+        {/* CoCounsel - Documents Uploaded */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="shrink-0">
+            <Logo icon className="size-7" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-[#737373]">CoCounsel - 9:11 a.m.</p>
+            {/* Brief Builder Card - Documents */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#212223]" />
+                  <span className="font-semibold text-[#212223]">Brief Builder</span>
+                </div>
+                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                  Motion for Summary Judgment
+                </span>
+                <span className="rounded-md border border-[#cccccc] bg-white px-2 py-1 text-xs text-[#212223]">
+                  Primary
+                </span>
+              </div>
+              <p className="mb-3 text-sm text-[#212223]">
+                To provide you with the most useful guidance, I should start by analyzing the <strong>original complaint, answer, and reply</strong> (if applicable). You can also upload any <strong>pertinent exhibits, dismissal orders, other relevant documents or templates</strong> you would like to use for your brief.
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+                  <FileText className="size-4 text-[#c9a227]" />
+                  <span className="truncate text-xs text-[#212223]">Gyant v. NFM - Complaint</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+                  <FileText className="size-4 text-[#c9a227]" />
+                  <span className="truncate text-xs text-[#212223]">Gyant v. NFM - Answer</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+                  <FileText className="size-4 text-[#c9a227]" />
+                  <span className="truncate text-xs text-[#212223]">Hansen Deposition</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+                  <FileText className="size-4 text-[#c9a227]" />
+                  <span className="truncate text-xs text-[#212223]">Policy Endorsement - Wind...</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+                  <FileText className="size-4 text-[#c9a227]" />
+                  <span className="truncate text-xs text-[#212223]">ROR Letter</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+                  <FileText className="size-4 text-[#c9a227]" />
+                  <span className="truncate text-xs text-[#212223]">Letter to NFM Dated Septe...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CoCounsel - Extracted Case Details */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="shrink-0">
+            <Logo icon className="size-7" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-[#737373]">CoCounsel - 9:13 a.m.</p>
+            {/* Brief Builder Card - Case Details */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#212223]" />
+                  <span className="font-semibold text-[#212223]">Brief Builder</span>
+                </div>
+                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                  Motion for Summary Judgment
+                </span>
+                <span className="rounded-md border border-[#cccccc] bg-white px-2 py-1 text-xs text-[#212223]">
+                  Primary
+                </span>
+              </div>
+              <p className="mb-3 text-sm text-[#212223]">
+                The following details were extracted from your uploaded documents. <strong>Review and enter any edit instructions as necessary.</strong>
+              </p>
+              <div className="mb-4 space-y-2 text-sm">
+                <div className="flex">
+                  <span className="w-32 shrink-0 font-medium text-[#212223]">Judge's name:</span>
+                  <span className="text-[#212223]">Andre Birotte Jr.</span>
+                  <span className="ml-1 text-[#737373]">iii</span>
+                </div>
+                <div className="flex">
+                  <span className="w-32 shrink-0 font-medium text-[#212223]">Civil Action No.:</span>
+                  <span className="text-[#212223]">4:25-cv-00064-O</span>
+                </div>
+                <div className="mt-3">
+                  <p className="font-medium text-[#212223]">Court name:</p>
+                  <p className="text-[#212223]">U.S. District Court, N.D. TX, Fort Wayne Division</p>
+                </div>
+                <div>
+                  <p className="font-medium text-[#212223]">Selected jurisdiction (sets the scope for your research):</p>
+                  <p className="text-[#212223]">Texas and Related Federal</p>
+                </div>
+                <div>
+                  <p className="font-medium text-[#212223]">Summary Judgment:</p>
+                  <p className="text-[#212223]">Movant's Memorandum of Law (Federal) | <a href="#" className="text-[#2e6b5c] underline">Preview template</a></p>
+                </div>
+              </div>
+              <p className="mb-2 text-sm text-[#212223]">I've also identified the following parties in the case.</p>
+              <p className="mb-2 text-sm font-medium text-[#212223]">Please indicate which party you represent:</p>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <Checkbox id="plaintiff1" defaultChecked className="border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" />
+                  <label htmlFor="plaintiff1" className="text-sm text-[#212223]"><strong>Plaintiff party 1:</strong> Gyant Properties, LLC</label>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Checkbox id="defendant1" className="mt-0.5 border-[#cccccc]" />
+                  <label htmlFor="defendant1" className="text-sm text-[#212223]"><strong>Defendant party 1:</strong> National Fire & Marine Insurance Company</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CoCounsel - Claims Selection */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="shrink-0">
+            <Logo icon className="size-7" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-[#737373]">CoCounsel - 9:20 a.m.</p>
+            {/* Brief Builder Card - Claims */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#212223]" />
+                  <span className="font-semibold text-[#212223]">Brief Builder</span>
+                </div>
+                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                  Motion for Summary Judgment
+                </span>
+                <span className="rounded-md border border-[#cccccc] bg-white px-2 py-1 text-xs text-[#212223]">
+                  Primary
+                </span>
+              </div>
+              <p className="mb-3 text-sm text-[#212223]">
+                Which claims, defenses, or other issues would you like to move on?
+              </p>
+              <div className="space-y-3">
+                <div className="flex items-start gap-2">
+                  <Checkbox id="claim1" defaultChecked className="mt-0.5 border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" />
+                  <label htmlFor="claim1" className="text-sm text-[#212223]">
+                    <strong>Breach of Insurance Contract - All Three Properties</strong>
+                    <p className="mt-0.5 text-xs text-[#737373]">Failure to pay covered hail damage claims for Bryant Irvin, Seminary, and Stuart properties.</p>
+                  </label>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Checkbox id="claim2" defaultChecked className="mt-0.5 border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" />
+                  <label htmlFor="claim2" className="text-sm text-[#212223]">
+                    <strong>Violation of § 542.055 - Failure to Acknowledge Receipt of Claim (Seminary)</strong>
+                    <p className="mt-0.5 text-xs text-[#737373]">NFM failed to acknowledge receipt of the Seminary property claim within 15 days as required by law.</p>
+                  </label>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Checkbox id="claim3" defaultChecked className="mt-0.5 border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" />
+                  <label htmlFor="claim3" className="text-sm text-[#212223]">
+                    <strong>Violation of § 542.056 - Failure to Begin Investigation (Seminary)</strong>
+                    <p className="mt-0.5 text-xs text-[#737373]">NFM failed to commence investigation of the Seminary claim within 15 days of notification.</p>
+                  </label>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Checkbox id="claim4" defaultChecked className="mt-0.5 border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" />
+                  <label htmlFor="claim4" className="text-sm text-[#212223]">
+                    <strong>Violation of § 541.061 - Misrepresentation of Insurance Policy</strong>
+                    <p className="mt-0.5 text-xs text-[#737373]">NFM misrepresented policy terms and coverage provisions to deny or delay payment.</p>
+                  </label>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Checkbox id="claim5" defaultChecked className="mt-0.5 border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" />
+                  <label htmlFor="claim5" className="text-sm text-[#212223]">
+                    <strong>Violation of § 541.060(a)(1) - Unfair Settlement Practices</strong>
+                    <p className="mt-0.5 text-xs text-[#737373]">NFM misrepresented material facts relating to coverage and failed to effectuate prompt settlement.</p>
+                  </label>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Checkbox id="claim6" defaultChecked className="mt-0.5 border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" />
+                  <label htmlFor="claim6" className="text-sm text-[#212223]">
+                    <strong>Violation of § 542.058 - Failure to Pay Claims Promptly</strong>
+                    <p className="mt-0.5 text-xs text-[#737373]">NFM failed to pay claims within required time periods after receiving necessary documentation.</p>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CoCounsel - Additional Documents Request */}
+        <div className="mb-4 flex items-start gap-2">
+          <div className="shrink-0">
+            <Logo icon className="size-7" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-[#737373]">CoCounsel - 9:32 a.m.</p>
+            {/* Brief Builder Card - Additional Docs */}
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="size-4 text-[#212223]" />
+                  <span className="font-semibold text-[#212223]">Brief Builder</span>
+                </div>
+                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                  Motion for Summary Judgment
+                </span>
+                <span className="rounded-md border border-[#cccccc] bg-white px-2 py-1 text-xs text-[#212223]">
+                  Primary
+                </span>
+              </div>
+              <p className="mb-2 text-sm text-[#212223]">
+                Almost there — can you provide any other key details or <strong>documents</strong>? These will help tailor the brief to your scenario. Use the chat to enter additional information or upload documents or such as:
+              </p>
+              <ul className="ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                <li>Discovery requests and responses</li>
+                <li>Deposition transcripts</li>
+                <li>Expert reports</li>
+                <li>Other motions and filings</li>
+                <li>Correspondence</li>
+                <li>Internal memos</li>
+                <li>Other relevant facts or context</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* User - No Further Details */}
         <div className="mb-4 flex items-start gap-2">
           <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
             JL
@@ -364,23 +567,12 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           <div>
             <p className="text-xs text-[#737373]">Jane Lawson - 9:36 a.m.</p>
             <p className="text-sm text-[#212223]">
-              I want to move to dismiss an amended complaint, arguing there is no substantial similarity...
+              No further details, start building my brief.
             </p>
           </div>
         </div>
 
-        {/* User Start Building Message */}
-        <div className="mb-4 flex items-start gap-2">
-          <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-            JL
-          </div>
-          <div>
-            <p className="text-xs text-[#737373]">Jane Lawson - 9:42 a.m.</p>
-            <p className="text-sm text-[#212223]">Start building my brief.</p>
-          </div>
-        </div>
-
-        {/* CoCounsel Response */}
+        {/* CoCounsel Response - Final */}
         <div className="mb-4 flex items-start gap-2">
           <div className="shrink-0">
             <Logo icon className="size-7" />
@@ -390,7 +582,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           </div>
         </div>
 
-        {/* Brief Builder Card */}
+        {/* Brief Builder Card - Final */}
         <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
           {/* Header */}
           <div className="mb-3 flex flex-wrap items-center gap-2">
