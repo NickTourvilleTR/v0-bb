@@ -2,14 +2,13 @@
 
 import { cn } from "@/lib/utils";
 import {
+  ClipboardList,
   Scale,
   Building2,
-  Sparkles,
   ListTree,
   FileText,
-  CheckCircle2,
   Users,
-  Gem,
+  CheckCircle2,
   Flag,
   ChevronRight,
 } from "lucide-react";
@@ -21,14 +20,13 @@ interface Step {
 }
 
 const steps: Step[] = [
+  { id: "intake", label: "Intake", icon: <ClipboardList className="size-5" /> },
   { id: "argue", label: "Argue", icon: <Scale className="size-5" /> },
-  { id: "support", label: "Support", icon: <Building2 className="size-5" /> },
-  { id: "distinguish", label: "Distinguish", icon: <Sparkles className="size-5" /> },
+  { id: "develop", label: "Develop", icon: <Building2 className="size-5" /> },
   { id: "outline", label: "Outline", icon: <ListTree className="size-5" /> },
   { id: "draft", label: "Draft", icon: <FileText className="size-5" /> },
-  { id: "verify", label: "Verify", icon: <CheckCircle2 className="size-5" /> },
   { id: "opposition", label: "Opposition", icon: <Users className="size-5" /> },
-  { id: "polish", label: "Polish", icon: <Gem className="size-5" /> },
+  { id: "verify", label: "Verify", icon: <CheckCircle2 className="size-5" /> },
   { id: "finalize", label: "Finalize", icon: <Flag className="size-5" /> },
 ];
 
@@ -39,7 +37,7 @@ interface BriefStepperNavProps {
 }
 
 export function BriefStepperNav({
-  currentStep = "argue",
+  currentStep = "intake",
   className,
   onStepClick,
 }: BriefStepperNavProps) {

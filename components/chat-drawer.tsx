@@ -25,7 +25,7 @@ interface ChatDrawerProps {
 type ChatState = "initial" | "adding" | "added";
 
 export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, currentStep = "argue" }: ChatDrawerProps) {
-  const [activeTab, setActiveTab] = React.useState<"chat" | "versions" | "sources">("chat");
+  const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
   const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
@@ -94,7 +94,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           <PanelRightClose className="size-5" />
         </button>
         <div className="flex flex-1">
-          {(["chat", "versions", "sources"] as const).map((tab) => (
+          {(["chat", "notes", "versions", "sources"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -105,7 +105,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   : "text-[#737373] hover:text-[#212223]"
               )}
             >
-              {tab === "chat" ? "Chat" : tab === "versions" ? "Versions" : "Sources"}
+              {tab === "chat" ? "Chat" : tab === "notes" ? "Notes" : tab === "versions" ? "Versions" : "Sources"}
             </button>
           ))}
         </div>
@@ -113,6 +113,13 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
       {/* Tab Content */}
       <div ref={chatScrollRef} className="flex-1 overflow-y-auto p-4">
+        {/* Notes Tab */}
+        {activeTab === "notes" && (
+          <div className="flex h-full flex-col items-center justify-center text-center">
+            <p className="text-sm text-[#737373]">No notes yet. Add notes to keep track of important information.</p>
+          </div>
+        )}
+
         {/* Versions Tab */}
         {activeTab === "versions" && (
           <div className="space-y-3">
@@ -333,13 +340,20 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           </div>
         </div>
 
-        {/* Additional Context Card (truncated) */}
-        <div className="mb-4 rounded-lg border border-[#e5e5e5] bg-white p-3">
-          <p className="text-sm text-[#212223]">
-            If you prefer, <strong>you can add more context</strong> to provide any
-            other detail. Or, tell me if there is something else you'd like to do
-            instead.
+        {/* Additional Context Card with document types */}
+        <div className="mb-4 text-sm text-[#212223]">
+          <p className="mb-2">
+            your scenario. Use the chat to enter additional information or upload documents or such as:
           </p>
+          <ul className="ml-4 list-disc space-y-1">
+            <li>Discovery requests and responses</li>
+            <li>Deposition transcripts</li>
+            <li>Expert reports</li>
+            <li>Other motions and filings</li>
+            <li>Correspondence</li>
+            <li>Internal memos</li>
+            <li>Other relevant facts or context</li>
+          </ul>
         </div>
 
         {/* User Context Message */}
@@ -379,42 +393,30 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
         {/* Brief Builder Card */}
         <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
           {/* Header */}
-          <div className="mb-3 flex items-center justify-between">
+          <div className="mb-3 flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-2">
               <Sparkles className="size-4 text-[#212223]" />
               <span className="font-semibold text-[#212223]">Brief Builder</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                Motion to dismiss
-              </span>
-              <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                Primary brief
-              </span>
-            </div>
+            <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+              Motion for Summary Judgment
+            </span>
+            <span className="rounded-md border border-[#cccccc] bg-white px-2 py-1 text-xs text-[#212223]">
+              Primary
+            </span>
           </div>
 
           {/* Content */}
           <div className="mb-3 flex items-center gap-2">
-            <span className="text-sm text-[#212223]">Your arguments are ready:</span>
+            <span className="text-sm text-[#212223]">Review your intake summary:</span>
             <Button
               variant="outline"
               size="sm"
               className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
             >
-              Go to Argue
+              Go to Intake
             </Button>
           </div>
-
-          <p className="mb-2 text-sm text-[#212223]">
-            I've pre-selected the stronger arguments for your motion. You can tell
-            me if you want to:
-          </p>
-          <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-            <li>Add an argument</li>
-            <li>Edit an argument</li>
-            <li>Select/deselect an argument</li>
-          </ul>
 
           <p className="mb-3 font-medium text-[#212223]">
             What would you like to do next?
@@ -423,12 +425,11 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-2">
             <Button
-              variant="outline"
               size="sm"
-              className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              className="h-8 bg-[#1d4b34] px-3 text-sm text-white hover:bg-[#163d2a]"
               onClick={onNextSupportingAuthority}
             >
-              Next: Supporting authority
+              Next: Select arguments
             </Button>
             <Button
               variant="outline"

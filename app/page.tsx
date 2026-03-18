@@ -25,6 +25,7 @@ import { DraftLoadingScreen } from "@/components/draft-loading-screen";
 import { DraftEditor } from "@/components/draft-editor";
 import { VerifyPanel } from "@/components/verify-panel";
 import { FinalizePanel } from "@/components/finalize-panel";
+import { IntakeScreen } from "@/components/intake-screen";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Sparkles } from "lucide-react";
 import * as React from "react";
@@ -39,6 +40,7 @@ type Screen =
   | "additional-details"
   | "context-provided"
   | "generating"
+  | "intake"
   | "builder"
   | "support-loading"
   | "support"
@@ -161,12 +163,13 @@ export default function BriefBuilderPrototype() {
 
   // Handler for stepper navigation
   const handleStepperClick = (stepId: string) => {
-    const stepToScreen: Record<string, ScreenType> = {
+    const stepToScreen: Record<string, Screen> = {
+      intake: "intake",
       argue: "builder",
-      support: "support",
-      distinguish: "distinguish",
+      develop: "support",
       outline: "outline",
       draft: "draft",
+      opposition: "distinguish",
       verify: "verify",
       finalize: "finalize",
     };
@@ -187,22 +190,51 @@ export default function BriefBuilderPrototype() {
     "additional-details": 6,
     "context-provided": 7,
     "generating": 8,
-    "builder": 9,
-    "support-loading": 10,
-    "support": 11,
-    "distinguish": 12,
-    "outline": 13,
-    "outline-loading": 14,
-    "outline-ready": 15,
-    "draft": 16,
-    "draft-loading": 17,
-    "draft-ready": 18,
-    "verify": 19,
-    "finalize": 20,
+    "intake": 9,
+    "builder": 10,
+    "support-loading": 11,
+    "support": 12,
+    "distinguish": 13,
+    "outline": 14,
+    "outline-loading": 15,
+    "outline-ready": 16,
+    "draft": 17,
+    "draft-loading": 18,
+    "draft-ready": 19,
+    "verify": 20,
+    "finalize": 21,
   };
 
   const isAtOrPast = (screen: Screen) =>
     screenIndex[currentScreen] >= screenIndex[screen];
+
+  // Intake layout
+  if (currentScreen === "intake") {
+    return (
+      <div className="flex h-screen bg-white">
+        {/* Side Navigation */}
+        <CocoSideNav onLogoClick={handleReset} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title="Motion for Summary Judgment" />
+          <BriefStepperNav currentStep="intake" onStepClick={handleStepperClick} />
+          <div className="flex flex-1 overflow-hidden">
+            {/* Intake Screen */}
+            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+              <IntakeScreen />
+            </div>
+            {/* Chat Drawer */}
+            <ChatDrawer 
+              isOpen={drawerOpen} 
+              onToggle={() => setDrawerOpen(!drawerOpen)}
+              currentStep="argue"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Outline layout
   if (currentScreen === "outline") {
