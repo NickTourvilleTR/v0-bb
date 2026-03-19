@@ -620,6 +620,27 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               Skip to generate draft
             </Button>
           </div>
+
+          {/* Input Box */}
+          <div className="mt-4 rounded-xl border border-[#e5e5e5] bg-white">
+            <Textarea
+              placeholder="Ask CoCounsel..."
+              className="min-h-[60px] resize-none border-0 bg-transparent px-4 py-3 text-sm text-[#212223] placeholder:text-[#737373] focus-visible:ring-0"
+            />
+            <div className="flex items-center justify-between px-3 pb-3">
+              <div className="flex items-center gap-2">
+                <button className="p-1 text-[#737373] hover:text-[#212223]">
+                  <Paperclip className="size-5" />
+                </button>
+                <button className="p-1 text-[#737373] hover:text-[#212223]">
+                  <Image className="size-5" />
+                </button>
+              </div>
+              <button className="flex size-10 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]">
+                <ArrowUp className="size-5" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* User Add Argument Message */}
