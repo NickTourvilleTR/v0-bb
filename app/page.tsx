@@ -27,6 +27,7 @@ import { VerifyPanel } from "@/components/verify-panel";
 import { FinalizePanel } from "@/components/finalize-panel";
 import { IntakeScreen } from "@/components/intake-screen";
 import { ChatDrawer } from "@/components/chat-drawer";
+import { Switch } from "@/components/ui/switch";
 import { Sparkles, PenLine, Search, LayoutGrid } from "lucide-react";
 import * as React from "react";
 
@@ -660,7 +661,17 @@ export default function BriefBuilderPrototype() {
       <div className="flex flex-1 flex-col">
         {currentScreen === "start" ? (
           /* Start Screen */
-          <main className="flex flex-1 flex-col items-center justify-center px-6">
+          <main className="relative flex flex-1 flex-col items-center justify-center px-6">
+            {/* Try new CoCounsel Toggle - Top Right */}
+            <div className="absolute top-4 right-4 flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-3 py-1.5 shadow-sm">
+              <Sparkles className="size-4 text-[#d64000]" />
+              <span className="text-sm text-[#212223]">Try new CoCounsel</span>
+              <Switch
+                defaultChecked
+                className="data-[state=checked]:bg-[#1d4b34]"
+              />
+            </div>
+            
             <div className="flex w-full max-w-3xl flex-col items-center">
               {/* Greeting */}
               <div className="mb-2 flex items-center gap-2">
