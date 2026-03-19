@@ -303,6 +303,7 @@ export default function BriefBuilderPrototype() {
               isOpen={drawerOpen}
               onToggle={() => setDrawerOpen(!drawerOpen)}
               currentStep="argue"
+              hideInput={true}
             />
           </div>
         </div>

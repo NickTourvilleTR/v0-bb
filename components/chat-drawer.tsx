@@ -20,11 +20,12 @@ interface ChatDrawerProps {
   onNextVerify?: () => void;
   onNextFinalize?: () => void;
   currentStep?: "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize";
+  hideInput?: boolean;
 }
 
 type ChatState = "initial" | "adding" | "added";
 
-export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, currentStep = "argue" }: ChatDrawerProps) {
+export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, currentStep = "argue", hideInput = false }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
@@ -1464,8 +1465,8 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
         )}
       </div>
 
-      {/* Chat Input - only show on Chat tab */}
-      {activeTab === "chat" && (
+      {/* Chat Input - only show on Chat tab and when not hidden */}
+      {activeTab === "chat" && !hideInput && (
       <div className="border-t border-[#e5e5e5] p-3">
         <div className="relative rounded-lg border border-[#e5e5e5] bg-white">
           <Textarea
