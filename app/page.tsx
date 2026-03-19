@@ -27,7 +27,7 @@ import { VerifyPanel } from "@/components/verify-panel";
 import { FinalizePanel } from "@/components/finalize-panel";
 import { IntakeScreen } from "@/components/intake-screen";
 import { ChatDrawer } from "@/components/chat-drawer";
-import { Sparkles } from "lucide-react";
+import { Sparkles, PenLine, Search, LayoutGrid } from "lucide-react";
 import * as React from "react";
 
 type Screen =
@@ -662,14 +662,39 @@ export default function BriefBuilderPrototype() {
           /* Start Screen */
           <main className="flex flex-1 flex-col items-center justify-center px-6">
             <div className="flex w-full max-w-3xl flex-col items-center">
-              <h1 className="mb-8 text-5xl font-normal text-[#000000]">
-                Get started
+              {/* Greeting */}
+              <div className="mb-2 flex items-center gap-2">
+                <Sparkles className="size-5 text-[#c9a227]" />
+                <span className="text-base text-[#212223]">Good morning, Alex</span>
+              </div>
+              
+              {/* Tagline */}
+              <h1 className="mb-6 text-2xl font-normal text-[#000000]">
+                Let's take some work off your plate
               </h1>
+              
+              {/* Input */}
               <CocoChatInput
-                placeholder="Ask anything..."
+                placeholder="Ask CoCounsel to perform a legal task..."
                 onSubmit={handleStartSubmit}
                 variant="start"
               />
+              
+              {/* Quick Action Buttons */}
+              <div className="mt-4 flex flex-wrap justify-center gap-2">
+                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                  <PenLine className="size-4 text-[#737373]" />
+                  Draft full documents...
+                </button>
+                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                  <Search className="size-4 text-[#737373]" />
+                  Conduct deep research...
+                </button>
+                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                  <LayoutGrid className="size-4 text-[#737373]" />
+                  Analyze document sets...
+                </button>
+              </div>
             </div>
           </main>
         ) : (

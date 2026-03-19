@@ -1,6 +1,6 @@
 "use client";
 
-import { Upload, FileText, Send, Paperclip, Image, ArrowUp } from "lucide-react";
+import { Paperclip, BookOpen, AtSign, Sparkles, ArrowUp, Image } from "lucide-react";
 import * as React from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ export interface CocoChatInputProps {
 export function CocoChatInput({
   value: controlledValue,
   onValueChange,
-  placeholder = "Ask anything...",
+  placeholder = "Ask CoCounsel to perform a legal task...",
   onSubmit,
   className,
   variant = "start",
@@ -58,89 +58,55 @@ export function CocoChatInput({
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="min-h-[80px] resize-none border-0 bg-transparent px-4 pt-4 pb-14 text-[#212223] placeholder:text-[#666666] focus-visible:ring-0 focus-visible:ring-offset-0"
-          rows={3}
+          className="min-h-[56px] resize-none border-0 bg-transparent px-4 pt-4 pb-12 text-[#212223] placeholder:text-[#999999] focus-visible:ring-0 focus-visible:ring-offset-0"
+          rows={1}
         />
 
         {/* Bottom Toolbar */}
-        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between border-t border-[#f2f2f2] px-3 py-2">
-          {variant === "start" ? (
-            <>
-              <div className="flex items-center gap-1">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-8 gap-2 px-3 text-[#404040] hover:bg-[#f2f2f2] hover:text-[#212223]"
-                >
-                  <Upload className="size-4" />
-                  <span className="text-sm">Upload</span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-8 gap-2 px-3 text-[#404040] hover:bg-[#f2f2f2] hover:text-[#212223]"
-                >
-                  <FileText className="size-4" />
-                  <span className="text-sm">Library</span>
-                </Button>
-              </div>
+        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-3 py-2">
+          <div className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8 text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+            >
+              <Paperclip className="size-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8 text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+            >
+              <BookOpen className="size-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8 text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+            >
+              <AtSign className="size-4" />
+            </Button>
+          </div>
 
-              <Button
-                onClick={handleSubmit}
-                size="sm"
-                className="h-8 rounded-md bg-[#000000] px-4 text-white hover:bg-[#212223]"
-              >
-                Send
-              </Button>
-            </>
-          ) : (
-            <>
-              <div className="flex items-center gap-1">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="size-8 text-[#404040] hover:bg-[#f2f2f2] hover:text-[#212223]"
-                >
-                  <Paperclip className="size-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="size-8 text-[#404040] hover:bg-[#f2f2f2] hover:text-[#212223]"
-                >
-                  <Image className="size-4" />
-                </Button>
-              </div>
-
-              <Button
-                onClick={handleSubmit}
-                size="icon"
-                className="size-8 rounded-full bg-[#2e6b5c] text-white hover:bg-[#24594c]"
-              >
-                <ArrowUp className="size-4" />
-              </Button>
-            </>
-          )}
+          <div className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8 text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+            >
+              <Sparkles className="size-4" />
+            </Button>
+            <Button
+              onClick={handleSubmit}
+              size="icon"
+              className="size-8 rounded-full bg-[#e5e5e5] text-[#999999] hover:bg-[#d5d5d5]"
+              disabled={!value.trim()}
+            >
+              <ArrowUp className="size-4" />
+            </Button>
+          </div>
         </div>
       </div>
-
-      {/* Privacy Notice */}
-      <p className="mt-2 text-sm text-[#666666]">
-        Your data is{" "}
-        {variant === "conversation" ? (
-          <a href="#" className="text-[#212223] underline hover:no-underline">
-            private and secure
-          </a>
-        ) : (
-          <>
-            private and secure.{" "}
-            <a href="#" className="text-[#212223] underline hover:no-underline">
-              Learn more
-            </a>
-          </>
-        )}
-        {variant === "conversation" && "."}
-      </p>
     </div>
   );
 }
