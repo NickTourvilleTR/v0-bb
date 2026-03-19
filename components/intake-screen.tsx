@@ -2,8 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Search, FileText, Check, Paperclip, Image, ArrowUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Search, FileText, Check } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 
 interface IntakeScreenProps {
@@ -255,32 +254,6 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
         </div>
       </div>
 
-      {/* Bottom Chat Input */}
-      <div className="border-t border-[#e5e5e5] bg-white px-6 py-4">
-        <div className="mx-auto max-w-3xl">
-          <div className="relative rounded-xl border border-[#e5e5e5] bg-white">
-            <input
-              type="text"
-              placeholder="Ask CoCounsel..."
-              className="w-full rounded-xl border-0 bg-transparent px-4 py-3 pr-24 text-sm text-[#212223] placeholder:text-[#999999] focus:outline-none focus:ring-0"
-            />
-            <div className="absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-1">
-              <button className="p-2 text-[#737373] hover:text-[#212223]">
-                <Paperclip className="size-4" />
-              </button>
-              <button className="p-2 text-[#737373] hover:text-[#212223]">
-                <Image className="size-4" />
-              </button>
-              <button className="flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white">
-                <ArrowUp className="size-4" />
-              </button>
-            </div>
-          </div>
-          <p className="mt-2 text-xs text-[#737373]">
-            Your data is <a href="#" className="underline">private and secure</a>.
-          </p>
-        </div>
-      </div>
     </div>
   );
 }
