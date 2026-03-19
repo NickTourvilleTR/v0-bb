@@ -29,7 +29,7 @@ import { IntakeScreen } from "@/components/intake-screen";
 import { LibraryScreen } from "@/components/library-screen";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Switch } from "@/components/ui/switch";
-import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library } from "lucide-react";
+import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X } from "lucide-react";
 import * as React from "react";
 
 type Screen =
@@ -59,8 +59,10 @@ type Screen =
   | "finalize";
 
 export default function BriefBuilderPrototype() {
+  // Force refresh - all handlers are inline functions
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
   const [drawerOpen, setDrawerOpen] = React.useState(true);
+  const [notesOpen, setNotesOpen] = React.useState(false);
   const [showUserArgument, setShowUserArgument] = React.useState(false);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
@@ -263,7 +265,10 @@ export default function BriefBuilderPrototype() {
               >
                 <MessageSquare className="size-5" />
               </button>
-              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
+              <button 
+                onClick={() => setNotesOpen(!notesOpen)}
+                className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
+              >
                 <Notebook className="size-5" />
               </button>
               <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
@@ -273,6 +278,26 @@ export default function BriefBuilderPrototype() {
                 <Library className="size-5" />
               </button>
             </div>
+            {/* Notes Panel */}
+            {notesOpen && (
+              <div className="flex w-80 flex-col border-l border-[#e5e5e5] bg-white">
+                <div className="flex items-center justify-between border-b border-[#e5e5e5] px-4 py-3">
+                  <h3 className="font-semibold text-[#212223]">Notes</h3>
+                  <button
+                    onClick={() => setNotesOpen(false)}
+                    className="p-1 text-[#737373] hover:text-[#212223]"
+                  >
+                    <X className="size-5" />
+                  </button>
+                </div>
+                <div className="flex-1 overflow-y-auto p-4">
+                  <textarea
+                    placeholder="Add your notes here..."
+                    className="h-full w-full resize-none rounded-lg border border-[#e5e5e5] bg-[#fcfcfc] p-3 text-sm text-[#212223] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#1d4b34]"
+                  />
+                </div>
+              </div>
+            )}
             {/* Chat Drawer */}
             <ChatDrawer
               isOpen={drawerOpen}
