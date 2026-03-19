@@ -3,16 +3,10 @@
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 import {
-  ArrowRightFromLine,
-  MessageSquarePlus,
+  Home,
   FolderOpen,
-  Search,
-  ClipboardList,
-  Heart,
-  Calendar,
-  Settings,
-  HelpCircle,
-  Shield,
+  Eye,
+  Clock,
   User,
 } from "lucide-react";
 import * as React from "react";
@@ -38,19 +32,13 @@ interface CocoSideNavProps {
 
 export function CocoSideNav({ className, onLogoClick }: CocoSideNavProps) {
   const topNavItems: NavItem[] = [
-    { icon: <ArrowRightFromLine className="size-5" />, label: "Expand", href: "#" },
-    { icon: <MessageSquarePlus className="size-5" />, label: "New Chat", href: "#", active: true },
+    { icon: <Home className="size-5" />, label: "Home", href: "#" },
     { icon: <FolderOpen className="size-5" />, label: "Projects", href: "#" },
-    { icon: <Search className="size-5" />, label: "Search", href: "#" },
-    { icon: <ClipboardList className="size-5" />, label: "Tasks", href: "#" },
-    { icon: <Heart className="size-5" />, label: "Favorites", href: "#" },
-    { icon: <Calendar className="size-5" />, label: "Calendar", href: "#" },
-    { icon: <Settings className="size-5" />, label: "Settings", href: "#" },
+    { icon: <Eye className="size-5" />, label: "Review", href: "#" },
+    { icon: <Clock className="size-5" />, label: "History", href: "#" },
   ];
 
   const bottomNavItems: NavItem[] = [
-    { icon: <HelpCircle className="size-5" />, label: "Help", href: "#" },
-    { icon: <Shield className="size-5" />, label: "Privacy", href: "#" },
     { icon: <User className="size-5" />, label: "Profile", href: "#" },
   ];
 
