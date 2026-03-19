@@ -16,29 +16,22 @@ interface PromptCard {
 
 const prompts: PromptCard[] = [
   {
-    id: "0",
-    title: "Brief Builder",
-    description: "Draft a legal brief or memorandum of law for motions including summary judgment, motions to dismiss, and more.",
-    icon: <Sparkles className="size-4 text-[#d64000]" />,
-    isFavorite: true,
-  },
-  {
     id: "1",
-    title: "AI Jurisdiction Surveys",
-    description: "Please provide a comprehensive survey of the law across different jurisdictions regarding: [LEGAL QUESTION]",
-    icon: <Scale className="size-4 text-[#c9a227]" />,
-  },
-  {
-    id: "2",
     title: "Agreement Clause Drafting",
     description: "Draft a [CLAUSE TYPE] clause for a [AGREEMENT TYPE] that addresses the following requirements: [REQUIREMENTS]",
     icon: <FileText className="size-4 text-[#2e6b5c]" />,
   },
   {
-    id: "3",
+    id: "2",
     title: "AI-Assisted Research US",
     description: "Research the following legal question and provide relevant answers with citations to Westlaw authority: [QUESTION]",
     icon: <FileSearch className="size-4 text-[#c9a227]" />,
+  },
+  {
+    id: "3",
+    title: "AI Jurisdiction Surveys",
+    description: "Please provide a comprehensive survey of the law across different jurisdictions regarding: [LEGAL QUESTION]",
+    icon: <Scale className="size-4 text-[#c9a227]" />,
   },
   {
     id: "4",
@@ -75,42 +68,49 @@ const prompts: PromptCard[] = [
   },
   {
     id: "9",
+    title: "Brief Builder",
+    description: "Draft a legal brief or memorandum of law for motions including summary judgment, motions to dismiss, and more.",
+    icon: <Sparkles className="size-4 text-[#d64000]" />,
+    isFavorite: true,
+  },
+  {
+    id: "10",
     title: "Bulk Opinion Summary",
     description: "Provide summaries of the court holdings and their potential impact on similar cases.",
     icon: <Scale className="size-4 text-[#c9a227]" />,
   },
   {
-    id: "10",
+    id: "11",
     title: "Claim Identification and Analysis",
     description: "Identify all claims against the defendants and outline the supporting facts for each claim.",
     icon: <FileText className="size-4 text-[#2e6b5c]" />,
   },
   {
-    id: "11",
+    id: "12",
     title: "Claim Summary",
     description: "Summarize all claims presented in the pleading in a clear, structured format.",
     icon: <Scale className="size-4 text-[#c9a227]" />,
   },
   {
-    id: "12",
+    id: "13",
     title: "Claims Explorer",
     description: "Analyze the fact pattern and identify all potential claims including statutory, common law, and constitutional causes of action.",
     icon: <FileSearch className="size-4 text-[#c9a227]" />,
   },
   {
-    id: "13",
+    id: "14",
     title: "Compare Documents",
     description: "Compare the attached documents and identify all significant differences and changes.",
     icon: <GitCompare className="size-4 text-[#737373]" />,
   },
   {
-    id: "14",
+    id: "15",
     title: "Compare Opinions",
     description: "Compare the substantive legal analysis in the attached court opinions and highlight key differences.",
     icon: <GitCompare className="size-4 text-[#737373]" />,
   },
   {
-    id: "15",
+    id: "16",
     title: "Contract Provision Analysis",
     description: "Analyze the contract and organize all provisions by topic or clause type.",
     icon: <FileText className="size-4 text-[#2e6b5c]" />,
