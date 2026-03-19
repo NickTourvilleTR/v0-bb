@@ -214,7 +214,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -242,7 +242,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -270,7 +270,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -298,7 +298,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -327,7 +327,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -355,7 +355,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -383,7 +383,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -412,7 +412,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -441,7 +441,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -469,7 +469,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -522,7 +522,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -550,7 +550,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -603,7 +603,7 @@ export default function BriefBuilderPrototype() {
     return (
       <div className="flex h-screen bg-white">
         {/* Side Navigation */}
-        <CocoSideNav onLogoClick={handleReset} />
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
@@ -655,7 +655,7 @@ export default function BriefBuilderPrototype() {
   return (
     <div className="flex h-screen bg-white">
       {/* Side Navigation */}
-      <CocoSideNav onLogoClick={handleReset} />
+      <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} />
 
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col">
