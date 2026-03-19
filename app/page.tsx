@@ -250,7 +250,10 @@ export default function BriefBuilderPrototype() {
           <div className="flex flex-1 overflow-hidden">
             {/* Intake Screen */}
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <IntakeScreen />
+              <IntakeScreen 
+                onNextSelectArguments={() => setCurrentScreen("builder")}
+                onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+              />
             </div>
             {/* Chat Drawer */}
             <ChatDrawer 
