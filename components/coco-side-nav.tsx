@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import {
   Home,
   FolderOpen,
-  Eye,
+  Library,
   Clock,
   User,
 } from "lucide-react";
@@ -34,7 +34,7 @@ export function CocoSideNav({ className, onLogoClick }: CocoSideNavProps) {
   const topNavItems: NavItem[] = [
     { icon: <Home className="size-5" />, label: "Home", href: "#" },
     { icon: <FolderOpen className="size-5" />, label: "Projects", href: "#" },
-    { icon: <Eye className="size-5" />, label: "Review", href: "#" },
+    { icon: <Library className="size-5" />, label: "Library", href: "#" },
     { icon: <Clock className="size-5" />, label: "History", href: "#" },
   ];
 
