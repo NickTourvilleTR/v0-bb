@@ -126,7 +126,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           </div>
 
           {/* Brief Role Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+          <div className="mb-6 rounded-lg border border-[#e5e5e5] border-l-4 border-l-[#1d4b34] bg-white p-5">
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="mb-3 text-sm font-medium text-[#212223]">Brief role</h3>
@@ -181,7 +181,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           </div>
 
           {/* Uploaded Files Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+          <div className="mb-6 rounded-lg border border-[#e5e5e5] border-l-4 border-l-[#1d4b34] bg-white p-5">
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
             <div className="flex flex-wrap gap-2">
               {uploadedFiles.map((file, index) => (
@@ -197,7 +197,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           </div>
 
           {/* Complaint Details Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+          <div className="mb-6 rounded-lg border border-[#e5e5e5] border-l-4 border-l-[#1d4b34] bg-white p-5">
             <h3 className="mb-4 text-sm font-medium text-[#212223]">Complaint details</h3>
             
             <div className="mb-4 rounded-md border border-[#e5e5e5] bg-[#f7f7f7] p-4">
@@ -243,7 +243,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           </div>
 
           {/* Claims Selected Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+          <div className="mb-6 rounded-lg border border-[#e5e5e5] border-l-4 border-l-[#1d4b34] bg-white p-5">
             <h3 className="mb-4 text-sm font-medium text-[#212223]">Claims selected</h3>
             <div className="space-y-3">
               {claimsState.map((claim) => (
