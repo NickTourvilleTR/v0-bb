@@ -258,7 +258,7 @@ export default function BriefBuilderPrototype() {
             {/* Chat Drawer */}
             <ChatDrawer
               isOpen={drawerOpen}
-              onToggle={handleToolbarClick}
+              onToggle={() => setDrawerOpen(!drawerOpen)}
               currentStep="argue"
             />
           </div>
