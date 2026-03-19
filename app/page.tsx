@@ -29,7 +29,7 @@ import { IntakeScreen } from "@/components/intake-screen";
 import { LibraryScreen } from "@/components/library-screen";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Switch } from "@/components/ui/switch";
-import { Sparkles, PenLine, Search, LayoutGrid } from "lucide-react";
+import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library } from "lucide-react";
 import * as React from "react";
 
 type Screen =
@@ -254,6 +254,24 @@ export default function BriefBuilderPrototype() {
                 onNextSelectArguments={() => setCurrentScreen("builder")}
                 onSkipToGenerateDraft={() => setCurrentScreen("draft")}
               />
+            </div>
+            {/* Right Toolbar */}
+            <div className="flex flex-col gap-2 border-l border-[#e5e5e5] bg-white p-2">
+              <button 
+                onClick={() => setDrawerOpen(!drawerOpen)} 
+                className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
+              >
+                <MessageSquare className="size-5" />
+              </button>
+              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
+                <Notebook className="size-5" />
+              </button>
+              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
+                <History className="size-5" />
+              </button>
+              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
+                <Library className="size-5" />
+              </button>
             </div>
             {/* Chat Drawer */}
             <ChatDrawer
