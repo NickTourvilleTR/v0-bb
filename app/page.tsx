@@ -758,13 +758,6 @@ export default function BriefBuilderPrototype() {
                 Let's take some work off your plate
               </h1>
               
-              {/* Input */}
-              <CocoChatInput
-                placeholder="Ask CoCounsel to perform a legal task..."
-                onSubmit={handleStartSubmit}
-                variant="start"
-              />
-              
               {/* Quick Action Buttons */}
               <div className="mt-4 flex flex-wrap justify-center gap-2">
                 <button 
@@ -990,15 +983,11 @@ export default function BriefBuilderPrototype() {
                       </button>
                     </div>
                   )}
-                  {currentScreen !== "intake" && (
+                  {currentScreen === "start" && (
                     <CocoChatInput
                       placeholder="Ask CoCounsel..."
                       variant="conversation"
-                      onSubmit={
-                        currentScreen === "additional-details"
-                          ? handleAdditionalContextSubmit
-                          : handleStartSubmit
-                      }
+                      onSubmit={handleStartSubmit}
                     />
                   )}
                 </div>
