@@ -115,6 +115,10 @@ export default function BriefBuilderPrototype() {
     }, 2000);
   };
 
+  const handleToolbarClick = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
   const handleAdditionalContextSubmit = () => {
     setCurrentScreen("context-provided");
   };
@@ -257,23 +261,23 @@ export default function BriefBuilderPrototype() {
             </div>
             {/* Right Toolbar */}
             <div className="flex flex-col gap-2 border-l border-[#e5e5e5] bg-white p-2">
-              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
+              <button onClick={handleToolbarClick} className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
                 <MessageSquare className="size-5" />
               </button>
-              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
+              <button onClick={handleToolbarClick} className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
                 <ExternalLink className="size-5" />
               </button>
-              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
+              <button onClick={handleToolbarClick} className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
                 <History className="size-5" />
               </button>
-              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
+              <button onClick={handleToolbarClick} className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
                 <Library className="size-5" />
               </button>
             </div>
             {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
+            <ChatDrawer
+              isOpen={drawerOpen}
+              onToggle={handleToolbarClick}
               currentStep="argue"
             />
           </div>
