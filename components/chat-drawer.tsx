@@ -1109,7 +1109,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </div>
 
               <p className="mb-2 text-sm text-[#212223]">
-                {"{"}I've created an outline based on your scenario and selections. You can tell me if you want to
+                I've created an outline based on your scenario and selections. You can tell me if you want to
               </p>
               <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
                 <li>Add/remove a section</li>
@@ -1122,7 +1122,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </p>
 
               <p className="font-medium text-[#212223]">
-                What would you like to do next?{"}"}
+                What would you like to do next?
               </p>
             </div>
 
@@ -1205,7 +1205,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </div>
 
               <p className="mb-2 text-sm text-[#212223]">
-                {"{"}I've created an outline based on your scenario and selections. You can tell me if you want to
+                I've created an outline based on your scenario and selections. You can tell me if you want to
               </p>
               <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
                 <li>Add/remove a section</li>
@@ -1218,7 +1218,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </p>
 
               <p className="font-medium text-[#212223]">
-                What would you like to do next?{"}"}
+                What would you like to do next?
               </p>
             </div>
 
@@ -1275,7 +1275,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   </div>
 
                   <p className="mb-2 text-sm text-[#212223]">
-                    {"{"}I've created a brief draft based on your scenario, selections and outline. You can tell me if you want to:
+                    I've created a brief draft based on your scenario, selections and outline. You can tell me if you want to:
                   </p>
                   <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
                     <li>Add/remove a section</li>
@@ -1288,7 +1288,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   </p>
 
                   <p className="font-medium text-[#212223]">
-                    What would you like to do next?{"}"}
+                    What would you like to do next?
                   </p>
                 </div>
               </>
@@ -1373,11 +1373,11 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </div>
 
               <p className="mb-2 text-sm text-[#212223]">
-                {"{"}I've run verification based on the draft. Please review any warnings.
+                I've run verification based on the draft. Please review any warnings.
               </p>
 
               <p className="font-medium text-[#212223]">
-                What would you like to do next?{"}"}
+                What would you like to do next?
               </p>
             </div>
 
@@ -1448,7 +1448,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </div>
 
               <p className="font-medium text-[#212223]">
-                {"{"}What would you like to do next?{"}"}
+                {"{"}What would you like to do next?
               </p>
             </div>
 
