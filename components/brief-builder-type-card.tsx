@@ -1,30 +1,26 @@
 "use client";
 
 import { Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
-import * as React from "react";
+
+const briefTypes = [
+  { id: "primary", label: "Primary" },
+  { id: "reply", label: "Reply" },
+  { id: "opposition", label: "Opposition" },
+];
 
 interface BriefBuilderTypeCardProps {
   onSubmit?: (type: string) => void;
   className?: string;
-  disabled?: boolean;
-  defaultValue?: string;
 }
 
 export function BriefBuilderTypeCard({
   onSubmit,
   className,
-  disabled = false,
-  defaultValue = "",
 }: BriefBuilderTypeCardProps) {
-  const [selectedType, setSelectedType] = React.useState<string>(defaultValue);
-
-  const handleSubmit = () => {
-    if (onSubmit && selectedType) {
-      onSubmit(selectedType);
+  const handleSelect = (type: string) => {
+    if (onSubmit) {
+      onSubmit(type);
     }
   };
 
@@ -47,37 +43,19 @@ export function BriefBuilderTypeCard({
         <strong>Primary</strong>, <strong>Reply</strong>, or <strong>Opposition</strong> brief?
       </p>
 
-      {/* Radio Options */}
-      <RadioGroup
-        value={selectedType}
-        onValueChange={disabled ? undefined : setSelectedType}
-        className="mb-6 space-y-3"
-        disabled={disabled}
-      >
-        <div className="flex items-center gap-3">
-          <RadioGroupItem value="primary" id="primary" className="border-[#737373] text-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c]" disabled={disabled} />
-          <Label htmlFor="primary" className="text-[#212223] cursor-pointer">Primary</Label>
-        </div>
-        <div className="flex items-center gap-3">
-          <RadioGroupItem value="reply" id="reply" className="border-[#737373] text-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c]" disabled={disabled} />
-          <Label htmlFor="reply" className="text-[#212223] cursor-pointer">Reply</Label>
-        </div>
-        <div className="flex items-center gap-3">
-          <RadioGroupItem value="opposition" id="opposition" className="border-[#737373] text-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c]" disabled={disabled} />
-          <Label htmlFor="opposition" className="text-[#212223] cursor-pointer">Opposition</Label>
-        </div>
-      </RadioGroup>
-
-      {/* Submit Button */}
-      {!disabled && (
-        <Button
-          onClick={handleSubmit}
-          className="h-10 bg-[#2e6b5c] px-6 text-white hover:bg-[#24594c]"
-          disabled={!selectedType}
-        >
-          Submit
-        </Button>
-      )}
+      {/* Clickable Options */}
+      <div className="space-y-3">
+        {briefTypes.map((type) => (
+          <button
+            key={type.id}
+            onClick={() => handleSelect(type.id)}
+            className="flex w-full items-center gap-3 rounded-lg border border-[#e5e5e5] bg-white px-4 py-3 text-left transition-colors hover:bg-[#f7f7f7]"
+          >
+            <div className="size-4 rounded-full border-2 border-[#737373]" />
+            <span className="text-[#212223]">{type.label}</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
