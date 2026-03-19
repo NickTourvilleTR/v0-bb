@@ -258,6 +258,7 @@ export default function BriefBuilderPrototype() {
             setNotesOpen={setNotesOpen}
             currentStep="argue"
             hideInput={true}
+            showVersionsTab={true}
           >
             <IntakeScreen 
               onNextSelectArguments={() => setCurrentScreen("builder")}
@@ -283,6 +284,7 @@ export default function BriefBuilderPrototype() {
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             currentStep="outline"
+            showVersionsTab={true}
           >
             <OutlineScreen onGenerateOutline={handleGenerateOutline} />
           </AppLayoutWrapper>
@@ -305,6 +307,7 @@ export default function BriefBuilderPrototype() {
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             currentStep="outline-loading"
+            showVersionsTab={true}
           >
             <OutlineLoadingScreen progress={70} />
           </AppLayoutWrapper>
@@ -328,6 +331,7 @@ export default function BriefBuilderPrototype() {
             setNotesOpen={setNotesOpen}
             currentStep="outline-ready"
             onNextDraft={handleNextDraft}
+            showVersionsTab={true}
           >
             <OutlineEditor />
           </AppLayoutWrapper>
@@ -350,6 +354,7 @@ export default function BriefBuilderPrototype() {
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             currentStep="draft"
+            showVersionsTab={true}
           >
             <DraftScreen onGenerateDraft={handleGenerateDraft} />
           </AppLayoutWrapper>
@@ -372,6 +377,7 @@ export default function BriefBuilderPrototype() {
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             currentStep="draft-loading"
+            showVersionsTab={true}
           >
             <DraftLoadingScreen progress={70} />
           </AppLayoutWrapper>
@@ -395,6 +401,7 @@ export default function BriefBuilderPrototype() {
             setNotesOpen={setNotesOpen}
             currentStep="draft-ready"
             onNextVerify={handleNextVerify}
+            showVersionsTab={true}
           >
             <DraftEditor />
           </AppLayoutWrapper>
@@ -418,6 +425,7 @@ export default function BriefBuilderPrototype() {
             setNotesOpen={setNotesOpen}
             currentStep="verify"
             onNextFinalize={handleNextFinalize}
+            showVersionsTab={true}
           >
             <VerifyPanel />
           </AppLayoutWrapper>
@@ -440,6 +448,7 @@ export default function BriefBuilderPrototype() {
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             currentStep="finalize"
+            showVersionsTab={true}
           >
             <FinalizePanel />
           </AppLayoutWrapper>
@@ -463,6 +472,7 @@ export default function BriefBuilderPrototype() {
             setNotesOpen={setNotesOpen}
             currentStep="distinguish"
             onNextOutline={handleNextOutline}
+            showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
               <ContraryAuthoritiesPanel />
@@ -487,6 +497,7 @@ export default function BriefBuilderPrototype() {
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             currentStep="support-loading"
+            showVersionsTab={true}
           >
             <SupportLoadingScreen progress={70} />
           </AppLayoutWrapper>
@@ -510,6 +521,7 @@ export default function BriefBuilderPrototype() {
             setNotesOpen={setNotesOpen}
             currentStep="support"
             onNextContraryAuthorities={handleNextContraryAuthorities}
+            showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
               <SupportingAuthoritiesPanel />
@@ -536,6 +548,7 @@ export default function BriefBuilderPrototype() {
             currentStep="argue"
             onArgumentAdded={() => setShowUserArgument(true)}
             onNextSupportingAuthority={handleNextSupportingAuthority}
+            showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
               <ArgumentsPanel showUserArgument={showUserArgument} />

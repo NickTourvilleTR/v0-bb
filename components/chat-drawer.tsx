@@ -21,11 +21,12 @@ interface ChatDrawerProps {
   onNextFinalize?: () => void;
   currentStep?: "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize";
   hideInput?: boolean;
+  showVersionsTab?: boolean;
 }
 
 type ChatState = "initial" | "adding" | "added";
 
-export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, currentStep = "argue", hideInput = false }: ChatDrawerProps) {
+export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, currentStep = "argue", hideInput = false, showVersionsTab = false }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
@@ -86,7 +87,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           <X className="size-5" />
         </button>
         <div className="flex flex-1">
-          {(["chat", "notes", "sources"] as const).map((tab) => (
+          {(showVersionsTab ? ["chat", "notes", "versions", "sources"] as const : ["chat", "notes", "sources"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -97,7 +98,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   : "text-[#737373] hover:text-[#212223]"
               )}
             >
-              {tab === "chat" ? "Chat" : tab === "notes" ? "Notes" : "Sources"}
+              {tab === "chat" ? "Chat" : tab === "notes" ? "Notes" : tab === "versions" ? "Versions" : "Sources"}
             </button>
           ))}
         </div>
@@ -112,7 +113,44 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           </div>
         )}
 
-
+        {/* Versions Tab */}
+        {activeTab === "versions" && showVersionsTab && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
+              <div>
+                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
+                  2 Arguments selected and edited
+                </a>
+                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:24 PM</p>
+              </div>
+              <button className="text-[#737373] hover:text-[#212223]">
+                <RotateCcw className="size-4" />
+              </button>
+            </div>
+            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
+              <div>
+                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
+                  2 Arguments selected and edited
+                </a>
+                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:25 PM</p>
+              </div>
+              <button className="text-[#737373] hover:text-[#212223]">
+                <RotateCcw className="size-4" />
+              </button>
+            </div>
+            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
+              <div>
+                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
+                  3 Arguments selected and edited
+                </a>
+                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:20 PM</p>
+              </div>
+              <button className="text-[#737373] hover:text-[#212223]">
+                <RotateCcw className="size-4" />
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Sources Tab */}
         {activeTab === "sources" && (

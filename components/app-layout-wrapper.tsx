@@ -21,6 +21,7 @@ interface AppLayoutWrapperProps {
   onNextVerify?: () => void;
   onNextFinalize?: () => void;
   hideInput?: boolean;
+  showVersionsTab?: boolean;
   className?: string;
 }
 
@@ -39,6 +40,7 @@ export function AppLayoutWrapper({
   onNextVerify,
   onNextFinalize,
   hideInput = false,
+  showVersionsTab = false,
   className,
 }: AppLayoutWrapperProps) {
   return (
@@ -89,6 +91,7 @@ export function AppLayoutWrapper({
         onNextVerify={onNextVerify}
         onNextFinalize={onNextFinalize}
         hideInput={hideInput}
+        showVersionsTab={showVersionsTab}
       />
     </div>
   );
