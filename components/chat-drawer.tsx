@@ -1467,33 +1467,32 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
       {/* Chat Input - only show on Chat tab and when not hidden */}
       {activeTab === "chat" && !hideInput && (
-        <div className="border-t border-[#e5e5e5] p-3">
-          <div className="relative rounded-lg border border-[#e5e5e5] bg-white">
+        <div className="border-t border-[#e5e5e5] p-4">
+          <div className="rounded-xl border border-[#e5e5e5] bg-white">
             <Textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask CoCounsel..."
-              className="min-h-[60px] resize-none border-0 bg-transparent px-3 py-2 text-sm focus-visible:ring-0"
+              className="min-h-[80px] resize-none border-0 bg-transparent px-4 py-3 text-sm text-[#212223] placeholder:text-[#737373] focus-visible:ring-0"
             />
-            <div className="flex items-center justify-between border-t border-[#f2f2f2] px-2 py-1">
-              <div className="flex items-center gap-1">
-                <Button variant="ghost" size="icon" className="size-7 text-[#737373]">
-                  <Paperclip className="size-4" />
-                </Button>
-                <Button variant="ghost" size="icon" className="size-7 text-[#737373]">
-                  <Image className="size-4" />
-                </Button>
+            <div className="flex items-center justify-between px-3 pb-3">
+              <div className="flex items-center gap-2">
+                <button className="p-1 text-[#737373] hover:text-[#212223]">
+                  <Paperclip className="size-5" />
+                </button>
+                <button className="p-1 text-[#737373] hover:text-[#212223]">
+                  <Image className="size-5" />
+                </button>
               </div>
-              <Button
-                size="icon"
-                className="size-7 rounded-full bg-[#2e6b5c] text-white hover:bg-[#24594c]"
+              <button
+                className="flex size-10 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
                 onClick={handleSubmit}
               >
-                <ArrowUp className="size-4" />
-              </Button>
+                <ArrowUp className="size-5" />
+              </button>
             </div>
           </div>
-          <p className="mt-2 text-center text-xs text-[#737373]">
+          <p className="mt-3 text-center text-sm text-[#737373]">
             Your data is{" "}
             <a href="#" className="text-[#212223] underline">
               private and secure
