@@ -693,7 +693,10 @@ export default function BriefBuilderPrototype() {
               
               {/* Quick Action Buttons */}
               <div className="mt-4 flex flex-wrap justify-center gap-2">
-                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                <button 
+                  onClick={handleStartSubmit}
+                  className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                >
                   <PenLine className="size-4 text-[#737373]" />
                   Draft a legal brief
                 </button>
