@@ -197,24 +197,24 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           </div>
 
           {/* Complaint Details Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] border-l-4 border-l-[#1d4b34] bg-white p-5">
-            <h3 className="mb-4 text-sm font-medium text-[#212223]">Complaint details</h3>
+          <div className="mb-6 rounded-xl border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-6">
+            <h3 className="mb-4 font-semibold text-[#212223]">Complaint details</h3>
             
-            <div className="mb-4 rounded-md border border-[#e5e5e5] bg-[#f7f7f7] p-4">
+            <div className="mb-4 rounded-lg border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-4">
               <div className="space-y-1 text-sm">
-                <p><span className="font-medium">Judge&apos;s name:</span> Andre Birotte Jr.</p>
-                <p><span className="font-medium">Civil Action No.:</span> 4:25-cv-00064-O</p>
+                <p><span className="font-semibold">Judge&apos;s name:</span> Andre Birotte Jr.</p>
+                <p><span className="font-semibold">Civil Action No.:</span> 4:25-cv-00064-O</p>
               </div>
               <div className="mt-4 space-y-1 text-sm">
-                <p><span className="font-medium">Court name:</span> U.S. District Court, N.D. TX, Fort Wayne Division</p>
-                <p><span className="font-medium">Selected jurisdiction (sets the scope for your research):</span> Texas and Related Federal</p>
-                <p><span className="font-medium">Summary judgment:</span> Movant&apos;s Memorandum of Law (Federal) | <a href="#" className="text-[#2e6b5c] underline">Preview template</a></p>
+                <p><span className="font-semibold">Court name:</span> U.S. District Court, N.D. TX, Fort Wayne Division</p>
+                <p><span className="font-semibold">Selected jurisdiction (sets the scope for your research):</span> Texas and Related Federal</p>
+                <p><span className="font-semibold">Summary judgment:</span> Movant&apos;s Memorandum of Law (Federal) | <a href="#" className="text-[#2e6b5c] underline">Preview template</a></p>
               </div>
             </div>
 
             {/* Party you represent */}
-            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] p-4">
-              <h4 className="mb-3 text-sm font-medium text-[#212223]">Party you represent:</h4>
+            <div className="rounded-lg border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-4">
+              <h4 className="mb-3 font-semibold text-[#212223]">Party you represent:</h4>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Checkbox 
@@ -224,7 +224,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     className="border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" 
                   />
                   <label htmlFor="plaintiff" className="text-sm text-[#212223]">
-                    <span className="font-medium">Plaintiff party 1:</span> Gyant Properties, LLC
+                    <span className="font-semibold">Plaintiff party 1:</span> Gyant Properties, LLC
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
@@ -235,7 +235,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     className="border-[#cccccc]" 
                   />
                   <label htmlFor="defendant" className="text-sm text-[#212223]">
-                    <span className="font-medium">Defendant party 1:</span> National Fire & Marine Insurance Company
+                    <span className="font-semibold">Defendant party 1:</span> National Fire & Marine Insurance Company
                   </label>
                 </div>
               </div>
@@ -243,13 +243,13 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           </div>
 
           {/* Claims Selected Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] border-l-4 border-l-[#1d4b34] bg-white p-5">
-            <h3 className="mb-4 text-sm font-medium text-[#212223]">Claims selected</h3>
+          <div className="mb-6 rounded-xl border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-6">
+            <h3 className="mb-4 font-semibold text-[#212223]">Claims selected</h3>
             <div className="space-y-3">
               {claimsState.map((claim) => (
                 <div
                   key={claim.id}
-                  className="flex items-start gap-3 rounded-md border border-[#e5e5e5] bg-[#f7f7f7] p-4"
+                  className="flex items-start gap-3 rounded-lg border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-4"
                 >
                   <Checkbox 
                     id={claim.id}
@@ -261,8 +261,8 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     )}
                   />
                   <label htmlFor={claim.id} className="flex-1 cursor-pointer">
-                    <p className="text-sm font-medium text-[#212223]">{claim.title}</p>
-                    <p className="mt-1 text-xs text-[#737373]">{claim.description}</p>
+                    <p className="text-sm font-semibold text-[#212223]">{claim.title}</p>
+                    <p className="mt-1 text-sm text-[#737373]">{claim.description}</p>
                   </label>
                 </div>
               ))}
