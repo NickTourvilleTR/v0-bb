@@ -227,12 +227,17 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "library") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col overflow-hidden">
-          <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="argue"
+          >
+            <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -629,6 +634,13 @@ export default function BriefBuilderPrototype() {
           /* Conversation Screen */
           <>
             <CocoHeader title="{Motion to Dismiss}" />
+            <AppLayoutWrapper
+              drawerOpen={drawerOpen}
+              setDrawerOpen={setDrawerOpen}
+              notesOpen={notesOpen}
+              setNotesOpen={setNotesOpen}
+              currentStep="argue"
+            >
             <main
               ref={scrollRef}
               className="flex flex-1 flex-col overflow-y-auto bg-white"
@@ -840,6 +852,7 @@ export default function BriefBuilderPrototype() {
                 </div>
               </div>
             </main>
+            </AppLayoutWrapper>
           </>
         )}
       </div>
