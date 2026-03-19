@@ -69,18 +69,9 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
     }, 3000);
   };
 
-  // Collapsed state - just show toggle button
+  // Collapsed state - hide completely
   if (!isOpen) {
-    return (
-      <div className={cn("flex h-full flex-col items-center border-l border-[#e5e5e5] bg-white py-3 px-2", className)}>
-        <button
-          className="flex size-10 items-center justify-center rounded-md border border-[#e5e5e5] text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
-          onClick={onToggle}
-        >
-          <PanelRightOpen className="size-5" />
-        </button>
-      </div>
-    );
+    return null;
   }
 
   return (
