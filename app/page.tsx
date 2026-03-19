@@ -121,10 +121,10 @@ export default function BriefBuilderPrototype() {
 
   const handleReadyToBuild = () => {
     setCurrentScreen("generating");
-    // Simulate generating arguments, then show builder
+    // Simulate generating, then show intake
     setTimeout(() => {
-      setCurrentScreen("builder");
-    }, 3000);
+      setCurrentScreen("intake");
+    }, 2000);
   };
 
   const handleReset = () => {
