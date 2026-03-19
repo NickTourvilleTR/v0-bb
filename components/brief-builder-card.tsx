@@ -1,13 +1,38 @@
 "use client";
 
 import { Sparkles, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import * as React from "react";
+
+const motionTypes = [
+  {
+    id: "dismiss",
+    title: "Motion to dismiss",
+    description: "Ask the court to dismiss the case before trial by challenging the sufficiency of the opposing party's claims.",
+  },
+  {
+    id: "compel",
+    title: "Motion to compel",
+    description: "Ask that the court enforce the opposing party's compliance with discovery requests.",
+  },
+  {
+    id: "protective-order",
+    title: "Motion for protective order",
+    description: "Ask that the court limit the scope, methods, or disclosure of information obtainable via discovery.",
+  },
+  {
+    id: "exclude-evidence",
+    title: "Motion to exclude evidence",
+    description: "Ask pretrial ruling to bar inadmissible evidence from being presented at trial.",
+  },
+  {
+    id: "transfer-venue",
+    title: "Motion to transfer venue",
+    description: "Ask that the case is moved to a different court or jurisdiction for convenience or fairness.",
+  },
+];
 
 interface BriefBuilderCardProps {
-  question: string;
+  question?: string;
   searchPlaceholder?: string;
   onSubmit?: (value: string) => void;
   className?: string;
@@ -16,18 +41,12 @@ interface BriefBuilderCardProps {
 }
 
 export function BriefBuilderCard({
-  question,
-  searchPlaceholder = "Search for a motion type",
   onSubmit,
   className,
-  disabled = false,
-  defaultValue = "",
 }: BriefBuilderCardProps) {
-  const [searchValue, setSearchValue] = React.useState(defaultValue);
-
-  const handleSubmit = () => {
+  const handleMotionSelect = (motionId: string) => {
     if (onSubmit) {
-      onSubmit(searchValue);
+      onSubmit(motionId);
     }
   };
 
@@ -39,43 +58,36 @@ export function BriefBuilderCard({
       )}
     >
       {/* Header */}
-      <div className="mb-4 flex items-center gap-2">
+      <div className="mb-6 flex items-center gap-2">
         <Sparkles className="size-5 text-[#212223]" />
         <h3 className="text-lg font-semibold text-[#212223]">Brief Builder</h3>
       </div>
 
-      {/* Question */}
-      <p className="mb-6 text-[#212223]">{question}</p>
+      {/* Motion Type Options */}
+      <div className="space-y-3">
+        {motionTypes.map((motion) => (
+          <button
+            key={motion.id}
+            onClick={() => handleMotionSelect(motion.id)}
+            className="w-full rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors hover:bg-[#f7f7f7]"
+          >
+            <h4 className="font-semibold text-[#212223]">{motion.title}</h4>
+            <p className="mt-1 text-sm text-[#737373]">{motion.description}</p>
+          </button>
+        ))}
 
-      {/* Search Field */}
-      <div className="mb-6">
-        <label className="mb-2 block text-sm font-medium text-[#212223]">
-          Search
-        </label>
-        <div className="relative">
-          <Input
-            type="text"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder={searchPlaceholder}
-            disabled={disabled}
-            className="h-11 border-[#cccccc] bg-white pr-10 text-[#212223] placeholder:text-[#737373] focus-visible:ring-[#2e6b5c] disabled:opacity-100 disabled:cursor-default"
-          />
-          <Search className="absolute right-3 top-1/2 size-4 -translate-y-1/2 text-[#737373]" />
-        </div>
-      </div>
-
-      {/* Submit Button */}
-      {!disabled && (
-        <Button
-          onClick={handleSubmit}
-          variant="outline"
-          className="h-10 border-[#cccccc] bg-white px-6 text-[#404040] hover:bg-[#f2f2f2]"
-          disabled={!searchValue.trim()}
+        {/* Draft another motion type */}
+        <button
+          onClick={() => handleMotionSelect("other")}
+          className="w-full rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors hover:bg-[#f7f7f7]"
         >
-          Submit
-        </Button>
-      )}
+          <div className="flex items-center gap-2">
+            <Search className="size-4 text-[#737373]" />
+            <h4 className="font-semibold text-[#212223]">Draft another motion type</h4>
+          </div>
+          <p className="mt-1 text-sm text-[#737373]">Describe the kind of motion that your brief will support.</p>
+        </button>
+      </div>
     </div>
   );
 }
