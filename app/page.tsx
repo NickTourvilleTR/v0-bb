@@ -249,7 +249,7 @@ export default function BriefBuilderPrototype() {
           <BriefStepperNav currentStep="intake" onStepClick={handleStepperClick} />
           <div className="flex flex-1 overflow-hidden">
             {/* Intake Screen */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
+            <div className="relative flex flex-1 flex-col overflow-y-auto bg-[#fcfcfc]">
               <IntakeScreen 
                 onNextSelectArguments={() => setCurrentScreen("builder")}
                 onSkipToGenerateDraft={() => setCurrentScreen("draft")}
