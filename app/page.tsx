@@ -29,7 +29,7 @@ import { IntakeScreen } from "@/components/intake-screen";
 import { LibraryScreen } from "@/components/library-screen";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { Switch } from "@/components/ui/switch";
-import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X } from "lucide-react";
+import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp } from "lucide-react";
 import * as React from "react";
 
 type Screen =
@@ -758,8 +758,40 @@ export default function BriefBuilderPrototype() {
                 Let's take some work off your plate
               </h1>
               
+              {/* Input Box */}
+              <div className="mb-6 w-full max-w-2xl">
+                <div className="rounded-xl border border-[#e5e5e5] bg-white p-4 shadow-sm">
+                  <input
+                    type="text"
+                    placeholder="Ask CoCounsel to perform a legal task..."
+                    className="w-full border-0 bg-transparent text-sm text-[#212223] placeholder:text-[#999999] focus:outline-none focus:ring-0"
+                  />
+                  <div className="mt-3 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <button className="p-1 text-[#737373] hover:text-[#212223]">
+                        <Paperclip className="size-4" />
+                      </button>
+                      <button className="p-1 text-[#737373] hover:text-[#212223]">
+                        <BookOpen className="size-4" />
+                      </button>
+                      <button className="p-1 text-[#737373] hover:text-[#212223]">
+                        <AtSign className="size-4" />
+                      </button>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button className="p-1 text-[#737373] hover:text-[#212223]">
+                        <Sparkles className="size-4" />
+                      </button>
+                      <button className="flex size-8 items-center justify-center rounded-full bg-[#e5e5e5] text-[#999999]">
+                        <ArrowUp className="size-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
               {/* Quick Action Buttons */}
-              <div className="mt-4 flex flex-wrap justify-center gap-2">
+              <div className="flex flex-wrap justify-center gap-2">
                 <button 
                   onClick={handleStartSubmit}
                   className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
