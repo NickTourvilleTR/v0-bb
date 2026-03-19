@@ -29,13 +29,14 @@ interface CocoSideNavProps {
   className?: string;
   onLogoClick?: () => void;
   onHomeClick?: () => void;
+  onLibraryClick?: () => void;
 }
 
-export function CocoSideNav({ className, onLogoClick, onHomeClick }: CocoSideNavProps) {
+export function CocoSideNav({ className, onLogoClick, onHomeClick, onLibraryClick }: CocoSideNavProps) {
   const topNavItems: NavItem[] = [
     { icon: <Home className="size-5" />, label: "Home", onClick: onHomeClick },
     { icon: <FolderOpen className="size-5" />, label: "Projects", href: "#" },
-    { icon: <Library className="size-5" />, label: "Library", href: "#" },
+    { icon: <Library className="size-5" />, label: "Library", onClick: onLibraryClick },
     { icon: <Clock className="size-5" />, label: "History", href: "#" },
   ];
 
