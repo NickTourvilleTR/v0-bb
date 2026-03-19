@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp, ExternalLink, FileText, AlertTriangle, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronUp, Notebook, FileText, AlertTriangle, ChevronRight } from "lucide-react";
 
 export function VerifyPanel() {
   const [expandedPassages, setExpandedPassages] = useState<Record<string, boolean>>({ "1-1": true });
@@ -64,7 +64,7 @@ export function VerifyPanel() {
                 className="inline-flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
               >
                 Bothmann v. Harrington, 458 So. 2d 1163 (Fla. Dist. Ct. App. 1984)
-                <ExternalLink className="size-3" />
+                <Notebook className="size-3" />
               </a>
             </div>
 
@@ -125,14 +125,14 @@ export function VerifyPanel() {
                   className="mb-1 flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
                   237k136 Libel and Slander {'>'} Defenses
-                  <ExternalLink className="size-3" />
+                  <Notebook className="size-3" />
                 </a>
                 <a
                   href="#"
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
                   237k139 Libel and Slander {'>'} Actions
-                  <ExternalLink className="size-3" />
+                  <Notebook className="size-3" />
                 </a>
               </div>
 
@@ -143,7 +143,7 @@ export function VerifyPanel() {
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
                   Defamation and Disparagement {'>'} General Determination
-                  <ExternalLink className="size-3" />
+                  <Notebook className="size-3" />
                 </a>
               </div>
 
@@ -154,7 +154,7 @@ export function VerifyPanel() {
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
                   Cases citing Bothmann v. Harrington
-                  <ExternalLink className="size-3" />
+                  <Notebook className="size-3" />
                 </a>
               </div>
 
@@ -165,7 +165,7 @@ export function VerifyPanel() {
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
                   Cases with similar language
-                  <ExternalLink className="size-3" />
+                  <Notebook className="size-3" />
                 </a>
               </div>
             </div>
@@ -298,7 +298,7 @@ export function VerifyPanel() {
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
                   217k123 Libel and Slander {'>'} Trade Disparagement
-                  <ExternalLink className="size-3" />
+                  <Notebook className="size-3" />
                 </a>
               </div>
 
@@ -309,7 +309,7 @@ export function VerifyPanel() {
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
                   Defamation {'>'} Trade Disparagement
-                  <ExternalLink className="size-3" />
+                  <Notebook className="size-3" />
                 </a>
               </div>
 
@@ -320,7 +320,7 @@ export function VerifyPanel() {
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
                   Cases citing Salit v. Ruden, McClosky, Smith, Schuster & Russell, P.A., 743 So. 2d 381 (Fla. Dist. Ct. App. 1999)
-                  <ExternalLink className="size-3" />
+                  <Notebook className="size-3" />
                 </a>
               </div>
 
@@ -331,7 +331,7 @@ export function VerifyPanel() {
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
                   25 cases with similar language
-                  <ExternalLink className="size-3" />
+                  <Notebook className="size-3" />
                 </a>
               </div>
             </div>

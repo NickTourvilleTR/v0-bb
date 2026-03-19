@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ExternalLink } from "lucide-react";
+import { Notebook } from "lucide-react";
 
 interface Citation {
   id: string;
@@ -174,7 +174,7 @@ export function SupportingAuthoritiesPanel({
                       >
                         {citation.name}
                       </a>
-                      <ExternalLink className="size-3.5 text-[#2e6b5c]" />
+                      <Notebook className="size-3.5 text-[#2e6b5c]" />
                     </div>
                     
                     {/* Citation Reference */}

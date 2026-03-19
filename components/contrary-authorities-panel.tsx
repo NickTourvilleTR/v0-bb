@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ExternalLink } from "lucide-react";
+import { Notebook } from "lucide-react";
 
 interface ContraryAuthority {
   id: string;
@@ -159,7 +159,7 @@ export function ContraryAuthoritiesPanel({ className }: ContraryAuthoritiesPanel
                     className="inline-flex items-center gap-1 font-medium text-[#2e6b5c] hover:underline"
                   >
                     {authority.caseName}
-                    <ExternalLink className="size-3.5" />
+                    <Notebook className="size-3.5" />
                   </a>
                   <p className="text-sm text-[#737373]">{authority.citation}</p>
                 </div>
@@ -175,7 +175,7 @@ export function ContraryAuthoritiesPanel({ className }: ContraryAuthoritiesPanel
                       className="inline-flex items-center gap-0.5 text-[#2e6b5c] hover:underline"
                     >
                       {authority.howToDistinguish.ruleLink.text}
-                      <ExternalLink className="size-3" />
+                      <Notebook className="size-3" />
                     </a>
                   )}
                   {authority.howToDistinguish.introEnd}
@@ -199,7 +199,7 @@ export function ContraryAuthoritiesPanel({ className }: ContraryAuthoritiesPanel
                     className="mt-2 inline-flex items-center gap-0.5 text-sm text-[#2e6b5c] hover:underline"
                   >
                     {authority.howToDistinguish.citationLink.text}
-                    <ExternalLink className="size-3" />
+                    <Notebook className="size-3" />
                   </a>
                 )}
               </div>
