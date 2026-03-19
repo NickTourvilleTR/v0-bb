@@ -676,7 +676,7 @@ export default function BriefBuilderPrototype() {
               {/* Greeting */}
               <div className="mb-2 flex items-center gap-2">
                 <Sparkles className="size-5 text-[#d64000]" />
-                <span className="text-base text-[#212223]">Good morning, Thomson</span>
+                <span className="text-base text-[#212223]">Good morning, Jane</span>
               </div>
               
               {/* Tagline */}
