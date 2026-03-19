@@ -289,10 +289,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           <div>
             <p className="text-xs text-[#737373]">Jane Lawson - 9:07 a.m.</p>
             <p className="text-sm text-[#212223]">
-              Draft a motion for summary judgment in Gyant Properties, LLC v. NFM Insurance
-            </p>
-            <p className="mt-1 text-sm text-[#212223]">
-              ur brief or memo supporting?
+              Help me draft a legal brief
             </p>
           </div>
         </div>
