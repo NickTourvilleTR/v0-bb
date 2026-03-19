@@ -28,6 +28,7 @@ import { FinalizePanel } from "@/components/finalize-panel";
 import { IntakeScreen } from "@/components/intake-screen";
 import { LibraryScreen } from "@/components/library-screen";
 import { ChatDrawer } from "@/components/chat-drawer";
+import { RightToolbar } from "@/components/right-toolbar";
 import { Switch } from "@/components/ui/switch";
 import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp } from "lucide-react";
 import * as React from "react";
@@ -258,26 +259,10 @@ export default function BriefBuilderPrototype() {
               />
             </div>
             {/* Right Toolbar */}
-            <div className="flex flex-col gap-2 border-l border-[#e5e5e5] bg-white p-2">
-              <button 
-                onClick={() => setDrawerOpen(!drawerOpen)} 
-                className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
-              >
-                <MessageSquare className="size-5" />
-              </button>
-              <button 
-                onClick={() => setNotesOpen(!notesOpen)}
-                className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
-              >
-                <Notebook className="size-5" />
-              </button>
-              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
-                <History className="size-5" />
-              </button>
-              <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]">
-                <Library className="size-5" />
-              </button>
-            </div>
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Notes Panel */}
             {notesOpen && (
               <div className="flex w-80 flex-col border-l border-[#e5e5e5] bg-white">
@@ -327,6 +312,11 @@ export default function BriefBuilderPrototype() {
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <OutlineScreen onGenerateOutline={handleGenerateOutline} />
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -355,6 +345,11 @@ export default function BriefBuilderPrototype() {
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <OutlineLoadingScreen progress={70} />
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -383,6 +378,11 @@ export default function BriefBuilderPrototype() {
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <OutlineEditor />
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -412,6 +412,11 @@ export default function BriefBuilderPrototype() {
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <DraftScreen onGenerateDraft={handleGenerateDraft} />
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -440,6 +445,11 @@ export default function BriefBuilderPrototype() {
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <DraftLoadingScreen progress={70} />
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -468,6 +478,11 @@ export default function BriefBuilderPrototype() {
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <DraftEditor />
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -497,6 +512,11 @@ export default function BriefBuilderPrototype() {
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <VerifyPanel />
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -526,6 +546,11 @@ export default function BriefBuilderPrototype() {
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <FinalizePanel />
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -578,6 +603,11 @@ export default function BriefBuilderPrototype() {
                 </div>
               )}
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -607,6 +637,11 @@ export default function BriefBuilderPrototype() {
             <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
               <SupportLoadingScreen progress={70} />
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -659,6 +694,11 @@ export default function BriefBuilderPrototype() {
                 </div>
               )}
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
@@ -712,6 +752,11 @@ export default function BriefBuilderPrototype() {
                 </div>
               )}
             </div>
+            {/* Right Toolbar */}
+            <RightToolbar
+              onChatClick={() => setDrawerOpen(!drawerOpen)}
+              onNotesClick={() => setNotesOpen(!notesOpen)}
+            />
             {/* Chat Drawer */}
             <ChatDrawer 
               isOpen={drawerOpen} 
