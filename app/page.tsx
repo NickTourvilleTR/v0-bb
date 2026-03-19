@@ -868,51 +868,13 @@ export default function BriefBuilderPrototype() {
                 )}
 
                 {/* Ready to Build Card */}
-                {isAtOrPast("context-provided") && !isAtOrPast("generating") && (
+                {(isAtOrPast("context-provided") || isAtOrPast("ready-to-build")) && !isAtOrPast("generating") && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:36 a.m."
                     className="mb-6"
                   >
                     <BriefBuilderReadyCard />
-                  </CocoChatMessage>
-                )}
-
-                {/* Ready to Build Card - shown after skip */}
-                {isAtOrPast("ready-to-build") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:36 a.m."
-                    className="mb-6"
-                  >
-                    <div className="rounded-xl border border-[#e5e5e5] bg-white p-6">
-                      {/* Header */}
-                      <div className="mb-4 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Sparkles className="size-5 text-[#212223]" />
-                          <h3 className="text-lg font-semibold text-[#212223]">Brief Builder</h3>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="rounded-md bg-[#1d4b34] px-3 py-1 text-sm text-white">
-                            Motion to dismiss
-                          </span>
-                          <span className="rounded-md border border-[#e5e5e5] bg-white px-3 py-1 text-sm text-[#212223]">
-                            Primary brief
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <p className="mb-4 text-[#212223]">
-                        Got it, I'll factor that in when generating your initial draft.
-                      </p>
-                      <p className="mb-4 text-[#212223]">
-                        <strong>Let's start building your brief now</strong> — you'll begin by reviewing and selecting the arguments to include in your brief, but you can work on any piece of it at any time.
-                      </p>
-                      <p className="text-[#212223]">
-                        If you prefer, <strong>you can add more context</strong> to provide any other detail. Or, tell me if there is something else you'd like to do instead.
-                      </p>
-                    </div>
                   </CocoChatMessage>
                 )}
 
