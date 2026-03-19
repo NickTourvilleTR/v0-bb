@@ -86,7 +86,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           <X className="size-5" />
         </button>
         <div className="flex flex-1">
-          {(["chat", "notes", "versions", "sources"] as const).map((tab) => (
+          {(["chat", "notes", "sources"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -97,7 +97,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   : "text-[#737373] hover:text-[#212223]"
               )}
             >
-              {tab === "chat" ? "Chat" : tab === "notes" ? "Notes" : tab === "versions" ? "Versions" : "Sources"}
+              {tab === "chat" ? "Chat" : tab === "notes" ? "Notes" : "Sources"}
             </button>
           ))}
         </div>
@@ -112,44 +112,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           </div>
         )}
 
-        {/* Versions Tab */}
-        {activeTab === "versions" && (
-          <div className="space-y-3">
-            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
-              <div>
-                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
-                  2 Arguments selected and edited
-                </a>
-                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:24 PM</p>
-              </div>
-              <button className="text-[#737373] hover:text-[#212223]">
-                <RotateCcw className="size-4" />
-              </button>
-            </div>
-            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
-              <div>
-                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
-                  2 Arguments selected and edited
-                </a>
-                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:25 PM</p>
-              </div>
-              <button className="text-[#737373] hover:text-[#212223]">
-                <RotateCcw className="size-4" />
-              </button>
-            </div>
-            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
-              <div>
-                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
-                  3 Arguments selected and edited
-                </a>
-                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:20 PM</p>
-              </div>
-              <button className="text-[#737373] hover:text-[#212223]">
-                <RotateCcw className="size-4" />
-              </button>
-            </div>
-          </div>
-        )}
+
 
         {/* Sources Tab */}
         {activeTab === "sources" && (
