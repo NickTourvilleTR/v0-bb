@@ -728,8 +728,7 @@ export default function BriefBuilderPrototype() {
                   className="mb-6"
                 >
                   <p className="text-[#212223]">
-                    Help me draft a legal brief for a standard motion to dismiss
-                    for the California district court.
+                    Help me draft a legal brief
                   </p>
                 </CocoChatMessage>
 
