@@ -9,6 +9,7 @@ interface RightToolbarProps {
   onNotesClick?: () => void;
   onHistoryClick?: () => void;
   onLibraryClick?: () => void;
+  hidden?: boolean;
 }
 
 export function RightToolbar({
@@ -17,7 +18,10 @@ export function RightToolbar({
   onNotesClick,
   onHistoryClick,
   onLibraryClick,
+  hidden = false,
 }: RightToolbarProps) {
+  if (hidden) return null;
+  
   return (
     <div className={cn("flex flex-col gap-2 border-l border-[#e5e5e5] bg-white p-2", className)}>
       <button

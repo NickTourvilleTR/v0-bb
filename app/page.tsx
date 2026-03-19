@@ -262,6 +262,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Notes Panel */}
             {notesOpen && (
@@ -316,6 +317,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -349,6 +351,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -382,6 +385,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -416,6 +420,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -449,6 +454,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -482,6 +488,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -516,6 +523,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -550,6 +558,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -607,6 +616,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -641,6 +651,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -698,6 +709,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
@@ -756,6 +768,7 @@ export default function BriefBuilderPrototype() {
             <RightToolbar
               onChatClick={() => setDrawerOpen(!drawerOpen)}
               onNotesClick={() => setNotesOpen(!notesOpen)}
+              hidden={drawerOpen || notesOpen}
             />
             {/* Chat Drawer */}
             <ChatDrawer 
