@@ -27,8 +27,7 @@ import { VerifyPanel } from "@/components/verify-panel";
 import { FinalizePanel } from "@/components/finalize-panel";
 import { IntakeScreen } from "@/components/intake-screen";
 import { LibraryScreen } from "@/components/library-screen";
-import { ChatDrawer } from "@/components/chat-drawer";
-import { RightToolbar } from "@/components/right-toolbar";
+import { AppLayoutWrapper } from "@/components/app-layout-wrapper";
 import { Switch } from "@/components/ui/switch";
 import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp } from "lucide-react";
 import * as React from "react";
@@ -243,55 +242,23 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "intake") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="Motion for Summary Judgment" />
           <BriefStepperNav currentStep="intake" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Intake Screen */}
-            <div className="relative flex flex-1 flex-col overflow-y-auto bg-[#fcfcfc]">
-              <IntakeScreen 
-                onNextSelectArguments={() => setCurrentScreen("builder")}
-                onSkipToGenerateDraft={() => setCurrentScreen("draft")}
-              />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="argue"
+            hideInput={true}
+          >
+            <IntakeScreen 
+              onNextSelectArguments={() => setCurrentScreen("builder")}
+              onSkipToGenerateDraft={() => setCurrentScreen("draft")}
             />
-            {/* Notes Panel */}
-            {notesOpen && (
-              <div className="flex w-80 flex-col border-l border-[#e5e5e5] bg-white">
-                <div className="flex items-center justify-between border-b border-[#e5e5e5] px-4 py-3">
-                  <h3 className="font-semibold text-[#212223]">Notes</h3>
-                  <button
-                    onClick={() => setNotesOpen(false)}
-                    className="p-1 text-[#737373] hover:text-[#212223]"
-                  >
-                    <X className="size-5" />
-                  </button>
-                </div>
-                <div className="flex-1 overflow-y-auto p-4">
-                  <textarea
-                    placeholder="Add your notes here..."
-                    className="h-full w-full resize-none rounded-lg border border-[#e5e5e5] bg-[#fcfcfc] p-3 text-sm text-[#212223] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#1d4b34]"
-                  />
-                </div>
-              </div>
-            )}
-            {/* Chat Drawer */}
-            <ChatDrawer
-              isOpen={drawerOpen}
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="argue"
-              hideInput={true}
-            />
-          </div>
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -301,31 +268,19 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "outline") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Outline Screen */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <OutlineScreen onGenerateOutline={handleGenerateOutline} />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="outline"
-            />
-          </div>
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="outline"
+          >
+            <OutlineScreen onGenerateOutline={handleGenerateOutline} />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -335,31 +290,19 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "outline-loading") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Loading Screen */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <OutlineLoadingScreen progress={70} />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="outline-loading"
-            />
-          </div>
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="outline-loading"
+          >
+            <OutlineLoadingScreen progress={70} />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -369,32 +312,20 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "outline-ready") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Outline Editor */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <OutlineEditor />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="outline-ready"
-              onNextDraft={handleNextDraft}
-            />
-          </div>
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="outline-ready"
+            onNextDraft={handleNextDraft}
+          >
+            <OutlineEditor />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -404,31 +335,19 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "draft") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Draft Screen */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <DraftScreen onGenerateDraft={handleGenerateDraft} />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="draft"
-            />
-          </div>
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="draft"
+          >
+            <DraftScreen onGenerateDraft={handleGenerateDraft} />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -438,31 +357,19 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "draft-loading") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Loading Screen */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <DraftLoadingScreen progress={70} />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="draft-loading"
-            />
-          </div>
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="draft-loading"
+          >
+            <DraftLoadingScreen progress={70} />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -472,32 +379,20 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "draft-ready") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Draft Editor */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <DraftEditor />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="draft-ready"
-              onNextVerify={handleNextVerify}
-            />
-          </div>
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="draft-ready"
+            onNextVerify={handleNextVerify}
+          >
+            <DraftEditor />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -507,32 +402,20 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "verify") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="verify" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Verify Panel */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <VerifyPanel />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="verify"
-              onNextFinalize={handleNextFinalize}
-            />
-          </div>
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="verify"
+            onNextFinalize={handleNextFinalize}
+          >
+            <VerifyPanel />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -542,31 +425,19 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "finalize") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="finalize" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Finalize Panel */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <FinalizePanel />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="finalize"
-            />
-          </div>
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="finalize"
+          >
+            <FinalizePanel />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -576,56 +447,22 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "distinguish") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="distinguish" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Contrary Authorities Panel */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <div className="flex-1 overflow-y-auto">
-                <ContraryAuthoritiesPanel />
-              </div>
-              
-              {/* Footer with buttons and input - shown when drawer is collapsed */}
-              {!drawerOpen && (
-                <div className="border-t border-[#e5e5e5] bg-white">
-                  {/* Action buttons */}
-                  <div className="flex justify-end gap-2 px-6 py-3">
-                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
-                      Next: Outline brief
-                    </button>
-                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
-                      Skip to generate draft
-                    </button>
-                  </div>
-                  {/* Chat input */}
-                  <div className="border-t border-[#e5e5e5] px-6 py-4">
-                    <CocoChatInput
-                      placeholder="Ask CoCounsel..."
-                      variant="conversation"
-                    />
-                  </div>
-                </div>
-              )}
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="distinguish"
+            onNextOutline={handleNextOutline}
+          >
+            <div className="flex-1 overflow-y-auto">
+              <ContraryAuthoritiesPanel />
             </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="distinguish"
-              onNextOutline={handleNextOutline}
-            />
-          </div>
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -635,31 +472,19 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "support-loading") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Loading Screen */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <SupportLoadingScreen progress={70} />
-            </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="support-loading"
-            />
-          </div>
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="support-loading"
+          >
+            <SupportLoadingScreen progress={70} />
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -669,56 +494,22 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "support") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Supporting Authorities Panel */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <div className="flex-1 overflow-y-auto">
-                <SupportingAuthoritiesPanel />
-              </div>
-              
-              {/* Footer with buttons and input - shown when drawer is collapsed */}
-              {!drawerOpen && (
-                <div className="border-t border-[#e5e5e5] bg-white">
-                  {/* Action buttons */}
-                  <div className="flex justify-end gap-2 px-6 py-3">
-                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
-                      Next: Review contrary authorities
-                    </button>
-                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
-                      Skip to generate draft
-                    </button>
-                  </div>
-                  {/* Chat input */}
-                  <div className="border-t border-[#e5e5e5] px-6 py-4">
-                    <CocoChatInput
-                      placeholder="Ask CoCounsel..."
-                      variant="conversation"
-                    />
-                  </div>
-                </div>
-              )}
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="support"
+            onNextContraryAuthorities={handleNextContraryAuthorities}
+          >
+            <div className="flex-1 overflow-y-auto">
+              <SupportingAuthoritiesPanel />
             </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              currentStep="support"
-              onNextContraryAuthorities={handleNextContraryAuthorities}
-            />
-          </div>
+          </AppLayoutWrapper>
         </div>
       </div>
     );
@@ -728,57 +519,23 @@ export default function BriefBuilderPrototype() {
   if (currentScreen === "builder") {
     return (
       <div className="flex h-screen bg-white">
-        {/* Side Navigation */}
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col">
           <CocoHeader title="{Motion to Dismiss}" />
           <BriefStepperNav currentStep="argue" onStepClick={handleStepperClick} />
-          <div className="flex flex-1 overflow-hidden">
-            {/* Arguments Panel */}
-            <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
-              <div className="flex-1 overflow-y-auto">
-                <ArgumentsPanel showUserArgument={showUserArgument} />
-              </div>
-              
-              {/* Footer with buttons and input - shown when drawer is collapsed */}
-              {!drawerOpen && (
-                <div className="border-t border-[#e5e5e5] bg-white">
-                  {/* Action buttons */}
-                  <div className="flex justify-end gap-2 px-6 py-3">
-                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
-                      Next: Supporting authority
-                    </button>
-                    <button className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
-                      Skip to generate draft
-                    </button>
-                  </div>
-                  {/* Chat input */}
-                  <div className="border-t border-[#e5e5e5] px-6 py-4">
-                    <CocoChatInput
-                      placeholder="Ask CoCounsel..."
-                      variant="conversation"
-                    />
-                  </div>
-                </div>
-              )}
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            currentStep="argue"
+            onArgumentAdded={() => setShowUserArgument(true)}
+            onNextSupportingAuthority={handleNextSupportingAuthority}
+          >
+            <div className="flex-1 overflow-y-auto">
+              <ArgumentsPanel showUserArgument={showUserArgument} />
             </div>
-            {/* Right Toolbar */}
-            <RightToolbar
-              onChatClick={() => setDrawerOpen(!drawerOpen)}
-              onNotesClick={() => setNotesOpen(!notesOpen)}
-              hidden={drawerOpen || notesOpen}
-            />
-            {/* Chat Drawer */}
-            <ChatDrawer 
-              isOpen={drawerOpen} 
-              onToggle={() => setDrawerOpen(!drawerOpen)}
-              onArgumentAdded={() => setShowUserArgument(true)}
-              onNextSupportingAuthority={handleNextSupportingAuthority}
-              currentStep="argue"
-            />
-          </div>
+          </AppLayoutWrapper>
         </div>
       </div>
     );
