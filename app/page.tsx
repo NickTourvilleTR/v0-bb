@@ -761,10 +761,6 @@ export default function BriefBuilderPrototype() {
                     className="mb-6"
                   >
                     <BriefBuilderCard
-                      question="Which motion type would you like to build?"
-                      searchPlaceholder="Search for a motion type"
-                      defaultValue={isAtOrPast("brief-type") ? "Motion to dismiss" : ""}
-                      disabled={isAtOrPast("brief-type")}
                       onSubmit={handleMotionSearchSubmit}
                     />
                   </CocoChatMessage>
