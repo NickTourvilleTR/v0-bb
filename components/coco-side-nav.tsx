@@ -79,6 +79,11 @@ export function CocoSideNav({ className, onLogoClick }: CocoSideNavProps) {
 
         {/* Bottom Navigation */}
         <nav className="flex flex-col items-center gap-3">
+          {/* Canada Flag */}
+          <span className="text-lg" role="img" aria-label="Canada">
+            🇨🇦
+          </span>
+          
           {bottomNavItems.map((item, index) => (
             <a
               key={index}
