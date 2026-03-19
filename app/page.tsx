@@ -990,15 +990,17 @@ export default function BriefBuilderPrototype() {
                       </button>
                     </div>
                   )}
-                  <CocoChatInput
-                    placeholder="Ask CoCounsel..."
-                    variant="conversation"
-                    onSubmit={
-                      currentScreen === "additional-details"
-                        ? handleAdditionalContextSubmit
-                        : handleStartSubmit
-                    }
-                  />
+                  {currentScreen !== "intake" && (
+                    <CocoChatInput
+                      placeholder="Ask CoCounsel..."
+                      variant="conversation"
+                      onSubmit={
+                        currentScreen === "additional-details"
+                          ? handleAdditionalContextSubmit
+                          : handleStartSubmit
+                      }
+                    />
+                  )}
                 </div>
               </div>
             </main>
