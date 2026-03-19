@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
-import { Sparkles, Paperclip, Image, ArrowUp, Notebook, RotateCcw, FileText, ExternalLink, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
+import { Sparkles, Paperclip, Image, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -82,7 +82,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           className="p-3 text-[#737373] hover:text-[#212223]"
           onClick={onToggle}
         >
-          <Notebook className="size-5" />
+          <X className="size-5" />
         </button>
         <div className="flex flex-1">
           {(["chat", "notes", "versions", "sources"] as const).map((tab) => (
@@ -206,7 +206,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                       <a href="#" className="font-medium text-[#2e6b5c] hover:underline">Shaw v. Lindheim</a>
                       <p className="text-xs text-[#737373]">919 F.2d 1353 (9th Cir. 2024)</p>
                     </div>
-                    <ExternalLink className="size-4 text-[#737373]" />
+                    <Notebook className="size-4 text-[#737373]" />
                   </div>
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-xs font-medium text-[#212223]">Snippet</span>
@@ -228,7 +228,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                       <a href="#" className="font-medium text-[#2e6b5c] hover:underline">Swirsky v. Carey</a>
                       <p className="text-xs text-[#737373]">376 F.3d 841 (9th Cir. 2004)</p>
                     </div>
-                    <ExternalLink className="size-4 text-[#737373]" />
+                    <Notebook className="size-4 text-[#737373]" />
                   </div>
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-xs font-medium text-[#212223]">Snippet</span>
@@ -250,7 +250,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                       <a href="#" className="font-medium text-[#2e6b5c] hover:underline">In re Enron Corp. Sec., Derivative & ERISA Litig.</a>
                       <p className="text-xs text-[#737373]">235 F. Supp. 2d 549 (S.D. Tex. 2002)</p>
                     </div>
-                    <ExternalLink className="size-4 text-[#737373]" />
+                    <Notebook className="size-4 text-[#737373]" />
                   </div>
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-xs font-medium text-[#212223]">Snippet</span>
