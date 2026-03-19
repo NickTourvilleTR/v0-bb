@@ -224,7 +224,7 @@ export default function BriefBuilderPrototype() {
 
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col overflow-hidden">
-          <LibraryScreen />
+          <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
         </div>
       </div>
     );

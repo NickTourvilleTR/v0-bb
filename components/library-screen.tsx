@@ -119,7 +119,11 @@ const prompts: PromptCard[] = [
 
 const tabs = ["Prompts", "Question sets", "Documents"];
 
-export function LibraryScreen() {
+interface LibraryScreenProps {
+  onBriefBuilderClick?: () => void;
+}
+
+export function LibraryScreen({ onBriefBuilderClick }: LibraryScreenProps) {
   const [activeTab, setActiveTab] = React.useState("Prompts");
   const [searchQuery, setSearchQuery] = React.useState("");
 
@@ -194,7 +198,11 @@ export function LibraryScreen() {
           {prompts.map((prompt) => (
             <div
               key={prompt.id}
-              className="group relative rounded-lg border border-[#e5e5e5] bg-white p-4 transition-shadow hover:shadow-md"
+              onClick={prompt.title === "Brief Builder" ? onBriefBuilderClick : undefined}
+              className={cn(
+                "group relative rounded-lg border border-[#e5e5e5] bg-white p-4 transition-shadow hover:shadow-md",
+                prompt.title === "Brief Builder" && "cursor-pointer"
+              )}
             >
               {prompt.isFavorite && (
                 <Star className="absolute right-3 top-3 size-4 fill-[#c9a227] text-[#c9a227]" />
