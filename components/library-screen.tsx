@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Search, Plus, Star, Settings, FileText, Scale, MessageSquare, ClipboardList, BarChart3, FileSearch, GitCompare } from "lucide-react";
+import { Search, Plus, Star, Settings, FileText, Scale, MessageSquare, ClipboardList, BarChart3, FileSearch, GitCompare, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -15,6 +15,13 @@ interface PromptCard {
 }
 
 const prompts: PromptCard[] = [
+  {
+    id: "0",
+    title: "Brief Builder",
+    description: "Draft a legal brief or memorandum of law for motions including summary judgment, motions to dismiss, and more.",
+    icon: <Sparkles className="size-4 text-[#d64000]" />,
+    isFavorite: true,
+  },
   {
     id: "1",
     title: "AI Jurisdiction Surveys",
