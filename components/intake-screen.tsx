@@ -160,23 +160,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                   </label>
                 </div>
               </div>
-              <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  className="h-8 bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                  onClick={onNextSelectArguments}
-                >
-                  Next: Select arguments
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-8 border-[#cccccc] bg-white px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                  onClick={onSkipToGenerateDraft}
-                >
-                  Skip to generate draft
-                </Button>
-              </div>
+
             </div>
           </div>
 
