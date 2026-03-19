@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
-import { Sparkles, Paperclip, Image, ArrowUp, X, RotateCcw, FileText, ExternalLink, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
+import { Sparkles, Paperclip, Image, ArrowUp, Notebook, RotateCcw, FileText, ExternalLink, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -82,7 +82,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           className="p-3 text-[#737373] hover:text-[#212223]"
           onClick={onToggle}
         >
-          <X className="size-5" />
+          <Notebook className="size-5" />
         </button>
         <div className="flex flex-1">
           {(["chat", "notes", "versions", "sources"] as const).map((tab) => (
