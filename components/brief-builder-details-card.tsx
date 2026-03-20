@@ -135,13 +135,15 @@ export function BriefBuilderDetailsCard({
 
       {/* Done Button */}
       {!disabled && (
-        <Button
-          onClick={handleDone}
-          className="h-10 bg-[#2e6b5c] px-6 text-white hover:bg-[#24594c]"
-          disabled={!selectedParty}
-        >
-          Done
-        </Button>
+        <div className="flex justify-center">
+          <Button
+            onClick={handleDone}
+            className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
+            disabled={!selectedParty}
+          >
+            Done
+          </Button>
+        </div>
       )}
     </div>
   );

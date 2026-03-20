@@ -54,13 +54,12 @@ export function BriefBuilderReadyCard({
       </div>
 
       {/* Start Building Button */}
-      <div className="mt-6">
+      <div className="mt-6 flex justify-center">
         <Button
           onClick={onStartBuilding}
-          variant="outline"
-          className="flex items-center gap-2 border-[#cccccc] bg-white text-[#212223] hover:bg-[#f2f2f2]"
+          className="flex h-10 items-center gap-2 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
         >
-          <Sparkles className="size-4 text-[#d64000]" />
+          <Sparkles className="size-4" />
           I'm ready, let's start building
         </Button>
       </div>

@@ -141,13 +141,15 @@ export function BriefBuilderUploadCard({
 
       {/* Upload Button */}
       {!disabled && (
-        <Button
-          onClick={handleUpload}
-          className="h-10 bg-[#2e6b5c] px-6 text-white hover:bg-[#24594c]"
-          disabled={!selectedFile}
-        >
-          Upload
-        </Button>
+        <div className="flex justify-center">
+          <Button
+            onClick={handleUpload}
+            className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
+            disabled={!selectedFile}
+          >
+            Upload
+          </Button>
+        </div>
       )}
     </div>
   );
