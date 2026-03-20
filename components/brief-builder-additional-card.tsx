@@ -70,26 +70,29 @@ export function BriefBuilderAdditionalCard({
           placeholder="Enter additional details here..."
           className="min-h-[80px] resize-none border-0 bg-transparent px-4 py-3 text-sm text-[#212223] placeholder:text-[#737373] focus-visible:ring-0"
         />
-        <div className="flex items-center justify-center gap-3 px-3 pb-3">
-          <button className="p-1 text-[#737373] hover:text-[#212223]">
-            <Paperclip className="size-5" />
-          </button>
-          <button className="p-1 text-[#737373] hover:text-[#212223]">
-            <Image className="size-5" />
-          </button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onSkip}
-            className="h-10 border-[#e5e5e5] px-6 text-sm text-[#737373] hover:bg-[#f7f7f7] hover:text-[#212223]"
-          >
-            Skip this step
-          </Button>
-          <Button
-            className="h-10 bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-          >
-            Submit
-          </Button>
+        <div className="space-y-3 px-3 pb-3">
+          <div className="flex items-center justify-center gap-2">
+            <button className="p-2 text-[#737373] hover:text-[#212223]">
+              <Paperclip className="size-5" />
+            </button>
+            <button className="p-2 text-[#737373] hover:text-[#212223]">
+              <Image className="size-5" />
+            </button>
+          </div>
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              onClick={onSkip}
+              className="h-11 flex-1 border-[#e5e5e5] text-[#737373] hover:bg-[#f7f7f7]"
+            >
+              Skip this step
+            </Button>
+            <Button
+              className="h-11 flex-1 bg-[#1d4b34] text-white hover:bg-[#163d2a]"
+            >
+              Submit
+            </Button>
+          </div>
         </div>
       </div>
     </div>
