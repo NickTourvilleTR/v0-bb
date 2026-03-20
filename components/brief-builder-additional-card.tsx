@@ -75,7 +75,7 @@ export function BriefBuilderAdditionalCard({
             <Paperclip className="size-5" />
           </button>
         </div>
-        <div className="flex gap-3 px-3 pb-3">
+        <div className="flex gap-3 px-3 pb-3 pt-2">
           <Button
             variant="outline"
             onClick={onSkip}
