@@ -1170,7 +1170,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             <Textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Ask a follow-up..."
+              placeholder="Ask CoCounsel..."
               className="min-h-[40px] resize-none border-0 bg-transparent p-0 text-sm text-[#212223] placeholder:text-[#737373] focus-visible:ring-0"
             />
             <div className="mt-3 flex items-center justify-between">
