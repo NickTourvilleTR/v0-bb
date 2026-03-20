@@ -73,15 +73,13 @@ export default function BriefBuilderPrototype() {
   }>>([]);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
-  const messageIdCounter = React.useRef(0);
   
   // Helper function to add a message to the chat
   const addChatMessage = (type: "user" | "assistant", content: string) => {
     const now = new Date();
     const timestamp = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true }).toLowerCase();
-    messageIdCounter.current += 1;
     setChatMessages(prev => [...prev, {
-      id: `msg-${Date.now()}-${messageIdCounter.current}`,
+      id: crypto.randomUUID(),
       type,
       content,
       timestamp,
