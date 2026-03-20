@@ -653,6 +653,7 @@ export default function BriefBuilderPrototype() {
               notesOpen={notesOpen}
               setNotesOpen={setNotesOpen}
               currentStep="argue"
+              hideHistoryButton={true}
             >
             <main
               ref={scrollRef}

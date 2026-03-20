@@ -22,6 +22,7 @@ interface AppLayoutWrapperProps {
   onNextFinalize?: () => void;
   hideInput?: boolean;
   showVersionsTab?: boolean;
+  hideHistoryButton?: boolean;
   className?: string;
 }
 
@@ -41,6 +42,7 @@ export function AppLayoutWrapper({
   onNextFinalize,
   hideInput = false,
   showVersionsTab = false,
+  hideHistoryButton = false,
   className,
 }: AppLayoutWrapperProps) {
   return (
@@ -55,6 +57,7 @@ export function AppLayoutWrapper({
         onChatClick={() => setDrawerOpen(!drawerOpen)}
         onNotesClick={() => setNotesOpen(!notesOpen)}
         hidden={drawerOpen || notesOpen}
+        hideHistoryButton={hideHistoryButton}
       />
       
       {/* Notes Panel */}

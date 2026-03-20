@@ -10,6 +10,7 @@ interface RightToolbarProps {
   onHistoryClick?: () => void;
   onLibraryClick?: () => void;
   hidden?: boolean;
+  hideHistoryButton?: boolean;
 }
 
 export function RightToolbar({
@@ -19,6 +20,7 @@ export function RightToolbar({
   onHistoryClick,
   onLibraryClick,
   hidden = false,
+  hideHistoryButton = false,
 }: RightToolbarProps) {
   if (hidden) return null;
   
@@ -36,12 +38,14 @@ export function RightToolbar({
       >
         <Notebook className="size-5" />
       </button>
-      <button
-        onClick={onHistoryClick}
-        className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
-      >
-        <History className="size-5" />
-      </button>
+      {!hideHistoryButton && (
+        <button
+          onClick={onHistoryClick}
+          className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
+        >
+          <History className="size-5" />
+        </button>
+      )}
       <button
         onClick={onLibraryClick}
         className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
