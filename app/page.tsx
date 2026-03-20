@@ -870,17 +870,7 @@ export default function BriefBuilderPrototype() {
               {/* Bottom Chat Input */}
               <div className="sticky bottom-0 border-t border-[#e5e5e5] bg-white px-6 py-4">
                 <div className="mx-auto max-w-3xl">
-                  {/* Skip Button - shown only on additional-details screen */}
-                  {currentScreen === "additional-details" && (
-                    <div className="mb-3 flex justify-end">
-                      <button
-                        onClick={handleSkipAdditional}
-                        className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                      >
-                        Skip this step
-                      </button>
-                    </div>
-                  )}
+
                   {/* Ready Button - shown only on context-provided screen */}
                   {currentScreen === "context-provided" && (
                     <div className="mb-3 flex justify-end">
