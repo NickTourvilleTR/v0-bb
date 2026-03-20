@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageSquare, Notebook, History, Library } from "lucide-react";
+import { MessageSquare, Notebook, History, FileStack } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Tooltip,
@@ -80,11 +80,11 @@ export function RightToolbar({
               onClick={onLibraryClick}
               className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
             >
-              <Library className="size-5" />
+              <FileStack className="size-5" />
             </button>
           </TooltipTrigger>
           <TooltipContent side="left">
-            <p>Library</p>
+            <p>Sources</p>
           </TooltipContent>
         </Tooltip>
       </div>
