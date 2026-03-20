@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, ChevronRight, SkipForward, FastForward, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface SkipButtonTreatmentsProps {
   onSkip?: () => void;
@@ -9,13 +10,13 @@ interface SkipButtonTreatmentsProps {
 export function SkipButtonTreatments({ onSkip }: SkipButtonTreatmentsProps) {
   return (
     <div className="space-y-6 p-6">
-      <h2 className="text-lg font-semibold text-[#212223]">Skip Button Treatments</h2>
+      <h2 className="text-lg font-semibold text-[#212223]">Skip Button Treatments (Secondary Style)</h2>
       
       <div className="grid grid-cols-2 gap-6">
         {/* Treatment 1: Simple Text Link */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
           <p className="mb-3 text-xs text-[#737373]">1. Simple Text Link</p>
-          <div className="flex justify-end">
+          <div className="flex justify-center">
             <button
               onClick={onSkip}
               className="text-sm text-[#737373] underline hover:text-[#212223]"
@@ -28,7 +29,7 @@ export function SkipButtonTreatments({ onSkip }: SkipButtonTreatmentsProps) {
         {/* Treatment 2: Ghost Button with Arrow */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
           <p className="mb-3 text-xs text-[#737373]">2. Ghost Button with Arrow</p>
-          <div className="flex justify-end">
+          <div className="flex justify-center">
             <button
               onClick={onSkip}
               className="flex items-center gap-2 text-sm text-[#737373] hover:text-[#212223]"
@@ -39,112 +40,123 @@ export function SkipButtonTreatments({ onSkip }: SkipButtonTreatmentsProps) {
           </div>
         </div>
 
-        {/* Treatment 3: Outlined Button */}
+        {/* Treatment 3: Secondary Outlined Button */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
-          <p className="mb-3 text-xs text-[#737373]">3. Outlined Button</p>
-          <div className="flex justify-end">
-            <button
+          <p className="mb-3 text-xs text-[#737373]">3. Secondary Outlined Button</p>
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
               onClick={onSkip}
-              className="rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              className="border-[#cccccc] bg-white text-[#212223] hover:bg-[#f2f2f2]"
             >
               Skip this step
-            </button>
+            </Button>
           </div>
         </div>
 
-        {/* Treatment 4: Pill Button */}
+        {/* Treatment 4: Secondary Pill Button */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
-          <p className="mb-3 text-xs text-[#737373]">4. Pill Button</p>
-          <div className="flex justify-end">
-            <button
+          <p className="mb-3 text-xs text-[#737373]">4. Secondary Pill Button</p>
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
               onClick={onSkip}
-              className="rounded-full border border-[#cccccc] bg-white px-5 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              className="rounded-full border-[#cccccc] bg-white px-6 text-[#212223] hover:bg-[#f2f2f2]"
             >
               Skip this step
-            </button>
+            </Button>
           </div>
         </div>
 
         {/* Treatment 5: Icon Only Button */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
-          <p className="mb-3 text-xs text-[#737373]">5. Icon Button with Tooltip</p>
-          <div className="flex justify-end">
-            <button
+          <p className="mb-3 text-xs text-[#737373]">5. Secondary Icon Button</p>
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              size="icon"
               onClick={onSkip}
-              className="flex size-10 items-center justify-center rounded-full border border-[#cccccc] bg-white text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+              className="size-10 rounded-full border-[#cccccc] bg-white text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
               title="Skip this step"
             >
               <SkipForward className="size-5" />
-            </button>
+            </Button>
           </div>
         </div>
 
-        {/* Treatment 6: Subtle Background Button */}
+        {/* Treatment 6: Secondary Ghost Button */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
-          <p className="mb-3 text-xs text-[#737373]">6. Subtle Background</p>
-          <div className="flex justify-end">
-            <button
+          <p className="mb-3 text-xs text-[#737373]">6. Secondary Ghost Button</p>
+          <div className="flex justify-center">
+            <Button
+              variant="ghost"
               onClick={onSkip}
-              className="rounded-md bg-[#f2f2f2] px-4 py-2 text-sm text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
+              className="text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
             >
               Skip this step
-            </button>
+            </Button>
           </div>
         </div>
 
-        {/* Treatment 7: Underlined with Chevron */}
+        {/* Treatment 7: Secondary with Chevron */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
-          <p className="mb-3 text-xs text-[#737373]">7. Underlined with Chevron</p>
-          <div className="flex justify-end">
-            <button
+          <p className="mb-3 text-xs text-[#737373]">7. Secondary with Chevron</p>
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
               onClick={onSkip}
-              className="flex items-center gap-1 border-b border-[#737373] pb-0.5 text-sm text-[#737373] hover:border-[#212223] hover:text-[#212223]"
+              className="border-[#cccccc] bg-white text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
             >
               Skip
-              <ChevronRight className="size-4" />
-            </button>
+              <ChevronRight className="ml-1 size-4" />
+            </Button>
           </div>
         </div>
 
-        {/* Treatment 8: Muted Text with Divider */}
+        {/* Treatment 8: Muted Secondary with Divider */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
           <p className="mb-3 text-xs text-[#737373]">8. With Divider Line</p>
-          <div className="flex items-center justify-end gap-3">
-            <span className="h-px flex-1 bg-[#e5e5e5]" />
-            <button
+          <div className="flex items-center justify-center gap-3">
+            <span className="h-px w-16 bg-[#e5e5e5]" />
+            <Button
+              variant="ghost"
               onClick={onSkip}
-              className="text-sm text-[#737373] hover:text-[#212223]"
+              className="text-sm text-[#737373] hover:bg-transparent hover:text-[#212223]"
             >
               or skip this step
-            </button>
+            </Button>
+            <span className="h-px w-16 bg-[#e5e5e5]" />
           </div>
         </div>
 
-        {/* Treatment 9: Compact Inline */}
+        {/* Treatment 9: Compact Secondary */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
-          <p className="mb-3 text-xs text-[#737373]">9. Compact Inline</p>
-          <div className="flex justify-end">
-            <button
+          <p className="mb-3 text-xs text-[#737373]">9. Compact Secondary</p>
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              size="sm"
               onClick={onSkip}
-              className="flex items-center gap-1.5 text-xs text-[#737373] hover:text-[#212223]"
+              className="h-8 border-[#cccccc] bg-white text-xs text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
             >
-              <FastForward className="size-3" />
+              <FastForward className="mr-1.5 size-3" />
               Skip
-            </button>
+            </Button>
           </div>
         </div>
 
-        {/* Treatment 10: Dismissive Style */}
+        {/* Treatment 10: Secondary Dismissive Style */}
         <div className="rounded-lg border border-[#e5e5e5] p-4">
-          <p className="mb-3 text-xs text-[#737373]">10. Dismissive Style</p>
-          <div className="flex justify-end">
-            <button
+          <p className="mb-3 text-xs text-[#737373]">10. Secondary Dismissive</p>
+          <div className="flex justify-center">
+            <Button
+              variant="ghost"
               onClick={onSkip}
-              className="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+              className="text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
             >
-              <X className="size-4" />
+              <X className="mr-2 size-4" />
               Not now
-            </button>
+            </Button>
           </div>
         </div>
       </div>
