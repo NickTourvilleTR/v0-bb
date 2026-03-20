@@ -7,8 +7,7 @@ import { CocoChatMessage } from "@/components/coco-chat-message";
 import { BriefBuilderCard } from "@/components/brief-builder-card";
 import { BriefBuilderTypeCard } from "@/components/brief-builder-type-card";
 import { BriefBuilderUploadCard } from "@/components/brief-builder-upload-card";
-import { BriefBuilderDetailsCard } from "@/components/brief-builder-details-card";
-import { BriefBuilderAdditionalCard } from "@/components/brief-builder-additional-card";
+import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-combined-details-card";
 import { BriefBuilderProgressCard } from "@/components/brief-builder-progress-card";
 import { BriefBuilderReadyCard } from "@/components/brief-builder-ready-card";
 import { BriefBuilderGeneratingCard } from "@/components/brief-builder-generating-card";
@@ -40,8 +39,6 @@ type Screen =
   | "file-upload"
   | "uploading"
   | "case-details"
-  | "additional-details"
-  | "context-provided"
   | "ready-to-build"
   | "generating"
   | "intake"
@@ -130,14 +127,13 @@ export default function BriefBuilderPrototype() {
     }, 3000);
   };
 
-  const handleCaseDetailsDone = () => {
-    addChatMessage("user", "Case details confirmed");
-    addChatMessage("assistant", "Almost there — can you provide any other key details or <strong>documents</strong>? These will help tailor the brief to your scenario.");
-    setCurrentScreen("additional-details");
+  const handleCaseDetailsContinue = (selectedParty: string, additionalDetails: string) => {
+    addChatMessage("user", additionalDetails ? `Case details confirmed with additional context: ${additionalDetails}` : "Case details confirmed");
+    setCurrentScreen("ready-to-build");
   };
 
-  const handleSkipAdditional = () => {
-    addChatMessage("user", "No further details, start building my brief");
+  const handleCaseDetailsSkip = () => {
+    addChatMessage("user", "Skipped additional details");
     setCurrentScreen("ready-to-build");
   };
 
@@ -148,9 +144,7 @@ export default function BriefBuilderPrototype() {
     }, 2000);
   };
 
-  const handleAdditionalContextSubmit = () => {
-    setCurrentScreen("context-provided");
-  };
+
 
   const handleReadyToBuild = () => {
     addChatMessage("assistant", "Building your brief now...");
@@ -234,10 +228,8 @@ export default function BriefBuilderPrototype() {
     "brief-type": 2,
     "file-upload": 3,
     "uploading": 4,
-    "case-details": 5,
-    "additional-details": 6,
-    "context-provided": 7,
-    "ready-to-build": 8,
+  "case-details": 5,
+  "ready-to-build": 6,
     "generating": 9,
     "intake": 10,
     "builder": 11,
@@ -787,50 +779,24 @@ export default function BriefBuilderPrototype() {
                   </CocoChatMessage>
                 )}
 
-                {/* Case Details Card */}
+                {/* Combined Case Details and Additional Details Card */}
                 {isAtOrPast("case-details") && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:25 a.m."
                     className="mb-6"
                   >
-                    <BriefBuilderDetailsCard
-                      defaultParty={isAtOrPast("additional-details") ? "defendant2" : ""}
-                      disabled={isAtOrPast("additional-details")}
-                      onDone={handleCaseDetailsDone}
+                    <BriefBuilderCombinedDetailsCard
+                      defaultParty={isAtOrPast("ready-to-build") ? "defendant2" : ""}
+                      disabled={isAtOrPast("ready-to-build")}
+                      onContinue={handleCaseDetailsContinue}
+                      onSkip={handleCaseDetailsSkip}
                     />
                   </CocoChatMessage>
                 )}
 
-                {/* Additional Details Card */}
-                {isAtOrPast("additional-details") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:32 a.m."
-                    className="mb-6"
-                  >
-                    <BriefBuilderAdditionalCard onSkip={handleSkipAdditional} />
-                  </CocoChatMessage>
-                )}
-
-                {/* User Context Message */}
-                {isAtOrPast("context-provided") && (
-                  <CocoChatMessage
-                    type="user"
-                    userName="Jane Lawson"
-                    timestamp="9:36 a.m."
-                    className="mb-6"
-                  >
-                    <p className="text-[#212223]">
-                      I want to move to dismiss an amended complaint, arguing there
-                      is no substantial similarity of protected expression between
-                      her memoir and the plaintiff's novel One Italian Summer.
-                    </p>
-                  </CocoChatMessage>
-                )}
-
                 {/* Ready to Build Card */}
-                {(isAtOrPast("context-provided") || isAtOrPast("ready-to-build")) && !isAtOrPast("generating") && (
+                {isAtOrPast("ready-to-build") && !isAtOrPast("generating") && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:36 a.m."
@@ -871,18 +837,7 @@ export default function BriefBuilderPrototype() {
               <div className="sticky bottom-0 border-t border-[#e5e5e5] bg-white px-6 py-4">
                 <div className="mx-auto max-w-3xl">
 
-                  {/* Ready Button - shown only on context-provided screen */}
-                  {currentScreen === "context-provided" && (
-                    <div className="mb-3 flex justify-end">
-                      <button
-                        onClick={handleReadyToBuild}
-                        className="flex items-center gap-2 rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                      >
-                        <Sparkles className="size-4 text-[#d64000]" />
-                        I'm ready, let's start building
-                      </button>
-                    </div>
-                  )}
+
 
                   {currentScreen === "start" && (
                     <CocoChatInput
