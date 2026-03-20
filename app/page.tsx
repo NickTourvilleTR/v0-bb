@@ -809,7 +809,7 @@ export default function BriefBuilderPrototype() {
                     timestamp="9:32 a.m."
                     className="mb-6"
                   >
-                    <BriefBuilderAdditionalCard />
+                    <BriefBuilderAdditionalCard onSkip={handleSkipAdditional} />
                   </CocoChatMessage>
                 )}
 

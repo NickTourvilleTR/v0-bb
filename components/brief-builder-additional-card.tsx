@@ -3,17 +3,20 @@ import { cn } from "@/lib/utils";
 import * as React from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Paperclip, Image, ArrowUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface BriefBuilderAdditionalCardProps {
   showTags?: boolean;
   className?: string;
   onInputChange?: (value: string) => void;
+  onSkip?: () => void;
 }
 
 export function BriefBuilderAdditionalCard({
   showTags = true,
   className,
   onInputChange,
+  onSkip,
 }: BriefBuilderAdditionalCardProps) {
   const [inputValue, setInputValue] = React.useState("");
 
@@ -76,9 +79,19 @@ export function BriefBuilderAdditionalCard({
               <Image className="size-5" />
             </button>
           </div>
-          <button className="flex size-10 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]">
-            <ArrowUp className="size-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onSkip}
+              className="h-8 border-[#e5e5e5] text-sm text-[#737373] hover:bg-[#f7f7f7] hover:text-[#212223]"
+            >
+              Skip this step
+            </Button>
+            <button className="flex size-10 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]">
+              <ArrowUp className="size-5" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
