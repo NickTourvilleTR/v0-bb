@@ -1,16 +1,26 @@
 "use client";
 import { cn } from "@/lib/utils";
 import * as React from "react";
+import { Textarea } from "@/components/ui/textarea";
+import { Paperclip, Image, ArrowUp } from "lucide-react";
 
 interface BriefBuilderAdditionalCardProps {
   showTags?: boolean;
   className?: string;
+  onInputChange?: (value: string) => void;
 }
 
 export function BriefBuilderAdditionalCard({
   showTags = true,
   className,
+  onInputChange,
 }: BriefBuilderAdditionalCardProps) {
+  const [inputValue, setInputValue] = React.useState("");
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+    onInputChange?.(value);
+  };
   return (
     <div
       className={cn(
@@ -40,7 +50,7 @@ export function BriefBuilderAdditionalCard({
       </p>
 
       {/* Bullet List */}
-      <ul className="ml-6 list-disc space-y-1 text-[#212223]">
+      <ul className="mb-4 ml-6 list-disc space-y-1 text-[#212223]">
         <li>Pertinent facts</li>
         <li>Relevant context</li>
         <li>Theory of the case</li>
@@ -48,6 +58,29 @@ export function BriefBuilderAdditionalCard({
         <li>Contested facts and issues</li>
         <li>Strategic objectives or considerations</li>
       </ul>
+
+      {/* Input Box */}
+      <div className="rounded-xl border border-[#e5e5e5] bg-white">
+        <Textarea
+          value={inputValue}
+          onChange={(e) => handleInputChange(e.target.value)}
+          placeholder="Enter additional details here..."
+          className="min-h-[80px] resize-none border-0 bg-transparent px-4 py-3 text-sm text-[#212223] placeholder:text-[#737373] focus-visible:ring-0"
+        />
+        <div className="flex items-center justify-between px-3 pb-3">
+          <div className="flex items-center gap-2">
+            <button className="p-1 text-[#737373] hover:text-[#212223]">
+              <Paperclip className="size-5" />
+            </button>
+            <button className="p-1 text-[#737373] hover:text-[#212223]">
+              <Image className="size-5" />
+            </button>
+          </div>
+          <button className="flex size-10 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]">
+            <ArrowUp className="size-5" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
