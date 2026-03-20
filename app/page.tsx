@@ -64,8 +64,28 @@ export default function BriefBuilderPrototype() {
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [notesOpen, setNotesOpen] = React.useState(false);
   const [showUserArgument, setShowUserArgument] = React.useState(false);
+  const [chatMessages, setChatMessages] = React.useState<Array<{
+    id: string;
+    type: "user" | "assistant";
+    content: string;
+    timestamp?: string;
+    userName?: string;
+  }>>([]);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
+  
+  // Helper function to add a message to the chat
+  const addChatMessage = (type: "user" | "assistant", content: string) => {
+    const now = new Date();
+    const timestamp = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true }).toLowerCase();
+    setChatMessages(prev => [...prev, {
+      id: `msg-${Date.now()}`,
+      type,
+      content,
+      timestamp,
+      userName: type === "user" ? "Jane Lawson" : undefined
+    }]);
+  };
 
   // Auto-scroll to bottom when screen changes with smooth animation
   React.useEffect(() => {
@@ -79,6 +99,8 @@ export default function BriefBuilderPrototype() {
   }, [currentScreen]);
 
   const handleStartSubmit = () => {
+    addChatMessage("user", "Help me draft a legal brief");
+    addChatMessage("assistant", "I can help you draft a memorandum of law. What type of motion are you working on?");
     setCurrentScreen("motion-search");
   };
 
@@ -87,26 +109,35 @@ export default function BriefBuilderPrototype() {
   };
 
   const handleMotionSearchSubmit = () => {
+    addChatMessage("user", "Motion for Summary Judgment");
+    addChatMessage("assistant", "To ensure the draft fits your scenario, are you drafting a <strong>Primary</strong>, <strong>Opposition</strong>, or <strong>Reply</strong> brief?");
     setCurrentScreen("brief-type");
   };
 
   const handleBriefTypeSubmit = () => {
+    addChatMessage("user", "Primary brief");
+    addChatMessage("assistant", "Please upload any relevant documents such as the <strong>original complaint, answer, and reply</strong> (if applicable). You can also upload any <strong>pertinent exhibits or templates</strong>.");
     setCurrentScreen("file-upload");
   };
 
   const handleFileUpload = () => {
+    addChatMessage("user", "Uploaded 6 documents");
     setCurrentScreen("uploading");
     // Simulate analyzing documents, then show case details
     setTimeout(() => {
+      addChatMessage("assistant", "I've extracted the following details from your uploaded documents. <strong>Review and enter any edit instructions as necessary.</strong>");
       setCurrentScreen("case-details");
     }, 3000);
   };
 
   const handleCaseDetailsDone = () => {
+    addChatMessage("user", "Case details confirmed");
+    addChatMessage("assistant", "Almost there — can you provide any other key details or <strong>documents</strong>? These will help tailor the brief to your scenario.");
     setCurrentScreen("additional-details");
   };
 
   const handleSkipAdditional = () => {
+    addChatMessage("user", "No further details, start building my brief");
     setCurrentScreen("ready-to-build");
   };
 
@@ -122,15 +153,18 @@ export default function BriefBuilderPrototype() {
   };
 
   const handleReadyToBuild = () => {
+    addChatMessage("assistant", "Building your brief now...");
     setCurrentScreen("generating");
     // Simulate generating, then show intake
     setTimeout(() => {
+      addChatMessage("assistant", "Your brief intake is ready. Review your intake summary and select your next steps.");
       setCurrentScreen("intake");
     }, 2000);
   };
 
   const handleReset = () => {
     setCurrentScreen("start");
+    setChatMessages([]);
   };
 
   const handleNextSupportingAuthority = () => {
@@ -234,6 +268,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="argue"
           >
             <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
@@ -256,6 +291,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="argue"
             hideInput={true}
             showVersionsTab={true}
@@ -283,6 +319,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="outline"
             showVersionsTab={true}
           >
@@ -306,6 +343,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="outline-loading"
             showVersionsTab={true}
           >
@@ -329,6 +367,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="outline-ready"
             onNextDraft={handleNextDraft}
             showVersionsTab={true}
@@ -353,6 +392,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="draft"
             showVersionsTab={true}
           >
@@ -376,6 +416,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="draft-loading"
             showVersionsTab={true}
           >
@@ -399,6 +440,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="draft-ready"
             onNextVerify={handleNextVerify}
             showVersionsTab={true}
@@ -423,6 +465,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="verify"
             onNextFinalize={handleNextFinalize}
             showVersionsTab={true}
@@ -447,6 +490,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="finalize"
             showVersionsTab={true}
           >
@@ -470,6 +514,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="distinguish"
             onNextOutline={handleNextOutline}
             showVersionsTab={true}
@@ -496,6 +541,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="support-loading"
             showVersionsTab={true}
           >
@@ -519,6 +565,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="support"
             onNextContraryAuthorities={handleNextContraryAuthorities}
             showVersionsTab={true}
@@ -545,6 +592,7 @@ export default function BriefBuilderPrototype() {
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
+            messages={chatMessages}
             currentStep="argue"
             onArgumentAdded={() => setShowUserArgument(true)}
             onNextSupportingAuthority={handleNextSupportingAuthority}
@@ -652,6 +700,7 @@ export default function BriefBuilderPrototype() {
               setDrawerOpen={setDrawerOpen}
               notesOpen={notesOpen}
               setNotesOpen={setNotesOpen}
+              messages={chatMessages}
               currentStep="argue"
               hideHistoryButton={true}
             >

@@ -23,6 +23,13 @@ interface AppLayoutWrapperProps {
   hideInput?: boolean;
   showVersionsTab?: boolean;
   hideHistoryButton?: boolean;
+  messages?: Array<{
+    id: string;
+    type: "user" | "assistant";
+    content: string;
+    timestamp?: string;
+    userName?: string;
+  }>;
   className?: string;
 }
 
@@ -43,6 +50,7 @@ export function AppLayoutWrapper({
   hideInput = false,
   showVersionsTab = false,
   hideHistoryButton = false,
+  messages = [],
   className,
 }: AppLayoutWrapperProps) {
   return (
@@ -95,6 +103,7 @@ export function AppLayoutWrapper({
         onNextFinalize={onNextFinalize}
         hideInput={hideInput}
         showVersionsTab={showVersionsTab}
+        messages={messages}
       />
     </div>
   );
