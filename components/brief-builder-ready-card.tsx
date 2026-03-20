@@ -1,14 +1,18 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface BriefBuilderReadyCardProps {
   showTags?: boolean;
   className?: string;
+  onStartBuilding?: () => void;
 }
 
 export function BriefBuilderReadyCard({
   showTags = true,
   className,
+  onStartBuilding,
 }: BriefBuilderReadyCardProps) {
   return (
     <div
@@ -47,6 +51,18 @@ export function BriefBuilderReadyCard({
           other detail. Or, tell me if there is something else you'd like to do
           instead.
         </p>
+      </div>
+
+      {/* Start Building Button */}
+      <div className="mt-6">
+        <Button
+          onClick={onStartBuilding}
+          variant="outline"
+          className="flex items-center gap-2 border-[#cccccc] bg-white text-[#212223] hover:bg-[#f2f2f2]"
+        >
+          <Sparkles className="size-4 text-[#d64000]" />
+          I'm ready, let's start building
+        </Button>
       </div>
     </div>
   );

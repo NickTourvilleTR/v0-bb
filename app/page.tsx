@@ -836,7 +836,7 @@ export default function BriefBuilderPrototype() {
                     timestamp="9:36 a.m."
                     className="mb-6"
                   >
-                    <BriefBuilderReadyCard />
+                    <BriefBuilderReadyCard onStartBuilding={handleStartBuilding} />
                   </CocoChatMessage>
                 )}
 
@@ -893,18 +893,7 @@ export default function BriefBuilderPrototype() {
                       </button>
                     </div>
                   )}
-                  {/* Ready Button - shown only on ready-to-build screen */}
-                  {currentScreen === "ready-to-build" && (
-                    <div className="mb-3 flex justify-end">
-                      <button
-                        onClick={handleStartBuilding}
-                        className="flex items-center gap-2 rounded-md border border-[#cccccc] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                      >
-                        <Sparkles className="size-4 text-[#d64000]" />
-                        I'm ready, let's start building
-                      </button>
-                    </div>
-                  )}
+
                   {currentScreen === "start" && (
                     <CocoChatInput
                       placeholder="Ask CoCounsel..."
