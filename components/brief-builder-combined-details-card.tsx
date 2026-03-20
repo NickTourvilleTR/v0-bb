@@ -141,7 +141,10 @@ export function BriefBuilderCombinedDetailsCard({
       <div className="my-6 border-t border-[#e5e5e5]" />
 
       {/* Additional Details Section */}
-      <h4 className="mb-4 text-lg font-semibold text-[#212223]">Additional details</h4>
+      <div className="mb-4 flex items-center gap-2">
+        <h4 className="text-lg font-semibold text-[#212223]">Additional details</h4>
+        <span className="rounded-full bg-[#f2f2f2] px-2 py-0.5 text-xs text-[#737373]">Optional</span>
+      </div>
       
       <p className="mb-4 text-[#212223]">
         <strong>Are there any other key details you can provide?</strong>{" "}
