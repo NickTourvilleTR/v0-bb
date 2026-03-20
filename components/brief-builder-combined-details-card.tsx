@@ -174,18 +174,11 @@ export function BriefBuilderCombinedDetailsCard({
             <Paperclip className="size-5" />
           </button>
         </div>
-        <div className="flex gap-3 px-3 pb-3 pt-2">
-          <Button
-            variant="outline"
-            onClick={onSkip}
-            className="h-11 flex-1 border-[#e5e5e5] text-[#737373] hover:bg-[#f7f7f7]"
-          >
-            Skip this step
-          </Button>
+        <div className="flex justify-center px-3 pb-3 pt-2">
           <Button
             onClick={handleContinue}
             disabled={!selectedParty}
-            className="h-11 flex-1 bg-[#1d4b34] text-white hover:bg-[#163d2a]"
+            className="h-11 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
           >
             Continue
           </Button>
