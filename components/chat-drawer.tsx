@@ -1178,7 +1178,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <Paperclip className="size-5" />
               </button>
             </div>
-            <div className="flex items-center justify-center px-3 pb-3">
+            <div className="flex items-center justify-end px-3 pb-3">
               <button
                 className="flex size-10 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
                 onClick={handleSubmit}
