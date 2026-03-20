@@ -64,6 +64,11 @@ export function AppLayoutWrapper({
     setDrawerOpen(true);
   };
 
+  const handleSourcesClick = () => {
+    setDrawerTab("sources");
+    setDrawerOpen(true);
+  };
+
   return (
     <div className={cn("flex flex-1 overflow-hidden", className)}>
       {/* Main Content */}
@@ -75,6 +80,7 @@ export function AppLayoutWrapper({
       <RightToolbar
         onChatClick={handleChatClick}
         onNotesClick={handleNotesClick}
+        onLibraryClick={handleSourcesClick}
         hidden={drawerOpen}
         hideHistoryButton={hideHistoryButton}
       />
