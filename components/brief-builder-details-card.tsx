@@ -141,7 +141,7 @@ export function BriefBuilderDetailsCard({
             className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
             disabled={!selectedParty}
           >
-            Done
+            Continue
           </Button>
         </div>
       )}
