@@ -29,6 +29,11 @@ const motionTypes = [
     title: "Motion to transfer venue",
     description: "Ask that the case is moved to a different court or jurisdiction for convenience or fairness.",
   },
+  {
+    id: "summary-judgment",
+    title: "Motion for Summary Judgment",
+    description: "Ask the court to rule in your favor without a trial by showing there are no genuine disputes of material fact.",
+  },
 ];
 
 interface BriefBuilderCardProps {
