@@ -6,27 +6,27 @@ import { cn } from "@/lib/utils";
 const motionTypes = [
   {
     id: "dismiss",
-    title: "Motion to dismiss",
+    title: "Motion to Dismiss",
     description: "Ask the court to dismiss the case before trial by challenging the sufficiency of the opposing party's claims.",
   },
   {
     id: "compel",
-    title: "Motion to compel",
+    title: "Motion to Compel",
     description: "Ask that the court enforce the opposing party's compliance with discovery requests.",
   },
   {
     id: "protective-order",
-    title: "Motion for protective order",
+    title: "Motion for Protective Order",
     description: "Ask that the court limit the scope, methods, or disclosure of information obtainable via discovery.",
   },
   {
     id: "exclude-evidence",
-    title: "Motion to exclude evidence",
+    title: "Motion to Exclude Evidence",
     description: "Ask pretrial ruling to bar inadmissible evidence from being presented at trial.",
   },
   {
     id: "transfer-venue",
-    title: "Motion to transfer venue",
+    title: "Motion to Transfer Venue",
     description: "Ask that the case is moved to a different court or jurisdiction for convenience or fairness.",
   },
   {
