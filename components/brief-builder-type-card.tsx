@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const briefTypes = [
@@ -41,10 +40,7 @@ export function BriefBuilderTypeCard({
       )}
     >
       {/* Header */}
-      <div className="mb-4 flex items-center gap-2">
-        <Sparkles className="size-5 text-[#212223]" />
-        <h3 className="text-lg font-semibold text-[#212223]">Brief Builder</h3>
-      </div>
+      <h3 className="mb-4 text-lg font-semibold text-[#212223]">Select brief type</h3>
 
       {/* Question */}
       <p className="mb-6 text-[#212223]">

@@ -1,6 +1,4 @@
 "use client";
-
-import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 
@@ -22,10 +20,7 @@ export function BriefBuilderAdditionalCard({
     >
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-5 text-[#212223]" />
-          <h3 className="text-lg font-semibold text-[#212223]">Brief Builder</h3>
-        </div>
+        <h3 className="text-lg font-semibold text-[#212223]">Additional details</h3>
         {showTags && (
           <div className="flex items-center gap-2">
             <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">

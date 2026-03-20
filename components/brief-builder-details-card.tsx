@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles, Pencil } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
@@ -38,10 +38,7 @@ export function BriefBuilderDetailsCard({
     >
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-5 text-[#212223]" />
-          <h3 className="text-lg font-semibold text-[#212223]">Brief Builder</h3>
-        </div>
+        <h3 className="text-lg font-semibold text-[#212223]">Case details</h3>
         {showTags && (
           <div className="flex items-center gap-2">
             <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">

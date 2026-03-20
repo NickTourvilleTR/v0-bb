@@ -1,6 +1,4 @@
 "use client";
-
-import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface BriefBuilderReadyCardProps {
@@ -21,10 +19,7 @@ export function BriefBuilderReadyCard({
     >
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-5 text-[#212223]" />
-          <h3 className="text-lg font-semibold text-[#212223]">Brief Builder</h3>
-        </div>
+        <h3 className="text-lg font-semibold text-[#212223]">Ready to build</h3>
         {showTags && (
           <div className="flex items-center gap-2">
             <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-sm text-[#212223]">

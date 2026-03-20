@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const motionTypes = [
@@ -58,10 +58,7 @@ export function BriefBuilderCard({
       )}
     >
       {/* Header */}
-      <div className="mb-6 flex items-center gap-2">
-        <Sparkles className="size-5 text-[#212223]" />
-        <h3 className="text-lg font-semibold text-[#212223]">Brief Builder</h3>
-      </div>
+      <h3 className="mb-6 text-lg font-semibold text-[#212223]">Select motion type</h3>
 
       {/* Motion Type Options */}
       <div className="space-y-3">
