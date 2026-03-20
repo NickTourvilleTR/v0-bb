@@ -29,12 +29,18 @@ interface ChatDrawerProps {
     timestamp?: string;
     userName?: string;
   }>;
+  defaultTab?: "chat" | "notes" | "versions" | "sources";
 }
 
 type ChatState = "initial" | "adding" | "added";
 
-export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, currentStep = "argue", hideInput = false, showVersionsTab = false, messages = [] }: ChatDrawerProps) {
-  const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
+export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, currentStep = "argue", hideInput = false, showVersionsTab = false, messages = [], defaultTab = "chat" }: ChatDrawerProps) {
+  const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
+  
+  // Update active tab when defaultTab changes
+  React.useEffect(() => {
+    setActiveTab(defaultTab);
+  }, [defaultTab]);
   const [inputValue, setInputValue] = React.useState("");
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
   const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
