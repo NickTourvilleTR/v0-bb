@@ -98,13 +98,13 @@ export function VerifyPanel() {
               {expandedPassages["1-1"] && (
                 <div className="mt-3 pl-6">
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    "Disparagement of Property. Bothmann's primary cause of action is for slander of title, or more appropriately called disparagement of title or property. In a disparagement action the plaintiff must allege and prove the following elements: (1) A falsehood (2) has been published, or communicated to a third person (3) when the defendant-publisher knows or reasonably should know that it will likely result in inducing others not to deal with the plaintiff and (4) in fact, the falsehood does play a material and substantial part in inducing others not to deal with the plaintiff; and (5) special damages are proximately caused as a result of the published falsehood."
+                    "The substantial-similarity test contains an extrinsic and intrinsic component." Funky Films, Inc. v. Time Warner Ent. Co., L.P., 462 F.3d 1072, 1077 (9th Cir. 2006), overruled on other grounds by Skidmore, 952 F.3d 1051. The extrinsic test requires a three-step analysis: (1) the plaintiff identifies similarities between the copyrighted work and the accused work; (2) of those similarities, the court disregards any that are based on unprotectable material or authorized use; and (3) the court must determine the scope of protection ("thick" or "thin") to which the remainder is entitled "as a whole." Apple Computer, 35 F.3d at 1443 (referring to what we here call "thick" protection as "broad" protection). Only if the extrinsic analysis succeeds does the so-called "intrinsic" analysis takes place. See Funky Films, 462 F.3d at 1077. The intrinsic test "examines an ordinary person's subjective impressions of the similarities between two works," and involves questions of fact determined by the jury under instructions as to the level of protection applicable. Funky Films, 462 F.3d at 1077 (citing Shaw v. Lindheim, 919 F.2d 1353, 1360–61 (9th Cir. 1990)).
                   </p>
                   <a
                     href="#"
                     className="mt-2 inline-flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                   >
-                    Bothmann v. Harrington, 458 So. 2d at 1165 (Fla. Dist. Ct. App. 1984) — See in context
+                    Corbello v. Valli, 974 F.3d 965, 974 (9th Cir. 2020) — See in context
                   </a>
                 </div>
               )}
