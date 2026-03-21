@@ -39,16 +39,29 @@ const defaultAuthorities: ArgumentAuthority[] = [
         ],
       },
       {
-        id: "swirsky",
-        name: "Swirsky v. Carey",
-        citation: "376 F.3d 841 (9th Cir. 2004)",
-        badges: ["Similar facts"],
+        id: "corbello",
+        name: "Corbello v. Valli",
+        citation: "974 F.3d 965 (9th Cir. 2020)",
+        badges: ["Similar facts", "Asserted truths doctrine"],
         description:
-          'This case dealt with "total concept and feel" and parallel structure in plot/character relationships can defeat early dismissal with respect to similarity.',
+          "An author who presents a work as nonfiction cannot claim copyright protection over elements of that work as if they were fiction because the facts of one's own life, even as recounted in an unpublished memoir, are not protectable expression.",
         supportPoints: [
-          "Swirsky was about musical works and relied heavily on expert musicology. That's very different from a literary comparison, where the judge can simply read the two works.",
-          "The selection-and-arrangement logic in Swirsky concerned specific combinations of melodic, harmonic, and rhythmic elements. Here, plaintiff doesn't identify any analogous, protectable combination—only standard elements of a grief journey and real-life facts.",
-          'Later authorities warn against using Swirsky as a license to bundle any number of unprotectable details. Defendants\' position is that plaintiff\'s alleged overlaps are exactly the sort of "random similarities" Cavalier and Litchfield say are insufficient.',
+          "Just as the Corbello court held that a work presented as a truthful autobiographical account cannot later be recharacterized as fiction to obtain copyright protection, Love's complaint describes Eat the Lemon as a personal memoir based on her own life, which prevents claiming copyright in the facts of that life.",
+          "Corbello's asserted truths doctrine provides that elements a work holds out as factual are treated as facts for copyright purposes, regardless of how the author later characterizes them in litigation. The specificity of Love's similarity allegations underscores that she is pointing to details of her actual lived experience, not original expressive choices.",
+          "In Corbello, defendants unquestionably had access to the manuscript yet the Ninth Circuit found no infringement because access to a factual work does not transform unprotectable biographical details into protectable expression. Love's access allegations do not change what is and is not protectable in Eat the Lemon.",
+        ],
+      },
+      {
+        id: "biani",
+        name: "Biani v. Showtime Networks, Inc.",
+        citation: "153 F.4th 957 (9th Cir. 2025)",
+        badges: ["Similar facts", "Scènes à faire"],
+        description:
+          "Character traits alleged to be copied from a plaintiff's original works are unprotectable scènes à faire when they are stock features of the relevant genre, and that even a cursory comparison of the works revealing more differences than similarities warrants dismissal for failure to allege substantial similarity in protectable expression.",
+        supportPoints: [
+          "Genre conventions are not protectable expression. Just as Biani held that traits naturally associated with Victorian Gothic fiction are stock elements of that genre and therefore unprotectable, the elements Love identifies as copied are largely the natural furnishings of a grief memoir set on the Amalfi Coast.",
+          "A central move in Biani was the court's insistence on looking at the works as a whole. One Italian Summer is built around a magical-realist time travel device through which the protagonist literally meets her young mother, an element with no counterpart in Eat the Lemon.",
+          "Biani affirmed dismissal notwithstanding a plaintiff who assembled a chart of specific, itemized correspondences between characters. Accumulating a catalog of individual similarities does not satisfy the extrinsic test when those similarities reflect unprotectable ideas and genre conventions rather than the plaintiff's original expressive choices.",
         ],
       },
     ],
@@ -63,8 +76,8 @@ export function SupportingAuthoritiesPanel({
   className,
 }: SupportingAuthoritiesPanelProps) {
   const [selectedCitations, setSelectedCitations] = React.useState<string[]>([
-    "shaw",
-    "swirsky",
+    "corbello",
+    "biani",
   ]);
 
   const toggleCitation = (citationId: string) => {
