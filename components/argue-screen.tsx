@@ -4,6 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { List, FileBadge } from "lucide-react";
 
 interface ArgueScreenProps {
   className?: string;
@@ -95,16 +96,28 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
     <div className={cn("flex flex-1 flex-col bg-[#fcfcfc]", className)}>
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-3xl px-6 py-8">
-          {/* Header */}
-          <div className="mb-6">
-            <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-              ARGUE
-            </p>
-            <h1 className="text-2xl font-semibold text-[#212223]">
-              Select the desired arguments
-            </h1>
+        <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8 pb-32">
+          {/* Left sidebar buttons - sticky */}
+          <div className="sticky top-8 flex h-fit flex-col gap-2">
+            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+              <List className="size-5 text-[#212223]" />
+            </button>
+            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+              <FileBadge className="size-5 text-[#1d4b34]" />
+            </button>
           </div>
+
+          {/* Main content column */}
+          <div className="flex-1 max-w-3xl">
+            {/* Header */}
+            <div className="mb-6">
+              <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
+                ARGUE
+              </p>
+              <h1 className="text-2xl font-semibold text-[#212223]">
+                Select the desired arguments
+              </h1>
+            </div>
 
           {/* Select All */}
           <div className="mb-6 flex items-center gap-3">
@@ -174,25 +187,24 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Bottom Action Bar */}
-      <div className="border-t border-[#e5e5e5] bg-white px-6 py-4">
-        <div className="mx-auto flex max-w-3xl items-center justify-center gap-3">
-          <Button
-            variant="outline"
-            onClick={onNextSupportingAuthority}
-            className="border-[#cccccc] text-[#212223] hover:bg-[#f7f7f7]"
-          >
-            Next: Supporting authority
-          </Button>
-          <Button
-            variant="outline"
-            onClick={onSkipToGenerateDraft}
-            className="border-[#cccccc] text-[#212223] hover:bg-[#f7f7f7]"
-          >
-            Skip to generate draft
-          </Button>
+          {/* Bottom Action Buttons */}
+          <div className="flex items-center justify-center gap-3 pb-8 pt-4">
+            <Button
+              variant="outline"
+              onClick={onNextSupportingAuthority}
+              className="border-[#cccccc] text-[#212223] hover:bg-[#f7f7f7]"
+            >
+              Next: Supporting authority
+            </Button>
+            <Button
+              variant="outline"
+              onClick={onSkipToGenerateDraft}
+              className="border-[#cccccc] text-[#212223] hover:bg-[#f7f7f7]"
+            >
+              Skip to generate draft
+            </Button>
+          </div>
+          </div>
         </div>
       </div>
     </div>

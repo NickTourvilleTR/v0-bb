@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { List } from "lucide-react";
+import { List, FileBadge } from "lucide-react";
 
 interface Argument {
   id: string;
@@ -116,22 +116,27 @@ export function ArgumentsPanel({ className, showUserArgument = false }: Argument
   }, [showUserArgument]);
 
   return (
-    <div className={cn("flex flex-1 flex-col", className)}>
-      {/* Sidebar toggle button */}
-      <div className="absolute left-4 top-4">
-        <button className="flex size-10 items-center justify-center rounded-md border border-[#e5e5e5] bg-white hover:bg-[#f2f2f2]">
-          <List className="size-5 text-[#212223]" />
-        </button>
-      </div>
+    <div className={cn("flex flex-1 flex-col overflow-y-auto", className)}>
+      {/* Main content with sidebar */}
+      <div className="mx-auto flex w-full max-w-4xl gap-6 px-6 py-8">
+        {/* Left sidebar buttons - sticky */}
+        <div className="sticky top-8 flex h-fit flex-col gap-2">
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <List className="size-5 text-[#212223]" />
+          </button>
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <FileBadge className="size-5 text-[#1d4b34]" />
+          </button>
+        </div>
 
-      {/* Main content */}
-      <div className="mx-auto w-full max-w-4xl px-6 py-8">
-        <p className="mb-1 text-sm font-medium uppercase tracking-wide text-[#737373]">
-          ARGUE
-        </p>
-        <h1 className="mb-6 text-3xl font-normal text-[#212223]">
-          Select the desired arguments
-        </h1>
+        {/* Main content column */}
+        <div className="flex-1">
+          <p className="mb-1 text-sm font-medium uppercase tracking-wide text-[#737373]">
+            ARGUE
+          </p>
+          <h1 className="mb-6 text-3xl font-normal text-[#212223]">
+            Select the desired arguments
+          </h1>
 
         {/* Select All */}
         <div className="mb-4 flex items-center gap-3">
@@ -201,6 +206,7 @@ export function ArgumentsPanel({ className, showUserArgument = false }: Argument
           ))}
           {/* Scroll anchor for new arguments */}
           <div ref={scrollEndRef} />
+        </div>
         </div>
       </div>
     </div>
