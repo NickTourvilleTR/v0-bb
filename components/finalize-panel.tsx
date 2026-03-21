@@ -43,7 +43,7 @@ export function FinalizePanel() {
         {/* Success Banner */}
         <div className="mb-6 flex items-center justify-between rounded-lg bg-[#1d4b34] px-6 py-4">
           <span className="text-lg font-medium text-white">Your brief is ready</span>
-          <Button className="bg-[#212223] text-white hover:bg-[#404040]">
+          <Button className="rounded-full bg-[#212223] px-6 text-white hover:bg-[#404040]">
             <svg className="mr-2 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />

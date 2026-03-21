@@ -82,7 +82,7 @@ export function BriefBuilderUploadCard({
           <div className="mb-4 flex flex-wrap items-center justify-center gap-3">
             <Button
               variant="outline"
-              className="h-10 gap-2 border-[#cccccc] bg-white text-[#212223] hover:bg-[#f2f2f2]"
+              className="h-10 gap-2 rounded-full border-[#cccccc] bg-white px-6 text-[#212223] hover:bg-[#f2f2f2]"
               onClick={handleFileSelect}
             >
               <Upload className="size-4" />
@@ -90,7 +90,7 @@ export function BriefBuilderUploadCard({
             </Button>
             <Button
               variant="outline"
-              className="h-10 gap-2 border-[#cccccc] bg-white text-[#212223] hover:bg-[#f2f2f2]"
+              className="h-10 gap-2 rounded-full border-[#cccccc] bg-white px-6 text-[#212223] hover:bg-[#f2f2f2]"
               onClick={handleFileSelect}
             >
               <Upload className="size-4" />
@@ -101,7 +101,7 @@ export function BriefBuilderUploadCard({
           <div className="mb-4 flex flex-wrap items-center justify-center gap-3">
             <Button
               variant="outline"
-              className="h-10 gap-2 border-[#cccccc] bg-white text-[#212223] hover:bg-[#f2f2f2]"
+              className="h-10 gap-2 rounded-full border-[#cccccc] bg-white px-6 text-[#212223] hover:bg-[#f2f2f2]"
               onClick={handleFileSelect}
             >
               <FileText className="size-4" />
@@ -109,7 +109,7 @@ export function BriefBuilderUploadCard({
             </Button>
             <Button
               variant="outline"
-              className="h-10 gap-2 border-[#cccccc] bg-white text-[#212223] hover:bg-[#f2f2f2]"
+              className="h-10 gap-2 rounded-full border-[#cccccc] bg-white px-6 text-[#212223] hover:bg-[#f2f2f2]"
               onClick={handleFileSelect}
             >
               <Database className="size-4" />
@@ -156,7 +156,7 @@ export function BriefBuilderUploadCard({
         <div className="flex justify-center">
           <Button
             onClick={handleUpload}
-            className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
+            className="h-10 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
             disabled={selectedFiles.length === 0}
           >
             Upload

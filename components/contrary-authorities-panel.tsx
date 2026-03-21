@@ -44,7 +44,7 @@ export function ContraryAuthoritiesPanel({ className }: ContraryAuthoritiesPanel
           {/* Add Party/Attorney Button */}
           <Button
             variant="outline"
-            className="mb-12 border-[#cccccc] text-[#212223] hover:bg-[#f7f7f7]"
+            className="mb-12 rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
           >
             <Plus className="mr-2 size-4" />
             Add a Party/Attorney

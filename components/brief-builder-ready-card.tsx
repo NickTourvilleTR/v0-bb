@@ -57,7 +57,7 @@ export function BriefBuilderReadyCard({
       <div className="mt-6 flex justify-center">
         <Button
           onClick={onStartBuilding}
-          className="flex h-10 items-center gap-2 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
+          className="flex h-10 items-center gap-2 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
         >
           <Sparkles className="size-4" />
           I'm ready, let's start building

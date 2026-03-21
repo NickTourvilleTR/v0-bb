@@ -106,7 +106,7 @@ export function OutlineScreen({ className, onGenerateOutline }: OutlineScreenPro
         <div className="flex justify-center">
           <Button
             onClick={onGenerateOutline}
-            className="bg-[#1f1f1f] px-8 py-2 text-white hover:bg-[#404040]"
+            className="rounded-full bg-[#1f1f1f] px-8 py-2 text-white hover:bg-[#404040]"
           >
             Generate outline
           </Button>

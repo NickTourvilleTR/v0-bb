@@ -138,7 +138,7 @@ export function BriefBuilderDetailsCard({
         <div className="flex justify-center">
           <Button
             onClick={handleDone}
-            className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
+            className="h-10 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
             disabled={!selectedParty}
           >
             Continue
