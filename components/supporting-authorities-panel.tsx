@@ -41,14 +41,14 @@ const defaultAuthorities: ArgumentAuthority[] = [
       {
         id: "corbello",
         name: "Corbello v. Valli",
-        citation: "974 F.3d 965 (9th Cir. 2020)",
-        badges: ["Similar facts", "Asserted truths doctrine"],
+        citation: "974 F.3d 965, 974 (9th Cir. 2020)",
+        badges: ["Substantial similarity", "Extrinsic/Intrinsic test"],
         description:
-          "An author who presents a work as nonfiction cannot claim copyright protection over elements of that work as if they were fiction because the facts of one's own life, even as recounted in an unpublished memoir, are not protectable expression.",
+          "To establish copyright infringement, a plaintiff must demonstrate that the defendant copied protected elements of the work by satisfying both the extrinsic and intrinsic tests for substantial similarity. The extrinsic test is an objective comparison of specific expressive elements — including plot, theme, dialogue, mood, setting, pace, characters, and sequence of events — after filtering out unprotectable material such as facts, ideas, and scènes à faire; the intrinsic test asks whether an ordinary reasonable person would find the works substantially similar in their total concept and feel.",
         supportPoints: [
-          "Just as the Corbello court held that a work presented as a truthful autobiographical account cannot later be recharacterized as fiction to obtain copyright protection, Love's complaint describes Eat the Lemon as a personal memoir based on her own life, which prevents claiming copyright in the facts of that life.",
-          "Corbello's asserted truths doctrine provides that elements a work holds out as factual are treated as facts for copyright purposes, regardless of how the author later characterizes them in litigation. The specificity of Love's similarity allegations underscores that she is pointing to details of her actual lived experience, not original expressive choices.",
-          "In Corbello, defendants unquestionably had access to the manuscript yet the Ninth Circuit found no infringement because access to a factual work does not transform unprotectable biographical details into protectable expression. Love's access allegations do not change what is and is not protectable in Eat the Lemon.",
+          "\"The substantial-similarity test contains an extrinsic and intrinsic component.\" Funky Films, Inc. v. Time Warner Ent. Co., L.P., 462 F.3d 1072, 1077 (9th Cir. 2006), overruled on other grounds by Skidmore, 952 F.3d 1051.",
+          "The extrinsic test requires a three-step analysis: (1) the plaintiff identifies similarities between the copyrighted work and the accused work; (2) of those similarities, the court disregards any that are based on unprotectable material or authorized use; and (3) the court must determine the scope of protection (\"thick\" or \"thin\") to which the remainder is entitled \"as a whole.\" Apple Computer, 35 F.3d at 1443.",
+          "The intrinsic test \"examines an ordinary person's subjective impressions of the similarities between two works,\" and involves questions of fact determined by the jury under instructions as to the level of protection applicable. Funky Films, 462 F.3d at 1077 (citing Shaw v. Lindheim, 919 F.2d 1353, 1360–61 (9th Cir. 1990)).",
         ],
       },
       {
