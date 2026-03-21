@@ -187,17 +187,16 @@ export function ArgueScreen2({ className, onNextSupportingAuthority, onSkipToGen
           <div className="flex items-center justify-center gap-3 pb-8 pt-4">
             <Button
               variant="outline"
-              onClick={onNextSupportingAuthority}
-              className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
-            >
-              Next: Supporting authority
-            </Button>
-            <Button
-              variant="outline"
               onClick={onSkipToGenerateDraft}
               className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
             >
               Skip to generate draft
+            </Button>
+            <Button
+              onClick={onNextSupportingAuthority}
+              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+            >
+              Next: Supporting authority
             </Button>
           </div>
           </div>
