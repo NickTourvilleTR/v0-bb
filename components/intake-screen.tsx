@@ -18,42 +18,91 @@ const uploadedFiles = [
   { name: "One Italian Summer (lodged)", type: "W" },
 ];
 
-const claims = [
+const argumentsSelected = [
   {
     id: "copyright",
-    title: "Copyright Infringement (17 U.S.C. § 106)",
-    description: "Unauthorized reproduction and derivative use of protected expression from plaintiff's memoir Eat the Lemon.",
-    checked: true,
+    title: "Copyright infringement (17 U.S.C. § 101 et seq.)",
+    description: "Direct, contributory, and vicarious infringement of Love's exclusive rights in Eat the Lemon, including reproduction, preparation of derivative works, and distribution.",
   },
   {
     id: "breach-fiduciary",
-    title: "Breach of Fiduciary Duty",
-    description: "Literary agents and representatives breached duties of loyalty by sharing confidential manuscript with third parties.",
-    checked: true,
+    title: "Breach of fiduciary duty",
+    description: "Each defendant owed Love duties of loyalty and care arising from their roles as agents, managers, editors, and publishers entrusted with her manuscript.",
+  },
+  {
+    id: "breach-contract",
+    title: "Breach of contract",
+    description: "Defendants who entered written and oral agreements to represent and market the ETL manuscript failed to perform their obligations and pay sums due.",
+  },
+  {
+    id: "promissory-estoppel",
+    title: "Promissory estoppel",
+    description: "Defendants made promises regarding the care and commercialization of ETL on which Love justifiably relied to her detriment.",
+  },
+  {
+    id: "intentional-interference",
+    title: "Intentional interference with contractual relations",
+    description: "Defendants intentionally disrupted Love's existing contracts related to the ETL Work, preventing performance and causing loss of profits and goodwill.",
   },
   {
     id: "tortious-interference",
-    title: "Tortious Interference with Contractual Relations",
-    description: "Defendants interfered with plaintiff's publishing opportunities by misappropriating her work.",
-    checked: true,
+    title: "Tortious interference with prospective business advantage",
+    description: "Defendants interfered with economic relationships that would have resulted in benefit to Love from the exploitation of the ETL manuscript.",
+  },
+  {
+    id: "intentional-misrepresentation",
+    title: "Intentional misrepresentation",
+    description: "Defendants misrepresented their intentions regarding the care, protection, and distribution of the ETL Work and related proceeds.",
+  },
+  {
+    id: "negligent-misrepresentation",
+    title: "Negligent misrepresentation",
+    description: "Defendants negligently or falsely represented that they would use the ETL manuscript solely for agreed-upon purposes.",
+  },
+  {
+    id: "negligence",
+    title: "Negligence",
+    description: "Defendants failed to act as reasonable professionals and breached their duty of care in handling Love's intellectual property.",
+  },
+  {
+    id: "conversion",
+    title: "Conversion",
+    description: "Defendants converted Love's intellectual property, funds, and goodwill to their own use without consent.",
+  },
+  {
+    id: "emotional-distress",
+    title: "Intentional infliction of emotional distress",
+    description: "Defendants' conduct in misappropriating Love's life story and allegedly silencing and isolating her caused severe emotional distress.",
+  },
+  {
+    id: "stalking",
+    title: "Stalking (Cal. Civ. Code § 1708.7)",
+    description: "Certain defendants engaged in a pattern of conduct intended to follow, surveil, and harass Love to prevent her from challenging the alleged scheme.",
   },
   {
     id: "conspiracy",
-    title: "Civil Conspiracy",
-    description: "Coordinated action among defendants to exploit plaintiff's manuscript and suppress her objections.",
-    checked: true,
+    title: "Conspiracy",
+    description: "Two or more defendants agreed to convert Love's manuscript and related intellectual property to their own benefit through deceptive means.",
   },
   {
-    id: "unjust-enrichment",
-    title: "Unjust Enrichment",
-    description: "Defendants profited from One Italian Summer and Paramount film adaptation derived from plaintiff's work.",
-    checked: false,
+    id: "unfair-business",
+    title: "Unfair business practices (Cal. Bus. & Prof. Code § 17200 et seq.)",
+    description: "Defendants' conduct constitutes unlawful, unfair, and fraudulent business practices under California law.",
   },
   {
-    id: "unfair-competition",
-    title: "Unfair Competition (Cal. Bus. & Prof. Code § 17200)",
-    description: "Unlawful, unfair, and fraudulent business practices in connection with the misappropriation.",
-    checked: false,
+    id: "accounting",
+    title: "Accounting",
+    description: "Love seeks a judicial accounting to determine monies generated from the ETL Work that defendants have failed to disclose or distribute.",
+  },
+  {
+    id: "constructive-trust",
+    title: "Constructive trust",
+    description: "Defendants hold Love's intellectual property, goodwill, and proceeds as involuntary trustees and must re-convey them to Love.",
+  },
+  {
+    id: "declaratory-relief",
+    title: "Declaratory relief",
+    description: "Love seeks a declaration clarifying defendants' obligations under the parties' agreements and her rights in the ETL Work.",
   },
 ];
 
@@ -181,13 +230,13 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             </div>
           </div>
 
-          {/* Claims Selected Card - Read Only */}
+          {/* Arguments Selected Card - Read Only */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Claims selected</h3>
+            <h3 className="mb-3 text-sm font-medium text-[#212223]">Arguments selected</h3>
             <div className="space-y-3">
-              {claims.filter(c => c.checked).map((claim) => (
+              {argumentsSelected.map((argument) => (
                 <div
-                  key={claim.id}
+                  key={argument.id}
                   className="flex items-start gap-3"
                 >
                   <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border border-[#1d4b34] bg-[#1d4b34]">
@@ -196,8 +245,8 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-semibold text-[#212223]">{claim.title}</p>
-                    <p className="mt-1 text-sm text-[#737373]">{claim.description}</p>
+                    <p className="text-sm font-semibold text-[#212223]">{argument.title}</p>
+                    <p className="mt-1 text-sm text-[#737373]">{argument.description}</p>
                   </div>
                 </div>
               ))}
