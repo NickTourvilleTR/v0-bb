@@ -2,8 +2,14 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Notebook, FileText, AlertTriangle, ChevronRight, List, ScanEye } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export function VerifyPanel() {
+interface VerifyPanelProps {
+  onNextOpposition?: () => void;
+  onSkipToFinalize?: () => void;
+}
+
+export function VerifyPanel({ onNextOpposition, onSkipToFinalize }: VerifyPanelProps) {
   const [expandedPassages, setExpandedPassages] = useState<Record<string, boolean>>({ "1-1": true });
 
   const togglePassage = (key: string) => {
@@ -342,6 +348,23 @@ export function VerifyPanel() {
             </div>
           </div>
         </div>
+
+          {/* Bottom Action Buttons */}
+          <div className="flex items-center justify-center gap-3 pb-8 pt-6">
+            <Button
+              variant="outline"
+              onClick={onSkipToFinalize}
+              className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
+            >
+              Skip to finalize
+            </Button>
+            <Button
+              onClick={onNextOpposition}
+              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+            >
+              Next: Opposition brief
+            </Button>
+          </div>
         </div>
       </div>
     </div>

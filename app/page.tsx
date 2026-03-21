@@ -471,7 +471,10 @@ export default function BriefBuilderPrototype() {
             onNextFinalize={handleNextFinalize}
             showVersionsTab={true}
           >
-            <VerifyPanel />
+            <VerifyPanel 
+              onNextOpposition={() => setCurrentScreen("distinguish")}
+              onSkipToFinalize={() => setCurrentScreen("finalize")}
+            />
           </AppLayoutWrapper>
         </div>
       </div>
