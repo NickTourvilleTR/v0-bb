@@ -23,9 +23,10 @@ import {
 
 interface DraftEditorProps {
   className?: string;
+  onVerifyBrief?: () => void;
 }
 
-export function DraftEditor({ className }: DraftEditorProps) {
+export function DraftEditor({ className, onVerifyBrief }: DraftEditorProps) {
   const [fontSize, setFontSize] = React.useState(36);
 
   return (
@@ -454,6 +455,16 @@ export function DraftEditor({ className }: DraftEditorProps) {
                 <p className="mt-4 text-sm italic text-[#212223]">Attorneys for Simon & Schuster, LLC</p>
               </div>
             </div>
+          </div>
+
+          {/* Bottom Action Button */}
+          <div className="flex items-center justify-center gap-3 pb-8 pt-8">
+            <Button
+              onClick={onVerifyBrief}
+              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+            >
+              Verify brief
+            </Button>
           </div>
         </div>
       </div>

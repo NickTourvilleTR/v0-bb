@@ -446,7 +446,7 @@ export default function BriefBuilderPrototype() {
             onNextVerify={handleNextVerify}
             showVersionsTab={true}
           >
-            <DraftEditor />
+            <DraftEditor onVerifyBrief={() => setCurrentScreen("verify")} />
           </AppLayoutWrapper>
         </div>
       </div>
