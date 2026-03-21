@@ -117,7 +117,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
 
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-3xl px-6 py-8 pb-32">
+        <div className="mx-auto max-w-3xl px-6 pb-32 pt-20">
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
