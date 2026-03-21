@@ -193,14 +193,14 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
             <Button
               variant="outline"
               onClick={onNextSupportingAuthority}
-              className="border-[#cccccc] text-[#212223] hover:bg-[#f7f7f7]"
+              className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
             >
               Next: Supporting authority
             </Button>
             <Button
               variant="outline"
               onClick={onSkipToGenerateDraft}
-              className="border-[#cccccc] text-[#212223] hover:bg-[#f7f7f7]"
+              className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
             >
               Skip to generate draft
             </Button>
