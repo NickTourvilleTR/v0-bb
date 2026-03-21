@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { FileText } from "lucide-react";
+import { FileText, List, FileBadge } from "lucide-react";
 
 interface IntakeScreenProps {
   className?: string;
@@ -111,14 +111,26 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl px-6 py-8 pb-32">
-          {/* Header */}
-          <div className="mb-6">
-            <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-              INTAKE SUMMARY
-            </p>
-            <h1 className="text-2xl font-semibold text-[#212223]">
-              Review your selections
-            </h1>
+          {/* Header with sidebar buttons */}
+          <div className="mb-6 flex items-start gap-6">
+            {/* Left sidebar buttons */}
+            <div className="flex flex-col gap-2">
+              <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+                <List className="size-5 text-[#212223]" />
+              </button>
+              <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+                <FileBadge className="size-5 text-[#1d4b34]" />
+              </button>
+            </div>
+            {/* Title */}
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
+                INTAKE SUMMARY
+              </p>
+              <h1 className="text-2xl font-semibold text-[#212223]">
+                Review your selections
+              </h1>
+            </div>
           </div>
 
           {/* Motion Summary Card */}
