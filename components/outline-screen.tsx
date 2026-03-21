@@ -40,9 +40,10 @@ const outlineItems: OutlineItem[] = [
 interface OutlineScreenProps {
   className?: string;
   onGenerateOutline?: () => void;
+  onNextDraft?: () => void;
 }
 
-export function OutlineScreen({ className, onGenerateOutline }: OutlineScreenProps) {
+export function OutlineScreen({ className, onGenerateOutline, onNextDraft }: OutlineScreenProps) {
   return (
     <div className={cn("flex flex-1 flex-col items-center overflow-y-auto px-8 py-12", className)}>
       <div className="mx-auto w-full max-w-2xl">
@@ -109,6 +110,16 @@ export function OutlineScreen({ className, onGenerateOutline }: OutlineScreenPro
             className="rounded-full bg-[#1d4b34] px-8 py-2 text-white hover:bg-[#163d2a]"
           >
             Generate outline
+          </Button>
+        </div>
+
+        {/* Bottom Action Buttons */}
+        <div className="flex items-center justify-center gap-3 pb-8 pt-8">
+          <Button
+            onClick={onNextDraft}
+            className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+          >
+            Next: Draft
           </Button>
         </div>
       </div>
