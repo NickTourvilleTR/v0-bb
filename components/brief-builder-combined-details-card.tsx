@@ -41,35 +41,25 @@ export function BriefBuilderCombinedDetailsCard({
       )}
     >
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-[#212223]">Review your selections</h3>
-        {showTags && (
-          <div className="flex items-center gap-2">
-            <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-              Motion for Summary Judgment
-            </span>
-            <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-              Primary brief
-            </span>
-          </div>
-        )}
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold text-[#212223]">Motion for Summary Judgment: Movant's Memorandum of Law (Federal)</h3>
       </div>
 
-      {/* Case Summary */}
-      <div className="mb-6 space-y-4 text-[#212223]">
-        <p>
-          Plaintiff <strong>Adrienne Love</strong>, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author <strong>Rebecca Serle</strong>.
-        </p>
-        <p>
-          Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle's novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022.
-        </p>
-        <p>
-          Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation.
-        </p>
-        <p>
+      {/* Case Summary as Bullet Points */}
+      <ul className="mb-6 ml-6 list-disc space-y-3 text-[#212223]">
+        <li>
+          Plaintiff <strong>Adrienne Love</strong>, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author <strong>Rebecca Serle</strong>
+        </li>
+        <li>
+          Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle's novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022
+        </li>
+        <li>
+          Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation
+        </li>
+        <li>
           <strong>Jurisdiction:</strong> U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
-        </p>
-      </div>
+        </li>
+      </ul>
 
       {/* Parties Section */}
       <p className="mb-4 text-[#212223]">
