@@ -144,8 +144,11 @@ export default function BriefBuilderPrototype() {
   };
 
   const handleStartBuilding = () => {
+    addChatMessage("user", "I'm ready, let's start building");
+    addChatMessage("assistant", "Generating your brief intake summary...");
     setCurrentScreen("generating");
     setTimeout(() => {
+      addChatMessage("assistant", "Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims. Review the summary and proceed to select your arguments.");
       setCurrentScreen("intake");
     }, 2000);
   };
@@ -168,44 +171,63 @@ export default function BriefBuilderPrototype() {
   };
 
   const handleNextSupportingAuthority = () => {
+    addChatMessage("user", "Next: Supporting authority");
+    addChatMessage("assistant", "Researching supporting authorities for your selected arguments...");
     setCurrentScreen("support-loading");
     // Simulate generating authorities, then show support screen
     setTimeout(() => {
+      addChatMessage("assistant", "I've identified relevant case law and statutes to support your arguments. Review the authorities and select which ones to include in your brief.");
       setCurrentScreen("support");
     }, 3000);
   };
 
   const handleNextContraryAuthorities = () => {
+    addChatMessage("user", "Next: Opposition brief");
+    addChatMessage("assistant", "Now let's prepare for potential challenges. Review the anticipated opposition arguments and how to address them in your brief.");
     setCurrentScreen("distinguish");
   };
 
   const handleNextOutline = () => {
+    addChatMessage("user", "Next: Outline");
+    addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments before generating the full outline.");
     setCurrentScreen("outline");
   };
 
   const handleGenerateOutline = () => {
+    addChatMessage("user", "Generate outline");
+    addChatMessage("assistant", "Generating your brief outline based on the selected arguments and authorities...");
     setCurrentScreen("outline-loading");
     setTimeout(() => {
+      addChatMessage("assistant", "Your outline is ready. Review the structure and headings, then proceed to generate the full draft.");
       setCurrentScreen("outline-ready");
     }, 3000);
   };
 
   const handleNextDraft = () => {
+    addChatMessage("user", "Next: Draft");
+    addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
     setCurrentScreen("draft");
   };
 
   const handleGenerateDraft = () => {
+    addChatMessage("user", "Generate draft");
+    addChatMessage("assistant", "Drafting your Motion to Dismiss based on the outline and selected authorities...");
     setCurrentScreen("draft-loading");
     setTimeout(() => {
+      addChatMessage("assistant", "Your draft is complete. Review the full brief, make any edits, and proceed to verify citations when ready.");
       setCurrentScreen("draft-ready");
     }, 3000);
   };
 
   const handleNextVerify = () => {
+    addChatMessage("user", "Verify brief");
+    addChatMessage("assistant", "Verifying your citations and checking for potential issues. Review the verification results and address any flagged items.");
     setCurrentScreen("verify");
   };
 
   const handleNextFinalize = () => {
+    addChatMessage("user", "Next: Finalize");
+    addChatMessage("assistant", "Your brief is ready for final review. Download the document or make any last adjustments before filing.");
     setCurrentScreen("finalize");
   };
 
@@ -293,12 +315,28 @@ argue: "argue2",
             messages={chatMessages}
             currentStep="intake"
             showVersionsTab={true}
-            onNextSelectArguments={() => setCurrentScreen("argue2")}
-            onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+            onNextSelectArguments={() => {
+              addChatMessage("user", "Next: Select arguments");
+              addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
+              setCurrentScreen("argue2");
+            }}
+            onSkipToGenerateDraft={() => {
+              addChatMessage("user", "Skip to generate draft");
+              addChatMessage("assistant", "Skipping ahead to draft generation with default arguments.");
+              setCurrentScreen("draft");
+            }}
           >
             <IntakeScreen 
-              onNextSelectArguments={() => setCurrentScreen("argue2")}
-              onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+              onNextSelectArguments={() => {
+                addChatMessage("user", "Next: Select arguments");
+                addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
+                setCurrentScreen("argue2");
+              }}
+              onSkipToGenerateDraft={() => {
+                addChatMessage("user", "Skip to generate draft");
+                addChatMessage("assistant", "Skipping ahead to draft generation with default arguments.");
+                setCurrentScreen("draft");
+              }}
             />
           </AppLayoutWrapper>
         </div>
@@ -322,10 +360,21 @@ argue: "argue2",
             messages={chatMessages}
             currentStep="outline"
             onGenerateOutline={handleGenerateOutline}
-            onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+            onSkipToGenerateDraft={() => {
+              addChatMessage("user", "Skip to generate draft");
+              addChatMessage("assistant", "Skipping ahead to draft generation.");
+              setCurrentScreen("draft");
+            }}
             showVersionsTab={true}
           >
-            <OutlineScreen onGenerateOutline={handleGenerateOutline} onNextDraft={() => setCurrentScreen("draft")} />
+            <OutlineScreen 
+              onGenerateOutline={handleGenerateOutline} 
+              onNextDraft={() => {
+                addChatMessage("user", "Skip to generate draft");
+                addChatMessage("assistant", "Skipping ahead to draft generation.");
+                setCurrentScreen("draft");
+              }} 
+            />
           </AppLayoutWrapper>
         </div>
       </div>
@@ -371,10 +420,18 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="outline-ready"
-            onNextDraft={handleNextDraft}
+            onNextDraft={() => {
+              addChatMessage("user", "Next: Draft");
+              addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
+              setCurrentScreen("draft");
+            }}
             showVersionsTab={true}
           >
-            <OutlineEditor onNextDraft={() => setCurrentScreen("draft")} />
+            <OutlineEditor onNextDraft={() => {
+              addChatMessage("user", "Next: Draft");
+              addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
+              setCurrentScreen("draft");
+            }} />
           </AppLayoutWrapper>
         </div>
       </div>
@@ -445,10 +502,18 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="draft-ready"
-            onVerifyBrief={() => setCurrentScreen("verify")}
+            onVerifyBrief={() => {
+              addChatMessage("user", "Verify brief");
+              addChatMessage("assistant", "Verifying your citations and checking for potential issues.");
+              setCurrentScreen("verify");
+            }}
             showVersionsTab={true}
           >
-            <DraftEditor onVerifyBrief={() => setCurrentScreen("verify")} />
+            <DraftEditor onVerifyBrief={() => {
+              addChatMessage("user", "Verify brief");
+              addChatMessage("assistant", "Verifying your citations and checking for potential issues.");
+              setCurrentScreen("verify");
+            }} />
           </AppLayoutWrapper>
         </div>
       </div>
@@ -470,13 +535,29 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="verify"
-            onNextOpposition={() => setCurrentScreen("distinguish")}
-            onSkipToFinalize={() => setCurrentScreen("finalize")}
+            onNextOpposition={() => {
+              addChatMessage("user", "Next: Opposition brief");
+              addChatMessage("assistant", "Now let's prepare for potential challenges. Review the anticipated opposition arguments.");
+              setCurrentScreen("distinguish");
+            }}
+            onSkipToFinalize={() => {
+              addChatMessage("user", "Skip to finalize");
+              addChatMessage("assistant", "Skipping ahead to finalize your brief.");
+              setCurrentScreen("finalize");
+            }}
             showVersionsTab={true}
           >
             <VerifyPanel 
-              onNextOpposition={() => setCurrentScreen("distinguish")}
-              onSkipToFinalize={() => setCurrentScreen("finalize")}
+              onNextOpposition={() => {
+                addChatMessage("user", "Next: Opposition brief");
+                addChatMessage("assistant", "Now let's prepare for potential challenges. Review the anticipated opposition arguments.");
+                setCurrentScreen("distinguish");
+              }}
+              onSkipToFinalize={() => {
+                addChatMessage("user", "Skip to finalize");
+                addChatMessage("assistant", "Skipping ahead to finalize your brief.");
+                setCurrentScreen("finalize");
+              }}
             />
           </AppLayoutWrapper>
         </div>
@@ -523,11 +604,19 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="opposition"
-            onNextFinalize={() => setCurrentScreen("finalize")}
+            onNextFinalize={() => {
+              addChatMessage("user", "Next: Finalize");
+              addChatMessage("assistant", "Your brief is ready for final review. Download the document or make any last adjustments.");
+              setCurrentScreen("finalize");
+            }}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
-              <ContraryAuthoritiesPanel onNextFinalize={() => setCurrentScreen("finalize")} />
+              <ContraryAuthoritiesPanel onNextFinalize={() => {
+                addChatMessage("user", "Next: Finalize");
+                addChatMessage("assistant", "Your brief is ready for final review. Download the document or make any last adjustments.");
+                setCurrentScreen("finalize");
+              }} />
             </div>
           </AppLayoutWrapper>
         </div>
@@ -574,14 +663,30 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="support"
-            onNextOutline={() => setCurrentScreen("outline")}
-            onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+            onNextOutline={() => {
+              addChatMessage("user", "Next: Outline");
+              addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+              setCurrentScreen("outline");
+            }}
+            onSkipToGenerateDraft={() => {
+              addChatMessage("user", "Skip to generate draft");
+              addChatMessage("assistant", "Skipping ahead to draft generation.");
+              setCurrentScreen("draft");
+            }}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
               <SupportingAuthoritiesPanel 
-                onNextOutline={() => setCurrentScreen("outline")}
-                onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+                onNextOutline={() => {
+                  addChatMessage("user", "Next: Outline");
+                  addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+                  setCurrentScreen("outline");
+                }}
+                onSkipToGenerateDraft={() => {
+                  addChatMessage("user", "Skip to generate draft");
+                  addChatMessage("assistant", "Skipping ahead to draft generation.");
+                  setCurrentScreen("draft");
+                }}
               />
             </div>
           </AppLayoutWrapper>
@@ -606,13 +711,21 @@ argue: "argue2",
             messages={chatMessages}
             currentStep="argue2"
             onNextSupportingAuthority={handleNextSupportingAuthority}
-            onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+            onSkipToGenerateDraft={() => {
+              addChatMessage("user", "Skip to generate draft");
+              addChatMessage("assistant", "Skipping ahead to draft generation.");
+              setCurrentScreen("draft");
+            }}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
               <ArgueScreen2 
                 onNextSupportingAuthority={handleNextSupportingAuthority}
-                onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+                onSkipToGenerateDraft={() => {
+                  addChatMessage("user", "Skip to generate draft");
+                  addChatMessage("assistant", "Skipping ahead to draft generation.");
+                  setCurrentScreen("draft");
+                }}
               />
             </div>
           </AppLayoutWrapper>
