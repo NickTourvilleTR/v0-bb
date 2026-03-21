@@ -69,13 +69,13 @@ export function VerifyPanel() {
             {/* Statement Column */}
             <div className="border-r border-[#e5e5e5] p-4">
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                In a disparagement action, the plaintiff must allege and prove: (1) a falsehood; (2) has been published or communicated to a third person; (3) when the defendant-publisher knows or reasonably should know that it will likely result in inducing others not to deal with the plaintiff; (4) in fact, the falsehood does play a material and substantial part in inducing others not to deal with the plaintiff; and (5) special damages are proximately caused as a result of the published falsehood.
+                To establish copyright infringement, a plaintiff must demonstrate that the defendant copied protected elements of the work by satisfying both the extrinsic and intrinsic tests for substantial similarity. The extrinsic test is an objective comparison of specific expressive elements — including plot, theme, dialogue, mood, setting, pace, characters, and sequence of events — after filtering out unprotectable material such as facts, ideas, and scènes à faire; the intrinsic test asks whether an ordinary reasonable person would find the works substantially similar in their total concept and feel.
               </p>
               <a
                 href="#"
                 className="inline-flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
               >
-                Bothmann v. Harrington, 458 So. 2d 1163 (Fla. Dist. Ct. App. 1984)
+                Corbello v. Valli, 974 F.3d 965, 974 (9th Cir. 2020)
                 <Notebook className="size-3" />
               </a>
             </div>
