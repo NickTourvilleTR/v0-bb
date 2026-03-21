@@ -24,8 +24,8 @@ const steps: Step[] = [
   { id: "develop", label: "Develop", icon: <Scale className="size-5" /> },
   { id: "outline", label: "Outline", icon: <ListTree className="size-5" /> },
   { id: "draft", label: "Draft", icon: <FileText className="size-5" /> },
-  { id: "opposition", label: "Opposition", icon: <Users className="size-5" /> },
   { id: "verify", label: "Verify", icon: <CheckCircle2 className="size-5" /> },
+  { id: "opposition", label: "Opposition", icon: <Users className="size-5" /> },
   { id: "finalize", label: "Finalize", icon: <Flag className="size-5" /> },
 ];
 
