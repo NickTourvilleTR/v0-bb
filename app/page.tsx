@@ -373,7 +373,7 @@ export default function BriefBuilderPrototype() {
             onNextDraft={handleNextDraft}
             showVersionsTab={true}
           >
-            <OutlineEditor />
+            <OutlineEditor onNextDraft={() => setCurrentScreen("draft")} />
           </AppLayoutWrapper>
         </div>
       </div>

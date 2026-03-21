@@ -18,9 +18,10 @@ import { Button } from "@/components/ui/button";
 
 interface OutlineEditorProps {
   className?: string;
+  onNextDraft?: () => void;
 }
 
-export function OutlineEditor({ className }: OutlineEditorProps) {
+export function OutlineEditor({ className, onNextDraft }: OutlineEditorProps) {
   const [expandedSections, setExpandedSections] = React.useState<string[]>(["factual-background"]);
 
   const toggleSection = (sectionId: string) => {
@@ -502,6 +503,16 @@ export function OutlineEditor({ className }: OutlineEditorProps) {
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Bottom Action Button */}
+          <div className="flex items-center justify-center gap-3 pt-8">
+            <Button
+              onClick={onNextDraft}
+              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+            >
+              Next: Draft
+            </Button>
           </div>
         </div>
       </div>
