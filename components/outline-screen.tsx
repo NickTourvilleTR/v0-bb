@@ -103,23 +103,20 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft }: Out
           </div>
         </div>
 
-        {/* Generate button */}
-        <div className="flex justify-center">
-          <Button
-            onClick={onGenerateOutline}
-            className="rounded-full bg-[#1d4b34] px-8 py-2 text-white hover:bg-[#163d2a]"
-          >
-            Generate outline
-          </Button>
-        </div>
-
         {/* Bottom Action Buttons */}
-        <div className="flex items-center justify-center gap-3 pb-8 pt-8">
+        <div className="flex items-center justify-center gap-3 pb-8 pt-4">
           <Button
+            variant="outline"
             onClick={onNextDraft}
-            className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+            className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
           >
             Next: Draft
+          </Button>
+          <Button
+            onClick={onGenerateOutline}
+            className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+          >
+            Generate outline
           </Button>
         </div>
       </div>
