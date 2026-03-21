@@ -70,10 +70,10 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
   };
 
   return (
-    <div className={cn("flex flex-1 flex-col bg-[#fcfcfc]", className)}>
+    <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-3xl px-6 py-8">
+        <div className="mx-auto max-w-3xl px-6 py-8 pb-32">
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
