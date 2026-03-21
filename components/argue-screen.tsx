@@ -43,7 +43,7 @@ const arguments_data = [
     title: "Statute of limitations bars claims because they were filed too late.",
     points: [
       "The Conspiracy Allegations Are Fundamentally Implausible",
-      "B. No Specific Conduct Alleged Against S&S",
+      "No Specific Conduct Alleged Against S&S",
       "Many Claims Are Untimely and/or Preempted by the Copyright Act",
     ],
     appliesTo: "Causes of Action 2-14 (Breach of Fiduciary Duty, Intentional Interference with Contractual Relations, Tortious Interference with Business Advantage, Intentional Misrepresentation, Negligent Misrepresentation, Negligence, Intentional Infliction of Emotional Distress, Stalking, Conspiracy, Unfair Business Practices, Accounting, Constructive Trust, and Declaratory Judgment)",
