@@ -19,7 +19,14 @@ interface ChatDrawerProps {
   onNextDraft?: () => void;
   onNextVerify?: () => void;
   onNextFinalize?: () => void;
-  currentStep?: "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize";
+  onNextSelectArguments?: () => void;
+  onSkipToGenerateDraft?: () => void;
+  onNextOpposition?: () => void;
+  onSkipToFinalize?: () => void;
+  onGenerateOutline?: () => void;
+  onGenerateDraft?: () => void;
+  onVerifyBrief?: () => void;
+  currentStep?: "intake" | "argue" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   hideInput?: boolean;
   showVersionsTab?: boolean;
   messages?: Array<{
@@ -34,7 +41,7 @@ interface ChatDrawerProps {
 
 type ChatState = "initial" | "adding" | "added";
 
-export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, currentStep = "argue", hideInput = false, showVersionsTab = false, messages = [], defaultTab = "chat" }: ChatDrawerProps) {
+export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, onNextSelectArguments, onSkipToGenerateDraft, onNextOpposition, onSkipToFinalize, onGenerateOutline, onGenerateDraft, onVerifyBrief, currentStep = "argue", hideInput = false, showVersionsTab = false, messages = [], defaultTab = "chat" }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   
   // Update active tab when defaultTab changes
@@ -1166,6 +1173,140 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
       {/* Chat Input - show on Chat tab */}
       {activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
+          {/* Step-based prompt buttons */}
+          <div className="mb-3 flex flex-wrap gap-2">
+            {currentStep === "intake" && (
+              <>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onSkipToGenerateDraft}
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to generate draft
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={onNextSelectArguments}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Next: Select arguments
+                </Button>
+              </>
+            )}
+            {(currentStep === "argue" || currentStep === "argue2") && (
+              <>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onSkipToGenerateDraft}
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to generate draft
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={onNextSupportingAuthority}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Next: Supporting authority
+                </Button>
+              </>
+            )}
+            {currentStep === "support" && (
+              <>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onSkipToGenerateDraft}
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to generate draft
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={onNextOutline}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Next: Outline
+                </Button>
+              </>
+            )}
+            {currentStep === "outline" && (
+              <>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onSkipToGenerateDraft}
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to generate draft
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={onGenerateOutline}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Generate outline
+                </Button>
+              </>
+            )}
+            {currentStep === "outline-ready" && (
+              <Button
+                size="sm"
+                onClick={onNextDraft}
+                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+              >
+                Next: Draft
+              </Button>
+            )}
+            {currentStep === "draft" && (
+              <Button
+                size="sm"
+                onClick={onGenerateDraft}
+                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+              >
+                Generate draft
+              </Button>
+            )}
+            {currentStep === "draft-ready" && (
+              <Button
+                size="sm"
+                onClick={onVerifyBrief}
+                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+              >
+                Verify brief
+              </Button>
+            )}
+            {currentStep === "verify" && (
+              <>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onSkipToFinalize}
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to finalize
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={onNextOpposition}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Next: Opposition brief
+                </Button>
+              </>
+            )}
+            {(currentStep === "opposition" || currentStep === "distinguish") && (
+              <Button
+                size="sm"
+                onClick={onNextFinalize}
+                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+              >
+                Next: Finalize
+              </Button>
+            )}
+          </div>
           <div className="rounded-2xl border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
             <Textarea
               value={inputValue}

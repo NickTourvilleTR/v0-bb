@@ -291,9 +291,10 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="argue"
-            hideInput={true}
+            currentStep="intake"
             showVersionsTab={true}
+            onNextSelectArguments={() => setCurrentScreen("argue2")}
+            onSkipToGenerateDraft={() => setCurrentScreen("draft")}
           >
             <IntakeScreen 
               onNextSelectArguments={() => setCurrentScreen("argue2")}
@@ -320,6 +321,8 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="outline"
+            onGenerateOutline={handleGenerateOutline}
+            onSkipToGenerateDraft={() => setCurrentScreen("draft")}
             showVersionsTab={true}
           >
             <OutlineScreen onGenerateOutline={handleGenerateOutline} onNextDraft={() => setCurrentScreen("draft")} />
@@ -393,6 +396,7 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="draft"
+            onGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
           >
             <DraftScreen onGenerateDraft={handleGenerateDraft} />
@@ -441,7 +445,7 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="draft-ready"
-            onNextVerify={handleNextVerify}
+            onVerifyBrief={() => setCurrentScreen("verify")}
             showVersionsTab={true}
           >
             <DraftEditor onVerifyBrief={() => setCurrentScreen("verify")} />
@@ -466,7 +470,8 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="verify"
-            onNextFinalize={handleNextFinalize}
+            onNextOpposition={() => setCurrentScreen("distinguish")}
+            onSkipToFinalize={() => setCurrentScreen("finalize")}
             showVersionsTab={true}
           >
             <VerifyPanel 
@@ -517,8 +522,8 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="distinguish"
-            onNextOutline={handleNextOutline}
+            currentStep="opposition"
+            onNextFinalize={() => setCurrentScreen("finalize")}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
@@ -568,8 +573,9 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="develop"
-            onNextContraryAuthorities={handleNextContraryAuthorities}
+            currentStep="support"
+            onNextOutline={() => setCurrentScreen("outline")}
+            onSkipToGenerateDraft={() => setCurrentScreen("draft")}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
@@ -600,6 +606,7 @@ argue: "argue2",
             messages={chatMessages}
             currentStep="argue2"
             onNextSupportingAuthority={handleNextSupportingAuthority}
+            onSkipToGenerateDraft={() => setCurrentScreen("draft")}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">

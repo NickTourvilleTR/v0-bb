@@ -11,7 +11,7 @@ interface AppLayoutWrapperProps {
   setDrawerOpen: (open: boolean) => void;
   notesOpen: boolean;
   setNotesOpen: (open: boolean) => void;
-  currentStep?: "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize";
+  currentStep?: "intake" | "argue" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
@@ -19,6 +19,13 @@ interface AppLayoutWrapperProps {
   onNextDraft?: () => void;
   onNextVerify?: () => void;
   onNextFinalize?: () => void;
+  onNextSelectArguments?: () => void;
+  onSkipToGenerateDraft?: () => void;
+  onNextOpposition?: () => void;
+  onSkipToFinalize?: () => void;
+  onGenerateOutline?: () => void;
+  onGenerateDraft?: () => void;
+  onVerifyBrief?: () => void;
   hideInput?: boolean;
   showVersionsTab?: boolean;
   hideHistoryButton?: boolean;
@@ -46,6 +53,13 @@ export function AppLayoutWrapper({
   onNextDraft,
   onNextVerify,
   onNextFinalize,
+  onNextSelectArguments,
+  onSkipToGenerateDraft,
+  onNextOpposition,
+  onSkipToFinalize,
+  onGenerateOutline,
+  onGenerateDraft,
+  onVerifyBrief,
   hideInput = false,
   showVersionsTab = false,
   hideHistoryButton = false,
@@ -97,6 +111,13 @@ export function AppLayoutWrapper({
         onNextDraft={onNextDraft}
         onNextVerify={onNextVerify}
         onNextFinalize={onNextFinalize}
+        onNextSelectArguments={onNextSelectArguments}
+        onSkipToGenerateDraft={onSkipToGenerateDraft}
+        onNextOpposition={onNextOpposition}
+        onSkipToFinalize={onSkipToFinalize}
+        onGenerateOutline={onGenerateOutline}
+        onGenerateDraft={onGenerateDraft}
+        onVerifyBrief={onVerifyBrief}
         hideInput={hideInput}
         showVersionsTab={showVersionsTab}
         messages={messages}
