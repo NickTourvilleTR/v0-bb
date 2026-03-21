@@ -232,8 +232,10 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     key={argument.id}
                     className="flex items-start gap-3"
                   >
-                    <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
-                      <div className="size-2 rounded-full bg-white" />
+                    <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border border-[#737373] bg-[#737373]">
+                      <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="2 6 5 9 10 3" />
+                      </svg>
                     </div>
                     <div className="flex-1">
                       <p className="text-sm text-[#212223]">{argument.title}</p>
