@@ -136,14 +136,14 @@ export function VerifyPanel() {
                   href="#"
                   className="mb-1 flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
-                  237k136 Libel and Slander {'>'} Defenses
+                  99k554 Substantial similarity in general
                   <Notebook className="size-3" />
                 </a>
                 <a
                   href="#"
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
-                  237k139 Libel and Slander {'>'} Actions
+                  99k555 Intrinsic and extrinsic similarity
                   <Notebook className="size-3" />
                 </a>
               </div>
@@ -152,9 +152,16 @@ export function VerifyPanel() {
                 <p className="mb-1 text-sm font-medium text-[#212223]">Precision Research:</p>
                 <a
                   href="#"
+                  className="mb-1 flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
+                >
+                  Copyright Infringement
+                  <Notebook className="size-3" />
+                </a>
+                <a
+                  href="#"
                   className="flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
                 >
-                  Defamation and Disparagement {'>'} General Determination
+                  Substantial Similarity of Protected Elements
                   <Notebook className="size-3" />
                 </a>
               </div>
