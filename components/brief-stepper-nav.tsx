@@ -42,14 +42,14 @@ export function BriefStepperNav({
 }: BriefStepperNavProps) {
   return (
     <div className={cn("border-b border-[#e5e5e5] bg-white px-6 py-4", className)}>
-      <div className="mx-auto max-w-3xl">
-        <div className="flex items-center rounded-lg bg-[#f2f2f2] p-1">
+      <div className="mx-auto max-w-5xl">
+        <div className="flex items-center rounded-full bg-[#f2f2f2] p-1">
           {steps.map((step) => (
             <button
               key={step.id}
               onClick={() => onStepClick?.(step.id)}
               className={cn(
-                "flex flex-1 items-center justify-center gap-2 rounded-md px-3 py-2.5 text-sm font-medium transition-all cursor-pointer",
+                "flex flex-1 items-center justify-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium transition-all cursor-pointer",
                 currentStep === step.id
                   ? "bg-white text-[#212223] shadow-sm"
                   : "text-[#737373] hover:text-[#212223]"
