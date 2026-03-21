@@ -298,7 +298,7 @@ export default function BriefBuilderPrototype() {
             showVersionsTab={true}
           >
             <IntakeScreen 
-              onNextSelectArguments={() => setCurrentScreen("builder")}
+              onNextSelectArguments={() => setCurrentScreen("argue2")}
               onSkipToGenerateDraft={() => setCurrentScreen("draft")}
             />
           </AppLayoutWrapper>
