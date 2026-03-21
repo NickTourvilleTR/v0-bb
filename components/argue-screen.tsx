@@ -76,6 +76,7 @@ const arguments_data = [
 ];
 
 export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft }: ArgueScreenProps) {
+  // Force refresh - argue screen with updated 4th card content
   const [argumentsState, setArgumentsState] = React.useState(arguments_data);
 
   const selectedCount = argumentsState.filter(arg => arg.checked).length;
