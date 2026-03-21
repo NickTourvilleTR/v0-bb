@@ -110,7 +110,7 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft }: Out
             onClick={onNextDraft}
             className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
           >
-            Next: Draft
+            Skip to generate draft
           </Button>
           <Button
             onClick={onGenerateOutline}
