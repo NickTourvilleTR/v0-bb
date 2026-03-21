@@ -549,21 +549,21 @@ export default function BriefBuilderPrototype() {
     );
   }
 
-  // Support layout (split view with chat drawer)
+  // Support layout (split view with chat drawer) - "Develop" step
   if (currentScreen === "support") {
     return (
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} />
+          <BriefStepperNav currentStep="develop" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="support"
+            currentStep="develop"
             onNextContraryAuthorities={handleNextContraryAuthorities}
             showVersionsTab={true}
           >
