@@ -69,7 +69,7 @@ export function ContraryAuthoritiesPanel({ className }: ContraryAuthoritiesPanel
             <div className="space-y-4">
               <div className="flex">
                 <div className="w-1/2">
-                  <p className="font-semibold uppercase text-[#212223]">GYANT PROPERTIES, LLC,</p>
+                  <p className="font-semibold uppercase text-[#212223]">ADRIENNE LOVE,</p>
                 </div>
                 <div className="w-1/2 text-right">
                   <p className="text-[#212223]">Plaintiff,</p>
