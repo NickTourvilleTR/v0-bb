@@ -324,7 +324,7 @@ export default function BriefBuilderPrototype() {
             currentStep="outline"
             showVersionsTab={true}
           >
-            <OutlineScreen onGenerateOutline={handleGenerateOutline} />
+            <OutlineScreen onGenerateOutline={handleGenerateOutline} onNextDraft={() => setCurrentScreen("draft")} />
           </AppLayoutWrapper>
         </div>
       </div>
