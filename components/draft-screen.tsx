@@ -40,7 +40,7 @@ export function DraftScreen({ className, onGenerateDraft }: DraftScreenProps) {
       {/* Generate Button */}
       <button
         onClick={onGenerateDraft}
-        className="rounded-md bg-[#1f1f1f] px-6 py-3 text-sm font-medium text-white hover:bg-[#404040] transition-colors"
+        className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#163d2a]"
       >
         Generate draft
       </button>
