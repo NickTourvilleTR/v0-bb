@@ -13,6 +13,13 @@ interface BriefBuilderUploadCardProps {
   showFile?: boolean;
 }
 
+const defaultFiles = [
+  { id: "1", name: "Love – First Amended Complaint", type: "P" },
+  { id: "2", name: "Quitclaim & Assignment Agreement", type: "P" },
+  { id: "3", name: "Eat The Lemon Feb 2021 Manuscript", type: "W" },
+  { id: "4", name: "One Italian Summer (lodged)", type: "W" },
+];
+
 export function BriefBuilderUploadCard({
   onUpload,
   showTags = true,
@@ -20,16 +27,16 @@ export function BriefBuilderUploadCard({
   disabled = false,
   showFile = false,
 }: BriefBuilderUploadCardProps) {
-  const [selectedFile, setSelectedFile] = React.useState<string | null>(
-    showFile ? "Love v. Airbnb - First A..." : null
+  const [selectedFiles, setSelectedFiles] = React.useState<typeof defaultFiles>(
+    showFile ? defaultFiles : []
   );
 
   const handleFileSelect = () => {
-    setSelectedFile("Love v. Airbnb - First A...");
+    setSelectedFiles(defaultFiles);
   };
 
-  const handleRemoveFile = () => {
-    setSelectedFile(null);
+  const handleRemoveFile = (fileId: string) => {
+    setSelectedFiles(selectedFiles.filter(f => f.id !== fileId));
   };
 
   const handleUpload = () => {
@@ -119,23 +126,28 @@ export function BriefBuilderUploadCard({
         </div>
       )}
 
-      {/* Selected File */}
-      {selectedFile && (
-        <div className={cn("flex items-center gap-2", !disabled && "mb-4")}>
-          <div className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-white px-3 py-2">
-            <div className="flex size-5 items-center justify-center rounded bg-[#dc0a0a] text-[10px] font-bold text-white">
-              P
+      {/* Selected Files */}
+      {selectedFiles.length > 0 && (
+        <div className={cn("flex flex-wrap items-center gap-2", !disabled && "mb-4")}>
+          {selectedFiles.map((file) => (
+            <div key={file.id} className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-white px-3 py-2">
+              <div className={cn(
+                "flex size-5 items-center justify-center rounded text-[10px] font-bold text-white",
+                file.type === "P" ? "bg-[#dc0a0a]" : "bg-[#2563eb]"
+              )}>
+                {file.type}
+              </div>
+              <span className="text-sm text-[#212223]">{file.name}</span>
+              {!disabled && (
+                <button
+                  onClick={() => handleRemoveFile(file.id)}
+                  className="ml-1 text-[#737373] hover:text-[#212223]"
+                >
+                  <X className="size-4" />
+                </button>
+              )}
             </div>
-            <span className="text-sm text-[#212223]">{selectedFile}</span>
-            {!disabled && (
-              <button
-                onClick={handleRemoveFile}
-                className="ml-1 text-[#737373] hover:text-[#212223]"
-              >
-                <X className="size-4" />
-              </button>
-            )}
-          </div>
+          ))}
         </div>
       )}
 
@@ -145,7 +157,7 @@ export function BriefBuilderUploadCard({
           <Button
             onClick={handleUpload}
             className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
-            disabled={!selectedFile}
+            disabled={selectedFiles.length === 0}
           >
             Upload
           </Button>
