@@ -87,11 +87,11 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           {/* Motion Summary Card */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <p className="mb-3 text-sm font-semibold text-[#212223]">
-              Motion for Summary Judgment: Movant&apos;s Memorandum of Law (Federal)
+              Motion to Dismiss: Love v. Serle et al.
             </p>
             <ul className="ml-4 list-disc space-y-2 text-sm text-[#212223]">
               <li>
-                Plaintiff <strong>Adrienne Love</strong>, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author <strong>Rebecca Serle</strong>
+                Plaintiff Adrienne Love, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author Rebecca Serle
               </li>
               <li>
                 Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle&apos;s novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022
@@ -100,7 +100,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation
               </li>
               <li>
-                <strong>Jurisdiction:</strong> U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
+                Jurisdiction: U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
               </li>
             </ul>
           </div>
@@ -111,7 +111,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             <div className="relative">
               <input
                 type="text"
-                defaultValue="Motion for Summary Judgment"
+                defaultValue="Motion to Dismiss"
                 className="w-full rounded-md border border-[#cccccc] bg-white px-4 py-2.5 pr-10 text-sm text-[#212223] focus:border-[#2e6b5c] focus:outline-none focus:ring-1 focus:ring-[#2e6b5c]"
               />
               <Search className="absolute right-3 top-1/2 size-4 -translate-y-1/2 text-[#737373]" />
