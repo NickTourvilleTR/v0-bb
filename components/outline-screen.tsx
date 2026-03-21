@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { ListTree } from "lucide-react";
+import { ListTree, List, FileBadge } from "lucide-react";
 
 interface OutlineItem {
   title: string;
@@ -44,17 +44,29 @@ interface OutlineScreenProps {
 
 export function OutlineScreen({ className, onGenerateOutline }: OutlineScreenProps) {
   return (
-    <div className={cn("flex flex-1 flex-col items-center overflow-y-auto px-8 py-12", className)}>
-      <div className="mx-auto w-full max-w-2xl">
-        {/* Icon */}
-        <div className="mb-6 flex justify-center">
-          <ListTree className="size-16 text-[#737373]" strokeWidth={1} />
+    <div className={cn("flex flex-1 flex-col overflow-y-auto", className)}>
+      <div className="mx-auto flex w-full max-w-4xl gap-6 px-6 py-8">
+        {/* Left sidebar buttons - sticky */}
+        <div className="sticky top-8 flex h-fit flex-col gap-2">
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <List className="size-5 text-[#212223]" />
+          </button>
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <FileBadge className="size-5 text-[#1d4b34]" />
+          </button>
         </div>
 
-        {/* Title */}
-        <h1 className="mb-2 text-center text-3xl font-semibold text-[#212223]">
-          Create your outline
-        </h1>
+        {/* Main content column */}
+        <div className="flex-1 max-w-2xl">
+          {/* Icon */}
+          <div className="mb-6 flex justify-center">
+            <ListTree className="size-16 text-[#737373]" strokeWidth={1} />
+          </div>
+
+          {/* Title */}
+          <h1 className="mb-2 text-center text-3xl font-semibold text-[#212223]">
+            Create your outline
+          </h1>
 
         {/* Subtitle */}
         <p className="mb-6 text-center text-[#737373]">
@@ -102,14 +114,15 @@ export function OutlineScreen({ className, onGenerateOutline }: OutlineScreenPro
           </div>
         </div>
 
-        {/* Generate button */}
-        <div className="flex justify-center">
-          <Button
-            onClick={onGenerateOutline}
-            className="bg-[#1f1f1f] px-8 py-2 text-white hover:bg-[#404040]"
-          >
-            Generate outline
-          </Button>
+          {/* Generate button */}
+          <div className="flex justify-center">
+            <Button
+              onClick={onGenerateOutline}
+              className="bg-[#1f1f1f] px-8 py-2 text-white hover:bg-[#404040]"
+            >
+              Generate outline
+            </Button>
+          </div>
         </div>
       </div>
     </div>
