@@ -7,9 +7,10 @@ import { Plus, List } from "lucide-react";
 
 interface ContraryAuthoritiesPanelProps {
   className?: string;
+  onNextFinalize?: () => void;
 }
 
-export function ContraryAuthoritiesPanel({ className }: ContraryAuthoritiesPanelProps) {
+export function ContraryAuthoritiesPanel({ className, onNextFinalize }: ContraryAuthoritiesPanelProps) {
   return (
     <div className={cn("flex h-full flex-col overflow-y-auto", className)}>
       <div className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
@@ -109,6 +110,16 @@ export function ContraryAuthoritiesPanel({ className }: ContraryAuthoritiesPanel
               <p>
                 Finally, dismissal at the pleading stage is appropriate only where it is clear as a matter of law that no substantial similarity exists between the protectable elements of the works. <em>Woodland v. Hill</em>, 136 F.4th 1199, 1210 (9th Cir. 2025). Where, as here, the complaint identifies a substantial number of specific correspondences whose protectability — individually or in combination — cannot be resolved without a careful comparative analysis of both works in their entirety, the motion to dismiss should be denied. <em>See Zindel v. Fox Searchlight Pictures, Inc.</em>, No. 18-56087, 2020 WL 4502108, at *1 (9th Cir. Aug. 5, 2020) (reversing dismissal where "reasonable minds could differ on the issue of substantial similarity" and expert testimony could bear on the qualitative significance of the shared elements). Love is entitled to the opportunity to make that showing.
               </p>
+            </div>
+
+            {/* Bottom Action Button */}
+            <div className="flex items-center justify-center gap-3 pb-8 pt-8">
+              <Button
+                onClick={onNextFinalize}
+                className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+              >
+                Next: Finalize
+              </Button>
             </div>
           </div>
         </div>

@@ -524,7 +524,7 @@ export default function BriefBuilderPrototype() {
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
-              <ContraryAuthoritiesPanel />
+              <ContraryAuthoritiesPanel onNextFinalize={() => setCurrentScreen("finalize")} />
             </div>
           </AppLayoutWrapper>
         </div>
