@@ -113,60 +113,37 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             </div>
           </div>
 
-          {/* Brief Role Card */}
-          <div className="mb-6 rounded-xl border border-[#e5e5e5] bg-white p-6">
-            <div className="flex items-start justify-between">
-              <div>
-                <h3 className="mb-4 font-semibold text-[#212223]">Brief role</h3>
-                <div className="space-y-3">
-                  <label className="flex cursor-pointer items-center gap-3" onClick={() => setBriefRole("primary")}>
-                    <div className={cn(
-                      "flex size-5 items-center justify-center rounded-full border-2",
-                      briefRole === "primary" ? "border-[#737373] bg-[#737373]" : "border-[#cccccc]"
-                    )}>
-                      {briefRole === "primary" && <div className="size-2 rounded-full bg-white" />}
-                    </div>
-                    <span className="text-[#212223]">Primary</span>
-                  </label>
-                  <label className="flex cursor-pointer items-center gap-3" onClick={() => setBriefRole("opposition")}>
-                    <div className={cn(
-                      "flex size-5 items-center justify-center rounded-full border-2",
-                      briefRole === "opposition" ? "border-[#737373] bg-[#737373]" : "border-[#cccccc]"
-                    )}>
-                      {briefRole === "opposition" && <div className="size-2 rounded-full bg-white" />}
-                    </div>
-                    <span className="text-[#212223]">Opposition</span>
-                  </label>
-                  <label className="flex cursor-pointer items-center gap-3" onClick={() => setBriefRole("reply")}>
-                    <div className={cn(
-                      "flex size-5 items-center justify-center rounded-full border-2",
-                      briefRole === "reply" ? "border-[#737373] bg-[#737373]" : "border-[#cccccc]"
-                    )}>
-                      {briefRole === "reply" && <div className="size-2 rounded-full bg-white" />}
-                    </div>
-                    <span className="text-[#212223]">Reply</span>
-                  </label>
+          {/* Brief Role Card - Read Only */}
+          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+            <h3 className="mb-3 text-sm font-medium text-[#212223]">Brief role</h3>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
+                  <div className="size-2 rounded-full bg-white" />
                 </div>
+                <span className="text-sm text-[#212223]">Primary</span>
               </div>
-
+              <div className="flex items-center gap-3">
+                <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
+                <span className="text-sm text-[#737373]">Opposition</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
+                <span className="text-sm text-[#737373]">Reply</span>
+              </div>
             </div>
           </div>
 
-          {/* Uploaded Files Card */}
-          <div className="mb-6 rounded-xl border border-[#e5e5e5] bg-white p-6">
-            <h3 className="mb-4 font-semibold text-[#212223]">Uploaded documents</h3>
+          {/* Uploaded Files Card - Read Only */}
+          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+            <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
             <div className="flex flex-wrap gap-3">
               {uploadedFiles.map((file, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-white px-3 py-2"
+                  className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2"
                 >
-                  <div className={cn(
-                    "flex size-5 items-center justify-center rounded text-[10px] font-bold text-white",
-                    file.type === "P" ? "bg-[#dc0a0a]" : "bg-[#2563eb]"
-                  )}>
-                    {file.type}
-                  </div>
+                  <FileText className="size-4 text-[#737373]" />
                   <span className="text-sm text-[#212223]">{file.name}</span>
                 </div>
               ))}
