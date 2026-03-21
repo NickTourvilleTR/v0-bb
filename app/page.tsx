@@ -509,7 +509,7 @@ export default function BriefBuilderPrototype() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="distinguish" onStepClick={handleStepperClick} />
+          <BriefStepperNav currentStep="opposition" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
             setDrawerOpen={setDrawerOpen}
