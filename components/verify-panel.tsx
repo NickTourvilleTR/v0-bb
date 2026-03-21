@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Notebook, FileText, AlertTriangle, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronUp, Notebook, FileText, AlertTriangle, ChevronRight, List, ScanEye } from "lucide-react";
 
 export function VerifyPanel() {
   const [expandedPassages, setExpandedPassages] = useState<Record<string, boolean>>({ "1-1": true });
@@ -11,8 +11,20 @@ export function VerifyPanel() {
   };
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto p-6">
-      <div className="mx-auto w-full max-w-5xl">
+    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
+      <div className="mx-auto flex w-full max-w-6xl gap-6 px-6 py-8">
+        {/* Left sidebar buttons - sticky */}
+        <div className="sticky top-8 flex h-fit flex-col gap-2">
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <List className="size-5 text-[#212223]" />
+          </button>
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <ScanEye className="size-5 text-[#1d4b34]" />
+          </button>
+        </div>
+
+        {/* Main content column */}
+        <div className="flex-1">
         {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -336,6 +348,7 @@ export function VerifyPanel() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
