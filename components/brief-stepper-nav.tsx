@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   ClipboardList,
   MessagesSquare,
-  Building2,
+  Scale,
   ListTree,
   FileText,
   Users,
@@ -21,7 +21,7 @@ interface Step {
 const steps: Step[] = [
   { id: "intake", label: "Intake", icon: <ClipboardList className="size-5" /> },
   { id: "argue", label: "Argue", icon: <MessagesSquare className="size-5" /> },
-  { id: "develop", label: "Develop", icon: <Building2 className="size-5" /> },
+  { id: "develop", label: "Develop", icon: <Scale className="size-5" /> },
   { id: "outline", label: "Outline", icon: <ListTree className="size-5" /> },
   { id: "draft", label: "Draft", icon: <FileText className="size-5" /> },
   { id: "opposition", label: "Opposition", icon: <Users className="size-5" /> },
