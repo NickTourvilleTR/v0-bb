@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Notebook } from "lucide-react";
+import { Notebook, List, ScanEye } from "lucide-react";
 
 interface Citation {
   id: string;
@@ -78,37 +78,30 @@ export function SupportingAuthoritiesPanel({
   const currentAuthority = defaultAuthorities[0];
 
   return (
-    <div className={cn("flex h-full flex-col", className)}>
-      {/* Sidebar Toggle */}
-      <div className="absolute left-0 top-0 z-10 p-4">
-        <button className="flex size-10 items-center justify-center rounded-md border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f2f2f2]">
-          <svg
-            className="size-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 overflow-y-auto px-6 py-4 pl-20">
-        {/* Header */}
-        <div className="mb-6">
-          <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-            SUPPORTING AUTHORITIES
-          </p>
-          <h1 className="text-2xl font-semibold text-[#212223]">
-            Select the desired authories
-          </h1>
+    <div className={cn("flex h-full flex-col overflow-y-auto", className)}>
+      {/* Main Content with sidebar */}
+      <div className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
+        {/* Left sidebar buttons - sticky */}
+        <div className="sticky top-8 flex h-fit flex-col gap-2">
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <List className="size-5 text-[#212223]" />
+          </button>
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <ScanEye className="size-5 text-[#1d4b34]" />
+          </button>
         </div>
+
+        {/* Main content column */}
+        <div className="flex-1">
+          {/* Header */}
+          <div className="mb-6">
+            <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
+              SUPPORTING AUTHORITIES
+            </p>
+            <h1 className="text-2xl font-semibold text-[#212223]">
+              Select the desired authorities
+            </h1>
+          </div>
 
         {/* Argument Section */}
         <h2 className="mb-4 text-lg font-semibold text-[#212223]">
@@ -217,6 +210,7 @@ export function SupportingAuthoritiesPanel({
               </div>
             </div>
           ))}
+        </div>
         </div>
       </div>
     </div>
