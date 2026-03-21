@@ -38,8 +38,20 @@ const arguments_data = [
     checked: true,
   },
   {
-    id: "unclean-hands",
+    id: "statute-of-limitations",
     number: 3,
+    title: "Statute of limitations bars claims because they were filed too late.",
+    points: [
+      "The Conspiracy Allegations Are Fundamentally Implausible",
+      "B. No Specific Conduct Alleged Against S&S",
+      "Many Claims Are Untimely and/or Preempted by the Copyright Act",
+    ],
+    appliesTo: "Causes of Action 2-14 (Breach of Fiduciary Duty, Intentional Interference with Contractual Relations, Tortious Interference with Business Advantage, Intentional Misrepresentation, Negligent Misrepresentation, Negligence, Intentional Infliction of Emotional Distress, Stalking, Conspiracy, Unfair Business Practices, Accounting, Constructive Trust, and Declaratory Judgment)",
+    checked: true,
+  },
+  {
+    id: "unclean-hands",
+    number: 4,
     title: "Unclean hands prevents relief because the plaintiff acted inequitably.",
     points: [
       "Time since defendant's last involvement with plaintiff occurred nearly four-and-a-half years before plaintiff filed the complaint.",
@@ -51,7 +63,7 @@ const arguments_data = [
   },
   {
     id: "non-protectable",
-    number: 4,
+    number: 5,
     title: "Non-protectable elements cannot support a copyright claim because they consist of facts, ideas, or other material the law leaves in the public domain.",
     points: [
       "Similarities identified by plaintiff are just well-known facts",
