@@ -22,7 +22,7 @@ export function AdditionalDetailsInputExplorations() {
             className="min-h-[100px] resize-none border-0 bg-transparent p-0 text-sm text-[#212223] placeholder:text-[#737373] focus-visible:ring-0"
           />
           <div className="mt-4 flex justify-center">
-            <Button className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
+            <Button className="h-10 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
               Continue
             </Button>
           </div>
@@ -47,7 +47,7 @@ export function AdditionalDetailsInputExplorations() {
                 <Paperclip className="size-5" />
               </button>
             </div>
-            <Button className="h-9 rounded-lg bg-[#212223] px-4 text-white hover:bg-[#333333]">
+            <Button className="h-9 rounded-full bg-[#212223] px-6 text-white hover:bg-[#333333]">
               Continue
             </Button>
           </div>
@@ -69,7 +69,7 @@ export function AdditionalDetailsInputExplorations() {
             />
           </div>
           <div className="mt-4 flex justify-center">
-            <Button className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
+            <Button className="h-10 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
               Continue
             </Button>
           </div>
@@ -96,7 +96,7 @@ export function AdditionalDetailsInputExplorations() {
             </button>
           </div>
           <div className="mt-4 flex justify-center">
-            <Button className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
+            <Button className="h-10 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
               Continue
             </Button>
           </div>
@@ -118,7 +118,7 @@ export function AdditionalDetailsInputExplorations() {
             </button>
           </div>
           <div className="mt-4 flex justify-center">
-            <Button className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
+            <Button className="h-10 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
               Continue
             </Button>
           </div>
@@ -139,7 +139,7 @@ export function AdditionalDetailsInputExplorations() {
               <Paperclip className="mr-2 size-4" />
               Attach
             </Button>
-            <Button className="h-10 flex-1 bg-[#1d4b34] text-white hover:bg-[#163d2a]">
+            <Button className="h-10 flex-1 rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]">
               Continue
             </Button>
           </div>
@@ -186,7 +186,7 @@ export function AdditionalDetailsInputExplorations() {
             />
           </div>
           <div className="flex justify-center border-t border-[#e5e5e5] p-3">
-            <Button className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
+            <Button className="h-10 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
               Continue
             </Button>
           </div>
@@ -211,7 +211,7 @@ export function AdditionalDetailsInputExplorations() {
             </button>
           </div>
           <div className="mt-4 flex justify-center">
-            <Button className="h-10 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
+            <Button className="h-10 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]">
               Continue
             </Button>
           </div>
@@ -236,7 +236,7 @@ export function AdditionalDetailsInputExplorations() {
                 <Mic className="size-5" />
               </button>
             </div>
-            <Button className="h-9 rounded-lg bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]">
+            <Button className="h-9 rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]">
               Continue
             </Button>
           </div>

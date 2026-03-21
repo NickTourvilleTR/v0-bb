@@ -162,7 +162,7 @@ export function BriefBuilderCombinedDetailsCard({
           <Button
             onClick={handleContinue}
             disabled={!selectedParty}
-            className="h-11 bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
+            className="h-11 rounded-full bg-[#1d4b34] px-8 text-white hover:bg-[#163d2a]"
           >
             Continue
           </Button>
