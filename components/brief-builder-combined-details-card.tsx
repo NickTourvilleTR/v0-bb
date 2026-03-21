@@ -42,11 +42,11 @@ export function BriefBuilderCombinedDetailsCard({
     >
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-[#212223]">Case details</h3>
+        <h3 className="text-lg font-semibold text-[#212223]">Review your selections</h3>
         {showTags && (
           <div className="flex items-center gap-2">
             <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-              Motion to dismiss
+              Motion for Summary Judgment
             </span>
             <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
               Primary brief
@@ -55,26 +55,20 @@ export function BriefBuilderCombinedDetailsCard({
         )}
       </div>
 
-      {/* Description */}
-      <p className="mb-4 text-[#212223]">
-        The following details were extracted from your uploaded documents.{" "}
-        <strong>Review and enter any edit instructions as necessary.</strong>
-      </p>
-
-      {/* Case Details Box */}
-      <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-[#fcfcfc] p-4">
-        <div className="space-y-1 text-[#212223]">
-          <p><strong>Judge's name:</strong> Andre Birotte Jr.</p>
-          <p><strong>Docket number:</strong> 2:2025-cv-01779</p>
-          <p><strong>Venue:</strong> Central District of California</p>
-          <p><strong>Selected jurisdiction (sets the scope for your research):</strong> California</p>
-          <p>
-            <strong>Template:</strong> Asserting a motion  |{" "}
-            <a href="#" className="text-[#006fc4] underline hover:no-underline">
-              Preview template
-            </a>
-          </p>
-        </div>
+      {/* Case Summary */}
+      <div className="mb-6 space-y-4 text-[#212223]">
+        <p>
+          Plaintiff <strong>Adrienne Love</strong>, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author <strong>Rebecca Serle</strong>.
+        </p>
+        <p>
+          Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle's novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022.
+        </p>
+        <p>
+          Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation.
+        </p>
+        <p>
+          <strong>Jurisdiction:</strong> U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
+        </p>
       </div>
 
       {/* Parties Section */}
