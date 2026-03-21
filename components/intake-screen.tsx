@@ -108,13 +108,8 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           {/* Motion Type Card */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Motion type</h3>
-            <div className="relative">
-              <input
-                type="text"
-                defaultValue="Motion to Dismiss"
-                className="w-full rounded-md border border-[#cccccc] bg-white px-4 py-2.5 pr-10 text-sm text-[#212223] focus:border-[#2e6b5c] focus:outline-none focus:ring-1 focus:ring-[#2e6b5c]"
-              />
-              <Search className="absolute right-3 top-1/2 size-4 -translate-y-1/2 text-[#737373]" />
+            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-2.5 text-sm text-[#212223]">
+              Motion to Dismiss
             </div>
           </div>
 
