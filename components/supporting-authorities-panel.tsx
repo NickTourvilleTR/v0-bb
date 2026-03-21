@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 import { Notebook, List, ScanEye } from "lucide-react";
 
 interface Citation {
@@ -70,10 +71,14 @@ const defaultAuthorities: ArgumentAuthority[] = [
 
 interface SupportingAuthoritiesPanelProps {
   className?: string;
+  onNextOutline?: () => void;
+  onSkipToGenerateDraft?: () => void;
 }
 
 export function SupportingAuthoritiesPanel({
   className,
+  onNextOutline,
+  onSkipToGenerateDraft,
 }: SupportingAuthoritiesPanelProps) {
   const [selectedCitations, setSelectedCitations] = React.useState<string[]>([
     "corbello",
@@ -224,6 +229,23 @@ export function SupportingAuthoritiesPanel({
             </div>
           ))}
         </div>
+
+          {/* Bottom Action Buttons */}
+          <div className="flex items-center justify-center gap-3 pb-8 pt-6">
+            <Button
+              variant="outline"
+              onClick={onSkipToGenerateDraft}
+              className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
+            >
+              Skip to generate draft
+            </Button>
+            <Button
+              onClick={onNextOutline}
+              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+            >
+              Next: Outline
+            </Button>
+          </div>
         </div>
       </div>
     </div>
