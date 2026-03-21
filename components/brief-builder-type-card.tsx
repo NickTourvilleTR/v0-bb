@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 
 const briefTypes = [
   { id: "primary", label: "Primary" },
-  { id: "reply", label: "Reply" },
   { id: "opposition", label: "Opposition" },
+  { id: "reply", label: "Reply" },
 ];
 
 interface BriefBuilderTypeCardProps {
