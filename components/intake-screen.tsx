@@ -119,13 +119,18 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl px-6 pb-32 pt-20">
           {/* Header */}
-          <div className="mb-6">
-            <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-              INTAKE SUMMARY
-            </p>
-            <h1 className="text-2xl font-semibold text-[#212223]">
-              Review your selections
-            </h1>
+          <div className="mb-6 flex items-start gap-4">
+            <button className="mt-1 flex size-10 shrink-0 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+              <List className="size-5 text-[#212223]" />
+            </button>
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
+                INTAKE SUMMARY
+              </p>
+              <h1 className="text-2xl font-semibold text-[#212223]">
+                Review your selections
+              </h1>
+            </div>
           </div>
 
           {/* Motion Summary Card */}
