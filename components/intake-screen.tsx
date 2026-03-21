@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { FileText, List } from "lucide-react";
+import { FileText, List, ScanEye } from "lucide-react";
 
 interface IntakeScreenProps {
   className?: string;
@@ -117,7 +117,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               <List className="size-5 text-[#212223]" />
             </button>
             <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-              <FileText className="size-5 text-[#1d4b34]" />
+              <ScanEye className="size-5 text-[#1d4b34]" />
             </button>
           </div>
 
