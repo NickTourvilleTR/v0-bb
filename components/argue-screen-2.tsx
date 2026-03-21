@@ -159,10 +159,7 @@ export function ArgueScreen2({ className, onNextSupportingAuthority, onSkipToGen
                     id={argument.id}
                     checked={argument.checked}
                     onCheckedChange={() => toggleArgument(argument.id)}
-                    className={cn(
-                      "mt-1",
-                      argument.checked ? "border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" : "border-[#cccccc]"
-                    )}
+                    className="mt-0.5 border-[#737373] data-[state=checked]:border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]"
                   />
                   <div className="flex-1">
                     <label htmlFor={argument.id} className="cursor-pointer">
