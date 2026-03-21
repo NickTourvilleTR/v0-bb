@@ -186,7 +186,6 @@ export function ArgueScreen2({ className, onNextSupportingAuthority, onSkipToGen
               </div>
             ))}
           </div>
-        </div>
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-4">
             <Button
