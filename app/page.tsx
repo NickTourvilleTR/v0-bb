@@ -61,6 +61,10 @@ export default function BriefBuilderPrototype() {
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [notesOpen, setNotesOpen] = React.useState(false);
   const [showUserArgument, setShowUserArgument] = React.useState(false);
+  const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
+  
+  // Dynamic header title based on selected motion
+  const headerTitle = selectedMotion ? "Motion to Dismiss" : "Brief Builder";
   const [chatMessages, setChatMessages] = React.useState<Array<{
     id: string;
     type: "user" | "assistant";
@@ -105,8 +109,9 @@ export default function BriefBuilderPrototype() {
     setCurrentScreen("library");
   };
 
-  const handleMotionSearchSubmit = () => {
-    addChatMessage("user", "Motion for Summary Judgment");
+  const handleMotionSearchSubmit = (motionId?: string) => {
+    setSelectedMotion(motionId || "dismiss");
+    addChatMessage("user", "Motion to Dismiss");
     addChatMessage("assistant", "To ensure the draft fits your scenario, are you drafting a <strong>Primary</strong>, <strong>Opposition</strong>, or <strong>Reply</strong> brief?");
     setCurrentScreen("brief-type");
   };
@@ -276,7 +281,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="Motion for Summary Judgment" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="intake" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -304,7 +309,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -328,7 +333,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -352,7 +357,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -377,7 +382,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -401,7 +406,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -425,7 +430,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -450,7 +455,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="verify" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -475,7 +480,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="finalize" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -499,7 +504,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="distinguish" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -526,7 +531,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -550,7 +555,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -577,7 +582,7 @@ export default function BriefBuilderPrototype() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title="{Motion to Dismiss}" />
+          <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="argue" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
@@ -686,7 +691,7 @@ export default function BriefBuilderPrototype() {
         ) : (
           /* Conversation Screen */
           <>
-            <CocoHeader title="{Motion to Dismiss}" />
+            <CocoHeader title={headerTitle} />
             <AppLayoutWrapper
               drawerOpen={drawerOpen}
               setDrawerOpen={setDrawerOpen}
