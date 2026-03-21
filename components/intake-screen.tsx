@@ -2,8 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Search, FileText, Check } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { FileText } from "lucide-react";
 
 interface IntakeScreenProps {
   className?: string;
@@ -107,17 +106,6 @@ const argumentsSelected = [
 ];
 
 export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft }: IntakeScreenProps) {
-  const [briefRole, setBriefRole] = React.useState("primary");
-  const [plaintiffChecked, setPlaintiffChecked] = React.useState(true);
-  const [defendantChecked, setDefendantChecked] = React.useState(false);
-  const [claimsState, setClaimsState] = React.useState(claims);
-
-  const toggleClaim = (id: string) => {
-    setClaimsState(prev => prev.map(claim => 
-      claim.id === id ? { ...claim, checked: !claim.checked } : claim
-    ));
-  };
-
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
       {/* Main Content */}
