@@ -572,7 +572,10 @@ export default function BriefBuilderPrototype() {
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
-              <SupportingAuthoritiesPanel />
+              <SupportingAuthoritiesPanel 
+                onNextOutline={() => setCurrentScreen("outline")}
+                onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+              />
             </div>
           </AppLayoutWrapper>
         </div>
