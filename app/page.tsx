@@ -43,7 +43,6 @@ type Screen =
   | "ready-to-build"
   | "generating"
   | "intake"
-  | "builder"
   | "argue2"
   | "support-loading"
   | "support"
@@ -214,8 +213,8 @@ export default function BriefBuilderPrototype() {
   const handleStepperClick = (stepId: string) => {
     const stepToScreen: Record<string, Screen> = {
       intake: "intake",
-      argue: "builder",
-      argue2: "argue2",
+argue: "argue2",
+  argue2: "argue2",
       develop: "support",
       outline: "outline",
       draft: "draft",
@@ -239,9 +238,8 @@ export default function BriefBuilderPrototype() {
   "case-details": 5,
   "ready-to-build": 6,
     "generating": 9,
-    "intake": 10,
-    "builder": 11,
-    "argue2": 11.5,
+"intake": 10,
+  "argue2": 11,
     "support-loading": 12,
     "support": 13,
     "distinguish": 14,
@@ -586,35 +584,7 @@ export default function BriefBuilderPrototype() {
     );
   }
 
-  // Builder layout (split view with chat drawer)
-  if (currentScreen === "builder") {
-    return (
-      <div className="flex h-screen bg-white">
-        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-        <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="argue2" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            currentStep="argue"
-            onArgumentAdded={() => setShowUserArgument(true)}
-            onNextSupportingAuthority={() => setCurrentScreen("argue2")}
-            showVersionsTab={true}
-          >
-            <div className="flex-1 overflow-y-auto">
-              <ArgumentsPanel showUserArgument={showUserArgument} />
-            </div>
-          </AppLayoutWrapper>
-        </div>
-      </div>
-    );
-  }
-
-  // Argue 2 layout
+  // Argue layout
   if (currentScreen === "argue2") {
     return (
       <div className="flex h-screen bg-white">
