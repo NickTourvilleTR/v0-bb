@@ -209,13 +209,13 @@ export function VerifyPanel() {
             {/* Statement Column */}
             <div className="border-r border-[#e5e5e5] p-4">
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                Legal malice, sometimes said to be an element of a disparagement of property action, is presumed to exist if the other elements are established.
+                The extrinsic test is an objective one that focuses on "articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events." Kouf v. Walt Disney Pictures & Television, 16 F.3d 1042, 1045 (9th Cir.1994) (citation and internal quotation marks omitted). Even without considering "As Long As They Kill Themselves," we conclude that the Metcalfs satisfied this test and raised a genuine issue of triable fact on the question of substantial similarity.
               </p>
               <a
                 href="#"
                 className="inline-flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
               >
-                Bothmann v. Harrington, 458 So. 2d 1163 (Fla. Dist. Ct. App. 1984)
+                Metcalf v. Bochco, 294 F.3d 1069, 1073 (9th Cir. 2002)
               </a>
             </div>
 
