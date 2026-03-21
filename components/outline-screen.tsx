@@ -102,15 +102,14 @@ export function OutlineScreen({ className, onGenerateOutline }: OutlineScreenPro
           </div>
         </div>
 
-          {/* Generate button */}
-          <div className="flex justify-center">
-            <Button
-              onClick={onGenerateOutline}
-              className="bg-[#1f1f1f] px-8 py-2 text-white hover:bg-[#404040]"
-            >
-              Generate outline
-            </Button>
-          </div>
+        {/* Generate button */}
+        <div className="flex justify-center">
+          <Button
+            onClick={onGenerateOutline}
+            className="bg-[#1f1f1f] px-8 py-2 text-white hover:bg-[#404040]"
+          >
+            Generate outline
+          </Button>
         </div>
       </div>
     </div>
