@@ -80,8 +80,7 @@ export function ContraryAuthoritiesPanel({ className }: ContraryAuthoritiesPanel
 
               <div className="flex">
                 <div className="w-1/2">
-                  <p className="font-semibold uppercase text-[#212223]">NATIONAL FIRE & MARINE</p>
-                  <p className="font-semibold uppercase text-[#212223]">INSURANCE COMPANY,</p>
+                  <p className="font-semibold uppercase text-[#212223]">REBECCA SERLE, ET AL.,</p>
                 </div>
                 <div className="w-1/2 text-right">
                   <p className="text-[#212223]">Defendant.</p>
