@@ -25,6 +25,7 @@ import { DraftEditor } from "@/components/draft-editor";
 import { VerifyPanel } from "@/components/verify-panel";
 import { FinalizePanel } from "@/components/finalize-panel";
 import { IntakeScreen } from "@/components/intake-screen";
+import { ArgueScreen2 } from "@/components/argue-screen-2";
 import { LibraryScreen } from "@/components/library-screen";
 import { AppLayoutWrapper } from "@/components/app-layout-wrapper";
 import { Switch } from "@/components/ui/switch";
@@ -43,6 +44,7 @@ type Screen =
   | "generating"
   | "intake"
   | "builder"
+  | "argue2"
   | "support-loading"
   | "support"
   | "distinguish"
@@ -213,6 +215,7 @@ export default function BriefBuilderPrototype() {
     const stepToScreen: Record<string, Screen> = {
       intake: "intake",
       argue: "builder",
+      argue2: "argue2",
       develop: "support",
       outline: "outline",
       draft: "draft",
@@ -238,6 +241,7 @@ export default function BriefBuilderPrototype() {
     "generating": 9,
     "intake": 10,
     "builder": 11,
+    "argue2": 11.5,
     "support-loading": 12,
     "support": 13,
     "distinguish": 14,
@@ -592,11 +596,41 @@ export default function BriefBuilderPrototype() {
             messages={chatMessages}
             currentStep="argue"
             onArgumentAdded={() => setShowUserArgument(true)}
-            onNextSupportingAuthority={handleNextSupportingAuthority}
+            onNextSupportingAuthority={() => setCurrentScreen("argue2")}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
               <ArgumentsPanel showUserArgument={showUserArgument} />
+            </div>
+          </AppLayoutWrapper>
+        </div>
+      </div>
+    );
+  }
+
+  // Argue 2 layout
+  if (currentScreen === "argue2") {
+    return (
+      <div className="flex h-screen bg-white">
+        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
+        <div className="flex flex-1 flex-col">
+          <CocoHeader title={headerTitle} />
+          <BriefStepperNav currentStep="argue2" onStepClick={handleStepperClick} />
+          <AppLayoutWrapper
+            drawerOpen={drawerOpen}
+            setDrawerOpen={setDrawerOpen}
+            notesOpen={notesOpen}
+            setNotesOpen={setNotesOpen}
+            messages={chatMessages}
+            currentStep="argue2"
+            onNextSupportingAuthority={handleNextSupportingAuthority}
+            showVersionsTab={true}
+          >
+            <div className="flex-1 overflow-y-auto">
+              <ArgueScreen2 
+                onNextSupportingAuthority={handleNextSupportingAuthority}
+                onSkipToGenerateDraft={() => setCurrentScreen("draft")}
+              />
             </div>
           </AppLayoutWrapper>
         </div>
