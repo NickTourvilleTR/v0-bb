@@ -174,46 +174,50 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           {/* Uploaded Files Card - Read Only */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
-            <div className="flex flex-wrap gap-3">
-              {uploadedFiles.map((file, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2"
-                >
-                  <FileText className="size-4 text-[#737373]" />
-                  <span className="text-sm text-[#212223]">{file.name}</span>
-                </div>
-              ))}
+            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+              <div className="flex flex-wrap gap-2">
+                {uploadedFiles.map((file, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-3 py-1.5"
+                  >
+                    <FileText className="size-4 text-[#737373]" />
+                    <span className="text-sm text-[#737373]">{file.name}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Case Details Card - Read Only */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
-            <div className="space-y-2 text-sm text-[#212223]">
-              <p><span className="font-semibold">Judge&apos;s name:</span> Andre Birotte Jr.</p>
-              <p><span className="font-semibold">Civil Action No.:</span> 2:2025-cv-01779</p>
-              <p><span className="font-semibold">Court name:</span> U.S. District Court, C.D. California, Western Division</p>
-              <p><span className="font-semibold">Selected jurisdiction:</span> California and Related Federal</p>
-              <p><span className="font-semibold">Template:</span> Motion to Dismiss: Movant&apos;s Memorandum of Law (Federal)</p>
+            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+              <div className="space-y-2 text-sm text-[#737373]">
+                <p><span className="font-medium text-[#212223]">Judge&apos;s name:</span> Andre Birotte Jr.</p>
+                <p><span className="font-medium text-[#212223]">Civil Action No.:</span> 2:2025-cv-01779</p>
+                <p><span className="font-medium text-[#212223]">Court name:</span> U.S. District Court, C.D. California, Western Division</p>
+                <p><span className="font-medium text-[#212223]">Selected jurisdiction:</span> California and Related Federal</p>
+                <p><span className="font-medium text-[#212223]">Template:</span> Motion to Dismiss: Movant&apos;s Memorandum of Law (Federal)</p>
+              </div>
             </div>
           </div>
 
           {/* Party You Represent Card - Read Only */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Party you represent</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="flex size-4 items-center justify-center rounded border border-[#1d4b34] bg-[#1d4b34]">
-                  <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="2 6 5 9 10 3" />
-                  </svg>
+            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
+                    <div className="size-2 rounded-full bg-white" />
+                  </div>
+                  <span className="text-sm text-[#212223]">Defendant: Rebecca Serle, et al.</span>
                 </div>
-                <span className="text-sm text-[#212223]"><span className="font-semibold">Defendant:</span> Rebecca Serle, et al.</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="size-4 rounded border border-[#cccccc]" />
-                <span className="text-sm text-[#737373]"><span className="font-semibold">Plaintiff:</span> Adrienne Love</span>
+                <div className="flex items-center gap-3">
+                  <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
+                  <span className="text-sm text-[#737373]">Plaintiff: Adrienne Love</span>
+                </div>
               </div>
             </div>
           </div>
@@ -221,23 +225,23 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
           {/* Arguments Selected Card - Read Only */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Arguments selected</h3>
-            <div className="space-y-3">
-              {argumentsSelected.map((argument) => (
-                <div
-                  key={argument.id}
-                  className="flex items-start gap-3"
-                >
-                  <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border border-[#1d4b34] bg-[#1d4b34]">
-                    <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-                      <polyline points="2 6 5 9 10 3" />
-                    </svg>
+            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+              <div className="space-y-3">
+                {argumentsSelected.map((argument) => (
+                  <div
+                    key={argument.id}
+                    className="flex items-start gap-3"
+                  >
+                    <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
+                      <div className="size-2 rounded-full bg-white" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm text-[#212223]">{argument.title}</p>
+                      <p className="mt-1 text-sm text-[#737373]">{argument.description}</p>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold text-[#212223]">{argument.title}</p>
-                    <p className="mt-1 text-sm text-[#737373]">{argument.description}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
