@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { List, FileBadge } from "lucide-react";
+import { List, FileText } from "lucide-react";
 
 interface ArgueScreenProps {
   className?: string;
@@ -103,7 +103,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               <List className="size-5 text-[#212223]" />
             </button>
             <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-              <FileBadge className="size-5 text-[#1d4b34]" />
+              <FileText className="size-5 text-[#1d4b34]" />
             </button>
           </div>
 
