@@ -150,74 +150,55 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             </div>
           </div>
 
-          {/* Case Details Card */}
-          <div className="mb-6 rounded-xl border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-6">
-            <h3 className="mb-4 font-semibold text-[#212223]">Case details</h3>
-            
-            <div className="mb-4 rounded-lg border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-4">
-              <div className="space-y-1 text-sm">
-                <p><span className="font-semibold">Judge&apos;s name:</span> Andre Birotte Jr.</p>
-                <p><span className="font-semibold">Civil Action No.:</span> 2:2025-cv-01779</p>
-              </div>
-              <div className="mt-4 space-y-1 text-sm">
-                <p><span className="font-semibold">Court name:</span> U.S. District Court, C.D. California, Western Division</p>
-                <p><span className="font-semibold">Selected jurisdiction (sets the scope for your research):</span> California and Related Federal</p>
-                <p><span className="font-semibold">Template:</span> Summary Judgment: Movant&apos;s Memorandum of Law (Federal) | <a href="#" className="text-[#2e6b5c] underline">Preview template</a></p>
-              </div>
+          {/* Case Details Card - Read Only */}
+          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+            <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
+            <div className="space-y-2 text-sm text-[#212223]">
+              <p><span className="font-semibold">Judge&apos;s name:</span> Andre Birotte Jr.</p>
+              <p><span className="font-semibold">Civil Action No.:</span> 2:2025-cv-01779</p>
+              <p><span className="font-semibold">Court name:</span> U.S. District Court, C.D. California, Western Division</p>
+              <p><span className="font-semibold">Selected jurisdiction:</span> California and Related Federal</p>
+              <p><span className="font-semibold">Template:</span> Motion to Dismiss: Movant&apos;s Memorandum of Law (Federal)</p>
             </div>
+          </div>
 
-            {/* Party you represent */}
-            <div className="rounded-lg border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-4">
-              <h4 className="mb-3 font-semibold text-[#212223]">Party you represent:</h4>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <Checkbox 
-                    id="defendant" 
-                    checked={defendantChecked}
-                    onCheckedChange={(checked) => setDefendantChecked(checked as boolean)}
-                    className="border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" 
-                  />
-                  <label htmlFor="defendant" className="text-sm text-[#212223]">
-                    <span className="font-semibold">Defendant:</span> Rebecca Serle, et al.
-                  </label>
+          {/* Party You Represent Card - Read Only */}
+          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+            <h3 className="mb-3 text-sm font-medium text-[#212223]">Party you represent</h3>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="flex size-4 items-center justify-center rounded border border-[#1d4b34] bg-[#1d4b34]">
+                  <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polyline points="2 6 5 9 10 3" />
+                  </svg>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Checkbox 
-                    id="plaintiff" 
-                    checked={plaintiffChecked}
-                    onCheckedChange={(checked) => setPlaintiffChecked(checked as boolean)}
-                    className="border-[#cccccc]" 
-                  />
-                  <label htmlFor="plaintiff" className="text-sm text-[#212223]">
-                    <span className="font-semibold">Plaintiff:</span> Adrienne Love
-                  </label>
-                </div>
+                <span className="text-sm text-[#212223]"><span className="font-semibold">Defendant:</span> Rebecca Serle, et al.</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="size-4 rounded border border-[#cccccc]" />
+                <span className="text-sm text-[#737373]"><span className="font-semibold">Plaintiff:</span> Adrienne Love</span>
               </div>
             </div>
           </div>
 
-          {/* Claims Selected Card */}
-          <div className="mb-6 rounded-xl border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-6">
-            <h3 className="mb-4 font-semibold text-[#212223]">Claims selected</h3>
+          {/* Claims Selected Card - Read Only */}
+          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+            <h3 className="mb-3 text-sm font-medium text-[#212223]">Claims selected</h3>
             <div className="space-y-3">
-              {claimsState.map((claim) => (
+              {claims.filter(c => c.checked).map((claim) => (
                 <div
                   key={claim.id}
-                  className="flex items-start gap-3 rounded-lg border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-4"
+                  className="flex items-start gap-3"
                 >
-                  <Checkbox 
-                    id={claim.id}
-                    checked={claim.checked}
-                    onCheckedChange={() => toggleClaim(claim.id)}
-                    className={cn(
-                      "mt-0.5",
-                      claim.checked ? "border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" : "border-[#cccccc]"
-                    )}
-                  />
-                  <label htmlFor={claim.id} className="flex-1 cursor-pointer">
+                  <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border border-[#1d4b34] bg-[#1d4b34]">
+                    <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="2 6 5 9 10 3" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
                     <p className="text-sm font-semibold text-[#212223]">{claim.title}</p>
                     <p className="mt-1 text-sm text-[#737373]">{claim.description}</p>
-                  </label>
+                  </div>
                 </div>
               ))}
             </div>
