@@ -10,7 +10,6 @@ import {
   Users,
   CheckCircle2,
   Flag,
-  ChevronRight,
 } from "lucide-react";
 
 interface Step {
@@ -42,27 +41,25 @@ export function BriefStepperNav({
   onStepClick,
 }: BriefStepperNavProps) {
   return (
-    <div className={cn("flex items-center justify-center border-b border-[#e5e5e5] bg-white px-4 py-3", className)}>
-      <div className="flex items-center gap-1 w-full justify-between">
-        {steps.map((step, index) => (
-          <div key={step.id} className="flex items-center">
+    <div className={cn("border-b border-[#e5e5e5] bg-white px-6 py-4", className)}>
+      <div className="mx-auto max-w-3xl">
+        <div className="flex items-center rounded-lg bg-[#f2f2f2] p-1">
+          {steps.map((step) => (
             <button
+              key={step.id}
               onClick={() => onStepClick?.(step.id)}
               className={cn(
-                "flex flex-col items-center gap-1 px-3 py-2 rounded-md transition-colors cursor-pointer",
+                "flex flex-1 items-center justify-center gap-2 rounded-md px-3 py-2.5 text-sm font-medium transition-all cursor-pointer",
                 currentStep === step.id
-                  ? "bg-[#1f1f1f] text-white"
-                  : "text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+                  ? "bg-white text-[#212223] shadow-sm"
+                  : "text-[#737373] hover:text-[#212223]"
               )}
             >
               {step.icon}
-              <span className="text-xs font-medium">{step.label}</span>
+              <span className="hidden lg:inline">{step.label}</span>
             </button>
-            {index < steps.length - 1 && (
-              <ChevronRight className="size-4 text-[#cccccc] mx-1" />
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
