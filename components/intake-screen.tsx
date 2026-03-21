@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { FileText, List } from "lucide-react";
+import { FileText } from "lucide-react";
 
 interface IntakeScreenProps {
   className?: string;
@@ -107,30 +107,18 @@ const argumentsSelected = [
 
 export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft }: IntakeScreenProps) {
   return (
-    <div className={cn("relative flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
-      {/* Sidebar toggle button */}
-      <div className="absolute left-4 top-4 z-10">
-        <button className="flex size-10 items-center justify-center rounded-md border border-[#e5e5e5] bg-white hover:bg-[#f2f2f2]">
-          <List className="size-5 text-[#212223]" />
-        </button>
-      </div>
-
+    <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-3xl px-6 pb-32 pt-20">
+        <div className="mx-auto max-w-3xl px-6 py-8 pb-32">
           {/* Header */}
-          <div className="mb-6 flex items-start gap-4">
-            <button className="mt-1 flex size-10 shrink-0 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-              <List className="size-5 text-[#212223]" />
-            </button>
-            <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-                INTAKE SUMMARY
-              </p>
-              <h1 className="text-2xl font-semibold text-[#212223]">
-                Review your selections
-              </h1>
-            </div>
+          <div className="mb-6">
+            <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
+              INTAKE SUMMARY
+            </p>
+            <h1 className="text-2xl font-semibold text-[#212223]">
+              Review your selections
+            </h1>
           </div>
 
           {/* Motion Summary Card */}
