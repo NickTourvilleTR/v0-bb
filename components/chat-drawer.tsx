@@ -439,24 +439,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </p>
             </div>
 
-            {/* Action Buttons */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                onClick={onNextSupportingAuthority}
-              >
-                Next: Supporting authority
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-              >
-                Skip to generate draft
-              </Button>
-            </div>
           </>
         )}
 
@@ -537,28 +519,9 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <li>Select or remove a supporting authority</li>
               </ul>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="font-medium text-[#212223]">
                 What would you like to do next?
               </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                  onClick={onNextContraryAuthorities}
-                >
-                  Next: Review contrary authorities
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to generate draft
-                </Button>
-              </div>
             </div>
           </>
         )}
@@ -624,28 +587,9 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <li>Select or remove a supporting authority</li>
               </ul>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="font-medium text-[#212223]">
                 What would you like to do next?
               </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                  onClick={onNextOutline}
-                >
-                  Next: Outline brief
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to generate draft
-                </Button>
-              </div>
             </div>
           </>
         )}
@@ -727,29 +671,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-              >
-                <svg className="mr-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                Download
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                onClick={onNextDraft}
-              >
-                Next: Generate draft
-              </Button>
-            </div>
           </>
         )}
 
@@ -821,30 +742,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               <p className="font-medium text-[#212223]">
                 What would you like to do next?
               </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-              >
-                <svg className="mr-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                Download
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                onClick={onNextDraft}
-              >
-                Next: Generate draft
-              </Button>
             </div>
           </>
         )}
@@ -990,30 +887,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 </div>
               </>
             )}
-
-            {/* Action Buttons */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-              >
-                <svg className="mr-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                Download
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                onClick={onNextVerify}
-              >
-                Next: Verify brief
-              </Button>
-            </div>
           </>
         )}
 
@@ -1077,18 +950,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 What would you like to do next?
               </p>
             </div>
-
-            {/* Action Buttons */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                onClick={onNextFinalize}
-              >
-                Next: Finalize
-              </Button>
-            </div>
           </>
         )}
 
@@ -1145,24 +1006,8 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </div>
 
               <p className="font-medium text-[#212223]">
-                {"{"}What would you like to do next?
+                What would you like to do next?
               </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 border-[#cccccc] bg-white px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-              >
-                <svg className="mr-1.5 size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                Next: Download
-              </Button>
             </div>
           </>
         )}
