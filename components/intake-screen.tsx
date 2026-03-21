@@ -12,50 +12,48 @@ interface IntakeScreenProps {
 }
 
 const uploadedFiles = [
-  "Gyant v. NFM - Complaint",
-  "Gyant v. NFM - Answer",
-  "Hansen Deposition",
-  "Policy Endorsement - Wind...",
-  "ROR Letter",
-  "Letter to NFM Dated Septe...",
+  { name: "Love – First Amended Complaint", type: "P" },
+  { name: "Quitclaim & Assignment Agreement", type: "P" },
+  { name: "Eat The Lemon Feb 2021 Manuscript", type: "W" },
+  { name: "One Italian Summer (lodged)", type: "W" },
 ];
 
 const claims = [
   {
-    id: "breach",
-    title: "Breach of Insurance Contract - All Three Properties",
-    description: "Failure to pay covered hail damage claims for Bryant Irvin, Seminary, and Stuart properties.",
+    id: "copyright",
+    title: "Copyright Infringement (17 U.S.C. § 106)",
+    description: "Unauthorized reproduction and derivative use of protected expression from plaintiff's memoir Eat the Lemon.",
+    checked: true,
+  },
+  {
+    id: "breach-fiduciary",
+    title: "Breach of Fiduciary Duty",
+    description: "Literary agents and representatives breached duties of loyalty by sharing confidential manuscript with third parties.",
+    checked: true,
+  },
+  {
+    id: "tortious-interference",
+    title: "Tortious Interference with Contractual Relations",
+    description: "Defendants interfered with plaintiff's publishing opportunities by misappropriating her work.",
+    checked: true,
+  },
+  {
+    id: "conspiracy",
+    title: "Civil Conspiracy",
+    description: "Coordinated action among defendants to exploit plaintiff's manuscript and suppress her objections.",
+    checked: true,
+  },
+  {
+    id: "unjust-enrichment",
+    title: "Unjust Enrichment",
+    description: "Defendants profited from One Italian Summer and Paramount film adaptation derived from plaintiff's work.",
     checked: false,
   },
   {
-    id: "542-055",
-    title: "Violation of § 542.055 - Failure to Acknowledge Receipt of Claim (Seminary)",
-    description: "NFM failed to acknowledge receipt of the Seminary property claim within 15 days as required by law.",
-    checked: true,
-  },
-  {
-    id: "542-056",
-    title: "Violation of § 542.056 - Failure to Begin Investigation (Seminary)",
-    description: "NFM failed to commence investigation of the Seminary claim within 15 days of notification.",
-    checked: true,
-  },
-  {
-    id: "541-061",
-    title: "Violation of § 541.061 - Misrepresentation of Insurance Policy",
-    description: "NFM misrepresented policy terms and coverage provisions to deny or delay payment.",
-    checked: true,
-  },
-  {
-    id: "541-060",
-    title: "Violation of § 541.060(a)(1) - Unfair Settlement Practices",
-    description: "NFM misrepresented material facts relating to coverage and failed to effectuate prompt settlement.",
+    id: "unfair-competition",
+    title: "Unfair Competition (Cal. Bus. & Prof. Code § 17200)",
+    description: "Unlawful, unfair, and fraudulent business practices in connection with the misappropriation.",
     checked: false,
-  },
-  {
-    id: "542-058",
-    title: "Violation of § 542.058 - Failure to Pay Claims Promptly",
-    description: "NFM failed to pay claims within required time periods after receiving necessary documentation.",
-    checked: true,
   },
 ];
 
@@ -88,25 +86,21 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
 
           {/* Motion Summary Card */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <p className="mb-3 text-sm text-[#212223]">
-              <span className="font-semibold">Motion for Summary Judgment:</span>{" "}
-              Movant&apos;s Memorandum of Law (Federal)
+            <p className="mb-3 text-sm font-semibold text-[#212223]">
+              Motion for Summary Judgment: Movant&apos;s Memorandum of Law (Federal)
             </p>
             <ul className="ml-4 list-disc space-y-2 text-sm text-[#212223]">
               <li>
-                Plaintiff Gyant Properties, LLC alleges that defendant NFM Productions, Inc. breached their insurance contract by failing to timely investigate and pay a commercial property claim following a water pipe burst on January 15, 2023
+                Plaintiff <strong>Adrienne Love</strong>, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author <strong>Rebecca Serle</strong>
               </li>
               <li>
-                Defendant&apos;s answer denies liability, asserting the damage was pre-existing and unrelated to the reported pipe burst incident
+                Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle&apos;s novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022
               </li>
               <li>
-                Discovery is being conducted under Level 2 of Rule 190 of the Texas Rules of Civil Procedure; discovery closes on 6/30/2025
+                Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation
               </li>
               <li>
-                Motion for summary judgment on all claims except unfair competition claim.
-              </li>
-              <li>
-                Jurisdiction: U.S. District Court, N.D. Texas, Fort Wayne Division
+                <strong>Jurisdiction:</strong> U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
               </li>
             </ul>
           </div>
@@ -165,33 +159,38 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
 
           {/* Uploaded Files Card */}
           <div className="mb-6 rounded-xl border border-[#e5e5e5] bg-white p-6">
-            <h3 className="mb-4 font-semibold text-[#212223]">Uploaded files</h3>
+            <h3 className="mb-4 font-semibold text-[#212223]">Uploaded documents</h3>
             <div className="flex flex-wrap gap-3">
               {uploadedFiles.map((file, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2"
+                  className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-white px-3 py-2"
                 >
-                  <FileText className="size-4 text-[#737373]" />
-                  <span className="text-sm text-[#212223]">{file}</span>
+                  <div className={cn(
+                    "flex size-5 items-center justify-center rounded text-[10px] font-bold text-white",
+                    file.type === "P" ? "bg-[#dc0a0a]" : "bg-[#2563eb]"
+                  )}>
+                    {file.type}
+                  </div>
+                  <span className="text-sm text-[#212223]">{file.name}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Complaint Details Card */}
+          {/* Case Details Card */}
           <div className="mb-6 rounded-xl border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-6">
-            <h3 className="mb-4 font-semibold text-[#212223]">Complaint details</h3>
+            <h3 className="mb-4 font-semibold text-[#212223]">Case details</h3>
             
             <div className="mb-4 rounded-lg border border-l-4 border-[#e5e5e5] border-l-[#1d4b34] bg-white p-4">
               <div className="space-y-1 text-sm">
                 <p><span className="font-semibold">Judge&apos;s name:</span> Andre Birotte Jr.</p>
-                <p><span className="font-semibold">Civil Action No.:</span> 4:25-cv-00064-O</p>
+                <p><span className="font-semibold">Civil Action No.:</span> 2:2025-cv-01779</p>
               </div>
               <div className="mt-4 space-y-1 text-sm">
-                <p><span className="font-semibold">Court name:</span> U.S. District Court, N.D. TX, Fort Wayne Division</p>
-                <p><span className="font-semibold">Selected jurisdiction (sets the scope for your research):</span> Texas and Related Federal</p>
-                <p><span className="font-semibold">Summary judgment:</span> Movant&apos;s Memorandum of Law (Federal) | <a href="#" className="text-[#2e6b5c] underline">Preview template</a></p>
+                <p><span className="font-semibold">Court name:</span> U.S. District Court, C.D. California, Western Division</p>
+                <p><span className="font-semibold">Selected jurisdiction (sets the scope for your research):</span> California and Related Federal</p>
+                <p><span className="font-semibold">Template:</span> Summary Judgment: Movant&apos;s Memorandum of Law (Federal) | <a href="#" className="text-[#2e6b5c] underline">Preview template</a></p>
               </div>
             </div>
 
@@ -201,24 +200,24 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Checkbox 
-                    id="plaintiff" 
-                    checked={plaintiffChecked}
-                    onCheckedChange={(checked) => setPlaintiffChecked(checked as boolean)}
+                    id="defendant" 
+                    checked={defendantChecked}
+                    onCheckedChange={(checked) => setDefendantChecked(checked as boolean)}
                     className="border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" 
                   />
-                  <label htmlFor="plaintiff" className="text-sm text-[#212223]">
-                    <span className="font-semibold">Plaintiff party 1:</span> Gyant Properties, LLC
+                  <label htmlFor="defendant" className="text-sm text-[#212223]">
+                    <span className="font-semibold">Defendant:</span> Rebecca Serle, et al.
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
                   <Checkbox 
-                    id="defendant" 
-                    checked={defendantChecked}
-                    onCheckedChange={(checked) => setDefendantChecked(checked as boolean)}
+                    id="plaintiff" 
+                    checked={plaintiffChecked}
+                    onCheckedChange={(checked) => setPlaintiffChecked(checked as boolean)}
                     className="border-[#cccccc]" 
                   />
-                  <label htmlFor="defendant" className="text-sm text-[#212223]">
-                    <span className="font-semibold">Defendant party 1:</span> National Fire & Marine Insurance Company
+                  <label htmlFor="plaintiff" className="text-sm text-[#212223]">
+                    <span className="font-semibold">Plaintiff:</span> Adrienne Love
                   </label>
                 </div>
               </div>
