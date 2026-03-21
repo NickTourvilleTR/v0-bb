@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -43,15 +44,23 @@ interface BriefBuilderCardProps {
   className?: string;
   disabled?: boolean;
   defaultValue?: string;
+  selectedValue?: string;
 }
 
 export function BriefBuilderCard({
   onSubmit,
   className,
+  selectedValue,
 }: BriefBuilderCardProps) {
+  const [selected, setSelected] = React.useState<string | null>(selectedValue || null);
+
   const handleMotionSelect = (motionId: string) => {
+    setSelected(motionId);
     if (onSubmit) {
-      onSubmit(motionId);
+      // Small delay to show selection before transitioning
+      setTimeout(() => {
+        onSubmit(motionId);
+      }, 150);
     }
   };
 
@@ -71,14 +80,31 @@ export function BriefBuilderCard({
           <button
             key={motion.id}
             onClick={() => handleMotionSelect(motion.id)}
-            className="w-full rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors hover:bg-[#f7f7f7]"
+            className={cn(
+              "flex w-full items-start gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
+              selected === motion.id
+                ? "border-[#1d4b34] bg-[#f0f5f3]"
+                : "border-[#e5e5e5] hover:bg-[#f7f7f7]"
+            )}
           >
-            <h4 className="font-semibold text-[#212223]">{motion.title}</h4>
-            <p className="mt-1 text-sm text-[#737373]">{motion.description}</p>
+            <div className={cn(
+              "mt-1 flex size-4 shrink-0 items-center justify-center rounded-full border-2",
+              selected === motion.id
+                ? "border-[#1d4b34]"
+                : "border-[#737373]"
+            )}>
+              {selected === motion.id && (
+                <div className="size-2 rounded-full bg-[#1d4b34]" />
+              )}
+            </div>
+            <div>
+              <h4 className="font-semibold text-[#212223]">{motion.title}</h4>
+              <p className="mt-1 text-sm text-[#737373]">{motion.description}</p>
+            </div>
           </button>
         ))}
 
-        {/* Draft another motion type */}
+        {/* Draft another motion type - no radio button */}
         <button
           onClick={() => handleMotionSelect("other")}
           className="w-full rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors hover:bg-[#f7f7f7]"
