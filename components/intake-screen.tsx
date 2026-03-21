@@ -110,20 +110,21 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-3xl px-6 py-8 pb-32">
-          {/* Header with sidebar buttons */}
-          <div className="mb-6 flex items-start gap-6">
-            {/* Left sidebar buttons */}
-            <div className="flex flex-col gap-2">
-              <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-                <List className="size-5 text-[#212223]" />
-              </button>
-              <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-                <FileBadge className="size-5 text-[#1d4b34]" />
-              </button>
-            </div>
-            {/* Title */}
-            <div>
+        <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8 pb-32">
+          {/* Left sidebar buttons - sticky */}
+          <div className="sticky top-8 flex h-fit flex-col gap-2">
+            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+              <List className="size-5 text-[#212223]" />
+            </button>
+            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+              <FileBadge className="size-5 text-[#1d4b34]" />
+            </button>
+          </div>
+
+          {/* Main content column */}
+          <div className="flex-1 max-w-3xl">
+            {/* Header */}
+            <div className="mb-6">
               <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
                 INTAKE SUMMARY
               </p>
@@ -131,7 +132,6 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 Review your selections
               </h1>
             </div>
-          </div>
 
           {/* Motion Summary Card */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
@@ -259,20 +259,21 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             </div>
           </div>
 
-          {/* Call to Action Buttons */}
-          <div className="flex items-center justify-center gap-3 pb-8 pt-4">
-            <button
-              onClick={onSkipToGenerateDraft}
-              className="rounded-lg border border-[#e5e5e5] bg-white px-6 py-3 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7]"
-            >
-              Skip to generate draft
-            </button>
-            <button
-              onClick={onNextSelectArguments}
-              className="rounded-lg bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white hover:bg-[#163d2a]"
-            >
-              Next: Select arguments
-            </button>
+            {/* Call to Action Buttons */}
+            <div className="flex items-center justify-center gap-3 pb-8 pt-4">
+              <button
+                onClick={onSkipToGenerateDraft}
+                className="rounded-lg border border-[#e5e5e5] bg-white px-6 py-3 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7]"
+              >
+                Skip to generate draft
+              </button>
+              <button
+                onClick={onNextSelectArguments}
+                className="rounded-lg bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white hover:bg-[#163d2a]"
+              >
+                Next: Select arguments
+              </button>
+            </div>
           </div>
         </div>
       </div>
