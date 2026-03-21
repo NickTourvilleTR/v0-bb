@@ -222,28 +222,14 @@ export function VerifyPanel() {
             {/* Verify Column - Problematic */}
             <div className="border-r border-[#e5e5e5] p-4">
               {/* Problematic Alert */}
-              <div className="mb-4 rounded-lg border border-[#dc2626] bg-[#fef2f2] p-4">
+              <div className="rounded-lg border border-[#dc2626] bg-[#fef2f2] p-4">
                 <div className="mb-2 flex items-center gap-2">
                   <AlertTriangle className="size-4 text-[#dc2626]" />
                   <span className="font-semibold text-[#dc2626]">Problematic</span>
                 </div>
                 <p className="text-sm leading-relaxed text-[#212223]">
-                  The cited passage directly contradicts this statement. The court explicitly states that "there is no presumption" regarding essential elements in a disparagement action. The plaintiff bears the burden of establishing falsity without any presumption. Furthermore, the enumerated five elements do not include "legal malice" as a separate element that could be presumed; instead, knowledge or intent is embedded within element three.
+                  The cited case finds copyright infringement, holding that even when the alleged similarities consist entirely of generic, individually unprotectable elements, the selection and arrangement of those elements — the particular sequence in which an author strings them together — can itself be protectable. The court used the musical analogy: each note in a scale is unprotectable, but a pattern of notes may earn copyright protection.
                 </p>
-              </div>
-
-              {/* Relevant passage */}
-              <div>
-                <p className="mb-2 font-medium text-[#212223]">Relevant passage</p>
-                <p className="text-sm leading-relaxed text-[#212223]">
-                  "Disparagement of Property. A review of the record and the pleadings reveals that a genuine issue of material fact exists as to the falsehood element of the disparagement action. In this type of action, there is no presumption that a disparaging statement is false, as is the case in a personal slander action, and the plaintiff has the burden of establishing falsity."
-                </p>
-                <a
-                  href="#"
-                  className="mt-2 inline-flex items-center gap-1 text-sm text-[#0062c4] underline hover:text-[#005da2]"
-                >
-                  Bothmann v. Harrington, 458 So. 2d at 1165 (Fla. Dist. Ct. App. 1984) — See in context
-                </a>
               </div>
             </div>
 
