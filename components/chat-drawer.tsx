@@ -748,7 +748,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </ul>
 
               <p className="mb-2 text-sm text-[#212223]">
-                You can also make an edits directly to the brief (@Justin indicate that it's a text editor)
+                You can also make edits directly to the brief.
               </p>
 
               <p className="mb-3 font-medium text-[#212223]">
@@ -803,7 +803,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </ul>
 
               <p className="mb-2 text-sm text-[#212223]">
-                You can also make an edits directly to the brief (@Justin indicate that it's a text editor)
+                You can also make edits directly to the brief.
               </p>
 
               <p className="mb-3 font-medium text-[#212223]">
@@ -856,7 +856,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   </ul>
 
                   <p className="mb-2 text-sm text-[#212223]">
-                    You can also make an edits directly to the brief (@Justin indicate that it's a text editor)
+                    You can also make edits directly to the brief.
                   </p>
 
                   <p className="mb-3 font-medium text-[#212223]">
