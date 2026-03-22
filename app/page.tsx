@@ -1,5 +1,4 @@
 "use client";
-
 import { CocoSideNav } from "@/components/coco-side-nav";
 import { CocoChatInput } from "@/components/coco-chat-input";
 import { CocoHeader } from "@/components/coco-header";
