@@ -777,9 +777,6 @@ argue: "argue2",
                   <div className="mt-3 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <button className="p-1 text-[#737373] hover:text-[#212223]">
-                        <Paperclip className="size-4" />
-                      </button>
-                      <button className="p-1 text-[#737373] hover:text-[#212223]">
                         <BookOpen className="size-4" />
                       </button>
                       <button className="p-1 text-[#737373] hover:text-[#212223]">
