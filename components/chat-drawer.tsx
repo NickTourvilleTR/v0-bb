@@ -1,6 +1,6 @@
 "use client";
-// v236+ rebuild - MS Teams style quote/reply functionality with drawer close
-
+// Chat Drawer - MS Teams style quote/reply with drawer close button support
+import * as React from "react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
