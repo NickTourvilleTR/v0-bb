@@ -357,36 +357,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           </div>
         )}
 
-        {/* Argue2 Step Card */}
-        {(currentStep === "argue" || currentStep === "argue2") && messages.length > 0 && chatState !== "adding" && chatState !== "added" && (
-          <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-            <p className="mb-2 text-sm text-[#212223]">
-              Review the potential arguments and select which ones to include in your brief.
-            </p>
-
-            <p className="mb-3 text-sm text-[#212223]">
-              What would you like to do next?
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={onSkipToGenerateDraft}
-                className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-              >
-                Skip to generate draft
-              </Button>
-              <Button
-                size="sm"
-                onClick={onNextSupportingAuthority}
-                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-              >
-                Next: Supporting authority
-              </Button>
-            </div>
-          </div>
-        )}
-
         {/* User Add Argument Message */}
         {(chatState === "adding" || chatState === "added") && (
           <div className="mt-4 flex items-start gap-2">
