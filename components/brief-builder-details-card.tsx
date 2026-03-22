@@ -103,7 +103,7 @@ export function BriefBuilderDetailsCard({
               className="border-[#737373] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c] disabled:opacity-50"
             />
             <label htmlFor="plaintiff1" className="text-[#737373] cursor-not-allowed">
-              <strong>Plaintiff party 1:</strong> Adrienne Love
+              <strong>Plaintiff 1:</strong> Adrienne Love
             </label>
           </div>
           <div className="flex items-center gap-3">
@@ -115,7 +115,7 @@ export function BriefBuilderDetailsCard({
               className="border-[#737373] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c]"
             />
             <label htmlFor="defendant1" className="text-[#212223] cursor-pointer">
-              <strong>Representing defendant party 1:</strong> Airbnb Inc.
+              <strong>Defendant 1:</strong> Airbnb Inc.
             </label>
           </div>
           <div className="flex items-center gap-3">
@@ -127,7 +127,7 @@ export function BriefBuilderDetailsCard({
               className="border-[#737373] data-[state=checked]:bg-[#2e6b5c] data-[state=checked]:border-[#2e6b5c]"
             />
             <label htmlFor="defendant2" className="text-[#212223] cursor-pointer">
-              <strong>Representing defendant party 2:</strong> Simon and Schuster, LLC
+              <strong>Defendant 2:</strong> Simon and Schuster, LLC
             </label>
           </div>
         </div>
