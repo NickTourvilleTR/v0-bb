@@ -885,13 +885,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-sm text-[#212223]">The brief finalization summary is ready for review:</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Go to Finalize
-                </Button>
               </div>
 
               <p className="mb-3 text-sm text-[#212223]">
