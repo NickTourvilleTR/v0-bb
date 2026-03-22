@@ -19,7 +19,7 @@ interface Message {
 interface ChatDrawerProps {
   isOpen: boolean;
   onToggle: () => void;
-  currentStep?: "intake" | "argue" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
+  currentStep?: "intake" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
@@ -221,7 +221,7 @@ export function ChatDrawer({
             )}
 
             {/* Argue Step Card */}
-            {(currentStep === "argue" || currentStep === "argue2") && (
+            {(currentStep === "argue2") && (
               <MessageCard
                 onQuote={() => handleQuote("Review the potential arguments and select which ones to include in your brief.")}
               >

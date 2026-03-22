@@ -11,7 +11,7 @@ interface AppLayoutWrapperProps {
   setDrawerOpen: (open: boolean) => void;
   notesOpen: boolean;
   setNotesOpen: (open: boolean) => void;
-  currentStep?: "intake" | "argue" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
+  currentStep?: "intake" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
@@ -47,7 +47,7 @@ export function AppLayoutWrapper({
   setDrawerOpen,
   notesOpen,
   setNotesOpen,
-  currentStep = "argue",
+  currentStep = "argue2",
   onArgumentAdded,
   onNextSupportingAuthority,
   onNextContraryAuthorities,
