@@ -341,13 +341,13 @@ export function ChatDrawer({
                 </ul>
                 <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">
-                  <Button size="sm" className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">
-                    <Download className="mr-2 size-4" />
-                    Download brief
-                  </Button>
                   <Button size="sm" variant="outline" className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">
                     <Mail className="mr-2 size-4" />
                     Email
+                  </Button>
+                  <Button size="sm" className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">
+                    <Download className="mr-2 size-4" />
+                    Download brief
                   </Button>
                 </div>
               </MessageCard>
