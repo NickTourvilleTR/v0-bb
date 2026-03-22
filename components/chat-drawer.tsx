@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
-import { Sparkles, Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
+import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -330,21 +330,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
         {/* Intake Step Card */}
         {currentStep === "intake" && messages.length > 0 && (
           <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-            <div className="mb-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Sparkles className="size-4 text-[#212223]" />
-                <span className="font-semibold text-[#212223]">Brief Builder</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                  Motion to dismiss
-                </span>
-                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                  Primary brief
-                </span>
-              </div>
-            </div>
-
             <p className="mb-2 text-sm text-[#212223]">
               Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
             </p>
@@ -375,21 +360,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
         {/* Argue2 Step Card */}
         {(currentStep === "argue" || currentStep === "argue2") && messages.length > 0 && chatState !== "adding" && chatState !== "added" && (
           <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-            <div className="mb-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Sparkles className="size-4 text-[#212223]" />
-                <span className="font-semibold text-[#212223]">Brief Builder</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                  Motion to dismiss
-                </span>
-                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                  Primary brief
-                </span>
-              </div>
-            </div>
-
             <p className="mb-2 text-sm text-[#212223]">
               Review the potential arguments and select which ones to include in your brief.
             </p>
@@ -446,21 +416,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
             {/* Adding Argument Card */}
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="size-4 text-[#212223]" />
-                  <span className="font-semibold text-[#212223]">Brief Builder</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Motion to dismiss
-                  </span>
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Primary brief
-                  </span>
-                </div>
-              </div>
-
               {/* Progress */}
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm text-[#212223]">Adding argument...</span>
@@ -509,21 +464,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
             {/* Added Argument Card */}
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="size-4 text-[#212223]" />
-                  <span className="font-semibold text-[#212223]">Brief Builder</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Motion to dismiss
-                  </span>
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Primary brief
-                  </span>
-                </div>
-              </div>
-
               <p className="mb-3 text-sm text-[#212223]">
                 All set. I've added the argument to your draft brief.
               </p>
@@ -595,21 +535,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
             {/* Support Ready Card */}
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="size-4 text-[#212223]" />
-                  <span className="font-semibold text-[#212223]">Brief Builder</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Motion to dismiss
-                  </span>
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Primary brief
-                  </span>
-                </div>
-              </div>
-
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
                 <Button
@@ -680,21 +605,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
             {/* Support Ready Card */}
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="size-4 text-[#212223]" />
-                  <span className="font-semibold text-[#212223]">Brief Builder</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Motion to dismiss
-                  </span>
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Primary brief
-                  </span>
-                </div>
-              </div>
-
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
                 <Button
@@ -757,32 +667,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
             {/* Distinguish Ready Card */}
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="size-4 text-[#212223]" />
-                  <span className="font-semibold text-[#212223]">Brief Builder</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Motion to dismiss
-                  </span>
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Primary brief
-                  </span>
-                </div>
-              </div>
-
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm text-[#212223]">Contrary authorities are ready for review:</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Go to Distinguish
-                </Button>
-              </div>
-
               <p className="mb-2 text-sm text-[#212223]">
                 Select the contrary authorities to distinguish in your motion. You can tell me if you want to:
               </p>
@@ -854,32 +738,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
             {/* Outline Ready Card */}
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="size-4 text-[#212223]" />
-                  <span className="font-semibold text-[#212223]">Brief Builder</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Motion to dismiss
-                  </span>
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Primary brief
-                  </span>
-                </div>
-              </div>
-
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm text-[#212223]">Brief outline is ready for review:</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Go to Outline
-                </Button>
-              </div>
-
               <p className="mb-2 text-sm text-[#212223]">
                 I've created an outline based on your scenario and selections. You can tell me if you want to
               </p>
@@ -935,32 +793,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
             {/* Outline Ready Card */}
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="size-4 text-[#212223]" />
-                  <span className="font-semibold text-[#212223]">Brief Builder</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Motion to dismiss
-                  </span>
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Primary brief
-                  </span>
-                </div>
-              </div>
-
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm text-[#212223]">Brief outline is ready for review:</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Go to Outline
-                </Button>
-              </div>
-
               <p className="mb-2 text-sm text-[#212223]">
                 I've created an outline based on your scenario and selections. You can tell me if you want to
               </p>
@@ -1014,32 +846,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
                 {/* Draft Ready Card */}
                 <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-                  <div className="mb-3 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Sparkles className="size-4 text-[#212223]" />
-                      <span className="font-semibold text-[#212223]">Brief Builder</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                        Motion to dismiss
-                      </span>
-                      <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                        Primary brief
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mb-3 flex items-center gap-2">
-                    <span className="text-sm text-[#212223]">The draft brief is ready for review:</span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
-                    >
-                      Go to Draft
-                    </Button>
-                  </div>
-
                   <p className="mb-2 text-sm text-[#212223]">
                     I've created a brief draft based on your scenario, selections and outline. You can tell me if you want to:
                   </p>
@@ -1097,32 +903,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
             {/* Verify Ready Card */}
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="size-4 text-[#212223]" />
-                  <span className="font-semibold text-[#212223]">Brief Builder</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Motion to dismiss
-                  </span>
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Primary brief
-                  </span>
-                </div>
-              </div>
-
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm text-[#212223]">Brief verification is ready for review:</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Go to Verify
-                </Button>
-              </div>
-
               <p className="mb-2 text-sm text-[#212223]">
                 I've run verification based on the draft. Please review any warnings.
               </p>
@@ -1177,21 +957,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
             {/* Finalize Ready Card */}
             <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="size-4 text-[#212223]" />
-                  <span className="font-semibold text-[#212223]">Brief Builder</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Motion to dismiss
-                  </span>
-                  <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-                    Primary brief
-                  </span>
-                </div>
-              </div>
-
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-sm text-[#212223]">The brief finalization summary is ready for review:</span>
                 <Button
