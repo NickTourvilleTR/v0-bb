@@ -1,10 +1,12 @@
 "use client";
 
-// Chat drawer component - v231 rebuild
+// Chat drawer component for displaying message history and input
+// v231 - Clean rebuild
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
+import { MessageCardQuote } from "@/components/message-card-quote";
 import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Download } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -331,7 +333,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
         {/* Intake Step Card */}
         {currentStep === "intake" && messages.length > 0 && (
-          <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+          <MessageCardQuote onQuote={() => console.log("[v0] Quoted intake message")}>
             <p className="mb-2 text-sm text-[#212223]">
               Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
             </p>
@@ -356,7 +358,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 Next: Select arguments
               </Button>
             </div>
-          </div>
+          </MessageCardQuote>
         )}
 
         {/* User Add Argument Message */}
@@ -506,7 +508,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Support Ready Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+            <MessageCardQuote onQuote={() => console.log("[v0] Quoted support message")}>
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
                 <Button
@@ -547,7 +549,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   Next: Outline
                 </Button>
               </div>
-            </div>
+            </MessageCardQuote>
           </>
         )}
 
@@ -638,7 +640,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Distinguish Ready Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+            <MessageCardQuote onQuote={() => console.log("[v0] Quoted distinguish message")}>
               <p className="mb-2 text-sm text-[#212223]">
                 Select the contrary authorities to distinguish in your motion. You can tell me if you want to:
               </p>
@@ -668,7 +670,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                   Generate outline
                 </Button>
               </div>
-            </div>
+            </MessageCardQuote>
 
           </>
         )}
