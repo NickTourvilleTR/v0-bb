@@ -221,7 +221,10 @@ export function SupportingAuthoritiesPanel({
               </div>
 
               {/* Right Column - Support Points */}
-              <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-white p-4 pl-6">
+              <div className={cn(
+                "w-1/2 border-l border-dashed border-[#d2d2d2] p-4 pl-6",
+                selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white"
+              )}>
                 <ul className="list-disc space-y-4 pl-4 marker:text-[#212223]">
                   {citation.supportPoints.map((point, pointIndex) => (
                     <li key={pointIndex} className="text-sm leading-relaxed text-[#212223]">
