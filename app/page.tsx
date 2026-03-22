@@ -246,7 +246,8 @@ export default function BriefBuilderPrototype() {
   const handleStepperClick = (stepId: string) => {
     const stepToScreen: Record<string, Screen> = {
       intake: "intake",
-      argue2: "argue2",
+argue: "argue2",
+      argue: "argue",
       develop: "support",
       outline: "outline",
       draft: "draft",
