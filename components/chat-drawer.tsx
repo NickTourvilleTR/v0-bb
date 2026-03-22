@@ -7,7 +7,6 @@ import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, Chev
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { QuoteReplyCard } from "@/components/quote-reply-card";
 
 interface ChatDrawerProps {
   className?: string;
@@ -170,7 +169,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <RotateCcw className="size-4" />
               </button>
             </div>
-          </QuoteReplyCard>
+          </div>
         )}
 
         {/* Sources Tab */}
@@ -355,7 +354,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 Next: Select arguments
               </Button>
             </div>
-          </QuoteReplyCard>
+          </div>
         )}
 
         {/* User Add Argument Message */}
@@ -370,7 +369,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 Add one more argument that applies to multiple claims: waiver applies because the plaintiff's written agreement allowing the defendant to review the document bars her from asserting claims inconsistent with that agreement. Use conditional phrasing if needed.
               </p>
             </div>
-          </QuoteReplyCard>
+          </div>
         )}
 
         {/* CoCounsel Adding Response */}
@@ -386,7 +385,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Adding Argument Card */}
-            <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               {/* Progress */}
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm text-[#212223]">Adding argument...</span>
@@ -434,7 +433,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Added Argument Card */}
-            <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               <p className="mb-3 text-sm text-[#212223]">
                 All set. I've added the argument to your draft brief.
               </p>
@@ -505,7 +504,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Support Ready Card */}
-            <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
                 <Button
@@ -575,7 +574,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Support Ready Card */}
-            <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
                 <Button
@@ -637,7 +636,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Distinguish Ready Card */}
-            <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               <p className="mb-2 text-sm text-[#212223]">
                 Select the contrary authorities to distinguish in your motion. You can tell me if you want to:
               </p>
@@ -686,7 +685,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Outline Ready Card */}
-            <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               <p className="mb-2 text-sm text-[#212223]">
                 I've created an outline based on your scenario and selections. You can tell me if you want to
               </p>
@@ -730,7 +729,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Outline Ready Card */}
-            <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               <p className="mb-2 text-sm text-[#212223]">
                 I've created an outline based on your scenario and selections. You can tell me if you want to
               </p>
@@ -772,7 +771,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 </div>
 
                 {/* Draft Ready Card */}
-                <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+                <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
                   <p className="mb-2 text-sm text-[#212223]">
                     I've created a brief draft based on your scenario, selections and outline. You can tell me if you want to:
                   </p>
@@ -829,7 +828,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Verify Ready Card */}
-            <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               <p className="mb-2 text-sm text-[#212223]">
                 I've run verification based on the draft. Please review any warnings.
               </p>
@@ -883,7 +882,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
             </div>
 
             {/* Finalize Ready Card */}
-            <QuoteReplyCard className="mt-2" onQuote={() => console.log("Quoted message")}>
+            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-sm text-[#212223]">The brief finalization summary is ready for review:</span>
               </div>
@@ -939,7 +938,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <ArrowUp className="size-5" />
               </button>
             </div>
-          </QuoteReplyCard>
+          </div>
           <p className="mt-3 text-center text-sm text-[#737373]">
             Your data is{" "}
             <a href="#" className="text-[#212223] underline">
