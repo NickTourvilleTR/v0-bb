@@ -301,7 +301,9 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="intake" onBriefBuilderClick={handleStartSubmit} />
+            currentStep="intake"
+          >
+            <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
           </AppLayoutWrapper>
         </div>
       </div>
