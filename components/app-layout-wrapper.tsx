@@ -39,6 +39,7 @@ interface AppLayoutWrapperProps {
     userName?: string;
   }>;
   className?: string;
+  selectedMotion?: string | null;
 }
 
 export function AppLayoutWrapper({
@@ -69,6 +70,7 @@ export function AppLayoutWrapper({
   onClearQuote,
   messages = [],
   className,
+  selectedMotion = null,
 }: AppLayoutWrapperProps) {
   const [drawerTab, setDrawerTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
   const [drawerWidth, setDrawerWidth] = React.useState(380);
@@ -174,6 +176,7 @@ export function AppLayoutWrapper({
         quotedText={quotedText}
         onClearQuote={onClearQuote}
         width={drawerOpen ? drawerWidth : undefined}
+        selectedMotion={selectedMotion}
       />
     </div>
   );

@@ -719,8 +719,9 @@ export default function BriefBuilderPrototype() {
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-                currentStep="argue"
+            currentStep="argue"
             onNextSupportingAuthority={handleNextSupportingAuthority}
+            selectedMotion={selectedMotion}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
               addChatMessage("assistant", "Skipping ahead to draft generation.");

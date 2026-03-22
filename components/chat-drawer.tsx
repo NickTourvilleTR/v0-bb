@@ -41,6 +41,7 @@ interface ChatDrawerProps {
   quotedText?: string | null;
   onClearQuote?: () => void;
   width?: number;
+  selectedMotion?: string | null;
 }
 
 export function ChatDrawer({
@@ -68,6 +69,7 @@ export function ChatDrawer({
   quotedText: quotedTextProp = null,
   onClearQuote,
   width,
+  selectedMotion = null,
 }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const [inputValue, setInputValue] = React.useState("");
@@ -221,7 +223,7 @@ export function ChatDrawer({
             )}
 
             {/* Argue Step Card */}
-            {(currentStep === "argue") && (
+            {(currentStep === "argue" && selectedMotion) && (
               <MessageCard
                 onQuote={() => handleQuote("Review the potential arguments and select which ones to include in your brief.")}
               >
