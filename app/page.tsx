@@ -57,7 +57,6 @@ type Screen =
   | "finalize";
 
 export default function BriefBuilderPrototype() {
-  console.log("[v0] BriefBuilderPrototype rendering");
   // Force refresh - all handlers are inline functions
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
   const [drawerOpen, setDrawerOpen] = React.useState(true);
