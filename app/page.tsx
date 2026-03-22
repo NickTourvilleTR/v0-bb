@@ -348,6 +348,7 @@ argue: "argue2",
                 addChatMessage("assistant", "Skipping ahead to draft generation with default arguments.");
                 setCurrentScreen("draft");
               }}
+              onEditOutline={() => setCurrentScreen("outline")}
             />
           </AppLayoutWrapper>
         </div>
@@ -569,6 +570,7 @@ argue: "argue2",
                 addChatMessage("assistant", "Skipping ahead to finalize your brief.");
                 setCurrentScreen("finalize");
               }}
+              onEditOutline={() => setCurrentScreen("outline")}
             />
           </AppLayoutWrapper>
         </div>
@@ -698,6 +700,7 @@ argue: "argue2",
                   addChatMessage("assistant", "Skipping ahead to draft generation.");
                   setCurrentScreen("draft");
                 }}
+                onEditOutline={() => setCurrentScreen("outline")}
               />
             </div>
           </AppLayoutWrapper>

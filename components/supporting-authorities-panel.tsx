@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Notebook, List, ScanEye } from "lucide-react";
+import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface Citation {
   id: string;
@@ -73,13 +74,16 @@ interface SupportingAuthoritiesPanelProps {
   className?: string;
   onNextOutline?: () => void;
   onSkipToGenerateDraft?: () => void;
+  onEditOutline?: () => void;
 }
 
 export function SupportingAuthoritiesPanel({
   className,
   onNextOutline,
   onSkipToGenerateDraft,
+  onEditOutline,
 }: SupportingAuthoritiesPanelProps) {
+  const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   const [selectedCitations, setSelectedCitations] = React.useState<string[]>([
     "corbello",
     "biani",
@@ -104,7 +108,7 @@ export function SupportingAuthoritiesPanel({
           <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
             <List className="size-5 text-[#212223]" />
           </button>
-          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+          <button onClick={() => setShowOutlinePreview(true)} className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
             <ScanEye className="size-5 text-[#1d4b34]" />
           </button>
         </div>
@@ -248,6 +252,15 @@ export function SupportingAuthoritiesPanel({
           </div>
         </div>
       </div>
+      {showOutlinePreview && (
+        <OutlinePreviewModal
+          onClose={() => setShowOutlinePreview(false)}
+          onEdit={() => {
+            setShowOutlinePreview(false);
+            onEditOutline?.();
+          }}
+        />
+      )}
     </div>
   );
 }

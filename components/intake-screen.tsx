@@ -3,11 +3,13 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { FileText, List, ScanEye } from "lucide-react";
+import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface IntakeScreenProps {
   className?: string;
   onNextSelectArguments?: () => void;
   onSkipToGenerateDraft?: () => void;
+  onEditOutline?: () => void;
 }
 
 const uploadedFiles = [
@@ -105,7 +107,8 @@ const argumentsSelected = [
   },
 ];
 
-export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft }: IntakeScreenProps) {
+export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline }: IntakeScreenProps) {
+  const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
       {/* Main Content */}
@@ -116,7 +119,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
               <List className="size-5 text-[#212223]" />
             </button>
-            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <button onClick={() => setShowOutlinePreview(true)} className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
               <ScanEye className="size-5 text-[#1d4b34]" />
             </button>
           </div>
@@ -278,6 +281,15 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
         </div>
       </div>
 
+      {showOutlinePreview && (
+        <OutlinePreviewModal
+          onClose={() => setShowOutlinePreview(false)}
+          onEdit={() => {
+            setShowOutlinePreview(false);
+            onEditOutline?.();
+          }}
+        />
+      )}
     </div>
   );
 }

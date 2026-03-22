@@ -3,13 +3,16 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Notebook, FileText, AlertTriangle, ChevronRight, List, ScanEye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface VerifyPanelProps {
   onNextOpposition?: () => void;
   onSkipToFinalize?: () => void;
+  onEditOutline?: () => void;
 }
 
-export function VerifyPanel({ onNextOpposition, onSkipToFinalize }: VerifyPanelProps) {
+export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline }: VerifyPanelProps) {
+  const [showOutlinePreview, setShowOutlinePreview] = useState(false);
   const [expandedPassages, setExpandedPassages] = useState<Record<string, boolean>>({ "1-1": true });
 
   const togglePassage = (key: string) => {
@@ -24,7 +27,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize }: VerifyPanelP
           <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
             <List className="size-5 text-[#212223]" />
           </button>
-          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+          <button onClick={() => setShowOutlinePreview(true)} className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
             <ScanEye className="size-5 text-[#1d4b34]" />
           </button>
         </div>
@@ -367,6 +370,15 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize }: VerifyPanelP
           </div>
         </div>
       </div>
+      {showOutlinePreview && (
+        <OutlinePreviewModal
+          onClose={() => setShowOutlinePreview(false)}
+          onEdit={() => {
+            setShowOutlinePreview(false);
+            onEditOutline?.();
+          }}
+        />
+      )}
     </div>
   );
 }
