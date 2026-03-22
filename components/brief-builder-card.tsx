@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Search } from "lucide-react";
+import { Search, Reply } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const motionTypes = [
@@ -53,6 +53,7 @@ export function BriefBuilderCard({
   selectedValue,
 }: BriefBuilderCardProps) {
   const [selected, setSelected] = React.useState<string | null>(selectedValue || null);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   const handleMotionSelect = (motionId: string) => {
     setSelected(motionId);
@@ -64,13 +65,29 @@ export function BriefBuilderCard({
     }
   };
 
+  const handleQuoteClick = () => {
+    console.log("[v0] Quoted motion type selection");
+  };
+
   return (
     <div
       className={cn(
-        "rounded-xl border border-[#e5e5e5] bg-white p-6",
+        "relative rounded-xl border border-[#e5e5e5] bg-white p-6",
         className
       )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Quote Reply Button - Simple Icon Button Variant */}
+      {isHovered && (
+        <button
+          onClick={handleQuoteClick}
+          className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
+          title="Quote this message"
+        >
+          <Reply className="size-4" />
+        </button>
+      )}
       {/* Header */}
       <h3 className="mb-6 text-lg font-semibold text-[#212223]">Select motion type</h3>
 
