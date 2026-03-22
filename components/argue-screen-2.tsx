@@ -112,7 +112,7 @@ export function ArgueScreen2({ className, onNextSupportingAuthority, onSkipToGen
             {/* Header */}
             <div className="mb-6">
               <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-                ARGUE 2
+                ARGUE
               </p>
               <h1 className="text-2xl font-semibold text-[#212223]">
                 Select the desired arguments
