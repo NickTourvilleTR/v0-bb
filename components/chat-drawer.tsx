@@ -341,7 +341,7 @@ export function ChatDrawer({
                 <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">
-                    <Grip className="mr-2 size-4" />
+                    <Download className="mr-2 size-4" />
                     Download brief
                   </Button>
                 </div>
