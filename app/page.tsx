@@ -25,7 +25,7 @@ import { DraftEditor } from "@/components/draft-editor";
 import { VerifyPanel } from "@/components/verify-panel";
 import { FinalizePanel } from "@/components/finalize-panel";
 import { IntakeScreen } from "@/components/intake-screen";
-import { ArgueScreen2 } from "@/components/argue-screen-2";
+import { ArgueScreen } from "@/components/argue-screen";
 import { LibraryScreen } from "@/components/library-screen";
 import { AppLayoutWrapper } from "@/components/app-layout-wrapper";
 import { Switch } from "@/components/ui/switch";
@@ -247,7 +247,7 @@ export default function BriefBuilderPrototype() {
     const stepToScreen: Record<string, Screen> = {
       intake: "intake",
 argue: "argue2",
-  argue2: "argue2",
+      argue: "argue",
       develop: "support",
       outline: "outline",
       draft: "draft",
@@ -329,7 +329,7 @@ argue: "argue2",
             onNextSelectArguments={() => {
               addChatMessage("user", "Next: Select arguments");
               addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
-              setCurrentScreen("argue2");
+              setCurrentScreen("argue");
             }}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
@@ -341,7 +341,7 @@ argue: "argue2",
               onNextSelectArguments={() => {
                 addChatMessage("user", "Next: Select arguments");
                 addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
-                setCurrentScreen("argue2");
+                setCurrentScreen("argue");
               }}
               onSkipToGenerateDraft={() => {
                 addChatMessage("user", "Skip to generate draft");
@@ -707,7 +707,7 @@ argue: "argue2",
   }
 
   // Argue layout
-  if (currentScreen === "argue2") {
+        if (currentScreen === "argue") {
     return (
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
@@ -720,7 +720,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="argue2"
+              currentStep="argue"
             onNextSupportingAuthority={handleNextSupportingAuthority}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
@@ -730,7 +730,7 @@ argue: "argue2",
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
-              <ArgueScreen2 
+              <ArgueScreen 
                 onNextSupportingAuthority={handleNextSupportingAuthority}
                 onSkipToGenerateDraft={() => {
                   addChatMessage("user", "Skip to generate draft");

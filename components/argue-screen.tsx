@@ -1,5 +1,5 @@
 "use client";
-
+// Argue screen component
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -76,7 +76,6 @@ const arguments_data = [
 ];
 
 export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft }: ArgueScreenProps) {
-  // Updated card 3 with all three bullet points for statute of limitations
   const [argumentsState, setArgumentsState] = React.useState(arguments_data);
 
   const selectedCount = argumentsState.filter(arg => arg.checked).length;
@@ -113,7 +112,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
             {/* Header */}
             <div className="mb-6">
               <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-                ARGUE
+                ARGUE 2
               </p>
               <h1 className="text-2xl font-semibold text-[#212223]">
                 Select the desired arguments
@@ -146,7 +145,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
           </div>
 
           {/* Arguments List */}
-          <div className="space-y-4">
+          <div className="space-y-4 pb-4">
             {argumentsState.map((argument) => (
               <div
                 key={argument.id}
@@ -160,10 +159,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                     id={argument.id}
                     checked={argument.checked}
                     onCheckedChange={() => toggleArgument(argument.id)}
-                    className={cn(
-                      "mt-1",
-                      argument.checked ? "border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]" : "border-[#cccccc]"
-                    )}
+                    className="mt-0.5 border-[#737373] data-[state=checked]:border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]"
                   />
                   <div className="flex-1">
                     <label htmlFor={argument.id} className="cursor-pointer">
@@ -187,7 +183,6 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               </div>
             ))}
           </div>
-        </div>
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-4">
             <Button

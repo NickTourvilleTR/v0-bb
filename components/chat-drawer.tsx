@@ -19,7 +19,7 @@ interface Message {
 interface ChatDrawerProps {
   isOpen: boolean;
   onToggle: () => void;
-  currentStep?: "intake" | "argue" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
+  currentStep?: "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
@@ -340,7 +340,7 @@ export function ChatDrawer({
       </div>
 
       {/* Argue Step Card - above input */}
-      {(currentStep === "argue" || currentStep === "argue2") && activeTab === "chat" && (
+      {(currentStep === "argue") && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
             <p className="mb-2 text-sm text-[#212223]">
