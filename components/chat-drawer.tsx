@@ -1,5 +1,5 @@
 "use client";
-// v236 rebuild - MS Teams style quote/reply functionality
+// v236+ rebuild - MS Teams style quote/reply functionality with drawer close
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
