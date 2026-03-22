@@ -287,7 +287,6 @@ export function ChatDrawer({
                 </p>
                 <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">
-                  <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
                   <Button size="sm" onClick={onGenerateDraft} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Generate draft</Button>
                 </div>
               </MessageCard>
