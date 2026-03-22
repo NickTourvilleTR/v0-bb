@@ -1,5 +1,8 @@
 "use client";
-// Chat Drawer - MS Teams style quote/reply with drawer close button support
+
+// ChatDrawer component - MS Teams style quote/reply with drawer close
+// Rebuilt to clear stale bytecode cache
+
 import * as React from "react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
