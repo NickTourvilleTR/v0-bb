@@ -4,12 +4,13 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { List, ScanEye } from "lucide-react";
+import { List, ScanEye, ListTree, X } from "lucide-react";
 
 interface ArgueScreenProps {
   className?: string;
   onNextSupportingAuthority?: () => void;
   onSkipToGenerateDraft?: () => void;
+  onEditOutline?: () => void;
 }
 
 const arguments_data = [
@@ -75,8 +76,9 @@ const arguments_data = [
   },
 ];
 
-export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft }: ArgueScreenProps) {
+export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline }: ArgueScreenProps) {
   const [argumentsState, setArgumentsState] = React.useState(arguments_data);
+  const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
 
   const selectedCount = argumentsState.filter(arg => arg.checked).length;
   const allSelected = selectedCount === argumentsState.length;
@@ -102,7 +104,10 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
             <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
               <List className="size-5 text-[#212223]" />
             </button>
-            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <button 
+              onClick={() => setShowOutlinePreview(true)}
+              className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]"
+            >
               <ScanEye className="size-5 text-[#1d4b34]" />
             </button>
           </div>
@@ -202,6 +207,92 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
           </div>
         </div>
       </div>
+
+      {/* Outline Preview Overlay */}
+      {showOutlinePreview && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="relative mx-4 flex max-h-[85vh] w-full max-w-2xl flex-col rounded-2xl bg-white shadow-xl">
+            {/* Close button */}
+            <button
+              onClick={() => setShowOutlinePreview(false)}
+              className="absolute right-4 top-4 z-10 flex size-8 items-center justify-center rounded-full hover:bg-[#f2f2f2]"
+            >
+              <X className="size-4 text-[#737373]" />
+            </button>
+
+            {/* Scrollable content */}
+            <div className="flex-1 overflow-y-auto px-8 py-10">
+              {/* Icon */}
+              <div className="mb-6 flex justify-center">
+                <ListTree className="size-16 text-[#737373]" strokeWidth={1} />
+              </div>
+
+              {/* Title */}
+              <h2 className="mb-2 text-center text-2xl font-semibold text-[#212223]">
+                Create your outline
+              </h2>
+
+              {/* Subtitle */}
+              <p className="mb-6 text-center text-sm text-[#737373]">
+                Based on your selections, this may take up to 15 minutes
+              </p>
+
+              {/* Description */}
+              <p className="mb-8 text-center text-sm text-[#212223]">
+                Review the actions you've taken and revisit any earlier steps to make changes as desired, then generate your outline to continue.
+              </p>
+
+              {/* Draft contents list */}
+              <div className="mb-6">
+                <h3 className="mb-4 font-semibold text-[#212223]">Your draft will include:</h3>
+                <div className="space-y-4">
+                  {[
+                    { title: "Context from uploaded documents", status: "edited" as const },
+                    { title: "3 Arguments to be drafted", linkText: "Review in Argue tab", status: "edited" as const },
+                    { title: "20 Supporting authorities selected", linkText: "Review in Support tab", status: "edited" as const },
+                    { title: "2 Contrary authorities selected", linkText: "Review in Distinguish tab", status: "unchanged" as const },
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start justify-between border-b border-[#e5e5e5] pb-4 last:border-0"
+                    >
+                      <div>
+                        <p className="text-sm text-[#212223]">{item.title}</p>
+                        {item.linkText && (
+                          <span className="text-xs text-[#2e6b5c]">{item.linkText}</span>
+                        )}
+                      </div>
+                      <span
+                        className={cn(
+                          "shrink-0 rounded px-2 py-1 text-xs font-medium",
+                          item.status === "edited"
+                            ? "bg-[#ebf0ed] text-[#2e6b5c]"
+                            : "bg-[#f2f2f2] text-[#737373]"
+                        )}
+                      >
+                        {item.status === "edited" ? "Edited" : "Unchanged"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Sticky Edit CTA */}
+            <div className="border-t border-[#e5e5e5] px-8 py-4">
+              <Button
+                onClick={() => {
+                  setShowOutlinePreview(false);
+                  onEditOutline?.();
+                }}
+                className="w-full rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+              >
+                Edit
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

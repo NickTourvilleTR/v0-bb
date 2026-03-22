@@ -732,6 +732,9 @@ argue: "argue2",
             <div className="flex-1 overflow-y-auto">
               <ArgueScreen 
                 onNextSupportingAuthority={handleNextSupportingAuthority}
+                onEditOutline={() => {
+                  setCurrentScreen("outline");
+                }}
                 onSkipToGenerateDraft={() => {
                   addChatMessage("user", "Skip to generate draft");
                   addChatMessage("assistant", "Skipping ahead to draft generation.");
