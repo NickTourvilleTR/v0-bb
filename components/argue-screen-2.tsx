@@ -98,7 +98,7 @@ export function ArgueScreen2({ className, onNextSupportingAuthority, onSkipToGen
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8 pb-32">
           {/* Left sidebar buttons - sticky */}
-          <div className="sticky top-8 flex h-fit flex-col gap-2">
+          <div className="self-start sticky top-8 flex flex-col gap-2">
             <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
               <List className="size-5 text-[#212223]" />
             </button>
