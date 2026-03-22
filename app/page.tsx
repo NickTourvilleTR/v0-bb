@@ -710,14 +710,14 @@ export default function BriefBuilderPrototype() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="argue2" onStepClick={handleStepperClick} />
+          <BriefStepperNav currentStep="argue" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="argue2"
+            currentStep="argue"
             onNextSupportingAuthority={handleNextSupportingAuthority}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
