@@ -327,8 +327,7 @@ export default function BriefBuilderPrototype() {
             showVersionsTab={true}
             onNextSelectArguments={() => {
               addChatMessage("user", "Next: Select arguments");
-              addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
-              setCurrentScreen("argue2");
+              setCurrentScreen("argue");
             }}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
@@ -339,8 +338,7 @@ export default function BriefBuilderPrototype() {
             <IntakeScreen 
               onNextSelectArguments={() => {
                 addChatMessage("user", "Next: Select arguments");
-                addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
-                setCurrentScreen("argue2");
+                setCurrentScreen("argue");
               }}
               onSkipToGenerateDraft={() => {
                 addChatMessage("user", "Skip to generate draft");
