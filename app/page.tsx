@@ -301,9 +301,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="argue"
-          >
-            <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
+            currentStep="intake" onBriefBuilderClick={handleStartSubmit} />
           </AppLayoutWrapper>
         </div>
       </div>
@@ -839,12 +837,7 @@ argue: "argue2",
               notesOpen={notesOpen}
               setNotesOpen={setNotesOpen}
               messages={chatMessages}
-              currentStep="argue"
-              hideHistoryButton={true}
-              quotedText={quotedText}
-              onClearQuote={handleClearQuote}
-            >
-            <main
+              currentStep="intake"
               ref={scrollRef}
               className="flex flex-1 flex-col overflow-y-auto bg-white"
             >
