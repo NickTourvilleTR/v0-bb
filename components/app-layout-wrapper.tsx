@@ -29,6 +29,8 @@ interface AppLayoutWrapperProps {
   hideInput?: boolean;
   showVersionsTab?: boolean;
   hideHistoryButton?: boolean;
+  quotedText?: string | null;
+  onClearQuote?: () => void;
   messages?: Array<{
     id: string;
     type: "user" | "assistant";
@@ -63,6 +65,8 @@ export function AppLayoutWrapper({
   hideInput = false,
   showVersionsTab = false,
   hideHistoryButton = false,
+  quotedText = null,
+  onClearQuote,
   messages = [],
   className,
 }: AppLayoutWrapperProps) {
@@ -122,6 +126,8 @@ export function AppLayoutWrapper({
         showVersionsTab={showVersionsTab}
         messages={messages}
         defaultTab={drawerTab}
+        quotedText={quotedText}
+        onClearQuote={onClearQuote}
       />
     </div>
   );

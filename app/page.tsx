@@ -63,9 +63,20 @@ export default function BriefBuilderPrototype() {
   const [notesOpen, setNotesOpen] = React.useState(false);
   const [showUserArgument, setShowUserArgument] = React.useState(false);
   const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
+  const [quotedText, setQuotedText] = React.useState<string | null>(null);
   
   // Dynamic header title based on selected motion
   const headerTitle = selectedMotion ? "Motion to Dismiss" : "Brief Builder";
+  
+  // Handler for quote action from cards
+  const handleQuote = (text: string) => {
+    setQuotedText(text);
+    setDrawerOpen(true); // Open drawer to show quoted text
+  };
+  
+  const handleClearQuote = () => {
+    setQuotedText(null);
+  };
   const [chatMessages, setChatMessages] = React.useState<Array<{
     id: string;
     type: "user" | "assistant";
@@ -830,6 +841,8 @@ argue: "argue2",
               messages={chatMessages}
               currentStep="argue"
               hideHistoryButton={true}
+              quotedText={quotedText}
+              onClearQuote={handleClearQuote}
             >
             <main
               ref={scrollRef}
@@ -857,6 +870,7 @@ argue: "argue2",
                   >
                     <BriefBuilderCard
                       onSubmit={handleMotionSearchSubmit}
+                      onQuote={handleQuote}
                     />
                   </CocoChatMessage>
                 )}

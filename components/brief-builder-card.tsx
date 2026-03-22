@@ -41,6 +41,7 @@ interface BriefBuilderCardProps {
   question?: string;
   searchPlaceholder?: string;
   onSubmit?: (value: string) => void;
+  onQuote?: (text: string) => void;
   className?: string;
   disabled?: boolean;
   defaultValue?: string;
@@ -49,6 +50,7 @@ interface BriefBuilderCardProps {
 
 export function BriefBuilderCard({
   onSubmit,
+  onQuote,
   className,
   selectedValue,
 }: BriefBuilderCardProps) {
@@ -66,7 +68,9 @@ export function BriefBuilderCard({
   };
 
   const handleQuoteClick = () => {
-    console.log("[v0] Quoted motion type selection");
+    if (onQuote) {
+      onQuote("Select motion type: Choose the type of motion your brief will support.");
+    }
   };
 
   return (

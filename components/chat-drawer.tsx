@@ -1,6 +1,5 @@
 "use client";
-
-// v236 - MS Teams style quote/reply functionality
+// v236 rebuild - MS Teams style quote/reply functionality
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
@@ -40,6 +39,8 @@ interface ChatDrawerProps {
   showVersionsTab?: boolean;
   messages?: Message[];
   defaultTab?: "chat" | "notes" | "versions" | "sources";
+  quotedText?: string | null;
+  onClearQuote?: () => void;
 }
 
 export function ChatDrawer({
@@ -64,11 +65,16 @@ export function ChatDrawer({
   showVersionsTab = false,
   messages = [],
   defaultTab = "chat",
+  quotedText: quotedTextProp = null,
+  onClearQuote,
 }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const [inputValue, setInputValue] = React.useState("");
-  const [quotedText, setQuotedText] = React.useState<string | null>(null);
+  const [internalQuotedText, setInternalQuotedText] = React.useState<string | null>(null);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
+  
+  // Use prop if provided, otherwise use internal state
+  const quotedText = quotedTextProp ?? internalQuotedText;
 
   React.useEffect(() => {
     setActiveTab(defaultTab);
@@ -83,12 +89,25 @@ export function ChatDrawer({
   const handleSubmit = () => {
     if (inputValue.trim() || quotedText) {
       setInputValue("");
-      setQuotedText(null);
+      // Clear quote - use prop callback if available, otherwise internal state
+      if (onClearQuote) {
+        onClearQuote();
+      } else {
+        setInternalQuotedText(null);
+      }
     }
   };
 
   const handleQuote = (text: string) => {
-    setQuotedText(text);
+    setInternalQuotedText(text);
+  };
+  
+  const handleClearQuote = () => {
+    if (onClearQuote) {
+      onClearQuote();
+    } else {
+      setInternalQuotedText(null);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -354,7 +373,7 @@ export function ChatDrawer({
                 <p className="line-clamp-2 text-xs text-[#737373]">{quotedText}</p>
               </div>
               <button
-                onClick={() => setQuotedText(null)}
+                onClick={handleClearQuote}
                 className="shrink-0 text-[#737373] hover:text-[#212223]"
               >
                 <X className="size-3.5" />
