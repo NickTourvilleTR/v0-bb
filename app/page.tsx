@@ -328,7 +328,6 @@ argue: "argue2",
             showVersionsTab={true}
             onNextSelectArguments={() => {
               addChatMessage("user", "Next: Select arguments");
-              addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
               setCurrentScreen("argue");
             }}
             onSkipToGenerateDraft={() => {
@@ -340,7 +339,6 @@ argue: "argue2",
             <IntakeScreen 
               onNextSelectArguments={() => {
                 addChatMessage("user", "Next: Select arguments");
-                addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
                 setCurrentScreen("argue");
               }}
               onSkipToGenerateDraft={() => {
