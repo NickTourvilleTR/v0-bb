@@ -12,7 +12,7 @@ import {
   QuoteVariant8,
   QuoteVariant9,
   QuoteVariant10,
-} from "../../components/quote-interactions-explorations";
+} from "@/components/quote-interactions-explorations";
 
 const variants = [
   { id: 1, label: "Simple icon button", description: "A single circular reply icon appears at the top right corner on hover." },
