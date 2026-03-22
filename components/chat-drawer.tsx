@@ -221,7 +221,7 @@ export function ChatDrawer({
             )}
 
             {/* Argue Step Card */}
-            {currentStep === "intake" && (
+            {(currentStep === "argue" || currentStep === "argue2") && (
               <MessageCard
                 onQuote={() => handleQuote("Review the potential arguments and select which ones to include in your brief.")}
               >
