@@ -1,7 +1,5 @@
 "use client";
 
-// Chat drawer component with message history and input
-
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
@@ -331,7 +329,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
 
         {/* Intake Step Card */}
         {currentStep === "intake" && messages.length > 0 && (
-          <QuoteReplyCard onQuote={() => console.log("Quoted: Intake message")}>
+          <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
             <p className="mb-2 text-sm text-[#212223]">
               Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
             </p>
