@@ -399,12 +399,6 @@ export function ChatDrawer({
                     <line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
                 </button>
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7" />
-                    <polyline points="7 7 17 7 17 17" />
-                  </svg>
-                </button>
               </div>
               <button
                 className="flex size-9 items-center justify-center rounded-lg bg-[#1d4b34] text-white hover:bg-[#163d2a]"
