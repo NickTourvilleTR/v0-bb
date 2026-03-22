@@ -327,6 +327,96 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           ))
         )}
 
+        {/* Intake Step Card */}
+        {currentStep === "intake" && messages.length > 0 && (
+          <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+            <div className="mb-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles className="size-4 text-[#212223]" />
+                <span className="font-semibold text-[#212223]">Brief Builder</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                  Motion to dismiss
+                </span>
+                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                  Primary brief
+                </span>
+              </div>
+            </div>
+
+            <p className="mb-2 text-sm text-[#212223]">
+              Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
+            </p>
+
+            <p className="mb-3 font-medium text-[#212223]">
+              What would you like to do next?
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onSkipToGenerateDraft}
+                className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              >
+                Skip to generate draft
+              </Button>
+              <Button
+                size="sm"
+                onClick={onNextSelectArguments}
+                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+              >
+                Next: Select arguments
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* Argue2 Step Card */}
+        {(currentStep === "argue" || currentStep === "argue2") && messages.length > 0 && chatState !== "adding" && chatState !== "added" && (
+          <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
+            <div className="mb-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles className="size-4 text-[#212223]" />
+                <span className="font-semibold text-[#212223]">Brief Builder</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                  Motion to dismiss
+                </span>
+                <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
+                  Primary brief
+                </span>
+              </div>
+            </div>
+
+            <p className="mb-2 text-sm text-[#212223]">
+              Review the potential arguments and select which ones to include in your brief.
+            </p>
+
+            <p className="mb-3 font-medium text-[#212223]">
+              What would you like to do next?
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onSkipToGenerateDraft}
+                className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+              >
+                Skip to generate draft
+              </Button>
+              <Button
+                size="sm"
+                onClick={onNextSupportingAuthority}
+                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+              >
+                Next: Supporting authority
+              </Button>
+            </div>
+          </div>
+        )}
+
         {/* User Add Argument Message */}
         {(chatState === "adding" || chatState === "added") && (
           <div className="mt-4 flex items-start gap-2">
@@ -434,9 +524,30 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 </div>
               </div>
 
-              <p className="text-sm text-[#212223]">
+              <p className="mb-3 text-sm text-[#212223]">
                 All set. I've added the argument to your draft brief.
               </p>
+
+              <p className="mb-3 font-medium text-[#212223]">
+                What would you like to do next?
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onSkipToGenerateDraft}
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to generate draft
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={onNextSupportingAuthority}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Next: Supporting authority
+                </Button>
+              </div>
             </div>
 
           </>
@@ -519,9 +630,26 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <li>Select or remove a supporting authority</li>
               </ul>
 
-              <p className="font-medium text-[#212223]">
+              <p className="mb-3 font-medium text-[#212223]">
                 What would you like to do next?
               </p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onSkipToGenerateDraft}
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to generate draft
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={onNextOutline}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Next: Outline
+                </Button>
+              </div>
             </div>
           </>
         )}
@@ -587,9 +715,18 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <li>Select or remove a supporting authority</li>
               </ul>
 
-              <p className="font-medium text-[#212223]">
+              <p className="mb-3 font-medium text-[#212223]">
                 What would you like to do next?
               </p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  size="sm"
+                  onClick={onNextFinalize}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Next: Finalize
+                </Button>
+              </div>
             </div>
           </>
         )}
@@ -655,9 +792,26 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <li>Select or remove a contrary authority</li>
               </ul>
 
-              <p className="font-medium text-[#212223]">
+              <p className="mb-3 font-medium text-[#212223]">
                 What would you like to do next?
               </p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onSkipToGenerateDraft}
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to generate draft
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={onGenerateOutline}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Generate outline
+                </Button>
+              </div>
             </div>
 
             {/* User Brief Outline Message */}
@@ -739,9 +893,18 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 You can also make an edits directly to the brief (@Justin indicate that it's a text editor)
               </p>
 
-              <p className="font-medium text-[#212223]">
+              <p className="mb-3 font-medium text-[#212223]">
                 What would you like to do next?
               </p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  size="sm"
+                  onClick={onNextDraft}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Next: Draft
+                </Button>
+              </div>
             </div>
           </>
         )}
@@ -811,9 +974,18 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 You can also make an edits directly to the brief (@Justin indicate that it's a text editor)
               </p>
 
-              <p className="font-medium text-[#212223]">
+              <p className="mb-3 font-medium text-[#212223]">
                 What would you like to do next?
               </p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  size="sm"
+                  onClick={onGenerateDraft}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Generate draft
+                </Button>
+              </div>
             </div>
 
             {/* User Draft Message */}
@@ -881,9 +1053,18 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                     You can also make an edits directly to the brief (@Justin indicate that it's a text editor)
                   </p>
 
-                  <p className="font-medium text-[#212223]">
+                  <p className="mb-3 font-medium text-[#212223]">
                     What would you like to do next?
                   </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      size="sm"
+                      onClick={onVerifyBrief}
+                      className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                    >
+                      Verify brief
+                    </Button>
+                  </div>
                 </div>
               </>
             )}
@@ -946,9 +1127,26 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 I've run verification based on the draft. Please review any warnings.
               </p>
 
-              <p className="font-medium text-[#212223]">
+              <p className="mb-3 font-medium text-[#212223]">
                 What would you like to do next?
               </p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onSkipToFinalize}
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Skip to finalize
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={onNextOpposition}
+                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
+                >
+                  Next: Opposition brief
+                </Button>
+              </div>
             </div>
           </>
         )}
@@ -1005,9 +1203,18 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 </Button>
               </div>
 
-              <p className="font-medium text-[#212223]">
+              <p className="mb-3 font-medium text-[#212223]">
                 What would you like to do next?
               </p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+                >
+                  Download brief
+                </Button>
+              </div>
             </div>
           </>
         )}
@@ -1018,140 +1225,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
       {/* Chat Input - show on Chat tab */}
       {activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
-          {/* Step-based prompt buttons */}
-          <div className="mb-3 flex flex-wrap gap-2">
-            {currentStep === "intake" && (
-              <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSkipToGenerateDraft}
-                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to generate draft
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={onNextSelectArguments}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Next: Select arguments
-                </Button>
-              </>
-            )}
-            {(currentStep === "argue" || currentStep === "argue2") && (
-              <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSkipToGenerateDraft}
-                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to generate draft
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={onNextSupportingAuthority}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Next: Supporting authority
-                </Button>
-              </>
-            )}
-            {currentStep === "support" && (
-              <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSkipToGenerateDraft}
-                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to generate draft
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={onNextOutline}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Next: Outline
-                </Button>
-              </>
-            )}
-            {currentStep === "outline" && (
-              <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSkipToGenerateDraft}
-                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to generate draft
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={onGenerateOutline}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Generate outline
-                </Button>
-              </>
-            )}
-            {currentStep === "outline-ready" && (
-              <Button
-                size="sm"
-                onClick={onNextDraft}
-                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-              >
-                Next: Draft
-              </Button>
-            )}
-            {currentStep === "draft" && (
-              <Button
-                size="sm"
-                onClick={onGenerateDraft}
-                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-              >
-                Generate draft
-              </Button>
-            )}
-            {currentStep === "draft-ready" && (
-              <Button
-                size="sm"
-                onClick={onVerifyBrief}
-                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-              >
-                Verify brief
-              </Button>
-            )}
-            {currentStep === "verify" && (
-              <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSkipToFinalize}
-                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to finalize
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={onNextOpposition}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Next: Opposition brief
-                </Button>
-              </>
-            )}
-            {(currentStep === "opposition" || currentStep === "distinguish") && (
-              <Button
-                size="sm"
-                onClick={onNextFinalize}
-                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-              >
-                Next: Finalize
-              </Button>
-            )}
-          </div>
           <div className="rounded-2xl border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
             <Textarea
               value={inputValue}
