@@ -43,7 +43,7 @@ type Screen =
   | "ready-to-build"
   | "generating"
   | "intake"
-  | "argue"
+  | "argue2"
   | "support-loading"
   | "support"
   | "distinguish"
@@ -246,7 +246,7 @@ export default function BriefBuilderPrototype() {
   const handleStepperClick = (stepId: string) => {
     const stepToScreen: Record<string, Screen> = {
       intake: "intake",
-      argue: "argue2",
+      argue2: "argue2",
       develop: "support",
       outline: "outline",
       draft: "draft",
@@ -271,7 +271,7 @@ export default function BriefBuilderPrototype() {
   "ready-to-build": 6,
     "generating": 9,
 "intake": 10,
-      argue: 11,
+  "argue2": 11,
     "support-loading": 12,
     "support": 13,
     "distinguish": 14,
@@ -328,7 +328,7 @@ export default function BriefBuilderPrototype() {
             onNextSelectArguments={() => {
               addChatMessage("user", "Next: Select arguments");
               addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
-              setCurrentScreen("argue");
+              setCurrentScreen("argue2");
             }}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
@@ -340,7 +340,7 @@ export default function BriefBuilderPrototype() {
               onNextSelectArguments={() => {
                 addChatMessage("user", "Next: Select arguments");
                 addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
-                setCurrentScreen("argue");
+                setCurrentScreen("argue2");
               }}
               onSkipToGenerateDraft={() => {
                 addChatMessage("user", "Skip to generate draft");
@@ -706,22 +706,21 @@ export default function BriefBuilderPrototype() {
   }
 
   // Argue layout
-        if (currentScreen === "argue") {
+  if (currentScreen === "argue2") {
     return (
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-              <BriefStepperNav currentStep="argue" onStepClick={handleStepperClick} />
+          <BriefStepperNav currentStep="argue2" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="argue"
+            currentStep="argue2"
             onNextSupportingAuthority={handleNextSupportingAuthority}
-            selectedMotion={selectedMotion}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
               addChatMessage("assistant", "Skipping ahead to draft generation.");

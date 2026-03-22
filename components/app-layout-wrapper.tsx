@@ -11,7 +11,7 @@ interface AppLayoutWrapperProps {
   setDrawerOpen: (open: boolean) => void;
   notesOpen: boolean;
   setNotesOpen: (open: boolean) => void;
-  currentStep?: "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
+  currentStep?: "intake" | "argue" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
@@ -39,7 +39,6 @@ interface AppLayoutWrapperProps {
     userName?: string;
   }>;
   className?: string;
-  selectedMotion?: string | null;
 }
 
 export function AppLayoutWrapper({
@@ -70,7 +69,6 @@ export function AppLayoutWrapper({
   onClearQuote,
   messages = [],
   className,
-  selectedMotion = null,
 }: AppLayoutWrapperProps) {
   const [drawerTab, setDrawerTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
   const [drawerWidth, setDrawerWidth] = React.useState(380);
@@ -176,7 +174,6 @@ export function AppLayoutWrapper({
         quotedText={quotedText}
         onClearQuote={onClearQuote}
         width={drawerOpen ? drawerWidth : undefined}
-        selectedMotion={selectedMotion}
       />
     </div>
   );

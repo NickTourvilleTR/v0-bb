@@ -21,6 +21,7 @@ interface Step {
 
 const steps: Step[] = [
   { id: "intake", label: "Intake", icon: <ClipboardList className="size-4" /> },
+  { id: "argue", label: "Argue", icon: <Scale className="size-4" /> },
   { id: "develop", label: "Develop", icon: <Building2 className="size-4" /> },
   { id: "outline", label: "Outline", icon: <ListTree className="size-4" /> },
   { id: "draft", label: "Draft", icon: <FileText className="size-4" /> },

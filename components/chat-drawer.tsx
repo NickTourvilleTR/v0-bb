@@ -19,7 +19,7 @@ interface Message {
 interface ChatDrawerProps {
   isOpen: boolean;
   onToggle: () => void;
-  currentStep?: "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
+  currentStep?: "intake" | "argue" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
@@ -41,7 +41,6 @@ interface ChatDrawerProps {
   quotedText?: string | null;
   onClearQuote?: () => void;
   width?: number;
-  selectedMotion?: string | null;
 }
 
 export function ChatDrawer({
@@ -69,7 +68,6 @@ export function ChatDrawer({
   quotedText: quotedTextProp = null,
   onClearQuote,
   width,
-  selectedMotion = null,
 }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const [inputValue, setInputValue] = React.useState("");
@@ -223,7 +221,7 @@ export function ChatDrawer({
             )}
 
             {/* Argue Step Card */}
-            {(currentStep === "argue" && selectedMotion) && (
+            {(currentStep === "argue" || currentStep === "argue2") && (
               <MessageCard
                 onQuote={() => handleQuote("Review the potential arguments and select which ones to include in your brief.")}
               >
