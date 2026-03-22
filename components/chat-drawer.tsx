@@ -1,5 +1,4 @@
 "use client";
-// Quote reply interactions demo
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
