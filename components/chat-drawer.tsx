@@ -1,5 +1,7 @@
 "use client";
 
+// Chat drawer component with message history and input
+
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
