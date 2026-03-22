@@ -47,7 +47,7 @@ export function AppLayoutWrapper({
   setDrawerOpen,
   notesOpen,
   setNotesOpen,
-  currentStep = "intake",
+  currentStep = "argue",
   onArgumentAdded,
   onNextSupportingAuthority,
   onNextContraryAuthorities,

@@ -95,19 +95,19 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
 
   return (
     <div className={cn("flex flex-1 flex-col bg-[#fcfcfc]", className)}>
-      {/* Left sidebar buttons - fixed positioning */}
-      <div className="fixed left-6 top-8 z-20 flex flex-col gap-2 md:left-12">
-        <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] hover:shadow-sm transition-all">
-          <List className="size-5 text-[#212223]" />
-        </button>
-        <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7] hover:shadow-sm transition-all">
-          <ScanEye className="size-5 text-[#1d4b34]" />
-        </button>
-      </div>
-
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8 pb-32 md:pl-20">
+        <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8 pb-32">
+          {/* Left sidebar buttons - sticky */}
+          <div className="sticky top-8 flex h-fit flex-col gap-2">
+            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+              <List className="size-5 text-[#212223]" />
+            </button>
+            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+              <ScanEye className="size-5 text-[#1d4b34]" />
+            </button>
+          </div>
+
           {/* Main content column */}
           <div className="flex-1 max-w-3xl">
             {/* Header */}

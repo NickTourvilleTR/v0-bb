@@ -246,7 +246,8 @@ export default function BriefBuilderPrototype() {
   const handleStepperClick = (stepId: string) => {
     const stepToScreen: Record<string, Screen> = {
       intake: "intake",
-      argue2: "argue2",
+argue: "argue2",
+  argue2: "argue2",
       develop: "support",
       outline: "outline",
       draft: "draft",
@@ -327,7 +328,8 @@ export default function BriefBuilderPrototype() {
             showVersionsTab={true}
             onNextSelectArguments={() => {
               addChatMessage("user", "Next: Select arguments");
-              setCurrentScreen("argue");
+              addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
+              setCurrentScreen("argue2");
             }}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
@@ -338,7 +340,8 @@ export default function BriefBuilderPrototype() {
             <IntakeScreen 
               onNextSelectArguments={() => {
                 addChatMessage("user", "Next: Select arguments");
-                setCurrentScreen("argue");
+                addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
+                setCurrentScreen("argue2");
               }}
               onSkipToGenerateDraft={() => {
                 addChatMessage("user", "Skip to generate draft");
@@ -710,14 +713,14 @@ export default function BriefBuilderPrototype() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="argue" onStepClick={handleStepperClick} />
+          <BriefStepperNav currentStep="argue2" onStepClick={handleStepperClick} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="argue"
+            currentStep="argue2"
             onNextSupportingAuthority={handleNextSupportingAuthority}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
