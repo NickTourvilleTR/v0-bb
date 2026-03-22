@@ -757,17 +757,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </div>
             </div>
 
-            {/* User Draft Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 2:45 p.m.</p>
-                <p className="text-sm text-[#212223]">Next: Draft brief</p>
-              </div>
-            </div>
-
             {/* Show draft ready card only when draft is ready */}
             {currentStep === "draft-ready" && (
               <>
