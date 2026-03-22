@@ -55,7 +55,7 @@ const VariantComponents = [
   QuoteVariant10,
 ];
 
-export default function QuoteDemoPage() {
+export default function QuoteExplorationsPage() {
   const [quotedVariant, setQuotedVariant] = React.useState<number | null>(null);
 
   return (
