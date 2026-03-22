@@ -87,6 +87,11 @@ export default function BriefBuilderPrototype() {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
   
+  // Handler for inline chat input (when drawer is closed)
+  const handleInlineSend = React.useCallback((message: string) => {
+    addChatMessage("user", message);
+  }, []);
+
   // Helper function to add a message to the chat
   const addChatMessage = (type: "user" | "assistant", content: string) => {
     const now = new Date();
@@ -302,6 +307,7 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="library"
+            onSendMessage={handleInlineSend}
           >
             <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
           </AppLayoutWrapper>
@@ -325,17 +331,7 @@ argue: "argue2",
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             currentStep="intake"
-            showVersionsTab={true}
-            onNextSelectArguments={() => {
-              addChatMessage("user", "Next: Select arguments");
-              addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
-              setCurrentScreen("argue");
-            }}
-            onSkipToGenerateDraft={() => {
-              addChatMessage("user", "Skip to generate draft");
-              addChatMessage("assistant", "Skipping ahead to draft generation with default arguments.");
-              setCurrentScreen("draft");
-            }}
+            onSendMessage={handleInlineSend}
           >
             <IntakeScreen 
               onNextSelectArguments={() => {
@@ -370,6 +366,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="outline"
             onGenerateOutline={handleGenerateOutline}
             onSkipToGenerateDraft={() => {
@@ -407,6 +404,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="outline-loading"
             showVersionsTab={true}
           >
@@ -431,6 +429,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="outline-ready"
             onNextDraft={() => {
               addChatMessage("user", "Next: Draft");
@@ -464,6 +463,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="draft"
             onGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
@@ -489,6 +489,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="draft-loading"
             showVersionsTab={true}
           >
@@ -513,6 +514,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="draft-ready"
             onVerifyBrief={() => {
               addChatMessage("user", "Verify brief");
@@ -546,6 +548,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="verify"
             onNextOpposition={() => {
               addChatMessage("user", "Next: Opposition brief");
@@ -592,6 +595,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="finalize"
             showVersionsTab={true}
           >
@@ -616,6 +620,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="opposition"
             onNextFinalize={() => {
               addChatMessage("user", "Next: Finalize");
@@ -651,6 +656,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="support-loading"
             showVersionsTab={true}
           >
@@ -675,6 +681,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
+            onSendMessage={handleInlineSend}
             currentStep="support"
             onNextOutline={() => {
               addChatMessage("user", "Next: Outline");
@@ -723,7 +730,8 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-              currentStep="argue"
+            onSendMessage={handleInlineSend}
+            currentStep="argue"
             onNextSupportingAuthority={handleNextSupportingAuthority}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
@@ -845,6 +853,7 @@ argue: "argue2",
               notesOpen={notesOpen}
               setNotesOpen={setNotesOpen}
               messages={chatMessages}
+              onSendMessage={handleInlineSend}
               currentStep="library"
               hideHistoryButton={true}
               quotedText={quotedText}

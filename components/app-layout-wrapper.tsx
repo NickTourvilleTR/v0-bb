@@ -4,6 +4,7 @@ import * as React from "react";
 import { RightToolbar } from "@/components/right-toolbar";
 import { ChatDrawer } from "@/components/chat-drawer";
 import { cn } from "@/lib/utils";
+import { ArrowUp } from "lucide-react";
 
 interface AppLayoutWrapperProps {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ interface AppLayoutWrapperProps {
   setDrawerOpen: (open: boolean) => void;
   notesOpen: boolean;
   setNotesOpen: (open: boolean) => void;
-  currentStep?: "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
+  currentStep?: "library" | "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
@@ -39,6 +40,7 @@ interface AppLayoutWrapperProps {
     userName?: string;
   }>;
   className?: string;
+  onSendMessage?: (message: string) => void;
 }
 
 export function AppLayoutWrapper({
@@ -69,6 +71,7 @@ export function AppLayoutWrapper({
   onClearQuote,
   messages = [],
   className,
+  onSendMessage,
 }: AppLayoutWrapperProps) {
   const [drawerTab, setDrawerTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
   const [drawerWidth, setDrawerWidth] = React.useState(380);
@@ -126,6 +129,40 @@ export function AppLayoutWrapper({
       {/* Main Content */}
       <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
         {children}
+
+        {/* Inline chat input - visible when drawer is closed */}
+        {!drawerOpen && onSendMessage && (
+          <div className="absolute bottom-4 left-1/2 z-20 w-full max-w-xl -translate-x-1/2 px-4">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const input = e.currentTarget.elements.namedItem("inline-chat") as HTMLInputElement;
+                const value = input?.value.trim();
+                if (value) {
+                  onSendMessage(value);
+                  setDrawerOpen(true);
+                  setDrawerTab("chat");
+                  input.value = "";
+                }
+              }}
+              className="flex items-center gap-2 rounded-full border border-[#d2d2d2] bg-white px-4 py-2 shadow-lg transition-shadow focus-within:border-[#1d4b34] focus-within:shadow-xl"
+            >
+              <input
+                name="inline-chat"
+                type="text"
+                placeholder="Ask CoCounsel..."
+                autoComplete="off"
+                className="flex-1 bg-transparent text-sm text-[#212223] placeholder:text-[#999] outline-none"
+              />
+              <button
+                type="submit"
+                className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-colors hover:bg-[#163d2a]"
+              >
+                <ArrowUp className="size-4" />
+              </button>
+            </form>
+          </div>
+        )}
       </div>
 
       {/* Right Toolbar - hidden when drawer is open */}
