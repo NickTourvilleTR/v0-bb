@@ -840,9 +840,11 @@ argue: "argue2",
               setNotesOpen={setNotesOpen}
               messages={chatMessages}
               currentStep="intake"
-              ref={scrollRef}
-              className="flex flex-1 flex-col overflow-y-auto bg-white"
+              hideHistoryButton={true}
+              quotedText={quotedText}
+              onClearQuote={handleClearQuote}
             >
+              <div ref={scrollRef} className="flex-1 overflow-y-auto bg-white">
               <div className="mx-auto w-full max-w-3xl flex-1 px-6 py-8">
                 {/* Initial User Message - Always shown */}
                 <CocoChatMessage
@@ -991,6 +993,7 @@ argue: "argue2",
                     />
                   )}
                 </div>
+              </div>
               </div>
             </AppLayoutWrapper>
           </>
