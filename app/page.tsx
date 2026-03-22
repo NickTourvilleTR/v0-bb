@@ -301,7 +301,7 @@ argue: "argue2",
             notesOpen={notesOpen}
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
-            currentStep="intake"
+            currentStep="library"
           >
             <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
           </AppLayoutWrapper>
@@ -845,7 +845,7 @@ argue: "argue2",
               notesOpen={notesOpen}
               setNotesOpen={setNotesOpen}
               messages={chatMessages}
-              currentStep="intake"
+              currentStep="library"
               hideHistoryButton={true}
               quotedText={quotedText}
               onClearQuote={handleClearQuote}
