@@ -668,34 +668,12 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               </div>
             </div>
 
-            {/* User Brief Outline Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 12:30 p.m.</p>
-                <p className="text-sm text-[#212223]">Next: Brief outline</p>
-              </div>
-            </div>
-
           </>
         )}
 
         {/* Outline Loading and Ready Messages */}
         {(currentStep === "outline-loading" || currentStep === "outline-ready") && (
           <>
-            {/* User Next Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 12:30 p.m.</p>
-                <p className="text-sm text-[#212223]">Next: Brief outline</p>
-              </div>
-            </div>
-
             {/* CoCounsel Outline Response */}
             <div className="mt-4 flex items-start gap-2">
               <div className="shrink-0">
@@ -740,17 +718,6 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
         {/* Draft Step Messages */}
         {(currentStep === "draft" || currentStep === "draft-loading" || currentStep === "draft-ready") && (
           <>
-            {/* User Next Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 12:30 p.m.</p>
-                <p className="text-sm text-[#212223]">Next: Brief outline</p>
-              </div>
-            </div>
-
             {/* CoCounsel Outline Response */}
             <div className="mt-4 flex items-start gap-2">
               <div className="shrink-0">
