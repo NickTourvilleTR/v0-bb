@@ -71,6 +71,9 @@ export function AppLayoutWrapper({
   className,
 }: AppLayoutWrapperProps) {
   const [drawerTab, setDrawerTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
+  const [drawerWidth, setDrawerWidth] = React.useState(380);
+  const isDragging = React.useRef(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const handleChatClick = () => {
     setDrawerTab("chat");
@@ -87,13 +90,44 @@ export function AppLayoutWrapper({
     setDrawerOpen(true);
   };
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    isDragging.current = true;
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+  };
+
+  React.useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current || !containerRef.current) return;
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const newWidth = containerRect.right - e.clientX;
+      const clamped = Math.min(Math.max(newWidth, 280), 640);
+      setDrawerWidth(clamped);
+    };
+
+    const handleMouseUp = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
   return (
-    <div className={cn("flex flex-1 overflow-hidden", className)}>
+    <div ref={containerRef} className={cn("flex flex-1 overflow-hidden", className)}>
       {/* Main Content */}
       <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
         {children}
       </div>
-      
+
       {/* Right Toolbar - hidden when drawer is open */}
       <RightToolbar
         onChatClick={handleChatClick}
@@ -102,7 +136,18 @@ export function AppLayoutWrapper({
         hidden={drawerOpen}
         hideHistoryButton={hideHistoryButton}
       />
-      
+
+      {/* Resize handle - only visible when drawer is open */}
+      {drawerOpen && (
+        <div
+          onMouseDown={handleMouseDown}
+          className="group relative z-10 flex w-1 flex-shrink-0 cursor-col-resize items-center justify-center bg-[#e5e5e5] hover:bg-[#1d4b34] transition-colors duration-150"
+          title="Drag to resize"
+        >
+          <div className="h-8 w-1 rounded-full bg-[#cccccc] group-hover:bg-white transition-colors duration-150" />
+        </div>
+      )}
+
       {/* Chat Drawer */}
       <ChatDrawer
         isOpen={drawerOpen}
@@ -128,6 +173,7 @@ export function AppLayoutWrapper({
         defaultTab={drawerTab}
         quotedText={quotedText}
         onClearQuote={onClearQuote}
+        width={drawerOpen ? drawerWidth : undefined}
       />
     </div>
   );

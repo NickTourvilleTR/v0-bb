@@ -1,9 +1,5 @@
 "use client";
 
-// ChatDrawer component - MS Teams style quote/reply with drawer close
-// Rebuilt to clear stale bytecode cache
-
-import * as React from "react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
@@ -44,6 +40,7 @@ interface ChatDrawerProps {
   defaultTab?: "chat" | "notes" | "versions" | "sources";
   quotedText?: string | null;
   onClearQuote?: () => void;
+  width?: number;
 }
 
 export function ChatDrawer({
@@ -70,6 +67,7 @@ export function ChatDrawer({
   defaultTab = "chat",
   quotedText: quotedTextProp = null,
   onClearQuote,
+  width,
 }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const [inputValue, setInputValue] = React.useState("");
@@ -123,7 +121,10 @@ export function ChatDrawer({
   if (!isOpen) return null;
 
   return (
-    <div className="flex h-full w-[340px] shrink-0 flex-col border-l border-[#e5e5e5] bg-white">
+    <div
+      className="flex h-full shrink-0 flex-col border-l border-[#e5e5e5] bg-white"
+      style={{ width: width ? `${width}px` : "340px" }}
+    >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[#e5e5e5] px-4 py-3">
         <div className="flex items-center gap-2">
