@@ -156,8 +156,8 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               <div
                 key={argument.id}
                 className={cn(
-                  "rounded-lg border bg-white p-5",
-                  argument.checked ? "border-[#1d4b34]" : "border-[#e5e5e5]"
+                  "rounded-lg border p-5",
+                  argument.checked ? "border-[#1d4b34] bg-[#f5f7f6]" : "border-[#e5e5e5] bg-white"
                 )}
               >
                 <div className="flex items-start gap-3">
