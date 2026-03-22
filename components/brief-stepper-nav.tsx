@@ -9,7 +9,7 @@ import {
   FileText,
   Users,
   CheckCircle2,
-  Flag,
+  Grip,
 } from "lucide-react";
 
 interface Step {
@@ -26,7 +26,7 @@ const steps: Step[] = [
   { id: "draft", label: "Draft", icon: <FileText className="size-5" /> },
   { id: "verify", label: "Verify", icon: <CheckCircle2 className="size-5" /> },
   { id: "opposition", label: "Opposition", icon: <Users className="size-5" /> },
-  { id: "finalize", label: "Finalize", icon: <Flag className="size-5" /> },
+  { id: "finalize", label: "Finalize", icon: <Grip className="size-5" /> },
 ];
 
 interface BriefStepperNavProps {
