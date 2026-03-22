@@ -940,7 +940,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 </button>
               </div>
               <button
-                className="flex size-9 items-center justify-center rounded-lg bg-[#212223] text-white hover:bg-[#333333]"
+                className="flex size-9 items-center justify-center rounded-lg bg-[#1d4b34] text-white hover:bg-[#163d2a]"
                 onClick={handleSubmit}
               >
                 <ArrowUp className="size-5" />
