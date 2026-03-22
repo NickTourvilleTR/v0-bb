@@ -334,7 +334,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
             </p>
 
-            <p className="mb-3 font-medium text-[#212223]">
+            <p className="mb-3 text-sm text-[#212223]">
               What would you like to do next?
             </p>
             <div className="flex flex-wrap gap-2">
@@ -364,7 +364,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
               Review the potential arguments and select which ones to include in your brief.
             </p>
 
-            <p className="mb-3 font-medium text-[#212223]">
+            <p className="mb-3 text-sm text-[#212223]">
               What would you like to do next?
             </p>
             <div className="flex flex-wrap gap-2">
@@ -468,7 +468,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 All set. I've added the argument to your draft brief.
               </p>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="mb-3 text-sm text-[#212223]">
                 What would you like to do next?
               </p>
               <div className="flex flex-wrap gap-2">
@@ -555,7 +555,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <li>Select or remove a supporting authority</li>
               </ul>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="mb-3 text-sm text-[#212223]">
                 What would you like to do next?
               </p>
               <div className="flex flex-wrap gap-2">
@@ -625,7 +625,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <li>Select or remove a supporting authority</li>
               </ul>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="mb-3 text-sm text-[#212223]">
                 What would you like to do next?
               </p>
               <div className="flex flex-wrap gap-2">
@@ -676,7 +676,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 <li>Select or remove a contrary authority</li>
               </ul>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="mb-3 text-sm text-[#212223]">
                 What would you like to do next?
               </p>
               <div className="flex flex-wrap gap-2">
@@ -751,7 +751,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 You can also make edits directly to the brief.
               </p>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="mb-3 text-sm text-[#212223]">
                 What would you like to do next?
               </p>
               <div className="flex flex-wrap gap-2">
@@ -806,7 +806,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 You can also make edits directly to the brief.
               </p>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="mb-3 text-sm text-[#212223]">
                 What would you like to do next?
               </p>
               <div className="flex flex-wrap gap-2">
@@ -859,7 +859,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                     You can also make edits directly to the brief.
                   </p>
 
-                  <p className="mb-3 font-medium text-[#212223]">
+                  <p className="mb-3 text-sm text-[#212223]">
                     What would you like to do next?
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -907,7 +907,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 I've run verification based on the draft. Please review any warnings.
               </p>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="mb-3 text-sm text-[#212223]">
                 What would you like to do next?
               </p>
               <div className="flex flex-wrap gap-2">
@@ -968,7 +968,7 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
                 </Button>
               </div>
 
-              <p className="mb-3 font-medium text-[#212223]">
+              <p className="mb-3 text-sm text-[#212223]">
                 What would you like to do next?
               </p>
               <div className="flex flex-wrap gap-2">
