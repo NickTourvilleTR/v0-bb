@@ -992,7 +992,6 @@ argue: "argue2",
                   )}
                 </div>
               </div>
-            </main>
             </AppLayoutWrapper>
           </>
         )}
