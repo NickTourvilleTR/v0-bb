@@ -1,18 +1,25 @@
 "use client";
 
-// v236
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
-import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Download } from "lucide-react";
+import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Download, Reply } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
+interface Message {
+  id: string;
+  type: "user" | "assistant";
+  content: string;
+  timestamp?: string;
+  userName?: string;
+}
+
 interface ChatDrawerProps {
-  className?: string;
-  isOpen?: boolean;
-  onToggle?: () => void;
+  isOpen: boolean;
+  onToggle: () => void;
+  currentStep?: "intake" | "argue" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
@@ -27,893 +34,336 @@ interface ChatDrawerProps {
   onGenerateOutline?: () => void;
   onGenerateDraft?: () => void;
   onVerifyBrief?: () => void;
-  currentStep?: "intake" | "argue" | "argue2" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   hideInput?: boolean;
   showVersionsTab?: boolean;
-  messages?: Array<{
-    id: string;
-    type: "user" | "assistant";
-    content: string;
-    timestamp?: string;
-    userName?: string;
-  }>;
+  messages?: Message[];
   defaultTab?: "chat" | "notes" | "versions" | "sources";
 }
 
-type ChatState = "initial" | "adding" | "added";
-
-export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded, onNextSupportingAuthority, onNextContraryAuthorities, onNextOutline, onNextDraft, onNextVerify, onNextFinalize, onNextSelectArguments, onSkipToGenerateDraft, onNextOpposition, onSkipToFinalize, onGenerateOutline, onGenerateDraft, onVerifyBrief, currentStep = "argue", hideInput = false, showVersionsTab = false, messages = [], defaultTab = "chat" }: ChatDrawerProps) {
+export function ChatDrawer({
+  isOpen,
+  onToggle,
+  currentStep,
+  onArgumentAdded,
+  onNextSupportingAuthority,
+  onNextContraryAuthorities,
+  onNextOutline,
+  onNextDraft,
+  onNextVerify,
+  onNextFinalize,
+  onNextSelectArguments,
+  onSkipToGenerateDraft,
+  onNextOpposition,
+  onSkipToFinalize,
+  onGenerateOutline,
+  onGenerateDraft,
+  onVerifyBrief,
+  hideInput = false,
+  showVersionsTab = false,
+  messages = [],
+  defaultTab = "chat",
+}: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
-  
-  // Update active tab when defaultTab changes
+  const [inputValue, setInputValue] = React.useState("");
+  const [quotedText, setQuotedText] = React.useState<string | null>(null);
+  const messagesEndRef = React.useRef<HTMLDivElement>(null);
+
   React.useEffect(() => {
     setActiveTab(defaultTab);
   }, [defaultTab]);
-  const [inputValue, setInputValue] = React.useState("");
-  const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
-  const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
-  const [chatState, setChatState] = React.useState<ChatState>("initial");
-  const [addingProgress, setAddingProgress] = React.useState(0);
-  const [researchExpanded, setResearchExpanded] = React.useState(false);
-  const chatScrollRef = React.useRef<HTMLDivElement>(null);
 
-  // Auto-scroll chat to bottom with smooth animation when content changes
-  const scrollToBottom = React.useCallback(() => {
-    if (chatScrollRef.current) {
-      chatScrollRef.current.scrollTo({
-        top: chatScrollRef.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, []);
-
-  // Auto-scroll chat to bottom on mount and when chat state or step changes
   React.useEffect(() => {
-    if (isOpen && activeTab === "chat") {
-      // Small delay to ensure DOM has updated
-      const timeoutId = setTimeout(scrollToBottom, 100);
-      return () => clearTimeout(timeoutId);
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [isOpen, activeTab, chatState, currentStep, scrollToBottom]);
+  }, [messages, currentStep]);
 
-  // Handle message submission
   const handleSubmit = () => {
-    if (!inputValue.trim()) return;
-    setInputValue("");
-    setChatState("adding");
-    
-    // Animate progress
-    setTimeout(() => setAddingProgress(40), 100);
-    
-    // Complete after delay
-    setTimeout(() => {
-      setChatState("added");
-      onArgumentAdded?.();
-    }, 3000);
+    if (inputValue.trim() || quotedText) {
+      setInputValue("");
+      setQuotedText(null);
+    }
   };
 
-  // Collapsed state - hide completely
-  if (!isOpen) {
-    return null;
-  }
+  const handleQuote = (text: string) => {
+    setQuotedText(text);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
+    }
+  };
+
+  if (!isOpen) return null;
 
   return (
-    <div className={cn("flex h-full w-[420px] flex-col border-l border-[#e5e5e5] bg-white", className)}>
-      {/* Tabs */}
-      <div className="flex items-center border-b border-[#e5e5e5]">
-        <button
-          className="p-3 text-[#737373] hover:text-[#212223]"
-          onClick={onToggle}
-        >
-          <X className="size-5" />
-        </button>
-        <div className="flex flex-1">
-          {(showVersionsTab ? ["chat", "notes", "versions", "sources"] as const : ["chat", "notes", "sources"] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={cn(
-                "flex-1 px-4 py-3 text-sm font-medium capitalize transition-colors",
-                activeTab === tab
-                  ? "border-b-2 border-[#2e6b5c] text-[#212223]"
-                  : "text-[#737373] hover:text-[#212223]"
-              )}
-            >
-              {tab === "chat" ? "Chat" : tab === "notes" ? "Notes" : tab === "versions" ? "Versions" : "Sources"}
-            </button>
-          ))}
+    <div className="flex h-full w-[340px] shrink-0 flex-col border-l border-[#e5e5e5] bg-white">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-[#e5e5e5] px-4 py-3">
+        <div className="flex items-center gap-2">
+          <Logo className="size-5" />
+          <span className="text-sm font-medium text-[#212223]">CoCounsel</span>
         </div>
+        <button
+          onClick={onToggle}
+          className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+        >
+          <X className="size-4" />
+        </button>
       </div>
 
-      {/* Tab Content */}
-      <div ref={chatScrollRef} className="flex-1 overflow-y-auto p-4">
-        {/* Notes Tab */}
-        {activeTab === "notes" && (
-          <div className="flex h-full flex-col items-center justify-center text-center">
-            <p className="text-sm text-[#737373]">No notes yet. Add notes to keep track of important information.</p>
-          </div>
-        )}
-
-        {/* Versions Tab */}
-        {activeTab === "versions" && showVersionsTab && (
-          <div className="space-y-3">
-            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
-              <div>
-                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
-                  2 Arguments selected and edited
-                </a>
-                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:24 PM</p>
-              </div>
-              <button className="text-[#737373] hover:text-[#212223]">
-                <RotateCcw className="size-4" />
-              </button>
-            </div>
-            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
-              <div>
-                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
-                  2 Arguments selected and edited
-                </a>
-                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:25 PM</p>
-              </div>
-              <button className="text-[#737373] hover:text-[#212223]">
-                <RotateCcw className="size-4" />
-              </button>
-            </div>
-            <div className="flex items-center justify-between rounded-lg p-3 hover:bg-[#f7f7f7]">
-              <div>
-                <a href="#" className="text-sm font-medium text-[#2e6b5c] hover:underline">
-                  3 Arguments selected and edited
-                </a>
-                <p className="text-xs text-[#737373]">Jan 29, 2026, 2:20 PM</p>
-              </div>
-              <button className="text-[#737373] hover:text-[#212223]">
-                <RotateCcw className="size-4" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Sources Tab */}
-        {activeTab === "sources" && (
-          <div>
-            {/* View Dropdown */}
-            <div className="mb-4 flex items-center gap-2">
-              <span className="text-sm text-[#212223]">View:</span>
-              <div className="relative">
-                <button
-                  onClick={() => setSourcesDropdownOpen(!sourcesDropdownOpen)}
-                  className="flex items-center gap-2 rounded-md border border-[#cccccc] bg-white px-3 py-1.5 text-sm text-[#212223] hover:bg-[#f7f7f7]"
-                >
-                  {sourcesView === "uploaded" ? "Uploaded documents" : "Cases & Statues"}
-                  <ChevronDown className="size-4" />
-                </button>
-                {sourcesDropdownOpen && (
-                  <div className="absolute left-0 top-full z-10 mt-1 w-48 rounded-md border border-[#e5e5e5] bg-white py-1 shadow-lg">
-                    <button
-                      onClick={() => { setSourcesView("uploaded"); setSourcesDropdownOpen(false); }}
-                      className="w-full px-3 py-2 text-left text-sm text-[#212223] hover:bg-[#f7f7f7]"
-                    >
-                      Uploaded documents
-                    </button>
-                    <button
-                      onClick={() => { setSourcesView("cases"); setSourcesDropdownOpen(false); }}
-                      className="w-full px-3 py-2 text-left text-sm text-[#212223] hover:bg-[#f7f7f7]"
-                    >
-                      Cases & Statues
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Uploaded Documents View */}
-            {sourcesView === "uploaded" && (
-              <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
-                <div className="flex items-start gap-3">
-                  <FileText className="mt-0.5 size-5 text-[#737373]" />
-                  <div>
-                    <p className="font-medium text-[#212223]">Love v. Airbnb - First Amended Complaint.pdf</p>
-                    <p className="text-xs text-[#737373]">Uploaded at 9:07 a.m.</p>
-                  </div>
-                </div>
-              </div>
+      {/* Tabs */}
+      <div className="flex border-b border-[#e5e5e5]">
+        {(["chat", "sources", "notes"] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={cn(
+              "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
+              activeTab === tab
+                ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
+                : "text-[#737373] hover:text-[#212223]"
             )}
-
-            {/* Cases & Statues View */}
-            {sourcesView === "cases" && (
-              <div className="space-y-4">
-                {/* Case 1 */}
-                <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
-                  <div className="mb-2 flex items-start justify-between">
-                    <div>
-                      <a href="#" className="font-medium text-[#2e6b5c] hover:underline">Shaw v. Lindheim</a>
-                      <p className="text-xs text-[#737373]">919 F.2d 1353 (9th Cir. 2024)</p>
-                    </div>
-                    <Notebook className="size-4 text-[#737373]" />
-                  </div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-xs font-medium text-[#212223]">Snippet</span>
-                    <div className="flex items-center gap-1 text-xs text-[#737373]">
-                      <ChevronLeft className="size-3" />
-                      <span>1 of 1</span>
-                      <ChevronRight className="size-3" />
-                    </div>
-                  </div>
-                  <p className="text-sm text-[#212223]">
-                    ...establishing that accountants can face primary liability under securities laws for material misstatements when they know statements will be communicated to investors...
-                  </p>
-                </div>
-
-                {/* Case 2 */}
-                <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
-                  <div className="mb-2 flex items-start justify-between">
-                    <div>
-                      <a href="#" className="font-medium text-[#2e6b5c] hover:underline">Swirsky v. Carey</a>
-                      <p className="text-xs text-[#737373]">376 F.3d 841 (9th Cir. 2004)</p>
-                    </div>
-                    <Notebook className="size-4 text-[#737373]" />
-                  </div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-xs font-medium text-[#212223]">Snippet</span>
-                    <div className="flex items-center gap-1 text-xs text-[#737373]">
-                      <ChevronLeft className="size-3" />
-                      <span>1 of 1</span>
-                      <ChevronRight className="size-3" />
-                    </div>
-                  </div>
-                  <p className="text-sm text-[#212223]">
-                    ...establishing that accountants can face primary liability under securities laws for material misstatements when they know statements will be communicated to investors...
-                  </p>
-                </div>
-
-                {/* Case 3 */}
-                <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
-                  <div className="mb-2 flex items-start justify-between">
-                    <div>
-                      <a href="#" className="font-medium text-[#2e6b5c] hover:underline">In re Enron Corp. Sec., Derivative & ERISA Litig.</a>
-                      <p className="text-xs text-[#737373]">235 F. Supp. 2d 549 (S.D. Tex. 2002)</p>
-                    </div>
-                    <Notebook className="size-4 text-[#737373]" />
-                  </div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-xs font-medium text-[#212223]">Snippet</span>
-                    <div className="flex items-center gap-1 text-xs text-[#737373]">
-                      <ChevronLeft className="size-3" />
-                      <span>1 of 1</span>
-                      <ChevronRight className="size-3" />
-                    </div>
-                  </div>
-                  <p className="text-sm text-[#212223]">
-                    ...establishing that accountants can face primary liability under securities laws for material misstatements when they know statements will be communicated to investors...
-                  </p>
-                </div>
-              </div>
+          >
+            {tab}
+          </button>
+        ))}
+        {showVersionsTab && (
+          <button
+            onClick={() => setActiveTab("versions")}
+            className={cn(
+              "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
+              activeTab === "versions"
+                ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
+                : "text-[#737373] hover:text-[#212223]"
             )}
-          </div>
+          >
+            Versions
+          </button>
         )}
+      </div>
 
-        {/* Chat Tab */}
+      {/* Messages Area */}
+      <div className="flex-1 overflow-y-auto p-4">
         {activeTab === "chat" && (
           <>
-        {/* Dynamic Messages from user input */}
-        {messages.length === 0 ? (
-          <div className="flex h-full flex-col items-center justify-center text-center">
-            <p className="text-sm text-[#737373]">No messages yet. Your conversation will appear here as you interact with the screens.</p>
-          </div>
-        ) : (
-          messages.map((message) => (
-            <div key={message.id} className="mb-4 flex items-start gap-2">
-              {message.type === "user" ? (
-                <>
-                  <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                    {message.userName?.split(" ").map(n => n[0]).join("") || "JL"}
-                  </div>
-                  <div>
-                    <p className="text-xs text-[#737373]">{message.userName || "Jane Lawson"} - {message.timestamp || "Just now"}</p>
-                    <p className="text-sm text-[#212223]">{message.content}</p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="shrink-0">
-                    <Logo icon className="size-7" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-[#737373]">CoCounsel - {message.timestamp || "Just now"}</p>
-                    <div className="mt-1 text-sm text-[#212223]" dangerouslySetInnerHTML={{ __html: message.content }} />
-                  </div>
-                </>
-              )}
-            </div>
-          ))
-        )}
-
-        {/* Intake Step Card */}
-        {currentStep === "intake" && messages.length > 0 && (
-          <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-            <p className="mb-2 text-sm text-[#212223]">
-              Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
-            </p>
-
-            <p className="mb-3 text-sm text-[#212223]">
-              What would you like to do next?
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={onSkipToGenerateDraft}
-                className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-              >
-                Skip to generate draft
-              </Button>
-              <Button
-                size="sm"
-                onClick={onNextSelectArguments}
-                className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-              >
-                Next: Select arguments
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {/* User Add Argument Message */}
-        {(chatState === "adding" || chatState === "added") && (
-          <div className="mt-4 flex items-start gap-2">
-            <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-              JL
-            </div>
-            <div>
-              <p className="text-xs text-[#737373]">Jane Lawson - 9:50 a.m.</p>
-              <p className="text-sm text-[#212223]">
-                Add one more argument that applies to multiple claims: waiver applies because the plaintiff's written agreement allowing the defendant to review the document bars her from asserting claims inconsistent with that agreement. Use conditional phrasing if needed.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* CoCounsel Adding Response */}
-        {chatState === "adding" && (
-          <>
-            <div className="mt-4 flex items-start gap-2">
-              <div className="shrink-0">
-                <Logo icon className="size-7" />
-              </div>
+            {/* CoCounsel intro message */}
+            <div className="mb-4 flex items-start gap-2">
+              <Logo className="mt-0.5 size-5 shrink-0" />
               <div>
-                <p className="text-xs text-[#737373]">CoCounsel - 9:50 a.m.</p>
+                <p className="text-xs text-[#737373]">CoCounsel</p>
+                <p className="text-sm text-[#212223]">
+                  I'm your AI legal assistant. I'll help you build your brief step by step.
+                </p>
               </div>
             </div>
 
-            {/* Adding Argument Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              {/* Progress */}
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm text-[#212223]">Adding argument...</span>
-                <span className="text-sm text-[#212223]">{addingProgress}%</span>
-              </div>
-              <div className="mb-4 h-1.5 w-full rounded-full bg-[#e5e5e5]">
-                <div
-                  className="h-1.5 rounded-full bg-[#2e6b5c] transition-all duration-1000 ease-out"
-                  style={{ width: `${addingProgress}%` }}
-                />
-              </div>
-
-              {/* Checkbox */}
-              <div className="mb-4 flex items-center gap-2">
-                <Checkbox className="border-[#737373]" />
-                <span className="text-sm text-[#212223]">Checkbox text label</span>
-              </div>
-
-              {/* Research Steps */}
-              <button
-                onClick={() => setResearchExpanded(!researchExpanded)}
-                className="flex w-full items-center justify-between border-t border-[#e5e5e5] pt-3"
-              >
-                <span className="font-medium text-[#212223]">Research steps</span>
-                {researchExpanded ? (
-                  <ChevronUp className="size-5 text-[#737373]" />
+            {/* Dynamic step messages */}
+            {messages.map((msg) => (
+              <div key={msg.id} className="mb-4 flex items-start gap-2">
+                {msg.type === "assistant" ? (
+                  <Logo className="mt-0.5 size-5 shrink-0" />
                 ) : (
-                  <ChevronDown className="size-5 text-[#737373]" />
+                  <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
+                    {msg.userName ? msg.userName.split(" ").map(n => n[0]).join("") : "U"}
+                  </div>
                 )}
-              </button>
-            </div>
-          </>
-        )}
-
-        {/* CoCounsel Added Response */}
-        {chatState === "added" && (
-          <>
-            <div className="mt-4 flex items-start gap-2">
-              <div className="shrink-0">
-                <Logo icon className="size-7" />
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">CoCounsel - 9:57 a.m.</p>
-              </div>
-            </div>
-
-            {/* Added Argument Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <p className="mb-3 text-sm text-[#212223]">
-                All set. I've added the argument to your draft brief.
-              </p>
-
-              <p className="mb-3 text-sm text-[#212223]">
-                What would you like to do next?
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSkipToGenerateDraft}
-                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to generate draft
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={onNextSupportingAuthority}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Next: Supporting authority
-                </Button>
-              </div>
-            </div>
-
-          </>
-        )}
-
-        {/* Support Loading Step Messages */}
-        {currentStep === "support-loading" && (
-          <>
-            {/* User Next Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 10:00 a.m.</p>
-                <p className="text-sm text-[#212223]">Next: Supporting authority</p>
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* Support Step Messages */}
-        {currentStep === "support" && (
-          <>
-            {/* User Next Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 10:00 a.m.</p>
-                <p className="text-sm text-[#212223]">Next: Supporting authority</p>
-              </div>
-            </div>
-
-            {/* CoCounsel Support Response */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="shrink-0">
-                <Logo icon className="size-7" />
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">CoCounsel - 10:15 a.m.</p>
-              </div>
-            </div>
-
-            {/* Support Ready Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Go to Support
-                </Button>
-              </div>
-
-              <p className="mb-2 text-sm text-[#212223]">
-                I've pre-selected the stronger supporting authorities for your brief. You can tell me if you want to:
-              </p>
-              <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                <li>Add a supporting authority</li>
-                <li>Edit how a supporting authority is used</li>
-                <li>Select or remove a supporting authority</li>
-              </ul>
-
-              <p className="mb-3 text-sm text-[#212223]">
-                What would you like to do next?
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSkipToGenerateDraft}
-                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to generate draft
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={onNextOutline}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Next: Outline
-                </Button>
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* Distinguish Step Messages */}
-        {currentStep === "distinguish" && (
-          <>
-            {/* User Next Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 10:00 a.m.</p>
-                <p className="text-sm text-[#212223]">Next: Supporting authority</p>
-              </div>
-            </div>
-
-            {/* CoCounsel Support Response (reusing from support step) */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="shrink-0">
-                <Logo icon className="size-7" />
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">CoCounsel - 10:15 a.m.</p>
-              </div>
-            </div>
-
-            {/* Support Ready Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-7 border-[#cccccc] bg-white px-3 text-xs text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Go to Support
-                </Button>
-              </div>
-
-              <p className="mb-2 text-sm text-[#212223]">
-                I've pre-selected the stronger supporting authorities for your brief. You can tell me if you want to:
-              </p>
-              <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                <li>Add a supporting authority</li>
-                <li>Edit how a supporting authority is used</li>
-                <li>Select or remove a supporting authority</li>
-              </ul>
-
-              <p className="mb-3 text-sm text-[#212223]">
-                What would you like to do next?
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  size="sm"
-                  onClick={onNextFinalize}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Next: Finalize
-                </Button>
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* Outline Step Messages */}
-        {currentStep === "outline" && (
-          <>
-            {/* User Next Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 11:30 a.m.</p>
-                <p className="text-sm text-[#212223]">Next: Contrary authorities</p>
-              </div>
-            </div>
-
-            {/* CoCounsel Distinguish Response */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="shrink-0">
-                <Logo icon className="size-7" />
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">CoCounsel - 11:45 a.m.</p>
-              </div>
-            </div>
-
-            {/* Distinguish Ready Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <p className="mb-2 text-sm text-[#212223]">
-                Select the contrary authorities to distinguish in your motion. You can tell me if you want to:
-              </p>
-              <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                <li>Add or modify a contrary authority</li>
-                <li>Edit how a contrary authority is used</li>
-                <li>Select or remove a contrary authority</li>
-              </ul>
-
-              <p className="mb-3 text-sm text-[#212223]">
-                What would you like to do next?
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSkipToGenerateDraft}
-                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to generate draft
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={onGenerateOutline}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Generate outline
-                </Button>
-              </div>
-            </div>
-
-          </>
-        )}
-
-        {/* Outline Loading and Ready Messages */}
-        {(currentStep === "outline-loading" || currentStep === "outline-ready") && (
-          <>
-            {/* CoCounsel Outline Response */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="shrink-0">
-                <Logo icon className="size-7" />
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">CoCounsel - 12:45 p.m.</p>
-              </div>
-            </div>
-
-            {/* Outline Ready Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <p className="mb-2 text-sm text-[#212223]">
-                I've created an outline based on your scenario and selections. You can tell me if you want to
-              </p>
-              <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                <li>Add/remove a section</li>
-                <li>Edit any sections</li>
-                <li>Make edits offline and upload an updated outline</li>
-              </ul>
-
-              <p className="mb-2 text-sm text-[#212223]">
-                You can also make edits directly to the brief.
-              </p>
-
-              <p className="mb-3 text-sm text-[#212223]">
-                What would you like to do next?
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  size="sm"
-                  onClick={onNextDraft}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Next: Draft
-                </Button>
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* Draft Step Messages */}
-        {(currentStep === "draft" || currentStep === "draft-loading" || currentStep === "draft-ready") && (
-          <>
-            {/* CoCounsel Outline Response */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="shrink-0">
-                <Logo icon className="size-7" />
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">CoCounsel - 12:45 p.m.</p>
-              </div>
-            </div>
-
-            {/* Outline Ready Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <p className="mb-2 text-sm text-[#212223]">
-                I've created an outline based on your scenario and selections. You can tell me if you want to
-              </p>
-              <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                <li>Add/remove a section</li>
-                <li>Edit any sections</li>
-                <li>Make edits offline and upload an updated outline</li>
-              </ul>
-
-              <p className="mb-2 text-sm text-[#212223]">
-                You can also make edits directly to the brief.
-              </p>
-
-              <p className="mb-3 text-sm text-[#212223]">
-                What would you like to do next?
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  size="sm"
-                  onClick={onGenerateDraft}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Generate draft
-                </Button>
-              </div>
-            </div>
-
-            {/* Show draft ready card only when draft is ready */}
-            {currentStep === "draft-ready" && (
-              <>
-                {/* CoCounsel Draft Response */}
-                <div className="mt-4 flex items-start gap-2">
-                  <div className="shrink-0">
-                    <Logo icon className="size-7" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-[#737373]">CoCounsel - 3:15 p.m.</p>
-                  </div>
+                <div>
+                  <p className="text-xs text-[#737373]">
+                    {msg.type === "assistant" ? "CoCounsel" : msg.userName || "You"}{msg.timestamp ? ` - ${msg.timestamp}` : ""}
+                  </p>
+                  <p className="text-sm text-[#212223]">{msg.content}</p>
                 </div>
+              </div>
+            ))}
 
-                {/* Draft Ready Card */}
-                <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-                  <p className="mb-2 text-sm text-[#212223]">
-                    I've created a brief draft based on your scenario, selections and outline. You can tell me if you want to:
-                  </p>
-                  <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                    <li>Add/remove a section</li>
-                    <li>Edit any sections in the outline</li>
-                    <li>Make edits offline and upload an updated draft</li>
-                  </ul>
-
-                  <p className="mb-2 text-sm text-[#212223]">
-                    You can also make edits directly to the brief.
-                  </p>
-
-                  <p className="mb-3 text-sm text-[#212223]">
-                    What would you like to do next?
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Button
-                      size="sm"
-                      onClick={onVerifyBrief}
-                      className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                    >
-                      Verify brief
-                    </Button>
-                  </div>
+            {/* Intake Step Card */}
+            {currentStep === "intake" && (
+              <MessageCard
+                onQuote={() => handleQuote("Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.")}
+              >
+                <p className="mb-2 text-sm text-[#212223]">
+                  Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
+                </p>
+                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+                  <Button size="sm" onClick={onNextSelectArguments} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Select arguments</Button>
                 </div>
-              </>
+              </MessageCard>
             )}
+
+            {/* Argue Step Card */}
+            {(currentStep === "argue" || currentStep === "argue2") && (
+              <MessageCard
+                onQuote={() => handleQuote("Review the potential arguments and select which ones to include in your brief.")}
+              >
+                <p className="mb-2 text-sm text-[#212223]">
+                  Review the potential arguments and select which ones to include in your brief.
+                </p>
+                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+                  <Button size="sm" onClick={onNextSupportingAuthority} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Supporting authority</Button>
+                </div>
+              </MessageCard>
+            )}
+
+            {/* Support Step Card */}
+            {currentStep === "support" && (
+              <MessageCard
+                onQuote={() => handleQuote("Supporting authorities are ready for review. I've pre-selected the stronger supporting authorities for your brief.")}
+              >
+                <div className="mb-3 flex items-center gap-2">
+                  <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
+                </div>
+                <p className="mb-2 text-sm text-[#212223]">I've pre-selected the stronger supporting authorities for your brief. You can tell me if you want to:</p>
+                <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                  <li>Add a supporting authority</li>
+                  <li>Edit how a supporting authority is used</li>
+                  <li>Select or remove a supporting authority</li>
+                </ul>
+                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+                  <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Outline</Button>
+                </div>
+              </MessageCard>
+            )}
+
+            {/* Distinguish Step Card */}
+            {currentStep === "distinguish" && (
+              <MessageCard
+                onQuote={() => handleQuote("Select the contrary authorities to distinguish in your motion.")}
+              >
+                <p className="mb-2 text-sm text-[#212223]">Select the contrary authorities to distinguish in your motion. You can tell me if you want to:</p>
+                <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                  <li>Add or modify a contrary authority</li>
+                  <li>Edit how a contrary authority is used</li>
+                  <li>Select or remove a contrary authority</li>
+                </ul>
+                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+                  <Button size="sm" onClick={onGenerateOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Generate outline</Button>
+                </div>
+              </MessageCard>
+            )}
+
+            {/* Outline Loading/Ready Step Card */}
+            {(currentStep === "outline-loading" || currentStep === "outline-ready") && (
+              <MessageCard
+                onQuote={() => handleQuote("Your brief outline is ready. Review the structure and sections before proceeding to the draft.")}
+              >
+                <p className="mb-2 text-sm text-[#212223]">
+                  Your brief outline is ready. Review the structure and sections before proceeding to the draft.
+                </p>
+                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+                  <Button size="sm" onClick={onGenerateDraft} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Generate draft</Button>
+                </div>
+              </MessageCard>
+            )}
+
+            {/* Draft Loading/Ready Step Card */}
+            {(currentStep === "draft" || currentStep === "draft-loading" || currentStep === "draft-ready") && (
+              <MessageCard
+                onQuote={() => handleQuote("Your brief draft is ready for review. You can make edits directly to the brief.")}
+              >
+                <p className="mb-2 text-sm text-[#212223]">
+                  Your brief draft is ready for review. You can make edits directly to the brief.
+                </p>
+                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to finalize</Button>
+                  <Button size="sm" onClick={onVerifyBrief} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Verify brief</Button>
+                </div>
+              </MessageCard>
+            )}
+
+            {/* Verify Step Card */}
+            {currentStep === "verify" && (
+              <MessageCard
+                onQuote={() => handleQuote("I've verified all citations and cross-references in your brief.")}
+              >
+                <p className="mb-2 text-sm text-[#212223]">
+                  I've verified all citations and cross-references in your brief.
+                </p>
+                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to finalize</Button>
+                  <Button size="sm" onClick={onNextOpposition} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Opposition brief</Button>
+                </div>
+              </MessageCard>
+            )}
+
+            {/* Finalize Step Card */}
+            {currentStep === "finalize" && (
+              <MessageCard
+                onQuote={() => handleQuote("The brief finalization summary is ready for review.")}
+              >
+                <div className="mb-3 flex items-center gap-2">
+                  <span className="text-sm text-[#212223]">The brief finalization summary is ready for review:</span>
+                </div>
+                <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                  <li>All citations verified</li>
+                  <li>Table of contents generated</li>
+                  <li>Table of authorities complete</li>
+                  <li>Word count within limits</li>
+                </ul>
+                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button size="sm" className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">
+                    <Download className="mr-2 size-4" />
+                    Download brief
+                  </Button>
+                </div>
+              </MessageCard>
+            )}
+
+            <div ref={messagesEndRef} />
           </>
         )}
 
-        {/* Verify Step Messages */}
-        {currentStep === "verify" && (
-          <>
-            {/* User Verify Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 3:45 p.m.</p>
-                <p className="text-sm text-[#212223]">Next: Verify brief</p>
-              </div>
-            </div>
-
-            {/* CoCounsel Verify Response */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="shrink-0">
-                <Logo icon className="size-7" />
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">CoCounsel - 3:55 p.m.</p>
-              </div>
-            </div>
-
-            {/* Verify Ready Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <p className="mb-2 text-sm text-[#212223]">
-                I've run verification based on the draft. Please review any warnings.
-              </p>
-
-              <p className="mb-3 text-sm text-[#212223]">
-                What would you like to do next?
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onSkipToFinalize}
-                  className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                >
-                  Skip to finalize
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={onNextOpposition}
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  Next: Opposition brief
-                </Button>
-              </div>
-            </div>
-          </>
+        {activeTab === "notes" && (
+          <div className="text-sm text-[#737373]">No notes yet.</div>
         )}
 
-        {/* Finalize Step Messages */}
-        {currentStep === "finalize" && (
-          <>
-            {/* User Finalize Message */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
-                JL
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">Jane Lawson - 4:30 p.m.</p>
-                <p className="text-sm text-[#212223]">Next: Finalize brief</p>
-              </div>
-            </div>
-
-            {/* CoCounsel Finalize Response */}
-            <div className="mt-4 flex items-start gap-2">
-              <div className="shrink-0">
-                <Logo icon className="size-7" />
-              </div>
-              <div>
-                <p className="text-xs text-[#737373]">CoCounsel - 4:35 p.m.</p>
-              </div>
-            </div>
-
-            {/* Finalize Ready Card */}
-            <div className="mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4">
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm text-[#212223]">The brief finalization summary is ready for review:</span>
-              </div>
-
-              <p className="mb-3 text-sm text-[#212223]">
-                What would you like to do next?
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  size="sm"
-                  className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                >
-                  <Download className="mr-2 size-4" />
-                  Download brief
-                </Button>
-              </div>
-            </div>
-          </>
+        {activeTab === "sources" && (
+          <div className="text-sm text-[#737373]">No sources yet.</div>
         )}
-          </>
+
+        {activeTab === "versions" && (
+          <div className="text-sm text-[#737373]">No versions yet.</div>
         )}
       </div>
 
-      {/* Chat Input - show on Chat tab */}
-      {activeTab === "chat" && (
+      {/* Chat Input */}
+      {!hideInput && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
+          {/* Quoted message preview */}
+          {quotedText && (
+            <div className="mb-2 flex items-start gap-2 rounded-lg border-l-4 border-[#1d4b34] bg-[#f0f7f4] px-3 py-2">
+              <div className="flex-1">
+                <p className="text-xs font-medium text-[#1d4b34]">Replying to CoCounsel</p>
+                <p className="line-clamp-2 text-xs text-[#737373]">{quotedText}</p>
+              </div>
+              <button
+                onClick={() => setQuotedText(null)}
+                className="shrink-0 text-[#737373] hover:text-[#212223]"
+              >
+                <X className="size-3.5" />
+              </button>
+            </div>
+          )}
           <div className="rounded-2xl border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
             <Textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
               placeholder="Ask CoCounsel..."
               className="min-h-[40px] resize-none border-0 bg-transparent p-0 text-sm text-[#212223] placeholder:text-[#737373] focus-visible:ring-0"
             />
@@ -942,13 +392,42 @@ export function ChatDrawer({ className, isOpen = true, onToggle, onArgumentAdded
           </div>
           <p className="mt-3 text-center text-sm text-[#737373]">
             Your data is{" "}
-            <a href="#" className="text-[#212223] underline">
-              private and secure
-            </a>
-            .
+            <a href="#" className="text-[#212223] underline">private and secure</a>.
           </p>
         </div>
       )}
+    </div>
+  );
+}
+
+// Simple icon button quote/reply variation (MS Teams style)
+function MessageCard({
+  children,
+  onQuote,
+}: {
+  children: React.ReactNode;
+  onQuote: () => void;
+}) {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  return (
+    <div
+      className="relative mt-2 rounded-lg border border-[#e5e5e5] bg-white p-4"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Quote Reply Button */}
+      <button
+        onClick={onQuote}
+        className={cn(
+          "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
+          isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
+        )}
+        title="Quote reply"
+      >
+        <Reply className="size-3.5" />
+      </button>
+      {children}
     </div>
   );
 }
