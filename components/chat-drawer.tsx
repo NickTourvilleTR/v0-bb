@@ -199,7 +199,7 @@ export function ChatDrawer({
                   <p className="text-xs text-[#737373]">
                     {msg.type === "assistant" ? "CoCounsel" : msg.userName || "You"}{msg.timestamp ? ` - ${msg.timestamp}` : ""}
                   </p>
-                  <p className="text-sm text-[#212223]">{msg.content}</p>
+                  <p className="text-sm text-[#212223]" dangerouslySetInnerHTML={{ __html: msg.content }} />
                 </div>
               </div>
             ))}
