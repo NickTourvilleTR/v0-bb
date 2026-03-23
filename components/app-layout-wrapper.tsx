@@ -133,52 +133,6 @@ export function AppLayoutWrapper({
         {/* Inline chat input - visible when drawer is closed */}
         {!drawerOpen && onSendMessage && (
           <div className="absolute bottom-4 left-1/2 z-20 w-full max-w-xl -translate-x-1/2 px-4">
-            {/* Argue step card */}
-            {currentStep === "argue" && (
-              <div className="mb-3 rounded-xl border border-[#e5e5e5] bg-white p-4 shadow-lg">
-                <p className="mb-2 text-sm text-[#212223]">
-                  Review the potential arguments and select which ones to include in your brief.
-                </p>
-                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={onSkipToGenerateDraft}
-                    className="h-8 rounded-full border border-[#cccccc] bg-white px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                  >
-                    Skip to generate draft
-                  </button>
-                  <button
-                    onClick={onNextSupportingAuthority}
-                    className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                  >
-                    Next: Supporting authority
-                  </button>
-                </div>
-              </div>
-            )}
-            {/* Intake summary card */}
-            {currentStep === "intake" && (
-              <div className="mb-3 rounded-xl border border-[#e5e5e5] bg-white p-4 shadow-lg">
-                <p className="mb-2 text-sm text-[#212223]">
-                  Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
-                </p>
-                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={onSkipToGenerateDraft}
-                    className="h-8 rounded-full border border-[#cccccc] bg-white px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-                  >
-                    Skip to generate draft
-                  </button>
-                  <button
-                    onClick={onNextSelectArguments}
-                    className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]"
-                  >
-                    Next: Select arguments
-                  </button>
-                </div>
-              </div>
-            )}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
