@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { List, ScanEye } from "lucide-react";
+import { List, ScanEye, Plus } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface ArgueScreenProps {
@@ -208,6 +208,12 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
           </div>
         </div>
       </div>
+
+      {/* Floating Action Button */}
+      <button className="fixed bottom-24 right-8 flex items-center gap-2 rounded-full bg-[#1d4b34] px-5 py-3 text-white shadow-lg hover:bg-[#163d2a]">
+        <Plus className="size-5" />
+        <span className="font-medium">Add argument</span>
+      </button>
 
       {/* Outline Preview Overlay */}
       {showOutlinePreview && (
