@@ -28,6 +28,7 @@ import { IntakeScreen } from "@/components/intake-screen";
 import { ArgueScreen } from "@/components/argue-screen";
 import { LibraryScreen } from "@/components/library-screen";
 import { AppLayoutWrapper } from "@/components/app-layout-wrapper";
+import { LoginScreen } from "@/components/login-screen";
 import { Switch } from "@/components/ui/switch";
 import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp } from "lucide-react";
 import * as React from "react";
@@ -57,6 +58,31 @@ type Screen =
   | "finalize";
 
 export default function BriefBuilderPrototype() {
+  const [isAuthenticated, setIsAuthenticated] = React.useState<boolean | null>(null);
+
+  React.useEffect(() => {
+    fetch("/api/auth/check")
+      .then((res) => res.json())
+      .then((data) => setIsAuthenticated(data.authenticated))
+      .catch(() => setIsAuthenticated(false));
+  }, []);
+
+  if (isAuthenticated === null) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#fcfcfc]">
+        <div className="size-6 animate-spin rounded-full border-2 border-[#1d4b34] border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <LoginScreen onSuccess={() => setIsAuthenticated(true)} />;
+  }
+
+  return <AuthenticatedApp />;
+}
+
+function AuthenticatedApp() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [notesOpen, setNotesOpen] = React.useState(false);
