@@ -96,25 +96,23 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
   };
 
   return (
-    <div className={cn("flex flex-1 flex-col bg-[#fcfcfc]", className)}>
+    <div className={cn("relative flex flex-1 flex-col bg-[#fcfcfc]", className)}>
+      {/* Left sidebar buttons - fixed to left side, not scrollable */}
+      <div className="absolute left-6 top-8 z-10 flex flex-col gap-2">
+        <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+          <List className="size-5 text-[#212223]" />
+        </button>
+        <button 
+          onClick={() => setShowOutlinePreview(true)}
+          className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]"
+        >
+          <ScanEye className="size-5 text-[#1d4b34]" />
+        </button>
+      </div>
+
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8 pb-32">
-          {/* Left sidebar buttons - sticky */}
-          <div className="sticky top-8 flex h-fit flex-col gap-2">
-            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-              <List className="size-5 text-[#212223]" />
-            </button>
-            <button 
-              onClick={() => setShowOutlinePreview(true)}
-              className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]"
-            >
-              <ScanEye className="size-5 text-[#1d4b34]" />
-            </button>
-          </div>
-
-          {/* Main content column */}
-          <div className="flex-1 max-w-3xl">
+        <div className="mx-auto max-w-3xl px-6 py-8 pb-32 pl-24">
             {/* Header */}
             <div className="mb-6">
               <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
