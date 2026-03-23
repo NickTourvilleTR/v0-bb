@@ -210,9 +210,9 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
       </div>
 
       {/* Floating Action Button */}
-      <button className="fixed bottom-24 right-8 flex items-center gap-2 rounded-full bg-[#1d4b34] px-5 py-3 text-white shadow-lg hover:bg-[#163d2a]">
+      <button className="fixed bottom-24 left-80 flex items-center gap-2 rounded-full bg-[#1d4b34] px-5 py-3 text-white shadow-lg hover:bg-[#163d2a]">
         <Plus className="size-5" />
-        <span className="font-medium">Add argument</span>
+        <span className="font-medium">Add arguments</span>
       </button>
 
       {/* Outline Preview Overlay */}

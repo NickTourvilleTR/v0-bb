@@ -256,9 +256,9 @@ export function SupportingAuthoritiesPanel({
         </div>
       </div>
       {/* Floating Action Button */}
-      <button className="fixed bottom-24 right-8 flex items-center gap-2 rounded-full bg-[#1d4b34] px-5 py-3 text-white shadow-lg hover:bg-[#163d2a]">
+      <button className="fixed bottom-24 left-80 flex items-center gap-2 rounded-full bg-[#1d4b34] px-5 py-3 text-white shadow-lg hover:bg-[#163d2a]">
         <Plus className="size-5" />
-        <span className="font-medium">Add authority</span>
+        <span className="font-medium">Add authorities</span>
       </button>
 
       {showOutlinePreview && (
