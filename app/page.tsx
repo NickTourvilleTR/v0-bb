@@ -335,7 +335,7 @@ export default function BriefBuilderPrototype() {
               onNextSelectArguments={() => {
                 addChatMessage("user", "Next: Select arguments");
                 addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
-                setCurrentScreen("argue");
+                setCurrentScreen("argue2");
               }}
               onSkipToGenerateDraft={() => {
                 addChatMessage("user", "Skip to generate draft");
@@ -715,7 +715,7 @@ export default function BriefBuilderPrototype() {
   }
 
   // Argue layout
-        if (currentScreen === "argue") {
+        if (currentScreen === "argue2") {
     return (
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
