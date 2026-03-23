@@ -203,7 +203,6 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               Next: Supporting authority
             </Button>
           </div>
-          </div>
         </div>
       </div>
 
