@@ -30,7 +30,7 @@ import { LibraryScreen } from "@/components/library-screen";
 import { AppLayoutWrapper } from "@/components/app-layout-wrapper";
 import { LoginScreen } from "@/components/login-screen";
 import { Switch } from "@/components/ui/switch";
-import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp } from "lucide-react";
+import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp, Gavel } from "lucide-react";
 import * as React from "react";
 
 type Screen =
@@ -868,8 +868,8 @@ function AuthenticatedApp() {
                 </div>
                 <div className="flex w-full justify-start">
                   <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
-                    <PenLine className="size-4 text-[#737373]" />
-                    Help me draft an opinion
+                    <Gavel className="size-4 text-[#737373]" />
+                    Help me with judicial drafting
                   </button>
                 </div>
               </div>
