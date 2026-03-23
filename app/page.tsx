@@ -248,6 +248,7 @@ export default function BriefBuilderPrototype() {
 
   // Handler for stepper navigation
   const handleStepperClick = (stepId: string) => {
+    console.log("[v0] handleStepperClick called with stepId:", stepId);
     const stepToScreen: Record<string, Screen> = {
       intake: "intake",
       argue2: "argue2",
@@ -259,7 +260,9 @@ export default function BriefBuilderPrototype() {
       finalize: "finalize",
     };
     const targetScreen = stepToScreen[stepId];
+    console.log("[v0] targetScreen resolved to:", targetScreen);
     if (targetScreen) {
+      console.log("[v0] Setting currentScreen to:", targetScreen);
       setCurrentScreen(targetScreen);
     }
   };
@@ -715,7 +718,8 @@ export default function BriefBuilderPrototype() {
   }
 
   // Argue layout
-        if (currentScreen === "argue2") {
+        console.log("[v0] Current screen is:", currentScreen);
+  if (currentScreen === "argue2") {
     return (
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
