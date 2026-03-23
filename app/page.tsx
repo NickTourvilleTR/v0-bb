@@ -57,7 +57,6 @@ type Screen =
   | "finalize";
 
 export default function BriefBuilderPrototype() {
-  // Force refresh - all handlers are inline functions
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [notesOpen, setNotesOpen] = React.useState(false);
@@ -87,11 +86,6 @@ export default function BriefBuilderPrototype() {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
   
-  // Handler for inline chat input (when drawer is closed)
-  const handleInlineSend = React.useCallback((message: string) => {
-    addChatMessage("user", message);
-  }, []);
-
   // Helper function to add a message to the chat
   const addChatMessage = (type: "user" | "assistant", content: string) => {
     const now = new Date();
@@ -103,6 +97,11 @@ export default function BriefBuilderPrototype() {
       timestamp,
       userName: type === "user" ? "Jane Lawson" : undefined
     }]);
+  };
+
+  // Handler for inline chat input (when drawer is closed)
+  const handleInlineSend = (message: string) => {
+    addChatMessage("user", message);
   };
 
   // Auto-scroll to bottom when screen changes with smooth animation

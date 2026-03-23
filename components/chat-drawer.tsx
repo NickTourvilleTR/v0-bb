@@ -19,7 +19,7 @@ interface Message {
 interface ChatDrawerProps {
   isOpen: boolean;
   onToggle: () => void;
-  currentStep?: "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
+  currentStep?: "library" | "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
   onNextContraryAuthorities?: () => void;
