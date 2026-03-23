@@ -96,7 +96,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
   };
 
   return (
-    <div className={cn("flex flex-1 flex-col bg-[#fcfcfc]", className)}>
+    <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8 pb-32">
