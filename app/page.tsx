@@ -864,6 +864,10 @@ function AuthenticatedApp() {
                   <LayoutGrid className="size-4 text-[#737373]" />
                   Analyze document sets...
                 </button>
+                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                  <Notebook className="size-4 text-[#737373]" />
+                  Help me draft an opinion
+                </button>
               </div>
             </div>
           </main>
