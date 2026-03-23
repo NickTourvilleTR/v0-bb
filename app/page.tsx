@@ -848,26 +848,30 @@ function AuthenticatedApp() {
               </div>
               
               {/* Quick Action Buttons */}
-              <div className="flex flex-wrap justify-center gap-2">
-                <button 
-                  onClick={handleStartSubmit}
-                  className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
-                >
-                  <PenLine className="size-4 text-[#737373]" />
-                  Help me draft a legal brief
-                </button>
-                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
-                  <Search className="size-4 text-[#737373]" />
-                  Conduct deep research...
-                </button>
-                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
-                  <LayoutGrid className="size-4 text-[#737373]" />
-                  Analyze document sets...
-                </button>
-                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
-                  <Notebook className="size-4 text-[#737373]" />
-                  Help me draft an opinion
-                </button>
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-wrap justify-center gap-2">
+                  <button 
+                    onClick={handleStartSubmit}
+                    className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                  >
+                    <PenLine className="size-4 text-[#737373]" />
+                    Help me draft a legal brief
+                  </button>
+                  <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                    <Search className="size-4 text-[#737373]" />
+                    Conduct deep research...
+                  </button>
+                  <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                    <LayoutGrid className="size-4 text-[#737373]" />
+                    Analyze document sets...
+                  </button>
+                </div>
+                <div className="flex w-full justify-start">
+                  <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                    <PenLine className="size-4 text-[#737373]" />
+                    Help me draft an opinion
+                  </button>
+                </div>
               </div>
             </div>
           </main>
