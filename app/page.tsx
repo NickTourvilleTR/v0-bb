@@ -6,7 +6,6 @@ import { CocoHeader } from "@/components/coco-header";
 import { CocoChatMessage } from "@/components/coco-chat-message";
 import { BriefBuilderCard } from "@/components/brief-builder-card";
 import { JudicialWorkProductCard } from "@/components/judicial-work-product-card";
-import { JudicialCourtCard } from "@/components/judicial-court-card";
 import { BriefBuilderTypeCard } from "@/components/brief-builder-type-card";
 import { BriefBuilderUploadCard } from "@/components/brief-builder-upload-card";
 import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-combined-details-card";
@@ -39,7 +38,6 @@ type Screen =
   | "start"
   | "library"
   | "judicial-work-product"
-  | "judicial-court"
   | "motion-search"
   | "brief-type"
   | "file-upload"
@@ -161,15 +159,11 @@ function AuthenticatedApp() {
   };
 
   const handleWorkProductSubmit = (workProductId: string) => {
-    const labels: Record<string, string> = {
-      order: "Order",
-      opinion: "Opinion",
-      "bench-memo": "Bench memo",
-      other: "Draft another document",
-    };
-    addChatMessage("user", labels[workProductId] || workProductId);
-    addChatMessage("assistant", "Which court is this for?");
-    setCurrentScreen("judicial-court");
+    if (workProductId === "order") {
+      addChatMessage("user", "Order");
+      addChatMessage("assistant", "Sure, I can help you draft an opinion. To provide you with the most useful guidance, I should start by analyzing the relevant briefs. You can also upload any pertinent records, prior court materials, templates, or other documents you would like to use for your opinion.");
+      setCurrentScreen("file-upload");
+    }
   };
 
   const handleLibraryClick = () => {
@@ -320,23 +314,22 @@ function AuthenticatedApp() {
   const screenIndex = {
     start: 0,
     "judicial-work-product": 1,
-    "judicial-court": 2,
     "motion-search": 1,
     "brief-type": 2,
-    "file-upload": 3,
-    "uploading": 4,
-  "case-details": 5,
-  "ready-to-build": 6,
-    "generating": 9,
-"intake": 10,
-  "argue2": 11,
-    "support-loading": 12,
-    "support": 13,
-    "distinguish": 14,
-    "outline": 15,
-    "outline-loading": 16,
-    "outline-ready": 17,
-    "draft": 18,
+    "file-upload": 2,
+    "uploading": 3,
+  "case-details": 4,
+  "ready-to-build": 5,
+    "generating": 8,
+"intake": 9,
+  "argue2": 10,
+    "support-loading": 11,
+    "support": 12,
+    "distinguish": 13,
+    "outline": 14,
+    "outline-loading": 15,
+    "outline-ready": 16,
+    "draft": 17,
     "draft-loading": 19,
     "draft-ready": 20,
     "verify": 21,
@@ -950,19 +943,6 @@ function AuthenticatedApp() {
                   </CocoChatMessage>
                 )}
 
-                {/* Judicial Court Card */}
-                {flowType === "judicial" && isAtOrPast("judicial-court") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
-                    <JudicialCourtCard
-                      onSubmit={() => {}}
-                    />
-                  </CocoChatMessage>
-                )}
-
                 {/* Motion Search Card */}
                 {flowType === "brief" && isAtOrPast("motion-search") && (
                   <CocoChatMessage
@@ -1015,6 +995,9 @@ function AuthenticatedApp() {
                       showFile={isAtOrPast("uploading")}
                       disabled={isAtOrPast("uploading")}
                       onUpload={handleFileUpload}
+                      headerTitle={flowType === "judicial" ? "Upload documents" : "Upload documents"}
+                      description={flowType === "judicial" ? "Sure, I can help you draft an opinion. To provide you with the most useful guidance, I should start by analyzing the relevant briefs. You can also upload any pertinent records, prior court materials, templates, or other documents you would like to use for your opinion." : "To provide you with the most useful guidance, I should start by analyzing the original complaint. You can also upload any pertinent exhibits, and other relevant documents."}
+                      tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
                     />
                   </CocoChatMessage>
                 )}
