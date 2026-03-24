@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, ScanEye, Plus } from "lucide-react";
+import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface Citation {
@@ -70,43 +70,46 @@ const defaultAuthorities: ArgumentAuthority[] = [
   },
 ];
 
-// Judicial flow authorities - two separate claims
-const judicialAuthorities: ArgumentAuthority[] = [
+interface JudicialClaim {
+  id: string;
+  title: string;
+  plaintiffPoints: string[];
+  defendantPoints: string[];
+}
+
+const judicialClaims: JudicialClaim[] = [
   {
     id: "breach-of-contract",
     title: "Breach of contract",
-    citations: [
-      {
-        id: "judicial-1",
-        name: "Placeholder Case 1",
-        citation: "123 F.3d 456 (9th Cir. 2024)",
-        badges: ["Insurance", "Contract"],
-        description: "Placeholder description for breach of contract case.",
-        supportPoints: [
-          "Placeholder support point 1",
-          "Placeholder support point 2",
-        ],
-      },
+    plaintiffPoints: [
+      "Plaintiff alleges they had a valid insurance contract with Richmond that required them to indemnify and pay benefits.",
+      "Plaintiff claims they performed all required conditions under the policy and therefore expected coverage, peace of mind, and financial protection.",
+      "Plaintiff says Defendant failed and refused to pay any benefits, causing damages.",
+    ],
+    defendantPoints: [
+      "The policy only covers amounts the insured is legally required to pay as \"damages\", and Richmond argues these remediation expenses were voluntary cleanup costs, not court-ordered damages.",
+      "Richmond says there was no lawsuit or court order requiring DG Plumbing to pay these amounts, so the claim falls outside the policy's insuring agreement.",
+      "Richmond also argues DG Plumbing violated the policy's \"no voluntary payments\" provision by incurring remediation expenses without Richmond's consent, which independently bars coverage.",
     ],
   },
   {
     id: "bad-faith",
     title: "Bad faith",
-    citations: [
-      {
-        id: "judicial-2",
-        name: "Placeholder Case 2",
-        citation: "789 F.3d 012 (9th Cir. 2024)",
-        badges: ["Bad faith", "Insurance"],
-        description: "Placeholder description for bad faith case.",
-        supportPoints: [
-          "Placeholder support point 1",
-          "Placeholder support point 2",
-        ],
-      },
+    plaintiffPoints: [
+      "Plaintiff alleges Richmond wrongfully withheld benefits due under the policy, including by denying the claim and delaying payment without proper cause.",
+      "Richmond handled the claim unfairly by failing to investigate thoroughly, objectively, and fairly, delaying claim processing, misrepresenting policy terms, and failing to communicate properly.",
+      "Plaintiff further alleges Richmond violated California insurance statutes and claims-handling regulations, and that its conduct was intentional, malicious, and oppressive.",
+    ],
+    defendantPoints: [
+      "Under California law, a bad faith claim generally requires that the insurer first owed benefits under the policy.",
+      "Because Richmond argues the policy did not cover the remediation expenses, it says DG Plumbing cannot show benefits were wrongfully withheld.",
+      "Richmond characterizes the bad faith claim as a \"tagalong\" claim that rises or falls with the contract claim, so if the contract claim is dismissed, the bad faith claim should be dismissed too.",
     ],
   },
 ];
+
+// Kept for brief flow
+const judicialAuthorities: ArgumentAuthority[] = [];
 
 interface SupportingAuthoritiesPanelProps {
   className?: string;
@@ -124,8 +127,20 @@ export function SupportingAuthoritiesPanel({
   flowType = "brief",
 }: SupportingAuthoritiesPanelProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
-  const [selectedCitations, setSelectedCitations] = React.useState<string[]>(
-    flowType === "judicial" ? ["judicial-1", "judicial-2"] : ["corbello", "biani"]
+  const [selectedCitations, setSelectedCitations] = React.useState<string[]>(["corbello", "biani"]);
+
+  // Judicial: per-claim decision state
+  const [decisions, setDecisions] = React.useState<Record<string, "plaintiff" | "defendant" | "neither" | null>>(
+    Object.fromEntries(judicialClaims.map((c) => [c.id, null]))
+  );
+  const [comments, setComments] = React.useState<Record<string, string>>(
+    Object.fromEntries(judicialClaims.map((c) => [c.id, "Motion to Dismiss denied"]))
+  );
+  const [editingComment, setEditingComment] = React.useState<Record<string, boolean>>(
+    Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
+  );
+  const [showComment, setShowComment] = React.useState<Record<string, boolean>>(
+    Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
   );
 
   const toggleCitation = (citationId: string) => {
@@ -136,7 +151,7 @@ export function SupportingAuthoritiesPanel({
     );
   };
 
-  const authorities = flowType === "judicial" ? judicialAuthorities : defaultAuthorities;
+  const authorities = defaultAuthorities;
 
   return (
     <div className={cn("flex h-full flex-col overflow-y-auto", className)}>
@@ -165,122 +180,203 @@ export function SupportingAuthoritiesPanel({
           </div>
 
         {/* Argument Sections */}
-        {authorities.map((authority, authorityIndex) => (
-          <div key={authority.id} className={authorityIndex > 0 ? "mt-8" : ""}>
-            {/* Section Header */}
-            <h2 className="mb-4 text-lg font-semibold text-[#212223]">
-              {flowType === "judicial" ? authority.title : `${authorityIndex + 1}. ${authority.title}`}
-            </h2>
+        {flowType === "judicial" ? (
+          // Judicial: traditional two-column table + radio decisions
+          judicialClaims.map((claim, claimIndex) => {
+            const decision = decisions[claim.id];
+            const isEditing = editingComment[claim.id];
+            const commentVisible = showComment[claim.id];
 
-            {/* Table Container */}
-            <div className="rounded-lg border border-[#e5e5e5] bg-white">
-              {/* Table Header */}
-              <div className="flex border-b border-[#e5e5e5]">
-                <div className="flex w-1/2 items-center gap-3 bg-[#f5f7f6] px-4 py-3">
-                  <Checkbox
-                    checked={authority.citations.every((c) => selectedCitations.includes(c.id))}
-                    onCheckedChange={() => {
-                      const allSelected = authority.citations.every((c) => selectedCitations.includes(c.id));
-                      if (allSelected) {
-                        setSelectedCitations((prev) => prev.filter((id) => !authority.citations.some((c) => c.id === id)));
-                      } else {
-                        setSelectedCitations((prev) => [...new Set([...prev, ...authority.citations.map((c) => c.id)])]);
-                      }
-                    }}
-                    className="border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
-                  />
-                  <span className="font-semibold text-[#212223]">Citations</span>
-                  <span className="text-sm text-[#737373]">
-                    • {authority.citations.filter((c) => selectedCitations.includes(c.id)).length} selected
-                  </span>
-                </div>
-                <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-white px-6 py-3">
-                  <span className="font-medium text-[#737373]">
-                    How this supports the argument
-                  </span>
-                </div>
-              </div>
+            return (
+              <div key={claim.id} className={claimIndex > 0 ? "mt-10" : ""}>
+                {/* Section heading */}
+                <h2 className="mb-4 text-lg font-semibold text-[#212223]">{claim.title}</h2>
 
-              {/* Citation Rows */}
-              {authority.citations.map((citation, index) => (
-                <div
-                  key={citation.id}
-                  className={cn(
-                    "flex",
-                    index < authority.citations.length - 1 && "border-b border-[#e5e5e5]"
-                  )}
-                >
-                  {/* Left Column - Citation Details */}
-                  <div
-                    className={cn(
-                      "w-1/2 p-4",
-                      selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white"
-                    )}
-                  >
-                    <div className="flex items-start gap-3">
-                      <Checkbox
-                        checked={selectedCitations.includes(citation.id)}
-                        onCheckedChange={() => toggleCitation(citation.id)}
-                        className="mt-0.5 border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
-                      />
-                      <div className="flex-1">
-                        {/* Case Name with Link */}
-                        <div className="flex items-center gap-1.5">
-                          <a
-                            href="#"
-                            className="font-medium text-[#2e6b5c] hover:underline"
-                          >
-                            {citation.name}
-                          </a>
-                          <Notebook className="size-3.5 text-[#2e6b5c]" />
-                        </div>
-                        
-                        {/* Citation Reference */}
-                        <p className="text-sm text-[#737373]">{citation.citation}</p>
-                        
-                        {/* Badges */}
-                        <div className="mt-2 flex flex-wrap gap-1.5">
-                          {citation.badges.map((badge) => (
-                            <span
-                              key={badge}
-                              className="rounded bg-[#ebf0ed] px-2 py-0.5 text-xs text-[#1d4b34]"
-                            >
-                              {badge}
-                            </span>
-                          ))}
-                        </div>
-                        
-                        {/* What this case is about */}
-                        <div className="mt-4">
-                          <p className="text-sm font-semibold text-[#212223]">
-                            What this case is about:
-                          </p>
-                          <p className="mt-1 text-sm text-[#212223]">
-                            {citation.description}
-                          </p>
-                        </div>
-                      </div>
+                {/* Table */}
+                <div className="overflow-hidden rounded-lg border border-[#e5e5e5] bg-white">
+                  {/* Table header */}
+                  <div className="flex border-b border-[#e5e5e5]">
+                    <div className="w-1/2 bg-[#f2f2f2] px-5 py-3">
+                      <span className="text-sm font-semibold text-[#212223]">{"Plaintiff's claims"}</span>
+                    </div>
+                    <div className="w-1/2 border-l border-[#e5e5e5] bg-[#f2f2f2] px-5 py-3">
+                      <span className="text-sm font-semibold text-[#212223]">{"Defendant's response"}</span>
                     </div>
                   </div>
 
-                  {/* Right Column - Support Points */}
-                  <div className={cn(
-                    "w-1/2 border-l border-dashed border-[#d2d2d2] p-4 pl-6",
-                    selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white"
-                  )}>
-                    <ul className="list-disc space-y-4 pl-4 marker:text-[#212223]">
-                      {citation.supportPoints.map((point, pointIndex) => (
-                        <li key={pointIndex} className="text-sm leading-relaxed text-[#212223]">
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
+                  {/* Table body - rows paired by index */}
+                  {Array.from({ length: Math.max(claim.plaintiffPoints.length, claim.defendantPoints.length) }).map((_, rowIdx) => (
+                    <div
+                      key={rowIdx}
+                      className={cn("flex", rowIdx < Math.max(claim.plaintiffPoints.length, claim.defendantPoints.length) - 1 && "border-b border-[#e5e5e5]")}
+                    >
+                      <div className="w-1/2 px-5 py-4">
+                        <p className="text-sm leading-relaxed text-[#212223]">{claim.plaintiffPoints[rowIdx] ?? ""}</p>
+                      </div>
+                      <div className="w-1/2 border-l border-[#e5e5e5] px-5 py-4">
+                        <p className="text-sm leading-relaxed text-[#212223]">{claim.defendantPoints[rowIdx] ?? ""}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Radio options */}
+                <div className="mt-4 flex items-center gap-6">
+                  {(["plaintiff", "defendant", "neither"] as const).map((option) => {
+                    const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
+                    return (
+                      <label key={option} className="flex cursor-pointer items-center gap-2">
+                        <input
+                          type="radio"
+                          name={`decision-${claim.id}`}
+                          value={option}
+                          checked={decision === option}
+                          onChange={() => {
+                            setDecisions((prev) => ({ ...prev, [claim.id]: option }));
+                            if (option === "plaintiff") {
+                              setShowComment((prev) => ({ ...prev, [claim.id]: true }));
+                            } else {
+                              setShowComment((prev) => ({ ...prev, [claim.id]: false }));
+                              setEditingComment((prev) => ({ ...prev, [claim.id]: false }));
+                            }
+                          }}
+                          className="accent-[#1d4b34]"
+                        />
+                        <span className="text-sm text-[#212223]">{labels[option]}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+                {/* Comment area - shown when Agree with Plaintiff selected */}
+                {commentVisible && (
+                  <div className="mt-3">
+                    {isEditing ? (
+                      <div className="flex flex-col gap-2">
+                        <textarea
+                          className="w-full rounded-lg border border-[#e5e5e5] px-4 py-3 text-sm text-[#212223] focus:border-[#1d4b34] focus:outline-none"
+                          rows={3}
+                          value={comments[claim.id]}
+                          onChange={(e) => setComments((prev) => ({ ...prev, [claim.id]: e.target.value }))}
+                        />
+                        <div className="flex gap-2">
+                          <Button
+                            size="sm"
+                            className="rounded-full bg-[#1d4b34] px-4 text-white hover:bg-[#163d2a]"
+                            onClick={() => setEditingComment((prev) => ({ ...prev, [claim.id]: false }))}
+                          >
+                            Save
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
+                            onClick={() => setEditingComment((prev) => ({ ...prev, [claim.id]: false }))}
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex items-start gap-3 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                        <p className="flex-1 text-sm text-[#212223]">{comments[claim.id]}</p>
+                        <button
+                          onClick={() => setEditingComment((prev) => ({ ...prev, [claim.id]: true }))}
+                          className="shrink-0 text-[#737373] hover:text-[#212223]"
+                        >
+                          <Pencil className="size-4" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Add comment button - only shown when comment not visible */}
+                {!commentVisible && (
+                  <div className="mt-3">
+                    <button
+                      onClick={() => setShowComment((prev) => ({ ...prev, [claim.id]: true }))}
+                      className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                    >
+                      <MessageSquarePlus className="size-4 text-[#737373]" />
+                      Add comment
+                    </button>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        ) : (
+          // Brief flow: original checkbox-based citation tables
+          authorities.map((authority, authorityIndex) => (
+            <div key={authority.id} className={authorityIndex > 0 ? "mt-8" : ""}>
+              <h2 className="mb-4 text-lg font-semibold text-[#212223]">
+                {authorityIndex + 1}. {authority.title}
+              </h2>
+              <div className="rounded-lg border border-[#e5e5e5] bg-white">
+                <div className="flex border-b border-[#e5e5e5]">
+                  <div className="flex w-1/2 items-center gap-3 bg-[#f5f7f6] px-4 py-3">
+                    <Checkbox
+                      checked={authority.citations.every((c) => selectedCitations.includes(c.id))}
+                      onCheckedChange={() => {
+                        const allSelected = authority.citations.every((c) => selectedCitations.includes(c.id));
+                        if (allSelected) {
+                          setSelectedCitations((prev) => prev.filter((id) => !authority.citations.some((c) => c.id === id)));
+                        } else {
+                          setSelectedCitations((prev) => [...new Set([...prev, ...authority.citations.map((c) => c.id)])]);
+                        }
+                      }}
+                      className="border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
+                    />
+                    <span className="font-semibold text-[#212223]">Citations</span>
+                    <span className="text-sm text-[#737373]">
+                      • {authority.citations.filter((c) => selectedCitations.includes(c.id)).length} selected
+                    </span>
+                  </div>
+                  <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-white px-6 py-3">
+                    <span className="font-medium text-[#737373]">How this supports the argument</span>
                   </div>
                 </div>
-              ))}
+                {authority.citations.map((citation, index) => (
+                  <div key={citation.id} className={cn("flex", index < authority.citations.length - 1 && "border-b border-[#e5e5e5]")}>
+                    <div className={cn("w-1/2 p-4", selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white")}>
+                      <div className="flex items-start gap-3">
+                        <Checkbox
+                          checked={selectedCitations.includes(citation.id)}
+                          onCheckedChange={() => toggleCitation(citation.id)}
+                          className="mt-0.5 border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
+                        />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-1.5">
+                            <a href="#" className="font-medium text-[#2e6b5c] hover:underline">{citation.name}</a>
+                            <Notebook className="size-3.5 text-[#2e6b5c]" />
+                          </div>
+                          <p className="text-sm text-[#737373]">{citation.citation}</p>
+                          <div className="mt-2 flex flex-wrap gap-1.5">
+                            {citation.badges.map((badge) => (
+                              <span key={badge} className="rounded bg-[#ebf0ed] px-2 py-0.5 text-xs text-[#1d4b34]">{badge}</span>
+                            ))}
+                          </div>
+                          <div className="mt-4">
+                            <p className="text-sm font-semibold text-[#212223]">What this case is about:</p>
+                            <p className="mt-1 text-sm text-[#212223]">{citation.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={cn("w-1/2 border-l border-dashed border-[#d2d2d2] p-4 pl-6", selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white")}>
+                      <ul className="list-disc space-y-4 pl-4 marker:text-[#212223]">
+                        {citation.supportPoints.map((point, pointIndex) => (
+                          <li key={pointIndex} className="text-sm leading-relaxed text-[#212223]">{point}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
 
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-6">
