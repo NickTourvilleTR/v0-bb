@@ -237,8 +237,8 @@ export function SupportingAuthoritiesPanel({
                   </div>
 
                   {/* Decision row — full width, header background, no column divider */}
-                  <div className="bg-[#f2f2f2] px-5 py-4">
-                    <p className="mb-3 text-sm font-semibold text-[#212223]">Decision</p>
+                  <div className="bg-[#ebf0ed] px-5 py-4">
+                    <p className="mb-3 text-sm font-semibold text-[#212223]">Decision:</p>
                     <div className="flex items-center gap-6">
                       {(["plaintiff", "defendant", "neither"] as const).map((option) => {
                         const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
