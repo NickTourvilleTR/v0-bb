@@ -78,8 +78,63 @@ const arguments_data = [
   },
 ];
 
+const judicial_arguments_data = [
+  {
+    id: "breach-of-contract",
+    number: 1,
+    title: "Breach of Insurance Contract",
+    points: [
+      "Plaintiff claims Richmond National breached the insurance policy by failing to pay benefits for their remediation claims even though they say they complied with the policy.",
+      "Plaintiff alleges they had a valid insurance contract with Richmond that required them to indemnify and pay benefits.",
+      "Plaintiff claims they performed all required conditions under the policy and therefore expected coverage, peace of mind, and financial protection.",
+      "Plaintiff says Defendant failed and refused to pay any benefits, causing damages.",
+    ],
+    appliesTo: "Plaintiff party 1: 516, Inc. dba DG Plumbing | Source: COMPLAINT filed by 516, Inc.",
+    checked: true,
+  },
+  {
+    id: "bad-faith-claim",
+    number: 2,
+    title: "Bad faith claim",
+    points: [
+      "Plaintiff claims Richmond acted in bad faith by unreasonably delaying, denying, and mishandling their insurance claim.",
+      "Plaintiff alleges Richmond wrongfully withheld benefits due under the policy, including by denying the claim and delaying payment without proper cause.",
+      "Richmond handled the claim unfairly by failing to investigate thoroughly, objectively, and fairly, delaying claim processing, misrepresenting policy terms, and failing to communicate properly.",
+      "Plaintiff further alleges Richmond violated California insurance statutes and claims-handling regulations, and that its conduct was intentional, malicious, and oppressive.",
+    ],
+    appliesTo: "Defendant party 1: Richmond National Insurance Company",
+    checked: true,
+  },
+  {
+    id: "breach-of-contract-defense",
+    number: 3,
+    title: "Breach of Contract Claim Defense",
+    points: [
+      "Richmond argues the breach of contract claim fails because the policy did not cover DG Plumbing's remediation costs, so denying the claim was not a breach.",
+      "The policy only covers amounts the insured is legally required to pay as \"damages\", and Richmond argues these remediation expenses were voluntary cleanup costs, not court-ordered damages.",
+      "Richmond says there was no lawsuit or court order requiring DG Plumbing to pay these amounts, so the claim falls outside the policy's insuring agreement.",
+      "Richmond also argues DG Plumbing violated the policy's \"no voluntary payments\" provision by incurring remediation expenses without Richmond's consent, which independently bars coverage.",
+    ],
+    appliesTo: "Source: NOTICE OF MOTION AND MOTION to Dismiss Case",
+    checked: false,
+  },
+  {
+    id: "bad-faith-defense",
+    number: 4,
+    title: "Bad Faith Claim Defense",
+    points: [
+      "Richmond argues the bad faith claim fails because there can be no bad faith if there was no coverage owed under the policy.",
+      "Under California law, a bad faith claim generally requires that the insurer first owed benefits under the policy.",
+      "Because Richmond argues the policy did not cover the remediation expenses, it says DG Plumbing cannot show benefits were wrongfully withheld.",
+      "Richmond characterizes the bad faith claim as a \"tagalong\" claim that rises or falls with the contract claim, so if the contract claim is dismissed, the bad faith claim should be dismissed too.",
+    ],
+    appliesTo: "Source: NOTICE OF MOTION AND MOTION to Dismiss Case",
+    checked: false,
+  },
+];
+
 export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: ArgueScreenProps) {
-  const [argumentsState, setArgumentsState] = React.useState(arguments_data);
+  const [argumentsState, setArgumentsState] = React.useState(flowType === "judicial" ? judicial_arguments_data : arguments_data);
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
 
   const selectedCount = argumentsState.filter(arg => arg.checked).length;
