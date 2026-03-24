@@ -524,7 +524,7 @@ function AuthenticatedApp() {
     );
   }
 
-  // Draft layout (initial)
+  // Draft layout (initial - Create your draft)
   if (currentScreen === "draft") {
     return (
       <div className="flex h-screen bg-white">
@@ -539,11 +539,10 @@ function AuthenticatedApp() {
             setNotesOpen={setNotesOpen}
             messages={chatMessages}
             onSendMessage={handleInlineSend}
-            currentStep="draft-ready"
-            onNextVerify={handleNextVerify}
+            currentStep="draft"
             showVersionsTab={true}
           >
-            <DraftEditor onNextVerify={handleNextVerify} />
+            <DraftScreen onGenerateDraft={handleGenerateDraft} />
           </AppLayoutWrapper>
         </div>
       </div>
