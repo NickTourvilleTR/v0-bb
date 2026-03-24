@@ -12,6 +12,7 @@ interface ArgueScreenProps {
   onNextSupportingAuthority?: () => void;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
 const arguments_data = [
@@ -77,7 +78,7 @@ const arguments_data = [
   },
 ];
 
-export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline }: ArgueScreenProps) {
+export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: ArgueScreenProps) {
   const [argumentsState, setArgumentsState] = React.useState(arguments_data);
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
 
@@ -118,10 +119,10 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
             {/* Header */}
             <div className="mb-6">
               <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-                ARGUE
+                {flowType === "judicial" ? "CLAIMS" : "ARGUE"}
               </p>
               <h1 className="text-2xl font-semibold text-[#212223]">
-                Select the desired arguments
+                {flowType === "judicial" ? "Select claims to decide on" : "Select the desired arguments"}
               </h1>
             </div>
 

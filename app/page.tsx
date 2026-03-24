@@ -800,6 +800,7 @@ function AuthenticatedApp() {
           >
             <div className="flex-1 overflow-y-auto">
               <ArgueScreen 
+                flowType={flowType}
                 onNextSupportingAuthority={handleNextSupportingAuthority}
                 onEditOutline={() => {
                   setCurrentScreen("outline");
