@@ -31,7 +31,7 @@ import { LibraryScreen } from "@/components/library-screen";
 import { AppLayoutWrapper } from "@/components/app-layout-wrapper";
 import { LoginScreen } from "@/components/login-screen";
 import { Switch } from "@/components/ui/switch";
-import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp, Gavel } from "lucide-react";
+import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp, Gavel, CheckCircle2 } from "lucide-react";
 import * as React from "react";
 
 type Screen =
@@ -642,19 +642,43 @@ function AuthenticatedApp() {
             }}
             showVersionsTab={true}
           >
-            <VerifyPanel 
-              onNextOpposition={() => {
-                addChatMessage("user", "Next: Opposition brief");
-                addChatMessage("assistant", "Now let's prepare for potential challenges. Review the anticipated opposition arguments.");
-                setCurrentScreen("distinguish");
-              }}
-              onSkipToFinalize={() => {
-                addChatMessage("user", "Skip to finalize");
-                addChatMessage("assistant", "Skipping ahead to finalize your brief.");
-                setCurrentScreen("finalize");
-              }}
-              onEditOutline={() => setCurrentScreen("outline")}
-            />
+            {flowType === "judicial" ? (
+              <div className="flex flex-1 flex-col items-center justify-center px-8">
+                <div className="mb-6">
+                  <CheckCircle2 className="size-16 text-[#737373]" />
+                </div>
+                <h1 className="mb-2 text-center text-2xl font-semibold text-[#212223]">
+                  Verify your draft
+                </h1>
+                <p className="mb-8 max-w-lg text-center text-[#737373]">
+                  This may take up to 10 minutes.
+                </p>
+                <button
+                  onClick={() => {
+                    addChatMessage("user", "Next: Finalize");
+                    addChatMessage("assistant", "Let's finalize your opinion.");
+                    setCurrentScreen("finalize");
+                  }}
+                  className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#163d2a]"
+                >
+                  Next: Finalize
+                </button>
+              </div>
+            ) : (
+              <VerifyPanel 
+                onNextOpposition={() => {
+                  addChatMessage("user", "Next: Opposition brief");
+                  addChatMessage("assistant", "Now let's prepare for potential challenges. Review the anticipated opposition arguments.");
+                  setCurrentScreen("distinguish");
+                }}
+                onSkipToFinalize={() => {
+                  addChatMessage("user", "Skip to finalize");
+                  addChatMessage("assistant", "Skipping ahead to finalize your brief.");
+                  setCurrentScreen("finalize");
+                }}
+                onEditOutline={() => setCurrentScreen("outline")}
+              />
+            )}
           </AppLayoutWrapper>
         </div>
       </div>
