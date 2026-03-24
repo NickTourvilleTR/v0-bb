@@ -303,17 +303,23 @@ export function ChatDrawer({
             {/* Finalize Step Card */}
             {currentStep === "finalize" && (
               <MessageCard
-                onQuote={() => handleQuote("The brief finalization summary is ready for review.")}
+                onQuote={() => handleQuote(flowType === "judicial" ? "The opinion finalization summary is ready for review." : "The brief finalization summary is ready for review.")}
               >
                 <div className="mb-3 flex items-center gap-2">
-                  <span className="text-sm text-[#212223]">The brief finalization summary is ready for review:</span>
+                  <span className="text-sm text-[#212223]">
+                    {flowType === "judicial" 
+                      ? "The opinion finalization summary is ready for review." 
+                      : "The brief finalization summary is ready for review:"}
+                  </span>
                 </div>
-                <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                  <li>All citations verified</li>
-                  <li>Table of contents generated</li>
-                  <li>Table of authorities complete</li>
-                  <li>Word count within limits</li>
-                </ul>
+                {flowType !== "judicial" && (
+                  <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                    <li>All citations verified</li>
+                    <li>Table of contents generated</li>
+                    <li>Table of authorities complete</li>
+                    <li>Word count within limits</li>
+                  </ul>
+                )}
                 <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" variant="outline" className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">
@@ -322,7 +328,7 @@ export function ChatDrawer({
                   </Button>
                   <Button size="sm" className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">
                     <Download className="mr-2 size-4" />
-                    Download brief
+                    {flowType === "judicial" ? "Download opinion" : "Download brief"}
                   </Button>
                 </div>
               </MessageCard>
