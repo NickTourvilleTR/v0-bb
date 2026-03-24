@@ -8,33 +8,16 @@ import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 interface IntakeScreenProps {
   className?: string;
   onNextSelectArguments?: () => void;
-  nextSelectArgumentsLabel?: string;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
-  flowType?: "brief" | "judicial";
-  uploadedFiles?: { name: string; type: string }[];
-  motionSummary?: React.ReactNode;
-  motionType?: string;
-  briefRole?: string;
-  caseDetails?: Record<string, string>;
 }
 
-export const judicialUploadedFiles = [
-  { name: "COMPLAINT filed by 516, Inc.", type: "P" },
-  { name: "NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
-  { name: "OPPOSITION to NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
-  { name: "Defendant's Objection and Request to Strike Plaintiff's Declarations", type: "W" },
-  { name: "REPLY In Support NOTICE OF MOTION AND MOTION to Dismiss Case", type: "W" },
+const uploadedFiles = [
+  { name: "Love – First Amended Complaint", type: "P" },
+  { name: "Quitclaim & Assignment Agreement", type: "P" },
+  { name: "Eat The Lemon Feb 2021 Manuscript", type: "W" },
+  { name: "One Italian Summer (lodged)", type: "W" },
 ];
-
-export const judicialCaseDetails = {
-  "Judge's name": "David O. Carter",
-  "Civil Action No.": "8:25-CV-01204",
-  "Court name": "United States District Court, C.D. California",
-  "Jurisdiction (sets the scope for your research)": "9th Circuit",
-  "Plaintiff party 1": "516, Inc. dba DG Plumbing",
-  "Defendant party 1": "Richmond National Insurance Company",
-};
 
 const argumentsSelected = [
   {
@@ -124,7 +107,7 @@ const argumentsSelected = [
   },
 ];
 
-export function IntakeScreen({ className, onNextSelectArguments, nextSelectArgumentsLabel = "Next: Select arguments", onSkipToGenerateDraft, onEditOutline }: IntakeScreenProps) {
+export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
@@ -291,7 +274,7 @@ export function IntakeScreen({ className, onNextSelectArguments, nextSelectArgum
                 onClick={onNextSelectArguments}
                 className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white hover:bg-[#163d2a]"
               >
-                {nextSelectArgumentsLabel}
+                Next: Select arguments
               </button>
             </div>
           </div>

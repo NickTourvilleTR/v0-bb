@@ -387,27 +387,13 @@ function AuthenticatedApp() {
             messages={chatMessages}
             currentStep="intake"
             onSendMessage={handleInlineSend}
-            nextSelectArgumentsLabel={flowType === "judicial" ? "Next: Review claims" : "Next: Select arguments"}
-            onNextSelectArguments={() => {
-              const label = flowType === "judicial" ? "Next: Review claims" : "Next: Select arguments";
-              addChatMessage("user", label);
-              addChatMessage("assistant", flowType === "judicial" ? "Review the claims I've identified and select which ones to include." : "Review the potential arguments I've identified and select which ones to include in your brief.");
-              setCurrentScreen("argue2");
-            }}
-            onSkipToGenerateDraft={() => {
-              addChatMessage("user", "Skip to generate draft");
-              addChatMessage("assistant", "Skipping ahead to draft generation with default arguments.");
-              setCurrentScreen("draft");
-            }}
           >
             <IntakeScreen 
               onNextSelectArguments={() => {
-                const label = flowType === "judicial" ? "Next: Review claims" : "Next: Select arguments";
-                addChatMessage("user", label);
-                addChatMessage("assistant", flowType === "judicial" ? "Review the claims I've identified and select which ones to include." : "Review the potential arguments I've identified and select which ones to include in your brief.");
+                addChatMessage("user", "Next: Select arguments");
+                addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
                 setCurrentScreen("argue2");
               }}
-              nextSelectArgumentsLabel={flowType === "judicial" ? "Next: Review claims" : "Next: Select arguments"}
               onSkipToGenerateDraft={() => {
                 addChatMessage("user", "Skip to generate draft");
                 addChatMessage("assistant", "Skipping ahead to draft generation with default arguments.");
