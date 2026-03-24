@@ -441,6 +441,7 @@ function AuthenticatedApp() {
             showVersionsTab={true}
           >
             <OutlineScreen 
+              flowType={flowType}
               onGenerateOutline={handleGenerateOutline} 
               onNextDraft={() => {
                 addChatMessage("user", "Skip to generate draft");
