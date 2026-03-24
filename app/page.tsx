@@ -6,6 +6,7 @@ import { CocoHeader } from "@/components/coco-header";
 import { CocoChatMessage } from "@/components/coco-chat-message";
 import { BriefBuilderCard } from "@/components/brief-builder-card";
 import { JudicialWorkProductCard } from "@/components/judicial-work-product-card";
+import { JudicialCourtCard } from "@/components/judicial-court-card";
 import { BriefBuilderTypeCard } from "@/components/brief-builder-type-card";
 import { BriefBuilderUploadCard } from "@/components/brief-builder-upload-card";
 import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-combined-details-card";
@@ -38,6 +39,7 @@ type Screen =
   | "start"
   | "library"
   | "judicial-work-product"
+  | "judicial-court"
   | "motion-search"
   | "brief-type"
   | "file-upload"
@@ -156,6 +158,18 @@ function AuthenticatedApp() {
     addChatMessage("user", "Help me with judicial drafting");
     addChatMessage("assistant", "I can help you draft judicial work product. What type of document are you working on?");
     setCurrentScreen("judicial-work-product");
+  };
+
+  const handleWorkProductSubmit = (workProductId: string) => {
+    const labels: Record<string, string> = {
+      order: "Order",
+      opinion: "Opinion",
+      "bench-memo": "Bench memo",
+      other: "Draft another document",
+    };
+    addChatMessage("user", labels[workProductId] || workProductId);
+    addChatMessage("assistant", "Which court is this for?");
+    setCurrentScreen("judicial-court");
   };
 
   const handleLibraryClick = () => {
@@ -306,6 +320,7 @@ function AuthenticatedApp() {
   const screenIndex = {
     start: 0,
     "judicial-work-product": 1,
+    "judicial-court": 2,
     "motion-search": 1,
     "brief-type": 2,
     "file-upload": 3,
@@ -929,8 +944,21 @@ function AuthenticatedApp() {
                     className="mb-6"
                   >
                     <JudicialWorkProductCard
-                      onSubmit={() => {}}
+                      onSubmit={handleWorkProductSubmit}
                       onQuote={handleQuote}
+                    />
+                  </CocoChatMessage>
+                )}
+
+                {/* Judicial Court Card */}
+                {flowType === "judicial" && isAtOrPast("judicial-court") && (
+                  <CocoChatMessage
+                    type="assistant"
+                    timestamp="9:10 a.m."
+                    className="mb-6"
+                  >
+                    <JudicialCourtCard
+                      onSubmit={() => {}}
                     />
                   </CocoChatMessage>
                 )}
