@@ -126,7 +126,7 @@ const judicial_claims_grouped = [
       },
       {
         id: "bad-faith-defense",
-        title: "Bad Faith Claim Defense",
+        title: "Bad Faith Claim",
         sourceFile: "NOTICE OF MOTION AND MOTION to Dismiss Case",
         summary: "Richmond argues the bad faith claim fails because there can be no bad faith if there was no coverage owed under the policy.",
         points: [
@@ -134,7 +134,7 @@ const judicial_claims_grouped = [
           "Because Richmond argues the policy did not cover the remediation expenses, it says DG Plumbing cannot show benefits were wrongfully withheld.",
           "Richmond characterizes the bad faith claim as a \"tagalong\" claim that rises or falls with the contract claim, so if the contract claim is dismissed, the bad faith claim should be dismissed too.",
         ],
-        checked: false,
+        checked: true,
       },
     ],
   },
@@ -217,7 +217,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               <span>Select all</span>
             </button>
             <span className="text-sm text-[#737373]">•</span>
-            <span className="text-sm text-[#737373]">{selectedCount} Arguments selected</span>
+              <span className="text-sm text-[#737373]">{selectedCount} {flowType === "judicial" ? "Claims" : "Arguments"} selected</span>
           </div>
 
           {/* Arguments List */}

@@ -154,7 +154,7 @@ export function ArgumentsPanel({ className, showUserArgument = false, onEditOutl
             Select all
           </label>
           <span className="text-sm text-[#737373]">
-            • {selectedArgs.length} Arguments selected
+            • {selectedArgs.length} {flowType === "judicial" ? "Claims" : "Arguments"} selected
           </span>
         </div>
 
