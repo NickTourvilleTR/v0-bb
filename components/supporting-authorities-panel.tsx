@@ -211,7 +211,7 @@ export function SupportingAuthoritiesPanel({
                   </div>
 
                   {/* Single content row */}
-                  <div className="flex">
+                  <div className="flex border-b border-[#e5e5e5]">
                     <div className="w-1/2 px-5 py-4">
                       <p className="mb-3 text-sm leading-relaxed text-[#212223]">{claim.plaintiffSummary}</p>
                       <ul className="space-y-2">
@@ -235,94 +235,94 @@ export function SupportingAuthoritiesPanel({
                       </ul>
                     </div>
                   </div>
-                </div>
 
-                {/* Decision section */}
-                <div className="mt-6">
-                <p className="mb-3 text-sm font-semibold text-[#212223]">Decision</p>
-                <div className="flex items-center gap-6">
-                  {(["plaintiff", "defendant", "neither"] as const).map((option) => {
-                    const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
-                    return (
-                      <label key={option} className="flex cursor-pointer items-center gap-2">
-                        <input
-                          type="radio"
-                          name={`decision-${claim.id}`}
-                          value={option}
-                          checked={decision === option}
-                          onChange={() => {
-                            setDecisions((prev) => ({ ...prev, [claim.id]: option }));
-                            if (option === "plaintiff") {
-                              setShowComment((prev) => ({ ...prev, [claim.id]: true }));
-                            } else {
-                              setShowComment((prev) => ({ ...prev, [claim.id]: false }));
-                              setEditingComment((prev) => ({ ...prev, [claim.id]: false }));
-                            }
-                          }}
-                          className="accent-[#1d4b34]"
-                        />
-                        <span className="text-sm text-[#212223]">{labels[option]}</span>
-                      </label>
-                    );
-                  })}
-                </div>
+                  {/* Decision row — full width, header background, no column divider */}
+                  <div className="bg-[#f2f2f2] px-5 py-4">
+                    <p className="mb-3 text-sm font-semibold text-[#212223]">Decision</p>
+                    <div className="flex items-center gap-6">
+                      {(["plaintiff", "defendant", "neither"] as const).map((option) => {
+                        const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
+                        return (
+                          <label key={option} className="flex cursor-pointer items-center gap-2">
+                            <input
+                              type="radio"
+                              name={`decision-${claim.id}`}
+                              value={option}
+                              checked={decision === option}
+                              onChange={() => {
+                                setDecisions((prev) => ({ ...prev, [claim.id]: option }));
+                                if (option === "plaintiff") {
+                                  setShowComment((prev) => ({ ...prev, [claim.id]: true }));
+                                } else {
+                                  setShowComment((prev) => ({ ...prev, [claim.id]: false }));
+                                  setEditingComment((prev) => ({ ...prev, [claim.id]: false }));
+                                }
+                              }}
+                              className="accent-[#1d4b34]"
+                            />
+                            <span className="text-sm text-[#212223]">{labels[option]}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
 
-                {/* Comment area - shown when Agree with Plaintiff selected */}
-                {commentVisible && (
-                  <div className="mt-3">
-                    {isEditing ? (
-                      <div className="flex flex-col gap-2">
-                        <textarea
-                          className="w-full rounded-lg border border-[#e5e5e5] px-4 py-3 text-sm text-[#212223] focus:border-[#1d4b34] focus:outline-none"
-                          rows={3}
-                          value={comments[claim.id]}
-                          onChange={(e) => setComments((prev) => ({ ...prev, [claim.id]: e.target.value }))}
-                        />
-                        <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            className="rounded-full bg-[#1d4b34] px-4 text-white hover:bg-[#163d2a]"
-                            onClick={() => setEditingComment((prev) => ({ ...prev, [claim.id]: false }))}
-                          >
-                            Save
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
-                            onClick={() => setEditingComment((prev) => ({ ...prev, [claim.id]: false }))}
-                          >
-                            Cancel
-                          </Button>
-                        </div>
+                    {/* Comment area */}
+                    {commentVisible && (
+                      <div className="mt-3">
+                        {isEditing ? (
+                          <div className="flex flex-col gap-2">
+                            <textarea
+                              className="w-full rounded-lg border border-[#e5e5e5] bg-white px-4 py-3 text-sm text-[#212223] focus:border-[#1d4b34] focus:outline-none"
+                              rows={3}
+                              value={comments[claim.id]}
+                              onChange={(e) => setComments((prev) => ({ ...prev, [claim.id]: e.target.value }))}
+                            />
+                            <div className="flex gap-2">
+                              <Button
+                                size="sm"
+                                className="rounded-full bg-[#1d4b34] px-4 text-white hover:bg-[#163d2a]"
+                                onClick={() => setEditingComment((prev) => ({ ...prev, [claim.id]: false }))}
+                              >
+                                Save
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="rounded-full border-[#e5e5e5] bg-white px-4 text-[#212223] hover:bg-[#f7f7f7]"
+                                onClick={() => setEditingComment((prev) => ({ ...prev, [claim.id]: false }))}
+                              >
+                                Cancel
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-start gap-3 rounded-lg border border-[#e5e5e5] bg-white px-4 py-3">
+                            <p className="flex-1 text-sm text-[#212223]">{comments[claim.id]}</p>
+                            <button
+                              onClick={() => setEditingComment((prev) => ({ ...prev, [claim.id]: true }))}
+                              className="shrink-0 text-[#737373] hover:text-[#212223]"
+                            >
+                              <Pencil className="size-4" />
+                            </button>
+                          </div>
+                        )}
                       </div>
-                    ) : (
-                      <div className="flex items-start gap-3 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
-                        <p className="flex-1 text-sm text-[#212223]">{comments[claim.id]}</p>
+                    )}
+
+                    {/* Add comment button */}
+                    {!commentVisible && (
+                      <div className="mt-3">
                         <button
-                          onClick={() => setEditingComment((prev) => ({ ...prev, [claim.id]: true }))}
-                          className="shrink-0 text-[#737373] hover:text-[#212223]"
+                          onClick={() => setShowComment((prev) => ({ ...prev, [claim.id]: true }))}
+                          className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
                         >
-                          <Pencil className="size-4" />
+                          <MessageSquarePlus className="size-4 text-[#737373]" />
+                          Add comment
                         </button>
                       </div>
                     )}
                   </div>
-                )}
-
-                {/* Add comment button - only shown when comment not visible */}
-                {!commentVisible && (
-                  <div className="mt-3">
-                    <button
-                      onClick={() => setShowComment((prev) => ({ ...prev, [claim.id]: true }))}
-                      className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
-                    >
-                      <MessageSquarePlus className="size-4 text-[#737373]" />
-                      Add comment
-                    </button>
-                  </div>
-                )}
-                </div>{/* end Decision section */}
+                </div>
               </div>
             );
           })
