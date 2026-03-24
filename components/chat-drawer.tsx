@@ -335,7 +335,7 @@ export function ChatDrawer({
             <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
             <div className="flex flex-wrap gap-2">
               <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
-              <Button size="sm" onClick={onNextSelectArguments} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">{flowType === "judicial" ? "Next: Review claims" : "Next: Select arguments"}</Button>
+              <Button size="sm" onClick={onNextSelectArguments} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">{flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments"}</Button>
             </div>
           </div>
         </div>
