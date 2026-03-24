@@ -581,7 +581,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="draft-ready" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
             setDrawerOpen={setDrawerOpen}
