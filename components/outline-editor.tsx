@@ -12,17 +12,19 @@ import {
   Underline, 
   MoreHorizontal,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Upload
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface OutlineEditorProps {
   className?: string;
   onNextDraft?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
-export function OutlineEditor({ className, onNextDraft }: OutlineEditorProps) {
-  const [expandedSections, setExpandedSections] = React.useState<string[]>(["factual-background"]);
+export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: OutlineEditorProps) {
+  const [expandedSections, setExpandedSections] = React.useState<string[]>(flowType === "judicial" ? ["factual-procedural"] : ["factual-background"]);
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections((prev) =>
@@ -92,36 +94,163 @@ export function OutlineEditor({ className, onNextDraft }: OutlineEditorProps) {
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-6">
         <div className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8">
           {/* Header */}
-          <p className="mb-1 text-xs font-medium uppercase tracking-wider text-[#737373]">
-            OUTLINE
-          </p>
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">
+              OUTLINE
+            </p>
+            {flowType === "judicial" && (
+              <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] px-3 py-1.5 text-xs text-[#212223] hover:bg-[#f2f2f2]">
+                <Upload className="size-3" />
+                Upload an outline
+              </button>
+            )}
+          </div>
           <h1 className="mb-6 text-2xl font-semibold text-[#212223]">
             Confirm your outline selections
           </h1>
 
           {/* Document Length */}
           <div className="mb-6 rounded bg-[#f7f7f7] px-4 py-2">
-            <span className="text-sm text-[#212223]">Document length: ~17 pages</span>
+            <span className="text-sm text-[#212223]">Document length: {flowType === "judicial" ? "~15 pages" : "~17 pages"}</span>
           </div>
 
-          {/* Section I */}
-          <div className="border-b border-[#e5e5e5]">
-            <button
-              onClick={() => toggleSection("table-of-authorities")}
-              className="flex w-full items-center justify-between py-4"
-            >
-              <h2 className="text-lg font-semibold text-[#212223]">
-                I. TABLE OF AUTHORITIES
-              </h2>
-              {expandedSections.includes("table-of-authorities") ? (
-                <ChevronUp className="size-5 text-[#737373]" />
-              ) : (
-                <ChevronDown className="size-5 text-[#737373]" />
-              )}
-            </button>
-          </div>
+          {flowType === "judicial" ? (
+            // JUDICIAL FLOW OUTLINE
+            <>
+              {/* Section I: FACTUAL AND PROCEDURAL BACKGROUND */}
+              <div className="border-b border-[#e5e5e5]">
+                <button
+                  onClick={() => toggleSection("factual-procedural")}
+                  className="flex w-full items-center justify-between py-4"
+                >
+                  <h2 className="text-lg font-semibold text-[#212223]">
+                    I. FACTUAL AND PROCEDURAL BACKGROUND
+                  </h2>
+                  {expandedSections.includes("factual-procedural") ? (
+                    <ChevronUp className="size-5 text-[#737373]" />
+                  ) : (
+                    <ChevronDown className="size-5 text-[#737373]" />
+                  )}
+                </button>
+
+                {expandedSections.includes("factual-procedural") && (
+                  <div className="pb-6 space-y-6">
+                    {/* Subsection a: Plaintiff's Allegations */}
+                    <div>
+                      <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                        a. Plaintiff&apos;s Allegations
+                      </h3>
+                      <p className="text-sm text-[#212223]">
+                        Plaintiff 516, Inc. dba DG Plumbing alleges that it was insured under a policy issued by Defendant Richmond National Insurance Company. Plaintiff contends the policy required Richmond to indemnify Plaintiff and pay benefits for covered losses. Plaintiff further alleges that it complied with all policy conditions and submitted claims relating to remediation losses, but Richmond failed and refused to pay benefits due under the policy.
+                      </p>
+                      <p className="mt-2 text-sm text-[#212223]">
+                        Plaintiff also alleges Richmond acted in bad faith by unreasonably delaying and denying the claim, failing to investigate fairly and objectively, misrepresenting policy terms, delaying claim handling, and failing to communicate properly. Plaintiff alleges this conduct violated California insurance statutes and regulations and was intentional, malicious, and oppressive.
+                      </p>
+                    </div>
+
+                    {/* Subsection b: Defendant's Motion */}
+                    <div>
+                      <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                        b. Defendant&apos;s Motion
+                      </h3>
+                      <p className="text-sm text-[#212223]">
+                        Richmond moves to dismiss both claims. As to breach of contract, Richmond argues the policy covers only sums the insured is legally obligated to pay as &quot;damages,&quot; and that DG Plumbing&apos;s remediation costs were voluntary cleanup expenses rather than covered damages. Richmond further argues there was no lawsuit, judgment, or court order requiring Plaintiff to incur those expenses, and that Plaintiff violated the policy&apos;s no-voluntary-payments provision by incurring such costs without Richmond&apos;s consent.
+                      </p>
+                      <p className="mt-2 text-sm text-[#212223]">
+                        As to bad faith, Richmond argues that a bad faith claim cannot stand absent a contractual duty to pay benefits. Because Richmond contends no coverage exists, it argues the bad faith claim necessarily fails.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            // BRIEF FLOW OUTLINE
+            <>
+              {/* Section I */}
+              <div className="border-b border-[#e5e5e5]">
+                <button
+                  onClick={() => toggleSection("table-of-authorities")}
+                  className="flex w-full items-center justify-between py-4"
+                >
+                  <h2 className="text-lg font-semibold text-[#212223]">
+                    I. TABLE OF AUTHORITIES
+                  </h2>
+                  {expandedSections.includes("table-of-authorities") ? (
+                    <ChevronUp className="size-5 text-[#737373]" />
+                  ) : (
+                    <ChevronDown className="size-5 text-[#737373]" />
+                  )}
+                </button>
+              </div>
+            </>
+          )}
 
           {/* Section II */}
+          {flowType === "judicial" ? (
+            <div className="border-b border-[#e5e5e5]">
+              <button
+                onClick={() => toggleSection("legal-standards")}
+                className="flex w-full items-center justify-between py-4"
+              >
+                <h2 className="text-lg font-semibold text-[#212223]">
+                  II. APPLICABLE LEGAL STANDARDS
+                </h2>
+                {expandedSections.includes("legal-standards") ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+
+              {expandedSections.includes("legal-standards") && (
+                <div className="pb-6 space-y-6">
+                  {/* a. Motion to Dismiss */}
+                  <div>
+                    <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                      a. Motion to Dismiss
+                    </h3>
+                    <p className="text-sm text-[#212223]">
+                      On a motion to dismiss, the court accepts well-pleaded factual allegations as true and construes them in the light most favorable to the plaintiff. The issue is not whether plaintiff will ultimately prevail, but whether plaintiff has stated a plausible claim for relief.
+                    </p>
+                  </div>
+
+                  {/* b. Breach of Contract */}
+                  <div>
+                    <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                      b. Breach of Contract
+                    </h3>
+                    <p className="text-sm text-[#212223]">
+                      To state a claim for breach of contract, a plaintiff generally must allege:
+                    </p>
+                    <ol className="ml-6 mt-2 space-y-1 text-sm text-[#212223] list-decimal">
+                      <li>the existence of a contract,</li>
+                      <li>plaintiff&apos;s performance or excuse for nonperformance,</li>
+                      <li>defendant&apos;s breach, and</li>
+                      <li>resulting damages.</li>
+                    </ol>
+                  </div>
+
+                  {/* c. Insurance Bad Faith */}
+                  <div>
+                    <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                      c. Insurance Bad Faith
+                    </h3>
+                    <p className="text-sm text-[#212223]">
+                      To state a bad faith claim, a plaintiff generally must allege:
+                    </p>
+                    <ol className="ml-6 mt-2 space-y-1 text-sm text-[#212223] list-decimal">
+                      <li>benefits due under the policy were withheld, and</li>
+                      <li>the withholding was unreasonable or without proper cause.</li>
+                    </ol>
+                    <p className="mt-2 text-sm text-[#212223]">
+                      Where there is no potential policy benefit due, a bad faith claim generally cannot proceed. However, where coverage is sufficiently alleged and the insurer&apos;s conduct is alleged to have been unreasonable, dismissal at the pleading stage is not appropriate.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
           <div className="border-b border-[#e5e5e5]">
             <button
               onClick={() => toggleSection("factual-background")}
@@ -253,24 +382,201 @@ export function OutlineEditor({ className, onNextDraft }: OutlineEditorProps) {
               </div>
             )}
           </div>
+          )}
 
-          {/* Section III: ARGUMENT */}
-          <div className="border-b border-[#e5e5e5]">
-            <button
-              onClick={() => toggleSection("argument")}
-              className="flex w-full items-center justify-between px-1 py-3 text-left"
-            >
-              <h2 className="text-lg font-bold text-[#212223]">
-                III. ARGUMENT
-              </h2>
-              {expandedSections.includes("argument") ? (
-                <ChevronUp className="size-5 text-[#737373]" />
-              ) : (
-                <ChevronDown className="size-5 text-[#737373]" />
+          {/* Section III */}
+          {flowType === "judicial" ? (
+            // JUDICIAL FLOW: ANALYSIS, DISPOSITION, AND TENTATIVE RULING
+            <>
+            <div className="border-b border-[#e5e5e5]">
+              <button
+                onClick={() => toggleSection("analysis")}
+                className="flex w-full items-center justify-between py-4"
+              >
+                <h2 className="text-lg font-semibold text-[#212223]">
+                  III. ANALYSIS
+                </h2>
+                {expandedSections.includes("analysis") ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+
+              {expandedSections.includes("analysis") && (
+                <div className="pb-6 space-y-6">
+                  {/* a. FIRST CAUSE OF ACTION — BREACH OF CONTRACT */}
+                  <div>
+                    <h3 className="mb-3 text-base font-bold text-[#212223]">
+                      a. FIRST CAUSE OF ACTION — BREACH OF CONTRACT
+                    </h3>
+
+                    <div className="mb-4">
+                      <p className="mb-1 text-sm font-semibold text-[#212223]">1. Plaintiff&apos;s Pleading Is Facially Sufficient</p>
+                      <p className="mb-2 text-sm text-[#212223]">Plaintiff alleges that:</p>
+                      <ul className="ml-6 space-y-1 text-sm text-[#212223] list-disc">
+                        <li>a valid insurance contract existed,</li>
+                        <li>Plaintiff performed all conditions required under the policy,</li>
+                        <li>Richmond failed to pay benefits allegedly due for remediation-related losses, and</li>
+                        <li>Plaintiff suffered damages as a result.</li>
+                      </ul>
+                      <p className="mt-2 text-sm text-[#212223]">These allegations satisfy the basic elements of a contract claim at the pleading stage.</p>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="mb-2 text-sm font-semibold text-[#212223]">2. Defendant&apos;s Coverage Argument Does Not Defeat the Claim at This Stage</p>
+                      <p className="mb-2 text-sm text-[#212223]">Richmond&apos;s principal argument is that the policy covers only amounts the insured is legally obligated to pay as &quot;damages,&quot; and that the claimed remediation expenses were merely voluntary cleanup costs. That may ultimately prove to be a meritorious coverage defense. However, on the record summarized here, the Court cannot conclude as a matter of law that the claimed losses fall outside the policy&apos;s coverage grant.</p>
+                      <p className="mb-2 text-sm text-[#212223]">The key dispute is one of policy interpretation and factual characterization:</p>
+                      <ul className="ml-6 space-y-1 text-sm text-[#212223] list-disc">
+                        <li>whether remediation expenses can qualify as covered &quot;damages,&quot;</li>
+                        <li>whether such expenses were undertaken in response to legal liability or merely as voluntary mitigation,</li>
+                        <li>and whether a formal lawsuit or court order is required before the insuring agreement is triggered.</li>
+                      </ul>
+                      <p className="mt-2 text-sm text-[#212223]">Absent policy language and facts that conclusively resolve those issues against Plaintiff on the face of the complaint, dismissal is premature.</p>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="mb-2 text-sm font-semibold text-[#212223]">3. The No-Voluntary-Payments Argument Also Does Not Warrant Dismissal</p>
+                      <p className="mb-2 text-sm text-[#212223]">Richmond also argues Plaintiff violated the policy&apos;s no-voluntary-payments provision by incurring remediation costs without Richmond&apos;s consent. But whether Plaintiff&apos;s conduct constituted impermissible voluntary payments, whether consent was required under the circumstances, and whether any exception or excuse applies are fact-dependent issues not appropriately resolved on a motion to dismiss unless clearly established by the pleadings.</p>
+                      <p className="text-sm text-[#212223]">On the present allegations, Plaintiff&apos;s general assertion that it performed all conditions required under the policy is sufficient to withstand dismissal.</p>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="mb-2 text-sm font-semibold text-[#212223]">4. Recommended Ruling as to Breach of Contract</p>
+                      <p className="mb-2 text-sm text-[#212223]">Because Plaintiff has adequately pleaded the elements of breach of contract and Defendant&apos;s coverage defenses are not conclusively established at the pleading stage, the motion to dismiss the first cause of action should be denied.</p>
+                      <p className="px-4 py-2 bg-[#f7f7f7] rounded text-sm font-semibold text-[#212223]">
+                        Ruling: Motion to dismiss the breach of contract claim: DENIED.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* b. SECOND CAUSE OF ACTION — BAD FAITH */}
+                  <div>
+                    <h3 className="mb-3 text-base font-bold text-[#212223]">
+                      b. SECOND CAUSE OF ACTION — BAD FAITH
+                    </h3>
+
+                    <div className="mb-4">
+                      <p className="mb-2 text-sm font-semibold text-[#212223]">1. Defendant&apos;s Derivative Argument Fails Because the Contract Claim Survives</p>
+                      <p className="mb-2 text-sm text-[#212223]">Richmond&apos;s primary argument is that the bad faith claim rises or falls with the contract claim. That proposition is generally correct insofar as a bad faith claim requires the withholding of policy benefits due. But because the Court concludes Plaintiff has sufficiently alleged a viable contract claim, Richmond&apos;s derivative challenge does not support dismissal.</p>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="mb-2 text-sm font-semibold text-[#212223]">2. Plaintiff Alleges Unreasonable Claims Handling Beyond Mere Denial</p>
+                      <p className="mb-2 text-sm text-[#212223]">Plaintiff does not rely solely on the fact of nonpayment. Plaintiff also alleges Richmond:</p>
+                      <ul className="ml-6 space-y-1 text-sm text-[#212223] list-disc">
+                        <li>unreasonably delayed claim handling,</li>
+                        <li>failed to conduct a thorough, objective, and fair investigation,</li>
+                        <li>misrepresented policy terms,</li>
+                        <li>and failed to communicate properly.</li>
+                      </ul>
+                      <p className="mt-2 text-sm text-[#212223]">Those allegations, though ultimately subject to proof, are sufficient at the pleading stage to state a plausible claim that Richmond&apos;s handling of the claim was unreasonable.</p>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="mb-2 text-sm font-semibold text-[#212223]">3. Defendant&apos;s No-Coverage Position Does Not Eliminate the Claim at This Stage</p>
+                      <p className="mb-2 text-sm text-[#212223]">Richmond may ultimately establish that no benefits were due under the policy, in which event the bad faith claim may fail. But at this juncture, the Court cannot determine as a matter of law that the claim was uncovered. Because potential coverage remains plausibly alleged, the bad faith claim may proceed.</p>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="mb-2 text-sm font-semibold text-[#212223]">4. Recommended Ruling as to Bad Faith</p>
+                      <p className="mb-2 text-sm text-[#212223]">Given that the contract claim survives and Plaintiff has alleged unreasonable investigation, delay, denial, and misrepresentation, the bad faith claim is adequately pleaded.</p>
+                      <p className="px-4 py-2 bg-[#f7f7f7] rounded text-sm font-semibold text-[#212223]">
+                        Ruling: Motion to dismiss the bad faith claim: DENIED.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               )}
-            </button>
-            {expandedSections.includes("argument") && (
-              <div className="space-y-6 pb-6 pl-4">
+            </div>
+
+            {/* Section IV: RECOMMENDED DISPOSITION */}
+            <div className="border-b border-[#e5e5e5]">
+              <button
+                onClick={() => toggleSection("disposition")}
+                className="flex w-full items-center justify-between py-4"
+              >
+                <h2 className="text-lg font-semibold text-[#212223]">
+                  IV. RECOMMENDED DISPOSITION
+                </h2>
+                {expandedSections.includes("disposition") ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+
+              {expandedSections.includes("disposition") && (
+                <div className="pb-6">
+                  <p className="mb-3 text-sm text-[#212223]">
+                    Defendant Richmond National Insurance Company&apos;s motion to dismiss should be resolved as follows:
+                  </p>
+                  <ol className="ml-6 space-y-2 text-sm text-[#212223] list-decimal">
+                    <li>
+                      <span>First Cause of Action – Breach of Contract:</span>
+                      <br />
+                      <span className="font-semibold">DENIED</span>
+                    </li>
+                    <li>
+                      <span>Second Cause of Action – Bad Faith:</span>
+                      <br />
+                      <span className="font-semibold">DENIED</span>
+                    </li>
+                  </ol>
+                </div>
+              )}
+            </div>
+
+            {/* Section V: PROPOSED TENTATIVE RULING */}
+            <div>
+              <button
+                onClick={() => toggleSection("tentative-ruling")}
+                className="flex w-full items-center justify-between py-4"
+              >
+                <h2 className="text-lg font-semibold text-[#212223]">
+                  V. PROPOSED TENTATIVE RULING
+                </h2>
+                {expandedSections.includes("tentative-ruling") ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+
+              {expandedSections.includes("tentative-ruling") && (
+                <div className="pb-6 space-y-3">
+                  <p className="font-semibold text-sm text-[#212223]">Tentative Ruling:</p>
+                  <p className="text-sm text-[#212223]">
+                    Defendant&apos;s motion to dismiss is <span className="font-semibold">DENIED</span> as to both the breach of contract claim and the bad faith claim.
+                  </p>
+                  <p className="text-sm text-[#212223]">
+                    Plaintiff has sufficiently alleged the existence of an insurance contract, its own performance, Defendant&apos;s refusal to pay benefits, and resulting damages. Defendant&apos;s arguments that the claimed remediation expenses do not constitute covered &quot;damages,&quot; and that Plaintiff violated the policy&apos;s no-voluntary-payments provision, depend on policy interpretation and factual determinations not properly resolved on the pleadings alone.
+                  </p>
+                  <p className="text-sm text-[#212223]">
+                    The bad faith claim likewise survives. Because the Court declines to dismiss the contract claim, Defendant&apos;s argument that bad faith fails for lack of coverage is unavailing at this stage. Plaintiff also alleges unreasonable delay, inadequate investigation, misrepresentation, and improper claims handling, which are sufficient to state a plausible claim for bad faith.
+                  </p>
+                </div>
+              )}
+            </div>
+            </>
+          ) : (
+            // BRIEF FLOW: ARGUMENT
+            <div className="border-b border-[#e5e5e5]">
+              <button
+                onClick={() => toggleSection("argument")}
+                className="flex w-full items-center justify-between px-1 py-3 text-left"
+              >
+                <h2 className="text-lg font-bold text-[#212223]">
+                  III. ARGUMENT
+                </h2>
+                {expandedSections.includes("argument") ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+              {expandedSections.includes("argument") && (
+                <div className="space-y-6 pb-6 pl-4">
                 {/* Subsection A: Copyright Infringement */}
                 <div>
                   <h3 className="mb-4 text-base font-bold text-[#212223]">
@@ -504,6 +810,7 @@ export function OutlineEditor({ className, onNextDraft }: OutlineEditorProps) {
               </div>
             )}
           </div>
+          )}
 
           {/* Bottom Action Button */}
           <div className="flex items-center justify-center gap-3 pt-8">

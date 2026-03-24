@@ -82,9 +82,10 @@ interface ArgumentsPanelProps {
   className?: string;
   showUserArgument?: boolean;
   onEditOutline?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
-export function ArgumentsPanel({ className, showUserArgument = false, onEditOutline }: ArgumentsPanelProps) {
+export function ArgumentsPanel({ className, showUserArgument = false, onEditOutline, flowType = "brief" }: ArgumentsPanelProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   const [selectedArgs, setSelectedArgs] = React.useState<string[]>(["1", "2", "3"]);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
@@ -135,10 +136,10 @@ export function ArgumentsPanel({ className, showUserArgument = false, onEditOutl
         {/* Main content column */}
         <div className="flex-1">
           <p className="mb-1 text-sm font-medium uppercase tracking-wide text-[#737373]">
-            ARGUE
+            {flowType === "judicial" ? "CLAIMS" : "ARGUE"}
           </p>
           <h1 className="mb-6 text-3xl font-normal text-[#212223]">
-            Select the desired arguments
+            {flowType === "judicial" ? "Select claims to decide on" : "Select the desired arguments"}
           </h1>
 
         {/* Select All */}
@@ -153,7 +154,7 @@ export function ArgumentsPanel({ className, showUserArgument = false, onEditOutl
             Select all
           </label>
           <span className="text-sm text-[#737373]">
-            • {selectedArgs.length} Arguments selected
+            • {selectedArgs.length} {flowType === "judicial" ? "Claims" : "Arguments"} selected
           </span>
         </div>
 

@@ -10,6 +10,7 @@ interface IntakeScreenProps {
   onNextSelectArguments?: () => void;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
 const uploadedFiles = [
@@ -17,6 +18,14 @@ const uploadedFiles = [
   { name: "Quitclaim & Assignment Agreement", type: "P" },
   { name: "Eat The Lemon Feb 2021 Manuscript", type: "W" },
   { name: "One Italian Summer (lodged)", type: "W" },
+];
+
+const judicialUploadedFiles = [
+  { name: "COMPLAINT filed by 516, Inc.", type: "P" },
+  { name: "NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
+  { name: "OPPOSITION to NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
+  { name: "Defendant's Objection and Request to Strike Plaintiff's Declarations", type: "W" },
+  { name: "REPLY In Support NOTICE OF MOTION AND MOTION to Dismiss Case", type: "W" },
 ];
 
 const argumentsSelected = [
@@ -107,7 +116,7 @@ const argumentsSelected = [
   },
 ];
 
-export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline }: IntakeScreenProps) {
+export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
@@ -136,145 +145,175 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               </h1>
             </div>
 
-          {/* Motion Summary Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <p className="mb-3 text-sm font-semibold text-[#212223]">
-              Motion to Dismiss: Love v. Serle et al.
-            </p>
-            <ul className="ml-4 list-disc space-y-2 text-sm text-[#212223]">
-              <li>
-                Plaintiff Adrienne Love, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author Rebecca Serle
-              </li>
-              <li>
-                Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle&apos;s novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022
-              </li>
-              <li>
-                Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation
-              </li>
-              <li>
-                Jurisdiction: U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
-              </li>
-            </ul>
-          </div>
-
-          {/* Motion Type Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Motion type</h3>
-            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-2.5 text-sm text-[#212223]">
-              Motion to Dismiss
-            </div>
-          </div>
-
-          {/* Brief Role Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Brief role</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
-                  <div className="size-2 rounded-full bg-white" />
-                </div>
-                <span className="text-sm text-[#212223]">Primary</span>
+            {/* Motion Summary Card - only for brief flow */}
+            {flowType === "brief" && (
+              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+                <p className="mb-3 text-sm font-semibold text-[#212223]">
+                  Motion to Dismiss: Love v. Serle et al.
+                </p>
+                <ul className="ml-4 list-disc space-y-2 text-sm text-[#212223]">
+                  <li>
+                    Plaintiff Adrienne Love, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author Rebecca Serle
+                  </li>
+                  <li>
+                    Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle&apos;s novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022
+                  </li>
+                  <li>
+                    Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation
+                  </li>
+                  <li>
+                    Jurisdiction: U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
+                  </li>
+                </ul>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
-                <span className="text-sm text-[#737373]">Opposition</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
-                <span className="text-sm text-[#737373]">Reply</span>
+            )}
+
+            {/* Motion Type / Work Product Card */}
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <h3 className="mb-3 text-sm font-medium text-[#212223]">{flowType === "judicial" ? "Work product" : "Motion type"}</h3>
+              <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-2.5 text-sm text-[#212223]">
+                {flowType === "judicial" ? "Opinion" : "Motion to Dismiss"}
               </div>
             </div>
-          </div>
 
-          {/* Uploaded Files Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
-            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
-              <div className="flex flex-wrap gap-2">
-                {uploadedFiles.map((file, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-3 py-1.5"
-                  >
-                    <FileText className="size-4 text-[#737373]" />
-                    <span className="text-sm text-[#737373]">{file.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Case Details Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
-            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
-              <div className="space-y-2 text-sm text-[#737373]">
-                <p><span className="font-medium text-[#212223]">Judge&apos;s name:</span> Andre Birotte Jr.</p>
-                <p><span className="font-medium text-[#212223]">Civil Action No.:</span> 2:2025-cv-01779</p>
-                <p><span className="font-medium text-[#212223]">Court name:</span> U.S. District Court, C.D. California, Western Division</p>
-                <p><span className="font-medium text-[#212223]">Selected jurisdiction:</span> California and Related Federal</p>
-                <p><span className="font-medium text-[#212223]">Template:</span> Motion to Dismiss: Movant&apos;s Memorandum of Law (Federal)</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Party You Represent Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Party you represent</h3>
-            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
-                    <div className="size-2 rounded-full bg-white" />
-                  </div>
-                  <span className="text-sm text-[#212223]">Defendant: Rebecca Serle, et al.</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
-                  <span className="text-sm text-[#737373]">Plaintiff: Adrienne Love</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Arguments Selected Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Arguments selected</h3>
-            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
-              <div className="space-y-3">
-                {argumentsSelected.map((argument) => (
-                  <div
-                    key={argument.id}
-                    className="flex items-start gap-3"
-                  >
-                    <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border border-[#737373] bg-[#737373]">
-                      <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-                        <polyline points="2 6 5 9 10 3" />
-                      </svg>
+            {/* Brief Role Card - only for brief flow, Read Only */}
+            {flowType === "brief" && (
+              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+                <h3 className="mb-3 text-sm font-medium text-[#212223]">Brief role</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
+                      <div className="size-2 rounded-full bg-white" />
                     </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-[#212223]">{argument.title}</p>
-                      <p className="mt-1 text-sm text-[#737373]">{argument.description}</p>
-                    </div>
+                    <span className="text-sm text-[#212223]">Primary</span>
                   </div>
-                ))}
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
+                    <span className="text-sm text-[#737373]">Opposition</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
+                    <span className="text-sm text-[#737373]">Reply</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Uploaded Files Card - Read Only */}
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
+              <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                <div className="flex flex-wrap gap-2">
+                  {(flowType === "judicial" ? judicialUploadedFiles : uploadedFiles).map((file, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-3 py-1.5"
+                    >
+                      <FileText className="size-4 text-[#737373]" />
+                      <span className="text-sm text-[#737373]">{file.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {flowType === "judicial" && (
+                <div className="mt-3">
+                  <button className="rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                    Verify citations in the uploaded documents
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Case Details Card - Read Only */}
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
+              <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                <div className="space-y-2 text-sm text-[#737373]">
+                  {flowType === "judicial" ? (
+                    <>
+                      <p><span className="font-medium text-[#212223]">{"Judge's name:"}</span> David O. Carter</p>
+                      <p><span className="font-medium text-[#212223]">Civil Action No.:</span> 8:25-CV-01204</p>
+                      <p><span className="font-medium text-[#212223]">Court name:</span> United States District Court, C.D. California</p>
+                      <p><span className="font-medium text-[#212223]">Jurisdiction (sets the scope for your research):</span> 9th Circuit</p>
+                      <p><span className="font-medium text-[#212223]">Plaintiff party 1:</span> 516, Inc. dba DG Plumbing</p>
+                      <p><span className="font-medium text-[#212223]">Defendant party 1:</span> Richmond National Insurance Company</p>
+                    </>
+                  ) : (
+                    <>
+                      <p><span className="font-medium text-[#212223]">Judge&apos;s name:</span> Andre Birotte Jr.</p>
+                      <p><span className="font-medium text-[#212223]">Civil Action No.:</span> 2:2025-cv-01779</p>
+                      <p><span className="font-medium text-[#212223]">Court name:</span> U.S. District Court, C.D. California, Western Division</p>
+                      <p><span className="font-medium text-[#212223]">Selected jurisdiction:</span> California and Related Federal</p>
+                      <p><span className="font-medium text-[#212223]">Template:</span> Motion to Dismiss: Movant&apos;s Memorandum of Law (Federal)</p>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+
+            {/* Party You Represent Card - only for brief flow, Read Only */}
+            {flowType === "brief" && (
+              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+                <h3 className="mb-3 text-sm font-medium text-[#212223]">Party you represent</h3>
+                <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
+                        <div className="size-2 rounded-full bg-white" />
+                      </div>
+                      <span className="text-sm text-[#212223]">Defendant: Rebecca Serle, et al.</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
+                      <span className="text-sm text-[#737373]">Plaintiff: Adrienne Love</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Arguments Selected Card - only for brief flow, Read Only */}
+            {flowType === "brief" && (
+              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+                <h3 className="mb-3 text-sm font-medium text-[#212223]">Arguments selected</h3>
+                <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                  <div className="space-y-3">
+                    {argumentsSelected.map((argument) => (
+                      <div
+                        key={argument.id}
+                        className="flex items-start gap-3"
+                      >
+                        <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border border-[#737373] bg-[#737373]">
+                          <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
+                            <polyline points="2 6 5 9 10 3" />
+                          </svg>
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm text-[#212223]">{argument.title}</p>
+                          <p className="mt-1 text-sm text-[#737373]">{argument.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Call to Action Buttons */}
             <div className="flex items-center justify-center gap-3 pb-8 pt-4">
-              <button
-                onClick={onSkipToGenerateDraft}
-                className="rounded-full border border-[#e5e5e5] bg-white px-6 py-3 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7]"
-              >
-                Skip to generate draft
-              </button>
+              {flowType !== "judicial" && (
+                <button
+                  onClick={onSkipToGenerateDraft}
+                  className="rounded-full border border-[#e5e5e5] bg-white px-6 py-3 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7]"
+                >
+                  Skip to generate draft
+                </button>
+              )}
               <button
                 onClick={onNextSelectArguments}
                 className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white hover:bg-[#163d2a]"
               >
-                Next: Select arguments
+                {flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments"}
               </button>
             </div>
           </div>

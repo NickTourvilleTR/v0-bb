@@ -19,6 +19,7 @@ interface Message {
 interface ChatDrawerProps {
   isOpen: boolean;
   onToggle: () => void;
+  flowType?: "brief" | "judicial";
   currentStep?: "library" | "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
@@ -41,6 +42,7 @@ interface ChatDrawerProps {
   quotedText?: string | null;
   onClearQuote?: () => void;
   width?: number;
+  flowType?: "brief" | "judicial";
 }
 
 export function ChatDrawer({
@@ -68,6 +70,7 @@ export function ChatDrawer({
   quotedText: quotedTextProp = null,
   onClearQuote,
   width,
+  flowType = "brief",
 }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const [inputValue, setInputValue] = React.useState("");
@@ -208,22 +211,33 @@ export function ChatDrawer({
             {/* Support Step Card */}
             {currentStep === "support" && (
               <MessageCard
-                onQuote={() => handleQuote("Supporting authorities are ready for review. I've pre-selected the stronger supporting authorities for your brief.")}
+                onQuote={() => handleQuote(flowType === "judicial" ? "Decide how to resolve disputed issues." : "Supporting authorities are ready for review. I've pre-selected the stronger supporting authorities for your brief.")}
               >
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
-                </div>
-                <p className="mb-2 text-sm text-[#212223]">I've pre-selected the stronger supporting authorities for your brief. You can tell me if you want to:</p>
-                <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                  <li>Add a supporting authority</li>
-                  <li>Edit how a supporting authority is used</li>
-                  <li>Select or remove a supporting authority</li>
-                </ul>
-                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
-                <div className="flex flex-wrap gap-2">
-                  <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
-                  <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Outline</Button>
-                </div>
+                {flowType === "judicial" ? (
+                  <>
+                    <p className="mb-3 text-sm text-[#212223]">Decide how to resolve disputed issues.</p>
+                    <div className="flex flex-wrap gap-2">
+                      <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Outline</Button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="mb-3 flex items-center gap-2">
+                      <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
+                    </div>
+                    <p className="mb-2 text-sm text-[#212223]">I've pre-selected the stronger supporting authorities for your brief. You can tell me if you want to:</p>
+                    <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                      <li>Add a supporting authority</li>
+                      <li>Edit how a supporting authority is used</li>
+                      <li>Select or remove a supporting authority</li>
+                    </ul>
+                    <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                    <div className="flex flex-wrap gap-2">
+                      <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+                      <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Outline</Button>
+                    </div>
+                  </>
+                )}
               </MessageCard>
             )}
 
@@ -249,12 +263,11 @@ export function ChatDrawer({
             {/* Outline Loading/Ready Step Card */}
             {(currentStep === "outline-loading" || currentStep === "outline-ready") && (
               <MessageCard
-                onQuote={() => handleQuote("Your brief outline is ready. Review the structure and sections before proceeding to the draft.")}
+                onQuote={() => handleQuote("Your outline is ready. Review the structure and headings, then proceed to generate the full draft.")}
               >
-                <p className="mb-2 text-sm text-[#212223]">
-                  Your brief outline is ready. Review the structure and sections before proceeding to the draft.
+                <p className="mb-3 text-sm text-[#212223]">
+                  Your outline is ready. Review the structure and headings, then proceed to generate the full draft.
                 </p>
-                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" onClick={onNextDraft} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Draft</Button>
                 </div>
@@ -265,15 +278,24 @@ export function ChatDrawer({
             {/* Verify Step Card */}
             {currentStep === "verify" && (
               <MessageCard
-                onQuote={() => handleQuote("I've verified all citations and cross-references in your brief.")}
+                onQuote={() => handleQuote(flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief.")}
               >
                 <p className="mb-2 text-sm text-[#212223]">
-                  I've verified all citations and cross-references in your brief.
+                  {flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief."}
                 </p>
                 <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">
-                  <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to finalize</Button>
-                  <Button size="sm" onClick={onNextOpposition} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Opposition brief</Button>
+                  {flowType === "judicial" ? (
+                    <>
+                      <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to finalize</Button>
+                      <Button size="sm" className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Start verification</Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to finalize</Button>
+                      <Button size="sm" onClick={onNextOpposition} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Opposition brief</Button>
+                    </>
+                  )}
                 </div>
               </MessageCard>
             )}
@@ -281,17 +303,23 @@ export function ChatDrawer({
             {/* Finalize Step Card */}
             {currentStep === "finalize" && (
               <MessageCard
-                onQuote={() => handleQuote("The brief finalization summary is ready for review.")}
+                onQuote={() => handleQuote(flowType === "judicial" ? "The opinion finalization summary is ready for review." : "The brief finalization summary is ready for review.")}
               >
                 <div className="mb-3 flex items-center gap-2">
-                  <span className="text-sm text-[#212223]">The brief finalization summary is ready for review:</span>
+                  <span className="text-sm text-[#212223]">
+                    {flowType === "judicial" 
+                      ? "The opinion finalization summary is ready for review." 
+                      : "The brief finalization summary is ready for review:"}
+                  </span>
                 </div>
-                <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                  <li>All citations verified</li>
-                  <li>Table of contents generated</li>
-                  <li>Table of authorities complete</li>
-                  <li>Word count within limits</li>
-                </ul>
+                {flowType !== "judicial" && (
+                  <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                    <li>All citations verified</li>
+                    <li>Table of contents generated</li>
+                    <li>Table of authorities complete</li>
+                    <li>Word count within limits</li>
+                  </ul>
+                )}
                 <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" variant="outline" className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">
@@ -300,7 +328,7 @@ export function ChatDrawer({
                   </Button>
                   <Button size="sm" className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">
                     <Download className="mr-2 size-4" />
-                    Download brief
+                    {flowType === "judicial" ? "Download opinion" : "Download brief"}
                   </Button>
                 </div>
               </MessageCard>
@@ -327,13 +355,19 @@ export function ChatDrawer({
       {currentStep === "intake" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
-            <p className="mb-2 text-sm text-[#212223]">
-              Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
+            <p className="mb-3 text-sm text-[#212223]">
+              {flowType === "judicial"
+                ? "I've analyzed the uploaded documents. Here is your intake summary."
+                : "Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims."}
             </p>
-            <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+            {flowType !== "judicial" && (
+              <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+            )}
             <div className="flex flex-wrap gap-2">
-              <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
-              <Button size="sm" onClick={onNextSelectArguments} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Select arguments</Button>
+              {flowType !== "judicial" && (
+                <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+              )}
+              <Button size="sm" onClick={onNextSelectArguments} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">{flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments"}</Button>
             </div>
           </div>
         </div>
@@ -343,13 +377,19 @@ export function ChatDrawer({
       {currentStep === "argue" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
-            <p className="mb-2 text-sm text-[#212223]">
-              Review the potential arguments and select which ones to include in your brief.
+            <p className="mb-3 text-sm text-[#212223]">
+              {flowType === "judicial"
+                ? "Review the summary of the parties' arguments. You can also add in any positions that are not captured into the list for consideration."
+                : "Review the potential arguments and select which ones to include in your brief."}
             </p>
-            <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+            {flowType !== "judicial" && (
+              <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+            )}
             <div className="flex flex-wrap gap-2">
-              <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
-              <Button size="sm" onClick={onNextSupportingAuthority} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Supporting authority</Button>
+              {flowType !== "judicial" && (
+                <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+              )}
+              <Button size="sm" onClick={onNextSupportingAuthority} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: {flowType === "judicial" ? "Decide on selected claims" : "Supporting authority"}</Button>
             </div>
           </div>
         </div>

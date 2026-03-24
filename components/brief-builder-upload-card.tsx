@@ -11,6 +11,10 @@ interface BriefBuilderUploadCardProps {
   className?: string;
   disabled?: boolean;
   showFile?: boolean;
+  headerTitle?: string;
+  description?: string;
+  tags?: { label: string; color: string }[];
+  defaultFilesToUse?: typeof defaultFiles;
 }
 
 const defaultFiles = [
@@ -20,19 +24,34 @@ const defaultFiles = [
   { id: "4", name: "One Italian Summer (lodged)", type: "W" },
 ];
 
+export const judicialDefaultFiles = [
+  { id: "1", name: "COMPLAINT filed by 516, Inc.", type: "P" },
+  { id: "2", name: "NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
+  { id: "3", name: "OPPOSITION to NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
+  { id: "4", name: "Defendant's Objection and Request to Strike Plaintiff's Declarations", type: "W" },
+  { id: "5", name: "REPLY In Support NOTICE OF MOTION AND MOTION to Dismiss Case", type: "W" },
+];
+
 export function BriefBuilderUploadCard({
   onUpload,
   showTags = true,
   className,
   disabled = false,
   showFile = false,
+  headerTitle = "Upload documents",
+  description = "To provide you with the most useful guidance, I should start by analyzing the original complaint. You can also upload any pertinent exhibits, and other relevant documents.",
+  tags = [
+    { label: "Motion to dismiss", color: "#1d4b34" },
+    { label: "Primary brief", color: "#1d4b34" },
+  ],
+  defaultFilesToUse = defaultFiles,
 }: BriefBuilderUploadCardProps) {
   const [selectedFiles, setSelectedFiles] = React.useState<typeof defaultFiles>(
-    showFile ? defaultFiles : []
+    showFile ? defaultFilesToUse : []
   );
 
   const handleFileSelect = () => {
-    setSelectedFiles(defaultFiles);
+    setSelectedFiles(defaultFilesToUse);
   };
 
   const handleRemoveFile = (fileId: string) => {
@@ -54,22 +73,21 @@ export function BriefBuilderUploadCard({
     >
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-[#212223]">Upload documents</h3>
-        {showTags && (
+        <h3 className="text-lg font-semibold text-[#212223]">{headerTitle}</h3>
+        {showTags && tags.length > 0 && (
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-              Motion to dismiss
-            </span>
-            <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-              Primary brief
-            </span>
+            {tags.map((tag, idx) => (
+              <span key={idx} className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
+                {tag.label}
+              </span>
+            ))}
           </div>
         )}
       </div>
 
       {/* Description */}
       <p className="mb-6 text-[#212223]">
-        To provide you with the most useful guidance, I should start by analyzing the original complaint. You can also upload any pertinent exhibits, and other relevant documents.
+        {description}
       </p>
 
       {/* Upload Area */}

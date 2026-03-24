@@ -2,13 +2,15 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { Upload } from "lucide-react";
 
 interface DraftScreenProps {
   className?: string;
   onGenerateDraft?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
-export function DraftScreen({ className, onGenerateDraft }: DraftScreenProps) {
+export function DraftScreen({ className, onGenerateDraft, flowType = "brief" }: DraftScreenProps) {
   return (
     <div className={cn("flex flex-1 flex-col items-center justify-center px-8", className)}>
       {/* Document Icon */}
@@ -34,8 +36,25 @@ export function DraftScreen({ className, onGenerateDraft }: DraftScreenProps) {
 
       {/* Description */}
       <p className="mb-8 max-w-lg text-center text-[#737373]">
-        Based on your selections and outline, we'll generate a draft of your brief that you can edit further. This may take up to 30 minutes.
+        Based on your selections and outline, we'll generate a draft of your {flowType === "judicial" ? "opinion" : "brief"} that you can edit further. This may take up to 30 minutes.
       </p>
+
+      {/* Upload Prior Opinions Section (Judicial Flow) */}
+      {flowType === "judicial" && (
+        <div className="mb-8 max-w-lg rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-4">
+          <div className="flex items-start gap-3">
+            <Upload className="mt-0.5 size-5 flex-shrink-0 text-[#737373]" />
+            <div>
+              <p className="text-sm font-medium text-[#212223]">
+                Upload prior opinions
+              </p>
+              <p className="mt-1 text-sm text-[#737373]">
+                Upload prior opinions to customize the style, voice, and formatting of your draft.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Generate Button */}
       <button

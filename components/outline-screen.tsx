@@ -12,7 +12,7 @@ interface OutlineItem {
   status: "edited" | "unchanged";
 }
 
-const outlineItems: OutlineItem[] = [
+const briefOutlineItems: OutlineItem[] = [
   {
     title: "Context from uploaded documents",
     status: "edited",
@@ -37,13 +37,34 @@ const outlineItems: OutlineItem[] = [
   },
 ];
 
+const judicialOutlineItems: OutlineItem[] = [
+  {
+    title: "Context from uploaded documents",
+    status: "edited",
+  },
+  {
+    title: "4 claims selected",
+    link: "#",
+    linkText: "Review in Claims tab",
+    status: "edited",
+  },
+  {
+    title: "2 decisions made",
+    link: "#",
+    linkText: "Review in Decide tab",
+    status: "edited",
+  },
+];
+
 interface OutlineScreenProps {
   className?: string;
   onGenerateOutline?: () => void;
   onNextDraft?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
-export function OutlineScreen({ className, onGenerateOutline, onNextDraft }: OutlineScreenProps) {
+export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowType = "brief" }: OutlineScreenProps) {
+  const outlineItems = flowType === "judicial" ? judicialOutlineItems : briefOutlineItems;
   return (
     <div className={cn("flex flex-1 flex-col items-center overflow-y-auto px-8 py-12", className)}>
       <div className="mx-auto w-full max-w-2xl">

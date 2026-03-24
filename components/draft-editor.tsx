@@ -24,9 +24,10 @@ import {
 interface DraftEditorProps {
   className?: string;
   onVerifyBrief?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
-export function DraftEditor({ className, onVerifyBrief }: DraftEditorProps) {
+export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: DraftEditorProps) {
   const [fontSize, setFontSize] = React.useState(36);
 
   return (
@@ -117,29 +118,97 @@ export function DraftEditor({ className, onVerifyBrief }: DraftEditorProps) {
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs uppercase tracking-wide text-[#737373]">DRAFT</p>
-            <h1 className="text-2xl font-semibold text-[#212223]">Review and edit your draft brief</h1>
+            <h1 className="text-2xl font-semibold text-[#212223]">
+              Review and edit your draft {flowType === "judicial" ? "opinion" : "brief"}
+            </h1>
           </div>
 
-          {/* Party/Attorney Fields */}
-          <div className="mb-8 space-y-2 text-sm text-[#212223]">
-            <p>[Party/Attorney]</p>
-            <p>[Email]</p>
-            <p>[Street/Address]</p>
-            <p>[Telephone]</p>
-            <p>[Facsimile]</p>
-          </div>
+          {flowType === "judicial" ? (
+            // JUDICIAL FLOW: OPINION CONTENT
+            <>
+              {/* Court Header */}
+              <div className="mb-8 text-center">
+                <p className="text-lg font-semibold text-[#212223]">UNITED STATES DISTRICT COURT</p>
+                <p className="text-lg font-semibold text-[#212223]">CENTRAL DISTRICT OF CALIFORNIA</p>
+                <p className="text-lg font-semibold text-[#212223]">SOUTHERN DIVISION</p>
+              </div>
 
-          {/* Add Party Button */}
-          <button className="mb-8 flex items-center gap-2 rounded-md border border-[#cccccc] px-3 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
-            <Plus className="size-4" />
-            Add a Party/Attorney
-          </button>
+              {/* Case Information - Two Column Section */}
+              <div className="mb-8 flex gap-8">
+                {/* Left Column - Parties */}
+                <div className="flex-1 border-r border-[#e5e5e5] pr-8">
+                  <p className="mb-4 text-sm text-[#212223]">516 Inc., dba DG Plumbing,</p>
+                  <p className="mb-4 ml-8 text-sm text-[#212223]">Plaintiff</p>
+                  <p className="mb-4 ml-4 text-sm text-[#212223]">v.</p>
+                  <p className="mb-4 text-sm text-[#212223]">RICHMOND SERVICES, INC. dba RICHMOND NATIONAL INSURANCE COMPANY, a Delaware Corporation; and DOES 1 through 100, inclusive,</p>
+                  <p className="ml-8 text-sm text-[#212223]">Defendants.</p>
+                </div>
 
+                {/* Right Column - Case Details */}
+                <div className="flex-1">
+                  <p className="mb-12 text-sm text-[#212223]">Case No. 8:25-cv-01204-DOC-KES</p>
+                  <p className="text-sm font-bold text-[#212223]">ORDER DENYING DEFENDANT&apos;S MOTION TO DISMISS</p>
+                </div>
+              </div>
+
+              {/* Opening */}
+              <div className="mb-8">
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  Before the Court is Defendant&apos;s Richmond National Insurance Company (&quot;Defendant&quot; or &quot;RNIC&quot;) Motion to Dismiss (&quot;Motion&quot; or &quot;Mot.&quot;) (Dkt. 10) Plaintiff&apos;s 516, Inc. (&quot;Plaintiff&quot;) Complaint (&quot;Compl.&quot;) (Dkt. 1-2). For the following reasons, the Court hereby DENIES Defendant&apos;s Motion.
+                </p>
+              </div>
+
+              {/* I. Background */}
+              <div className="mb-8">
+                <h2 className="mb-4 text-base font-bold text-[#212223]">I. Background</h2>
+                <h3 className="mb-3 font-semibold text-[#212223]">A. Facts</h3>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  The following facts are taken from Plaintiff&apos;s Complaint. Plaintiff is a commercial plumbing company with its corporate office in Orange County, California. Compl. ¶ 1. Defendant is a surplus lines insurer registered to do business in the State of California. Id. ¶¶ 2-3. On or about February 1, 2024, Defendant issued a Commercial General Liability policy (&quot;CGL Policy&quot;) to Plaintiff with a policy period of February 1, 2024, to February 1, 2025. Id. ¶¶ 4-5. Pursuant to the policy, Plaintiff paid an insurance premium of $16,800. Id. ¶ 15.
+                </p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  The CGL Policy&apos;s terms are outlined in the Commercial General Liability Coverage Form and contains multiple provisions. Compl., Ex. A, Commercial General Liability Coverage Form (&quot;CGL Policy&quot;) (Dkt. 1-2). Section I pertaining to the Bodily Injury and Property Damage Liability, subsection 1 (a) states that Defendant &quot;will pay those sums that an insured becomes legally obligated to pay as damages because of &apos;bodily injury&apos; or &apos;property damage&apos; to which this insurance applies. [Defendant] will have the right and duty to defend the insured against any &apos;suit&apos; seeking those damages. However, [Defendant] will have no duty to defend the insured against any &apos;suit&apos; seeking damages for &apos;bodily injury&apos; or &apos;property damage&apos; to which this insurance does not apply.&quot; Id. at 1. Section V outlines the Definitions and subsection 18 defines a &quot;suit&quot; as &quot;a civil proceeding in which damages because of &apos;bodily injury&apos;, &apos;property damage,&apos; or &apos;personal and advertising injury&apos; to which this insurance applies are alleged.&quot; Id. at 16. Section IV which is titled &quot;Commercial General Liability Conditions,&quot; subsection 2(d) includes a &quot;no voluntary payments provision&quot; stating that &quot;[n]o insured will, except at that insured&apos;s own cost, voluntarily make a payment, assume any obligation, or incur any expense, other than for first aid, without our consent.&quot; Id. at 11.
+                </p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  On June 10, 2024, Plaintiff alleges to have installed a plumbing fixture on the third floor of a commercial remodeling project that leaked overnight and caused substantial damage to the building. Id. ¶ 9. This damage was alleged to affect all three floors of the building and the basement. Id. The total cost of remediation and repair exceeded $100,000, and Plaintiff alleges to have become &quot;legally obligated for these costs.&quot; Id. ¶ 12. Plaintiff does not allege that any suit was filed against Plaintiff for the remediation expenses. See generally Compl. According to Plaintiff, Plaintiff reported the loss to George L. Brown Insurance Agency, an agent for Defendant, on or around June 10, 2024, and it was decided that further investigation of the leak was warranted. Id. ¶ 10. On or about July 11, 2024, George L. Brown Insurance Agency reported the loss to Defendant. Id. ¶ 11. Plaintiff claims to have fully cooperated with Defendant&apos;s investigation of the claim. Id. ¶ 12. On September 13, 2024, Defendant denied coverage for the claim. Id. ¶ 13. Plaintiff retained counsel and asked Defendant to reconsider, but Defendant maintained its denial of coverage. Id.
+                </p>
+              </div>
+
+              {/* Bottom Action Button */}
+              <div className="flex items-center justify-center gap-3 pb-8 pt-8">
+                <Button
+                  onClick={onVerifyBrief}
+                  className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+                >
+                  Verify opinion
+                </Button>
+              </div>
+            </>
+          ) : (
+            // BRIEF FLOW: MOTION CONTENT
+            <>
+              {/* Party/Attorney Fields */}
+              <div className="mb-8 space-y-2 text-sm text-[#212223]">
+                <p>[Party/Attorney]</p>
+                <p>[Email]</p>
+                <p>[Street/Address]</p>
+                <p>[Telephone]</p>
+                <p>[Facsimile]</p>
+              </div>
+
+              {/* Add Party Button */}
+              <button className="mb-8 flex items-center gap-2 rounded-md border border-[#cccccc] px-3 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
+                <Plus className="size-4" />
+                Add a Party/Attorney
+              </button>
+            </>
+          )}
+
+          {flowType !== "judicial" && (<>
           {/* Court Header */}
           <div className="mb-8 text-center">
             <p className="text-lg font-semibold text-[#212223]">UNITED STATES DISTRICT COURT</p>
             <p className="text-lg font-semibold text-[#212223]">CENTRAL DISTRICT OF CALIFORNIA</p>
-            <p className="text-lg font-semibold text-[#212223]">WESTERN DIVISION</p>
+            <p className="text-lg font-semibold text-[#212223]">SOUTHERN DIVISION</p>
           </div>
 
           {/* Case Information */}
@@ -147,22 +216,21 @@ export function DraftEditor({ className, onVerifyBrief }: DraftEditorProps) {
             {/* Left Column - Parties */}
             <div className="flex-1 border-r border-[#e5e5e5] pr-8">
               <p className="mb-4 text-sm text-[#212223]">
-                <span className="font-medium">Adrienne Love</span>,
+                <span className="font-medium">516 Inc., dba DG Plumbing</span>,
               </p>
               <p className="mb-4 ml-16 text-sm text-[#212223]">Plaintiff,</p>
               <p className="mb-4 ml-8 text-sm text-[#212223]">v.</p>
               <p className="mb-4 text-sm text-[#212223]">
-                <span className="font-medium">Airbnb, Inc.</span>, et al.
+                <span className="font-medium">RICHMOND SERVICES, INC. dba RICHMOND NATIONAL INSURANCE COMPANY, a Delaware Corporation; and DOES 1 through 100, inclusive</span>,
               </p>
               <p className="ml-16 text-sm text-[#212223]">Defendants.</p>
             </div>
 
             {/* Right Column - Case Details */}
             <div className="flex-1">
-              <p className="mb-2 text-sm text-[#212223]">Case No. 2:25-cv-01779-AB(KSx)</p>
-              <p className="mb-4 text-sm text-[#212223]">Hon. André Birotte Jr.</p>
+              <p className="mb-2 text-sm text-[#212223]">Case No. 8:25-cv-01204-DOC-KES</p>
               <p className="text-sm font-semibold uppercase text-[#212223]">
-                DEFENDANT SIMON & SCHUSTER, LLC'S JOINDER IN CREATIVE ARTISTS AGENCY, LLC'S MOTION TO DISMISS FIRST AMENDED COMPLAINT AND MOTION TO DISMISS FIRST AMENDED COMPLAINT; MEMORANDUM OF POINTS AND AUTHORITIES IN SUPPORT THEREOF
+                ORDER DENYING DEFENDANT&apos;S MOTION TO DISMISS
               </p>
               <p className="mt-4 text-sm text-[#212223]">Hearing Date: October 31, 2025</p>
               <p className="text-sm text-[#212223]">Hearing Time: 10:00 a.m.</p>
@@ -463,9 +531,10 @@ export function DraftEditor({ className, onVerifyBrief }: DraftEditorProps) {
               onClick={onVerifyBrief}
               className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
             >
-              Verify brief
+              {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
             </Button>
           </div>
+          </>)}
         </div>
       </div>
     </div>

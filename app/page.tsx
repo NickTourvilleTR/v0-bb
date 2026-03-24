@@ -5,13 +5,14 @@ import { CocoChatInput } from "@/components/coco-chat-input";
 import { CocoHeader } from "@/components/coco-header";
 import { CocoChatMessage } from "@/components/coco-chat-message";
 import { BriefBuilderCard } from "@/components/brief-builder-card";
+import { JudicialWorkProductCard } from "@/components/judicial-work-product-card";
 import { BriefBuilderTypeCard } from "@/components/brief-builder-type-card";
-import { BriefBuilderUploadCard } from "@/components/brief-builder-upload-card";
+import { BriefBuilderUploadCard, judicialDefaultFiles } from "@/components/brief-builder-upload-card";
 import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-combined-details-card";
 import { BriefBuilderProgressCard } from "@/components/brief-builder-progress-card";
 import { BriefBuilderReadyCard } from "@/components/brief-builder-ready-card";
 import { BriefBuilderGeneratingCard } from "@/components/brief-builder-generating-card";
-import { BriefStepperNav } from "@/components/brief-stepper-nav";
+import { BriefStepperNav, judicialSteps } from "@/components/brief-stepper-nav";
 import { ArgumentsPanel } from "@/components/arguments-panel";
 import { SupportingAuthoritiesPanel } from "@/components/supporting-authorities-panel";
 import { SupportLoadingScreen } from "@/components/support-loading-screen";
@@ -30,12 +31,13 @@ import { LibraryScreen } from "@/components/library-screen";
 import { AppLayoutWrapper } from "@/components/app-layout-wrapper";
 import { LoginScreen } from "@/components/login-screen";
 import { Switch } from "@/components/ui/switch";
-import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp } from "lucide-react";
+import { Sparkles, PenLine, Search, LayoutGrid, MessageSquare, Notebook, History, Library, X, Paperclip, BookOpen, AtSign, ArrowUp, Gavel, CheckCircle2 } from "lucide-react";
 import * as React from "react";
 
 type Screen =
   | "start"
   | "library"
+  | "judicial-work-product"
   | "motion-search"
   | "brief-type"
   | "file-upload"
@@ -88,10 +90,12 @@ function AuthenticatedApp() {
   const [notesOpen, setNotesOpen] = React.useState(false);
   const [showUserArgument, setShowUserArgument] = React.useState(false);
   const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
+  const [selectedBriefType, setSelectedBriefType] = React.useState<string | null>(null);
   const [quotedText, setQuotedText] = React.useState<string | null>(null);
+  const [flowType, setFlowType] = React.useState<"brief" | "judicial">("brief");
   
-  // Dynamic header title based on selected motion
-  const headerTitle = selectedMotion ? "Motion to Dismiss" : "Brief Builder";
+  // Dynamic header title based on flow and selected motion
+  const headerTitle = flowType === "judicial" ? "Judicial drafting" : (selectedMotion ? "Motion to Dismiss" : "Brief Builder");
   
   // Handler for quote action from cards
   const handleQuote = (text: string) => {
@@ -142,9 +146,25 @@ function AuthenticatedApp() {
   }, [currentScreen]);
 
   const handleStartSubmit = () => {
+    setFlowType("brief");
     addChatMessage("user", "Help me draft a legal brief");
     addChatMessage("assistant", "I can help you draft a memorandum of law. What type of motion are you working on?");
     setCurrentScreen("motion-search");
+  };
+
+  const handleJudicialDraftingSubmit = () => {
+    setFlowType("judicial");
+    addChatMessage("user", "Help me with judicial drafting");
+    addChatMessage("assistant", "I can help you draft judicial work product. What type of document are you working on?");
+    setCurrentScreen("judicial-work-product");
+  };
+
+  const handleWorkProductSubmit = (workProductId: string) => {
+    if (workProductId === "opinion") {
+      addChatMessage("user", "Opinion");
+      addChatMessage("assistant", "Sure, I can help you draft an opinion. To provide you with the most useful guidance, I should start by analyzing the relevant briefs. You can also upload any pertinent records, prior court materials, templates, or other documents you would like to use for your opinion.");
+      setCurrentScreen("file-upload");
+    }
   };
 
   const handleLibraryClick = () => {
@@ -158,20 +178,28 @@ function AuthenticatedApp() {
     setCurrentScreen("brief-type");
   };
 
-  const handleBriefTypeSubmit = () => {
-    addChatMessage("user", "Primary brief");
+  const handleBriefTypeSubmit = (type: string) => {
+    const labels: Record<string, string> = { primary: "Primary", opposition: "Opposition", reply: "Reply" };
+    setSelectedBriefType(type);
+    addChatMessage("user", labels[type] || type);
     addChatMessage("assistant", "Please upload any relevant documents such as the <strong>original complaint, answer, and reply</strong> (if applicable). You can also upload any <strong>pertinent exhibits or templates</strong>.");
     setCurrentScreen("file-upload");
   };
 
   const handleFileUpload = () => {
-    addChatMessage("user", "Uploaded 6 documents");
-    setCurrentScreen("uploading");
-    // Simulate analyzing documents, then show case details
-    setTimeout(() => {
-      addChatMessage("assistant", "I've extracted the following details from your uploaded documents. <strong>Review and enter any edit instructions as necessary.</strong>");
-      setCurrentScreen("case-details");
-    }, 3000);
+    if (flowType === "judicial") {
+      addChatMessage("user", "Uploaded 5 documents");
+      addChatMessage("assistant", "I've analyzed the uploaded documents. Here is your intake summary.");
+      setCurrentScreen("intake");
+    } else {
+      addChatMessage("user", "Uploaded 6 documents");
+      setCurrentScreen("uploading");
+      // Simulate analyzing documents, then show case details
+      setTimeout(() => {
+        addChatMessage("assistant", "I've extracted the following details from your uploaded documents. <strong>Review and enter any edit instructions as necessary.</strong>");
+        setCurrentScreen("case-details");
+      }, 3000);
+    }
   };
 
   const handleCaseDetailsContinue = (selectedParty: string, additionalDetails: string) => {
@@ -209,17 +237,25 @@ function AuthenticatedApp() {
   const handleReset = () => {
     setCurrentScreen("start");
     setChatMessages([]);
+    setFlowType("brief");
+    setSelectedBriefType(null);
   };
 
   const handleNextSupportingAuthority = () => {
-    addChatMessage("user", "Next: Supporting authority");
-    addChatMessage("assistant", "Researching supporting authorities for your selected arguments...");
-    setCurrentScreen("support-loading");
-    // Simulate generating authorities, then show support screen
-    setTimeout(() => {
-      addChatMessage("assistant", "I've identified relevant case law and statutes to support your arguments. Review the authorities and select which ones to include in your brief.");
+    const buttonLabel = flowType === "judicial" ? "Next: Decide on selected claims" : "Next: Supporting authority";
+    addChatMessage("user", buttonLabel);
+    if (flowType === "judicial") {
+      addChatMessage("assistant", "Decide how to resolve disputed issues.");
       setCurrentScreen("support");
-    }, 3000);
+    } else {
+      addChatMessage("assistant", "Researching supporting authorities for your selected arguments...");
+      setCurrentScreen("support-loading");
+      // Simulate generating authorities, then show support screen
+      setTimeout(() => {
+        addChatMessage("assistant", "I've identified relevant case law and statutes to support your arguments. Review the authorities and select which ones to include in your brief.");
+        setCurrentScreen("support");
+      }, 3000);
+    }
   };
 
   const handleNextContraryAuthorities = () => {
@@ -236,7 +272,11 @@ function AuthenticatedApp() {
 
   const handleGenerateOutline = () => {
     addChatMessage("user", "Generate outline");
-    addChatMessage("assistant", "Generating your brief outline based on the selected arguments and authorities...");
+    if (flowType === "judicial") {
+      addChatMessage("assistant", "Generating your opinion outline based on the selected claims and decisions...");
+    } else {
+      addChatMessage("assistant", "Generating your brief outline based on the selected arguments and authorities...");
+    }
     setCurrentScreen("outline-loading");
     setTimeout(() => {
       addChatMessage("assistant", "Your outline is ready. Review the structure and headings, then proceed to generate the full draft.");
@@ -252,17 +292,23 @@ function AuthenticatedApp() {
 
   const handleGenerateDraft = () => {
     addChatMessage("user", "Generate draft");
-    addChatMessage("assistant", "Drafting your Motion to Dismiss based on the outline and selected authorities...");
+    const draftingMsg = flowType === "judicial" 
+      ? "Drafting your opinion based on the outline and supporting materials..."
+      : "Drafting your Motion to Dismiss based on the outline and selected authorities...";
+    addChatMessage("assistant", draftingMsg);
     setCurrentScreen("draft-loading");
     setTimeout(() => {
-      addChatMessage("assistant", "Your draft is complete. Review the full brief, make any edits, and proceed to verify citations when ready.");
+      const completeMsg = flowType === "judicial"
+        ? "Your draft is complete. Review the full opinion, make any edits, and proceed to verify when ready."
+        : "Your draft is complete. Review the full brief, make any edits, and proceed to verify citations when ready.";
+      addChatMessage("assistant", completeMsg);
       setCurrentScreen("draft-ready");
     }, 3000);
   };
 
   const handleNextVerify = () => {
     addChatMessage("user", "Verify brief");
-    addChatMessage("assistant", "Verifying your citations and checking for potential issues. Review the verification results and address any flagged items.");
+    addChatMessage("assistant", flowType === "judicial" ? "Verifying your opinion and checking for potential issues." : "Verifying your citations and checking for potential issues. Review the verification results and address any flagged items.");
     setCurrentScreen("verify");
   };
 
@@ -293,22 +339,23 @@ function AuthenticatedApp() {
   // Screen indices for comparison
   const screenIndex = {
     start: 0,
+    "judicial-work-product": 1,
     "motion-search": 1,
     "brief-type": 2,
-    "file-upload": 3,
-    "uploading": 4,
-  "case-details": 5,
-  "ready-to-build": 6,
-    "generating": 9,
-"intake": 10,
-  "argue2": 11,
-    "support-loading": 12,
-    "support": 13,
-    "distinguish": 14,
-    "outline": 15,
-    "outline-loading": 16,
-    "outline-ready": 17,
-    "draft": 18,
+    "file-upload": 2,
+    "uploading": 3,
+  "case-details": 4,
+  "ready-to-build": 5,
+    "generating": 8,
+"intake": 9,
+  "argue2": 10,
+    "support-loading": 11,
+    "support": 12,
+    "distinguish": 13,
+    "outline": 14,
+    "outline-loading": 15,
+    "outline-ready": 16,
+    "draft": 17,
     "draft-loading": 19,
     "draft-ready": 20,
     "verify": 21,
@@ -347,7 +394,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="intake" onStepClick={handleStepperClick} />
+          <BriefStepperNav currentStep="intake" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
           <AppLayoutWrapper
             drawerOpen={drawerOpen}
             setDrawerOpen={setDrawerOpen}
@@ -356,11 +403,18 @@ function AuthenticatedApp() {
             messages={chatMessages}
             currentStep="intake"
             onSendMessage={handleInlineSend}
+            flowType={flowType}
           >
             <IntakeScreen 
+              flowType={flowType}
               onNextSelectArguments={() => {
-                addChatMessage("user", "Next: Select arguments");
-                addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
+                const buttonLabel = flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments";
+                addChatMessage("user", buttonLabel);
+                if (flowType === "judicial") {
+                  addChatMessage("assistant", "Review the summary of the parties' arguments. You can also add in any positions that are not captured into the list for consideration.");
+                } else {
+                  addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
+                }
                 setCurrentScreen("argue2");
               }}
               onSkipToGenerateDraft={() => {
@@ -383,14 +437,15 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="outline"
             onGenerateOutline={handleGenerateOutline}
             onSkipToGenerateDraft={() => {
@@ -401,6 +456,7 @@ function AuthenticatedApp() {
             showVersionsTab={true}
           >
             <OutlineScreen 
+              flowType={flowType}
               onGenerateOutline={handleGenerateOutline} 
               onNextDraft={() => {
                 addChatMessage("user", "Skip to generate draft");
@@ -421,14 +477,15 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="outline-loading"
             showVersionsTab={true}
           >
@@ -446,14 +503,15 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="outline-ready"
             onNextDraft={() => {
               addChatMessage("user", "Next: Draft");
@@ -462,7 +520,9 @@ function AuthenticatedApp() {
             }}
             showVersionsTab={true}
           >
-            <OutlineEditor onNextDraft={() => {
+            <OutlineEditor 
+              flowType={flowType}
+              onNextDraft={() => {
               addChatMessage("user", "Next: Draft");
               addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
               setCurrentScreen("draft");
@@ -473,26 +533,26 @@ function AuthenticatedApp() {
     );
   }
 
-  // Draft layout (initial)
+  // Draft layout (initial - Create your draft)
   if (currentScreen === "draft") {
     return (
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="draft"
-            onGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
           >
-            <DraftScreen onGenerateDraft={handleGenerateDraft} />
+            <DraftScreen flowType={flowType} onGenerateDraft={handleGenerateDraft} />
           </AppLayoutWrapper>
         </div>
       </div>
@@ -506,14 +566,15 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="draft-loading"
             showVersionsTab={true}
           >
@@ -531,25 +592,38 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="draft-ready"
             onVerifyBrief={() => {
-              addChatMessage("user", "Verify brief");
-              addChatMessage("assistant", "Verifying your citations and checking for potential issues.");
+              const verifyMsg = flowType === "judicial" 
+                ? "Verify opinion"
+                : "Verify brief";
+              const verifyingMsg = flowType === "judicial"
+                ? "Verifying your opinion and checking for potential issues."
+                : "Verifying your citations and checking for potential issues.";
+              addChatMessage("user", verifyMsg);
+              addChatMessage("assistant", verifyingMsg);
               setCurrentScreen("verify");
             }}
             showVersionsTab={true}
           >
-            <DraftEditor onVerifyBrief={() => {
-              addChatMessage("user", "Verify brief");
-              addChatMessage("assistant", "Verifying your citations and checking for potential issues.");
+            <DraftEditor flowType={flowType} onVerifyBrief={() => {
+              const verifyMsg = flowType === "judicial" 
+                ? "Verify opinion"
+                : "Verify brief";
+              const verifyingMsg = flowType === "judicial"
+                ? "Verifying your opinion and checking for potential issues."
+                : "Verifying your citations and checking for potential issues.";
+              addChatMessage("user", verifyMsg);
+              addChatMessage("assistant", verifyingMsg);
               setCurrentScreen("verify");
             }} />
           </AppLayoutWrapper>
@@ -565,14 +639,15 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="verify" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="verify" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="verify"
             onNextOpposition={() => {
               addChatMessage("user", "Next: Opposition brief");
@@ -586,19 +661,55 @@ function AuthenticatedApp() {
             }}
             showVersionsTab={true}
           >
-            <VerifyPanel 
-              onNextOpposition={() => {
-                addChatMessage("user", "Next: Opposition brief");
-                addChatMessage("assistant", "Now let's prepare for potential challenges. Review the anticipated opposition arguments.");
-                setCurrentScreen("distinguish");
-              }}
-              onSkipToFinalize={() => {
-                addChatMessage("user", "Skip to finalize");
-                addChatMessage("assistant", "Skipping ahead to finalize your brief.");
-                setCurrentScreen("finalize");
-              }}
-              onEditOutline={() => setCurrentScreen("outline")}
-            />
+            {flowType === "judicial" ? (
+              <div className="flex flex-1 flex-col items-center justify-center px-8">
+                <div className="mb-6">
+                  <CheckCircle2 className="size-16 text-[#737373]" />
+                </div>
+                <h1 className="mb-2 text-center text-2xl font-semibold text-[#212223]">
+                  Verify your draft
+                </h1>
+                <p className="mb-8 max-w-lg text-center text-[#737373]">
+                  This may take up to 10 minutes.
+                </p>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      addChatMessage("user", "Skip to finalize");
+                      addChatMessage("assistant", "Skipping ahead to finalize your opinion.");
+                      setCurrentScreen("finalize");
+                    }}
+                    className="rounded-full border border-[#cccccc] px-6 py-3 text-sm font-medium text-[#212223] transition-colors hover:bg-[#f2f2f2]"
+                  >
+                    Skip to finalize
+                  </button>
+                  <button
+                    onClick={() => {
+                      addChatMessage("user", "Start verification");
+                      addChatMessage("assistant", "Verifying your opinion and checking for potential issues.");
+                      setCurrentScreen("verify");
+                    }}
+                    className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#163d2a]"
+                  >
+                    Start verification
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <VerifyPanel 
+                onNextOpposition={() => {
+                  addChatMessage("user", "Next: Opposition brief");
+                  addChatMessage("assistant", "Now let's prepare for potential challenges. Review the anticipated opposition arguments.");
+                  setCurrentScreen("distinguish");
+                }}
+                onSkipToFinalize={() => {
+                  addChatMessage("user", "Skip to finalize");
+                  addChatMessage("assistant", "Skipping ahead to finalize your brief.");
+                  setCurrentScreen("finalize");
+                }}
+                onEditOutline={() => setCurrentScreen("outline")}
+              />
+            )}
           </AppLayoutWrapper>
         </div>
       </div>
@@ -612,18 +723,19 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="finalize" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="finalize" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="finalize"
             showVersionsTab={true}
           >
-            <FinalizePanel />
+            <FinalizePanel flowType={flowType} />
           </AppLayoutWrapper>
         </div>
       </div>
@@ -638,13 +750,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="opposition" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="opposition"
             onNextFinalize={() => {
               addChatMessage("user", "Next: Finalize");
@@ -673,14 +786,15 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="support-loading"
             showVersionsTab={true}
           >
@@ -698,18 +812,24 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="develop" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="develop" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="support"
+            flowType={flowType}
             onNextOutline={() => {
               addChatMessage("user", "Next: Outline");
-              addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+              if (flowType === "judicial") {
+                addChatMessage("assistant", "Now let's structure your opinion. Review the outline sections and make any adjustments.");
+              } else {
+                addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+              }
               setCurrentScreen("outline");
             }}
             onSkipToGenerateDraft={() => {
@@ -721,9 +841,14 @@ function AuthenticatedApp() {
           >
             <div className="flex-1 overflow-y-auto">
               <SupportingAuthoritiesPanel 
+                flowType={flowType}
                 onNextOutline={() => {
                   addChatMessage("user", "Next: Outline");
-                  addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+                  if (flowType === "judicial") {
+                    addChatMessage("assistant", "Now let's structure your opinion. Review the outline sections and make any adjustments.");
+                  } else {
+                    addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+                  }
                   setCurrentScreen("outline");
                 }}
                 onSkipToGenerateDraft={() => {
@@ -747,15 +872,17 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefStepperNav currentStep="argue2" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+          <BriefStepperNav currentStep="argue2" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="argue"
+            flowType={flowType}
             onNextSupportingAuthority={handleNextSupportingAuthority}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
@@ -766,6 +893,7 @@ function AuthenticatedApp() {
           >
             <div className="flex-1 overflow-y-auto">
               <ArgueScreen 
+                flowType={flowType}
                 onNextSupportingAuthority={handleNextSupportingAuthority}
                 onEditOutline={() => {
                   setCurrentScreen("outline");
@@ -848,22 +976,33 @@ function AuthenticatedApp() {
               </div>
               
               {/* Quick Action Buttons */}
-              <div className="flex flex-wrap justify-center gap-2">
-                <button 
-                  onClick={handleStartSubmit}
-                  className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
-                >
-                  <PenLine className="size-4 text-[#737373]" />
-                  Help me draft a legal brief
-                </button>
-                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
-                  <Search className="size-4 text-[#737373]" />
-                  Conduct deep research...
-                </button>
-                <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
-                  <LayoutGrid className="size-4 text-[#737373]" />
-                  Analyze document sets...
-                </button>
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-wrap justify-center gap-2">
+                  <button 
+                    onClick={handleStartSubmit}
+                    className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                  >
+                    <PenLine className="size-4 text-[#737373]" />
+                    Help me draft a legal brief
+                  </button>
+                  <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                    <Search className="size-4 text-[#737373]" />
+                    Conduct deep research...
+                  </button>
+                  <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                    <LayoutGrid className="size-4 text-[#737373]" />
+                    Analyze document sets...
+                  </button>
+                </div>
+                <div className="flex w-full justify-start">
+                  <button
+                    onClick={handleJudicialDraftingSubmit}
+                    className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                  >
+                    <Gavel className="size-4 text-[#737373]" />
+                    Help me with judicial drafting
+                  </button>
+                </div>
               </div>
             </div>
           </main>
@@ -893,12 +1032,26 @@ function AuthenticatedApp() {
                   className="mb-6"
                 >
                   <p className="text-[#212223]">
-                    Help me draft a legal brief
+                    {flowType === "judicial" ? "Help me with judicial drafting" : "Help me draft a legal brief"}
                   </p>
                 </CocoChatMessage>
 
+                {/* Judicial Work Product Card */}
+                {flowType === "judicial" && isAtOrPast("judicial-work-product") && (
+                  <CocoChatMessage
+                    type="assistant"
+                    timestamp="9:10 a.m."
+                    className="mb-6"
+                  >
+                    <JudicialWorkProductCard
+                      onSubmit={handleWorkProductSubmit}
+                      onQuote={handleQuote}
+                    />
+                  </CocoChatMessage>
+                )}
+
                 {/* Motion Search Card */}
-                {isAtOrPast("motion-search") && (
+                {flowType === "brief" && isAtOrPast("motion-search") && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:10 a.m."
@@ -911,35 +1064,50 @@ function AuthenticatedApp() {
                   </CocoChatMessage>
                 )}
 
-                {/* Brief Type Card */}
-                {isAtOrPast("brief-type") && (
+                {/* Brief Type Card - only for brief flow */}
+                {flowType === "brief" && isAtOrPast("brief-type") && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:10 a.m."
                     className="mb-6"
                   >
                     <BriefBuilderTypeCard
-                      defaultValue={isAtOrPast("file-upload") ? "primary" : ""}
-                      disabled={isAtOrPast("file-upload")}
                       onSubmit={handleBriefTypeSubmit}
                     />
                   </CocoChatMessage>
                 )}
 
-                {/* User "Primary" message */}
-                {isAtOrPast("file-upload") && (
+                {/* User brief type message - only for brief flow, only after selection */}
+                {flowType === "brief" && isAtOrPast("file-upload") && selectedBriefType && (
                   <CocoChatMessage
                     type="user"
                     userName="Jane Lawson"
                     timestamp="9:10 a.m."
                     className="mb-6"
                   >
-                    <p className="text-[#212223]">Primary</p>
+                    <p className="text-[#212223]">
+                      {{ primary: "Primary", opposition: "Opposition", reply: "Reply" }[selectedBriefType] ?? selectedBriefType}
+                    </p>
+                  </CocoChatMessage>
+                )}
+
+                {/* User "Opinion" message - only for judicial flow */}
+                {flowType === "judicial" && isAtOrPast("file-upload") && (
+                  <CocoChatMessage
+                    type="user"
+                    userName="Jane Lawson"
+                    timestamp="9:10 a.m."
+                    className="mb-6"
+                  >
+                    <p className="text-[#212223]">Opinion</p>
                   </CocoChatMessage>
                 )}
 
                 {/* File Upload Card */}
-                {isAtOrPast("file-upload") && (
+                {(
+                  (flowType === "judicial" && isAtOrPast("file-upload")) ||
+                  (flowType === "brief" && isAtOrPast("file-upload") && selectedBriefType)
+                ) && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:10 a.m."
@@ -949,6 +1117,10 @@ function AuthenticatedApp() {
                       showFile={isAtOrPast("uploading")}
                       disabled={isAtOrPast("uploading")}
                       onUpload={handleFileUpload}
+                      headerTitle={flowType === "judicial" ? "Upload documents" : "Upload documents"}
+                      description={flowType === "judicial" ? "Sure, I can help you draft an opinion. To provide you with the most useful guidance, I should start by analyzing the relevant briefs. You can also upload any pertinent records, prior court materials, templates, or other documents you would like to use for your opinion." : "To provide you with the most useful guidance, I should start by analyzing the original complaint. You can also upload any pertinent exhibits, and other relevant documents."}
+                      tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
+                      defaultFilesToUse={flowType === "judicial" ? judicialDefaultFiles : undefined}
                     />
                   </CocoChatMessage>
                 )}
@@ -960,7 +1132,10 @@ function AuthenticatedApp() {
                     timestamp="9:10a.m."
                     className="mb-6"
                   >
-                    <BriefBuilderProgressCard progress={40} />
+                    <BriefBuilderProgressCard 
+                      progress={40} 
+                      tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
+                    />
                   </CocoChatMessage>
                 )}
 

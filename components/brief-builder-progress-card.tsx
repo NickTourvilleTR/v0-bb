@@ -10,12 +10,17 @@ interface BriefBuilderProgressCardProps {
   progress?: number;
   showTags?: boolean;
   className?: string;
+  tags?: { label: string; color: string }[];
 }
 
 export function BriefBuilderProgressCard({
   progress = 40,
   showTags = true,
   className,
+  tags = [
+    { label: "Motion to dismiss", color: "#1d4b34" },
+    { label: "Primary brief", color: "#1d4b34" },
+  ],
 }: BriefBuilderProgressCardProps) {
   const [emailMe, setEmailMe] = React.useState(false);
   const [animatedProgress, setAnimatedProgress] = React.useState(0);
@@ -38,14 +43,13 @@ export function BriefBuilderProgressCard({
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-lg font-semibold text-[#212223]">Analyzing documents</h3>
-        {showTags && (
+        {showTags && tags.length > 0 && (
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-              Motion to dismiss
-            </span>
-            <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-              Primary brief
-            </span>
+            {tags.map((tag, idx) => (
+              <span key={idx} className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
+                {tag.label}
+              </span>
+            ))}
           </div>
         )}
       </div>
