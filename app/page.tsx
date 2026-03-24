@@ -1007,7 +1007,10 @@ function AuthenticatedApp() {
                 )}
 
                 {/* File Upload Card */}
-                {isAtOrPast("file-upload") && (
+                {(
+                  (flowType === "judicial" && isAtOrPast("file-upload")) ||
+                  (flowType === "brief" && isAtOrPast("file-upload") && selectedBriefType)
+                ) && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:10 a.m."
