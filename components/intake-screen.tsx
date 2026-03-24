@@ -10,6 +10,7 @@ interface IntakeScreenProps {
   onNextSelectArguments?: () => void;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
 const uploadedFiles = [
@@ -107,7 +108,7 @@ const argumentsSelected = [
   },
 ];
 
-export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline }: IntakeScreenProps) {
+export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
@@ -274,7 +275,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 onClick={onNextSelectArguments}
                 className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white hover:bg-[#163d2a]"
               >
-                Next: Review claims
+                {flowType === "judicial" ? "Next: Review claims" : "Next: Select arguments"}
               </button>
             </div>
           </div>

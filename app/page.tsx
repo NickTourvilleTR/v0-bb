@@ -387,10 +387,13 @@ function AuthenticatedApp() {
             messages={chatMessages}
             currentStep="intake"
             onSendMessage={handleInlineSend}
+            flowType={flowType}
           >
             <IntakeScreen 
+              flowType={flowType}
               onNextSelectArguments={() => {
-                addChatMessage("user", "Next: Review claims");
+                const buttonLabel = flowType === "judicial" ? "Next: Review claims" : "Next: Select arguments";
+                addChatMessage("user", buttonLabel);
                 addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
                 setCurrentScreen("argue2");
               }}

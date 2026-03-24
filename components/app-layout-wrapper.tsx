@@ -32,6 +32,7 @@ interface AppLayoutWrapperProps {
   hideHistoryButton?: boolean;
   quotedText?: string | null;
   onClearQuote?: () => void;
+  flowType?: "brief" | "judicial";
   messages?: Array<{
     id: string;
     type: "user" | "assistant";
@@ -69,6 +70,7 @@ export function AppLayoutWrapper({
   hideHistoryButton = false,
   quotedText = null,
   onClearQuote,
+  flowType = "brief",
   messages = [],
   className,
   onSendMessage,
@@ -210,6 +212,7 @@ export function AppLayoutWrapper({
         defaultTab={drawerTab}
         quotedText={quotedText}
         onClearQuote={onClearQuote}
+        flowType={flowType}
         width={drawerOpen ? drawerWidth : undefined}
       />
     </div>
