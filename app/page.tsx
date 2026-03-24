@@ -976,6 +976,18 @@ function AuthenticatedApp() {
                   </CocoChatMessage>
                 )}
 
+                {/* User "Primary" message - only for brief flow */}
+                {flowType === "brief" && isAtOrPast("file-upload") && (
+                  <CocoChatMessage
+                    type="user"
+                    userName="Jane Lawson"
+                    timestamp="9:10 a.m."
+                    className="mb-6"
+                  >
+                    <p className="text-[#212223]">Primary</p>
+                  </CocoChatMessage>
+                )}
+
                 {/* User "Opinion" message - only for judicial flow */}
                 {flowType === "judicial" && isAtOrPast("file-upload") && (
                   <CocoChatMessage
