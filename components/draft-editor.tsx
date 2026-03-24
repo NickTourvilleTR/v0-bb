@@ -126,13 +126,6 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           {flowType === "judicial" ? (
             // JUDICIAL FLOW: OPINION CONTENT
             <>
-              {/* Court Header — centered, each line on its own with spacing */}
-              <div className="mb-6 text-center">
-                <p className="text-sm font-semibold text-[#212223]">UNITED STATES DISTRICT COURT</p>
-                <p className="mt-3 text-sm font-semibold text-[#212223]">CENTRAL DISTRICT OF CALIFORNIA</p>
-                <p className="mt-3 text-sm font-semibold text-[#212223]">SOUTHERN DIVISION</p>
-              </div>
-
               {/* Case Caption — left parties | ) divider | right case info */}
               <div className="mb-8 flex text-sm text-[#212223]">
                 {/* Left: party names */}
@@ -215,7 +208,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           <div className="mb-8 text-center">
             <p className="text-lg font-semibold text-[#212223]">UNITED STATES DISTRICT COURT</p>
             <p className="text-lg font-semibold text-[#212223]">CENTRAL DISTRICT OF CALIFORNIA</p>
-            <p className="text-lg font-semibold text-[#212223]">WESTERN DIVISION</p>
+            <p className="text-lg font-semibold text-[#212223]">SOUTHERN DIVISION</p>
           </div>
 
           {/* Case Information */}
