@@ -479,6 +479,43 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                 </div>
               )}
             </div>
+
+              {/* Section IV: RECOMMENDED DISPOSITION */}
+              <div className="border-b border-[#e5e5e5]">
+                <button
+                  onClick={() => toggleSection("disposition")}
+                  className="flex w-full items-center justify-between py-4"
+                >
+                  <h2 className="text-lg font-semibold text-[#212223]">
+                    IV. RECOMMENDED DISPOSITION
+                  </h2>
+                  {expandedSections.includes("disposition") ? (
+                    <ChevronUp className="size-5 text-[#737373]" />
+                  ) : (
+                    <ChevronDown className="size-5 text-[#737373]" />
+                  )}
+                </button>
+
+                {expandedSections.includes("disposition") && (
+                  <div className="pb-6">
+                    <p className="mb-3 text-sm text-[#212223]">
+                      Defendant Richmond National Insurance Company&apos;s motion to dismiss should be resolved as follows:
+                    </p>
+                    <ol className="ml-6 space-y-2 text-sm text-[#212223] list-decimal">
+                      <li>
+                        <span>First Cause of Action – Breach of Contract:</span>
+                        <br />
+                        <span className="font-semibold">DENIED</span>
+                      </li>
+                      <li>
+                        <span>Second Cause of Action – Bad Faith:</span>
+                        <br />
+                        <span className="font-semibold">DENIED</span>
+                      </li>
+                    </ol>
+                  </div>
+                )}
+              </div>
           ) : (
             // BRIEF FLOW: ARGUMENT
             <div className="border-b border-[#e5e5e5]">
