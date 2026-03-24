@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { List, ScanEye, Plus } from "lucide-react";
+import { List, ScanEye, Plus, FileText } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface ArgueScreenProps {
@@ -78,60 +78,45 @@ const arguments_data = [
   },
 ];
 
-const judicial_arguments_data = [
+// Judicial flow uses a grouped structure with party headers
+const judicial_claims_grouped = [
   {
-    id: "breach-of-contract",
-    number: 1,
-    title: "Breach of Insurance Contract",
-    points: [
-      "Plaintiff claims Richmond National breached the insurance policy by failing to pay benefits for their remediation claims even though they say they complied with the policy.",
-      "Plaintiff alleges they had a valid insurance contract with Richmond that required them to indemnify and pay benefits.",
-      "Plaintiff claims they performed all required conditions under the policy and therefore expected coverage, peace of mind, and financial protection.",
-      "Plaintiff says Defendant failed and refused to pay any benefits, causing damages.",
+    partyHeader: "Plaintiff party 1: 516, Inc. dba DG Plumbing",
+    claims: [
+      {
+        id: "breach-of-contract-defense",
+        title: "Breach of Contract Claim Defense",
+        sourceFile: "NOTICE OF MOTION AND MOTION to Dismiss Case",
+        summary: "Richmond argues the breach of contract claim fails because the policy did not cover DG Plumbing's remediation costs, so denying the claim was not a breach.",
+        points: [
+          "The policy only covers amounts the insured is legally required to pay as \"damages\", and Richmond argues these remediation expenses were voluntary cleanup costs, not court-ordered damages.",
+          "Richmond says there was no lawsuit or court order requiring DG Plumbing to pay these amounts, so the claim falls outside the policy's insuring agreement.",
+          "Richmond also argues DG Plumbing violated the policy's \"no voluntary payments\" provision by incurring remediation expenses without Richmond's consent, which independently bars coverage.",
+        ],
+        checked: true,
+      },
+      {
+        id: "bad-faith-defense",
+        title: "Bad Faith Claim Defense",
+        sourceFile: "NOTICE OF MOTION AND MOTION to Dismiss Case",
+        summary: "Richmond argues the bad faith claim fails because there can be no bad faith if there was no coverage owed under the policy.",
+        points: [
+          "Under California law, a bad faith claim generally requires that the insurer first owed benefits under the policy.",
+          "Because Richmond argues the policy did not cover the remediation expenses, it says DG Plumbing cannot show benefits were wrongfully withheld.",
+          "Richmond characterizes the bad faith claim as a \"tagalong\" claim that rises or falls with the contract claim, so if the contract claim is dismissed, the bad faith claim should be dismissed too.",
+        ],
+        checked: true,
+      },
     ],
-    appliesTo: "Plaintiff party 1: 516, Inc. dba DG Plumbing | Source: COMPLAINT filed by 516, Inc.",
-    checked: true,
-  },
-  {
-    id: "bad-faith-claim",
-    number: 2,
-    title: "Bad faith claim",
-    points: [
-      "Plaintiff claims Richmond acted in bad faith by unreasonably delaying, denying, and mishandling their insurance claim.",
-      "Plaintiff alleges Richmond wrongfully withheld benefits due under the policy, including by denying the claim and delaying payment without proper cause.",
-      "Richmond handled the claim unfairly by failing to investigate thoroughly, objectively, and fairly, delaying claim processing, misrepresenting policy terms, and failing to communicate properly.",
-      "Plaintiff further alleges Richmond violated California insurance statutes and claims-handling regulations, and that its conduct was intentional, malicious, and oppressive.",
-    ],
-    appliesTo: "Defendant party 1: Richmond National Insurance Company",
-    checked: true,
-  },
-  {
-    id: "breach-of-contract-defense",
-    number: 3,
-    title: "Breach of Contract Claim Defense",
-    points: [
-      "Richmond argues the breach of contract claim fails because the policy did not cover DG Plumbing's remediation costs, so denying the claim was not a breach.",
-      "The policy only covers amounts the insured is legally required to pay as \"damages\", and Richmond argues these remediation expenses were voluntary cleanup costs, not court-ordered damages.",
-      "Richmond says there was no lawsuit or court order requiring DG Plumbing to pay these amounts, so the claim falls outside the policy's insuring agreement.",
-      "Richmond also argues DG Plumbing violated the policy's \"no voluntary payments\" provision by incurring remediation expenses without Richmond's consent, which independently bars coverage.",
-    ],
-    appliesTo: "Source: NOTICE OF MOTION AND MOTION to Dismiss Case",
-    checked: false,
-  },
-  {
-    id: "bad-faith-defense",
-    number: 4,
-    title: "Bad Faith Claim Defense",
-    points: [
-      "Richmond argues the bad faith claim fails because there can be no bad faith if there was no coverage owed under the policy.",
-      "Under California law, a bad faith claim generally requires that the insurer first owed benefits under the policy.",
-      "Because Richmond argues the policy did not cover the remediation expenses, it says DG Plumbing cannot show benefits were wrongfully withheld.",
-      "Richmond characterizes the bad faith claim as a \"tagalong\" claim that rises or falls with the contract claim, so if the contract claim is dismissed, the bad faith claim should be dismissed too.",
-    ],
-    appliesTo: "Source: NOTICE OF MOTION AND MOTION to Dismiss Case",
-    checked: false,
   },
 ];
+
+// Flat version for state management compatibility
+const judicial_arguments_data = judicial_claims_grouped.flatMap(group => group.claims.map(claim => ({
+  ...claim,
+  number: 0, // not used in judicial
+  appliesTo: "", // not used in judicial
+})));
 
 export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: ArgueScreenProps) {
   const [argumentsState, setArgumentsState] = React.useState(flowType === "judicial" ? judicial_arguments_data : arguments_data);
@@ -208,42 +193,103 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
 
           {/* Arguments List */}
           <div className="space-y-4 pb-4">
-            {argumentsState.map((argument) => (
-              <div
-                key={argument.id}
-                className={cn(
-                  "rounded-lg border p-5",
-                  argument.checked ? "border-[#1d4b34] bg-[#f5f7f6]" : "border-[#e5e5e5] bg-white"
-                )}
-              >
-                <div className="flex items-start gap-3">
-                  <Checkbox 
-                    id={argument.id}
-                    checked={argument.checked}
-                    onCheckedChange={() => toggleArgument(argument.id)}
-                    className="mt-0.5 border-[#737373] data-[state=checked]:border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]"
-                  />
-                  <div className="flex-1">
-                    <label htmlFor={argument.id} className="cursor-pointer">
-                      <p className="font-semibold text-[#212223]">
-                        {argument.number}. {argument.title}
-                      </p>
-                    </label>
-                    <ul className="mt-2 ml-4 list-disc space-y-1">
-                      {argument.points.map((point, idx) => (
-                        <li key={idx} className="text-sm text-[#212223]">{point}</li>
-                      ))}
-                    </ul>
-                    <div className="mt-4">
-                      <p className="text-sm text-[#737373]">Applies to</p>
-                      <ul className="ml-4 mt-1 list-disc">
-                        <li className="text-sm text-[#212223]">{argument.appliesTo}</li>
+            {flowType === "judicial" ? (
+              // Judicial flow - grouped by party with new card structure
+              judicial_claims_grouped.map((group) => (
+                <div key={group.partyHeader}>
+                  {/* Party Header */}
+                  <h2 className="mb-4 text-lg font-semibold text-[#212223]">{group.partyHeader}</h2>
+                  
+                  {/* Claims under this party */}
+                  <div className="space-y-4">
+                    {group.claims.map((claim) => {
+                      const stateItem = argumentsState.find(a => a.id === claim.id);
+                      const isChecked = stateItem?.checked ?? false;
+                      
+                      return (
+                        <div
+                          key={claim.id}
+                          className={cn(
+                            "rounded-lg border p-5",
+                            isChecked ? "border-[#1d4b34] bg-[#f5f7f6]" : "border-[#e5e5e5] bg-white"
+                          )}
+                        >
+                          <div className="flex items-start gap-3">
+                            <Checkbox 
+                              id={claim.id}
+                              checked={isChecked}
+                              onCheckedChange={() => toggleArgument(claim.id)}
+                              className="mt-0.5 border-[#737373] data-[state=checked]:border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]"
+                            />
+                            <div className="flex-1">
+                              <label htmlFor={claim.id} className="cursor-pointer">
+                                <p className="font-semibold text-[#212223]">{claim.title}</p>
+                              </label>
+                              
+                              {/* Source file pill */}
+                              <div className="mt-2">
+                                <div className="inline-flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-3 py-1.5">
+                                  <FileText className="size-4 text-[#737373]" />
+                                  <span className="text-sm text-[#737373]">{claim.sourceFile}</span>
+                                </div>
+                              </div>
+                              
+                              {/* Summary */}
+                              <p className="mt-3 text-sm text-[#212223]">{claim.summary}</p>
+                              
+                              {/* Bullet points */}
+                              <ul className="mt-2 ml-4 list-disc space-y-1">
+                                {claim.points.map((point, idx) => (
+                                  <li key={idx} className="text-sm text-[#212223]">{point}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))
+            ) : (
+              // Brief flow - original flat structure
+              argumentsState.map((argument) => (
+                <div
+                  key={argument.id}
+                  className={cn(
+                    "rounded-lg border p-5",
+                    argument.checked ? "border-[#1d4b34] bg-[#f5f7f6]" : "border-[#e5e5e5] bg-white"
+                  )}
+                >
+                  <div className="flex items-start gap-3">
+                    <Checkbox 
+                      id={argument.id}
+                      checked={argument.checked}
+                      onCheckedChange={() => toggleArgument(argument.id)}
+                      className="mt-0.5 border-[#737373] data-[state=checked]:border-[#1d4b34] data-[state=checked]:bg-[#1d4b34]"
+                    />
+                    <div className="flex-1">
+                      <label htmlFor={argument.id} className="cursor-pointer">
+                        <p className="font-semibold text-[#212223]">
+                          {argument.number}. {argument.title}
+                        </p>
+                      </label>
+                      <ul className="mt-2 ml-4 list-disc space-y-1">
+                        {argument.points.map((point, idx) => (
+                          <li key={idx} className="text-sm text-[#212223]">{point}</li>
+                        ))}
                       </ul>
+                      <div className="mt-4">
+                        <p className="text-sm text-[#737373]">Applies to</p>
+                        <ul className="ml-4 mt-1 list-disc">
+                          <li className="text-sm text-[#212223]">{argument.appliesTo}</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-4">
