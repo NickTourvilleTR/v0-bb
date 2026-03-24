@@ -404,11 +404,7 @@ function AuthenticatedApp() {
               onNextSelectArguments={() => {
                 const buttonLabel = flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments";
                 addChatMessage("user", buttonLabel);
-                if (flowType === "judicial") {
-                  addChatMessage("assistant", "Review the summary of the parties' arguments. You can also add in any positions that are not captured into the list for consideration.");
-                } else {
-                  addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
-                }
+                addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
                 setCurrentScreen("argue2");
               }}
               onSkipToGenerateDraft={() => {
@@ -511,9 +507,7 @@ function AuthenticatedApp() {
             }}
             showVersionsTab={true}
           >
-            <OutlineEditor 
-              flowType={flowType}
-              onNextDraft={() => {
+            <OutlineEditor onNextDraft={() => {
               addChatMessage("user", "Next: Draft");
               addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
               setCurrentScreen("draft");

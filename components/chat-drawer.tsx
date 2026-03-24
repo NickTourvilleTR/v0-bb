@@ -262,11 +262,12 @@ export function ChatDrawer({
             {/* Outline Loading/Ready Step Card */}
             {(currentStep === "outline-loading" || currentStep === "outline-ready") && (
               <MessageCard
-                onQuote={() => handleQuote("Your outline is ready. Review the structure and headings, then proceed to generate the full draft.")}
+                onQuote={() => handleQuote("Your brief outline is ready. Review the structure and sections before proceeding to the draft.")}
               >
-                <p className="mb-3 text-sm text-[#212223]">
-                  Your outline is ready. Review the structure and headings, then proceed to generate the full draft.
+                <p className="mb-2 text-sm text-[#212223]">
+                  Your brief outline is ready. Review the structure and sections before proceeding to the draft.
                 </p>
+                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" onClick={onNextDraft} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Draft</Button>
                 </div>
