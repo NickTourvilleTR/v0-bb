@@ -542,7 +542,7 @@ function AuthenticatedApp() {
             currentStep="draft"
             showVersionsTab={true}
           >
-            <DraftScreen onGenerateDraft={handleGenerateDraft} />
+            <DraftScreen flowType={flowType} onGenerateDraft={handleGenerateDraft} />
           </AppLayoutWrapper>
         </div>
       </div>
