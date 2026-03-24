@@ -20,8 +20,10 @@ const briefActivityItems: ActivityItem[] = [
 ];
 
 const judicialActivityItems: ActivityItem[] = [
+  { name: "Intake", status: "Reviewed", icon: "check" },
+  { name: "Claims", status: "Reviewed", icon: "check" },
+  { name: "Decide", status: "Reviewed", icon: "check" },
   { name: "Outline", status: "Reviewed", icon: "check" },
-  { name: "Support", status: "Reviewed", icon: "check" },
   { name: "Draft", status: "Reviewed", icon: "check" },
   { name: "Verify", status: "Reviewed", icon: "check" },
 ];
