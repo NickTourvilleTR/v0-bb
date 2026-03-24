@@ -178,6 +178,70 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
           )}
 
           {/* Section II */}
+          {flowType === "judicial" ? (
+            <div className="border-b border-[#e5e5e5]">
+              <button
+                onClick={() => toggleSection("legal-standards")}
+                className="flex w-full items-center justify-between py-4"
+              >
+                <h2 className="text-lg font-semibold text-[#212223]">
+                  II. APPLICABLE LEGAL STANDARDS
+                </h2>
+                {expandedSections.includes("legal-standards") ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+
+              {expandedSections.includes("legal-standards") && (
+                <div className="pb-6 space-y-6">
+                  {/* a. Motion to Dismiss */}
+                  <div>
+                    <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                      a. Motion to Dismiss
+                    </h3>
+                    <p className="text-sm text-[#212223]">
+                      On a motion to dismiss, the court accepts well-pleaded factual allegations as true and construes them in the light most favorable to the plaintiff. The issue is not whether plaintiff will ultimately prevail, but whether plaintiff has stated a plausible claim for relief.
+                    </p>
+                  </div>
+
+                  {/* b. Breach of Contract */}
+                  <div>
+                    <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                      b. Breach of Contract
+                    </h3>
+                    <p className="text-sm text-[#212223]">
+                      To state a claim for breach of contract, a plaintiff generally must allege:
+                    </p>
+                    <ol className="ml-6 mt-2 space-y-1 text-sm text-[#212223] list-decimal">
+                      <li>the existence of a contract,</li>
+                      <li>plaintiff&apos;s performance or excuse for nonperformance,</li>
+                      <li>defendant&apos;s breach, and</li>
+                      <li>resulting damages.</li>
+                    </ol>
+                  </div>
+
+                  {/* c. Insurance Bad Faith */}
+                  <div>
+                    <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                      c. Insurance Bad Faith
+                    </h3>
+                    <p className="text-sm text-[#212223]">
+                      To state a bad faith claim, a plaintiff generally must allege:
+                    </p>
+                    <ol className="ml-6 mt-2 space-y-1 text-sm text-[#212223] list-decimal">
+                      <li>benefits due under the policy were withheld, and</li>
+                      <li>the withholding was unreasonable or without proper cause.</li>
+                    </ol>
+                    <p className="mt-2 text-sm text-[#212223]">
+                      Where there is no potential policy benefit due, a bad faith claim generally cannot proceed. However, where coverage is sufficiently alleged and the insurer&apos;s conduct is alleged to have been unreasonable, dismissal at the pleading stage is not appropriate.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
           <div className="border-b border-[#e5e5e5]">
             <button
               onClick={() => toggleSection("factual-background")}
@@ -309,6 +373,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
               </div>
             )}
           </div>
+          )}
 
           {/* Section III: ARGUMENT */}
           <div className="border-b border-[#e5e5e5]">
