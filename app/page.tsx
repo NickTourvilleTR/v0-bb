@@ -184,13 +184,19 @@ function AuthenticatedApp() {
   };
 
   const handleFileUpload = () => {
-    addChatMessage("user", "Uploaded 6 documents");
-    setCurrentScreen("uploading");
-    // Simulate analyzing documents, then show case details
-    setTimeout(() => {
-      addChatMessage("assistant", "I've extracted the following details from your uploaded documents. <strong>Review and enter any edit instructions as necessary.</strong>");
-      setCurrentScreen("case-details");
-    }, 3000);
+    if (flowType === "judicial") {
+      addChatMessage("user", "Uploaded 5 documents");
+      addChatMessage("assistant", "I've analyzed the uploaded documents. Here is your intake summary.");
+      setCurrentScreen("intake");
+    } else {
+      addChatMessage("user", "Uploaded 6 documents");
+      setCurrentScreen("uploading");
+      // Simulate analyzing documents, then show case details
+      setTimeout(() => {
+        addChatMessage("assistant", "I've extracted the following details from your uploaded documents. <strong>Review and enter any edit instructions as necessary.</strong>");
+        setCurrentScreen("case-details");
+      }, 3000);
+    }
   };
 
   const handleCaseDetailsContinue = (selectedParty: string, additionalDetails: string) => {
