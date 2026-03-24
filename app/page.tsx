@@ -308,7 +308,7 @@ function AuthenticatedApp() {
 
   const handleNextVerify = () => {
     addChatMessage("user", "Verify brief");
-    addChatMessage("assistant", "Verifying your citations and checking for potential issues. Review the verification results and address any flagged items.");
+    addChatMessage("assistant", flowType === "judicial" ? "Verifying your opinion and checking for potential issues." : "Verifying your citations and checking for potential issues. Review the verification results and address any flagged items.");
     setCurrentScreen("verify");
   };
 
@@ -607,7 +607,7 @@ function AuthenticatedApp() {
                 ? "Verify opinion"
                 : "Verify brief";
               const verifyingMsg = flowType === "judicial"
-                ? "Verifying your draft and checking for potential issues."
+                ? "Verifying your opinion and checking for potential issues."
                 : "Verifying your citations and checking for potential issues.";
               addChatMessage("user", verifyMsg);
               addChatMessage("assistant", verifyingMsg);
@@ -620,7 +620,7 @@ function AuthenticatedApp() {
                 ? "Verify opinion"
                 : "Verify brief";
               const verifyingMsg = flowType === "judicial"
-                ? "Verifying your draft and checking for potential issues."
+                ? "Verifying your opinion and checking for potential issues."
                 : "Verifying your citations and checking for potential issues.";
               addChatMessage("user", verifyMsg);
               addChatMessage("assistant", verifyingMsg);

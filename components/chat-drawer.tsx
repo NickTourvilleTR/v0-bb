@@ -278,10 +278,10 @@ export function ChatDrawer({
             {/* Verify Step Card */}
             {currentStep === "verify" && (
               <MessageCard
-                onQuote={() => handleQuote(flowType === "judicial" ? "Here are your verification results." : "I've verified all citations and cross-references in your brief.")}
+                onQuote={() => handleQuote(flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief.")}
               >
                 <p className="mb-2 text-sm text-[#212223]">
-                  {flowType === "judicial" ? "Here are your verification results." : "I've verified all citations and cross-references in your brief."}
+                  {flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief."}
                 </p>
                 <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">
