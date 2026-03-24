@@ -20,6 +20,14 @@ const uploadedFiles = [
   { name: "One Italian Summer (lodged)", type: "W" },
 ];
 
+const judicialUploadedFiles = [
+  { name: "COMPLAINT filed by 516, Inc.", type: "P" },
+  { name: "NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
+  { name: "OPPOSITION to NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
+  { name: "Defendant's Objection and Request to Strike Plaintiff's Declarations", type: "W" },
+  { name: "REPLY In Support NOTICE OF MOTION AND MOTION to Dismiss Case", type: "W" },
+];
+
 const argumentsSelected = [
   {
     id: "copyright",
@@ -160,11 +168,11 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             </div>
           )}
 
-          {/* Motion Type Card */}
+          {/* Motion Type / Work Product Card */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Motion type</h3>
+            <h3 className="mb-3 text-sm font-medium text-[#212223]">{flowType === "judicial" ? "Work product" : "Motion type"}</h3>
             <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-2.5 text-sm text-[#212223]">
-              Motion to Dismiss
+              {flowType === "judicial" ? "Opinion" : "Motion to Dismiss"}
             </div>
           </div>
 
@@ -196,7 +204,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
             <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
               <div className="flex flex-wrap gap-2">
-                {uploadedFiles.map((file, index) => (
+                {(flowType === "judicial" ? judicialUploadedFiles : uploadedFiles).map((file, index) => (
                   <div
                     key={index}
                     className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-3 py-1.5"
