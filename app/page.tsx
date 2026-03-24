@@ -438,13 +438,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="outline"
             onGenerateOutline={handleGenerateOutline}
             onSkipToGenerateDraft={() => {
@@ -477,13 +478,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="outline-loading"
             showVersionsTab={true}
           >
@@ -502,13 +504,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="outline" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="outline-ready"
             onNextDraft={() => {
               addChatMessage("user", "Next: Draft");
@@ -538,13 +541,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="draft"
             showVersionsTab={true}
           >
@@ -563,13 +567,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="draft-loading"
             showVersionsTab={true}
           >
@@ -588,24 +593,37 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="draft-ready"
             onVerifyBrief={() => {
-              addChatMessage("user", "Verify brief");
-              addChatMessage("assistant", "Verifying your citations and checking for potential issues.");
+              const verifyMsg = flowType === "judicial" 
+                ? "Verify opinion"
+                : "Verify brief";
+              const verifyingMsg = flowType === "judicial"
+                ? "Verifying your draft and checking for potential issues."
+                : "Verifying your citations and checking for potential issues.";
+              addChatMessage("user", verifyMsg);
+              addChatMessage("assistant", verifyingMsg);
               setCurrentScreen("verify");
             }}
             showVersionsTab={true}
           >
             <DraftEditor flowType={flowType} onVerifyBrief={() => {
-              addChatMessage("user", "Verify brief");
-              addChatMessage("assistant", "Verifying your citations and checking for potential issues.");
+              const verifyMsg = flowType === "judicial" 
+                ? "Verify opinion"
+                : "Verify brief";
+              const verifyingMsg = flowType === "judicial"
+                ? "Verifying your draft and checking for potential issues."
+                : "Verifying your citations and checking for potential issues.";
+              addChatMessage("user", verifyMsg);
+              addChatMessage("assistant", verifyingMsg);
               setCurrentScreen("verify");
             }} />
           </AppLayoutWrapper>
@@ -622,13 +640,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="verify" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="verify"
             onNextOpposition={() => {
               addChatMessage("user", "Next: Opposition brief");
@@ -693,13 +712,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="finalize" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="finalize"
             showVersionsTab={true}
           >
@@ -718,13 +738,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="opposition" onStepClick={handleStepperClick} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="opposition"
             onNextFinalize={() => {
               addChatMessage("user", "Next: Finalize");
@@ -754,13 +775,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="support" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="support-loading"
             showVersionsTab={true}
           >
@@ -779,13 +801,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="develop" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="support"
             flowType={flowType}
             onNextOutline={() => {
@@ -838,13 +861,14 @@ function AuthenticatedApp() {
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
           <BriefStepperNav currentStep="argue2" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialSteps : undefined} />
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            onSendMessage={handleInlineSend}
+        <AppLayoutWrapper
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          notesOpen={notesOpen}
+          setNotesOpen={setNotesOpen}
+          flowType={flowType}
+          messages={chatMessages}
+          onSendMessage={handleInlineSend}
             currentStep="argue"
             flowType={flowType}
             onNextSupportingAuthority={handleNextSupportingAuthority}

@@ -19,6 +19,7 @@ interface Message {
 interface ChatDrawerProps {
   isOpen: boolean;
   onToggle: () => void;
+  flowType?: "brief" | "judicial";
   currentStep?: "library" | "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
@@ -277,10 +278,10 @@ export function ChatDrawer({
             {/* Verify Step Card */}
             {currentStep === "verify" && (
               <MessageCard
-                onQuote={() => handleQuote("I've verified all citations and cross-references in your brief.")}
+                onQuote={() => handleQuote(flowType === "judicial" ? "Here are your verification results." : "I've verified all citations and cross-references in your brief.")}
               >
                 <p className="mb-2 text-sm text-[#212223]">
-                  I've verified all citations and cross-references in your brief.
+                  {flowType === "judicial" ? "Here are your verification results." : "I've verified all citations and cross-references in your brief."}
                 </p>
                 <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
                 <div className="flex flex-wrap gap-2">

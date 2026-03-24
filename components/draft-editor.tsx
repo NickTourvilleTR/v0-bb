@@ -531,7 +531,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
               onClick={onVerifyBrief}
               className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
             >
-              Verify brief
+              {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
             </Button>
           </div>
           </>)}

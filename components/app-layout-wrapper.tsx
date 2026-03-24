@@ -12,6 +12,7 @@ interface AppLayoutWrapperProps {
   setDrawerOpen: (open: boolean) => void;
   notesOpen: boolean;
   setNotesOpen: (open: boolean) => void;
+  flowType?: "brief" | "judicial";
   currentStep?: "library" | "intake" | "argue" | "support-loading" | "support" | "distinguish" | "outline" | "outline-loading" | "outline-ready" | "draft" | "draft-loading" | "draft-ready" | "verify" | "finalize" | "opposition";
   onArgumentAdded?: () => void;
   onNextSupportingAuthority?: () => void;
@@ -191,6 +192,7 @@ export function AppLayoutWrapper({
       <ChatDrawer
         isOpen={drawerOpen}
         onToggle={() => setDrawerOpen(!drawerOpen)}
+        flowType={flowType}
         currentStep={currentStep}
         onArgumentAdded={onArgumentAdded}
         onNextSupportingAuthority={onNextSupportingAuthority}
