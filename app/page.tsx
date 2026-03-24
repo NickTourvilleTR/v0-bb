@@ -5,6 +5,7 @@ import { CocoChatInput } from "@/components/coco-chat-input";
 import { CocoHeader } from "@/components/coco-header";
 import { CocoChatMessage } from "@/components/coco-chat-message";
 import { BriefBuilderCard } from "@/components/brief-builder-card";
+import { JudicialWorkProductCard } from "@/components/judicial-work-product-card";
 import { BriefBuilderTypeCard } from "@/components/brief-builder-type-card";
 import { BriefBuilderUploadCard } from "@/components/brief-builder-upload-card";
 import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-combined-details-card";
@@ -36,6 +37,7 @@ import * as React from "react";
 type Screen =
   | "start"
   | "library"
+  | "judicial-work-product"
   | "motion-search"
   | "brief-type"
   | "file-upload"
@@ -89,9 +91,10 @@ function AuthenticatedApp() {
   const [showUserArgument, setShowUserArgument] = React.useState(false);
   const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
   const [quotedText, setQuotedText] = React.useState<string | null>(null);
+  const [flowType, setFlowType] = React.useState<"brief" | "judicial">("brief");
   
-  // Dynamic header title based on selected motion
-  const headerTitle = selectedMotion ? "Motion to Dismiss" : "Brief Builder";
+  // Dynamic header title based on flow and selected motion
+  const headerTitle = flowType === "judicial" ? "Judicial drafting" : (selectedMotion ? "Motion to Dismiss" : "Brief Builder");
   
   // Handler for quote action from cards
   const handleQuote = (text: string) => {
@@ -142,9 +145,17 @@ function AuthenticatedApp() {
   }, [currentScreen]);
 
   const handleStartSubmit = () => {
+    setFlowType("brief");
     addChatMessage("user", "Help me draft a legal brief");
     addChatMessage("assistant", "I can help you draft a memorandum of law. What type of motion are you working on?");
     setCurrentScreen("motion-search");
+  };
+
+  const handleJudicialDraftingSubmit = () => {
+    setFlowType("judicial");
+    addChatMessage("user", "Help me with judicial drafting");
+    addChatMessage("assistant", "I can help you draft judicial work product. What type of document are you working on?");
+    setCurrentScreen("judicial-work-product");
   };
 
   const handleLibraryClick = () => {
@@ -209,6 +220,7 @@ function AuthenticatedApp() {
   const handleReset = () => {
     setCurrentScreen("start");
     setChatMessages([]);
+    setFlowType("brief");
   };
 
   const handleNextSupportingAuthority = () => {
@@ -293,6 +305,7 @@ function AuthenticatedApp() {
   // Screen indices for comparison
   const screenIndex = {
     start: 0,
+    "judicial-work-product": 1,
     "motion-search": 1,
     "brief-type": 2,
     "file-upload": 3,
@@ -867,7 +880,10 @@ function AuthenticatedApp() {
                   </button>
                 </div>
                 <div className="flex w-full justify-start">
-                  <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                  <button
+                    onClick={handleJudicialDraftingSubmit}
+                    className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                  >
                     <Gavel className="size-4 text-[#737373]" />
                     Help me with judicial drafting
                   </button>
@@ -901,12 +917,26 @@ function AuthenticatedApp() {
                   className="mb-6"
                 >
                   <p className="text-[#212223]">
-                    Help me draft a legal brief
+                    {flowType === "judicial" ? "Help me with judicial drafting" : "Help me draft a legal brief"}
                   </p>
                 </CocoChatMessage>
 
+                {/* Judicial Work Product Card */}
+                {flowType === "judicial" && isAtOrPast("judicial-work-product") && (
+                  <CocoChatMessage
+                    type="assistant"
+                    timestamp="9:10 a.m."
+                    className="mb-6"
+                  >
+                    <JudicialWorkProductCard
+                      onSubmit={() => {}}
+                      onQuote={handleQuote}
+                    />
+                  </CocoChatMessage>
+                )}
+
                 {/* Motion Search Card */}
-                {isAtOrPast("motion-search") && (
+                {flowType === "brief" && isAtOrPast("motion-search") && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:10 a.m."
