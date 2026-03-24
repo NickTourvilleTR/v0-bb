@@ -126,6 +126,13 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           {flowType === "judicial" ? (
             // JUDICIAL FLOW: OPINION CONTENT
             <>
+              {/* Court Header */}
+              <div className="mb-8 text-center">
+                <p className="text-lg font-semibold text-[#212223]">UNITED STATES DISTRICT COURT</p>
+                <p className="text-lg font-semibold text-[#212223]">CENTRAL DISTRICT OF CALIFORNIA</p>
+                <p className="text-lg font-semibold text-[#212223]">SOUTHERN DIVISION</p>
+              </div>
+
               {/* Opening */}
               <div className="mb-8">
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
