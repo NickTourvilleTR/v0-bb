@@ -21,6 +21,7 @@ interface AppLayoutWrapperProps {
   onNextVerify?: () => void;
   onNextFinalize?: () => void;
   onNextSelectArguments?: () => void;
+  nextSelectArgumentsLabel?: string;
   onSkipToGenerateDraft?: () => void;
   onNextOpposition?: () => void;
   onSkipToFinalize?: () => void;
@@ -58,6 +59,7 @@ export function AppLayoutWrapper({
   onNextVerify,
   onNextFinalize,
   onNextSelectArguments,
+  nextSelectArgumentsLabel,
   onSkipToGenerateDraft,
   onNextOpposition,
   onSkipToFinalize,
@@ -198,6 +200,7 @@ export function AppLayoutWrapper({
         onNextVerify={onNextVerify}
         onNextFinalize={onNextFinalize}
         onNextSelectArguments={onNextSelectArguments}
+        nextSelectArgumentsLabel={nextSelectArgumentsLabel}
         onSkipToGenerateDraft={onSkipToGenerateDraft}
         onNextOpposition={onNextOpposition}
         onSkipToFinalize={onSkipToFinalize}

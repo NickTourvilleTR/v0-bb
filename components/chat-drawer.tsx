@@ -28,6 +28,7 @@ interface ChatDrawerProps {
   onNextVerify?: () => void;
   onNextFinalize?: () => void;
   onNextSelectArguments?: () => void;
+  nextSelectArgumentsLabel?: string;
   onSkipToGenerateDraft?: () => void;
   onNextOpposition?: () => void;
   onSkipToFinalize?: () => void;
@@ -55,6 +56,7 @@ export function ChatDrawer({
   onNextVerify,
   onNextFinalize,
   onNextSelectArguments,
+  nextSelectArgumentsLabel = "Next: Select arguments",
   onSkipToGenerateDraft,
   onNextOpposition,
   onSkipToFinalize,
@@ -333,7 +335,7 @@ export function ChatDrawer({
             <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
             <div className="flex flex-wrap gap-2">
               <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
-              <Button size="sm" onClick={onNextSelectArguments} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Select arguments</Button>
+              <Button size="sm" onClick={onNextSelectArguments} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">{nextSelectArgumentsLabel}</Button>
             </div>
           </div>
         </div>
