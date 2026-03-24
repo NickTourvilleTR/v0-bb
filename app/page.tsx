@@ -242,12 +242,13 @@ function AuthenticatedApp() {
   };
 
   const handleNextSupportingAuthority = () => {
-    addChatMessage("user", "Next: Supporting authority");
-    addChatMessage("assistant", "Researching supporting authorities for your selected arguments...");
+    const buttonLabel = flowType === "judicial" ? "Next: Decide on selected claims" : "Next: Supporting authority";
+    addChatMessage("user", buttonLabel);
+    addChatMessage("assistant", flowType === "judicial" ? "Processing your selected claims..." : "Researching supporting authorities for your selected arguments...");
     setCurrentScreen("support-loading");
     // Simulate generating authorities, then show support screen
     setTimeout(() => {
-      addChatMessage("assistant", "I've identified relevant case law and statutes to support your arguments. Review the authorities and select which ones to include in your brief.");
+      addChatMessage("assistant", flowType === "judicial" ? "I've analyzed the selected claims and prepared a summary. Review the details and decide how to proceed." : "I've identified relevant case law and statutes to support your arguments. Review the authorities and select which ones to include in your brief.");
       setCurrentScreen("support");
     }, 3000);
   };
