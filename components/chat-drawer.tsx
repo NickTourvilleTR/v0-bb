@@ -329,12 +329,18 @@ export function ChatDrawer({
       {currentStep === "intake" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="rounded-lg border border-[#e5e5e5] bg-white p-4">
-            <p className="mb-2 text-sm text-[#212223]">
-              Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims.
+            <p className="mb-3 text-sm text-[#212223]">
+              {flowType === "judicial"
+                ? "I've analyzed the uploaded documents. Here is your intake summary."
+                : "Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims."}
             </p>
-            <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+            {flowType !== "judicial" && (
+              <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+            )}
             <div className="flex flex-wrap gap-2">
-              <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+              {flowType !== "judicial" && (
+                <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+              )}
               <Button size="sm" onClick={onNextSelectArguments} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">{flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments"}</Button>
             </div>
           </div>
