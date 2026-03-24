@@ -272,7 +272,11 @@ function AuthenticatedApp() {
 
   const handleGenerateOutline = () => {
     addChatMessage("user", "Generate outline");
-    addChatMessage("assistant", "Generating your brief outline based on the selected arguments and authorities...");
+    if (flowType === "judicial") {
+      addChatMessage("assistant", "Generating your opinion outline based on the selected claims and decisions...");
+    } else {
+      addChatMessage("assistant", "Generating your brief outline based on the selected arguments and authorities...");
+    }
     setCurrentScreen("outline-loading");
     setTimeout(() => {
       addChatMessage("assistant", "Your outline is ready. Review the structure and headings, then proceed to generate the full draft.");
