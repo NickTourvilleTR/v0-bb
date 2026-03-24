@@ -274,7 +274,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 onClick={onNextSelectArguments}
                 className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white hover:bg-[#163d2a]"
               >
-                Next: Select arguments
+                Next: Review claims
               </button>
             </div>
           </div>

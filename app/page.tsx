@@ -390,7 +390,7 @@ function AuthenticatedApp() {
           >
             <IntakeScreen 
               onNextSelectArguments={() => {
-                addChatMessage("user", "Next: Select arguments");
+                addChatMessage("user", "Next: Review claims");
                 addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");
                 setCurrentScreen("argue2");
               }}
