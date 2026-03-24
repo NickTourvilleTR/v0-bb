@@ -210,34 +210,37 @@ export function SupportingAuthoritiesPanel({
                     </div>
                   </div>
 
-                  {/* Summary row */}
-                  <div className="flex border-b border-[#e5e5e5]">
+                  {/* Single content row */}
+                  <div className="flex">
                     <div className="w-1/2 px-5 py-4">
-                      <p className="text-sm leading-relaxed text-[#212223]">{claim.plaintiffSummary}</p>
+                      <p className="mb-3 text-sm leading-relaxed text-[#212223]">{claim.plaintiffSummary}</p>
+                      <ul className="space-y-2">
+                        {claim.plaintiffPoints.map((point, i) => (
+                          <li key={i} className="flex gap-2 text-sm leading-relaxed text-[#212223]">
+                            <span className="mt-0.5 shrink-0 text-[#737373]">•</span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                     <div className="w-1/2 border-l border-[#e5e5e5] px-5 py-4">
-                      <p className="text-sm leading-relaxed text-[#212223]">{claim.defendantSummary}</p>
+                      <p className="mb-3 text-sm leading-relaxed text-[#212223]">{claim.defendantSummary}</p>
+                      <ul className="space-y-2">
+                        {claim.defendantPoints.map((point, i) => (
+                          <li key={i} className="flex gap-2 text-sm leading-relaxed text-[#212223]">
+                            <span className="mt-0.5 shrink-0 text-[#737373]">•</span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
-
-                  {/* Bullet rows paired by index */}
-                  {Array.from({ length: Math.max(claim.plaintiffPoints.length, claim.defendantPoints.length) }).map((_, rowIdx) => (
-                    <div
-                      key={rowIdx}
-                      className={cn("flex", rowIdx < Math.max(claim.plaintiffPoints.length, claim.defendantPoints.length) - 1 && "border-b border-[#e5e5e5]")}
-                    >
-                      <div className="w-1/2 px-5 py-4">
-                        <p className="text-sm leading-relaxed text-[#212223]">{"• "}{claim.plaintiffPoints[rowIdx] ?? ""}</p>
-                      </div>
-                      <div className="w-1/2 border-l border-[#e5e5e5] px-5 py-4">
-                        <p className="text-sm leading-relaxed text-[#212223]">{"• "}{claim.defendantPoints[rowIdx] ?? ""}</p>
-                      </div>
-                    </div>
-                  ))}
                 </div>
 
-                {/* Radio options */}
-                <div className="mt-4 flex items-center gap-6">
+                {/* Decision section */}
+                <div className="mt-6">
+                <p className="mb-3 text-sm font-semibold text-[#212223]">Decision</p>
+                <div className="flex items-center gap-6">
                   {(["plaintiff", "defendant", "neither"] as const).map((option) => {
                     const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
                     return (
@@ -319,6 +322,7 @@ export function SupportingAuthoritiesPanel({
                     </button>
                   </div>
                 )}
+                </div>{/* end Decision section */}
               </div>
             );
           })
