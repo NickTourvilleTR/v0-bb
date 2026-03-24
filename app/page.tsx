@@ -160,8 +160,8 @@ function AuthenticatedApp() {
   };
 
   const handleWorkProductSubmit = (workProductId: string) => {
-    if (workProductId === "order") {
-      addChatMessage("user", "Order");
+    if (workProductId === "opinion") {
+      addChatMessage("user", "Opinion");
       addChatMessage("assistant", "Sure, I can help you draft an opinion. To provide you with the most useful guidance, I should start by analyzing the relevant briefs. You can also upload any pertinent records, prior court materials, templates, or other documents you would like to use for your opinion.");
       setCurrentScreen("file-upload");
     }
