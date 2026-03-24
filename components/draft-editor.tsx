@@ -126,31 +126,6 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           {flowType === "judicial" ? (
             // JUDICIAL FLOW: OPINION CONTENT
             <>
-              {/* Case Caption — left parties | ) divider | right case info */}
-              <div className="mb-8 flex text-sm text-[#212223]">
-                {/* Left: party names */}
-                <div className="flex-1 space-y-2 pr-2">
-                  <p>516 Inc., dba DG Plumbing,</p>
-                  <p className="pl-8">Plaintiff</p>
-                  <p>v.</p>
-                  <p>RICHMOND SERVICES, INC. dba RICHMOND NATIONAL INSURANCE COMPANY, a Delaware Corporation; and DOES 1 through 100, inclusive,</p>
-                  <p className="pl-8">Defendants.</p>
-                </div>
-
-                {/* Middle: ) column */}
-                <div className="flex flex-col items-center px-2 leading-7">
-                  {[")", ")", ")", ")", ")", ")", ")", ")", ")", ")"].map((p, i) => (
-                    <span key={i}>{p}</span>
-                  ))}
-                </div>
-
-                {/* Right: case number + order title */}
-                <div className="flex-1 space-y-4 pl-2">
-                  <p>Case No. 8:25-cv-01204-DOC-KES</p>
-                  <p className="font-bold">ORDER DENYING DEFENDANT&apos;S MOTION TO DISMISS</p>
-                </div>
-              </div>
-
               {/* Opening */}
               <div className="mb-8">
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
@@ -216,22 +191,21 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             {/* Left Column - Parties */}
             <div className="flex-1 border-r border-[#e5e5e5] pr-8">
               <p className="mb-4 text-sm text-[#212223]">
-                <span className="font-medium">Adrienne Love</span>,
+                <span className="font-medium">516 Inc., dba DG Plumbing</span>,
               </p>
               <p className="mb-4 ml-16 text-sm text-[#212223]">Plaintiff,</p>
               <p className="mb-4 ml-8 text-sm text-[#212223]">v.</p>
               <p className="mb-4 text-sm text-[#212223]">
-                <span className="font-medium">Airbnb, Inc.</span>, et al.
+                <span className="font-medium">RICHMOND SERVICES, INC. dba RICHMOND NATIONAL INSURANCE COMPANY, a Delaware Corporation; and DOES 1 through 100, inclusive</span>,
               </p>
               <p className="ml-16 text-sm text-[#212223]">Defendants.</p>
             </div>
 
             {/* Right Column - Case Details */}
             <div className="flex-1">
-              <p className="mb-2 text-sm text-[#212223]">Case No. 2:25-cv-01779-AB(KSx)</p>
-              <p className="mb-4 text-sm text-[#212223]">Hon. André Birotte Jr.</p>
+              <p className="mb-2 text-sm text-[#212223]">Case No. 8:25-cv-01204-DOC-KES</p>
               <p className="text-sm font-semibold uppercase text-[#212223]">
-                DEFENDANT SIMON & SCHUSTER, LLC'S JOINDER IN CREATIVE ARTISTS AGENCY, LLC'S MOTION TO DISMISS FIRST AMENDED COMPLAINT AND MOTION TO DISMISS FIRST AMENDED COMPLAINT; MEMORANDUM OF POINTS AND AUTHORITIES IN SUPPORT THEREOF
+                ORDER DENYING DEFENDANT&apos;S MOTION TO DISMISS
               </p>
               <p className="mt-4 text-sm text-[#212223]">Hearing Date: October 31, 2025</p>
               <p className="text-sm text-[#212223]">Hearing Time: 10:00 a.m.</p>
