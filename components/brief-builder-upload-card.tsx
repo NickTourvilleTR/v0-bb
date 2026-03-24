@@ -14,6 +14,7 @@ interface BriefBuilderUploadCardProps {
   headerTitle?: string;
   description?: string;
   tags?: { label: string; color: string }[];
+  defaultFilesToUse?: typeof defaultFiles;
 }
 
 const defaultFiles = [
@@ -21,6 +22,14 @@ const defaultFiles = [
   { id: "2", name: "Quitclaim & Assignment Agreement", type: "P" },
   { id: "3", name: "Eat The Lemon Feb 2021 Manuscript", type: "W" },
   { id: "4", name: "One Italian Summer (lodged)", type: "W" },
+];
+
+export const judicialDefaultFiles = [
+  { id: "1", name: "COMPLAINT filed by 516, Inc.", type: "P" },
+  { id: "2", name: "NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
+  { id: "3", name: "OPPOSITION to NOTICE OF MOTION AND MOTION to Dismiss Case", type: "P" },
+  { id: "4", name: "Defendant's Objection and Request to Strike Plaintiff's Declarations", type: "W" },
+  { id: "5", name: "REPLY In Support NOTICE OF MOTION AND MOTION to Dismiss Case", type: "W" },
 ];
 
 export function BriefBuilderUploadCard({
@@ -35,13 +44,14 @@ export function BriefBuilderUploadCard({
     { label: "Motion to dismiss", color: "#1d4b34" },
     { label: "Primary brief", color: "#1d4b34" },
   ],
+  defaultFilesToUse = defaultFiles,
 }: BriefBuilderUploadCardProps) {
   const [selectedFiles, setSelectedFiles] = React.useState<typeof defaultFiles>(
-    showFile ? defaultFiles : []
+    showFile ? defaultFilesToUse : []
   );
 
   const handleFileSelect = () => {
-    setSelectedFiles(defaultFiles);
+    setSelectedFiles(defaultFilesToUse);
   };
 
   const handleRemoveFile = (fileId: string) => {

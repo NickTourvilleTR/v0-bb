@@ -7,7 +7,7 @@ import { CocoChatMessage } from "@/components/coco-chat-message";
 import { BriefBuilderCard } from "@/components/brief-builder-card";
 import { JudicialWorkProductCard } from "@/components/judicial-work-product-card";
 import { BriefBuilderTypeCard } from "@/components/brief-builder-type-card";
-import { BriefBuilderUploadCard } from "@/components/brief-builder-upload-card";
+import { BriefBuilderUploadCard, judicialDefaultFiles } from "@/components/brief-builder-upload-card";
 import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-combined-details-card";
 import { BriefBuilderProgressCard } from "@/components/brief-builder-progress-card";
 import { BriefBuilderReadyCard } from "@/components/brief-builder-ready-card";
@@ -957,18 +957,40 @@ function AuthenticatedApp() {
                   </CocoChatMessage>
                 )}
 
-                {/* Brief Type Card */}
-                {isAtOrPast("brief-type") && (
+                {/* Brief Type Card - only for brief flow */}
+                {flowType === "brief" && isAtOrPast("brief-type") && (
                   <CocoChatMessage
                     type="assistant"
                     timestamp="9:10 a.m."
                     className="mb-6"
                   >
                     <BriefBuilderTypeCard
-                      defaultValue={isAtOrPast("file-upload") ? "primary" : ""}
-                      disabled={isAtOrPast("file-upload")}
                       onSubmit={handleBriefTypeSubmit}
                     />
+                  </CocoChatMessage>
+                )}
+
+                {/* User "Primary" message - only for brief flow */}
+                {flowType === "brief" && isAtOrPast("file-upload") && (
+                  <CocoChatMessage
+                    type="user"
+                    userName="Jane Lawson"
+                    timestamp="9:10 a.m."
+                    className="mb-6"
+                  >
+                    <p className="text-[#212223]">Primary</p>
+                  </CocoChatMessage>
+                )}
+
+                {/* User "Opinion" message - only for judicial flow */}
+                {flowType === "judicial" && isAtOrPast("file-upload") && (
+                  <CocoChatMessage
+                    type="user"
+                    userName="Jane Lawson"
+                    timestamp="9:10 a.m."
+                    className="mb-6"
+                  >
+                    <p className="text-[#212223]">Opinion</p>
                   </CocoChatMessage>
                 )}
 
@@ -998,6 +1020,7 @@ function AuthenticatedApp() {
                       headerTitle={flowType === "judicial" ? "Upload documents" : "Upload documents"}
                       description={flowType === "judicial" ? "Sure, I can help you draft an opinion. To provide you with the most useful guidance, I should start by analyzing the relevant briefs. You can also upload any pertinent records, prior court materials, templates, or other documents you would like to use for your opinion." : "To provide you with the most useful guidance, I should start by analyzing the original complaint. You can also upload any pertinent exhibits, and other relevant documents."}
                       tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
+                      defaultFilesToUse={flowType === "judicial" ? judicialDefaultFiles : undefined}
                     />
                   </CocoChatMessage>
                 )}
