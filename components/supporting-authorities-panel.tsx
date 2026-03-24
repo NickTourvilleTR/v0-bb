@@ -73,7 +73,9 @@ const defaultAuthorities: ArgumentAuthority[] = [
 interface JudicialClaim {
   id: string;
   title: string;
+  plaintiffSummary: string;
   plaintiffPoints: string[];
+  defendantSummary: string;
   defendantPoints: string[];
 }
 
@@ -81,11 +83,13 @@ const judicialClaims: JudicialClaim[] = [
   {
     id: "breach-of-contract",
     title: "Breach of contract",
+    plaintiffSummary: "Plaintiff claims Richmond National breached the insurance policy by failing to pay benefits for their remediation claims even though they say they complied with the policy.",
     plaintiffPoints: [
       "Plaintiff alleges they had a valid insurance contract with Richmond that required them to indemnify and pay benefits.",
       "Plaintiff claims they performed all required conditions under the policy and therefore expected coverage, peace of mind, and financial protection.",
       "Plaintiff says Defendant failed and refused to pay any benefits, causing damages.",
     ],
+    defendantSummary: "Richmond argues the breach of contract claim fails because the policy did not cover DG Plumbing's remediation costs, so denying the claim was not a breach.",
     defendantPoints: [
       "The policy only covers amounts the insured is legally required to pay as \"damages\", and Richmond argues these remediation expenses were voluntary cleanup costs, not court-ordered damages.",
       "Richmond says there was no lawsuit or court order requiring DG Plumbing to pay these amounts, so the claim falls outside the policy's insuring agreement.",
@@ -95,11 +99,13 @@ const judicialClaims: JudicialClaim[] = [
   {
     id: "bad-faith",
     title: "Bad faith",
+    plaintiffSummary: "Plaintiff claims Richmond acted in bad faith by unreasonably delaying, denying, and mishandling their insurance claim.",
     plaintiffPoints: [
       "Plaintiff alleges Richmond wrongfully withheld benefits due under the policy, including by denying the claim and delaying payment without proper cause.",
       "Richmond handled the claim unfairly by failing to investigate thoroughly, objectively, and fairly, delaying claim processing, misrepresenting policy terms, and failing to communicate properly.",
       "Plaintiff further alleges Richmond violated California insurance statutes and claims-handling regulations, and that its conduct was intentional, malicious, and oppressive.",
     ],
+    defendantSummary: "Richmond argues the bad faith claim fails because there can be no bad faith if there was no coverage owed under the policy.",
     defendantPoints: [
       "Under California law, a bad faith claim generally requires that the insurer first owed benefits under the policy.",
       "Because Richmond argues the policy did not cover the remediation expenses, it says DG Plumbing cannot show benefits were wrongfully withheld.",
@@ -204,17 +210,27 @@ export function SupportingAuthoritiesPanel({
                     </div>
                   </div>
 
-                  {/* Table body - rows paired by index */}
+                  {/* Summary row */}
+                  <div className="flex border-b border-[#e5e5e5]">
+                    <div className="w-1/2 px-5 py-4">
+                      <p className="text-sm leading-relaxed text-[#212223]">{claim.plaintiffSummary}</p>
+                    </div>
+                    <div className="w-1/2 border-l border-[#e5e5e5] px-5 py-4">
+                      <p className="text-sm leading-relaxed text-[#212223]">{claim.defendantSummary}</p>
+                    </div>
+                  </div>
+
+                  {/* Bullet rows paired by index */}
                   {Array.from({ length: Math.max(claim.plaintiffPoints.length, claim.defendantPoints.length) }).map((_, rowIdx) => (
                     <div
                       key={rowIdx}
                       className={cn("flex", rowIdx < Math.max(claim.plaintiffPoints.length, claim.defendantPoints.length) - 1 && "border-b border-[#e5e5e5]")}
                     >
                       <div className="w-1/2 px-5 py-4">
-                        <p className="text-sm leading-relaxed text-[#212223]">{claim.plaintiffPoints[rowIdx] ?? ""}</p>
+                        <p className="text-sm leading-relaxed text-[#212223]">{"• "}{claim.plaintiffPoints[rowIdx] ?? ""}</p>
                       </div>
                       <div className="w-1/2 border-l border-[#e5e5e5] px-5 py-4">
-                        <p className="text-sm leading-relaxed text-[#212223]">{claim.defendantPoints[rowIdx] ?? ""}</p>
+                        <p className="text-sm leading-relaxed text-[#212223]">{"• "}{claim.defendantPoints[rowIdx] ?? ""}</p>
                       </div>
                     </div>
                   ))}
