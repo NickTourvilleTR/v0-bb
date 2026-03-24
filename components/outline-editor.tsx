@@ -19,10 +19,11 @@ import { Button } from "@/components/ui/button";
 interface OutlineEditorProps {
   className?: string;
   onNextDraft?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
-export function OutlineEditor({ className, onNextDraft }: OutlineEditorProps) {
-  const [expandedSections, setExpandedSections] = React.useState<string[]>(["factual-background"]);
+export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: OutlineEditorProps) {
+  const [expandedSections, setExpandedSections] = React.useState<string[]>(flowType === "judicial" ? ["factual-procedural"] : ["factual-background"]);
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections((prev) =>
@@ -101,25 +102,80 @@ export function OutlineEditor({ className, onNextDraft }: OutlineEditorProps) {
 
           {/* Document Length */}
           <div className="mb-6 rounded bg-[#f7f7f7] px-4 py-2">
-            <span className="text-sm text-[#212223]">Document length: ~17 pages</span>
+            <span className="text-sm text-[#212223]">Document length: {flowType === "judicial" ? "~15 pages" : "~17 pages"}</span>
           </div>
 
-          {/* Section I */}
-          <div className="border-b border-[#e5e5e5]">
-            <button
-              onClick={() => toggleSection("table-of-authorities")}
-              className="flex w-full items-center justify-between py-4"
-            >
-              <h2 className="text-lg font-semibold text-[#212223]">
-                I. TABLE OF AUTHORITIES
-              </h2>
-              {expandedSections.includes("table-of-authorities") ? (
-                <ChevronUp className="size-5 text-[#737373]" />
-              ) : (
-                <ChevronDown className="size-5 text-[#737373]" />
-              )}
-            </button>
-          </div>
+          {flowType === "judicial" ? (
+            // JUDICIAL FLOW OUTLINE
+            <>
+              {/* Section I: FACTUAL AND PROCEDURAL BACKGROUND */}
+              <div className="border-b border-[#e5e5e5]">
+                <button
+                  onClick={() => toggleSection("factual-procedural")}
+                  className="flex w-full items-center justify-between py-4"
+                >
+                  <h2 className="text-lg font-semibold text-[#212223]">
+                    I. FACTUAL AND PROCEDURAL BACKGROUND
+                  </h2>
+                  {expandedSections.includes("factual-procedural") ? (
+                    <ChevronUp className="size-5 text-[#737373]" />
+                  ) : (
+                    <ChevronDown className="size-5 text-[#737373]" />
+                  )}
+                </button>
+
+                {expandedSections.includes("factual-procedural") && (
+                  <div className="pb-6 space-y-6">
+                    {/* Subsection a: Plaintiff's Allegations */}
+                    <div>
+                      <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                        a. Plaintiff&apos;s Allegations
+                      </h3>
+                      <p className="text-sm text-[#212223]">
+                        Plaintiff 516, Inc. dba DG Plumbing alleges that it was insured under a policy issued by Defendant Richmond National Insurance Company. Plaintiff contends the policy required Richmond to indemnify Plaintiff and pay benefits for covered losses. Plaintiff further alleges that it complied with all policy conditions and submitted claims relating to remediation losses, but Richmond failed and refused to pay benefits due under the policy.
+                      </p>
+                      <p className="mt-2 text-sm text-[#212223]">
+                        Plaintiff also alleges Richmond acted in bad faith by unreasonably delaying and denying the claim, failing to investigate fairly and objectively, misrepresenting policy terms, delaying claim handling, and failing to communicate properly. Plaintiff alleges this conduct violated California insurance statutes and regulations and was intentional, malicious, and oppressive.
+                      </p>
+                    </div>
+
+                    {/* Subsection b: Defendant's Motion */}
+                    <div>
+                      <h3 className="mb-2 text-base font-semibold text-[#212223]">
+                        b. Defendant&apos;s Motion
+                      </h3>
+                      <p className="text-sm text-[#212223]">
+                        Richmond moves to dismiss both claims. As to breach of contract, Richmond argues the policy covers only sums the insured is legally obligated to pay as &quot;damages,&quot; and that DG Plumbing&apos;s remediation costs were voluntary cleanup expenses rather than covered damages. Richmond further argues there was no lawsuit, judgment, or court order requiring Plaintiff to incur those expenses, and that Plaintiff violated the policy&apos;s no-voluntary-payments provision by incurring such costs without Richmond&apos;s consent.
+                      </p>
+                      <p className="mt-2 text-sm text-[#212223]">
+                        As to bad faith, Richmond argues that a bad faith claim cannot stand absent a contractual duty to pay benefits. Because Richmond contends no coverage exists, it argues the bad faith claim necessarily fails.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            // BRIEF FLOW OUTLINE
+            <>
+              {/* Section I */}
+              <div className="border-b border-[#e5e5e5]">
+                <button
+                  onClick={() => toggleSection("table-of-authorities")}
+                  className="flex w-full items-center justify-between py-4"
+                >
+                  <h2 className="text-lg font-semibold text-[#212223]">
+                    I. TABLE OF AUTHORITIES
+                  </h2>
+                  {expandedSections.includes("table-of-authorities") ? (
+                    <ChevronUp className="size-5 text-[#737373]" />
+                  ) : (
+                    <ChevronDown className="size-5 text-[#737373]" />
+                  )}
+                </button>
+              </div>
+            </>
+          )}
 
           {/* Section II */}
           <div className="border-b border-[#e5e5e5]">
