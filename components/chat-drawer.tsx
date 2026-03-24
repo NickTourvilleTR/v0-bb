@@ -210,22 +210,33 @@ export function ChatDrawer({
             {/* Support Step Card */}
             {currentStep === "support" && (
               <MessageCard
-                onQuote={() => handleQuote("Supporting authorities are ready for review. I've pre-selected the stronger supporting authorities for your brief.")}
+                onQuote={() => handleQuote(flowType === "judicial" ? "Decide how to resolve disputed issues." : "Supporting authorities are ready for review. I've pre-selected the stronger supporting authorities for your brief.")}
               >
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
-                </div>
-                <p className="mb-2 text-sm text-[#212223]">I've pre-selected the stronger supporting authorities for your brief. You can tell me if you want to:</p>
-                <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
-                  <li>Add a supporting authority</li>
-                  <li>Edit how a supporting authority is used</li>
-                  <li>Select or remove a supporting authority</li>
-                </ul>
-                <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
-                <div className="flex flex-wrap gap-2">
-                  <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
-                  <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Outline</Button>
-                </div>
+                {flowType === "judicial" ? (
+                  <>
+                    <p className="mb-3 text-sm text-[#212223]">Decide how to resolve disputed issues.</p>
+                    <div className="flex flex-wrap gap-2">
+                      <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Outline</Button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="mb-3 flex items-center gap-2">
+                      <span className="text-sm text-[#212223]">Supporting authorities are ready for review:</span>
+                    </div>
+                    <p className="mb-2 text-sm text-[#212223]">I've pre-selected the stronger supporting authorities for your brief. You can tell me if you want to:</p>
+                    <ul className="mb-4 ml-4 list-disc space-y-1 text-sm text-[#212223]">
+                      <li>Add a supporting authority</li>
+                      <li>Edit how a supporting authority is used</li>
+                      <li>Select or remove a supporting authority</li>
+                    </ul>
+                    <p className="mb-3 text-sm text-[#212223]">What would you like to do next?</p>
+                    <div className="flex flex-wrap gap-2">
+                      <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2]">Skip to generate draft</Button>
+                      <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a]">Next: Outline</Button>
+                    </div>
+                  </>
+                )}
               </MessageCard>
             )}
 

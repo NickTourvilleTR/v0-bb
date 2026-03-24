@@ -400,13 +400,15 @@ export function SupportingAuthoritiesPanel({
 
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-6">
-            <Button
-              variant="outline"
-              onClick={onSkipToGenerateDraft}
-              className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
-            >
-              Skip to generate draft
-            </Button>
+            {flowType !== "judicial" && (
+              <Button
+                variant="outline"
+                onClick={onSkipToGenerateDraft}
+                className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
+              >
+                Skip to generate draft
+              </Button>
+            )}
             <Button
               onClick={onNextOutline}
               className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
