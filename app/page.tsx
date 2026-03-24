@@ -90,6 +90,7 @@ function AuthenticatedApp() {
   const [notesOpen, setNotesOpen] = React.useState(false);
   const [showUserArgument, setShowUserArgument] = React.useState(false);
   const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
+  const [selectedBriefType, setSelectedBriefType] = React.useState<string | null>(null);
   const [quotedText, setQuotedText] = React.useState<string | null>(null);
   const [flowType, setFlowType] = React.useState<"brief" | "judicial">("brief");
   
@@ -177,8 +178,10 @@ function AuthenticatedApp() {
     setCurrentScreen("brief-type");
   };
 
-  const handleBriefTypeSubmit = () => {
-    addChatMessage("user", "Primary brief");
+  const handleBriefTypeSubmit = (type: string) => {
+    const labels: Record<string, string> = { primary: "Primary", opposition: "Opposition", reply: "Reply" };
+    setSelectedBriefType(type);
+    addChatMessage("user", labels[type] || type);
     addChatMessage("assistant", "Please upload any relevant documents such as the <strong>original complaint, answer, and reply</strong> (if applicable). You can also upload any <strong>pertinent exhibits or templates</strong>.");
     setCurrentScreen("file-upload");
   };
@@ -235,6 +238,7 @@ function AuthenticatedApp() {
     setCurrentScreen("start");
     setChatMessages([]);
     setFlowType("brief");
+    setSelectedBriefType(null);
   };
 
   const handleNextSupportingAuthority = () => {
@@ -976,15 +980,17 @@ function AuthenticatedApp() {
                   </CocoChatMessage>
                 )}
 
-                {/* User "Primary" message - only for brief flow */}
-                {flowType === "brief" && isAtOrPast("file-upload") && (
+                {/* User brief type message - only for brief flow, only after selection */}
+                {flowType === "brief" && isAtOrPast("file-upload") && selectedBriefType && (
                   <CocoChatMessage
                     type="user"
                     userName="Jane Lawson"
                     timestamp="9:10 a.m."
                     className="mb-6"
                   >
-                    <p className="text-[#212223]">Primary</p>
+                    <p className="text-[#212223]">
+                      {{ primary: "Primary", opposition: "Opposition", reply: "Reply" }[selectedBriefType] ?? selectedBriefType}
+                    </p>
                   </CocoChatMessage>
                 )}
 
