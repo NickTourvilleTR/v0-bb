@@ -84,8 +84,37 @@ const judicial_claims_grouped = [
     partyHeader: "Plaintiff party 1: 516, Inc. dba DG Plumbing",
     claims: [
       {
-        id: "breach-of-contract-defense",
-        title: "Breach of Contract Claim Defense",
+        id: "breach-of-insurance-contract",
+        title: "Breach of Insurance Contract",
+        sourceFile: "COMPLAINT filed by 516, Inc.",
+        summary: "Plaintiff claims Richmond National breached the insurance policy by failing to pay benefits for their remediation claims even though they say they complied with the policy.",
+        points: [
+          "Plaintiff alleges they had a valid insurance contract with Richmond that required them to indemnify and pay benefits.",
+          "Plaintiff claims they performed all required conditions under the policy and therefore expected coverage, peace of mind, and financial protection.",
+          "Plaintiff says Defendant failed and refused to pay any benefits, causing damages.",
+        ],
+        checked: true,
+      },
+      {
+        id: "bad-faith-claim",
+        title: "Bad faith claim",
+        sourceFile: null,
+        summary: "Plaintiff claims Richmond acted in bad faith by unreasonably delaying, denying, and mishandling their insurance claim.",
+        points: [
+          "Plaintiff alleges Richmond wrongfully withheld benefits due under the policy, including by denying the claim and delaying payment without proper cause.",
+          "Richmond handled the claim unfairly by failing to investigate thoroughly, objectively, and fairly, delaying claim processing, misrepresenting policy terms, and failing to communicate properly.",
+          "Plaintiff further alleges Richmond violated California insurance statutes and claims-handling regulations, and that its conduct was intentional, malicious, and oppressive.",
+        ],
+        checked: true,
+      },
+    ],
+  },
+  {
+    partyHeader: "Defendant party 1: Richmond National Insurance Company",
+    claims: [
+      {
+        id: "breach-of-contract-claim",
+        title: "Breach of Contract Claim",
         sourceFile: "NOTICE OF MOTION AND MOTION to Dismiss Case",
         summary: "Richmond argues the breach of contract claim fails because the policy did not cover DG Plumbing's remediation costs, so denying the claim was not a breach.",
         points: [
@@ -105,7 +134,7 @@ const judicial_claims_grouped = [
           "Because Richmond argues the policy did not cover the remediation expenses, it says DG Plumbing cannot show benefits were wrongfully withheld.",
           "Richmond characterizes the bad faith claim as a \"tagalong\" claim that rises or falls with the contract claim, so if the contract claim is dismissed, the bad faith claim should be dismissed too.",
         ],
-        checked: true,
+        checked: false,
       },
     ],
   },
@@ -226,16 +255,18 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                                 <p className="font-semibold text-[#212223]">{claim.title}</p>
                               </label>
                               
-                              {/* Source file pill */}
-                              <div className="mt-2">
-                                <div className="inline-flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-3 py-1.5">
-                                  <FileText className="size-4 text-[#737373]" />
-                                  <span className="text-sm text-[#737373]">{claim.sourceFile}</span>
+                              {/* Source file pill - only if sourceFile exists */}
+                              {claim.sourceFile && (
+                                <div className="mt-2">
+                                  <div className="inline-flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-3 py-1.5">
+                                    <FileText className="size-4 text-[#737373]" />
+                                    <span className="text-sm text-[#737373]">{claim.sourceFile}</span>
+                                  </div>
                                 </div>
-                              </div>
+                              )}
                               
                               {/* Summary */}
-                              <p className="mt-3 text-sm text-[#212223]">{claim.summary}</p>
+                              <p className={cn("text-sm text-[#212223]", claim.sourceFile ? "mt-3" : "mt-2")}>{claim.summary}</p>
                               
                               {/* Bullet points */}
                               <ul className="mt-2 ml-4 list-disc space-y-1">
