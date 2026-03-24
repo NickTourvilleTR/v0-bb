@@ -137,26 +137,28 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               </h1>
             </div>
 
-          {/* Motion Summary Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <p className="mb-3 text-sm font-semibold text-[#212223]">
-              Motion to Dismiss: Love v. Serle et al.
-            </p>
-            <ul className="ml-4 list-disc space-y-2 text-sm text-[#212223]">
-              <li>
-                Plaintiff Adrienne Love, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author Rebecca Serle
-              </li>
-              <li>
-                Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle&apos;s novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022
-              </li>
-              <li>
-                Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation
-              </li>
-              <li>
-                Jurisdiction: U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
-              </li>
-            </ul>
-          </div>
+          {/* Motion Summary Card - only for brief flow */}
+          {flowType === "brief" && (
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <p className="mb-3 text-sm font-semibold text-[#212223]">
+                Motion to Dismiss: Love v. Serle et al.
+              </p>
+              <ul className="ml-4 list-disc space-y-2 text-sm text-[#212223]">
+                <li>
+                  Plaintiff Adrienne Love, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author Rebecca Serle
+                </li>
+                <li>
+                  Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle&apos;s novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022
+                </li>
+                <li>
+                  Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation
+                </li>
+                <li>
+                  Jurisdiction: U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
+                </li>
+              </ul>
+            </div>
+          )}
 
           {/* Motion Type Card */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
@@ -166,26 +168,28 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             </div>
           </div>
 
-          {/* Brief Role Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Brief role</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
-                  <div className="size-2 rounded-full bg-white" />
+          {/* Brief Role Card - only for brief flow, Read Only */}
+          {flowType === "brief" && (
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <h3 className="mb-3 text-sm font-medium text-[#212223]">Brief role</h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
+                    <div className="size-2 rounded-full bg-white" />
+                  </div>
+                  <span className="text-sm text-[#212223]">Primary</span>
                 </div>
-                <span className="text-sm text-[#212223]">Primary</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
-                <span className="text-sm text-[#737373]">Opposition</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
-                <span className="text-sm text-[#737373]">Reply</span>
+                <div className="flex items-center gap-3">
+                  <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
+                  <span className="text-sm text-[#737373]">Opposition</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
+                  <span className="text-sm text-[#737373]">Reply</span>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Uploaded Files Card - Read Only */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
@@ -219,49 +223,53 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             </div>
           </div>
 
-          {/* Party You Represent Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Party you represent</h3>
-            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
-                    <div className="size-2 rounded-full bg-white" />
+          {/* Party You Represent Card - only for brief flow, Read Only */}
+          {flowType === "brief" && (
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <h3 className="mb-3 text-sm font-medium text-[#212223]">Party you represent</h3>
+              <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#737373] bg-[#737373]">
+                      <div className="size-2 rounded-full bg-white" />
+                    </div>
+                    <span className="text-sm text-[#212223]">Defendant: Rebecca Serle, et al.</span>
                   </div>
-                  <span className="text-sm text-[#212223]">Defendant: Rebecca Serle, et al.</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
-                  <span className="text-sm text-[#737373]">Plaintiff: Adrienne Love</span>
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
+                    <span className="text-sm text-[#737373]">Plaintiff: Adrienne Love</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Arguments Selected Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
-            <h3 className="mb-3 text-sm font-medium text-[#212223]">Arguments selected</h3>
-            <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
-              <div className="space-y-3">
-                {argumentsSelected.map((argument) => (
-                  <div
-                    key={argument.id}
-                    className="flex items-start gap-3"
-                  >
-                    <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border border-[#737373] bg-[#737373]">
-                      <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-                        <polyline points="2 6 5 9 10 3" />
-                      </svg>
+          {/* Arguments Selected Card - only for brief flow, Read Only */}
+          {flowType === "brief" && (
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <h3 className="mb-3 text-sm font-medium text-[#212223]">Arguments selected</h3>
+              <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                <div className="space-y-3">
+                  {argumentsSelected.map((argument) => (
+                    <div
+                      key={argument.id}
+                      className="flex items-start gap-3"
+                    >
+                      <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border border-[#737373] bg-[#737373]">
+                        <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
+                          <polyline points="2 6 5 9 10 3" />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm text-[#212223]">{argument.title}</p>
+                        <p className="mt-1 text-sm text-[#737373]">{argument.description}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-[#212223]">{argument.title}</p>
-                      <p className="mt-1 text-sm text-[#737373]">{argument.description}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
             {/* Call to Action Buttons */}
             <div className="flex items-center justify-center gap-3 pb-8 pt-4">
