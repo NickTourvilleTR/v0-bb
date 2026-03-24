@@ -292,10 +292,16 @@ function AuthenticatedApp() {
 
   const handleGenerateDraft = () => {
     addChatMessage("user", "Generate draft");
-    addChatMessage("assistant", "Drafting your Motion to Dismiss based on the outline and selected authorities...");
+    const draftingMsg = flowType === "judicial" 
+      ? "Drafting your opinion based on the outline and supporting materials..."
+      : "Drafting your Motion to Dismiss based on the outline and selected authorities...";
+    addChatMessage("assistant", draftingMsg);
     setCurrentScreen("draft-loading");
     setTimeout(() => {
-      addChatMessage("assistant", "Your draft is complete. Review the full brief, make any edits, and proceed to verify citations when ready.");
+      const completeMsg = flowType === "judicial"
+        ? "Your draft is complete. Review the full opinion, make any edits, and proceed to verify when ready."
+        : "Your draft is complete. Review the full brief, make any edits, and proceed to verify citations when ready.";
+      addChatMessage("assistant", completeMsg);
       setCurrentScreen("draft-ready");
     }, 3000);
   };
