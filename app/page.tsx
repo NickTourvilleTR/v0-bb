@@ -747,6 +747,7 @@ function AuthenticatedApp() {
             messages={chatMessages}
             onSendMessage={handleInlineSend}
             currentStep="support"
+            flowType={flowType}
             onNextOutline={() => {
               addChatMessage("user", "Next: Outline");
               addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
