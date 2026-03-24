@@ -12,7 +12,8 @@ import {
   Underline, 
   MoreHorizontal,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Upload
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -93,9 +94,17 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-6">
         <div className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8">
           {/* Header */}
-          <p className="mb-1 text-xs font-medium uppercase tracking-wider text-[#737373]">
-            OUTLINE
-          </p>
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">
+              OUTLINE
+            </p>
+            {flowType === "judicial" && (
+              <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] px-3 py-1.5 text-xs text-[#212223] hover:bg-[#f2f2f2]">
+                <Upload className="size-3" />
+                Upload an outline
+              </button>
+            )}
+          </div>
           <h1 className="mb-6 text-2xl font-semibold text-[#212223]">
             Confirm your outline selections
           </h1>
@@ -377,7 +386,8 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
 
           {/* Section III */}
           {flowType === "judicial" ? (
-            // JUDICIAL FLOW: ANALYSIS
+            // JUDICIAL FLOW: ANALYSIS, DISPOSITION, AND TENTATIVE RULING
+            <>
             <div className="border-b border-[#e5e5e5]">
               <button
                 onClick={() => toggleSection("analysis")}
@@ -480,7 +490,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
               )}
             </div>
 
-              {/* Section IV: RECOMMENDED DISPOSITION */}
+            {/* Section IV: RECOMMENDED DISPOSITION */}
               <div className="border-b border-[#e5e5e5]">
                 <button
                   onClick={() => toggleSection("disposition")}
@@ -548,6 +558,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                   </div>
                 )}
               </div>
+            </>
           ) : (
             // BRIEF FLOW: ARGUMENT
             <div className="border-b border-[#e5e5e5]">
