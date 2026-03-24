@@ -507,7 +507,9 @@ function AuthenticatedApp() {
             }}
             showVersionsTab={true}
           >
-            <OutlineEditor onNextDraft={() => {
+            <OutlineEditor 
+              flowType={flowType}
+              onNextDraft={() => {
               addChatMessage("user", "Next: Draft");
               addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
               setCurrentScreen("draft");
