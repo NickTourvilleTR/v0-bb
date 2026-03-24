@@ -756,6 +756,7 @@ function AuthenticatedApp() {
           >
             <div className="flex-1 overflow-y-auto">
               <SupportingAuthoritiesPanel 
+                flowType={flowType}
                 onNextOutline={() => {
                   addChatMessage("user", "Next: Outline");
                   addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");

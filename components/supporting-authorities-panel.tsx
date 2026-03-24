@@ -70,11 +70,50 @@ const defaultAuthorities: ArgumentAuthority[] = [
   },
 ];
 
+// Judicial flow authorities - two separate claims
+const judicialAuthorities: ArgumentAuthority[] = [
+  {
+    id: "breach-of-contract",
+    title: "Breach of contract",
+    citations: [
+      {
+        id: "judicial-1",
+        name: "Placeholder Case 1",
+        citation: "123 F.3d 456 (9th Cir. 2024)",
+        badges: ["Insurance", "Contract"],
+        description: "Placeholder description for breach of contract case.",
+        supportPoints: [
+          "Placeholder support point 1",
+          "Placeholder support point 2",
+        ],
+      },
+    ],
+  },
+  {
+    id: "bad-faith",
+    title: "Bad faith",
+    citations: [
+      {
+        id: "judicial-2",
+        name: "Placeholder Case 2",
+        citation: "789 F.3d 012 (9th Cir. 2024)",
+        badges: ["Bad faith", "Insurance"],
+        description: "Placeholder description for bad faith case.",
+        supportPoints: [
+          "Placeholder support point 1",
+          "Placeholder support point 2",
+        ],
+      },
+    ],
+  },
+];
+
 interface SupportingAuthoritiesPanelProps {
   className?: string;
   onNextOutline?: () => void;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
 export function SupportingAuthoritiesPanel({
@@ -82,12 +121,12 @@ export function SupportingAuthoritiesPanel({
   onNextOutline,
   onSkipToGenerateDraft,
   onEditOutline,
+  flowType = "brief",
 }: SupportingAuthoritiesPanelProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
-  const [selectedCitations, setSelectedCitations] = React.useState<string[]>([
-    "corbello",
-    "biani",
-  ]);
+  const [selectedCitations, setSelectedCitations] = React.useState<string[]>(
+    flowType === "judicial" ? ["judicial-1", "judicial-2"] : ["corbello", "biani"]
+  );
 
   const toggleCitation = (citationId: string) => {
     setSelectedCitations((prev) =>
@@ -97,7 +136,7 @@ export function SupportingAuthoritiesPanel({
     );
   };
 
-  const currentAuthority = defaultAuthorities[0];
+  const authorities = flowType === "judicial" ? judicialAuthorities : defaultAuthorities;
 
   return (
     <div className={cn("flex h-full flex-col overflow-y-auto", className)}>
@@ -118,124 +157,130 @@ export function SupportingAuthoritiesPanel({
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-              SUPPORTING AUTHORITIES
+              {flowType === "judicial" ? "DECIDE" : "SUPPORTING AUTHORITIES"}
             </p>
             <h1 className="text-2xl font-semibold text-[#212223]">
-              Select the desired authorities
+              {flowType === "judicial" ? "Indicate how you would like to resolve the disputes" : "Select the desired authorities"}
             </h1>
           </div>
 
-        {/* Argument Section */}
-        <h2 className="mb-4 text-lg font-semibold text-[#212223]">
-          1. {currentAuthority.title}
-        </h2>
+        {/* Argument Sections */}
+        {authorities.map((authority, authorityIndex) => (
+          <div key={authority.id} className={authorityIndex > 0 ? "mt-8" : ""}>
+            {/* Section Header */}
+            <h2 className="mb-4 text-lg font-semibold text-[#212223]">
+              {flowType === "judicial" ? authority.title : `${authorityIndex + 1}. ${authority.title}`}
+            </h2>
 
-        {/* Table Container */}
-        <div className="rounded-lg border border-[#e5e5e5] bg-white">
-          {/* Table Header */}
-          <div className="flex border-b border-[#e5e5e5]">
-            <div className="flex w-1/2 items-center gap-3 bg-[#f5f7f6] px-4 py-3">
-              <Checkbox
-                checked={selectedCitations.length === currentAuthority.citations.length}
-                onCheckedChange={() => {
-                  if (selectedCitations.length === currentAuthority.citations.length) {
-                    setSelectedCitations([]);
-                  } else {
-                    setSelectedCitations(currentAuthority.citations.map((c) => c.id));
-                  }
-                }}
-                className="border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
-              />
-              <span className="font-semibold text-[#212223]">Citations</span>
-              <span className="text-sm text-[#737373]">
-                • {selectedCitations.length} selected
-              </span>
-            </div>
-            <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-white px-6 py-3">
-              <span className="font-medium text-[#737373]">
-                How this supports the argument
-              </span>
-            </div>
-          </div>
-
-          {/* Citation Rows */}
-          {currentAuthority.citations.map((citation, index) => (
-            <div
-              key={citation.id}
-              className={cn(
-                "flex",
-                index < currentAuthority.citations.length - 1 && "border-b border-[#e5e5e5]"
-              )}
-            >
-              {/* Left Column - Citation Details */}
-              <div
-                className={cn(
-                  "w-1/2 p-4",
-                  selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white"
-                )}
-              >
-                <div className="flex items-start gap-3">
+            {/* Table Container */}
+            <div className="rounded-lg border border-[#e5e5e5] bg-white">
+              {/* Table Header */}
+              <div className="flex border-b border-[#e5e5e5]">
+                <div className="flex w-1/2 items-center gap-3 bg-[#f5f7f6] px-4 py-3">
                   <Checkbox
-                    checked={selectedCitations.includes(citation.id)}
-                    onCheckedChange={() => toggleCitation(citation.id)}
-                    className="mt-0.5 border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
+                    checked={authority.citations.every((c) => selectedCitations.includes(c.id))}
+                    onCheckedChange={() => {
+                      const allSelected = authority.citations.every((c) => selectedCitations.includes(c.id));
+                      if (allSelected) {
+                        setSelectedCitations((prev) => prev.filter((id) => !authority.citations.some((c) => c.id === id)));
+                      } else {
+                        setSelectedCitations((prev) => [...new Set([...prev, ...authority.citations.map((c) => c.id)])]);
+                      }
+                    }}
+                    className="border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
                   />
-                  <div className="flex-1">
-                    {/* Case Name with Link */}
-                    <div className="flex items-center gap-1.5">
-                      <a
-                        href="#"
-                        className="font-medium text-[#2e6b5c] hover:underline"
-                      >
-                        {citation.name}
-                      </a>
-                      <Notebook className="size-3.5 text-[#2e6b5c]" />
-                    </div>
-                    
-                    {/* Citation Reference */}
-                    <p className="text-sm text-[#737373]">{citation.citation}</p>
-                    
-                    {/* Badges */}
-                    <div className="mt-2 flex flex-wrap gap-1.5">
-                      {citation.badges.map((badge) => (
-                        <span
-                          key={badge}
-                          className="rounded bg-[#ebf0ed] px-2 py-0.5 text-xs text-[#1d4b34]"
-                        >
-                          {badge}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    {/* What this case is about */}
-                    <div className="mt-4">
-                      <p className="text-sm font-semibold text-[#212223]">
-                        What this case is about:
-                      </p>
-                      <p className="mt-1 text-sm text-[#212223]">
-                        {citation.description}
-                      </p>
-                    </div>
-                  </div>
+                  <span className="font-semibold text-[#212223]">Citations</span>
+                  <span className="text-sm text-[#737373]">
+                    • {authority.citations.filter((c) => selectedCitations.includes(c.id)).length} selected
+                  </span>
+                </div>
+                <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-white px-6 py-3">
+                  <span className="font-medium text-[#737373]">
+                    How this supports the argument
+                  </span>
                 </div>
               </div>
 
-              {/* Right Column - Support Points */}
-              <div className={cn(
-                "w-1/2 border-l border-dashed border-[#d2d2d2] p-4 pl-6",
-                selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white"
-              )}>
-                <ul className="list-disc space-y-4 pl-4 marker:text-[#212223]">
-                  {citation.supportPoints.map((point, pointIndex) => (
-                    <li key={pointIndex} className="text-sm leading-relaxed text-[#212223]">
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {/* Citation Rows */}
+              {authority.citations.map((citation, index) => (
+                <div
+                  key={citation.id}
+                  className={cn(
+                    "flex",
+                    index < authority.citations.length - 1 && "border-b border-[#e5e5e5]"
+                  )}
+                >
+                  {/* Left Column - Citation Details */}
+                  <div
+                    className={cn(
+                      "w-1/2 p-4",
+                      selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white"
+                    )}
+                  >
+                    <div className="flex items-start gap-3">
+                      <Checkbox
+                        checked={selectedCitations.includes(citation.id)}
+                        onCheckedChange={() => toggleCitation(citation.id)}
+                        className="mt-0.5 border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
+                      />
+                      <div className="flex-1">
+                        {/* Case Name with Link */}
+                        <div className="flex items-center gap-1.5">
+                          <a
+                            href="#"
+                            className="font-medium text-[#2e6b5c] hover:underline"
+                          >
+                            {citation.name}
+                          </a>
+                          <Notebook className="size-3.5 text-[#2e6b5c]" />
+                        </div>
+                        
+                        {/* Citation Reference */}
+                        <p className="text-sm text-[#737373]">{citation.citation}</p>
+                        
+                        {/* Badges */}
+                        <div className="mt-2 flex flex-wrap gap-1.5">
+                          {citation.badges.map((badge) => (
+                            <span
+                              key={badge}
+                              className="rounded bg-[#ebf0ed] px-2 py-0.5 text-xs text-[#1d4b34]"
+                            >
+                              {badge}
+                            </span>
+                          ))}
+                        </div>
+                        
+                        {/* What this case is about */}
+                        <div className="mt-4">
+                          <p className="text-sm font-semibold text-[#212223]">
+                            What this case is about:
+                          </p>
+                          <p className="mt-1 text-sm text-[#212223]">
+                            {citation.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column - Support Points */}
+                  <div className={cn(
+                    "w-1/2 border-l border-dashed border-[#d2d2d2] p-4 pl-6",
+                    selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white"
+                  )}>
+                    <ul className="list-disc space-y-4 pl-4 marker:text-[#212223]">
+                      {citation.supportPoints.map((point, pointIndex) => (
+                        <li key={pointIndex} className="text-sm leading-relaxed text-[#212223]">
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
 
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-6">
