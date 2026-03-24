@@ -759,7 +759,11 @@ function AuthenticatedApp() {
             flowType={flowType}
             onNextOutline={() => {
               addChatMessage("user", "Next: Outline");
-              addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+              if (flowType === "judicial") {
+                addChatMessage("assistant", "Now let's structure your opinion. Review the outline sections and make any adjustments.");
+              } else {
+                addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+              }
               setCurrentScreen("outline");
             }}
             onSkipToGenerateDraft={() => {
@@ -774,7 +778,11 @@ function AuthenticatedApp() {
                 flowType={flowType}
                 onNextOutline={() => {
                   addChatMessage("user", "Next: Outline");
-                  addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+                  if (flowType === "judicial") {
+                    addChatMessage("assistant", "Now let's structure your opinion. Review the outline sections and make any adjustments.");
+                  } else {
+                    addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
+                  }
                   setCurrentScreen("outline");
                 }}
                 onSkipToGenerateDraft={() => {
