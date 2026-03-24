@@ -301,12 +301,14 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
 
             {/* Call to Action Buttons */}
             <div className="flex items-center justify-center gap-3 pb-8 pt-4">
-              <button
-                onClick={onSkipToGenerateDraft}
-                className="rounded-full border border-[#e5e5e5] bg-white px-6 py-3 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7]"
-              >
-                Skip to generate draft
-              </button>
+              {flowType !== "judicial" && (
+                <button
+                  onClick={onSkipToGenerateDraft}
+                  className="rounded-full border border-[#e5e5e5] bg-white px-6 py-3 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7]"
+                >
+                  Skip to generate draft
+                </button>
+              )}
               <button
                 onClick={onNextSelectArguments}
                 className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white hover:bg-[#163d2a]"
