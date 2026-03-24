@@ -250,6 +250,76 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                 </div>
               )}
             </div>
+
+            {/* Section IV: RECOMMENDED DISPOSITION */}
+            <div className="border-b border-[#e5e5e5]">
+              <button
+                onClick={() => toggleSection("disposition")}
+                className="flex w-full items-center justify-between py-4"
+              >
+                <h2 className="text-lg font-semibold text-[#212223]">
+                  IV. RECOMMENDED DISPOSITION
+                </h2>
+                {expandedSections.includes("disposition") ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+
+              {expandedSections.includes("disposition") && (
+                <div className="pb-6">
+                  <p className="mb-3 text-sm text-[#212223]">
+                    Defendant Richmond National Insurance Company&apos;s motion to dismiss should be resolved as follows:
+                  </p>
+                  <ol className="ml-6 space-y-2 text-sm text-[#212223] list-decimal">
+                    <li>
+                      <span>First Cause of Action – Breach of Contract:</span>
+                      <br />
+                      <span className="font-semibold">DENIED</span>
+                    </li>
+                    <li>
+                      <span>Second Cause of Action – Bad Faith:</span>
+                      <br />
+                      <span className="font-semibold">DENIED</span>
+                    </li>
+                  </ol>
+                </div>
+              )}
+            </div>
+
+            {/* Section V: PROPOSED TENTATIVE RULING */}
+            <div>
+              <button
+                onClick={() => toggleSection("tentative-ruling")}
+                className="flex w-full items-center justify-between py-4"
+              >
+                <h2 className="text-lg font-semibold text-[#212223]">
+                  V. PROPOSED TENTATIVE RULING
+                </h2>
+                {expandedSections.includes("tentative-ruling") ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+
+              {expandedSections.includes("tentative-ruling") && (
+                <div className="pb-6 space-y-3">
+                  <p className="font-semibold text-sm text-[#212223]">Tentative Ruling:</p>
+                  <p className="text-sm text-[#212223]">
+                    Defendant&apos;s motion to dismiss is <span className="font-semibold">DENIED</span> as to both the breach of contract claim and the bad faith claim.
+                  </p>
+                  <p className="text-sm text-[#212223]">
+                    Plaintiff has sufficiently alleged the existence of an insurance contract, its own performance, Defendant&apos;s refusal to pay benefits, and resulting damages. Defendant&apos;s arguments that the claimed remediation expenses do not constitute covered &quot;damages,&quot; and that Plaintiff violated the policy&apos;s no-voluntary-payments provision, depend on policy interpretation and factual determinations not properly resolved on the pleadings alone.
+                  </p>
+                  <p className="text-sm text-[#212223]">
+                    The bad faith claim likewise survives. Because the Court declines to dismiss the contract claim, Defendant&apos;s argument that bad faith fails for lack of coverage is unavailing at this stage. Plaintiff also alleges unreasonable delay, inadequate investigation, misrepresentation, and improper claims handling, which are sufficient to state a plausible claim for bad faith.
+                  </p>
+                </div>
+              )}
+            </div>
+            </>
           ) : (
           <div className="border-b border-[#e5e5e5]">
             <button
