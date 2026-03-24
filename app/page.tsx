@@ -970,18 +970,6 @@ function AuthenticatedApp() {
                   </CocoChatMessage>
                 )}
 
-                {/* User "Primary" message - only for brief flow */}
-                {flowType === "brief" && isAtOrPast("file-upload") && (
-                  <CocoChatMessage
-                    type="user"
-                    userName="Jane Lawson"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
-                    <p className="text-[#212223]">Primary</p>
-                  </CocoChatMessage>
-                )}
-
                 {/* User "Opinion" message - only for judicial flow */}
                 {flowType === "judicial" && isAtOrPast("file-upload") && (
                   <CocoChatMessage
@@ -991,18 +979,6 @@ function AuthenticatedApp() {
                     className="mb-6"
                   >
                     <p className="text-[#212223]">Opinion</p>
-                  </CocoChatMessage>
-                )}
-
-                {/* User "Primary" message */}
-                {isAtOrPast("file-upload") && (
-                  <CocoChatMessage
-                    type="user"
-                    userName="Jane Lawson"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
-                    <p className="text-[#212223]">Primary</p>
                   </CocoChatMessage>
                 )}
 
@@ -1032,7 +1008,10 @@ function AuthenticatedApp() {
                     timestamp="9:10a.m."
                     className="mb-6"
                   >
-                    <BriefBuilderProgressCard progress={40} />
+                    <BriefBuilderProgressCard 
+                      progress={40} 
+                      tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
+                    />
                   </CocoChatMessage>
                 )}
 
