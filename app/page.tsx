@@ -791,6 +791,7 @@ function AuthenticatedApp() {
             messages={chatMessages}
             onSendMessage={handleInlineSend}
             currentStep="argue"
+            flowType={flowType}
             onNextSupportingAuthority={handleNextSupportingAuthority}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
