@@ -597,7 +597,7 @@ function AuthenticatedApp() {
             }}
             showVersionsTab={true}
           >
-            <DraftEditor onVerifyBrief={() => {
+            <DraftEditor flowType={flowType} onVerifyBrief={() => {
               addChatMessage("user", "Verify brief");
               addChatMessage("assistant", "Verifying your citations and checking for potential issues.");
               setCurrentScreen("verify");

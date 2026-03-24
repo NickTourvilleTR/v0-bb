@@ -24,9 +24,10 @@ import {
 interface DraftEditorProps {
   className?: string;
   onVerifyBrief?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
-export function DraftEditor({ className, onVerifyBrief }: DraftEditorProps) {
+export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: DraftEditorProps) {
   const [fontSize, setFontSize] = React.useState(36);
 
   return (
@@ -117,9 +118,70 @@ export function DraftEditor({ className, onVerifyBrief }: DraftEditorProps) {
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs uppercase tracking-wide text-[#737373]">DRAFT</p>
-            <h1 className="text-2xl font-semibold text-[#212223]">Review and edit your draft brief</h1>
+            <h1 className="text-2xl font-semibold text-[#212223]">
+              Review and edit your draft {flowType === "judicial" ? "opinion" : "brief"}
+            </h1>
           </div>
 
+          {flowType === "judicial" ? (
+            // JUDICIAL FLOW: OPINION CONTENT
+            <>
+              {/* Court Header */}
+              <div className="mb-8 text-center">
+                <p className="text-xs uppercase tracking-wide text-[#737373]">UNITED STATES DISTRICT COURT</p>
+                <p className="text-xs uppercase tracking-wide text-[#737373]">CENTRAL DISTRICT OF CALIFORNIA</p>
+                <p className="text-xs uppercase tracking-wide text-[#737373]">SOUTHERN DIVISION</p>
+              </div>
+
+              {/* Case Caption */}
+              <div className="mb-8 flex gap-8">
+                <div className="flex-1">
+                  <p className="text-sm text-[#212223]">516 Inc., dba DG Plumbing,</p>
+                  <p className="ml-8 text-sm text-[#212223]">Plaintiff</p>
+                  <p className="text-sm text-[#212223]">v.</p>
+                  <p className="text-sm text-[#212223]">RICHMOND SERVICES, INC. dba</p>
+                  <p className="text-sm text-[#212223]">RICHMOND NATIONAL INSURANCE</p>
+                  <p className="text-sm text-[#212223]">COMPANY, a Delaware Corporation; and</p>
+                  <p className="text-sm text-[#212223]">DOES 1 through 100, inclusive,</p>
+                  <p className="ml-8 text-sm text-[#212223]">Defendants.</p>
+                </div>
+                <div className="flex-1 text-right">
+                  <p className="text-sm text-[#212223]">Case No. 8:25-cv-01204-DOC-KES</p>
+                </div>
+              </div>
+
+              {/* Order Title */}
+              <div className="mb-8 text-center">
+                <p className="text-base font-bold text-[#212223]">ORDER DENYING DEFENDANT'S</p>
+                <p className="text-base font-bold text-[#212223]">MOTION TO DISMISS</p>
+              </div>
+
+              {/* Opening */}
+              <div className="mb-8">
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  Before the Court is Defendant's Richmond National Insurance Company ("Defendant" or "RNIC") Motion to Dismiss ("Motion" or "Mot.") (Dkt. 10) Plaintiff's 516, Inc. ("Plaintiff") Complaint ("Compl.") (Dkt. 1-2). For the following reasons, the Court hereby DENIES Defendant's Motion.
+                </p>
+              </div>
+
+              {/* I. Background */}
+              <div className="mb-8">
+                <h2 className="mb-4 text-base font-bold text-[#212223]">I. Background</h2>
+                
+                <h3 className="mb-3 font-semibold text-[#212223]">A. Facts</h3>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  The following facts are taken from Plaintiff's Complaint. Plaintiff is a commercial plumbing company with its corporate office in Orange County, California. Compl. ¶ 1. Defendant is a surplus lines insurer registered to do business in the State of California. Id. ¶¶ 2-3. On or about February 1, 2024, Defendant issued a Commercial General Liability policy ("CGL Policy") to Plaintiff with a policy period of February 1, 2024, to February 1, 2025. Id. ¶¶ 4-5. Pursuant to the policy, Plaintiff paid an insurance premium of $16,800. Id. ¶ 15.
+                </p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  The CGL Policy's terms are outlined in the Commercial General Liability Coverage Form and contains multiple provisions. Compl., Ex. A, Commercial General Liability Coverage Form ("CGL Policy") (Dkt. 1-2). Section I pertaining to the Bodily Injury and Property Damage Liability, subsection 1 (a) states that Defendant "will pay those sums that an insured becomes legally obligated to pay as damages because of 'bodily injury' or 'property damage' to which this insurance applies. [Defendant] will have the right and duty to defend the insured against any 'suit' seeking those damages. However, [Defendant] will have no duty to defend the insured against any 'suit' seeking damages for 'bodily injury' or 'property damage' to which this insurance does not apply." Id. at 1. Section V outlines the Definitions and subsection 18 defines a "suit" as "a civil proceeding in which damages because of 'bodily injury', 'property damage,' or 'personal and advertising injury' to which this insurance applies are alleged." Id. at 16. Section IV which is titled "Commercial General Liability Conditions," subsection 2(d) includes a "no voluntary payments provision" stating that "[n]o insured will, except at that insured's own cost, voluntarily make a payment, assume any obligation, or incur any expense, other than for first aid, without our consent." Id. at 11.
+                </p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  On June 10, 2024, Plaintiff alleges to have installed a plumbing fixture on the third floor of a commercial remodeling project that leaked overnight and caused substantial damage to the building. Id. ¶ 9. This damage was alleged to affect all three floors of the building and the basement. Id. The total cost of remediation and repair exceeded $100,000, and Plaintiff alleges to have become "legally obligated for these costs." Id. ¶ 12. Plaintiff does not allege that any suit was filed against Plaintiff for the remediation expenses. See generally Compl. According to Plaintiff, Plaintiff reported the loss to George L. Brown Insurance Agency, an agent for Defendant, on or around June 10, 2024, and it was decided that further investigation of the leak was warranted. Id. ¶ 10. On or about July 11, 2024, George L. Brown Insurance Agency reported the loss to Defendant. Id. ¶ 11. Plaintiff claims to have fully cooperated with Defendant's investigation of the claim. Id. ¶ 12. On September 13, 2024, Defendant denied coverage for the claim. Id. ¶ 13. Plaintiff retained counsel and asked Defendant to reconsider, but Defendant maintained its denial of coverage. Id.
+                </p>
+              </div>
+            </>
+          ) : (
+            // BRIEF FLOW: MOTION CONTENT
+            <>
           {/* Party/Attorney Fields */}
           <div className="mb-8 space-y-2 text-sm text-[#212223]">
             <p>[Party/Attorney]</p>
@@ -134,6 +196,9 @@ export function DraftEditor({ className, onVerifyBrief }: DraftEditorProps) {
             <Plus className="size-4" />
             Add a Party/Attorney
           </button>
+
+            </>
+          )}
 
           {/* Court Header */}
           <div className="mb-8 text-center">
