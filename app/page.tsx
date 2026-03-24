@@ -672,16 +672,28 @@ function AuthenticatedApp() {
                 <p className="mb-8 max-w-lg text-center text-[#737373]">
                   This may take up to 10 minutes.
                 </p>
-                <button
-                  onClick={() => {
-                    addChatMessage("user", "Next: Finalize");
-                    addChatMessage("assistant", "Let's finalize your opinion.");
-                    setCurrentScreen("finalize");
-                  }}
-                  className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#163d2a]"
-                >
-                  Next: Finalize
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      addChatMessage("user", "Skip to finalize");
+                      addChatMessage("assistant", "Skipping ahead to finalize your opinion.");
+                      setCurrentScreen("finalize");
+                    }}
+                    className="rounded-full border border-[#cccccc] px-6 py-3 text-sm font-medium text-[#212223] transition-colors hover:bg-[#f2f2f2]"
+                  >
+                    Skip to finalize
+                  </button>
+                  <button
+                    onClick={() => {
+                      addChatMessage("user", "Start verification");
+                      addChatMessage("assistant", "Verifying your opinion and checking for potential issues.");
+                      setCurrentScreen("verify");
+                    }}
+                    className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#163d2a]"
+                  >
+                    Start verification
+                  </button>
+                </div>
               </div>
             ) : (
               <VerifyPanel 
