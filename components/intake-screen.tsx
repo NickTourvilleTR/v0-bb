@@ -215,6 +215,13 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 ))}
               </div>
             </div>
+            {flowType === "judicial" && (
+              <div className="mt-3">
+                <button className="rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                  Verify citations in the uploaded documents
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Case Details Card - Read Only */}
