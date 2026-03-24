@@ -133,6 +133,24 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
                 <p className="text-lg font-semibold text-[#212223]">SOUTHERN DIVISION</p>
               </div>
 
+              {/* Case Information - Two Column Section */}
+              <div className="mb-8 flex gap-8">
+                {/* Left Column - Parties */}
+                <div className="flex-1 border-r border-[#e5e5e5] pr-8">
+                  <p className="mb-4 text-sm text-[#212223]">516 Inc., dba DG Plumbing,</p>
+                  <p className="mb-4 ml-8 text-sm text-[#212223]">Plaintiff</p>
+                  <p className="mb-4 ml-4 text-sm text-[#212223]">v.</p>
+                  <p className="mb-4 text-sm text-[#212223]">RICHMOND SERVICES, INC. dba RICHMOND NATIONAL INSURANCE COMPANY, a Delaware Corporation; and DOES 1 through 100, inclusive,</p>
+                  <p className="ml-8 text-sm text-[#212223]">Defendants.</p>
+                </div>
+
+                {/* Right Column - Case Details */}
+                <div className="flex-1">
+                  <p className="mb-12 text-sm text-[#212223]">Case No. 8:25-cv-01204-DOC-KES</p>
+                  <p className="text-sm font-bold text-[#212223]">ORDER DENYING DEFENDANT&apos;S MOTION TO DISMISS</p>
+                </div>
+              </div>
+
               {/* Opening */}
               <div className="mb-8">
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
