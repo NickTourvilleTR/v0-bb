@@ -389,6 +389,7 @@ function AuthenticatedApp() {
             onSendMessage={handleInlineSend}
           >
             <IntakeScreen 
+              flowType={flowType}
               onNextSelectArguments={() => {
                 addChatMessage("user", "Next: Review claims");
                 addChatMessage("assistant", "Review the potential arguments I've identified and select which ones to include in your brief.");

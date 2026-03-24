@@ -10,6 +10,7 @@ interface IntakeScreenProps {
   onNextSelectArguments?: () => void;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
+  flowType?: "brief" | "judicial";
 }
 
 const uploadedFiles = [
@@ -107,7 +108,7 @@ const argumentsSelected = [
   },
 ];
 
-export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline }: IntakeScreenProps) {
+export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
@@ -136,8 +137,9 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               </h1>
             </div>
 
-          {/* Motion Summary Card */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+          {/* Motion Summary Card - only for brief flow */}
+          {flowType === "brief" && (
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <p className="mb-3 text-sm font-semibold text-[#212223]">
               Motion to Dismiss: Love v. Serle et al.
             </p>
@@ -156,6 +158,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               </li>
             </ul>
           </div>
+          )}
 
           {/* Motion Type Card */}
           <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
@@ -165,8 +168,9 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             </div>
           </div>
 
-          {/* Brief Role Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+          {/* Brief Role Card - only for brief flow, Read Only */}
+          {flowType === "brief" && (
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Brief role</h3>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -218,8 +222,9 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             </div>
           </div>
 
-          {/* Party You Represent Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+          {/* Party You Represent Card - only for brief flow, Read Only */}
+          {flowType === "brief" && (
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Party you represent</h3>
             <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
               <div className="space-y-3">
@@ -232,13 +237,15 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 <div className="flex items-center gap-3">
                   <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#cccccc]" />
                   <span className="text-sm text-[#737373]">Plaintiff: Adrienne Love</span>
-                </div>
-              </div>
+            </div>
+          </div>
+          )}
             </div>
           </div>
 
-          {/* Arguments Selected Card - Read Only */}
-          <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+          {/* Arguments Selected Card - only for brief flow, Read Only */}
+          {flowType === "brief" && (
+            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
             <h3 className="mb-3 text-sm font-medium text-[#212223]">Arguments selected</h3>
             <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
               <div className="space-y-3">
@@ -255,8 +262,9 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     <div className="flex-1">
                       <p className="text-sm text-[#212223]">{argument.title}</p>
                       <p className="mt-1 text-sm text-[#737373]">{argument.description}</p>
-                    </div>
-                  </div>
+            </div>
+          </div>
+          )}
                 ))}
               </div>
             </div>
@@ -277,8 +285,9 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 Next: Review claims
               </button>
             </div>
+            </div>
           </div>
-        </div>
+          )}
       </div>
 
       {showOutlinePreview && (
