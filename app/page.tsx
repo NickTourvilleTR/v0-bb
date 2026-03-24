@@ -735,7 +735,7 @@ function AuthenticatedApp() {
             currentStep="finalize"
             showVersionsTab={true}
           >
-            <FinalizePanel />
+            <FinalizePanel flowType={flowType} />
           </AppLayoutWrapper>
         </div>
       </div>
