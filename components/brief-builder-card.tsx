@@ -10,31 +10,37 @@ const motionTypes = [
     id: "dismiss",
     title: "Motion to Dismiss",
     description: "Ask the court to dismiss the case before trial by challenging the sufficiency of the opposing party's claims.",
+    functional: true,
   },
   {
     id: "compel",
     title: "Motion to Compel",
     description: "Ask that the court enforce the opposing party's compliance with discovery requests.",
+    functional: false,
   },
   {
     id: "protective-order",
     title: "Motion for Protective Order",
     description: "Ask that the court limit the scope, methods, or disclosure of information obtainable via discovery.",
+    functional: false,
   },
   {
     id: "exclude-evidence",
     title: "Motion to Exclude Evidence",
     description: "Ask pretrial ruling to bar inadmissible evidence from being presented at trial.",
+    functional: false,
   },
   {
     id: "transfer-venue",
     title: "Motion to Transfer Venue",
     description: "Ask that the case is moved to a different court or jurisdiction for convenience or fairness.",
+    functional: false,
   },
   {
     id: "summary-judgment",
     title: "Motion for Summary Judgment",
     description: "Ask the court to rule in your favor without a trial by showing there are no genuine disputes of material fact.",
+    functional: false,
   },
 ];
 
@@ -58,7 +64,8 @@ export function BriefBuilderCard({
   const [selected, setSelected] = React.useState<string | null>(selectedValue || null);
   const [isHovered, setIsHovered] = React.useState(false);
 
-  const handleMotionSelect = (motionId: string) => {
+  const handleMotionSelect = (motionId: string, functional = true) => {
+    if (!functional) return;
     setSelected(motionId);
     if (onSubmit) {
       // Small delay to show selection before transitioning
@@ -101,7 +108,7 @@ export function BriefBuilderCard({
         {motionTypes.map((motion) => (
           <button
             key={motion.id}
-            onClick={() => handleMotionSelect(motion.id)}
+            onClick={() => handleMotionSelect(motion.id, motion.functional)}
             className={cn(
               "flex w-full items-start justify-between gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
               selected === motion.id

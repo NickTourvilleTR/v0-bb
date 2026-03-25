@@ -10,16 +10,19 @@ const workProductTypes = [
     id: "order",
     title: "Order",
     description: "Draft a court order directing the parties or a party to take or refrain from a specific action.",
+    functional: false,
   },
   {
     id: "opinion",
     title: "Opinion",
     description: "Draft a judicial opinion explaining the court's reasoning and legal conclusions on a matter.",
+    functional: true,
   },
   {
     id: "bench-memo",
     title: "Bench memo",
     description: "Draft a bench memo summarizing the issues, facts, and legal arguments for an upcoming hearing.",
+    functional: false,
   },
 ];
 
@@ -39,7 +42,8 @@ export function JudicialWorkProductCard({
   const [selected, setSelected] = React.useState<string | null>(selectedValue || null);
   const [isHovered, setIsHovered] = React.useState(false);
 
-  const handleSelect = (id: string) => {
+  const handleSelect = (id: string, functional = true) => {
+    if (!functional) return;
     setSelected(id);
     if (onSubmit) {
       setTimeout(() => {
@@ -82,7 +86,7 @@ export function JudicialWorkProductCard({
         {workProductTypes.map((item) => (
           <button
             key={item.id}
-            onClick={() => handleSelect(item.id)}
+            onClick={() => handleSelect(item.id, item.functional)}
             className={cn(
               "flex w-full items-start justify-between gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
               selected === item.id
