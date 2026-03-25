@@ -522,28 +522,14 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
 
             </>)}
         </div>
+        <div className="flex items-center justify-center gap-3 py-8">
+          <Button
+            onClick={onVerifyBrief}
+            className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+          >
+            {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
+          </Button>
         </div>
-        </div>
-        {flowType !== "judicial" && (
-          <div className="flex items-center justify-center gap-3 py-8">
-            <Button
-              onClick={onVerifyBrief}
-              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-            >
-              Verify brief
-            </Button>
-          </div>
-        )}
-        {flowType === "judicial" && (
-          <div className="flex items-center justify-center gap-3 py-8">
-            <Button
-              onClick={onVerifyBrief}
-              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-            >
-              Verify opinion
-            </Button>
-          </div>
-        )}
         </div>
       </div>
       <SelectionContextMenu
