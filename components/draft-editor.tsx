@@ -114,7 +114,8 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
 
       {/* Document Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-8">
-        <div className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
+        <div className="mx-auto max-w-3xl">
+        <div className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs uppercase tracking-wide text-[#737373]">DRAFT</p>
@@ -173,15 +174,6 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
                 </p>
               </div>
 
-              {/* Bottom Action Button */}
-              <div className="flex items-center justify-center gap-3 pb-8 pt-8">
-                <Button
-                  onClick={onVerifyBrief}
-                  className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-                >
-                  Verify opinion
-                </Button>
-              </div>
             </>
           ) : (
             // BRIEF FLOW: MOTION CONTENT
@@ -525,16 +517,28 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             </div>
           </div>
 
-          {/* Bottom Action Button */}
+          {flowType !== "judicial" && (
           <div className="flex items-center justify-center gap-3 pb-8 pt-8">
             <Button
               onClick={onVerifyBrief}
               className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
             >
-              {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
+              Verify brief
             </Button>
           </div>
+          )}
           </>)}
+        </div>
+        {flowType === "judicial" && (
+          <div className="flex items-center justify-center gap-3 py-8">
+            <Button
+              onClick={onVerifyBrief}
+              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+            >
+              Verify opinion
+            </Button>
+          </div>
+        )}
         </div>
       </div>
     </div>
