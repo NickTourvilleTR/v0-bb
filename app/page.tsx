@@ -152,6 +152,9 @@ function AuthenticatedApp() {
       };
       
       setArgumentsState(prev => [...prev, newArgument]);
+      
+      // Add Jane's response
+      addChatMessage("assistant", "I've added this as argument 6 to your brief. It's a strong point that the complaint lumps all defendants together, which may fail to state a claim against S&S specifically under the pleading standards established in Iqbal and Twombly. This argument has been selected and applied to multiple causes of action.");
     }
   };
 
