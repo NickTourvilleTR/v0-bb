@@ -156,7 +156,11 @@ const complaintContent: { [key: string]: string[] } = {
     "Defendants include Acme Corp, Sound Made Public, Folio Literary Agency, The Gotham Group, 3 Arts, CAA, WME, Pinnacle Publishing/Atria, Paramount, Temple Hill, TFC, and individual industry professionals and author Rebecca Serle.",
     "Jurisdiction is based on federal copyright claims and supplemental jurisdiction, with venue alleged proper in this District.",
   ],
-  "Plaintiff's Work and Copyright": [],
+  "Plaintiff's Work and Copyright": [
+    "Love wrote a memoir titled \"Eat the Lemon: A Journey to Amalfi in Search of My Mother's Missing Cookbook\" after trips to Positano in 2017, while at Djerassi.",
+    "She alleges ownership of U.S. Copyright Registration No. TXu002385900 for the ETL Work, attached as Exhibit A.",
+    "The memoir recounts grieving her mother's cancer death, traveling to Positano, seeking her mother's cooking teacher, leaving a five-year partner in California, and time-shifting to her mother's youth.",
+  ],
   "Development, Submissions, and Industry Interest": [],
   "Alleged Access and Timeline Around OIS": [],
   "Alleged Substantial Similarities": [],
