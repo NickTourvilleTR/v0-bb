@@ -196,7 +196,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {/* Motion Type / Work Product Card */}
             <QuotableCard label={flowType === "judicial" ? "Work product: Opinion" : "Motion type: Motion to Dismiss"} onQuote={onQuote} className="mb-6">
               <h3 className="mb-3 text-sm font-medium text-[#212223]">{flowType === "judicial" ? "Work product" : "Motion type"}</h3>
-              <div className="rounded-md border border-[#c4c4c4] bg-[#e8e8e8] px-4 py-2.5 text-sm font-medium text-[#212223]">
+              <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-2.5 text-sm font-medium text-[#212223]">
                 {flowType === "judicial" ? "Opinion" : "Motion to Dismiss"}
               </div>
             </QuotableCard>
@@ -319,7 +319,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {/* Case Details Card - Read Only */}
             <QuotableCard label="Case details" onQuote={onQuote} className="mb-6">
               <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
-              <div className="rounded-md border border-[#c4c4c4] bg-[#e8e8e8] px-4 py-3">
+              <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-3">
                 <div className="space-y-2 text-sm text-[#212223]">
                   {flowType === "judicial" ? (
                     <>
