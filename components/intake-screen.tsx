@@ -151,15 +151,15 @@ const complaintSections = [
 ];
 
 const briefParties = [
-  { label: "Plaintiff 1", name: "Adrienne Love" },
-  { label: "Defendant 1", name: "Airbnb, Inc." },
-  { label: "Defendant 2", name: "Simon & Schuster, LLC" },
-  { label: "Defendant 3", name: "Sound Made Public, Inc." },
-  { label: "Defendant 4", name: "Folio Literary Agency" },
-  { label: "Defendant 5", name: "The Gotham Group, LLC" },
-  { label: "Defendant 6", name: "3 Arts Entertainment, LLC" },
-  { label: "Defendant 7", name: "Creative Artists Agency, LLC" },
-  { label: "Defendant 8", name: "William Morris Endeavor Entertainment, LLC" },
+  { label: "Plaintiff 1", name: "Adrienne Love", functional: false, disabled: true },
+  { label: "Defendant 1", name: "Airbnb, Inc.", functional: false, disabled: false },
+  { label: "Defendant 2", name: "Simon & Schuster, LLC", functional: true, disabled: false },
+  { label: "Defendant 3", name: "Sound Made Public, Inc.", functional: false, disabled: false },
+  { label: "Defendant 4", name: "Folio Literary Agency", functional: false, disabled: false },
+  { label: "Defendant 5", name: "The Gotham Group, LLC", functional: false, disabled: false },
+  { label: "Defendant 6", name: "3 Arts Entertainment, LLC", functional: false, disabled: false },
+  { label: "Defendant 7", name: "Creative Artists Agency, LLC", functional: false, disabled: false },
+  { label: "Defendant 8", name: "William Morris Endeavor Entertainment, LLC", functional: false, disabled: false },
 ];
 
 export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: IntakeScreenProps) {
@@ -229,14 +229,28 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                   <p className="mb-3 text-sm font-medium text-[#212223]">Please indicate which party you represent:</p>
                   <div className="space-y-2.5">
                     {briefParties.map((party) => (
-                      <label key={party.name} className="flex cursor-pointer items-center gap-3">
+                      <label
+                        key={party.name}
+                        className={cn(
+                          "flex items-center gap-3",
+                          party.functional ? "cursor-pointer" : party.disabled ? "cursor-default" : "cursor-not-allowed"
+                        )}
+                      >
                         <input
                           type="checkbox"
                           checked={selectedParties.includes(party.name)}
-                          onChange={() => toggleParty(party.name)}
-                          className="size-4 rounded border-[#a3a3a3] accent-[#1d4b34]"
+                          onChange={() => party.functional && toggleParty(party.name)}
+                          disabled={party.disabled}
+                          className={cn(
+                            "size-4 rounded border-[#a3a3a3] accent-[#1d4b34]",
+                            !party.functional && !party.disabled && "cursor-not-allowed",
+                            party.disabled && "opacity-30"
+                          )}
                         />
-                        <span className="text-sm text-[#212223]">
+                        <span className={cn(
+                          "text-sm",
+                          party.disabled ? "text-[#a3a3a3]" : "text-[#212223]"
+                        )}>
                           <span className="font-medium">{party.label}:</span> {party.name}
                         </span>
                       </label>
