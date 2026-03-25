@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { FileText, List, Reply, ScanEye } from "lucide-react";
+import { ArrowRight, FileText, List, Reply, ScanEye } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface IntakeScreenProps {
@@ -194,7 +194,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {/* Motion Type / Work Product Card */}
             <QuotableCard label={flowType === "judicial" ? "Work product: Opinion" : "Motion type: Motion to Dismiss"} onQuote={onQuote} className="mb-6">
               <h3 className="mb-3 text-sm font-medium text-[#212223]">{flowType === "judicial" ? "Work product" : "Motion type"}</h3>
-              <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-2.5 text-sm text-[#212223]">
+              <div className="rounded-md border border-[#c4c4c4] bg-[#e8e8e8] px-4 py-2.5 text-sm font-medium text-[#212223]">
                 {flowType === "judicial" ? "Opinion" : "Motion to Dismiss"}
               </div>
             </QuotableCard>
@@ -243,8 +243,9 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               </div>
               {flowType === "judicial" && (
                 <div className="mt-3">
-                  <button className="rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
+                  <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
                     Verify citations in the uploaded documents
+                    <ArrowRight className="size-4" />
                   </button>
                 </div>
               )}
@@ -253,8 +254,8 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {/* Case Details Card - Read Only */}
             <QuotableCard label="Case details" onQuote={onQuote} className="mb-6">
               <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
-              <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-3">
-                <div className="space-y-2 text-sm text-[#404040]">
+              <div className="rounded-md border border-[#c4c4c4] bg-[#e8e8e8] px-4 py-3">
+                <div className="space-y-2 text-sm text-[#212223]">
                   {flowType === "judicial" ? (
                     <>
                       <p><span className="font-medium text-[#212223]">{"Judge's name:"}</span> David O. Carter</p>
