@@ -120,7 +120,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
             </>
           ) : (
             <h1 className="mb-6 text-2xl font-semibold text-[#212223]">
-              Confirm your outline selections
+              Review and edit your outline
             </h1>
           )}
 
