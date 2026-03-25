@@ -184,7 +184,15 @@ const complaintContent: { [key: string]: string[] } = {
     "Love learned Malone was Serle's agent and Glick had been Serle's agent, Atria published OIS, and deLone's husband worked at Atria.",
     "Love alleges Serle had access via these individuals.",
   ],
-  "Alleged Substantial Similarities": [],
+  "Alleged Substantial Similarities": [
+    "Love alleges Serle used the ETL setting, characters, plot, themes, motifs, mood, and pace, not verbatim but with numerous detailed similarities.",
+    "Love includes side-by-side social media photo parallels with matching locations, clothing, poses, and people.",
+    "Both works share Positano hotel settings tied to mothers' romanticized pasts and real locations.",
+    "Protagonists are young women grieving mothers' misdiagnosed cancer, leaving five-year California partners, seeking connection in Positano.",
+    "Each mother is tied to cooking and lemons; fathers share the name Chuck; a local friend named Antonio takes boat trips at sunset.",
+    "Motifs include cooking, Aveeno near death, pervasive \"gold\" imagery, and lemons linked to mothers.",
+    "Themes involve grief journeys and understanding mothers anew through Amalfi, with solitary transformation.",
+  ],
   "Causes of Action": [],
   "Prayer for Relief": [],
 };
