@@ -551,8 +551,10 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
               </div>
             </div>
           </div>
-          </>)}
 
+            </>
+          )}
+        </div>
         <div className="flex items-center justify-center gap-3 py-8">
           <Button
             onClick={onVerifyBrief}
@@ -560,6 +562,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           >
             {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
           </Button>
+        </div>
         </div>
       </div>
       <SelectionContextMenu
