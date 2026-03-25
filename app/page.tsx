@@ -423,6 +423,7 @@ function AuthenticatedApp() {
                 setCurrentScreen("draft");
               }}
               onEditOutline={() => setCurrentScreen("outline")}
+              onQuote={(text) => handleQuote(text)}
             />
           </AppLayoutWrapper>
         </div>

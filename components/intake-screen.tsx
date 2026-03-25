@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { FileText, List, ScanEye } from "lucide-react";
+import { FileText, List, Reply, ScanEye } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface IntakeScreenProps {
@@ -10,7 +10,30 @@ interface IntakeScreenProps {
   onNextSelectArguments?: () => void;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
+  onQuote?: (text: string) => void;
   flowType?: "brief" | "judicial";
+}
+
+function QuotableCard({ children, label, onQuote, className }: { children: React.ReactNode; label: string; onQuote?: (text: string) => void; className?: string }) {
+  const [hovered, setHovered] = React.useState(false);
+  return (
+    <div
+      className={cn("relative rounded-lg border border-[#e5e5e5] bg-white p-5", className)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {hovered && onQuote && (
+        <button
+          onClick={() => onQuote(label)}
+          className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
+          title="Quote this message"
+        >
+          <Reply className="size-4" />
+        </button>
+      )}
+      {children}
+    </div>
+  );
 }
 
 const uploadedFiles = [
@@ -116,7 +139,7 @@ const argumentsSelected = [
   },
 ];
 
-export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: IntakeScreenProps) {
+export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
@@ -147,7 +170,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
 
             {/* Motion Summary Card - only for brief flow */}
             {flowType === "brief" && (
-              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <QuotableCard label="Motion to Dismiss: Love v. Serle et al." onQuote={onQuote} className="mb-6">
                 <p className="mb-3 text-sm font-semibold text-[#212223]">
                   Motion to Dismiss: Love v. Serle et al.
                 </p>
@@ -165,20 +188,20 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     Jurisdiction: U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
                   </li>
                 </ul>
-              </div>
+              </QuotableCard>
             )}
 
             {/* Motion Type / Work Product Card */}
-            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+            <QuotableCard label={flowType === "judicial" ? "Work product: Opinion" : "Motion type: Motion to Dismiss"} onQuote={onQuote} className="mb-6">
               <h3 className="mb-3 text-sm font-medium text-[#212223]">{flowType === "judicial" ? "Work product" : "Motion type"}</h3>
               <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-2.5 text-sm text-[#212223]">
                 {flowType === "judicial" ? "Opinion" : "Motion to Dismiss"}
               </div>
-            </div>
+            </QuotableCard>
 
             {/* Brief Role Card - only for brief flow, Read Only */}
             {flowType === "brief" && (
-              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <QuotableCard label="Brief role: Primary" onQuote={onQuote} className="mb-6">
                 <h3 className="mb-3 text-sm font-medium text-[#212223]">Brief role</h3>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
@@ -196,11 +219,11 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     <span className="text-sm text-[#737373]">Reply</span>
                   </div>
                 </div>
-              </div>
+              </QuotableCard>
             )}
 
             {/* Uploaded Files Card - Read Only */}
-            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+            <QuotableCard label="Uploaded files" onQuote={onQuote} className="mb-6">
               <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
               <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
                 <div className="flex flex-wrap gap-2">
@@ -222,10 +245,10 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                   </button>
                 </div>
               )}
-            </div>
+            </QuotableCard>
 
             {/* Case Details Card - Read Only */}
-            <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+            <QuotableCard label="Case details" onQuote={onQuote} className="mb-6">
               <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
               <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
                 <div className="space-y-2 text-sm text-[#737373]">
@@ -249,11 +272,11 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                   )}
                 </div>
               </div>
-            </div>
+            </QuotableCard>
 
             {/* Party You Represent Card - only for brief flow, Read Only */}
             {flowType === "brief" && (
-              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <QuotableCard label="Party you represent: Defendant — Rebecca Serle, et al." onQuote={onQuote} className="mb-6">
                 <h3 className="mb-3 text-sm font-medium text-[#212223]">Party you represent</h3>
                 <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
                   <div className="space-y-3">
@@ -269,12 +292,12 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     </div>
                   </div>
                 </div>
-              </div>
+              </QuotableCard>
             )}
 
             {/* Arguments Selected Card - only for brief flow, Read Only */}
             {flowType === "brief" && (
-              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white p-5">
+              <QuotableCard label="Arguments selected" onQuote={onQuote} className="mb-6">
                 <h3 className="mb-3 text-sm font-medium text-[#212223]">Arguments selected</h3>
                 <div className="rounded-md border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
                   <div className="space-y-3">
@@ -296,7 +319,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     ))}
                   </div>
                 </div>
-              </div>
+              </QuotableCard>
             )}
 
             {/* Call to Action Buttons */}
