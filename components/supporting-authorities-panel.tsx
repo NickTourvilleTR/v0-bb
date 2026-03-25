@@ -592,13 +592,21 @@ export function SupportingAuthoritiesPanel({
             );
           })
         ) : (
-          // Brief flow: original checkbox-based citation tables
+          // Brief flow: checkbox-based citation tables with subheaders
           authorities.map((authority, authorityIndex) => (
-            <div key={authority.id} className={authorityIndex > 0 ? "mt-8" : ""}>
-              <h2 className="mb-4 text-lg font-semibold text-[#212223]">
+            <div key={authority.id} className={authorityIndex > 0 ? "mt-10" : ""}>
+              {/* Main section header */}
+              <h2 className="mb-1 text-lg font-semibold text-[#212223]">
                 {authorityIndex + 1}. {authority.title}
               </h2>
+              {/* Subheader (e.g. "1A. ...") */}
+              {authority.subTitle && (
+                <h3 className="mb-4 text-base font-semibold text-[#212223]">
+                  {authority.subTitle}
+                </h3>
+              )}
               <div className="rounded-lg border border-[#e5e5e5] bg-white">
+                {/* Table header row */}
                 <div className="flex border-b border-[#e5e5e5]">
                   <div className="flex w-1/2 items-center gap-3 bg-[#f5f7f6] px-4 py-3">
                     <Checkbox
@@ -619,11 +627,13 @@ export function SupportingAuthoritiesPanel({
                     </span>
                   </div>
                   <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-white px-6 py-3">
-                    <span className="font-medium text-[#737373]">How this supports the argument</span>
+                    <span className="font-medium text-[#737373]">Key details</span>
                   </div>
                 </div>
+                {/* Citation rows */}
                 {authority.citations.map((citation, index) => (
                   <div key={citation.id} className={cn("flex", index < authority.citations.length - 1 && "border-b border-[#e5e5e5]")}>
+                    {/* Left column: Citation info */}
                     <div className={cn("w-1/2 p-4", selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white")}>
                       <div className="flex items-start gap-3">
                         <Checkbox
@@ -632,27 +642,40 @@ export function SupportingAuthoritiesPanel({
                           className="mt-0.5 border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
                         />
                         <div className="flex-1">
-                          <div className="flex items-center gap-1.5">
-                            <a href="#" className="font-medium text-[#2e6b5c] hover:underline">{citation.caseName}</a>
-                            <span className={cn("text-xs font-semibold uppercase px-2 py-1 rounded", citation.type === "authority" ? "bg-[#ebf0ed] text-[#1d4b34]" : "bg-[#fef3f0] text-[#d64000]")}>{citation.type}</span>
-                          </div>
+                          {/* Type label */}
+                          <p className="mb-1 text-sm font-semibold text-[#212223]">
+                            {citation.type === "authority" ? "Supporting authority" : "Fact"}
+                          </p>
+                          {/* Description */}
+                          <p className="mb-3 text-sm leading-relaxed text-[#212223]">{citation.description}</p>
+                          {/* Case name as link with external icon */}
+                          <a href="#" className="inline-flex items-center gap-1 text-sm font-medium text-[#2e6b5c] underline hover:text-[#1d4b34]">
+                            {citation.caseName}
+                            <svg className="size-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M3.5 1.5H10.5V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M10.5 1.5L1.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </a>
+                          {/* Citation reference */}
                           {citation.caseRef && <p className="text-sm text-[#737373]">{citation.caseRef}</p>}
+                          {/* Summary section */}
                           <div className="mt-4">
                             <p className="text-sm font-semibold text-[#212223]">Summary:</p>
-                            <p className="mt-1 text-sm text-[#212223]">{citation.summary}</p>
+                            <p className="mt-1 text-sm leading-relaxed text-[#212223]">{citation.summary}</p>
                           </div>
                         </div>
                       </div>
                     </div>
+                    {/* Right column: Key details (Relevance & Need to Know) */}
                     <div className={cn("w-1/2 border-l border-dashed border-[#d2d2d2] p-4 pl-6", selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white")}>
                       <div className="space-y-4">
                         <div>
                           <p className="text-sm font-semibold text-[#212223]">Relevance:</p>
-                          <p className="mt-1 text-sm text-[#212223]">{citation.relevance}</p>
+                          <p className="mt-1 text-sm leading-relaxed text-[#212223]">{citation.relevance}</p>
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-[#212223]">Need to know:</p>
-                          <p className="mt-1 text-sm text-[#212223]">{citation.needToKnow}</p>
+                          <p className="text-sm font-semibold text-[#212223]">Need to Know:</p>
+                          <p className="mt-1 text-sm leading-relaxed text-[#212223]">{citation.needToKnow}</p>
                         </div>
                       </div>
                     </div>
