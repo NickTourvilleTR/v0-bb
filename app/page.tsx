@@ -430,7 +430,7 @@ function AuthenticatedApp() {
                 addChatMessage("assistant", "Skipping ahead to draft generation with default arguments.");
                 setCurrentScreen("draft");
               }}
-              onEditOutline={() => setCurrentScreen("outline")}
+              onEditOutline={handleNextOutline}
               onQuote={(text) => handleQuote(text)}
             />
           </AppLayoutWrapper>
@@ -716,7 +716,7 @@ function AuthenticatedApp() {
                   addChatMessage("assistant", "Skipping ahead to finalize your brief.");
                   setCurrentScreen("finalize");
                 }}
-                onEditOutline={() => setCurrentScreen("outline")}
+                onEditOutline={handleNextOutline}
               />
             )}
           </AppLayoutWrapper>
@@ -832,15 +832,7 @@ function AuthenticatedApp() {
           onSendMessage={handleInlineSend}
             currentStep="support"
             flowType={flowType}
-            onNextOutline={() => {
-              addChatMessage("user", "Next: Outline");
-              if (flowType === "judicial") {
-                addChatMessage("assistant", "Now let's structure your opinion. Review the outline sections and make any adjustments.");
-              } else {
-                addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
-              }
-              setCurrentScreen("outline");
-            }}
+            onNextOutline={handleNextOutline}
             onSkipToGenerateDraft={() => {
               addChatMessage("user", "Skip to generate draft");
               addChatMessage("assistant", "Skipping ahead to draft generation.");
@@ -851,21 +843,13 @@ function AuthenticatedApp() {
             <div className="flex-1 overflow-y-auto">
               <SupportingAuthoritiesPanel 
                 flowType={flowType}
-                onNextOutline={() => {
-                  addChatMessage("user", "Next: Outline");
-                  if (flowType === "judicial") {
-                    addChatMessage("assistant", "Now let's structure your opinion. Review the outline sections and make any adjustments.");
-                  } else {
-                    addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
-                  }
-                  setCurrentScreen("outline");
-                }}
+                onNextOutline={handleNextOutline}
                 onSkipToGenerateDraft={() => {
                   addChatMessage("user", "Skip to generate draft");
                   addChatMessage("assistant", "Skipping ahead to draft generation.");
                   setCurrentScreen("draft");
                 }}
-                onEditOutline={() => setCurrentScreen("outline")}
+                onEditOutline={handleNextOutline}
               />
             </div>
           </AppLayoutWrapper>
@@ -904,9 +888,7 @@ function AuthenticatedApp() {
               <ArgueScreen 
                 flowType={flowType}
                 onNextSupportingAuthority={handleNextSupportingAuthority}
-                onEditOutline={() => {
-                  setCurrentScreen("outline");
-                }}
+                onEditOutline={handleNextOutline}
                 onSkipToGenerateDraft={() => {
                   addChatMessage("user", "Skip to generate draft");
                   addChatMessage("assistant", "Skipping ahead to draft generation.");
