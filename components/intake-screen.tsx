@@ -150,6 +150,20 @@ const complaintSections = [
   "Prayer for Relief",
 ];
 
+const complaintContent: { [key: string]: string[] } = {
+  "Parties and Jurisdiction": [
+    "Plaintiff is Adrienne Love, a California resident.",
+    "Defendants include Acme Corp, Sound Made Public, Folio Literary Agency, The Gotham Group, 3 Arts, CAA, WME, Pinnacle Publishing/Atria, Paramount, Temple Hill, TFC, and individual industry professionals and author Rebecca Serle.",
+    "Jurisdiction is based on federal copyright claims and supplemental jurisdiction, with venue alleged proper in this District.",
+  ],
+  "Plaintiff's Work and Copyright": [],
+  "Development, Submissions, and Industry Interest": [],
+  "Alleged Access and Timeline Around OIS": [],
+  "Alleged Substantial Similarities": [],
+  "Causes of Action": [],
+  "Prayer for Relief": [],
+};
+
 const briefParties = [
   { label: "Plaintiff 1", name: "Adrienne Love", functional: false, disabled: true },
   { label: "Defendant 1", name: "Airbnb, Inc.", functional: false, disabled: false },
@@ -212,14 +226,27 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 <h3 className="mb-3 text-base font-semibold text-[#212223]">Complaint Summary</h3>
                 <div className="mb-6 divide-y divide-[#e5e5e5] rounded-lg border border-[#e5e5e5]">
                   {complaintSections.map((section) => (
-                    <button
-                      key={section}
-                      onClick={() => toggleSection(section)}
-                      className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-[#f7f7f7]"
-                    >
-                      <ChevronRight className={cn("size-4 shrink-0 text-[#737373] transition-transform", expandedSections.includes(section) && "rotate-90")} />
-                      <span className="text-sm text-[#212223]">{section}</span>
-                    </button>
+                    <div key={section}>
+                      <button
+                        onClick={() => toggleSection(section)}
+                        className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-[#f7f7f7]"
+                      >
+                        <ChevronRight className={cn("size-4 shrink-0 text-[#737373] transition-transform", expandedSections.includes(section) && "rotate-90")} />
+                        <span className="text-sm text-[#212223]">{section}</span>
+                      </button>
+                      {expandedSections.includes(section) && complaintContent[section].length > 0 && (
+                        <div className="border-t border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                          <ul className="space-y-2">
+                            {complaintContent[section].map((bullet, idx) => (
+                              <li key={idx} className="flex gap-2 text-sm text-[#212223]">
+                                <span className="shrink-0">•</span>
+                                <span>{bullet}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
 
