@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, CircleCheck, FileText, List, Reply, ScanEye, Upload } from "lucide-react";
+import { ArrowRight, ChevronRight, CircleCheck, FileText, List, Reply, ScanEye, Upload } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface IntakeScreenProps {
@@ -245,19 +245,25 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               </div>
               {flowType === "judicial" && (
                 <div className="mt-4 flex gap-3">
-                  <div className="flex flex-1 items-start gap-3 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
-                    <CircleCheck className="mt-0.5 size-4 shrink-0 text-[#737373]" />
-                    <div>
-                      <p className="text-sm font-medium text-[#212223]">Verify files</p>
-                      <p className="mt-0.5 text-xs text-[#737373]">Check citations in the uploaded documents</p>
+                  <div className="flex flex-1 items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                    <div className="flex items-start gap-3">
+                      <CircleCheck className="mt-0.5 size-4 shrink-0 text-[#737373]" />
+                      <div>
+                        <p className="text-sm font-medium text-[#212223]">Verify files</p>
+                        <p className="mt-0.5 text-xs text-[#737373]">Check citations in the uploaded documents</p>
+                      </div>
                     </div>
+                    <ChevronRight className="mt-0.5 size-4 shrink-0 text-[#737373]" />
                   </div>
-                  <div className="flex flex-1 items-start gap-3 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
-                    <Upload className="mt-0.5 size-4 shrink-0 text-[#737373]" />
-                    <div>
-                      <p className="text-sm font-medium text-[#212223]">Upload prior opinions</p>
-                      <p className="mt-0.5 text-xs text-[#737373]">Automatically customize the style, voice, and formatting of your draft.</p>
+                  <div className="flex flex-1 items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                    <div className="flex items-start gap-3">
+                      <Upload className="mt-0.5 size-4 shrink-0 text-[#737373]" />
+                      <div>
+                        <p className="text-sm font-medium text-[#212223]">Upload prior opinions</p>
+                        <p className="mt-0.5 text-xs text-[#737373]">Automatically customize the style, voice, and formatting of your draft.</p>
+                      </div>
                     </div>
+                    <ChevronRight className="mt-0.5 size-4 shrink-0 text-[#737373]" />
                   </div>
                 </div>
               )}
