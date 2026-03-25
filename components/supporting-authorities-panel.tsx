@@ -640,8 +640,8 @@ export function SupportingAuthoritiesPanel({
                       • {authority.citations.filter((c) => selectedCitations.includes(c.id)).length} selected
                     </span>
                   </div>
-                  <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-white px-6 py-3">
-                    <span className="font-medium text-[#737373]">Key details</span>
+                  <div className="w-1/2 border-l border-dashed border-[#d2d2d2] bg-[#f5f7f6] px-6 py-3">
+                    <span className="font-semibold text-[#212223]">Key details</span>
                   </div>
                 </div>
                 {/* Citation rows */}
