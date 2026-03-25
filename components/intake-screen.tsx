@@ -210,7 +210,9 @@ const complaintContent: { [key: string]: string[] } = {
     "Constructive trust and related equitable relief, including TRO and injunction.",
     "Declaratory relief to clarify obligations and rights regarding access, control, and monies from ETL.",
   ],
-  "Prayer for Relief": [],
+  "Prayer for Relief": [
+    "Love seeks findings of willful infringement, fiduciary breach, injunctive relief, compensatory and statutory damages, disgorgement, punitive damages, fees and costs, and interest.",
+  ],
 };
 
 const briefParties = [
