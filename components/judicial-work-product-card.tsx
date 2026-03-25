@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Search, Reply } from "lucide-react";
+import { Scissors, Reply } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 const workProductTypes = [
   {
@@ -83,39 +84,45 @@ export function JudicialWorkProductCard({
             key={item.id}
             onClick={() => handleSelect(item.id)}
             className={cn(
-              "flex w-full items-start gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
+              "flex w-full items-start justify-between gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
               selected === item.id
                 ? "border-[#1d4b34] bg-[#f0f5f3]"
                 : "border-[#e5e5e5] hover:bg-[#f7f7f7]"
             )}
           >
-            <div className={cn(
-              "mt-1 flex size-4 shrink-0 items-center justify-center rounded-full border-2",
-              selected === item.id
-                ? "border-[#1d4b34]"
-                : "border-[#737373]"
-            )}>
-              {selected === item.id && (
-                <div className="size-2 rounded-full bg-[#1d4b34]" />
-              )}
+            <div className="flex items-start gap-3">
+              <div className={cn(
+                "mt-1 flex size-4 shrink-0 items-center justify-center rounded-full border-2",
+                selected === item.id
+                  ? "border-[#1d4b34]"
+                  : "border-[#737373]"
+              )}>
+                {selected === item.id && (
+                  <div className="size-2 rounded-full bg-[#1d4b34]" />
+                )}
+              </div>
+              <div>
+                <h4 className="font-semibold text-[#212223]">{item.title}</h4>
+                <p className="mt-1 text-sm text-[#737373]">{item.description}</p>
+              </div>
             </div>
-            <div>
-              <h4 className="font-semibold text-[#212223]">{item.title}</h4>
-              <p className="mt-1 text-sm text-[#737373]">{item.description}</p>
-            </div>
+            <Badge variant="outline" className="shrink-0">Workflow</Badge>
           </button>
         ))}
 
-        {/* Draft another document - no radio button, search icon */}
+        {/* Go to draft another document - no radio button, scissors icon */}
         <button
           onClick={() => handleSelect("other")}
-          className="w-full rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors hover:bg-[#f7f7f7]"
+          className="flex w-full items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors hover:bg-[#f7f7f7]"
         >
-          <div className="flex items-center gap-2">
-            <Search className="size-4 text-[#737373]" />
-            <h4 className="font-semibold text-[#212223]">Draft another document</h4>
+          <div>
+            <div className="flex items-center gap-2">
+              <Scissors className="size-4 text-[#737373]" />
+              <h4 className="font-semibold text-[#212223]">Go to draft a different document</h4>
+            </div>
+            <p className="mt-1 text-sm text-[#737373]">Describe the kind of judicial document you&apos;d like to draft.</p>
           </div>
-          <p className="mt-1 text-sm text-[#737373]">Describe the kind of judicial document you'd like to draft.</p>
+          <Badge variant="secondary" className="shrink-0">CoCounsel Drafting</Badge>
         </button>
       </div>
     </div>
