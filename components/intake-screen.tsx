@@ -142,6 +142,7 @@ const argumentsSelected = [
 
 export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
+  const [selectedJurisdiction, setSelectedJurisdiction] = React.useState("9th-circuit");
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
       {/* Main Content */}
@@ -341,6 +342,44 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 </div>
               </div>
             </QuotableCard>
+
+            {/* Jurisdiction Card - judicial flow only */}
+            {flowType === "judicial" && (
+              <QuotableCard label="Jurisdiction" onQuote={onQuote} className="mb-6">
+                <h3 className="mb-1 text-sm font-medium text-[#212223]">Jurisdiction</h3>
+                <p className="mb-4 text-xs text-[#737373]">Sets the scope for your research</p>
+                <div className="space-y-3">
+                  {[
+                    { id: "9th-circuit", label: "9th Circuit" },
+                    { id: "9th-circuit-federal", label: "9th Circuit and related federal" },
+                    { id: "different", label: "Select different jurisdiction(s)" },
+                  ].map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() => setSelectedJurisdiction(option.id)}
+                      className="flex w-full items-center gap-3 text-left"
+                    >
+                      <div className={cn(
+                        "flex size-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                        selectedJurisdiction === option.id
+                          ? "border-[#1d4b34] bg-[#1d4b34]"
+                          : "border-[#a3a3a3]"
+                      )}>
+                        {selectedJurisdiction === option.id && (
+                          <div className="size-2 rounded-full bg-white" />
+                        )}
+                      </div>
+                      <span className={cn(
+                        "text-sm",
+                        selectedJurisdiction === option.id ? "text-[#212223]" : "text-[#525252]"
+                      )}>
+                        {option.label}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </QuotableCard>
+            )}
 
             {/* Call to Action Buttons */}
             <div className="flex items-center justify-center gap-3 pb-8 pt-4">
