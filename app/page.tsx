@@ -293,9 +293,7 @@ function AuthenticatedApp() {
   };
 
   const handleNextDraft = () => {
-    addChatMessage("user", "Next: Draft");
-    addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
-    setCurrentScreen("draft");
+    handleGenerateDraft();
   };
 
   const handleGenerateDraft = () => {
@@ -415,6 +413,7 @@ function AuthenticatedApp() {
           >
             <IntakeScreen 
               flowType={flowType}
+              onGenerateDraft={handleGenerateDraft}
               onNextSelectArguments={() => {
                 const buttonLabel = flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments";
                 addChatMessage("user", buttonLabel);
@@ -425,11 +424,7 @@ function AuthenticatedApp() {
                 }
                 setCurrentScreen("argue2");
               }}
-              onSkipToGenerateDraft={() => {
-                addChatMessage("user", "Skip to generate draft");
-                addChatMessage("assistant", "Skipping ahead to draft generation with default arguments.");
-                setCurrentScreen("draft");
-              }}
+              onSkipToGenerateDraft={handleGenerateDraft}
               onEditOutline={handleNextOutline}
               onQuote={(text) => handleQuote(text)}
             />
@@ -457,21 +452,13 @@ function AuthenticatedApp() {
           onSendMessage={handleInlineSend}
             currentStep="outline"
             onGenerateOutline={handleGenerateOutline}
-            onSkipToGenerateDraft={() => {
-              addChatMessage("user", "Skip to generate draft");
-              addChatMessage("assistant", "Skipping ahead to draft generation.");
-              setCurrentScreen("draft");
-            }}
+            onSkipToGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
           >
             <OutlineScreen 
               flowType={flowType}
               onGenerateOutline={handleGenerateOutline} 
-              onNextDraft={() => {
-                addChatMessage("user", "Skip to generate draft");
-                addChatMessage("assistant", "Skipping ahead to draft generation.");
-                setCurrentScreen("draft");
-              }} 
+              onNextDraft={handleGenerateDraft}
             />
           </AppLayoutWrapper>
         </div>
@@ -522,20 +509,13 @@ function AuthenticatedApp() {
           messages={chatMessages}
           onSendMessage={handleInlineSend}
             currentStep="outline-ready"
-            onNextDraft={() => {
-              addChatMessage("user", "Next: Draft");
-              addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
-              setCurrentScreen("draft");
-            }}
+            onNextDraft={handleGenerateDraft}
             showVersionsTab={true}
           >
             <OutlineEditor 
               flowType={flowType}
-              onNextDraft={() => {
-              addChatMessage("user", "Next: Draft");
-              addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
-              setCurrentScreen("draft");
-            }} />
+              onNextDraft={handleGenerateDraft}
+            />
           </AppLayoutWrapper>
         </div>
       </div>
@@ -833,22 +813,14 @@ function AuthenticatedApp() {
             currentStep="support"
             flowType={flowType}
             onNextOutline={handleNextOutline}
-            onSkipToGenerateDraft={() => {
-              addChatMessage("user", "Skip to generate draft");
-              addChatMessage("assistant", "Skipping ahead to draft generation.");
-              setCurrentScreen("draft");
-            }}
+            onSkipToGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
               <SupportingAuthoritiesPanel 
                 flowType={flowType}
                 onNextOutline={handleNextOutline}
-                onSkipToGenerateDraft={() => {
-                  addChatMessage("user", "Skip to generate draft");
-                  addChatMessage("assistant", "Skipping ahead to draft generation.");
-                  setCurrentScreen("draft");
-                }}
+                onSkipToGenerateDraft={handleGenerateDraft}
                 onEditOutline={handleNextOutline}
               />
             </div>
@@ -877,11 +849,7 @@ function AuthenticatedApp() {
             currentStep="argue"
             flowType={flowType}
             onNextSupportingAuthority={handleNextSupportingAuthority}
-            onSkipToGenerateDraft={() => {
-              addChatMessage("user", "Skip to generate draft");
-              addChatMessage("assistant", "Skipping ahead to draft generation.");
-              setCurrentScreen("draft");
-            }}
+            onSkipToGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
@@ -889,11 +857,7 @@ function AuthenticatedApp() {
                 flowType={flowType}
                 onNextSupportingAuthority={handleNextSupportingAuthority}
                 onEditOutline={handleNextOutline}
-                onSkipToGenerateDraft={() => {
-                  addChatMessage("user", "Skip to generate draft");
-                  addChatMessage("assistant", "Skipping ahead to draft generation.");
-                  setCurrentScreen("draft");
-                }}
+                onSkipToGenerateDraft={handleGenerateDraft}
                 onQuote={handleQuote}
               />
             </div>

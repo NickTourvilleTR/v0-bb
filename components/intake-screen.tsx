@@ -2,13 +2,14 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, FileText, List, Reply, ScanEye } from "lucide-react";
+import { ArrowRight, FileText, List, Reply, ScanEye, Upload } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface IntakeScreenProps {
   className?: string;
   onNextSelectArguments?: () => void;
   onSkipToGenerateDraft?: () => void;
+  onGenerateDraft?: () => void;
   onEditOutline?: () => void;
   onQuote?: (text: string) => void;
   flowType?: "brief" | "judicial";
@@ -139,7 +140,7 @@ const argumentsSelected = [
   },
 ];
 
-export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: IntakeScreenProps) {
+export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
@@ -326,6 +327,21 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               </QuotableCard>
             )}
 
+            {/* Upload Prior Opinions Banner - judicial flow only */}
+            {flowType === "judicial" && (
+              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-4">
+                <div className="flex items-start gap-3">
+                  <Upload className="mt-0.5 size-5 shrink-0 text-[#737373]" />
+                  <div>
+                    <p className="text-sm font-medium text-[#212223]">Upload prior opinions</p>
+                    <p className="mt-1 text-sm text-[#737373]">
+                      Upload prior opinions to customize the style, voice, and formatting of your draft.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Call to Action Buttons */}
             <div className="flex items-center justify-center gap-3 pb-8 pt-4">
               {flowType !== "judicial" && (
@@ -337,10 +353,10 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 </button>
               )}
               <button
-                onClick={onNextSelectArguments}
+                onClick={flowType === "judicial" ? onGenerateDraft : onNextSelectArguments}
                 className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white hover:bg-[#163d2a]"
               >
-                {flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments"}
+                {flowType === "judicial" ? "Generate draft" : "Next: Select arguments"}
               </button>
             </div>
           </div>
