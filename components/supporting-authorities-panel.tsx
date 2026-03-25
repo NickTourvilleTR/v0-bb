@@ -591,17 +591,29 @@ export function SupportingAuthoritiesPanel({
               </div>
             );
           })
-        ) : (
-          // Brief flow: checkbox-based citation tables with subheaders
-          authorities.map((authority, authorityIndex) => (
-            <div key={authority.id} className={authorityIndex > 0 ? "mt-10" : ""}>
-              {/* Main section header */}
-              <h2 className="mb-1 text-lg font-semibold text-[#212223]">
-                {authorityIndex + 1}. {authority.title}
-              </h2>
+        ) : (() => {
+          // Build a list of unique titles in order to assign correct group numbers
+          const uniqueTitles: string[] = [];
+          authorities.forEach((a) => {
+            if (!uniqueTitles.includes(a.title)) uniqueTitles.push(a.title);
+          });
+
+          return authorities.map((authority, authorityIndex) => {
+            const groupNumber = uniqueTitles.indexOf(authority.title) + 1;
+            const isFirstInGroup = authorityIndex === 0 || authorities[authorityIndex - 1].title !== authority.title;
+            const isFirstEntry = authorityIndex === 0;
+
+            return (
+            <div key={authority.id} className={!isFirstEntry ? (isFirstInGroup ? "mt-10" : "mt-8") : ""}>
+              {/* Main section header — only shown once per unique title */}
+              {isFirstInGroup && (
+                <h2 className="mb-1 text-lg font-semibold text-[#212223]">
+                  {groupNumber}. {authority.title}
+                </h2>
+              )}
               {/* Subheader (e.g. "1A. ...") */}
               {authority.subTitle && (
-                <h3 className="mb-4 text-base font-semibold text-[#212223]">
+                <h3 className={cn("text-base font-semibold text-[#212223]", isFirstInGroup ? "mb-4" : "mb-4 mt-1")}>
                   {authority.subTitle}
                 </h3>
               )}
@@ -683,8 +695,9 @@ export function SupportingAuthoritiesPanel({
                 ))}
               </div>
             </div>
-          ))
-        )}
+            );
+          });
+        })()}
 
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-6">
