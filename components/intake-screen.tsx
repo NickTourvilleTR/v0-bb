@@ -302,7 +302,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
 
             {/* Upload Prior Opinions Banner - judicial flow only */}
             {flowType === "judicial" && (
-              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-4">
+              <QuotableCard label="Upload prior opinions" onQuote={onQuote} className="mb-6">
                 <div className="flex items-start gap-3">
                   <Upload className="mt-0.5 size-5 shrink-0 text-[#737373]" />
                   <div>
@@ -312,8 +312,27 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     </p>
                   </div>
                 </div>
-              </div>
+              </QuotableCard>
             )}
+
+            {/* Case Details Card - Read Only */}
+            <QuotableCard label="Case details" onQuote={onQuote} className="mb-6">
+              <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
+              <div className="rounded-md border border-[#c4c4c4] bg-[#e8e8e8] px-4 py-3">
+                <div className="space-y-2 text-sm text-[#212223]">
+                  <p><span className="font-medium text-[#212223]">Case Name:</span> Love v. Serle, et al.</p>
+                  <p><span className="font-medium text-[#212223]">Court:</span> U.S. District Court, Central District of California</p>
+                  <p><span className="font-medium text-[#212223]">Judge:</span> David O. Carter</p>
+                  <p><span className="font-medium text-[#212223]">Case Number:</span> 22-cv-07522-DOC-DFM</p>
+                  {flowType === "brief" && (
+                    <>
+                      <p><span className="font-medium text-[#212223]">Current Status:</span> Motion to Dismiss pending</p>
+                      <p><span className="font-medium text-[#212223]">Template:</span> Motion to Dismiss: Movant&apos;s Memorandum of Law (Federal)</p>
+                    </>
+                  )}
+                </div>
+              </div>
+            </QuotableCard>
 
             {/* Call to Action Buttons */}
             <div className="flex items-center justify-center gap-3 pb-8 pt-4">
