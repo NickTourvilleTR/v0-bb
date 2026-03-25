@@ -20,6 +20,7 @@ import {
   Underline,
   MoreHorizontal,
 } from "lucide-react";
+import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 
 interface DraftEditorProps {
   className?: string;
@@ -29,6 +30,8 @@ interface DraftEditorProps {
 
 export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: DraftEditorProps) {
   const [fontSize, setFontSize] = React.useState(36);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
 
   return (
     <div className={cn("flex min-h-0 flex-1 flex-col", className)}>
@@ -114,7 +117,8 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
 
       {/* Document Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-8">
-        <div className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
+        <div className="mx-auto max-w-3xl">
+        <div ref={contentRef} className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs uppercase tracking-wide text-[#737373]">DRAFT</p>
@@ -173,15 +177,6 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
                 </p>
               </div>
 
-              {/* Bottom Action Button */}
-              <div className="flex items-center justify-center gap-3 pb-8 pt-8">
-                <Button
-                  onClick={onVerifyBrief}
-                  className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-                >
-                  Verify opinion
-                </Button>
-              </div>
             </>
           ) : (
             // BRIEF FLOW: MOTION CONTENT
@@ -208,7 +203,6 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           <div className="mb-8 text-center">
             <p className="text-lg font-semibold text-[#212223]">UNITED STATES DISTRICT COURT</p>
             <p className="text-lg font-semibold text-[#212223]">CENTRAL DISTRICT OF CALIFORNIA</p>
-            <p className="text-lg font-semibold text-[#212223]">SOUTHERN DIVISION</p>
           </div>
 
           {/* Case Information */}
@@ -216,65 +210,92 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             {/* Left Column - Parties */}
             <div className="flex-1 border-r border-[#e5e5e5] pr-8">
               <p className="mb-4 text-sm text-[#212223]">
-                <span className="font-medium">516 Inc., dba DG Plumbing</span>,
+                <span className="font-medium">ADRIENNE LOVE</span>,
               </p>
               <p className="mb-4 ml-16 text-sm text-[#212223]">Plaintiff,</p>
               <p className="mb-4 ml-8 text-sm text-[#212223]">v.</p>
               <p className="mb-4 text-sm text-[#212223]">
-                <span className="font-medium">RICHMOND SERVICES, INC. dba RICHMOND NATIONAL INSURANCE COMPANY, a Delaware Corporation; and DOES 1 through 100, inclusive</span>,
+                <span className="font-medium">AIRBNB, INC., et al.</span>,
               </p>
               <p className="ml-16 text-sm text-[#212223]">Defendants.</p>
             </div>
 
             {/* Right Column - Case Details */}
             <div className="flex-1">
-              <p className="mb-2 text-sm text-[#212223]">Case No. 8:25-cv-01204-DOC-KES</p>
-              <p className="text-sm font-semibold uppercase text-[#212223]">
-                ORDER DENYING DEFENDANT&apos;S MOTION TO DISMISS
+              <p className="mb-2 text-sm text-[#212223]">Case No. 2:25-cv-01779-AB(KSx)</p>
+              <p className="mb-6 text-sm text-[#212223]">Hon. André Birotte Jr.</p>
+              <p className="mb-2 text-sm font-semibold uppercase text-[#212223]">
+                DEFENDANT DEFENDANT'S JOINDER IN<br/>
+                CREATIVE ARTISTS AGENCY, LLC'S MOTION TO<br/>
+                DISMISS FIRST AMENDED COMPLAINT AND<br/>
+                MOTION TO DISMISS FIRST AMENDED<br/>
+                COMPLAINT; MEMORANDUM OF POINTS AND<br/>
+                AUTHORITIES IN SUPPORT THEREOF
               </p>
-              <p className="mt-4 text-sm text-[#212223]">Hearing Date: October 31, 2025</p>
+              <p className="mt-6 text-sm text-[#212223]">Hearing Date: October 31, 2025</p>
               <p className="text-sm text-[#212223]">Hearing Time: 10:00 a.m.</p>
               <p className="text-sm text-[#212223]">Courtroom: 7B</p>
             </div>
           </div>
 
-          {/* Notice of Joinder */}
-          <div className="mb-8">
-            <h2 className="mb-4 text-center text-base font-bold text-[#212223] underline">
-              NOTICE OF JOINDER AND MOTION AND JOINDER AND MOTION
+          {/* MEMORANDUM OF POINTS AND AUTHORITIES */}
+          <div className="mb-8 text-center border-t border-b border-[#e5e5e5] py-4">
+            <h2 className="text-base font-bold text-[#212223] underline">
+              MEMORANDUM OF POINTS AND AUTHORITIES
             </h2>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              <strong>PLEASE TAKE NOTICE</strong> that on October 31, 2025, at 10:00 a.m. or as soon as may be heard before the Honorable André Birotte Jr. in Courtroom 7B of the United States District Court for the Central District of California, United States Courthouse, 350 West First Street, Los Angeles, California 90012, defendant Simon and Schuster, LLC ("S&S") will and hereby does move this Court for an order dismissing with prejudice the First Amended Complaint filed by plaintiff Adrienne Love.
-            </p>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              This motion is made following the conference of counsel pursuant to L.R. 7-3, which took place on September 5, 2025 by videoconference.
-            </p>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              The motion is made pursuant to Federal Rule of Civil Procedure 12(b)(6) on the ground that Love's First Amended Complaint fails to state a claim. <span className="underline">First</span>, Love's claim for copyright infringement fails because there is no substantial similarity of protected expression between Rebecca Serle's novel One Italian Summer, which was published by S&S, and Love's unpublished memoir Eat the Lemon. Any purported similarities consist of unprotectable facts from Love's own life or the unprotectable premise of a woman traveling alone to Italy in search of connection to her deceased mother.
-            </p>
           </div>
 
-          {/* I. INTRODUCTION */}
+          {/* I. INTRODUCTION - Updated to PRELIMINARY STATEMENT */}
           <div className="mb-8">
-            <h2 className="mb-4 text-lg font-bold text-[#212223]">I. INTRODUCTION</h2>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              In this case, Plaintiff Adrienne Love contends that she is the victim of a vast conspiracy to steal her life story. According to her, the conspiracy encompasses not just the author and publisher of the allegedly infringing work—Rebecca Serle's novel, <em>One Italian Summer</em>—but also a wide array of literary agents and editors, and even a movie studio. Love further alleges that, to pressure her into silence, this purported conspiracy involved stalking and various other attempts at physical or emotional intimidation.
-            </p>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              <strong><em>None of this actually happened.</em></strong> Sadly, it is entirely a figment of Love's imagination. Fortunately, it is unnecessary to proceed to discovery to sort this out.
-            </p>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              Although Love has now amended her Complaint, nothing pleaded in the First Amended Complaint ("FAC") cures her claims' fatal defects. Each of Love's claims can and should be rejected as a matter of law just based on the record currently before this Court: i.e., Love's First Amended Complaint and copies of the implicated works.
-            </p>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              <span className="underline">First</span>, the accusation that lies at the center of Love's conspiracy allegations—that One Italian Summer infringes on her copyright in her unpublished memoir Eat the Lemon—can be rejected as a matter of law just by comparing the two works. To prove copyright infringement, Love must demonstrate that the works at issue are "substantially similar" in their original protected expression. She cannot do that because (a) the purported similarities involve facts from Love's own life, which are not subject to copyright protection; and (b) even if Eat the Lemon were entitled to the same protection afforded fictional works, the only real overlap is that both works involve a female protagonist who travels alone to Italy's Amalfi Coast in search of connection with her deceased mother, and that is a general plot point over which Love cannot claim ownership.
-            </p>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              <span className="underline">Second</span>, Love's multiple state law claims are also fatally deficient. Those claims fail as to S&S because (a) each is premised on a purported conspiracy to commit and hide copyright infringement, when no such infringement occurred; (b) Love has not alleged conduct specifically by S&S that could make it liable for any of the claims asserted against it; and (c) many of the claims are untimely and/or preempted by the <a href="#" className="text-[#0062c4] hover:underline">Copyright Act</a>, as set forth in the <a href="#" className="text-[#0062c4] hover:underline">Motion to Dismiss of CAA</a>, which S&S joins in its entirety.
-            </p>
-            <p className="text-sm leading-relaxed text-[#212223]">
-              For these reasons, S&S respectfully requests that this Court dismiss the First Amended Complaint with prejudice as to it.
-            </p>
+            <h2 className="mb-4 text-lg font-bold text-[#212223]">I. PRELIMINARY STATEMENT</h2>
+            
+            {/* Bulleted Points */}
+            <ul className="space-y-3">
+              {/* Facts 1 */}
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
+                  Plaintiff Adrienne Love alleges a vast conspiracy — encompassing the author, publisher, literary agents, editors, and a movie studio — to steal her life story as depicted in her unpublished memoir Eat the Lemon and exploit it in Rebecca Serle's novel One Italian Summer, published by S&S. <span className="text-[#737373]">(FAC ¶¶46-48)</span>
+                </span>
+              </li>
+              
+              {/* Facts 2 */}
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
+                  Love further alleges that the conspirators stalked her, sent strangers claiming to work for the FBI to confront her, and caused two mysterious deaths to intimidate her into silence. <span className="text-[#737373]">(FAC ¶¶63, 65)</span>
+                </span>
+              </li>
+              
+              {/* Facts 3 */}
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
+                  Love has now filed a First Amended Complaint that is substantially identical to her original complaint, asserting copyright infringement and 13 state law claims against S&S. <span className="text-[#737373]">(FAC ¶¶130-264)</span>
+                </span>
+              </li>
+              
+              {/* Law */}
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#fcd34d] bg-[#fffbeb] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#b45309]">Law</span>
+                  A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC&apos;s fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#0062c4]">(FRCP 12(b)(6))</span>
+                </span>
+              </li>
+              
+              {/* Conclusion */}
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#6ee7b7] bg-[#ecfdf5] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#065f46]">Conclusion</span>
+                  Because (1) the two works are not substantially similar in protectable expression, (2) the state law claims lack specific allegations of conduct by S&S, and (3) many state law claims are untimely and/or preempted, the FAC should be dismissed with prejudice.
+                </span>
+              </li>
+            </ul>
           </div>
 
           {/* II. FACTUAL BACKGROUND */}
@@ -285,10 +306,10 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             <div className="mb-6">
               <h3 className="mb-2 font-bold text-[#212223]">A. The Parties</h3>
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                Love is the author of the unpublished memoir <em>Eat the Lemon</em>. <a href="#" className="text-[#0062c4] hover:underline">FAC ¶¶ 33-34</a>. She has registered two versions of the manuscript with the Copyright Office, a July 2020 draft and a February 2021 draft. Id. Ex. A. According to the copyright registration, the work was completed in 2021. <em>Id.</em>
+                Love is the author of <em>Eat the Lemon</em>, an unpublished memoir she describes as a personal account of her own life experiences. FAC ¶¶ 33–34. She has registered two manuscript versions with the U.S. Copyright Office—a July 2020 draft and a February 2021 draft—and represents that the work was completed in 2021. Id. Ex. A.
               </p>
               <p className="text-sm leading-relaxed text-[#212223]">
-                S&S is the publisher of <em>One Italian Summer</em>. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 11, 31, 78</a>. The book was first publicly announced in March 2021, when a sample chapter was released, and then published in March 2022. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 48, 50</a>.
+                S&S is the publisher of <em>One Italian Summer</em>, a novel authored by Rebecca Serle. FAC ¶¶ 11, 31, 78. The novel was first publicly announced in March 2021, when a sample chapter was released; it was published in March 2022. Id. ¶¶ 48, 50.
               </p>
             </div>
 
@@ -296,54 +317,57 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             <div className="mb-6">
               <h3 className="mb-2 font-bold text-[#212223]">B. The Alleged Conspiracy</h3>
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                Love claims to be the victim of a far-ranging conspiracy relating to <em>Eat the Lemon</em>. <a href="#" className="text-[#0062c4] hover:underline">FAC ¶¶ 46, 126</a>. Her central allegation is that "a network of conspirators, including some of Love's trusted advisors," decided that her life story would be more profitably told coming from "Serle, a well-known author," than coming from her. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶ 46</a>. She contends that these conspirators then worked to deliver her manuscript to Serle, after which it was misappropriated both in Serle's novel <em>One Italian Summer</em> and a related film project currently under development. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 37-48, 50, 57-61, 78-79</a>.
+                Love's central allegation is that a network of conspirators—including individuals she had trusted as her own advisors—decided that her life story would fetch greater commercial returns if told by Serle, an established novelist, rather than by Love herself. FAC ¶ 46. She contends that these conspirators arranged to funnel her manuscript to Serle, who then appropriated it for both <em>One Italian Summer</em> and a related film project currently in development. Id. ¶¶ 37–48, 50, 57–61, 78–79. Love further alleges that in May–June 2019 her literary agent shared the manuscript widely, that it was later sent to agents connected to Serle in early 2020, and that an S&S editor received a copy in early 2021. Id. ¶¶ 26, 39, 42–43, 47, 58–61.
               </p>
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                While Love asserts that One Italian Summer is an unlawful copy of <em>Eat the Lemon</em>, she also—and contradictorily—maintains that the novel distorts and misrepresents many aspects of her life. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 64, 126</a>. She contends that her life story was altered "to cast [her] in a negative light" to intimidate her from challenging the conspirators' plan to commercially exploit her work. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 76, 126</a>. She further asserts that, as part of this alleged plan to intimidate her into silence, she was "surveilled" by Serle and repeatedly confronted by "unfamiliar individuals" who "clearly knew who [she] was," and who "attempted to engage in discussions with [her], including concerning literary agencies, and told her that they worked for government agencies, including the FBI." <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 63, 66, 76, 126</a>. She also maintains that two mysterious deaths occurred in connection with the conspiracy. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶ 65</a>.
+                The alleged conspiracy goes well beyond literary theft. Love asserts that to silence her, the conspirators arranged for her to be surveilled, confronted by strangers claiming to work for the FBI, and subjected to other forms of physical and emotional intimidation. Id. ¶¶ 63, 66, 76, 126. She also contends that two individuals died under circumstances connected to the alleged scheme. Id. ¶ 65.
+              </p>
+              <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                In a contradiction the FAC never resolves, Love simultaneously claims that <em>One Italian Summer</em> is an unlawful copy of <em>Eat the Lemon</em> and that it deliberately distorts the facts of her life to cast her in a negative light. Id. ¶¶ 64, 76, 126.
               </p>
               <p className="text-sm leading-relaxed text-[#212223]">
-                Based on these broad conspiracy allegations, Love has sued 28 separate defendants, including S&S. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 4-31</a>. In addition to her claim for copyright infringement, Love is asserting 13 state law claims against S&S. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 130-52, 163-212, 220-64</a>.
+                Notably, correspondence between Serle and her literary agent demonstrates that Serle had already formulated the concept and basic plot of <em>One Italian Summer</em> in June 2019—before Love's manuscript was allegedly circulating in Serle's orbit. That correspondence was shared with Love's counsel in an effort to resolve this matter without litigation, to no avail. As explained below, however, the Court need not resolve the question of independent creation because the two works are not substantially similar as a matter of law.
               </p>
             </div>
 
             {/* C. The Two Works Compared */}
             <div className="mb-6">
               <h3 className="mb-2 font-bold text-[#212223]">C. The Two Works Compared</h3>
-              <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                Love's contention that One Italian Summer is an unlawful copy of Eat the Lemon is at the center of all her claims. What follows is a summary of the two works:
-              </p>
-
+              
               {/* 1. Eat the Lemon */}
-              <div className="mb-4 ml-4">
-                <p className="mb-2 font-medium text-[#212223]">1. <em>Eat the Lemon</em></p>
-                <p className="mb-2 text-sm leading-relaxed text-[#212223]">
-                  <em>Eat the Lemon</em> is, by Love's own account, a "personal memoir," which purports to describe her true experiences. <a href="#" className="text-[#0062c4] hover:underline">FAC ¶¶ 33, 36</a>. The memoir is centered on Love's efforts to come to terms with her tumultuous family life, including her mother's death a decade prior, through an extended immersion in day-to-day life in Italy's Amalfi Coast. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 112, 118, 124</a>. Love's memoir begins with her traveling down the Amalfi Coast with her boyfriend Brad. Schilken Decl. Ex. 1 (Eat the Lemon 2021 manuscript) ("ETL") at 3-4.; Later, readers learn that the trip was taken roughly ten years after Love's mother died from cancer, and that Love wanted to go to the Amalfi Coast because that was a meaningful place for her mother, where she briefly studied cooking. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 19-21, 36</a>.
+              <div className="mb-6 ml-4">
+                <p className="mb-4 font-semibold text-[#212223]">1. <em>Eat the Lemon</em></p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  <em>Eat the Lemon</em> is, by Love's own description, a "personal memoir" recounting her true experiences. FAC ¶¶ 33, 36. The work centers on Love's efforts to come to terms with the loss of her mother—who died of cancer roughly a decade before the events described—and with the broader trauma of her family life, through extended periods of immersion in the culture and landscape of Italy's Amalfi Coast. Id. ¶¶ 112, 118, 124.
                 </p>
-                <p className="mb-2 text-sm leading-relaxed text-[#212223]">
-                  The first third of the manuscript details Love and Brad's romantic adventures in Italy, with occasional flashbacks to scenes of Love's family life. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 1-44</a>. From the flashbacks, readers learn that Love's mother died after a brutal ten-year struggle with cancer, that Love's father abandoned the family when Love was a small child, and that Love's stepfather was emotionally abusive and defrauded Love out of her mother's possessions and property. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 6-10, 17-18, 36, 38-39</a>. Throughout the manuscript, Love's relationship with her mother is depicted as an unhappy one, with Love at one point observing: "I didn't have a single memory of warmth between my mother and me." <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 60-61, 93</a>.
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  The memoir opens with Love and her boyfriend, Brad, traveling together down the Amalfi Coast. ETL at 3–4. Through a series of flashbacks, readers learn that Love's childhood was marked by deep unhappiness: her father abandoned the family when she was young, her stepfather was emotionally abusive and defrauded her of her mother's belongings after her mother's death, and her relationship with her mother was characterized by distance and coldness. Id. at 6–10, 17–18, 36, 38–39. Love herself reflects at one point that she could not recall a single warm memory of her mother. Id. at 60–61, 93.
                 </p>
-                <p className="mb-2 text-sm leading-relaxed text-[#212223]">
-                  While in Italy, Love and Brad form a connection with Adele, a woman who rents out an apartment to the couple. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 11, 34-37</a>. Love tells Adele about her mother studying cooking in Amalfi when Love "was a child." <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 36</a>.
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  While in Italy, Love and Brad befriend Adele, a woman who rents them an apartment, and Love confides to Adele that her mother once studied cooking in Amalfi. Id. at 11, 34–37. Shortly after Love and Brad return to San Francisco, Love decides to go back to Italy alone, this time with a specific mission: to locate her mother's former cooking teacher and complete a cookbook her mother had assembled during her time in Italy. Id. at 45. Brad largely disappears from the narrative at this point.
                 </p>
                 <p className="text-sm leading-relaxed text-[#212223]">
-                  The memoir ends with Love reveling in having met "a magical elderly woman who remembers my mom when she was happy," and kissing the "beautiful shoulder" of Rosa, her new mother figure. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 100</a>.
+                  The remainder of the memoir follows Love's deepening connection to Adele, her family, and the rhythms of Italian life. On her mother's birthday, Love hosts a dinner party and prepares a recipe from her mother's cookbook; Adele's mother Rosa, who is an experienced cook, steps in to lead the preparation. Id. at 70, 73–78. Rosa later teaches Love to cook—offering a form of maternal warmth Love had never received from her own mother. Id. at 80–81, 93. Love also befriends a local woman named Anita, who helps her track down the identity of her mother's cooking teacher, only to learn that the teacher has died. Id. at 85–86. After a brief return to California, Love travels back to Italy and is introduced to Marietta, who was the cooking teacher's assistant and knew Love's mother during her time in Amalfi. Id. at 89–90, 94–95. From Marietta, Love learns that her mother was happy during the period Marietta knew her—a revelation that provides Love with a measure of peace she had not previously found. Id. at 95. The memoir ends with Love cherishing this new understanding of her mother and embracing Rosa as the mother figure she never had. Id. at 100.
                 </p>
               </div>
 
               {/* 2. One Italian Summer */}
-              <div className="mb-4 ml-4">
-                <p className="mb-2 font-medium text-[#212223]">2. <em>One Italian Summer</em></p>
-                <p className="mb-2 text-sm leading-relaxed text-[#212223]">
-                  Unlike <em>Eat the Lemon</em>, <em>One Italian Summer</em> is an avowed work of fiction, which incorporates elements of magical realism. When the novel opens, the narrator, Katy, has just experienced the loss of her mother to cancer. <a href="#" className="text-[#0062c4] hover:underline">Schilken Decl. Ex. 3 ("OIS") at 1</a>. Readers quickly learn that Katy's mother was "the great love of [her] life," that Katy feels completely lost without her, and that she has told her husband, Eric, that she "did not know if [she] could be married to him anymore" in light of the overwhelming loss of self she suddenly feels. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 3</a>.
+              <div className="ml-4">
+                <p className="mb-4 font-semibold text-[#212223]">2. <em>One Italian Summer</em></p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  <em>One Italian Summer</em> is an avowed work of fiction built around an extended device of magical realism. The novel opens with Katy, the narrator, in the immediate aftermath of her mother's death from cancer—a loss that has upended her sense of self and strained her marriage to Eric. OIS at 1, 3. Before her mother died, she and Katy had planned a trip together to Positano, Italy, where her mother had spent a meaningful summer as a young woman. Id. at 10–13. Katy decides to take the trip alone.
                 </p>
-                <p className="mb-2 text-sm leading-relaxed text-[#212223]">
-                  Prior to her mother's death, Katy and her mother had made arrangements for a long-discussed trip to Positano, Italy, where her mother spent time as a young woman and which "had always been special" to her. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 10-11</a>. In her grief, Katy decides to take the trip alone. <em>Id.</em> at 12-13. Once in Positano, Katy stays at the Hotel Poseidon, which her mother chose based on her memories of the place. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 24</a>. There, Katy meets a handsome American named Adam, who begins to casually pursue her. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 38-45, 74-80, 90-91, 94-101, 122-27</a>.
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  From the moment she arrives at the Hotel Poseidon—her mother's chosen accommodation—the novel takes a fantastical turn. On her first full day in Positano, Katy encounters a woman she immediately recognizes as her mother, but at the age her mother was when she lived in Italy decades earlier. Id. at 52–56. This encounter becomes the novel's central conceit: Katy is given the extraordinary opportunity to know her mother not as a parent, but as a peer—a young woman with ambitions, desires, and a life of her own that predated and ultimately outlasted her role as a mother.
                 </p>
-                <p className="mb-2 text-sm leading-relaxed text-[#212223]">
-                  On her first full day in Positano, Katy runs into a woman she instantly recognizes as her mother, only at the age she was when she spent time in Positano. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 52-56</a>. This turns out to be the central narrative device of the book—Katy getting the opportunity to spend time with her mother as a peer during a period in her mother's life when she wasn't defined by being her mother.
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  During her time in Positano, Katy also meets Adam, a charming American who works for a hotel acquisition company and is exploring the purchase of two local properties, including the Hotel Poseidon. Id. at 38–47. Her romantic entanglement with Adam unfolds as a parallel storyline to her growing relationship with her younger mother, and eventually culminates in a sexual encounter. Id. at 197–200.
                 </p>
-                <p className="text-sm leading-relaxed text-[#212223]">
-                  The books ends with Katy spreading her mother's ashes, which Eric had brought to her, in the Italian sea. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> at 241-45</a>.
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  The novel's central revelation arrives when Katy, while visiting her mother's apartment, discovers a photograph of herself as an infant on her mother's nightstand. Id. at 193. She realizes that her mother's trip to Italy did not occur before she was born, as she had always believed, but after—meaning her mother left her as a baby to come here. Id. at 193–96. Katy confronts her mother in anger, then later reconciles with her, coming to understand that her mother had felt her own identity and ambitions subsumed by the sudden responsibilities of motherhood and marriage, and had needed to reclaim a piece of who she was. Id. at 206–16.
+                </p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  In the novel's final act, Katy learns she has been living in 1992—the year her mother spent the summer in Italy—and that all of her experiences with Adam and her younger mother have taken place in a separate timeline. Id. at 211. She returns to the present to find Eric waiting for her in Positano. After speaking with her father and processing what she has learned, Katy recommits to her marriage. Id. at 227–37. The novel ends with Katy spreading her mother's ashes in the Italian sea, having come to see her mother—and herself—as a fully autonomous person, not defined by her relationships to others. Id. at 238–45.
                 </p>
               </div>
             </div>
@@ -352,7 +376,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             <div className="mb-6">
               <h3 className="mb-2 font-bold text-[#212223]">D. Procedural History</h3>
               <p className="text-sm leading-relaxed text-[#212223]">
-                Love filed her original Complaint on February 28, 2025. <a href="#" className="text-[#0062c4] hover:underline">ECF No. 1</a>. On June 30, 2025, S&S accepted service as part of a stipulation extending its time to respond to the Complaint to July 30, 2025. <a href="#" className="text-[#0062c4] hover:underline">ECF No. 19</a>. On June 30, 2025, S&S filed a Motion to Dismiss the Complaint in its entirety. <a href="#" className="text-[#0062c4] hover:underline">ECF Nos. 27-28</a>. On August 18, Love filed an Opposition to S&S's Motion to Dismiss. <a href="#" className="text-[#0062c4] hover:underline">ECF No. 43</a>. Two days later, Love filed the First Amended Complaint, which is now the operative pleading. <a href="#" className="text-[#0062c4] hover:underline">ECF No. 44</a>.
+                Love filed her original Complaint on February 28, 2025. S&S accepted service in June 2025 and filed a Motion to Dismiss the original Complaint on June 30, 2025. ECF Nos. 19, 27–28. Love filed an Opposition on August 18, 2025, and two days later filed the First Amended Complaint, which is now the operative pleading. ECF Nos. 43–44. The FAC is substantially identical to the original Complaint, with the primary difference being that Love no longer asserts each state law claim against every defendant. Because the FAC suffers from the same fatal deficiencies as the original pleading, S&S now moves to dismiss it with prejudice.
               </p>
             </div>
           </div>
@@ -490,20 +514,23 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           {/* IV. CONCLUSION */}
           <div className="mb-8">
             <h2 className="mb-4 text-lg font-bold text-[#212223]">IV. CONCLUSION</h2>
+            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+              Love's First Amended Complaint presents a sweeping conspiracy narrative that is unsupported by any plausible factual allegation and contradicted by the works at issue. The copyright infringement claim at the heart of that narrative fails as a matter of law because (a) the alleged similarities concern biographical facts that are categorically unprotectable, and (b) even analyzing <em>Eat the Lemon</em> as fiction, the two works diverge fundamentally across every dimension of the extrinsic test. Love's state law claims fall with the copyright claim because there was no infringement to conspire to commit or conceal, and because Love has not alleged any conduct by S&S specifically sufficient to support liability on any individual claim.
+            </p>
             <p className="mb-8 text-sm leading-relaxed text-[#212223]">
-              For the foregoing reasons, S&S respectfully asks this Court to dismiss Love's claims against S&S with prejudice.
+              Because these deficiencies are irremediable—they arise from what the works themselves say, not from any correctable pleading shortfall—dismissal with prejudice is warranted. S&S respectfully requests that this Court dismiss the First Amended Complaint in its entirety, with prejudice, as to S&S.
             </p>
             
             {/* Signature Block */}
             <div className="flex justify-between">
               <p className="text-sm text-[#212223]">DATED: September 12, 2025</p>
               <div className="text-right">
-                <p className="text-sm text-[#212223]">BALLARD SPAHR LLP</p>
-                <p className="text-sm text-[#212223]">Paul J. Safier</p>
-                <p className="text-sm text-[#212223]">Elizabeth L. Schilken</p>
-                <p className="mt-4 text-sm italic text-[#212223]">/s/ Elizabeth L. Schilken</p>
-                <p className="text-sm text-[#212223]">Elizabeth L. Schilken</p>
-                <p className="mt-4 text-sm italic text-[#212223]">Attorneys for Defendant Simon & Schuster, LLC</p>
+                <p className="text-sm font-semibold text-[#212223]">STERLING & ASSOCIATES LLP</p>
+                <p className="mt-4 text-sm text-[#212223]">David R. Mercer</p>
+                <p className="text-sm text-[#212223]">Sarah M. Thornton</p>
+                <p className="mt-4 text-sm italic text-[#212223]">/s/ Sarah M. Thornton</p>
+                <p className="text-sm text-[#212223]">Sarah M. Thornton</p>
+                <p className="mt-4 text-sm italic text-[#212223]">Attorneys for Defendant Defendant</p>
               </div>
             </div>
           </div>
@@ -525,18 +552,25 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             </div>
           </div>
 
-          {/* Bottom Action Button */}
-          <div className="flex items-center justify-center gap-3 pb-8 pt-8">
-            <Button
-              onClick={onVerifyBrief}
-              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-            >
-              {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
-            </Button>
-          </div>
-          </>)}
+            </>
+          )}
+        </div>
+        <div className="flex items-center justify-center gap-3 py-8">
+          <Button
+            onClick={onVerifyBrief}
+            className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+          >
+            {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
+          </Button>
+        </div>
         </div>
       </div>
+      <SelectionContextMenu
+        position={position}
+        onAddFacts={hide}
+        onAddAuthorities={hide}
+        onAskQuestion={hide}
+      />
     </div>
   );
 }

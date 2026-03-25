@@ -6,16 +6,20 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { List, ScanEye, Plus, FileText } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
+import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 
 interface ArgueScreenProps {
   className?: string;
-  onNextSupportingAuthority?: () => void;
-  onSkipToGenerateDraft?: () => void;
-  onEditOutline?: () => void;
+  onNextSupportingAuthority: () => void;
+  onSkipToGenerateDraft: () => void;
+  onEditOutline: () => void;
+  onQuote: (text: string) => void;
   flowType?: "brief" | "judicial";
+  argumentsState?: any[];
+  setArgumentsState?: (state: any[]) => void;
 }
 
-const arguments_data = [
+export const arguments_data = [
   {
     id: "copyright-infringement",
     number: 1,
@@ -147,9 +151,14 @@ const judicial_arguments_data = judicial_claims_grouped.flatMap(group => group.c
   appliesTo: "", // not used in judicial
 })));
 
-export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: ArgueScreenProps) {
-  const [argumentsState, setArgumentsState] = React.useState(flowType === "judicial" ? judicial_arguments_data : arguments_data);
+export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, onQuote, flowType = "brief", argumentsState: propArgumentsState, setArgumentsState: propSetArgumentsState }: ArgueScreenProps) {
+  const [localArgumentsState, setLocalArgumentsState] = React.useState(flowType === "judicial" ? judicial_arguments_data : arguments_data);
+  // Use passed-down state if available, otherwise use local state
+  const argumentsState = propArgumentsState ?? localArgumentsState;
+  const setArgumentsState = propSetArgumentsState ?? setLocalArgumentsState;
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
 
   const selectedCount = argumentsState.filter(arg => arg.checked).length;
   const allSelected = selectedCount === argumentsState.length;
@@ -184,7 +193,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
           </div>
 
           {/* Main content column */}
-          <div className="flex-1 max-w-3xl">
+          <div ref={flowType === "brief" ? contentRef : undefined} className="flex-1 max-w-3xl">
             {/* Header */}
             <div className="mb-6">
               <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -311,7 +320,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                         ))}
                       </ul>
                       <div className="mt-4">
-                        <p className="text-sm text-[#737373]">Applies to</p>
+                        <p className="text-sm font-medium text-[#212223]">Applies to</p>
                         <ul className="ml-4 mt-1 list-disc">
                           <li className="text-sm text-[#212223]">{argument.appliesTo}</li>
                         </ul>
@@ -322,6 +331,15 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               ))
             )}
           </div>
+          {/* Add additional argument/claim button */}
+          <button
+            onClick={() => onQuote?.(flowType === "judicial" ? "Add additional claim" : "Add additional argument")}
+            className="mt-2 mb-6 flex items-center gap-2 text-sm text-[#404040] hover:text-[#212223]"
+          >
+            <Plus className="size-4" />
+            <span>{flowType === "judicial" ? "Add additional claim" : "Add additional argument"}</span>
+          </button>
+
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-4">
             {flowType !== "judicial" && (
@@ -344,12 +362,6 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
         </div>
       </div>
 
-      {/* Floating Action Button */}
-      <button className="fixed bottom-8 left-20 flex items-center gap-2 rounded-full bg-[#1d4b34] px-4 py-2.5 text-white shadow-lg hover:bg-[#163d2a]">
-        <Plus className="size-4" />
-        <span className="text-sm font-medium">{flowType === "judicial" ? "Add claims" : "Add arguments"}</span>
-      </button>
-
       {/* Outline Preview Overlay */}
       {showOutlinePreview && (
         <OutlinePreviewModal
@@ -358,6 +370,14 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
             setShowOutlinePreview(false);
             onEditOutline?.();
           }}
+        />
+      )}
+      {flowType === "brief" && (
+        <SelectionContextMenu
+          position={position}
+          onAddFacts={hide}
+          onAddAuthorities={hide}
+          onAskQuestion={hide}
         />
       )}
     </div>
