@@ -203,7 +203,6 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           <div className="mb-8 text-center">
             <p className="text-lg font-semibold text-[#212223]">UNITED STATES DISTRICT COURT</p>
             <p className="text-lg font-semibold text-[#212223]">CENTRAL DISTRICT OF CALIFORNIA</p>
-            <p className="text-lg font-semibold text-[#212223]">SOUTHERN DIVISION</p>
           </div>
 
           {/* Case Information */}
@@ -211,42 +210,39 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             {/* Left Column - Parties */}
             <div className="flex-1 border-r border-[#e5e5e5] pr-8">
               <p className="mb-4 text-sm text-[#212223]">
-                <span className="font-medium">516 Inc., dba DG Plumbing</span>,
+                <span className="font-medium">ADRIENNE LOVE</span>,
               </p>
               <p className="mb-4 ml-16 text-sm text-[#212223]">Plaintiff,</p>
               <p className="mb-4 ml-8 text-sm text-[#212223]">v.</p>
               <p className="mb-4 text-sm text-[#212223]">
-                <span className="font-medium">RICHMOND SERVICES, INC. dba RICHMOND NATIONAL INSURANCE COMPANY, a Delaware Corporation; and DOES 1 through 100, inclusive</span>,
+                <span className="font-medium">AIRBNB, INC., et al.</span>,
               </p>
               <p className="ml-16 text-sm text-[#212223]">Defendants.</p>
             </div>
 
             {/* Right Column - Case Details */}
             <div className="flex-1">
-              <p className="mb-2 text-sm text-[#212223]">Case No. 8:25-cv-01204-DOC-KES</p>
-              <p className="text-sm font-semibold uppercase text-[#212223]">
-                ORDER DENYING DEFENDANT&apos;S MOTION TO DISMISS
+              <p className="mb-2 text-sm text-[#212223]">Case No. 2:25-cv-01779-AB(KSx)</p>
+              <p className="mb-6 text-sm text-[#212223]">Hon. André Birotte Jr.</p>
+              <p className="mb-2 text-sm font-semibold uppercase text-[#212223]">
+                DEFENDANT DEFENDANT'S JOINDER IN<br/>
+                CREATIVE ARTISTS AGENCY, LLC'S MOTION TO<br/>
+                DISMISS FIRST AMENDED COMPLAINT AND<br/>
+                MOTION TO DISMISS FIRST AMENDED<br/>
+                COMPLAINT; MEMORANDUM OF POINTS AND<br/>
+                AUTHORITIES IN SUPPORT THEREOF
               </p>
-              <p className="mt-4 text-sm text-[#212223]">Hearing Date: October 31, 2025</p>
+              <p className="mt-6 text-sm text-[#212223]">Hearing Date: October 31, 2025</p>
               <p className="text-sm text-[#212223]">Hearing Time: 10:00 a.m.</p>
               <p className="text-sm text-[#212223]">Courtroom: 7B</p>
             </div>
           </div>
 
-          {/* Notice of Joinder */}
-          <div className="mb-8">
-            <h2 className="mb-4 text-center text-base font-bold text-[#212223] underline">
-              NOTICE OF JOINDER AND MOTION AND JOINDER AND MOTION
+          {/* MEMORANDUM OF POINTS AND AUTHORITIES */}
+          <div className="mb-8 text-center border-t border-b border-[#e5e5e5] py-4">
+            <h2 className="text-base font-bold text-[#212223] underline">
+              MEMORANDUM OF POINTS AND AUTHORITIES
             </h2>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              <strong>PLEASE TAKE NOTICE</strong> that on October 31, 2025, at 10:00 a.m. or as soon as may be heard before the Honorable André Birotte Jr. in Courtroom 7B of the United States District Court for the Central District of California, United States Courthouse, 350 West First Street, Los Angeles, California 90012, defendant Simon and Schuster, LLC ("S&S") will and hereby does move this Court for an order dismissing with prejudice the First Amended Complaint filed by plaintiff Adrienne Love.
-            </p>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              This motion is made following the conference of counsel pursuant to L.R. 7-3, which took place on September 5, 2025 by videoconference.
-            </p>
-            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-              The motion is made pursuant to Federal Rule of Civil Procedure 12(b)(6) on the ground that Love's First Amended Complaint fails to state a claim. <span className="underline">First</span>, Love's claim for copyright infringement fails because there is no substantial similarity of protected expression between Rebecca Serle's novel One Italian Summer, which was published by S&S, and Love's unpublished memoir Eat the Lemon. Any purported similarities consist of unprotectable facts from Love's own life or the unprotectable premise of a woman traveling alone to Italy in search of connection to her deceased mother.
-            </p>
           </div>
 
           {/* I. INTRODUCTION - Updated to PRELIMINARY STATEMENT */}
@@ -513,20 +509,23 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           {/* IV. CONCLUSION */}
           <div className="mb-8">
             <h2 className="mb-4 text-lg font-bold text-[#212223]">IV. CONCLUSION</h2>
+            <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+              Love's First Amended Complaint presents a sweeping conspiracy narrative that is unsupported by any plausible factual allegation and contradicted by the works at issue. The copyright infringement claim at the heart of that narrative fails as a matter of law because (a) the alleged similarities concern biographical facts that are categorically unprotectable, and (b) even analyzing <em>Eat the Lemon</em> as fiction, the two works diverge fundamentally across every dimension of the extrinsic test. Love's state law claims fall with the copyright claim because there was no infringement to conspire to commit or conceal, and because Love has not alleged any conduct by S&S specifically sufficient to support liability on any individual claim.
+            </p>
             <p className="mb-8 text-sm leading-relaxed text-[#212223]">
-              For the foregoing reasons, S&S respectfully asks this Court to dismiss Love's claims against S&S with prejudice.
+              Because these deficiencies are irremediable—they arise from what the works themselves say, not from any correctable pleading shortfall—dismissal with prejudice is warranted. S&S respectfully requests that this Court dismiss the First Amended Complaint in its entirety, with prejudice, as to S&S.
             </p>
             
             {/* Signature Block */}
             <div className="flex justify-between">
               <p className="text-sm text-[#212223]">DATED: September 12, 2025</p>
               <div className="text-right">
-                <p className="text-sm text-[#212223]">BALLARD SPAHR LLP</p>
-                <p className="text-sm text-[#212223]">Paul J. Safier</p>
-                <p className="text-sm text-[#212223]">Elizabeth L. Schilken</p>
-                <p className="mt-4 text-sm italic text-[#212223]">/s/ Elizabeth L. Schilken</p>
-                <p className="text-sm text-[#212223]">Elizabeth L. Schilken</p>
-                <p className="mt-4 text-sm italic text-[#212223]">Attorneys for Defendant Simon & Schuster, LLC</p>
+                <p className="text-sm font-semibold text-[#212223]">STERLING & ASSOCIATES LLP</p>
+                <p className="mt-4 text-sm text-[#212223]">David R. Mercer</p>
+                <p className="text-sm text-[#212223]">Sarah M. Thornton</p>
+                <p className="mt-4 text-sm italic text-[#212223]">/s/ Sarah M. Thornton</p>
+                <p className="text-sm text-[#212223]">Sarah M. Thornton</p>
+                <p className="mt-4 text-sm italic text-[#212223]">Attorneys for Defendant Defendant</p>
               </div>
             </div>
           </div>
