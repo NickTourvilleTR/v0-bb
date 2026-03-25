@@ -17,63 +17,68 @@ interface MenuPosition {
 export function useSelectionContextMenu(containerRef: React.RefObject<HTMLElement>) {
   const [position, setPosition] = React.useState<MenuPosition | null>(null);
 
+  const computePosition = React.useCallback(() => {
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed || selection.toString().trim() === "") {
+      setPosition(null);
+      return;
+    }
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    const range = selection.getRangeAt(0);
+    if (!container.contains(range.commonAncestorContainer)) {
+      setPosition(null);
+      return;
+    }
+
+    const rect = range.getBoundingClientRect();
+    const menuWidth = 340;
+    const menuHeight = 44;
+    const margin = 8;
+
+    // Use viewport-relative coords — menu is position:fixed
+    let left = rect.left + rect.width / 2 - menuWidth / 2;
+    let top = rect.top - menuHeight - margin;
+
+    // Clamp horizontally within viewport
+    left = Math.max(margin, Math.min(left, window.innerWidth - menuWidth - margin));
+
+    // If it would go off the top, show below instead
+    if (top < margin) {
+      top = rect.bottom + margin;
+    }
+
+    setPosition({ top, left });
+  }, [containerRef]);
+
   React.useEffect(() => {
-    const handleSelectionChange = () => {
+    const handleMouseUp = () => setTimeout(computePosition, 10);
+    const handleKeyUp = () => setTimeout(computePosition, 10);
+
+    // Re-anchor the menu on every scroll event inside the scrollable container
+    const handleScroll = () => {
       const selection = window.getSelection();
-      if (!selection || selection.isCollapsed || selection.toString().trim() === "") {
-        setPosition(null);
-        return;
-      }
-
-      const container = containerRef.current;
-      if (!container) return;
-
-      // Check that the selection is inside our container
-      const range = selection.getRangeAt(0);
-      if (!container.contains(range.commonAncestorContainer)) {
-        setPosition(null);
-        return;
-      }
-
-      const rect = range.getBoundingClientRect();
-      const menuWidth = 340; // approximate width
-      const menuHeight = 44; // approximate height
-      const margin = 8;
-
-      // Position above the selection, centered
-      let left = rect.left + rect.width / 2 - menuWidth / 2;
-      let top = rect.top - menuHeight - margin;
-
-      // Clamp horizontally
-      left = Math.max(margin, Math.min(left, window.innerWidth - menuWidth - margin));
-
-      // If it would go off the top, show below instead
-      if (top < margin) {
-        top = rect.bottom + margin;
-      }
-
-      setPosition({ top, left });
+      if (!selection || selection.isCollapsed || selection.toString().trim() === "") return;
+      computePosition();
     };
 
-    const handleMouseUp = () => {
-      // Small delay so selection is finalized
-      setTimeout(handleSelectionChange, 10);
-    };
-
-    const handleKeyUp = () => {
-      setTimeout(handleSelectionChange, 10);
-    };
+    // Find the nearest scrollable ancestor of the container
+    const scrollParent = containerRef.current?.closest(".overflow-y-auto") ?? window;
 
     document.addEventListener("mouseup", handleMouseUp);
     document.addEventListener("keyup", handleKeyUp);
-    document.addEventListener("selectionchange", handleSelectionChange);
+    document.addEventListener("selectionchange", computePosition);
+    scrollParent.addEventListener("scroll", handleScroll);
 
     return () => {
       document.removeEventListener("mouseup", handleMouseUp);
       document.removeEventListener("keyup", handleKeyUp);
-      document.removeEventListener("selectionchange", handleSelectionChange);
+      document.removeEventListener("selectionchange", computePosition);
+      scrollParent.removeEventListener("scroll", handleScroll);
     };
-  }, [containerRef]);
+  }, [containerRef, computePosition]);
 
   const hide = React.useCallback(() => setPosition(null), []);
 
