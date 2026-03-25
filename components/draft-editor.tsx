@@ -520,8 +520,10 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             </div>
           </div>
 
-          {flowType !== "judicial" && (
-          <div className="flex items-center justify-center gap-3 pb-8 pt-8">
+          </>)}
+        </div>
+        {flowType !== "judicial" && (
+          <div className="flex items-center justify-center gap-3 py-8">
             <Button
               onClick={onVerifyBrief}
               className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
@@ -529,8 +531,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
               Verify brief
             </Button>
           </div>
-          )}
-        </div>
+        )}
         {flowType === "judicial" && (
           <div className="flex items-center justify-center gap-3 py-8">
             <Button
