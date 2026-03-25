@@ -108,14 +108,12 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
               </button>
             )}
           </div>
-          <h1 className="mb-6 text-2xl font-semibold text-[#212223]">
-            Confirm your outline selections
+          <h1 className="mb-2 text-3xl font-bold text-[#212223]">
+            Motion to Dismiss First Amended Complaint
           </h1>
-
-          {/* Document Length */}
-          <div className="mb-6 rounded bg-[#f7f7f7] px-4 py-2">
-            <span className="text-sm text-[#212223]">Document length: {flowType === "judicial" ? "~15 pages" : "~17 pages"}</span>
-          </div>
+          <p className="mb-6 text-lg text-[#737373]">
+            Defendant Defendant — Love v. Airbnb, Inc., et al., No. 2:25-cv-01779-AB(KSx) (C.D. Cal.)
+          </p>
 
           {flowType === "judicial" ? (
             // JUDICIAL FLOW OUTLINE
