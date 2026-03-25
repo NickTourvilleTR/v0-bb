@@ -912,6 +912,7 @@ function AuthenticatedApp() {
                   addChatMessage("assistant", "Skipping ahead to draft generation.");
                   setCurrentScreen("draft");
                 }}
+                onQuote={handleQuote}
               />
             </div>
           </AppLayoutWrapper>

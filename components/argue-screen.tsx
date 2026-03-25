@@ -13,6 +13,7 @@ interface ArgueScreenProps {
   onNextSupportingAuthority?: () => void;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
+  onQuote?: (text: string) => void;
   flowType?: "brief" | "judicial";
 }
 
@@ -148,7 +149,7 @@ const judicial_arguments_data = judicial_claims_grouped.flatMap(group => group.c
   appliesTo: "", // not used in judicial
 })));
 
-export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: ArgueScreenProps) {
+export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: ArgueScreenProps) {
   const [argumentsState, setArgumentsState] = React.useState(flowType === "judicial" ? judicial_arguments_data : arguments_data);
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -325,6 +326,15 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               ))
             )}
           </div>
+          {/* Add additional argument/claim button */}
+          <button
+            onClick={() => onQuote?.(flowType === "judicial" ? "Add additional claim" : "Add additional argument")}
+            className="mt-2 mb-6 flex items-center gap-2 text-sm text-[#404040] hover:text-[#212223]"
+          >
+            <Plus className="size-4" />
+            <span>{flowType === "judicial" ? "Add additional claim" : "Add additional argument"}</span>
+          </button>
+
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-4">
             {flowType !== "judicial" && (
