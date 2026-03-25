@@ -561,6 +561,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
           </Button>
         </div>
+        </div>
       </div>
       <SelectionContextMenu
         position={position}
