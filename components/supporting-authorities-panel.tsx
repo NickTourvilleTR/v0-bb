@@ -511,7 +511,7 @@ export function SupportingAuthoritiesPanel({
                         const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
                         const isFunctional = option === "plaintiff";
                         return (
-                          <label key={option} className={cn("flex items-center gap-2", isFunctional ? "cursor-pointer" : "cursor-not-allowed")}>
+                          <label key={option} className={cn("flex items-center gap-2", isFunctional ? "cursor-pointer" : "cursor-[not-allowed] select-none")}>
                             <input
                               type="radio"
                               name={`decision-${claim.id}`}
@@ -522,10 +522,10 @@ export function SupportingAuthoritiesPanel({
                                 setDecisions((prev) => ({ ...prev, [claim.id]: option }));
                                 setShowComment((prev) => ({ ...prev, [claim.id]: true }));
                               }}
-                              disabled={!isFunctional}
-                              className={cn("accent-[#1d4b34]", !isFunctional && "cursor-not-allowed opacity-50")}
+                              onClick={(e) => { if (!isFunctional) e.preventDefault(); }}
+                              className="accent-[#1d4b34] cursor-[inherit]"
                             />
-                            <span className={cn("text-sm", isFunctional ? "text-[#212223]" : "text-[#a3a3a3]")}>{labels[option]}</span>
+                            <span className="text-sm text-[#212223]">{labels[option]}</span>
                           </label>
                         );
                       })}
