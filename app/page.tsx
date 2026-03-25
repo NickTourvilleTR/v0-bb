@@ -851,6 +851,9 @@ function AuthenticatedApp() {
             onNextSupportingAuthority={handleNextSupportingAuthority}
             onSkipToGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
+            quotedText={quotedText}
+            onClearQuote={handleClearQuote}
+            prefillText={quotedText === "Add additional argument" ? "Please add an argument that the complaint improperly lumps all defendants together. The argument should be that the complaint fails to distinguish between defendants and therefore doesn't meet pleading standards as to S&S specifically." : undefined}
           >
             <div className="flex-1 overflow-y-auto">
               <ArgueScreen 

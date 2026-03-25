@@ -41,6 +41,7 @@ interface ChatDrawerProps {
   defaultTab?: "chat" | "notes" | "versions" | "sources";
   quotedText?: string | null;
   onClearQuote?: () => void;
+  prefillText?: string;
   width?: number;
   flowType?: "brief" | "judicial";
 }
@@ -69,6 +70,7 @@ export function ChatDrawer({
   defaultTab = "chat",
   quotedText: quotedTextProp = null,
   onClearQuote,
+  prefillText,
   width,
   flowType = "brief",
 }: ChatDrawerProps) {
@@ -118,6 +120,12 @@ export function ChatDrawer({
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSubmit();
+    }
+  };
+
+  const handleTextareaFocus = () => {
+    if (prefillText && !inputValue) {
+      setInputValue(prefillText);
     }
   };
 
@@ -418,6 +426,7 @@ export function ChatDrawer({
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
+              onFocus={handleTextareaFocus}
               placeholder="Ask CoCounsel..."
               className="min-h-[40px] resize-none border-0 bg-transparent p-0 text-sm text-[#212223] placeholder:text-[#737373] focus-visible:ring-0"
             />

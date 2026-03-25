@@ -33,6 +33,7 @@ interface AppLayoutWrapperProps {
   hideHistoryButton?: boolean;
   quotedText?: string | null;
   onClearQuote?: () => void;
+  prefillText?: string;
   flowType?: "brief" | "judicial";
   messages?: Array<{
     id: string;
@@ -71,6 +72,7 @@ export function AppLayoutWrapper({
   hideHistoryButton = false,
   quotedText = null,
   onClearQuote,
+  prefillText,
   flowType = "brief",
   messages = [],
   className,
@@ -214,6 +216,7 @@ export function AppLayoutWrapper({
         defaultTab={drawerTab}
         quotedText={quotedText}
         onClearQuote={onClearQuote}
+        prefillText={prefillText}
         flowType={flowType}
         width={drawerOpen ? drawerWidth : undefined}
       />
