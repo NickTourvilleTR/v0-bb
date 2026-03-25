@@ -9,62 +9,67 @@ import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface Citation {
   id: string;
-  name: string;
-  citation: string;
-  badges: string[];
+  type: "authority" | "fact";
   description: string;
-  supportPoints: string[];
+  caseName: string;
+  caseRef: string;
+  summary: string;
+  relevance: string;
+  needToKnow: string;
 }
 
-interface ArgumentAuthority {
+interface Authority {
   id: string;
   title: string;
+  subTitle?: string;
   citations: Citation[];
 }
 
-const defaultAuthorities: ArgumentAuthority[] = [
+const defaultAuthorities: Authority[] = [
   {
     id: "1",
     title: "Copyright Infringement Claim Fails as a Matter of Law",
+    subTitle: "1A. No Investigation Within 15 Days",
     citations: [
       {
-        id: "shaw",
-        name: "Shaw v. Lindheim",
-        citation: "919 F.2d 1353 (9th Cir. 2024)",
-        badges: ["Same judge", "Last 2 years"],
-        description:
-          'This case dealt with "total concept and feel" and parallel structure in plot/character relationships can defeat early dismissal with respect to similarity',
-        supportPoints: [
-          'Shaw predates the more refined extrinsic/intrinsic framework and involved strong parallelism in plot architecture and character functions in two crime-drama TV works. Here, once the generic "woman goes to Italy after mother\'s death" premise is stripped away, the plots, sequences, and character arcs diverge sharply.',
-          "Shaw dealt with detailed correspondences in a unique story setup and resolution. Here, the similarities are limited to commonplace grief-and-travel motifs that naturally flow from the premise.",
-          "Later Ninth Circuit decisions (Funky Films, Benay, etc.) have limited Shaw by emphasizing that shared themes and stock setups do not amount to substantial similarity in protectable expression.",
-        ],
-      },
-      {
         id: "corbello",
-        name: "Corbello v. Valli",
-        citation: "974 F.3d 965, 974 (9th Cir. 2020)",
-        badges: ["Substantial similarity", "Extrinsic/Intrinsic test"],
-        description:
-          "To establish copyright infringement, a plaintiff must demonstrate that the defendant copied protected elements of the work by satisfying both the extrinsic and intrinsic tests for substantial similarity. The extrinsic test is an objective comparison of specific expressive elements — including plot, theme, dialogue, mood, setting, pace, characters, and sequence of events — after filtering out unprotectable material such as facts, ideas, and scènes à faire; the intrinsic test asks whether an ordinary reasonable person would find the works substantially similar in their total concept and feel.",
-        supportPoints: [
-          "\"The substantial-similarity test contains an extrinsic and intrinsic component.\" Funky Films, Inc. v. Time Warner Ent. Co., L.P., 462 F.3d 1072, 1077 (9th Cir. 2006), overruled on other grounds by Skidmore, 952 F.3d 1051.",
-          "The extrinsic test requires a three-step analysis: (1) the plaintiff identifies similarities between the copyrighted work and the accused work; (2) of those similarities, the court disregards any that are based on unprotectable material or authorized use; and (3) the court must determine the scope of protection (\"thick\" or \"thin\") to which the remainder is entitled \"as a whole.\" Apple Computer, 35 F.3d at 1443.",
-          "The intrinsic test \"examines an ordinary person's subjective impressions of the similarities between two works,\" and involves questions of fact determined by the jury under instructions as to the level of protection applicable. Funky Films, 462 F.3d at 1077 (citing Shaw v. Lindheim, 919 F.2d 1353, 1360–61 (9th Cir. 1990)).",
-        ],
+        type: "authority",
+        description: "Facts narrated in a memoir or autobiography are not subject to copyright protection, even if they are later incorporated into a fictional work.",
+        caseName: "Corbello v. Valli",
+        caseRef: "974 F.3d 965, 971, 976–77, 984 (9th Cir. 2020)",
+        summary: "The Ninth Circuit rejected a copyright claim premised on alleged similarities between a Four Seasons member's autobiography and a popular musical about the band. The court held there was no infringement because the similarities involved purported facts from the author's real experiences as a band member, which were not copyrightable — even if the musical's writers used the author's historical research.",
+        relevance: "Directly analogous. Love's complaint explicitly characterizes Eat the Lemon as a personal memoir and alleges that OIS took the 'detailed story of Love's highly personal experiences.' Under Corbello, those biographical facts cannot form the basis of a copyright claim regardless of whether they were later incorporated into Serle's fiction.",
+        needToKnow: "Corbello distinguished between the unprotectable factual content of the autobiography and any original expressive choices in the writing itself. S&S may argue Love could still protect her specific prose — so the motion pairs this with the 'no substantial similarity' argument to foreclose both avenues.",
       },
       {
-        id: "biani",
-        name: "Biani v. Showtime Networks, Inc.",
-        citation: "153 F.4th 957 (9th Cir. 2025)",
-        badges: ["Similar facts", "Scènes à faire"],
-        description:
-          "Character traits alleged to be copied from a plaintiff's original works are unprotectable scènes à faire when they are stock features of the relevant genre, and that even a cursory comparison of the works revealing more differences than similarities warrants dismissal for failure to allege substantial similarity in protectable expression.",
-        supportPoints: [
-          "Genre conventions are not protectable expression. Just as Biani held that traits naturally associated with Victorian Gothic fiction are stock elements of that genre and therefore unprotectable, the elements Love identifies as copied are largely the natural furnishings of a grief memoir set on the Amalfi Coast.",
-          "A central move in Biani was the court's insistence on looking at the works as a whole. One Italian Summer is built around a magical-realist time travel device through which the protagonist literally meets her young mother, an element with no counterpart in Eat the Lemon.",
-          "Biani affirmed dismissal notwithstanding a plaintiff who assembled a chart of specific, itemized correspondences between characters. Accumulating a catalog of individual similarities does not satisfy the extrinsic test when those similarities reflect unprotectable ideas and genre conventions rather than the plaintiff's original expressive choices.",
-        ],
+        id: "feist",
+        type: "authority",
+        description: "Copyright protection does not extend to facts, and no author may copyright the facts she narrates.",
+        caseName: "Feist Publications, Inc. v. Rural Tel. Serv. Co.",
+        caseRef: "499 U.S. 340, 344–45 (1991)",
+        summary: "The Supreme Court established that copyright requires originality, and facts — no matter how diligently collected — are not original to the author. The principle applies equally to biographical and autobiographical facts.",
+        relevance: "Provides the constitutional and statutory foundation for the biographical-facts argument. S&S uses Feist to establish that Love cannot own the facts of her own life by virtue of writing about them.",
+        needToKnow: "Feist is universally known and will be difficult for Love to distinguish. Her best counterargument is that her specific creative expression of those facts (not the facts themselves) was copied — which is why the substantial similarity analysis is S&S's essential fallback.",
+      },
+      {
+        id: "vallejo",
+        type: "authority",
+        description: "A plaintiff cannot claim copyright protection in the factual details of her life story recounted in a memoir, even where those details allegedly appear in a subsequent fictional work.",
+        caseName: "Vallejo v. Narcos Prods. LLC",
+        caseRef: "833 F. App'x 250, 257–58, 260–61 (11th Cir. 2020)",
+        summary: "The Eleventh Circuit rejected a copyright claim by Pablo Escobar's former mistress based on alleged similarities between her memoir and scenes in the Netflix series Narcos, holding that she could not claim copyright protection in the facts recounted in her memoir.",
+        relevance: "Supports Corbello with persuasive authority from another circuit on nearly identical facts: a woman's memoir about real personal experiences allegedly misappropriated into a popular entertainment property. Strengthens the argument that the rule is not a Ninth Circuit outlier.",
+        needToKnow: "Eleventh Circuit authority is persuasive but not binding. Love may argue the Vallejo plaintiff's facts were more clearly 'public' historical events, whereas her story is more intimate. This distinction did not matter in Vallejo, but could be raised.",
+      },
+      {
+        id: "complaint-fact",
+        type: "fact",
+        description: "Love's own complaint admits that Eat the Lemon is a personal memoir recounting the true facts of her life, and that OIS took 'the detailed story of Love's highly personal experiences.'",
+        caseName: "Complaint ¶¶ 36, 75, 88, 210",
+        caseRef: "",
+        summary: "Love characterizes her work as a 'personal manuscript of her travels to Positano, Italy, to seek a connection to her mother after she died from mis-diagnosed cancer' and alleges that Serle 'effectively interjects herself into Love's life and stands in her shoes.' She even alleges that OIS used her real father's name, which does not appear in Eat the Lemon.",
+        relevance: "Love's own pleading undermines her copyright claim by framing the alleged infringement entirely in terms of biographical facts rather than original creative expression. This locks her into the argument that her life story was taken — precisely the category of claim Corbello and Feist foreclose.",
+        needToKnow: "This is S&S's strongest fact card. If Love attempts to re-frame at opposition as a claim about creative expression rather than biographical facts, she will contradict her own complaint, which courts disfavor at the pleading stage.",
       },
     ],
   },
@@ -115,7 +120,7 @@ const judicialClaims: JudicialClaim[] = [
 ];
 
 // Kept for brief flow
-const judicialAuthorities: ArgumentAuthority[] = [];
+const judicialAuthorities: Authority[] = [];
 
 interface SupportingAuthoritiesPanelProps {
   className?: string;
@@ -368,28 +373,28 @@ export function SupportingAuthoritiesPanel({
                         />
                         <div className="flex-1">
                           <div className="flex items-center gap-1.5">
-                            <a href="#" className="font-medium text-[#2e6b5c] hover:underline">{citation.name}</a>
-                            <Notebook className="size-3.5 text-[#2e6b5c]" />
+                            <a href="#" className="font-medium text-[#2e6b5c] hover:underline">{citation.caseName}</a>
+                            <span className={cn("text-xs font-semibold uppercase px-2 py-1 rounded", citation.type === "authority" ? "bg-[#ebf0ed] text-[#1d4b34]" : "bg-[#fef3f0] text-[#d64000]")}>{citation.type}</span>
                           </div>
-                          <p className="text-sm text-[#737373]">{citation.citation}</p>
-                          <div className="mt-2 flex flex-wrap gap-1.5">
-                            {citation.badges.map((badge) => (
-                              <span key={badge} className="rounded bg-[#ebf0ed] px-2 py-0.5 text-xs text-[#1d4b34]">{badge}</span>
-                            ))}
-                          </div>
+                          {citation.caseRef && <p className="text-sm text-[#737373]">{citation.caseRef}</p>}
                           <div className="mt-4">
-                            <p className="text-sm font-semibold text-[#212223]">What this case is about:</p>
-                            <p className="mt-1 text-sm text-[#212223]">{citation.description}</p>
+                            <p className="text-sm font-semibold text-[#212223]">Summary:</p>
+                            <p className="mt-1 text-sm text-[#212223]">{citation.summary}</p>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className={cn("w-1/2 border-l border-dashed border-[#d2d2d2] p-4 pl-6", selectedCitations.includes(citation.id) ? "bg-[#f5f7f6]" : "bg-white")}>
-                      <ul className="list-disc space-y-4 pl-4 marker:text-[#212223]">
-                        {citation.supportPoints.map((point, pointIndex) => (
-                          <li key={pointIndex} className="text-sm leading-relaxed text-[#212223]">{point}</li>
-                        ))}
-                      </ul>
+                      <div className="space-y-4">
+                        <div>
+                          <p className="text-sm font-semibold text-[#212223]">Relevance:</p>
+                          <p className="mt-1 text-sm text-[#212223]">{citation.relevance}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-[#212223]">Need to know:</p>
+                          <p className="mt-1 text-sm text-[#212223]">{citation.needToKnow}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}
