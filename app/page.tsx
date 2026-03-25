@@ -92,6 +92,14 @@ function AuthenticatedApp() {
   const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
   const [selectedBriefType, setSelectedBriefType] = React.useState<string | null>(null);
   const [quotedText, setQuotedText] = React.useState<string | null>(null);
+  const [argumentsState, setArgumentsState] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    // Initialize argumentsState when argue screen loads
+    if (currentScreen === "argue" && argumentsState.length === 0) {
+      // Will be populated by ArgueScreen component
+    }
+  }, [currentScreen]);
   const [flowType, setFlowType] = React.useState<"brief" | "judicial">("brief");
   
   // Dynamic header title based on flow and selected motion
@@ -132,6 +140,26 @@ function AuthenticatedApp() {
   // Handler for inline chat input (when drawer is closed)
   const handleInlineSend = (message: string) => {
     addChatMessage("user", message);
+    
+    // Check if this is the prefilled lumping defendants argument
+    if (currentScreen === "argue" && message.includes("lumps all defendants together")) {
+      // Create new argument object
+      const newArgumentNumber = argumentsState.length + 1;
+      const newArgument = {
+        id: `lumping-defendants-${Date.now()}`,
+        number: newArgumentNumber,
+        title: "The complaint's group pleading fails to state a claim against S&S because it does not distinguish S&S's conduct from that of the other defendants.",
+        points: [
+          "Love's complaint lumps all defendants together without specifying which defendant committed which alleged act.",
+          "The only allegations specific to S&S are that it published One Italian Summer and that one editor is married to Love's former literary agent who previously rejected her manuscript.",
+          "Under Iqbal and Twombly, a complaint must allege facts specific to each defendant; \"everyone did everything\" allegations do not satisfy Rule 8's plausibility standard as to any individual defendant.",
+        ],
+        appliesTo: "Causes of Action 2–14 (Breach of Fiduciary Duty, Intentional Interference with Contractual Relations, Tortious Interference with Business Advantage, Intentional Misrepresentation, Negligent Misrepresentation, Negligence, Intentional Infliction of Emotional Distress, Stalking, Conspiracy, Unfair Business Practices, Accounting, Constructive Trust, and Declaratory Judgment)",
+        checked: true,
+      };
+      
+      setArgumentsState(prev => [...prev, newArgument]);
+    }
   };
 
   // Auto-scroll to bottom when screen changes with smooth animation
@@ -862,6 +890,8 @@ function AuthenticatedApp() {
                 onEditOutline={handleNextOutline}
                 onSkipToGenerateDraft={handleGenerateDraft}
                 onQuote={handleQuote}
+                argumentsState={argumentsState}
+                setArgumentsState={setArgumentsState}
               />
             </div>
           </AppLayoutWrapper>

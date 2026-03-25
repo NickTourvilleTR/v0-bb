@@ -10,11 +10,13 @@ import { SelectionContextMenu, useSelectionContextMenu } from "@/components/sele
 
 interface ArgueScreenProps {
   className?: string;
-  onNextSupportingAuthority?: () => void;
-  onSkipToGenerateDraft?: () => void;
-  onEditOutline?: () => void;
-  onQuote?: (text: string) => void;
+  onNextSupportingAuthority: () => void;
+  onSkipToGenerateDraft: () => void;
+  onEditOutline: () => void;
+  onQuote: (text: string) => void;
   flowType?: "brief" | "judicial";
+  argumentsState?: any[];
+  setArgumentsState?: (state: any[]) => void;
 }
 
 const arguments_data = [
@@ -149,8 +151,11 @@ const judicial_arguments_data = judicial_claims_grouped.flatMap(group => group.c
   appliesTo: "", // not used in judicial
 })));
 
-export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: ArgueScreenProps) {
-  const [argumentsState, setArgumentsState] = React.useState(flowType === "judicial" ? judicial_arguments_data : arguments_data);
+export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, onQuote, flowType = "brief", argumentsState: propArgumentsState, setArgumentsState: propSetArgumentsState }: ArgueScreenProps) {
+  const [localArgumentsState, setLocalArgumentsState] = React.useState(flowType === "judicial" ? judicial_arguments_data : arguments_data);
+  // Use passed-down state if available, otherwise use local state
+  const argumentsState = propArgumentsState ?? localArgumentsState;
+  const setArgumentsState = propSetArgumentsState ?? setLocalArgumentsState;
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
