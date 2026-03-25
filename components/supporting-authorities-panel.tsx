@@ -406,7 +406,7 @@ export function SupportingAuthoritiesPanel({
 
   // Judicial: per-claim decision state
   const [decisions, setDecisions] = React.useState<Record<string, "plaintiff" | "defendant" | "neither" | null>>(
-    Object.fromEntries(judicialClaims.map((c) => [c.id, "plaintiff"]))
+    Object.fromEntries(judicialClaims.map((c) => [c.id, null]))
   );
   const [comments, setComments] = React.useState<Record<string, string>>(
     Object.fromEntries(judicialClaims.map((c) => [c.id, "Motion to Dismiss denied"]))
