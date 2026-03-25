@@ -400,7 +400,9 @@ export function SupportingAuthoritiesPanel({
   flowType = "brief",
 }: SupportingAuthoritiesPanelProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
-  const [selectedCitations, setSelectedCitations] = React.useState<string[]>(["corbello", "biani"]);
+  const [selectedCitations, setSelectedCitations] = React.useState<string[]>(() =>
+    defaultAuthorities.flatMap((a) => a.citations.map((c) => c.id))
+  );
 
   // Judicial: per-claim decision state
   const [decisions, setDecisions] = React.useState<Record<string, "plaintiff" | "defendant" | "neither" | null>>(
@@ -656,7 +658,7 @@ export function SupportingAuthoritiesPanel({
                         <div className="flex-1">
                           {/* Type label */}
                           <p className="mb-1 text-sm font-semibold text-[#212223]">
-                            {citation.type === "authority" ? "Supporting authority" : "Fact"}
+                            {citation.type === "authority" ? "Supporting authority" : "Supporting fact"}
                           </p>
                           {/* Description */}
                           <p className="mb-3 text-sm leading-relaxed text-[#212223]">{citation.description}</p>
