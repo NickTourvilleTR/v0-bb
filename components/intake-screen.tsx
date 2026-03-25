@@ -252,33 +252,6 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               )}
             </QuotableCard>
 
-            {/* Case Details Card - Read Only */}
-            <QuotableCard label="Case details" onQuote={onQuote} className="mb-6">
-              <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
-              <div className="rounded-md border border-[#c4c4c4] bg-[#e8e8e8] px-4 py-3">
-                <div className="space-y-2 text-sm text-[#212223]">
-                  {flowType === "judicial" ? (
-                    <>
-                      <p><span className="font-medium text-[#212223]">{"Judge's name:"}</span> David O. Carter</p>
-                      <p><span className="font-medium text-[#212223]">Civil Action No.:</span> 8:25-CV-01204</p>
-                      <p><span className="font-medium text-[#212223]">Court name:</span> United States District Court, C.D. California</p>
-                      <p><span className="font-medium text-[#212223]">Jurisdiction (sets the scope for your research):</span> 9th Circuit</p>
-                      <p><span className="font-medium text-[#212223]">Plaintiff party 1:</span> 516, Inc. dba DG Plumbing</p>
-                      <p><span className="font-medium text-[#212223]">Defendant party 1:</span> Richmond National Insurance Company</p>
-                    </>
-                  ) : (
-                    <>
-                      <p><span className="font-medium text-[#212223]">Judge&apos;s name:</span> Andre Birotte Jr.</p>
-                      <p><span className="font-medium text-[#212223]">Civil Action No.:</span> 2:2025-cv-01779</p>
-                      <p><span className="font-medium text-[#212223]">Court name:</span> U.S. District Court, C.D. California, Western Division</p>
-                      <p><span className="font-medium text-[#212223]">Selected jurisdiction:</span> California and Related Federal</p>
-                      <p><span className="font-medium text-[#212223]">Template:</span> Motion to Dismiss: Movant&apos;s Memorandum of Law (Federal)</p>
-                    </>
-                  )}
-                </div>
-              </div>
-            </QuotableCard>
-
             {/* Party You Represent Card - only for brief flow, Read Only */}
             {flowType === "brief" && (
               <QuotableCard label="Party you represent: Defendant — Rebecca Serle, et al." onQuote={onQuote} className="mb-6">
