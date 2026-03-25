@@ -108,12 +108,21 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
               </button>
             )}
           </div>
-          <h1 className="mb-2 text-3xl font-bold text-[#212223]">
-            Motion to Dismiss First Amended Complaint
-          </h1>
-          <p className="mb-6 text-lg text-[#737373]">
-            Defendant Defendant — Love v. Airbnb, Inc., et al., No. 2:25-cv-01779-AB(KSx) (C.D. Cal.)
-          </p>
+          
+          {flowType === "brief" ? (
+            <>
+              <h1 className="mb-2 text-3xl font-bold text-[#212223]">
+                Motion to Dismiss First Amended Complaint
+              </h1>
+              <p className="mb-6 text-lg text-[#737373]">
+                Defendant Defendant — Love v. Airbnb, Inc., et al., No. 2:25-cv-01779-AB(KSx) (C.D. Cal.)
+              </p>
+            </>
+          ) : (
+            <h1 className="mb-6 text-2xl font-semibold text-[#212223]">
+              Confirm your outline selections
+            </h1>
+          )}
 
           {flowType === "judicial" ? (
             // JUDICIAL FLOW OUTLINE
