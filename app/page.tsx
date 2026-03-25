@@ -886,8 +886,8 @@ function AuthenticatedApp() {
                 onEditOutline={handleNextOutline}
                 onSkipToGenerateDraft={handleGenerateDraft}
                 onQuote={handleQuote}
-                argumentsState={argumentsState}
-                setArgumentsState={setArgumentsState}
+                argumentsState={flowType === "judicial" ? undefined : argumentsState}
+                setArgumentsState={flowType === "judicial" ? undefined : setArgumentsState}
               />
             </div>
           </AppLayoutWrapper>
