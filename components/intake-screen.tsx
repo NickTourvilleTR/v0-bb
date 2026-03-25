@@ -244,11 +244,21 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 ))}
               </div>
               {flowType === "judicial" && (
-                <div className="mt-3">
-                  <button className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]">
-                    Verify citations in the uploaded documents
-                    <ArrowRight className="size-4" />
-                  </button>
+                <div className="mt-4 flex gap-3">
+                  <div className="flex flex-1 items-center justify-between gap-2 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <FileText className="size-4 shrink-0 text-[#737373]" />
+                      <span className="text-sm text-[#212223]">Verify citations in the uploaded documents</span>
+                    </div>
+                    <ArrowRight className="size-4 shrink-0 text-[#737373]" />
+                  </div>
+                  <div className="flex flex-1 items-center justify-between gap-2 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <Upload className="size-4 shrink-0 text-[#737373]" />
+                      <span className="text-sm text-[#212223]">Upload prior opinions</span>
+                    </div>
+                    <ArrowRight className="size-4 shrink-0 text-[#737373]" />
+                  </div>
                 </div>
               )}
             </QuotableCard>
@@ -296,21 +306,6 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                         </div>
                       </div>
                     ))}
-                  </div>
-                </div>
-              </QuotableCard>
-            )}
-
-            {/* Upload Prior Opinions Banner - judicial flow only */}
-            {flowType === "judicial" && (
-              <QuotableCard label="Upload prior opinions" onQuote={onQuote} className="mb-6">
-                <div className="flex items-start gap-3">
-                  <Upload className="mt-0.5 size-5 shrink-0 text-[#737373]" />
-                  <div>
-                    <p className="text-sm font-medium text-[#212223]">Upload prior opinions</p>
-                    <p className="mt-1 text-sm text-[#737373]">
-                      Upload prior opinions to customize the style, voice, and formatting of your draft.
-                    </p>
                   </div>
                 </div>
               </QuotableCard>
