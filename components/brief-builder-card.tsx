@@ -113,7 +113,8 @@ export function BriefBuilderCard({
               "flex w-full items-start justify-between gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
               selected === motion.id
                 ? "border-[#1d4b34] bg-[#f0f5f3]"
-                : "border-[#e5e5e5] hover:bg-[#f7f7f7]"
+                : "border-[#e5e5e5] hover:bg-[#f7f7f7]",
+              !motion.functional && "cursor-not-allowed"
             )}
           >
             <div className="flex items-start gap-3">
