@@ -19,7 +19,7 @@ interface ArgueScreenProps {
   setArgumentsState?: (state: any[]) => void;
 }
 
-const arguments_data = [
+export const arguments_data = [
   {
     id: "copyright-infringement",
     number: 1,

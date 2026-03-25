@@ -26,7 +26,7 @@ import { DraftEditor } from "@/components/draft-editor";
 import { VerifyPanel } from "@/components/verify-panel";
 import { FinalizePanel } from "@/components/finalize-panel";
 import { IntakeScreen } from "@/components/intake-screen";
-import { ArgueScreen } from "@/components/argue-screen";
+import { ArgueScreen, arguments_data } from "@/components/argue-screen";
 import { LibraryScreen } from "@/components/library-screen";
 import { AppLayoutWrapper } from "@/components/app-layout-wrapper";
 import { LoginScreen } from "@/components/login-screen";
@@ -92,14 +92,7 @@ function AuthenticatedApp() {
   const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
   const [selectedBriefType, setSelectedBriefType] = React.useState<string | null>(null);
   const [quotedText, setQuotedText] = React.useState<string | null>(null);
-  const [argumentsState, setArgumentsState] = React.useState<any[]>([]);
-
-  React.useEffect(() => {
-    // Initialize argumentsState when argue screen loads
-    if (currentScreen === "argue" && argumentsState.length === 0) {
-      // Will be populated by ArgueScreen component
-    }
-  }, [currentScreen]);
+  const [argumentsState, setArgumentsState] = React.useState<any[]>(arguments_data);
   const [flowType, setFlowType] = React.useState<"brief" | "judicial">("brief");
   
   // Dynamic header title based on flow and selected motion
@@ -890,8 +883,8 @@ function AuthenticatedApp() {
                 onEditOutline={handleNextOutline}
                 onSkipToGenerateDraft={handleGenerateDraft}
                 onQuote={handleQuote}
-                argumentsState={argumentsState.length > 0 ? argumentsState : undefined}
-                setArgumentsState={argumentsState.length > 0 ? setArgumentsState : undefined}
+                argumentsState={argumentsState}
+                setArgumentsState={setArgumentsState}
               />
             </div>
           </AppLayoutWrapper>
