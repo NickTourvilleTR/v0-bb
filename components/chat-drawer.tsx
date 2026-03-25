@@ -94,6 +94,8 @@ export function ChatDrawer({
 
   const handleSubmit = () => {
     if (inputValue.trim() || quotedText) {
+      const finalMessage = inputValue.trim() || quotedText;
+      onSendMessage?.(finalMessage);
       setInputValue("");
       // Clear quote - use prop callback if available, otherwise internal state
       if (onClearQuote) {
