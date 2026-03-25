@@ -247,25 +247,23 @@ export function SupportingAuthoritiesPanel({
                     <div className="flex items-center gap-6">
                       {(["plaintiff", "defendant", "neither"] as const).map((option) => {
                         const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
+                        const isFunctional = option === "plaintiff";
                         return (
-                          <label key={option} className="flex cursor-pointer items-center gap-2">
+                          <label key={option} className={cn("flex items-center gap-2", isFunctional ? "cursor-pointer" : "cursor-not-allowed")}>
                             <input
                               type="radio"
                               name={`decision-${claim.id}`}
                               value={option}
                               checked={decision === option}
                               onChange={() => {
+                                if (!isFunctional) return;
                                 setDecisions((prev) => ({ ...prev, [claim.id]: option }));
-                                if (option === "plaintiff") {
-                                  setShowComment((prev) => ({ ...prev, [claim.id]: true }));
-                                } else {
-                                  setShowComment((prev) => ({ ...prev, [claim.id]: false }));
-                                  setEditingComment((prev) => ({ ...prev, [claim.id]: false }));
-                                }
+                                setShowComment((prev) => ({ ...prev, [claim.id]: true }));
                               }}
-                              className="accent-[#1d4b34]"
+                              disabled={!isFunctional}
+                              className={cn("accent-[#1d4b34]", !isFunctional && "cursor-not-allowed opacity-50")}
                             />
-                            <span className="text-sm text-[#212223]">{labels[option]}</span>
+                            <span className={cn("text-sm", isFunctional ? "text-[#212223]" : "text-[#a3a3a3]")}>{labels[option]}</span>
                           </label>
                         );
                       })}
