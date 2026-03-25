@@ -138,10 +138,10 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {/* Header */}
             <div className="mb-6">
               <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-                INTAKE SUMMARY
+                INTAKE
               </p>
               <h1 className="text-2xl font-semibold text-[#212223]">
-                Review your selections
+                Review and make your selections
               </h1>
             </div>
 
