@@ -393,10 +393,10 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 </button>
               )}
               <button
-                onClick={flowType === "judicial" ? onGenerateDraft : onNextSelectArguments}
+                onClick={onNextSelectArguments}
                 className="rounded-full bg-[#1d4b34] px-6 py-3 text-sm font-medium text-white hover:bg-[#163d2a]"
               >
-                {flowType === "judicial" ? "Generate draft" : "Next: Select arguments"}
+                {flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments"}
               </button>
             </div>
           </div>
