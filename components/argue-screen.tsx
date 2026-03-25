@@ -315,7 +315,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                         ))}
                       </ul>
                       <div className="mt-4">
-                        <p className="text-sm text-[#737373]">Applies to</p>
+                        <p className="text-sm font-medium text-[#212223]">Applies to</p>
                         <ul className="ml-4 mt-1 list-disc">
                           <li className="text-sm text-[#212223]">{argument.appliesTo}</li>
                         </ul>
