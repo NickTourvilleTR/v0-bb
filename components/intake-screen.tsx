@@ -320,12 +320,20 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
               <div className="rounded-md border border-[#c4c4c4] bg-[#e8e8e8] px-4 py-3">
                 <div className="space-y-2 text-sm text-[#212223]">
-                  <p><span className="font-medium text-[#212223]">Case Name:</span> Love v. Serle, et al.</p>
-                  <p><span className="font-medium text-[#212223]">Court:</span> U.S. District Court, Central District of California</p>
-                  <p><span className="font-medium text-[#212223]">Judge:</span> David O. Carter</p>
-                  <p><span className="font-medium text-[#212223]">Case Number:</span> 22-cv-07522-DOC-DFM</p>
-                  {flowType === "brief" && (
+                  {flowType === "judicial" ? (
                     <>
+                      <p><span className="font-medium text-[#212223]">Judge:</span> David O. Carter</p>
+                      <p><span className="font-medium text-[#212223]">Civil Action No.:</span> 8:25-CV-01204</p>
+                      <p><span className="font-medium text-[#212223]">Court:</span> United States District Court, C.D. California</p>
+                      <p><span className="font-medium text-[#212223]">Plaintiff:</span> 516, Inc. dba DG Plumbing</p>
+                      <p><span className="font-medium text-[#212223]">Defendant:</span> Richmond National Insurance Company</p>
+                    </>
+                  ) : (
+                    <>
+                      <p><span className="font-medium text-[#212223]">Case Name:</span> Love v. Serle, et al.</p>
+                      <p><span className="font-medium text-[#212223]">Court:</span> U.S. District Court, Central District of California</p>
+                      <p><span className="font-medium text-[#212223]">Judge:</span> David O. Carter</p>
+                      <p><span className="font-medium text-[#212223]">Case Number:</span> 22-cv-07522-DOC-DFM</p>
                       <p><span className="font-medium text-[#212223]">Current Status:</span> Motion to Dismiss pending</p>
                       <p><span className="font-medium text-[#212223]">Template:</span> Motion to Dismiss: Movant&apos;s Memorandum of Law (Federal)</p>
                     </>
