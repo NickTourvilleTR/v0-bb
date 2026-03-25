@@ -890,8 +890,8 @@ function AuthenticatedApp() {
                 onEditOutline={handleNextOutline}
                 onSkipToGenerateDraft={handleGenerateDraft}
                 onQuote={handleQuote}
-                argumentsState={argumentsState}
-                setArgumentsState={setArgumentsState}
+                argumentsState={argumentsState.length > 0 ? argumentsState : undefined}
+                setArgumentsState={argumentsState.length > 0 ? setArgumentsState : undefined}
               />
             </div>
           </AppLayoutWrapper>
