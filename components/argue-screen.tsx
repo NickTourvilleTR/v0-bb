@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { List, ScanEye, Plus, FileText } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
+import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 
 interface ArgueScreenProps {
   className?: string;
@@ -150,6 +151,8 @@ const judicial_arguments_data = judicial_claims_grouped.flatMap(group => group.c
 export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGenerateDraft, onEditOutline, flowType = "brief" }: ArgueScreenProps) {
   const [argumentsState, setArgumentsState] = React.useState(flowType === "judicial" ? judicial_arguments_data : arguments_data);
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
 
   const selectedCount = argumentsState.filter(arg => arg.checked).length;
   const allSelected = selectedCount === argumentsState.length;
@@ -184,7 +187,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
           </div>
 
           {/* Main content column */}
-          <div className="flex-1 max-w-3xl">
+          <div ref={flowType === "brief" ? contentRef : undefined} className="flex-1 max-w-3xl">
             {/* Header */}
             <div className="mb-6">
               <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -358,6 +361,14 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
             setShowOutlinePreview(false);
             onEditOutline?.();
           }}
+        />
+      )}
+      {flowType === "brief" && (
+        <SelectionContextMenu
+          position={position}
+          onAddFacts={hide}
+          onAddAuthorities={hide}
+          onAskQuestion={hide}
         />
       )}
     </div>

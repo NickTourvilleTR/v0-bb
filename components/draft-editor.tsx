@@ -20,6 +20,7 @@ import {
   Underline,
   MoreHorizontal,
 } from "lucide-react";
+import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 
 interface DraftEditorProps {
   className?: string;
@@ -29,6 +30,8 @@ interface DraftEditorProps {
 
 export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: DraftEditorProps) {
   const [fontSize, setFontSize] = React.useState(36);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
 
   return (
     <div className={cn("flex min-h-0 flex-1 flex-col", className)}>
@@ -115,7 +118,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
       {/* Document Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-8">
         <div className="mx-auto max-w-3xl">
-        <div className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
+        <div ref={contentRef} className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs uppercase tracking-wide text-[#737373]">DRAFT</p>
@@ -541,6 +544,12 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
         )}
         </div>
       </div>
+      <SelectionContextMenu
+        position={position}
+        onAddFacts={hide}
+        onAddAuthorities={hide}
+        onAskQuestion={hide}
+      />
     </div>
   );
 }

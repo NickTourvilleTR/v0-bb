@@ -16,6 +16,7 @@ import {
   Upload
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 
 interface OutlineEditorProps {
   className?: string;
@@ -25,6 +26,8 @@ interface OutlineEditorProps {
 
 export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: OutlineEditorProps) {
   const [expandedSections, setExpandedSections] = React.useState<string[]>(flowType === "judicial" ? ["factual-procedural"] : ["factual-background"]);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections((prev) =>
@@ -92,7 +95,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-6">
-        <div className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8">
+        <div ref={contentRef} className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8">
           {/* Header */}
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">
@@ -823,6 +826,12 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
           </div>
         </div>
       </div>
+      <SelectionContextMenu
+        position={position}
+        onAddFacts={hide}
+        onAddAuthorities={hide}
+        onAskQuestion={hide}
+      />
     </div>
   );
 }
