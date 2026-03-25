@@ -250,47 +250,52 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             <h2 className="mb-4 text-lg font-bold text-[#212223]">I. PRELIMINARY STATEMENT</h2>
             
             {/* Bulleted Points */}
-            <div className="space-y-3">
+            <ul className="space-y-3">
               {/* Facts 1 */}
-              <div className="flex items-start gap-3">
-                <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
-                <p className="text-sm text-[#212223]">
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
                   Plaintiff Adrienne Love alleges a vast conspiracy — encompassing the author, publisher, literary agents, editors, and a movie studio — to steal her life story as depicted in her unpublished memoir Eat the Lemon and exploit it in Rebecca Serle's novel One Italian Summer, published by S&S. <span className="text-[#737373]">(FAC ¶¶46-48)</span>
-                </p>
-              </div>
+                </span>
+              </li>
               
               {/* Facts 2 */}
-              <div className="flex items-start gap-3">
-                <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
-                <p className="text-sm text-[#212223]">
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
                   Love further alleges that the conspirators stalked her, sent strangers claiming to work for the FBI to confront her, and caused two mysterious deaths to intimidate her into silence. <span className="text-[#737373]">(FAC ¶¶63, 65)</span>
-                </p>
-              </div>
+                </span>
+              </li>
               
               {/* Facts 3 */}
-              <div className="flex items-start gap-3">
-                <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
-                <p className="text-sm text-[#212223]">
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
                   Love has now filed a First Amended Complaint that is substantially identical to her original complaint, asserting copyright infringement and 13 state law claims against S&S. <span className="text-[#737373]">(FAC ¶¶130-264)</span>
-                </p>
-              </div>
+                </span>
+              </li>
               
               {/* Law */}
-              <div className="flex items-start gap-3">
-                <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
-                <p className="text-sm text-[#212223]">
-                  A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC's fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#737373]">(FRCP 12(b)(6))</span>
-                </p>
-              </div>
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#fcd34d] bg-[#fffbeb] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#b45309]">Law</span>
+                  A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC&apos;s fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#0062c4]">(FRCP 12(b)(6))</span>
+                </span>
+              </li>
               
               {/* Conclusion */}
-              <div className="flex items-start gap-3">
-                <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
-                <p className="text-sm text-[#212223]">
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  <span className="mr-2 inline-block shrink-0 rounded border border-[#6ee7b7] bg-[#ecfdf5] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#065f46]">Conclusion</span>
                   Because (1) the two works are not substantially similar in protectable expression, (2) the state law claims lack specific allegations of conduct by S&S, and (3) many state law claims are untimely and/or preempted, the FAC should be dismissed with prejudice.
-                </p>
-              </div>
-            </div>
+                </span>
+              </li>
+            </ul>
           </div>
 
           {/* II. FACTUAL BACKGROUND */}
