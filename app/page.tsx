@@ -266,8 +266,16 @@ function AuthenticatedApp() {
 
   const handleNextOutline = () => {
     addChatMessage("user", "Next: Outline");
-    addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments before generating the full outline.");
-    setCurrentScreen("outline");
+    if (flowType === "judicial") {
+      addChatMessage("assistant", "Generating your opinion outline based on the selected claims and decisions...");
+    } else {
+      addChatMessage("assistant", "Generating your brief outline based on the selected arguments and authorities...");
+    }
+    setCurrentScreen("outline-loading");
+    setTimeout(() => {
+      addChatMessage("assistant", "Your outline is ready. Review the structure and headings, then proceed to generate the full draft.");
+      setCurrentScreen("outline-ready");
+    }, 3000);
   };
 
   const handleGenerateOutline = () => {
