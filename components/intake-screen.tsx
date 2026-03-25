@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ChevronRight, CircleCheck, FileText, List, Reply, ScanEye, Upload } from "lucide-react";
+import { ArrowRight, ChevronRight, CircleCheck, FileText, List, Paperclip, Reply, ScanEye, Upload } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface IntakeScreenProps {
@@ -140,9 +140,44 @@ const argumentsSelected = [
   },
 ];
 
+const complaintSections = [
+  "Parties and Jurisdiction",
+  "Plaintiff's Work and Copyright",
+  "Development, Submissions, and Industry Interest",
+  "Alleged Access and Timeline Around OIS",
+  "Alleged Substantial Similarities",
+  "Causes of Action",
+  "Prayer for Relief",
+];
+
+const briefParties = [
+  { label: "Plaintiff 1", name: "Adrienne Love" },
+  { label: "Defendant 1", name: "Airbnb, Inc." },
+  { label: "Defendant 2", name: "Simon & Schuster, LLC" },
+  { label: "Defendant 3", name: "Sound Made Public, Inc." },
+  { label: "Defendant 4", name: "Folio Literary Agency" },
+  { label: "Defendant 5", name: "The Gotham Group, LLC" },
+  { label: "Defendant 6", name: "3 Arts Entertainment, LLC" },
+  { label: "Defendant 7", name: "Creative Artists Agency, LLC" },
+  { label: "Defendant 8", name: "William Morris Endeavor Entertainment, LLC" },
+];
+
 export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   const [selectedJurisdiction, setSelectedJurisdiction] = React.useState("9th-circuit");
+  const [expandedSections, setExpandedSections] = React.useState<string[]>([]);
+  const [selectedParties, setSelectedParties] = React.useState<string[]>([]);
+  const [additionalDetails, setAdditionalDetails] = React.useState("");
+
+  const toggleSection = (section: string) =>
+    setExpandedSections((prev) =>
+      prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
+    );
+
+  const toggleParty = (name: string) =>
+    setSelectedParties((prev) =>
+      prev.includes(name) ? prev.filter((p) => p !== name) : [...prev, name]
+    );
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
       {/* Main Content */}
@@ -170,80 +205,106 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
               </h1>
             </div>
 
-            {/* Motion Summary Card - only for brief flow */}
+            {/* Brief flow: single combined card */}
             {flowType === "brief" && (
-              <QuotableCard label="Motion to Dismiss: Love v. Serle et al." onQuote={onQuote} className="mb-6">
-                <p className="mb-3 text-sm font-semibold text-[#212223]">
-                  Motion to Dismiss: Love v. Serle et al.
-                </p>
-                <ul className="ml-4 list-disc space-y-2 text-sm text-[#212223]">
-                  <li>
-                    Plaintiff Adrienne Love, an individual residing in California, brings this action against 28 defendants including publishers, literary agents, talent agencies, producers, and author Rebecca Serle
-                  </li>
-                  <li>
-                    Love alleges that her unpublished memoir <em>Eat the Lemon</em> — a personal account of traveling to the Amalfi Coast to reconnect with her deceased mother — was misappropriated and formed the basis of Serle&apos;s novel <em>One Italian Summer</em>, published by Atria Books (S&S) in March 2022
-                  </li>
-                  <li>
-                    Love further alleges a coordinated conspiracy among her former literary representatives and industry defendants to exploit her manuscript, silence her objections, and profit from the resulting book and Paramount film adaptation
-                  </li>
-                  <li>
-                    Jurisdiction: U.S. District Court, C.D. California, Western Division — federal question under the Copyright Act (28 U.S.C. §§ 1331, 1338(a)) with supplemental jurisdiction over state law claims (28 U.S.C. § 1367(a))
-                  </li>
-                </ul>
-              </QuotableCard>
-            )}
+              <QuotableCard label="Complaint Summary" onQuote={onQuote} className="mb-6">
+                {/* Complaint Summary section */}
+                <h3 className="mb-3 text-base font-semibold text-[#212223]">Complaint Summary</h3>
+                <div className="mb-6 divide-y divide-[#e5e5e5] rounded-lg border border-[#e5e5e5]">
+                  {complaintSections.map((section) => (
+                    <button
+                      key={section}
+                      onClick={() => toggleSection(section)}
+                      className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-[#f7f7f7]"
+                    >
+                      <ChevronRight className={cn("size-4 shrink-0 text-[#737373] transition-transform", expandedSections.includes(section) && "rotate-90")} />
+                      <span className="text-sm text-[#212223]">{section}</span>
+                    </button>
+                  ))}
+                </div>
 
-            {/* Motion Type / Work Product Card */}
-            <QuotableCard label={flowType === "judicial" ? "Work product: Opinion" : "Motion type: Motion to Dismiss"} onQuote={onQuote} className="mb-6">
-              <h3 className="mb-3 text-sm font-medium text-[#212223]">{flowType === "judicial" ? "Work product" : "Motion type"}</h3>
-              <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-2.5 text-sm font-medium text-[#212223]">
-                {flowType === "judicial" ? "Opinion" : "Motion to Dismiss"}
-              </div>
-            </QuotableCard>
+                {/* Party selection section */}
+                <p className="mb-3 text-sm text-[#212223]">I&apos;ve also identified the following parties in the case.</p>
+                <div className="mb-6 rounded-lg border border-[#e5e5e5] p-4">
+                  <p className="mb-3 text-sm font-medium text-[#212223]">Please indicate which party you represent:</p>
+                  <div className="space-y-2.5">
+                    {briefParties.map((party) => (
+                      <label key={party.name} className="flex cursor-pointer items-center gap-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedParties.includes(party.name)}
+                          onChange={() => toggleParty(party.name)}
+                          className="size-4 rounded border-[#a3a3a3] accent-[#1d4b34]"
+                        />
+                        <span className="text-sm text-[#212223]">
+                          <span className="font-medium">{party.label}:</span> {party.name}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
 
-            {/* Brief Role Card - only for brief flow, Read Only */}
-            {flowType === "brief" && (
-              <QuotableCard label="Brief role: Primary" onQuote={onQuote} className="mb-6">
-                <h3 className="mb-3 text-sm font-medium text-[#212223]">Brief role</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#525252] bg-[#525252]">
-                      <div className="size-2 rounded-full bg-white" />
-                    </div>
-                    <span className="text-sm text-[#212223]">Primary</span>
+                {/* Additional details section */}
+                <div>
+                  <div className="mb-2 flex items-center gap-2">
+                    <h4 className="text-sm font-semibold text-[#212223]">Additional details</h4>
+                    <span className="rounded bg-[#f2f2f2] px-2 py-0.5 text-xs text-[#737373]">Optional</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#a3a3a3]" />
-                    <span className="text-sm text-[#525252]">Opposition</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#a3a3a3]" />
-                    <span className="text-sm text-[#525252]">Reply</span>
+                  <p className="mb-3 text-sm text-[#212223]">
+                    <span className="font-semibold">Are there any other key details you can provide?</span>{" "}
+                    These will help tailor the brief to your scenario. You can enter additional information such as:
+                  </p>
+                  <ul className="mb-3 ml-5 list-disc space-y-1 text-sm text-[#212223]">
+                    <li>Pertinent facts</li>
+                    <li>Relevant context</li>
+                    <li>Theory of the case</li>
+                    <li>Client&apos;s side of the story</li>
+                    <li>Contested facts and issues</li>
+                    <li>Strategic objectives or considerations</li>
+                  </ul>
+                  <div className="relative rounded-lg border border-[#e5e5e5]">
+                    <textarea
+                      value={additionalDetails}
+                      onChange={(e) => setAdditionalDetails(e.target.value)}
+                      placeholder="Enter additional details here..."
+                      rows={4}
+                      className="w-full resize-none rounded-lg bg-white px-4 py-3 pr-10 text-sm text-[#212223] placeholder:text-[#a3a3a3] focus:outline-none"
+                    />
+                    <button className="absolute bottom-3 right-3 text-[#a3a3a3] hover:text-[#737373]">
+                      <Paperclip className="size-4" />
+                    </button>
                   </div>
                 </div>
               </QuotableCard>
             )}
 
-            {/* Uploaded Files Card - Read Only */}
-            <QuotableCard label="Uploaded files" onQuote={onQuote} className="mb-6">
-              <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
-              <div className="flex flex-wrap gap-2">
-                {(flowType === "judicial" ? judicialUploadedFiles : uploadedFiles).map((file, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-white px-3 py-2"
-                  >
-                    <div className={cn(
-                      "flex size-5 shrink-0 items-center justify-center rounded text-[10px] font-bold text-white",
-                      file.type === "P" ? "bg-[#dc0a0a]" : "bg-[#2563eb]"
-                    )}>
-                      {file.type}
+            {/* Judicial flow: work product card */}
+            {flowType === "judicial" && (
+              <QuotableCard label="Work product: Opinion" onQuote={onQuote} className="mb-6">
+                <h3 className="mb-3 text-sm font-medium text-[#212223]">Work product</h3>
+                <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-2.5 text-sm font-medium text-[#212223]">
+                  Opinion
+                </div>
+              </QuotableCard>
+            )}
+
+            {/* Judicial flow: uploaded files card */}
+            {flowType === "judicial" && (
+              <QuotableCard label="Uploaded files" onQuote={onQuote} className="mb-6">
+                <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
+                <div className="flex flex-wrap gap-2">
+                  {judicialUploadedFiles.map((file, index) => (
+                    <div key={index} className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-white px-3 py-2">
+                      <div className={cn(
+                        "flex size-5 shrink-0 items-center justify-center rounded text-[10px] font-bold text-white",
+                        file.type === "P" ? "bg-[#dc0a0a]" : "bg-[#2563eb]"
+                      )}>
+                        {file.type}
+                      </div>
+                      <span className="text-sm text-[#212223]">{file.name}</span>
                     </div>
-                    <span className="text-sm text-[#212223]">{file.name}</span>
-                  </div>
-                ))}
-              </div>
-              {flowType === "judicial" && (
+                  ))}
+                </div>
                 <div className="mt-4 flex gap-3">
                   <div className="flex flex-1 items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
                     <div className="flex items-start gap-3">
@@ -266,83 +327,24 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     <ChevronRight className="mt-0.5 size-4 shrink-0 text-[#737373]" />
                   </div>
                 </div>
-              )}
-            </QuotableCard>
-
-            {/* Party You Represent Card - only for brief flow, Read Only */}
-            {flowType === "brief" && (
-              <QuotableCard label="Party you represent: Defendant — Rebecca Serle, et al." onQuote={onQuote} className="mb-6">
-                <h3 className="mb-3 text-sm font-medium text-[#212223]">Party you represent</h3>
-                <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-3">
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#525252] bg-[#525252]">
-                        <div className="size-2 rounded-full bg-white" />
-                      </div>
-                      <span className="text-sm text-[#212223]">Defendant: Rebecca Serle, et al.</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="flex size-5 items-center justify-center rounded-full border-2 border-[#a3a3a3]" />
-                      <span className="text-sm text-[#525252]">Plaintiff: Adrienne Love</span>
-                    </div>
-                  </div>
-                </div>
               </QuotableCard>
             )}
 
-            {/* Arguments Selected Card - only for brief flow, Read Only */}
-            {flowType === "brief" && (
-              <QuotableCard label="Arguments selected" onQuote={onQuote} className="mb-6">
-                <h3 className="mb-3 text-sm font-medium text-[#212223]">Arguments selected</h3>
-                <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-3">
-                  <div className="space-y-3">
-                    {argumentsSelected.map((argument) => (
-                      <div
-                        key={argument.id}
-                        className="flex items-start gap-3"
-                      >
-                        <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border border-[#525252] bg-[#525252]">
-                          <svg className="size-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-                            <polyline points="2 6 5 9 10 3" />
-                          </svg>
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm text-[#212223]">{argument.title}</p>
-                          <p className="mt-1 text-sm text-[#404040]">{argument.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </QuotableCard>
-            )}
-
-            {/* Case Details Card - Read Only */}
+            {/* Case Details Card - judicial only */}
+            {flowType === "judicial" && (
             <QuotableCard label="Case details" onQuote={onQuote} className="mb-6">
               <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
               <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-3">
                 <div className="space-y-2 text-sm text-[#212223]">
-                  {flowType === "judicial" ? (
-                    <>
-                      <p><span className="font-medium text-[#212223]">Judge:</span> David O. Carter</p>
-                      <p><span className="font-medium text-[#212223]">Civil Action No.:</span> 8:25-CV-01204</p>
-                      <p><span className="font-medium text-[#212223]">Court:</span> United States District Court, C.D. California</p>
-                      <p><span className="font-medium text-[#212223]">Plaintiff:</span> 516, Inc. dba DG Plumbing</p>
-                      <p><span className="font-medium text-[#212223]">Defendant:</span> Richmond National Insurance Company</p>
-                    </>
-                  ) : (
-                    <>
-                      <p><span className="font-medium text-[#212223]">Case Name:</span> Love v. Serle, et al.</p>
-                      <p><span className="font-medium text-[#212223]">Court:</span> U.S. District Court, Central District of California</p>
-                      <p><span className="font-medium text-[#212223]">Judge:</span> David O. Carter</p>
-                      <p><span className="font-medium text-[#212223]">Case Number:</span> 22-cv-07522-DOC-DFM</p>
-                      <p><span className="font-medium text-[#212223]">Current Status:</span> Motion to Dismiss pending</p>
-                      <p><span className="font-medium text-[#212223]">Template:</span> Motion to Dismiss: Movant&apos;s Memorandum of Law (Federal)</p>
-                    </>
-                  )}
+                  <p><span className="font-medium text-[#212223]">Judge:</span> David O. Carter</p>
+                  <p><span className="font-medium text-[#212223]">Civil Action No.:</span> 8:25-CV-01204</p>
+                  <p><span className="font-medium text-[#212223]">Court:</span> United States District Court, C.D. California</p>
+                  <p><span className="font-medium text-[#212223]">Plaintiff:</span> 516, Inc. dba DG Plumbing</p>
+                  <p><span className="font-medium text-[#212223]">Defendant:</span> Richmond National Insurance Company</p>
                 </div>
               </div>
             </QuotableCard>
+            )}
 
             {/* Jurisdiction Card - judicial flow only */}
             {flowType === "judicial" && (
