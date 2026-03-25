@@ -135,7 +135,7 @@ function AuthenticatedApp() {
     addChatMessage("user", message);
     
     // Check if this is the prefilled lumping defendants argument
-    if (currentScreen === "argue" && message.includes("lumps all defendants together")) {
+    if (currentScreen === "argue2" && message.includes("lumps all defendants together")) {
       // Create new argument object
       const newArgumentNumber = argumentsState.length + 1;
       const newArgument = {
