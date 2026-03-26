@@ -213,8 +213,12 @@ function AuthenticatedApp() {
   const handleFileUpload = () => {
     if (flowType === "judicial") {
       addChatMessage("user", "Uploaded 5 documents");
-      addChatMessage("assistant", "I've analyzed the uploaded documents. Here is your intake summary.");
-      setCurrentScreen("intake");
+      setCurrentScreen("uploading");
+      // Simulate analyzing documents, then go to intake
+      setTimeout(() => {
+        addChatMessage("assistant", "I've analyzed the uploaded documents. Here is your intake summary.");
+        setCurrentScreen("intake");
+      }, 3000);
     } else {
       addChatMessage("user", "Uploaded 6 documents");
       setCurrentScreen("uploading");
