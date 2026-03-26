@@ -615,31 +615,31 @@ export function SupportingAuthoritiesPanel({
                       </div>
                     )}
 
-                    {/* Add comment button — shown for non-bad-faith claims when no comment yet */}
-                    {claim.id !== "bad-faith" && !commentVisible && (
-                      <div className="mt-3">
-                        <button
-                          onClick={() => setShowComment((prev) => ({ ...prev, [claim.id]: true }))}
-                          className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
-                        >
-                          <MessageSquarePlus className="size-4 text-[#737373]" />
-                          Add comment
-                        </button>
-                      </div>
-                    )}
+  {/* Add reasoning button — shown for non-bad-faith claims when no comment yet */}
+  {claim.id !== "bad-faith" && !commentVisible && (
+    <div className="mt-3">
+      <button
+        onClick={() => setCommentVisible(true)}
+        className="flex items-center gap-2 text-sm text-[#0066CC] hover:underline"
+      >
+        <MessageSquarePlus className="size-4 text-[#737373]" />
+        Add reasoning
+      </button>
+    </div>
+  )}
 
-                    {/* Add comment button for bad-faith — shown always when decision is made */}
-                    {claim.id === "bad-faith" && decision && (
-                      <div className="mt-3">
-                        <button
-                          className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
-                          onClick={() => {}}
-                        >
-                          <MessageSquarePlus className="size-4 text-[#737373]" />
-                          Add comment
-                        </button>
-                      </div>
-                    )}
+  {/* Add reasoning button for bad-faith — shown always when decision is made */}
+  {claim.id === "bad-faith" && decision && (
+    <div className="mt-3">
+      <button
+        onClick={() => setCommentVisible(true)}
+        className="flex items-center gap-2 text-sm text-[#0066CC] hover:underline"
+      >
+        <MessageSquarePlus className="size-4 text-[#737373]" />
+        Add reasoning
+      </button>
+    </div>
+  )}
                   </div>
                 </div>
               </div>
