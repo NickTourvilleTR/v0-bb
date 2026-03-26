@@ -343,7 +343,39 @@ export function ChatDrawer({
         )}
 
         {activeTab === "sources" && (
-          <div className="text-sm text-[#737373]">No sources yet.</div>
+          <div className="flex flex-col gap-3">
+            {/* View dropdown */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-[#737373]">View:</span>
+              <button className="inline-flex items-center gap-1.5 rounded-full border border-[#1d4b34] px-3 py-1 text-sm font-medium text-[#1d4b34]">
+                Uploaded documents
+                <ChevronDown className="size-3.5" />
+              </button>
+            </div>
+
+            {/* Document list */}
+            <div className="flex flex-col gap-1">
+              {[
+                { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
+                { name: "Gyant v. NFM - Answer.pdf", time: "9:17 a.m." },
+                { name: "Hansen Deposition.pdf", time: "9:17 a.m." },
+                { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", time: "9:17 a.m." },
+                { name: "ROR Letter.docx", time: "9:17 a.m." },
+                { name: "Letter to NFM Dated September 19, 2023.docx", time: "9:17 a.m." },
+              ].map((doc) => (
+                <button
+                  key={doc.name}
+                  className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
+                >
+                  <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
+                    <p className="text-xs text-[#737373]">Uploaded at {doc.time}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
         )}
 
         {activeTab === "versions" && (
