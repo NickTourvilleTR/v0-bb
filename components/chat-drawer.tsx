@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { gyantComplaintPages } from "@/lib/document-content";
 import { Logo } from "@/components/logo";
-import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Download, Reply, Flag, Grip, Mail, ArrowLeft, Undo2, Redo2, ZoomIn, ZoomOut, ExternalLink } from "lucide-react";
+import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronDown, ChevronUp, Download, Reply, Flag, Grip, Mail, ArrowLeft, Undo2, Redo2, ZoomIn, ZoomOut, ExternalLink } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -89,7 +89,6 @@ export function ChatDrawer({
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
   const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
   const [openedDocument, setOpenedDocument] = React.useState<{ name: string; time: string } | null>(null);
-  const [currentPage, setCurrentPage] = React.useState(1);
   const sourcesDropdownRef = React.useRef<HTMLDivElement>(null);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
@@ -428,7 +427,6 @@ export function ChatDrawer({
                     key={doc.name}
                     onClick={() => {
                       setOpenedDocument(doc);
-                      setCurrentPage(1);
                       onDocumentOpen?.();
                     }}
                     className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
@@ -477,67 +475,39 @@ export function ChatDrawer({
             </div>
 
             {/* Toolbar */}
-            {(() => {
-              const pages = openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : [];
-              const totalPages = pages.length || 1;
-              const currentPageData = pages[currentPage - 1];
-              return (
-                <>
-                  <div className="flex items-center justify-between rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
-                    <div className="flex items-center gap-1">
-                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                        <Undo2 className="size-4" />
-                      </button>
-                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                        <Redo2 className="size-4" />
-                      </button>
-                      <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
-                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                        <ZoomOut className="size-4" />
-                      </button>
-                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                        <ZoomIn className="size-4" />
-                      </button>
-                      <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
-                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                        <Download className="size-4" />
-                      </button>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-[#737373]">{currentPage} of {totalPages}</span>
-                      <button
-                        onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                        disabled={currentPage === 1}
-                        className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223] disabled:opacity-30"
-                      >
-                        <ChevronLeft className="size-4" />
-                      </button>
-                      <button
-                        onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                        disabled={currentPage === totalPages}
-                        className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223] disabled:opacity-30"
-                      >
-                        <ChevronRight className="size-4" />
-                      </button>
-                    </div>
-                  </div>
+            <div className="sticky top-0 z-10 flex items-center justify-between rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+              <div className="flex items-center gap-1">
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <Undo2 className="size-4" />
+                </button>
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <Redo2 className="size-4" />
+                </button>
+                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <ZoomOut className="size-4" />
+                </button>
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <ZoomIn className="size-4" />
+                </button>
+                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <Download className="size-4" />
+                </button>
+              </div>
+            </div>
 
-                  {/* Document Content */}
-                  <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
-                    {currentPageData ? (
-                      <>
-                        <p className="mb-4 text-xs text-[#737373]">{currentPageData.pageHeader}</p>
-                        <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
-                          {currentPageData.content}
-                        </div>
-                      </>
-                    ) : (
-                      <p className="text-sm text-[#737373]">No content available for this page.</p>
-                    )}
+            {/* Document Content - continuous scroll */}
+            <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
+              {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : []).map((page, index) => (
+                <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
+                  <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
+                  <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
+                    {page.content}
                   </div>
-                </>
-              );
-            })()}
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
