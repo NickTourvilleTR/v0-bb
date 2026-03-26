@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil, ExternalLink, Sparkles } from "lucide-react";
+import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil, ExternalLink, Sparkles, Reply } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface Citation {
@@ -388,6 +388,7 @@ interface SupportingAuthoritiesPanelProps {
   onNextOutline?: () => void;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
+  onQuote?: (text: string) => void;
   flowType?: "brief" | "judicial";
 }
 
@@ -396,6 +397,7 @@ export function SupportingAuthoritiesPanel({
   onNextOutline,
   onSkipToGenerateDraft,
   onEditOutline,
+  onQuote,
   flowType = "brief",
 }: SupportingAuthoritiesPanelProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
@@ -414,6 +416,9 @@ export function SupportingAuthoritiesPanel({
     Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
   );
   const [showComment, setShowComment] = React.useState<Record<string, boolean>>(
+    Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
+  );
+  const [hoveredDecision, setHoveredDecision] = React.useState<Record<string, boolean>>(
     Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
   );
 
@@ -579,17 +584,30 @@ export function SupportingAuthoritiesPanel({
                   )}
 
                   {/* Decision row — full width, header background, no column divider */}
-                  <div className="bg-[#ebf0ed] px-5 py-4">
-                    <div className="mb-3 flex items-center justify-between">
+                  <div
+                    className="relative bg-[#ebf0ed] px-5 py-4"
+                    onMouseEnter={() => setHoveredDecision((prev) => ({ ...prev, [claim.id]: true }))}
+                    onMouseLeave={() => setHoveredDecision((prev) => ({ ...prev, [claim.id]: false }))}
+                  >
+                    {hoveredDecision[claim.id] && onQuote && (
+                      <button
+                        onClick={() => onQuote(
+                          claim.id === "breach-of-contract"
+                            ? "Decision on breach of contract"
+                            : "Decision on breach of the implied covenant of good faith and fair dealing"
+                        )}
+                        className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
+                        title="Quote this message"
+                      >
+                        <Reply className="size-4" />
+                      </button>
+                    )}
+                    <div className="mb-3">
                       <p className="text-sm font-semibold text-[#212223]">
                         {claim.id === "breach-of-contract"
                           ? "Decision on breach of contract:"
                           : "Decision on breach of the implied covenant of good faith and fair dealing:"}
                       </p>
-                      <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] px-3 py-1.5 text-xs text-[#212223] hover:bg-white">
-                        <Notebook className="size-3" />
-                        Quote this
-                      </button>
                     </div>
                     <div className="flex items-center gap-6">
                       {(["plaintiff", "defendant", "neither"] as const).map((option) => {
