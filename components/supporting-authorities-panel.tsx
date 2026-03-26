@@ -508,17 +508,23 @@ export function SupportingAuthoritiesPanel({
                   {claim.id === "breach-of-contract" && (
                     <div className="border-b border-[#e5e5e5] bg-white px-5 py-4">
                       <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
-                      <ol className="list-decimal space-y-3 pl-5 text-sm leading-relaxed text-[#212223]">
-                        <li>
-                          To establish a breach of contract, Plaintiff must demonstrate (1) the existence of a valid contract, (2) Plaintiff&apos;s performance or excuse for nonperformance, (3) Defendant&apos;s breach of the contract, and (4) resulting damages to Plaintiff because of the breach. <a href="#" className="text-[#6366f1] underline"><em>Pyramid Techs., Inc. v. Hartford Cas. Ins. Co.</em>, 752 F. 3d 807, 818 (9th Cir. 2014)</a> (citing <a href="#" className="text-[#6366f1] underline"><em>Abdelhamid v. Fire Ins. Exch.</em>, 182 Cal.App.4th 990, 106 Cal. Rptr. 3d 26, 33 (2010)</a>).
-                        </li>
-                        <li>
-                          Moreover, when an insurer is moving to dismiss a plaintiff&apos;s complaint based on the language of the insurance policy, it must establish conclusively that this language &quot;unambiguously negates beyond reasonable controversy the construction alleged in the body of the complaint.&quot; <a href="#" className="text-[#6366f1] underline"><em>Palacin v. Allstate Ins. Co.</em>, 119 Cal. App. 4th 855, 862, 14 Cal.Rptr.3d 731 (2004)</a> (citing <a href="#" className="text-[#6366f1] underline"><em>Columbia Cas. Co. v. Nw Nat&apos;l. Ins. Co.</em>, 231 Cal. App. 3d 457, 468, 282 Cal.Rptr. 389 (1991)</a>).
-                        </li>
-                        <li>
-                          To meet this burden, Defendant must show that the language in the policy supporting their position is &quot;so clear that parole evidence would be inadmissible to refute it.&quot; <a href="#" className="text-[#6366f1] underline"><em>Id.</em></a> (citing <a href="#" className="text-[#6366f1] underline">231 Cal. App. 3d at 469, 282 Cal.Rptr. 389</a>).
-                        </li>
-                      </ol>
+                      <div className="space-y-4">
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;To establish a breach of contract, Plaintiff must demonstrate (1) the existence of a valid contract, (2) Plaintiff&apos;s performance or excuse for nonperformance, (3) Defendant&apos;s breach of the contract, and (4) resulting damages to Plaintiff because of the breach.&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Pyramid Techs., Inc. v. Hartford Cas. Ins. Co.</em>, 752 F. 3d 807, 818 (9th Cir. 2014)</a> (citing <a href="#" className="text-[#6366f1] underline"><em>Abdelhamid v. Fire Ins. Exch.</em>, 182 Cal.App.4th 990, 106 Cal. Rptr. 3d 26, 33 (2010)</a>).
+                        </div>
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;Moreover, when an insurer is moving to dismiss a plaintiff&apos;s complaint based on the language of the insurance policy, it must establish conclusively that this language &quot;unambiguously negates beyond reasonable controversy the construction alleged in the body of the complaint.&quot;&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Palacin v. Allstate Ins. Co.</em>, 119 Cal. App. 4th 855, 862, 14 Cal.Rptr.3d 731 (2004)</a> (citing <a href="#" className="text-[#6366f1] underline"><em>Columbia Cas. Co. v. Nw Nat&apos;l. Ins. Co.</em>, 231 Cal. App. 3d 457, 468, 282 Cal.Rptr. 389 (1991)</a>).
+                        </div>
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;To meet this burden, Defendant must show that the language in the policy supporting their position is &quot;so clear that parole evidence would be inadmissible to refute it.&quot;&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Id.</em></a> (citing <a href="#" className="text-[#6366f1] underline">231 Cal. App. 3d at 469, 282 Cal.Rptr. 389</a>).
+                        </div>
+                      </div>
                       <div className="mt-4">
                         <Button
                           size="sm"
