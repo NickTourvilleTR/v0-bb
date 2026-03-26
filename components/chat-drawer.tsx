@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
-import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Download, Reply, Flag, Grip, Mail } from "lucide-react";
+import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Download, Reply, Flag, Grip, Mail, ArrowLeft, Undo2, Redo2, ZoomIn, ZoomOut, ExternalLink } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -43,6 +43,8 @@ interface ChatDrawerProps {
   onClearQuote?: () => void;
   width?: number;
   flowType?: "brief" | "judicial";
+  onDocumentOpen?: () => void;
+  onDocumentClose?: () => void;
 }
 
 export function ChatDrawer({
@@ -71,12 +73,17 @@ export function ChatDrawer({
   onClearQuote,
   width,
   flowType = "brief",
+  onDocumentOpen,
+  onDocumentClose,
 }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const [inputValue, setInputValue] = React.useState("");
   const [internalQuotedText, setInternalQuotedText] = React.useState<string | null>(null);
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
   const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
+  const [openedDocument, setOpenedDocument] = React.useState<{ name: string; time: string } | null>(null);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const totalPages = 25;
   const sourcesDropdownRef = React.useRef<HTMLDivElement>(null);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
@@ -144,50 +151,54 @@ export function ChatDrawer({
       className="flex h-full shrink-0 flex-col border-l border-[#e5e5e5] bg-white"
       style={{ width: width ? `${width}px` : "340px" }}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-[#e5e5e5] px-4 py-3">
-        <div className="flex items-center gap-2">
-          <Logo className="size-5" />
-          <span className="text-sm font-medium text-[#212223]">CoCounsel</span>
+      {/* Header - hidden when document is open */}
+      {!openedDocument && (
+        <div className="flex items-center justify-between border-b border-[#e5e5e5] px-4 py-3">
+          <div className="flex items-center gap-2">
+            <Logo className="size-5" />
+            <span className="text-sm font-medium text-[#212223]">CoCounsel</span>
+          </div>
+          <button
+            onClick={onToggle}
+            className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+          >
+            <X className="size-4" />
+          </button>
         </div>
-        <button
-          onClick={onToggle}
-          className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
-        >
-          <X className="size-4" />
-        </button>
-      </div>
+      )}
 
-      {/* Tabs */}
-      <div className="flex border-b border-[#e5e5e5]">
-        {(["chat", "sources", "notes"] as const).map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={cn(
-              "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
-              activeTab === tab
-                ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
-                : "text-[#737373] hover:text-[#212223]"
-            )}
-          >
-            {tab}
-          </button>
-        ))}
-        {showVersionsTab && (
-          <button
-            onClick={() => setActiveTab("versions")}
-            className={cn(
-              "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
-              activeTab === "versions"
-                ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
-                : "text-[#737373] hover:text-[#212223]"
-            )}
-          >
-            Versions
-          </button>
-        )}
-      </div>
+      {/* Tabs - hidden when document is open */}
+      {!openedDocument && (
+        <div className="flex border-b border-[#e5e5e5]">
+          {(["chat", "sources", "notes"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={cn(
+                "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
+                activeTab === tab
+                  ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
+                  : "text-[#737373] hover:text-[#212223]"
+              )}
+            >
+              {tab}
+            </button>
+          ))}
+          {showVersionsTab && (
+            <button
+              onClick={() => setActiveTab("versions")}
+              className={cn(
+                "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
+                activeTab === "versions"
+                  ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
+                  : "text-[#737373] hover:text-[#212223]"
+              )}
+            >
+              Versions
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-4">
@@ -358,7 +369,7 @@ export function ChatDrawer({
           <div className="text-sm text-[#737373]">No notes yet.</div>
         )}
 
-        {activeTab === "sources" && (
+        {activeTab === "sources" && !openedDocument && (
           <div className="flex flex-col gap-3">
             {/* View dropdown */}
             <div className="flex items-center gap-2">
@@ -409,6 +420,11 @@ export function ChatDrawer({
                 ].map((doc) => (
                   <button
                     key={doc.name}
+                    onClick={() => {
+                      setOpenedDocument(doc);
+                      setCurrentPage(1);
+                      onDocumentOpen?.();
+                    }}
                     className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
                   >
                     <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
@@ -424,6 +440,97 @@ export function ChatDrawer({
             {sourcesView === "cases" && (
               <div className="text-sm text-[#737373]">No cases or statutes yet.</div>
             )}
+          </div>
+        )}
+
+        {/* Document Viewer */}
+        {activeTab === "sources" && openedDocument && (
+          <div className="flex flex-col gap-4">
+            {/* Back to Sources */}
+            <button
+              onClick={() => {
+                setOpenedDocument(null);
+                onDocumentClose?.();
+              }}
+              className="flex items-center gap-2 text-sm text-[#212223] hover:text-[#1d4b34] transition-colors"
+            >
+              <ArrowLeft className="size-4" />
+              Back to Sources
+            </button>
+
+            {/* Document title */}
+            <div>
+              <a
+                href="#"
+                className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#1d4b34] underline decoration-[#1d4b34] underline-offset-2 hover:text-[#163d2a]"
+              >
+                {openedDocument.name}
+                <ExternalLink className="size-4" />
+              </a>
+              <p className="mt-1 text-sm text-[#737373]">Uploaded at {openedDocument.time}</p>
+            </div>
+
+            {/* Toolbar */}
+            <div className="flex items-center justify-between rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+              <div className="flex items-center gap-1">
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <Undo2 className="size-4" />
+                </button>
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <Redo2 className="size-4" />
+                </button>
+                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <ZoomOut className="size-4" />
+                </button>
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <ZoomIn className="size-4" />
+                </button>
+                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <Download className="size-4" />
+                </button>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-[#737373]">{currentPage} of {totalPages}</span>
+                <button
+                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223] disabled:opacity-30"
+                >
+                  <ChevronLeft className="size-4" />
+                </button>
+                <button
+                  onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223] disabled:opacity-30"
+                >
+                  <ChevronRight className="size-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Document Content */}
+            <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
+              <h2 className="mb-4 text-xl font-bold text-[#212223]">Gyant v. NFM</h2>
+              <ul className="list-disc space-y-4 pl-5 text-sm leading-relaxed text-[#212223]">
+                <li>
+                  {"This lawsuit stems from National Fire & Marine Insurance Company's (NFM's) failure to timely and properly investigate and adjust Gyant Properties, LLC's (Gyant's) claims for damage to 3 properties insured by NFM."}
+                </li>
+                <li>
+                  {"Gyant is a commercial property owner of, at the time of this policy, 26 separate premises. NFM purportedly issued an insurance policy to Gyant for these 26 premises, including the properties located at 4804 Bryant Irvin Ct. Fort Worth (\"Bryant Irvin\" property), 3316-3328 Stuart Dr. Fort Worth (\"Stuart\" property), and 1100-1136 E. Seminary Drive, Fort Worth (\"Seminary\" property)."}
+                </li>
+                <li>
+                  {"Gyant made claims for hail damage to these properties arising out of a hailstorm on or about March 16, 2023. NFM's own claim files and documents show that the acknowledgement of claims, investigation of claims, the adjustment of the claims, and the settlement practices of these claims by NFM violated several provisions of Chapter 541 and 542 of the Texas Insurance Code, as a matter of law."}
+                </li>
+                <li>
+                  {"NFM judicially admitted that it sold and issued an insurance policy (Policy No. 12PRM086299-02) to Gyant Properties, LLC. See Appendix 003."}
+                </li>
+                <li>
+                  {"NFM judicially admitted that the policy provided coverage for \"covered losses\""}
+                </li>
+              </ul>
+            </div>
           </div>
         )}
 

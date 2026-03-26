@@ -78,6 +78,8 @@ export function AppLayoutWrapper({
 }: AppLayoutWrapperProps) {
   const [drawerTab, setDrawerTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
   const [drawerWidth, setDrawerWidth] = React.useState(380);
+  const [isDocumentOpen, setIsDocumentOpen] = React.useState(false);
+  const previousWidthRef = React.useRef(380);
   const isDragging = React.useRef(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -94,6 +96,20 @@ export function AppLayoutWrapper({
   const handleSourcesClick = () => {
     setDrawerTab("sources");
     setDrawerOpen(true);
+  };
+
+  const handleDocumentOpen = () => {
+    if (containerRef.current) {
+      previousWidthRef.current = drawerWidth;
+      const containerWidth = containerRef.current.getBoundingClientRect().width;
+      setDrawerWidth(Math.round(containerWidth / 2));
+      setIsDocumentOpen(true);
+    }
+  };
+
+  const handleDocumentClose = () => {
+    setDrawerWidth(previousWidthRef.current);
+    setIsDocumentOpen(false);
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -216,6 +232,8 @@ export function AppLayoutWrapper({
         onClearQuote={onClearQuote}
         flowType={flowType}
         width={drawerOpen ? drawerWidth : undefined}
+        onDocumentOpen={handleDocumentOpen}
+        onDocumentClose={handleDocumentClose}
       />
     </div>
   );
