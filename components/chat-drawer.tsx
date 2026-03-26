@@ -43,7 +43,7 @@ interface ChatDrawerProps {
   onClearQuote?: () => void;
   prefillText?: string;
   width?: number;
-  flowType?: "brief" | "judicial";
+  onSendMessage?: (message: string) => void;
 }
 
 export function ChatDrawer({
@@ -73,6 +73,7 @@ export function ChatDrawer({
   prefillText,
   width,
   flowType = "brief",
+  onSendMessage,
 }: ChatDrawerProps) {
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const [inputValue, setInputValue] = React.useState("");
@@ -91,6 +92,13 @@ export function ChatDrawer({
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages, currentStep]);
+
+  // Auto-fill input when prefillText changes
+  React.useEffect(() => {
+    if (prefillText) {
+      setInputValue(prefillText);
+    }
+  }, [prefillText]);
 
   const handleSubmit = () => {
     if (inputValue.trim() || quotedText) {

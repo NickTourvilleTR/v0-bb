@@ -217,7 +217,7 @@ export function AppLayoutWrapper({
         quotedText={quotedText}
         onClearQuote={onClearQuote}
         prefillText={prefillText}
-        flowType={flowType}
+        onSendMessage={onSendMessage}
         width={drawerOpen ? drawerWidth : undefined}
       />
     </div>

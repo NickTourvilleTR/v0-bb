@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil } from "lucide-react";
+import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil, ExternalLink } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface Citation {
@@ -350,33 +350,32 @@ const judicialClaims: JudicialClaim[] = [
   {
     id: "breach-of-contract",
     title: "Breach of contract",
-    plaintiffSummary: "Plaintiff claims Richmond National breached the insurance policy by failing to pay benefits for their remediation claims even though they say they complied with the policy.",
+    plaintiffSummary: `The court in <a href="#" class="text-blue-600 underline"><em>McCormick v. Sentinel Life Ins. Co.</em> (Cal. App. 2nd Dist. 1984) 153 Cal. App. 3d 1030, 1046</a> said: "An insurance company has a duty to pay a claim when it has acquired, though one means or another, sufficient evidence to establish the validity of that claim. It does not have the right to insist the claim be proved only through certain types of evidence. Nor does it exhibit good faith in denying a claim merely because an insured failed to dot the i's or cross the t's on a claim for or other submission...the real question is whether there was enough evidence of whatever form and however acquired that it would be unreasonable for the insurance company to refuse to pay the claim." In <a href="#" class="text-blue-600 underline"><em>McCormick</em></a>, the court reversed the arbitrator's order granting the insurance company's motion for summary judgment.`,
     plaintiffPoints: [
-      "Plaintiff alleges they had a valid insurance contract with Richmond that required them to indemnify and pay benefits.",
-      "Plaintiff claims they performed all required conditions under the policy and therefore expected coverage, peace of mind, and financial protection.",
-      "Plaintiff says Defendant failed and refused to pay any benefits, causing damages.",
+      `The California Supreme Court in <a href="#" class="text-blue-600 underline"><em>Isaacson v. California Ins. Guarantee Assn</em> (Cal. 1988) supra at 791</a> said: "Accordingly, if an insurer 'erroneously denies coverage and/or improperly refuses to defend the insured' in violation of its contractual duties, 'the insured is entitled to make a reasonable settlement of the claim in good faith and may then maintain an action against the insurer to recover the amount of the settlement."`,
+      `The <a href="#" class="text-blue-600 underline"><em>Isaacson</em></a> court went onto say: "Further, if an insurer wrongfully fails to provide coverage or a defense, and the insured then settled the claim, the insured is given the benefit of an evidentiary presumption. In a later action against the insurer for reimbursement based on a breach of its contractual duty to defend the action, a reasonable settlement made by the insured to terminate the underlying claim against him may be used as presumptive evidence of the insured's liability on the underlying claim, and the amount of such liability."`,
+      "Thus, the amounts paid by PLAINTIFF in this case are presumptive evidence of PLAINTIFF'S and thus RNIC's liability.",
     ],
-    defendantSummary: "Richmond argues the breach of contract claim fails because the policy did not cover DG Plumbing's remediation costs, so denying the claim was not a breach.",
+    defendantSummary: `Under California law, non-compliance with a no voluntary payments provision may be excused when an insured is under duress regarding its legal interests. <a href="#" class="text-blue-600 underline"><em>Jamestown Builders, Inc. v. Gen. Star Indem. Co.</em>, 77 Cal. App. 4th 341, 348 (1999)</a> (cited by DG Plumbing). For example, non-compliance has been excused when an insured has to incur legal expenses to avoid a default judgment. See, e.g., <a href="#" class="text-blue-600 underline"><em>Fiorito v. Super. Ct.</em>, 226 Cal. App. 3d 433, 438 (1990)</a>. On the other hand, non-compliance has not been excused when, as here, an insured assumes amounts solely to protect its business interests.`,
     defendantPoints: [
-      "The policy only covers amounts the insured is legally required to pay as \"damages\", and Richmond argues these remediation expenses were voluntary cleanup costs, not court-ordered damages.",
-      "Richmond says there was no lawsuit or court order requiring DG Plumbing to pay these amounts, so the claim falls outside the policy's insuring agreement.",
-      "Richmond also argues DG Plumbing violated the policy's \"no voluntary payments\" provision by incurring remediation expenses without Richmond's consent, which independently bars coverage.",
+      `See, e.g., <a href="#" class="text-blue-600 underline"><em>Umpqua Bank v. First Am. Title Ins. Co.</em>, No. CIV. 2:09-3208 WBS, 2011 WL 4852229, at *9 (E.D. Cal. Oct. 12, 2011)</a> (holding that a bank's decision to settle a lawsuit was a business decision that did not fall within the exception), aff'd, <a href="#" class="text-blue-600 underline">542 F. App'x 635 (9th Cir. 2013)</a>; <a href="#" class="text-blue-600 underline"><em>Jamestown Builders</em>, 77 Cal. App. 4th at 344-45, 349</a> (holding that a developer's payments to repair water intrusion damages before any lawsuits were filed against it did not fall within the exception). For its part, DG Plumbing cites no authority holding that it faced the type of legal risks that allowed it to incur the Remediation Expenses without Richmond's consent. See Pl.'s Opp. at 10-11.`,
+      `Non-compliance with a no voluntary payments provision may also be excused when an insured is unaware of the identity of its insurer or the contents of the policy. <a href="#" class="text-blue-600 underline"><em>Jamestown Builders</em>, 77 Cal. App. 4th at 348</a>; see also <a href="#" class="text-blue-600 underline"><em>Corthera, Inc. v. Scottsdale Ins. Co.</em>, No. 14-CV-05014-EMC, 2016 WL 270951, at *9 (N.D. Cal. Jan. 22, 2016)</a> ('[T]he key is not the involuntary nature of the underlying obligation, but the involuntariness of not giving prior notice to the insurer as required by NVP clauses.'). Here, DG Plumbing was immediately aware of the need to notice the Water Leak to Richmond, but it decided to delay providing that notice.`,
+      "By voluntarily assuming the Remediation Expenses without Richmond's consent, DG Plumbing deprived Richmond of those standard contractual rights. DG Plumbing has no right under the Policy to unilaterally resolve a potential pre-'suit' claim based on DG Plumbing's own conclusion that it would be liable for the same.",
     ],
   },
   {
     id: "bad-faith",
-    title: "Bad faith",
-    plaintiffSummary: "Plaintiff claims Richmond acted in bad faith by unreasonably delaying, denying, and mishandling their insurance claim.",
+    title: "Breach of the implied covenant of good faith and fair dealing",
+    plaintiffSummary: `The true "bedrock" case pertaining to the circumstances in the present case is <a href="#" class="text-blue-600 underline"><em>Egan v. Mut of Omaha Ins. Co.</em> (Cal 1979) 24 Cal. 3d 809, 817</a>. In that case, the California Supreme Court said: "For the reasons discussed below, we conclude that an insurer may breach the covenant of good faith and fair dealing when it fails to properly investigate its insured claim." [Emphasis added.] The Egan court went onto say: "the insurer, when determining whether to settle a claim, must give at least as much consideration to the welfare of its insured as it gives to its own interest." <a href="#" class="text-blue-600 underline">Id. at 818</a>. "When the insurer unreasonably and in bad faith withholds payment of the claim of its insured it is subject to liability in tort. [Citations.] For the insurer to fulfill its obligation not to impair the right of the insured to receive the benefits of the agreement, it again must give at least as much consideration to the latter's interests as it does to its own." <a href="#" class="text-blue-600 underline">Id. at 818-819</a>.`,
     plaintiffPoints: [
-      "Plaintiff alleges Richmond wrongfully withheld benefits due under the policy, including by denying the claim and delaying payment without proper cause.",
-      "Richmond handled the claim unfairly by failing to investigate thoroughly, objectively, and fairly, delaying claim processing, misrepresenting policy terms, and failing to communicate properly.",
-      "Plaintiff further alleges Richmond violated California insurance statutes and claims-handling regulations, and that its conduct was intentional, malicious, and oppressive.",
+      `The Egan court explained: "The purchase of...insurance provides peace of mind and security...[Citation.] To protect these interests it is essential that an insurer fully inquire into possible bases that might support the insured's claim. Although we recognize that distinguishing fraudulent from legitimate claims may occasionally be difficult for insurers...an insurer cannot reasonably and in good faith deny payments to its insured without thoroughly investigating the foundation for its denial." <a href="#" class="text-blue-600 underline">Id. at 819</a>.`,
+      `As stated above, RNIC did almost nothing to investigate PLAINTIFF'S claim. They did not come to the job site and did not speak with the general contractor or any of the contractors who performed the water remediation and made the repairs. They simply denied the claim. (<a href="#" class="text-blue-600 underline">Gomez Dec, para 11</a>).`,
+      `PLAINTIFF'S expert, Kevin Quinley states: "In my 47 years of experience with insurance claims, liability insurers do not confine their investigative or settlement responsibilities to litigated cases; instead they routinely investigate, evaluate and settle pre-litigation claims where appropriate." (<a href="#" class="text-blue-600 underline">Quinley Dec, para 16</a>).`,
     ],
-    defendantSummary: "Richmond argues the bad faith claim fails because there can be no bad faith if there was no coverage owed under the policy.",
+    defendantSummary: `As explained in Richmond's opening brief, California law is well-settled that there cannot be bad faith when there is no covered loss. <a href="#" class="text-blue-600 underline">MTD Br. at 13-14</a> (citing cases). DG Plumbing does not dispute this conclusion, and in fact, cites authority confirming it. See <a href="#" class="text-blue-600 underline"><em>Love v. Fire Ins. Exch.</em>, 221 Cal. App. 3d 1136, 1153 (1990)</a> ("Our conclusion that a bad faith claim cannot be maintained unless policy benefits are due is in accord with the policy in which the duty of good faith is rooted."). Because there is no coverage for the Insurance Claim, there is no bad faith as a matter of law.`,
     defendantPoints: [
-      "Under California law, a bad faith claim generally requires that the insurer first owed benefits under the policy.",
-      "Because Richmond argues the policy did not cover the remediation expenses, it says DG Plumbing cannot show benefits were wrongfully withheld.",
-      "Richmond characterizes the bad faith claim as a \"tagalong\" claim that rises or falls with the contract claim, so if the contract claim is dismissed, the bad faith claim should be dismissed too.",
+      `DG Plumbing nonetheless maintains that Richmond is liable for bad faith because it purportedly failed to investigate the Insurance Claim. Pl.'s Opp. at 5-7. DG Plumbing's argument was rejected in a recent opinion issued in this District involving nearly identical facts. See <a href="#" class="text-blue-600 underline"><em>R.P. Ruiz</em>, 764 F. Supp. 3d at 944</a>. In R.P. Ruiz, an insured under a commercial general liability policy remediated deficient work at a project. <a href="#" class="text-blue-600 underline">Id. at 940-41</a>. The client never sued the insured. Id. Rather, the insured corrected the work at its own expense and then sought reimbursement under the insurance policy. <a href="#" class="text-blue-600 underline">Id. at 941</a>. The Court held that there was no indemnity coverage for the remediation expenses because they were not court-ordered damages. <a href="#" class="text-blue-600 underline">Id. at 944</a>. The Court also rejected the insured's claim that the insurer was liable in bad faith for failing to investigate the insurance claim--the Court concluded there was no mandatory duty under the policy to investigate any pre-"suit" claim and that there could be no bad faith without covered loss. <a href="#" class="text-blue-600 underline">Id. at 944, 946</a> (citations omitted). The Court dismissed with prejudice the contract and bad faith claims. <a href="#" class="text-blue-600 underline">Id. at 946</a>.`,
+      "In accordance with the authority cited in Richmond's opening brief and R.P. Ruiz, the Court does not need to scrutinize Richmond's specific theory of alleged bad faith to dismiss the count. But if the Court does consider it, the failure-to-investigate theory apparently depends on the illogical and false premise that the Insurance Claim is a first-party insurance claim that also involves the duty to defend under a third-party liability policy. DG Plumbing cites cases addressing both contexts,³ even though neither one actually applies to the Insurance Claim seeking indemnity under the third-party liability Policy.",
     ],
   },
 ];
@@ -482,23 +481,23 @@ export function SupportingAuthoritiesPanel({
                   {/* Single content row */}
                   <div className="flex border-b border-[#e5e5e5]">
                     <div className="w-1/2 px-5 py-4">
-                      <p className="mb-3 text-sm leading-relaxed text-[#212223]">{claim.plaintiffSummary}</p>
+                      <p className="mb-3 text-sm leading-relaxed text-[#212223]" dangerouslySetInnerHTML={{ __html: claim.plaintiffSummary }} />
                       <ul className="space-y-2">
                         {claim.plaintiffPoints.map((point, i) => (
                           <li key={i} className="flex gap-2 text-sm leading-relaxed text-[#212223]">
                             <span className="mt-0.5 shrink-0 text-[#737373]">•</span>
-                            <span>{point}</span>
+                            <span dangerouslySetInnerHTML={{ __html: point }} />
                           </li>
                         ))}
                       </ul>
                     </div>
                     <div className="w-1/2 border-l border-[#e5e5e5] px-5 py-4">
-                      <p className="mb-3 text-sm leading-relaxed text-[#212223]">{claim.defendantSummary}</p>
+                      <p className="mb-3 text-sm leading-relaxed text-[#212223]" dangerouslySetInnerHTML={{ __html: claim.defendantSummary }} />
                       <ul className="space-y-2">
                         {claim.defendantPoints.map((point, i) => (
                           <li key={i} className="flex gap-2 text-sm leading-relaxed text-[#212223]">
                             <span className="mt-0.5 shrink-0 text-[#737373]">•</span>
-                            <span>{point}</span>
+                            <span dangerouslySetInnerHTML={{ __html: point }} />
                           </li>
                         ))}
                       </ul>
@@ -511,9 +510,13 @@ export function SupportingAuthoritiesPanel({
                     <div className="flex items-center gap-6">
                       {(["plaintiff", "defendant", "neither"] as const).map((option) => {
                         const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
-                        const isFunctional = option === "plaintiff";
+                        // breach-of-contract: plaintiff is functional; bad-faith: neither is functional
+                        const isFunctional =
+                          claim.id === "bad-faith"
+                            ? option === "neither"
+                            : option === "plaintiff";
                         return (
-                          <label key={option} className={cn("flex items-center gap-2", isFunctional ? "cursor-pointer" : "cursor-[not-allowed] select-none")}>
+                          <label key={option} className={cn("flex items-center gap-2", isFunctional ? "cursor-pointer" : "cursor-not-allowed select-none")}>
                             <input
                               type="radio"
                               name={`decision-${claim.id}`}
@@ -522,7 +525,9 @@ export function SupportingAuthoritiesPanel({
                               onChange={() => {
                                 if (!isFunctional) return;
                                 setDecisions((prev) => ({ ...prev, [claim.id]: option }));
-                                setShowComment((prev) => ({ ...prev, [claim.id]: true }));
+                                if (claim.id !== "bad-faith") {
+                                  setShowComment((prev) => ({ ...prev, [claim.id]: true }));
+                                }
                               }}
                               onClick={(e) => { if (!isFunctional) e.preventDefault(); }}
                               className="accent-[#1d4b34] cursor-[inherit]"
@@ -533,8 +538,42 @@ export function SupportingAuthoritiesPanel({
                       })}
                     </div>
 
-                    {/* Comment area */}
-                    {commentVisible && (
+                    {/* Legal Research card — shown for bad-faith when Neither is selected */}
+                    {claim.id === "bad-faith" && decision === "neither" && (
+                      <div className="mt-4 rounded-lg border border-[#e5e5e5] bg-white p-5">
+                        <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
+                        <div className="space-y-4">
+                          <div className="text-sm leading-relaxed text-[#212223]">
+                            &hellip;To establish a claim for a breach of the implied covenant of good faith and fair dealing, Plaintiff must demonstrate (1) benefits due under the policy must have been withheld; and (2) the reason for withholding benefits must have been unreasonable or without proper cause.&hellip;
+                            <br />
+                            <a href="#" className="text-blue-600 hover:underline"><em>Wilshire Manor Apartments, LLC v. State Farm Gen. Ins. Co.</em>, 732 Fed. Appx. 613, 614 (9th Cir. 2018)</a>
+                          </div>
+                          <div className="text-sm leading-relaxed text-[#212223]">
+                            &hellip;California courts have held that when there is no breach of contract, there necessarily is no breach of the implied covenant of good faith and fair dealing.&hellip;
+                            <br />
+                            <a href="#" className="text-blue-600 hover:underline"><em>Razuki v. AmGUARD Ins. Co.</em>, No. 24-2352, 2025 WL 1604592, at *1 (9th Cir. June 6, 2025)</a>
+                          </div>
+                          <div className="text-sm leading-relaxed text-[#212223]">
+                            &hellip;It is clear that if there is no <em>potential</em> for coverage and, hence, no duty to defend under the terms of the policy, there can be no action for breach of the implied covenant of good faith and fair dealing because the covenant is based on the contractual relationship between the insured and the insurer.&hellip;
+                            <br />
+                            <a href="#" className="text-blue-600 hover:underline"><em>Waller</em>, 11 Cal. 4th at 36, 44 Cal.Rptr.2d 370, 900 P.2d 619</a>
+                          </div>
+                        </div>
+                        <div className="mt-4">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="rounded-full border-[#e5e5e5] bg-white px-4 text-[#212223] hover:bg-[#f7f7f7]"
+                          >
+                            Continue with AI Deep Research
+                            <ExternalLink className="ml-2 size-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Comment area — shown for non-bad-faith claims */}
+                    {claim.id !== "bad-faith" && commentVisible && (
                       <div className="mt-3">
                         {isEditing ? (
                           <div className="flex flex-col gap-2">
@@ -576,12 +615,25 @@ export function SupportingAuthoritiesPanel({
                       </div>
                     )}
 
-                    {/* Add comment button */}
-                    {!commentVisible && (
+                    {/* Add comment button — shown for non-bad-faith claims when no comment yet */}
+                    {claim.id !== "bad-faith" && !commentVisible && (
                       <div className="mt-3">
                         <button
                           onClick={() => setShowComment((prev) => ({ ...prev, [claim.id]: true }))}
                           className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                        >
+                          <MessageSquarePlus className="size-4 text-[#737373]" />
+                          Add comment
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Add comment button for bad-faith — shown always when decision is made */}
+                    {claim.id === "bad-faith" && decision && (
+                      <div className="mt-3">
+                        <button
+                          className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                          onClick={() => {}}
                         >
                           <MessageSquarePlus className="size-4 text-[#737373]" />
                           Add comment
