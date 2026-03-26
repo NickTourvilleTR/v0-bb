@@ -101,7 +101,7 @@ const judicial_claims_grouped = [
       },
       {
         id: "bad-faith-claim",
-        title: "Bad faith claim",
+        title: "Breach of the implied covenant of good faith and fair dealing",
         sourceFile: null,
         summary: "Plaintiff claims Richmond acted in bad faith by unreasonably delaying, denying, and mishandling their insurance claim.",
         points: [
@@ -130,7 +130,7 @@ const judicial_claims_grouped = [
       },
       {
         id: "bad-faith-defense",
-        title: "Bad Faith Claim",
+        title: "Breach of the implied covenant of good faith and fair dealing",
         sourceFile: "NOTICE OF MOTION AND MOTION to Dismiss Case",
         summary: "Richmond argues the bad faith claim fails because there can be no bad faith if there was no coverage owed under the policy.",
         points: [
