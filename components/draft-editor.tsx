@@ -19,6 +19,7 @@ import {
   Italic,
   Underline,
   MoreHorizontal,
+  Upload,
 } from "lucide-react";
 import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 
