@@ -1014,83 +1014,34 @@ function AuthenticatedApp() {
             >
               <div ref={scrollRef} className="flex-1 overflow-y-auto bg-white">
               <div className="mx-auto w-full max-w-3xl flex-1 px-6 py-8">
-                {/* Initial User Message - Always shown */}
-                <CocoChatMessage
-                  type="user"
-                  userName="Jane Lawson"
-                  timestamp="9:07 a.m."
-                  className="mb-6"
-                >
-                  <p className="text-[#212223]">
-                    {flowType === "judicial" ? "Help me with judicial drafting" : "Help me draft a legal brief"}
-                  </p>
-                </CocoChatMessage>
 
                 {/* Judicial Work Product Card */}
                 {flowType === "judicial" && isAtOrPast("judicial-work-product") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <JudicialWorkProductCard
                       onSubmit={handleWorkProductSubmit}
                       onQuote={handleQuote}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Motion Search Card */}
                 {flowType === "brief" && isAtOrPast("motion-search") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderCard
                       onSubmit={handleMotionSearchSubmit}
                       onQuote={handleQuote}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Brief Type Card - only for brief flow */}
                 {flowType === "brief" && isAtOrPast("brief-type") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderTypeCard
                       onSubmit={handleBriefTypeSubmit}
                     />
-                  </CocoChatMessage>
-                )}
-
-                {/* User brief type message - only for brief flow, only after selection */}
-                {flowType === "brief" && isAtOrPast("file-upload") && selectedBriefType && (
-                  <CocoChatMessage
-                    type="user"
-                    userName="Jane Lawson"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
-                    <p className="text-[#212223]">
-                      {{ primary: "Primary", opposition: "Opposition", reply: "Reply" }[selectedBriefType] ?? selectedBriefType}
-                    </p>
-                  </CocoChatMessage>
-                )}
-
-                {/* User "Opinion" message - only for judicial flow */}
-                {flowType === "judicial" && isAtOrPast("file-upload") && (
-                  <CocoChatMessage
-                    type="user"
-                    userName="Jane Lawson"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
-                    <p className="text-[#212223]">Opinion</p>
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* File Upload Card */}
@@ -1098,11 +1049,7 @@ function AuthenticatedApp() {
                   (flowType === "judicial" && isAtOrPast("file-upload")) ||
                   (flowType === "brief" && isAtOrPast("file-upload") && selectedBriefType)
                 ) && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderUploadCard
                       showFile={isAtOrPast("uploading")}
                       disabled={isAtOrPast("uploading")}
@@ -1112,48 +1059,36 @@ function AuthenticatedApp() {
                       tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
                       defaultFilesToUse={flowType === "judicial" ? judicialDefaultFiles : undefined}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Uploading/Analyzing Progress Card */}
                 {currentScreen === "uploading" && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderProgressCard 
                       progress={40} 
                       tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Combined Case Details and Additional Details Card */}
                 {isAtOrPast("case-details") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:25 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderCombinedDetailsCard
                       defaultParty={isAtOrPast("ready-to-build") ? "defendant2" : ""}
                       disabled={isAtOrPast("ready-to-build")}
                       onContinue={handleCaseDetailsContinue}
                       onSkip={handleCaseDetailsSkip}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Ready to Build Card */}
                 {isAtOrPast("ready-to-build") && !isAtOrPast("generating") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:36 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderReadyCard onStartBuilding={handleStartBuilding} />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* User "Start building" message */}
