@@ -366,17 +366,16 @@ const judicialClaims: JudicialClaim[] = [
   {
     id: "bad-faith",
     title: "Bad faith",
-    plaintiffSummary: "Plaintiff claims Richmond acted in bad faith by unreasonably delaying, denying, and mishandling their insurance claim.",
+    plaintiffSummary: "The true \"bedrock\" case pertaining to the circumstances in the present case is Egan v. Mut of Omaha Ins. Co. (Cal 1979) 24 Cal. 3d 809, 817. In that case, the California Supreme Court said: \"For the reasons discussed below, we conclude that an insurer may breach the covenant of good faith and fair dealing when it fails to properly investigate its insured claim.\" [Emphasis added.] The Egan court went onto say: \"the insurer, when determining whether to settle a claim, must give at least as much consideration to the welfare of its insured as it gives to its own interest.\" Id. at 818. \"When the insurer unreasonably and in bad faith withholds payment of the claim of its insured it is subject to liability in tort. [Citations.] For the insurer to fulfill its obligation not to impair the right of the insured to receive the benefits of the agreement, it again must give at least as much consideration to the latter's interests as it does to its own.\" Id. at 818-819.",
     plaintiffPoints: [
-      "Plaintiff alleges Richmond wrongfully withheld benefits due under the policy, including by denying the claim and delaying payment without proper cause.",
-      "Richmond handled the claim unfairly by failing to investigate thoroughly, objectively, and fairly, delaying claim processing, misrepresenting policy terms, and failing to communicate properly.",
-      "Plaintiff further alleges Richmond violated California insurance statutes and claims-handling regulations, and that its conduct was intentional, malicious, and oppressive.",
+      "The Egan court explained: \"The purchase of...insurance provides peace of mind and security...[Citation.] To protect these interests it is essential that an insurer fully inquire into possible bases that might support the insured's claim. Although we recognize that distinguishing fraudulent from legitimate claims may occasionally be difficult for insurers...an insurer cannot reasonably and in good faith deny payments to its insured without thoroughly investigating the foundation for its denial.\" Id. at 819.",
+      "As stated above, RNIC did almost nothing to investigate PLAINTIFF'S claim. They did not come to the job site and did not speak with the general contractor or any of the contractors who performed the water remediation and made the repairs. They simply denied the claim. (Gomez Dec, para 11).",
+      "PLAINTIFF'S expert, Kevin Quinley states: \"In my 47 years of experience with insurance claims, liability insurers do not confine their investigative or settlement responsibilities to litigated cases; instead they routinely investigate, evaluate and settle pre-litigation claims where appropriate.\" (Quinley Dec, para 16).",
     ],
-    defendantSummary: "Richmond argues the bad faith claim fails because there can be no bad faith if there was no coverage owed under the policy.",
+    defendantSummary: "As explained in Richmond's opening brief, California law is well-settled that there cannot be bad faith when there is no covered loss. MTD Br. at 13-14 (citing cases). DG Plumbing does not dispute this conclusion, and in fact, cites authority confirming it. See Love v. Fire Ins. Exch., 221 Cal. App. 3d 1136, 1153 (1990) (\"Our conclusion that a bad faith claim cannot be maintained unless policy benefits are due is in accord with the policy in which the duty of good faith is rooted.\"). Because there is no coverage for the Insurance Claim, there is no bad faith as a matter of law.",
     defendantPoints: [
-      "Under California law, a bad faith claim generally requires that the insurer first owed benefits under the policy.",
-      "Because Richmond argues the policy did not cover the remediation expenses, it says DG Plumbing cannot show benefits were wrongfully withheld.",
-      "Richmond characterizes the bad faith claim as a \"tagalong\" claim that rises or falls with the contract claim, so if the contract claim is dismissed, the bad faith claim should be dismissed too.",
+      "DG Plumbing nonetheless maintains that Richmond is liable for bad faith because it purportedly failed to investigate the Insurance Claim. Pl.'s Opp. at 5-7. DG Plumbing's argument was rejected in a recent opinion issued in this District involving nearly identical facts. See R.P. Ruiz, 764 F. Supp. 3d at 944. In R.P. Ruiz, an insured under a commercial general liability policy remediated deficient work at a project. Id. at 940-41. The client never sued the insured. Id. Rather, the insured corrected the work at its own expense and then sought reimbursement under the insurance policy. Id. at 941. The Court held that there was no indemnity coverage for the remediation expenses because they were not court-ordered damages. Id. at 944. The Court also rejected the insured's claim that the insurer was liable in bad faith for failing to investigate the insurance claim--the Court concluded there was no mandatory duty under the policy to investigate any pre-\"suit\" claim and that there could be no bad faith without covered loss. Id. at 944, 946 (citations omitted). The Court dismissed with prejudice the contract and bad faith claims. Id. at 946.",
+      "In accordance with the authority cited in Richmond's opening brief and R.P. Ruiz, the Court does not need to scrutinize Richmond's specific theory of alleged bad faith to dismiss the count. But if the Court does consider it, the failure-to-investigate theory apparently depends on the illogical and false premise that the Insurance Claim is a first-party insurance claim that also involves the duty to defend under a third-party liability policy. DG Plumbing cites cases addressing both contexts,\u00b3 even though neither one actually applies to the Insurance Claim seeking indemnity under the third-party liability Policy.",
     ],
   },
 ];
@@ -511,9 +510,13 @@ export function SupportingAuthoritiesPanel({
                     <div className="flex items-center gap-6">
                       {(["plaintiff", "defendant", "neither"] as const).map((option) => {
                         const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
-                        const isFunctional = option === "plaintiff";
+                        // breach-of-contract: plaintiff is functional; bad-faith: neither is functional
+                        const isFunctional =
+                          claim.id === "bad-faith"
+                            ? option === "neither"
+                            : option === "plaintiff";
                         return (
-                          <label key={option} className={cn("flex items-center gap-2", isFunctional ? "cursor-pointer" : "cursor-[not-allowed] select-none")}>
+                          <label key={option} className={cn("flex items-center gap-2", isFunctional ? "cursor-pointer" : "cursor-not-allowed select-none")}>
                             <input
                               type="radio"
                               name={`decision-${claim.id}`}
@@ -522,7 +525,9 @@ export function SupportingAuthoritiesPanel({
                               onChange={() => {
                                 if (!isFunctional) return;
                                 setDecisions((prev) => ({ ...prev, [claim.id]: option }));
-                                setShowComment((prev) => ({ ...prev, [claim.id]: true }));
+                                if (claim.id !== "bad-faith") {
+                                  setShowComment((prev) => ({ ...prev, [claim.id]: true }));
+                                }
                               }}
                               onClick={(e) => { if (!isFunctional) e.preventDefault(); }}
                               className="accent-[#1d4b34] cursor-[inherit]"
@@ -533,8 +538,37 @@ export function SupportingAuthoritiesPanel({
                       })}
                     </div>
 
-                    {/* Comment area */}
-                    {commentVisible && (
+                    {/* Legal Research card — shown for bad-faith when Neither is selected */}
+                    {claim.id === "bad-faith" && decision === "neither" && (
+                      <div className="mt-4 rounded-lg border border-[#e5e5e5] bg-white p-5">
+                        <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
+                        <ol className="space-y-3 pl-4">
+                          <li className="text-sm leading-relaxed text-[#212223]" style={{ listStyleType: "decimal" }}>
+                            To establish a claim for a breach of the implied covenant of good faith and fair dealing, Plaintiff must demonstrate (1) benefits due under the policy must have been withheld; and (2) the reason for withholding benefits must have been unreasonable or without proper cause.{" "}
+                            <em>Wilshire Manor Apartments, LLC v. State Farm Gen. Ins. Co.</em>, 732 Fed. Appx. 613, 614 (9th Cir. 2018)
+                          </li>
+                          <li className="text-sm leading-relaxed text-[#212223]" style={{ listStyleType: "decimal" }}>
+                            California courts have held that when there is no breach of contract, there necessarily is no breach of the implied covenant of good faith and fair dealing.{" "}
+                            <em>Razuki v. AmGUARD Ins. Co.</em>, No. 24-2352, 2025 WL 1604592, at *1 (9th Cir. June 6, 2025)
+                          </li>
+                          <li className="text-sm leading-relaxed text-[#212223]" style={{ listStyleType: "decimal" }}>
+                            It is clear that if there is no <em>potential</em> for coverage and, hence, no duty to defend under the terms of the policy, there can be no action for breach of the implied covenant of good faith and fair dealing because the covenant is based on the contractual relationship between the insured and the insurer.{" "}
+                            <em>Waller</em>, 11 Cal. 4th at 36, 44 Cal.Rptr.2d 370, 900 P.2d 619
+                          </li>
+                        </ol>
+                        <div className="mt-4">
+                          <Button
+                            size="sm"
+                            className="rounded-full bg-[#1d4b34] px-4 text-white hover:bg-[#163d2a]"
+                          >
+                            Continue with AI Deep Research
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Comment area — shown for non-bad-faith claims */}
+                    {claim.id !== "bad-faith" && commentVisible && (
                       <div className="mt-3">
                         {isEditing ? (
                           <div className="flex flex-col gap-2">
@@ -576,12 +610,25 @@ export function SupportingAuthoritiesPanel({
                       </div>
                     )}
 
-                    {/* Add comment button */}
-                    {!commentVisible && (
+                    {/* Add comment button — shown for non-bad-faith claims when no comment yet */}
+                    {claim.id !== "bad-faith" && !commentVisible && (
                       <div className="mt-3">
                         <button
                           onClick={() => setShowComment((prev) => ({ ...prev, [claim.id]: true }))}
                           className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                        >
+                          <MessageSquarePlus className="size-4 text-[#737373]" />
+                          Add comment
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Add comment button for bad-faith — shown when Neither is NOT selected */}
+                    {claim.id === "bad-faith" && decision !== "neither" && (
+                      <div className="mt-3">
+                        <button
+                          className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
+                          onClick={() => {}}
                         >
                           <MessageSquarePlus className="size-4 text-[#737373]" />
                           Add comment
