@@ -120,9 +120,17 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
         <div className="mx-auto max-w-3xl">
         {/* Judicial header — above the white card */}
         {flowType === "judicial" && (
-          <div className="mb-4">
-            <p className="text-xs uppercase tracking-wide text-[#737373]">Draft</p>
-            <h1 className="text-2xl font-semibold text-[#212223]">Review and edit your draft opinion</h1>
+          <div className="mx-auto mb-4 max-w-3xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">Draft</p>
+                <h1 className="text-2xl font-semibold text-[#212223]">Review and edit your draft opinion</h1>
+              </div>
+              <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] px-3 py-1.5 text-xs text-[#212223] hover:bg-[#f2f2f2]">
+                <Upload className="size-3" />
+                Upload files for styling
+              </button>
+            </div>
           </div>
         )}
 
