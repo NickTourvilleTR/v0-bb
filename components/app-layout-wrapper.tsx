@@ -149,8 +149,8 @@ export function AppLayoutWrapper({
       <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
         {children}
 
-        {/* Inline chat input - visible when drawer is closed */}
-        {!drawerOpen && onSendMessage && (
+        {/* Inline chat input - visible when drawer is closed OR when a non-chat tab is active */}
+        {(!drawerOpen || drawerTab !== "chat") && onSendMessage && (
           <div className="absolute bottom-4 left-1/2 z-20 w-full max-w-xl -translate-x-1/2 px-4">
             <form
               onSubmit={(e) => {
@@ -159,7 +159,9 @@ export function AppLayoutWrapper({
                 const value = input?.value.trim();
                 if (value) {
                   onSendMessage(value);
-                  setDrawerOpen(true);
+                  if (!drawerOpen) {
+                    setDrawerOpen(true);
+                  }
                   setDrawerTab("chat");
                   input.value = "";
                 }
