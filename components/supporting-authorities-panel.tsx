@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil, ExternalLink } from "lucide-react";
+import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil, ExternalLink, Sparkles } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface Citation {
@@ -507,7 +507,10 @@ export function SupportingAuthoritiesPanel({
                   {/* Legal research row for breach-of-contract — always visible */}
                   {claim.id === "breach-of-contract" && (
                     <div className="border-b border-[#e5e5e5] bg-white px-5 py-4">
-                      <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
+                      <div className="mb-3 flex items-center gap-1.5">
+                        <Sparkles className="size-4 text-orange-500" />
+                        <p className="text-sm font-semibold text-[#212223]">Legal research</p>
+                      </div>
                       <div className="space-y-4">
                         <div className="text-sm leading-relaxed text-[#212223]">
                           &hellip;To establish a breach of contract, Plaintiff must demonstrate (1) the existence of a valid contract, (2) Plaintiff&apos;s performance or excuse for nonperformance, (3) Defendant&apos;s breach of the contract, and (4) resulting damages to Plaintiff because of the breach.&hellip;
@@ -541,7 +544,10 @@ export function SupportingAuthoritiesPanel({
                   {/* Legal research row for bad-faith — always visible */}
                   {claim.id === "bad-faith" && (
                     <div className="border-b border-[#e5e5e5] bg-white px-5 py-4">
-                      <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
+                      <div className="mb-3 flex items-center gap-1.5">
+                        <Sparkles className="size-4 text-orange-500" />
+                        <p className="text-sm font-semibold text-[#212223]">Legal research</p>
+                      </div>
                       <div className="space-y-4">
                         <div className="text-sm leading-relaxed text-[#212223]">
                           &hellip;To establish a claim for a breach of the implied covenant of good faith and fair dealing, Plaintiff must demonstrate (1) benefits due under the policy must have been withheld; and (2) the reason for withholding benefits must have been unreasonable or without proper cause.&hellip;
