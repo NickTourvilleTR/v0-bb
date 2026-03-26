@@ -118,14 +118,24 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
       {/* Document Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-8">
         <div className="mx-auto max-w-3xl">
-        <div ref={contentRef} className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
-          {/* Header */}
-          <div className="mb-6">
-            <p className="text-xs uppercase tracking-wide text-[#737373]">DRAFT</p>
-            <h1 className="text-2xl font-semibold text-[#212223]">
-              Review and edit your draft {flowType === "judicial" ? "opinion" : "brief"}
-            </h1>
+        {/* Judicial header — above the white card */}
+        {flowType === "judicial" && (
+          <div className="mb-4">
+            <p className="text-xs uppercase tracking-wide text-[#737373]">Draft</p>
+            <h1 className="text-2xl font-semibold text-[#212223]">Review and edit your draft opinion</h1>
           </div>
+        )}
+
+        <div ref={contentRef} className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
+          {/* Header — brief only, stays inside the white card */}
+          {flowType !== "judicial" && (
+            <div className="mb-6">
+              <p className="text-xs uppercase tracking-wide text-[#737373]">DRAFT</p>
+              <h1 className="text-2xl font-semibold text-[#212223]">
+                Review and edit your draft brief
+              </h1>
+            </div>
+          )}
 
           {flowType === "judicial" ? (
             // JUDICIAL FLOW: OPINION CONTENT
