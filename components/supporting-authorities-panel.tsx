@@ -365,7 +365,7 @@ const judicialClaims: JudicialClaim[] = [
   },
   {
     id: "bad-faith",
-    title: "Bad faith",
+    title: "Breach of the implied covenant of good faith and fair dealing",
     plaintiffSummary: "The true \"bedrock\" case pertaining to the circumstances in the present case is Egan v. Mut of Omaha Ins. Co. (Cal 1979) 24 Cal. 3d 809, 817. In that case, the California Supreme Court said: \"For the reasons discussed below, we conclude that an insurer may breach the covenant of good faith and fair dealing when it fails to properly investigate its insured claim.\" [Emphasis added.] The Egan court went onto say: \"the insurer, when determining whether to settle a claim, must give at least as much consideration to the welfare of its insured as it gives to its own interest.\" Id. at 818. \"When the insurer unreasonably and in bad faith withholds payment of the claim of its insured it is subject to liability in tort. [Citations.] For the insurer to fulfill its obligation not to impair the right of the insured to receive the benefits of the agreement, it again must give at least as much consideration to the latter's interests as it does to its own.\" Id. at 818-819.",
     plaintiffPoints: [
       "The Egan court explained: \"The purchase of...insurance provides peace of mind and security...[Citation.] To protect these interests it is essential that an insurer fully inquire into possible bases that might support the insured's claim. Although we recognize that distinguishing fraudulent from legitimate claims may occasionally be difficult for insurers...an insurer cannot reasonably and in good faith deny payments to its insured without thoroughly investigating the foundation for its denial.\" Id. at 819.",
