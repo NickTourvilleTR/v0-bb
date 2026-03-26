@@ -446,7 +446,6 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 <div className="space-y-3">
                   {[
                     { id: "9th-circuit", label: "9th Circuit" },
-                    { id: "9th-circuit-federal", label: "9th Circuit and related federal" },
                     { id: "different", label: "Select different jurisdiction(s)" },
                   ].map((option) => (
                     <button
