@@ -75,7 +75,23 @@ export function ChatDrawer({
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const [inputValue, setInputValue] = React.useState("");
   const [internalQuotedText, setInternalQuotedText] = React.useState<string | null>(null);
+  const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
+  const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
+  const sourcesDropdownRef = React.useRef<HTMLDivElement>(null);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (sourcesDropdownRef.current && !sourcesDropdownRef.current.contains(event.target as Node)) {
+        setSourcesDropdownOpen(false);
+      }
+    }
+    if (sourcesDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [sourcesDropdownOpen]);
   
   // Use prop if provided, otherwise use internal state
   const quotedText = quotedTextProp ?? internalQuotedText;
@@ -347,34 +363,67 @@ export function ChatDrawer({
             {/* View dropdown */}
             <div className="flex items-center gap-2">
               <span className="text-sm text-[#737373]">View:</span>
-              <button className="inline-flex items-center gap-1.5 rounded-full border border-[#1d4b34] px-3 py-1 text-sm font-medium text-[#1d4b34]">
-                Uploaded documents
-                <ChevronDown className="size-3.5" />
-              </button>
+              <div ref={sourcesDropdownRef} className="relative">
+                <button
+                  onClick={() => setSourcesDropdownOpen(!sourcesDropdownOpen)}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#1d4b34] px-3 py-1 text-sm font-medium text-[#1d4b34]"
+                >
+                  {sourcesView === "uploaded" ? "Uploaded documents" : "Cases & statutes"}
+                  <ChevronDown className={cn("size-3.5 transition-transform", sourcesDropdownOpen && "rotate-180")} />
+                </button>
+                {sourcesDropdownOpen && (
+                  <div className="absolute left-0 top-full z-50 mt-1 min-w-[200px] overflow-hidden rounded-lg border border-[#e5e5e5] bg-white shadow-lg">
+                    <button
+                      onClick={() => { setSourcesView("uploaded"); setSourcesDropdownOpen(false); }}
+                      className={cn(
+                        "flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-[#f7f7f7]",
+                        sourcesView === "uploaded" ? "font-medium text-[#212223]" : "text-[#737373]"
+                      )}
+                    >
+                      Uploaded documents
+                    </button>
+                    <button
+                      onClick={() => { setSourcesView("cases"); setSourcesDropdownOpen(false); }}
+                      className={cn(
+                        "flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-[#f7f7f7]",
+                        sourcesView === "cases" ? "font-medium text-[#212223]" : "text-[#737373]"
+                      )}
+                    >
+                      Cases & statutes
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Document list */}
-            <div className="flex flex-col gap-1">
-              {[
-                { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
-                { name: "Gyant v. NFM - Answer.pdf", time: "9:17 a.m." },
-                { name: "Hansen Deposition.pdf", time: "9:17 a.m." },
-                { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", time: "9:17 a.m." },
-                { name: "ROR Letter.docx", time: "9:17 a.m." },
-                { name: "Letter to NFM Dated September 19, 2023.docx", time: "9:17 a.m." },
-              ].map((doc) => (
-                <button
-                  key={doc.name}
-                  className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
-                >
-                  <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
-                    <p className="text-xs text-[#737373]">Uploaded at {doc.time}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
+            {sourcesView === "uploaded" && (
+              <div className="flex flex-col gap-1">
+                {[
+                  { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
+                  { name: "Gyant v. NFM - Answer.pdf", time: "9:17 a.m." },
+                  { name: "Hansen Deposition.pdf", time: "9:17 a.m." },
+                  { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", time: "9:17 a.m." },
+                  { name: "ROR Letter.docx", time: "9:17 a.m." },
+                  { name: "Letter to NFM Dated September 19, 2023.docx", time: "9:17 a.m." },
+                ].map((doc) => (
+                  <button
+                    key={doc.name}
+                    className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
+                  >
+                    <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
+                      <p className="text-xs text-[#737373]">Uploaded at {doc.time}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {sourcesView === "cases" && (
+              <div className="text-sm text-[#737373]">No cases or statutes yet.</div>
+            )}
           </div>
         )}
 
