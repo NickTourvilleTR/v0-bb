@@ -504,6 +504,68 @@ export function SupportingAuthoritiesPanel({
                     </div>
                   </div>
 
+                  {/* Legal research row for breach-of-contract — always visible */}
+                  {claim.id === "breach-of-contract" && (
+                    <div className="border-b border-[#e5e5e5] bg-white px-5 py-4">
+                      <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
+                      <ol className="list-decimal space-y-3 pl-5 text-sm leading-relaxed text-[#212223]">
+                        <li>
+                          To establish a breach of contract, Plaintiff must demonstrate (1) the existence of a valid contract, (2) Plaintiff&apos;s performance or excuse for nonperformance, (3) Defendant&apos;s breach of the contract, and (4) resulting damages to Plaintiff because of the breach. <a href="#" className="text-[#6366f1] underline"><em>Pyramid Techs., Inc. v. Hartford Cas. Ins. Co.</em>, 752 F. 3d 807, 818 (9th Cir. 2014)</a> (citing <a href="#" className="text-[#6366f1] underline"><em>Abdelhamid v. Fire Ins. Exch.</em>, 182 Cal.App.4th 990, 106 Cal. Rptr. 3d 26, 33 (2010)</a>).
+                        </li>
+                        <li>
+                          Moreover, when an insurer is moving to dismiss a plaintiff&apos;s complaint based on the language of the insurance policy, it must establish conclusively that this language &quot;unambiguously negates beyond reasonable controversy the construction alleged in the body of the complaint.&quot; <a href="#" className="text-[#6366f1] underline"><em>Palacin v. Allstate Ins. Co.</em>, 119 Cal. App. 4th 855, 862, 14 Cal.Rptr.3d 731 (2004)</a> (citing <a href="#" className="text-[#6366f1] underline"><em>Columbia Cas. Co. v. Nw Nat&apos;l. Ins. Co.</em>, 231 Cal. App. 3d 457, 468, 282 Cal.Rptr. 389 (1991)</a>).
+                        </li>
+                        <li>
+                          To meet this burden, Defendant must show that the language in the policy supporting their position is &quot;so clear that parole evidence would be inadmissible to refute it.&quot; <a href="#" className="text-[#6366f1] underline"><em>Id.</em></a> (citing <a href="#" className="text-[#6366f1] underline">231 Cal. App. 3d at 469, 282 Cal.Rptr. 389</a>).
+                        </li>
+                      </ol>
+                      <div className="mt-4">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-full border-[#e5e5e5] bg-white px-4 text-[#212223] hover:bg-[#f7f7f7]"
+                        >
+                          Continue with AI Deep Research
+                          <ExternalLink className="ml-2 size-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Legal research row for bad-faith — always visible */}
+                  {claim.id === "bad-faith" && (
+                    <div className="border-b border-[#e5e5e5] bg-white px-5 py-4">
+                      <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
+                      <div className="space-y-4">
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;To establish a claim for a breach of the implied covenant of good faith and fair dealing, Plaintiff must demonstrate (1) benefits due under the policy must have been withheld; and (2) the reason for withholding benefits must have been unreasonable or without proper cause.&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Wilshire Manor Apartments, LLC v. State Farm Gen. Ins. Co.</em>, 732 Fed. Appx. 613, 614 (9th Cir. 2018)</a>
+                        </div>
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;California courts have held that when there is no breach of contract, there necessarily is no breach of the implied covenant of good faith and fair dealing.&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Razuki v. AmGUARD Ins. Co.</em>, No. 24-2352, 2025 WL 1604592, at *1 (9th Cir. June 6, 2025)</a>
+                        </div>
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;It is clear that if there is no <em>potential</em> for coverage and, hence, no duty to defend under the terms of the policy, there can be no action for breach of the implied covenant of good faith and fair dealing because the covenant is based on the contractual relationship between the insured and the insurer.&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Waller</em>, 11 Cal. 4th at 36, 44 Cal.Rptr.2d 370, 900 P.2d 619</a>
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-full border-[#e5e5e5] bg-white px-4 text-[#212223] hover:bg-[#f7f7f7]"
+                        >
+                          Continue with AI Deep Research
+                          <ExternalLink className="ml-2 size-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Decision row — full width, header background, no column divider */}
                   <div className="bg-[#ebf0ed] px-5 py-4">
                     <p className="mb-3 text-sm font-semibold text-[#212223]">Decision:</p>
@@ -537,40 +599,6 @@ export function SupportingAuthoritiesPanel({
                         );
                       })}
                     </div>
-
-                    {/* Legal Research card — shown for bad-faith when Neither is selected */}
-                    {claim.id === "bad-faith" && decision === "neither" && (
-                      <div className="mt-4 rounded-lg border border-[#e5e5e5] bg-white p-5">
-                        <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
-                        <div className="space-y-4">
-                          <div className="text-sm leading-relaxed text-[#212223]">
-                            &hellip;To establish a claim for a breach of the implied covenant of good faith and fair dealing, Plaintiff must demonstrate (1) benefits due under the policy must have been withheld; and (2) the reason for withholding benefits must have been unreasonable or without proper cause.&hellip;
-                            <br />
-                            <a href="#" className="text-blue-600 hover:underline"><em>Wilshire Manor Apartments, LLC v. State Farm Gen. Ins. Co.</em>, 732 Fed. Appx. 613, 614 (9th Cir. 2018)</a>
-                          </div>
-                          <div className="text-sm leading-relaxed text-[#212223]">
-                            &hellip;California courts have held that when there is no breach of contract, there necessarily is no breach of the implied covenant of good faith and fair dealing.&hellip;
-                            <br />
-                            <a href="#" className="text-blue-600 hover:underline"><em>Razuki v. AmGUARD Ins. Co.</em>, No. 24-2352, 2025 WL 1604592, at *1 (9th Cir. June 6, 2025)</a>
-                          </div>
-                          <div className="text-sm leading-relaxed text-[#212223]">
-                            &hellip;It is clear that if there is no <em>potential</em> for coverage and, hence, no duty to defend under the terms of the policy, there can be no action for breach of the implied covenant of good faith and fair dealing because the covenant is based on the contractual relationship between the insured and the insurer.&hellip;
-                            <br />
-                            <a href="#" className="text-blue-600 hover:underline"><em>Waller</em>, 11 Cal. 4th at 36, 44 Cal.Rptr.2d 370, 900 P.2d 619</a>
-                          </div>
-                        </div>
-                        <div className="mt-4">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="rounded-full border-[#e5e5e5] bg-white px-4 text-[#212223] hover:bg-[#f7f7f7]"
-                          >
-                            Continue with AI Deep Research
-                            <ExternalLink className="ml-2 size-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    )}
 
                     {/* Comment area — shown for non-bad-faith claims */}
                     {claim.id !== "bad-faith" && commentVisible && (
