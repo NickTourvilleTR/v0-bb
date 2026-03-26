@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { gyantComplaintPages } from "@/lib/document-content";
 import { Logo } from "@/components/logo";
 import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Download, Reply, Flag, Grip, Mail, ArrowLeft, Undo2, Redo2, ZoomIn, ZoomOut, ExternalLink } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -89,7 +90,6 @@ export function ChatDrawer({
   const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
   const [openedDocument, setOpenedDocument] = React.useState<{ name: string; time: string } | null>(null);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const totalPages = 25;
   const sourcesDropdownRef = React.useRef<HTMLDivElement>(null);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
@@ -477,66 +477,67 @@ export function ChatDrawer({
             </div>
 
             {/* Toolbar */}
-            <div className="flex items-center justify-between rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
-              <div className="flex items-center gap-1">
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <Undo2 className="size-4" />
-                </button>
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <Redo2 className="size-4" />
-                </button>
-                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <ZoomOut className="size-4" />
-                </button>
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <ZoomIn className="size-4" />
-                </button>
-                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <Download className="size-4" />
-                </button>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-[#737373]">{currentPage} of {totalPages}</span>
-                <button
-                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                  disabled={currentPage === 1}
-                  className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223] disabled:opacity-30"
-                >
-                  <ChevronLeft className="size-4" />
-                </button>
-                <button
-                  onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                  disabled={currentPage === totalPages}
-                  className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223] disabled:opacity-30"
-                >
-                  <ChevronRight className="size-4" />
-                </button>
-              </div>
-            </div>
+            {(() => {
+              const pages = openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : [];
+              const totalPages = pages.length || 1;
+              const currentPageData = pages[currentPage - 1];
+              return (
+                <>
+                  <div className="flex items-center justify-between rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+                    <div className="flex items-center gap-1">
+                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                        <Undo2 className="size-4" />
+                      </button>
+                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                        <Redo2 className="size-4" />
+                      </button>
+                      <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                        <ZoomOut className="size-4" />
+                      </button>
+                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                        <ZoomIn className="size-4" />
+                      </button>
+                      <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                      <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                        <Download className="size-4" />
+                      </button>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-[#737373]">{currentPage} of {totalPages}</span>
+                      <button
+                        onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                        disabled={currentPage === 1}
+                        className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223] disabled:opacity-30"
+                      >
+                        <ChevronLeft className="size-4" />
+                      </button>
+                      <button
+                        onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                        disabled={currentPage === totalPages}
+                        className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223] disabled:opacity-30"
+                      >
+                        <ChevronRight className="size-4" />
+                      </button>
+                    </div>
+                  </div>
 
-            {/* Document Content */}
-            <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
-              <h2 className="mb-4 text-xl font-bold text-[#212223]">Gyant v. NFM</h2>
-              <ul className="list-disc space-y-4 pl-5 text-sm leading-relaxed text-[#212223]">
-                <li>
-                  {"This lawsuit stems from National Fire & Marine Insurance Company's (NFM's) failure to timely and properly investigate and adjust Gyant Properties, LLC's (Gyant's) claims for damage to 3 properties insured by NFM."}
-                </li>
-                <li>
-                  {"Gyant is a commercial property owner of, at the time of this policy, 26 separate premises. NFM purportedly issued an insurance policy to Gyant for these 26 premises, including the properties located at 4804 Bryant Irvin Ct. Fort Worth (\"Bryant Irvin\" property), 3316-3328 Stuart Dr. Fort Worth (\"Stuart\" property), and 1100-1136 E. Seminary Drive, Fort Worth (\"Seminary\" property)."}
-                </li>
-                <li>
-                  {"Gyant made claims for hail damage to these properties arising out of a hailstorm on or about March 16, 2023. NFM's own claim files and documents show that the acknowledgement of claims, investigation of claims, the adjustment of the claims, and the settlement practices of these claims by NFM violated several provisions of Chapter 541 and 542 of the Texas Insurance Code, as a matter of law."}
-                </li>
-                <li>
-                  {"NFM judicially admitted that it sold and issued an insurance policy (Policy No. 12PRM086299-02) to Gyant Properties, LLC. See Appendix 003."}
-                </li>
-                <li>
-                  {"NFM judicially admitted that the policy provided coverage for \"covered losses\""}
-                </li>
-              </ul>
-            </div>
+                  {/* Document Content */}
+                  <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
+                    {currentPageData ? (
+                      <>
+                        <p className="mb-4 text-xs text-[#737373]">{currentPageData.pageHeader}</p>
+                        <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
+                          {currentPageData.content}
+                        </div>
+                      </>
+                    ) : (
+                      <p className="text-sm text-[#737373]">No content available for this page.</p>
+                    )}
+                  </div>
+                </>
+              );
+            })()}
           </div>
         )}
 
