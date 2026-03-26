@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil, ExternalLink, Sparkles, Reply } from "lucide-react";
+import { Notebook, List, ScanEye, Plus, Pencil, ExternalLink, Sparkles, Reply } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface Citation {
@@ -410,7 +410,12 @@ export function SupportingAuthoritiesPanel({
     Object.fromEntries(judicialClaims.map((c) => [c.id, null]))
   );
   const [comments, setComments] = React.useState<Record<string, string>>(
-    Object.fromEntries(judicialClaims.map((c) => [c.id, "Accordingly, the Court DENIES Defendant's Motion as to Plaintiff's breach of contract claim WITHOUT PREJUDICE."]))
+    Object.fromEntries(judicialClaims.map((c) => [
+      c.id,
+      c.id === "bad-faith"
+        ? ""
+        : "Accordingly, the Court DENIES Defendant's Motion as to Plaintiff's breach of contract claim WITHOUT PREJUDICE.",
+    ]))
   );
   const [editingComment, setEditingComment] = React.useState<Record<string, boolean>>(
     Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
@@ -627,9 +632,7 @@ export function SupportingAuthoritiesPanel({
                               onChange={() => {
                                 if (!isFunctional) return;
                                 setDecisions((prev) => ({ ...prev, [claim.id]: option }));
-                                if (claim.id !== "bad-faith") {
-                                  setShowComment((prev) => ({ ...prev, [claim.id]: true }));
-                                }
+                                setShowComment((prev) => ({ ...prev, [claim.id]: true }));
                               }}
                               onClick={(e) => { if (!isFunctional) e.preventDefault(); }}
                               className="accent-[#1d4b34] cursor-[inherit]"
@@ -640,8 +643,8 @@ export function SupportingAuthoritiesPanel({
                       })}
                     </div>
 
-                    {/* Comment area — shown for non-bad-faith claims */}
-                    {claim.id !== "bad-faith" && commentVisible && (
+                    {/* Comment area — shown when a decision is made */}
+                    {commentVisible && (
                       <div className="mt-3">
                         {isEditing ? (
                           <div className="flex flex-col gap-2">
@@ -683,31 +686,7 @@ export function SupportingAuthoritiesPanel({
                       </div>
                     )}
 
-  {/* Add reasoning button — shown for non-bad-faith claims when no comment yet */}
-  {claim.id !== "bad-faith" && !commentVisible && (
-    <div className="mt-3">
-      <button
-        onClick={() => setCommentVisible(true)}
-        className="flex items-center gap-2 text-sm text-[#0066CC] hover:underline"
-      >
-        <MessageSquarePlus className="size-4 text-[#737373]" />
-        Add reasoning
-      </button>
-    </div>
-  )}
 
-  {/* Add reasoning button for bad-faith — shown whenever comment is not yet visible */}
-  {claim.id === "bad-faith" && !commentVisible && (
-    <div className="mt-3">
-      <button
-        onClick={() => setCommentVisible(true)}
-        className="flex items-center gap-2 text-sm text-[#0066CC] hover:underline"
-      >
-        <MessageSquarePlus className="size-4 text-[#737373]" />
-        Add reasoning
-      </button>
-    </div>
-  )}
                   </div>
                 </div>
               </div>
