@@ -408,7 +408,7 @@ export function SupportingAuthoritiesPanel({
     Object.fromEntries(judicialClaims.map((c) => [c.id, null]))
   );
   const [comments, setComments] = React.useState<Record<string, string>>(
-    Object.fromEntries(judicialClaims.map((c) => [c.id, "Motion to Dismiss denied"]))
+    Object.fromEntries(judicialClaims.map((c) => [c.id, "Cause of action denied"]))
   );
   const [editingComment, setEditingComment] = React.useState<Record<string, boolean>>(
     Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
