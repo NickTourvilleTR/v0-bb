@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil } from "lucide-react";
+import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil, ExternalLink } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface Citation {
@@ -562,9 +562,11 @@ export function SupportingAuthoritiesPanel({
                         <div className="mt-4">
                           <Button
                             size="sm"
-                            className="rounded-full bg-[#1d4b34] px-4 text-white hover:bg-[#163d2a]"
+                            variant="outline"
+                            className="rounded-full border-[#e5e5e5] bg-white px-4 text-[#212223] hover:bg-[#f7f7f7]"
                           >
                             Continue with AI Deep Research
+                            <ExternalLink className="ml-2 size-4" />
                           </Button>
                         </div>
                       </div>
