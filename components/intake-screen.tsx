@@ -402,7 +402,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     <div className="flex items-start gap-3">
                       <CircleCheck className="mt-0.5 size-4 shrink-0 text-[#737373]" />
                       <div>
-                        <p className="text-sm font-medium text-[#212223]">Verify files</p>
+                        <p className="text-sm font-medium text-[#212223]">Verify uploaded filings</p>
                         <p className="mt-0.5 text-xs text-[#737373]">Check citations in the uploaded documents</p>
                       </div>
                     </div>
@@ -446,7 +446,6 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 <div className="space-y-3">
                   {[
                     { id: "9th-circuit", label: "9th Circuit" },
-                    { id: "9th-circuit-federal", label: "9th Circuit and related federal" },
                     { id: "different", label: "Select different jurisdiction(s)" },
                   ].map((option) => (
                     <button
