@@ -236,6 +236,7 @@ export function AppLayoutWrapper({
         width={drawerOpen ? drawerWidth : undefined}
         onDocumentOpen={handleDocumentOpen}
         onDocumentClose={handleDocumentClose}
+        onTabChange={setDrawerTab}
       />
     </div>
   );

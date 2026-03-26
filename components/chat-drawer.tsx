@@ -45,6 +45,7 @@ interface ChatDrawerProps {
   flowType?: "brief" | "judicial";
   onDocumentOpen?: () => void;
   onDocumentClose?: () => void;
+  onTabChange?: (tab: "chat" | "notes" | "versions" | "sources") => void;
 }
 
 export function ChatDrawer({
@@ -75,8 +76,13 @@ export function ChatDrawer({
   flowType = "brief",
   onDocumentOpen,
   onDocumentClose,
+  onTabChange,
 }: ChatDrawerProps) {
-  const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
+  const [activeTab, setActiveTabInternal] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
+  const setActiveTab = React.useCallback((tab: "chat" | "notes" | "versions" | "sources") => {
+    setActiveTabInternal(tab);
+    onTabChange?.(tab);
+  }, [onTabChange]);
   const [inputValue, setInputValue] = React.useState("");
   const [internalQuotedText, setInternalQuotedText] = React.useState<string | null>(null);
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
@@ -104,7 +110,7 @@ export function ChatDrawer({
   const quotedText = quotedTextProp ?? internalQuotedText;
 
   React.useEffect(() => {
-    setActiveTab(defaultTab);
+    setActiveTabInternal(defaultTab);
   }, [defaultTab]);
 
   React.useEffect(() => {
