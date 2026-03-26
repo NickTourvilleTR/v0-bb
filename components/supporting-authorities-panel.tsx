@@ -542,20 +542,23 @@ export function SupportingAuthoritiesPanel({
                     {claim.id === "bad-faith" && decision === "neither" && (
                       <div className="mt-4 rounded-lg border border-[#e5e5e5] bg-white p-5">
                         <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
-                        <ol className="space-y-3 pl-4">
-                          <li className="text-sm leading-relaxed text-[#212223]" style={{ listStyleType: "decimal" }}>
-                            To establish a claim for a breach of the implied covenant of good faith and fair dealing, Plaintiff must demonstrate (1) benefits due under the policy must have been withheld; and (2) the reason for withholding benefits must have been unreasonable or without proper cause.{" "}
-                            <em>Wilshire Manor Apartments, LLC v. State Farm Gen. Ins. Co.</em>, 732 Fed. Appx. 613, 614 (9th Cir. 2018)
-                          </li>
-                          <li className="text-sm leading-relaxed text-[#212223]" style={{ listStyleType: "decimal" }}>
-                            California courts have held that when there is no breach of contract, there necessarily is no breach of the implied covenant of good faith and fair dealing.{" "}
-                            <em>Razuki v. AmGUARD Ins. Co.</em>, No. 24-2352, 2025 WL 1604592, at *1 (9th Cir. June 6, 2025)
-                          </li>
-                          <li className="text-sm leading-relaxed text-[#212223]" style={{ listStyleType: "decimal" }}>
-                            It is clear that if there is no <em>potential</em> for coverage and, hence, no duty to defend under the terms of the policy, there can be no action for breach of the implied covenant of good faith and fair dealing because the covenant is based on the contractual relationship between the insured and the insurer.{" "}
-                            <em>Waller</em>, 11 Cal. 4th at 36, 44 Cal.Rptr.2d 370, 900 P.2d 619
-                          </li>
-                        </ol>
+                        <div className="space-y-4">
+                          <div className="text-sm leading-relaxed text-[#212223]">
+                            &hellip;To establish a claim for a breach of the implied covenant of good faith and fair dealing, Plaintiff must demonstrate (1) benefits due under the policy must have been withheld; and (2) the reason for withholding benefits must have been unreasonable or without proper cause.&hellip;
+                            <br />
+                            <a href="#" className="text-blue-600 hover:underline"><em>Wilshire Manor Apartments, LLC v. State Farm Gen. Ins. Co.</em>, 732 Fed. Appx. 613, 614 (9th Cir. 2018)</a>
+                          </div>
+                          <div className="text-sm leading-relaxed text-[#212223]">
+                            &hellip;California courts have held that when there is no breach of contract, there necessarily is no breach of the implied covenant of good faith and fair dealing.&hellip;
+                            <br />
+                            <a href="#" className="text-blue-600 hover:underline"><em>Razuki v. AmGUARD Ins. Co.</em>, No. 24-2352, 2025 WL 1604592, at *1 (9th Cir. June 6, 2025)</a>
+                          </div>
+                          <div className="text-sm leading-relaxed text-[#212223]">
+                            &hellip;It is clear that if there is no <em>potential</em> for coverage and, hence, no duty to defend under the terms of the policy, there can be no action for breach of the implied covenant of good faith and fair dealing because the covenant is based on the contractual relationship between the insured and the insurer.&hellip;
+                            <br />
+                            <a href="#" className="text-blue-600 hover:underline"><em>Waller</em>, 11 Cal. 4th at 36, 44 Cal.Rptr.2d 370, 900 P.2d 619</a>
+                          </div>
+                        </div>
                         <div className="mt-4">
                           <Button
                             size="sm"
