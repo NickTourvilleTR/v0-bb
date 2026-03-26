@@ -628,8 +628,8 @@ export function SupportingAuthoritiesPanel({
     </div>
   )}
 
-  {/* Add reasoning button for bad-faith — shown always when decision is made */}
-  {claim.id === "bad-faith" && decision && (
+  {/* Add reasoning button for bad-faith — shown whenever comment is not yet visible */}
+  {claim.id === "bad-faith" && !commentVisible && (
     <div className="mt-3">
       <button
         onClick={() => setCommentVisible(true)}
