@@ -623,8 +623,8 @@ export function SupportingAuthoritiesPanel({
                       </div>
                     )}
 
-                    {/* Add comment button for bad-faith — shown when Neither is NOT selected */}
-                    {claim.id === "bad-faith" && decision !== "neither" && (
+                    {/* Add comment button for bad-faith — shown always when decision is made */}
+                    {claim.id === "bad-faith" && decision && (
                       <div className="mt-3">
                         <button
                           className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
