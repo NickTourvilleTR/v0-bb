@@ -397,7 +397,9 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 flex gap-3">
+                <div className="mt-4 flex flex-col gap-3">
+                  <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">Suggestions:</p>
+                  <div className="flex gap-3">
                   <div className="flex flex-1 items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
                     <div className="flex items-start gap-3">
                       <CircleCheck className="mt-0.5 size-4 shrink-0 text-[#737373]" />
@@ -417,6 +419,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                       </div>
                     </div>
                     <ChevronRight className="mt-0.5 size-4 shrink-0 text-[#737373]" />
+                  </div>
                   </div>
                 </div>
               </QuotableCard>

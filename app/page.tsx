@@ -850,6 +850,7 @@ function AuthenticatedApp() {
                 onNextOutline={handleNextOutline}
                 onSkipToGenerateDraft={handleGenerateDraft}
                 onEditOutline={handleNextOutline}
+                onQuote={handleQuote}
               />
             </div>
           </AppLayoutWrapper>

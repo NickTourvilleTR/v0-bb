@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil, ExternalLink } from "lucide-react";
+import { Notebook, List, ScanEye, Plus, MessageSquarePlus, Pencil, ExternalLink, Sparkles, Reply } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface Citation {
@@ -360,7 +360,7 @@ const judicialClaims: JudicialClaim[] = [
     defendantPoints: [
       `See, e.g., <a href="#" class="text-blue-600 underline"><em>Umpqua Bank v. First Am. Title Ins. Co.</em>, No. CIV. 2:09-3208 WBS, 2011 WL 4852229, at *9 (E.D. Cal. Oct. 12, 2011)</a> (holding that a bank's decision to settle a lawsuit was a business decision that did not fall within the exception), aff'd, <a href="#" class="text-blue-600 underline">542 F. App'x 635 (9th Cir. 2013)</a>; <a href="#" class="text-blue-600 underline"><em>Jamestown Builders</em>, 77 Cal. App. 4th at 344-45, 349</a> (holding that a developer's payments to repair water intrusion damages before any lawsuits were filed against it did not fall within the exception). For its part, DG Plumbing cites no authority holding that it faced the type of legal risks that allowed it to incur the Remediation Expenses without Richmond's consent. See Pl.'s Opp. at 10-11.`,
       `Non-compliance with a no voluntary payments provision may also be excused when an insured is unaware of the identity of its insurer or the contents of the policy. <a href="#" class="text-blue-600 underline"><em>Jamestown Builders</em>, 77 Cal. App. 4th at 348</a>; see also <a href="#" class="text-blue-600 underline"><em>Corthera, Inc. v. Scottsdale Ins. Co.</em>, No. 14-CV-05014-EMC, 2016 WL 270951, at *9 (N.D. Cal. Jan. 22, 2016)</a> ('[T]he key is not the involuntary nature of the underlying obligation, but the involuntariness of not giving prior notice to the insurer as required by NVP clauses.'). Here, DG Plumbing was immediately aware of the need to notice the Water Leak to Richmond, but it decided to delay providing that notice.`,
-      "By voluntarily assuming the Remediation Expenses without Richmond's consent, DG Plumbing deprived Richmond of those standard contractual rights. DG Plumbing has no right under the Policy to unilaterally resolve a potential pre-'suit' claim based on DG Plumbing's own conclusion that it would be liable for the same.",
+      "Compl. ¶¶ 9-10 (reporting the Water Leak to its broker on the same date it was discovered). For that reason, DG Plumbing also cannot prove as a matter of law that the Remediation Expenses were involuntary. See, e.g., <a href=\"#\" class=\"text-blue-600 underline\"><em>AMCO Ins. Co. v. Morfe</em>, No. CV 12-2323 DSF (PLAx), 2017 WL 11630629, at *3 (C.D. Cal. Jan. 25, 2017)</a> (\"When there is no genuine dispute as to any material fact, the voluntariness of unauthorized payments can be decided as a matter of law.\"), aff'd, <a href=\"#\" class=\"text-blue-600 underline\">749 F. App'x 531 (9th Cir. 2018)</a>.\nIn truth, DG Plumbing's position depends on the false premise that it did not have the option to allow a lawsuit, if any, to be filed against it. Pl.'s Opp. at 11. DG Plumbing, again, cites no authority in support of its position. However, it does cite a case rejecting that position. See <a href=\"#\" class=\"text-blue-600 underline\"><em>San Francisco Bay Area Rapid Transit Dist. v. Nat'l Union Fire Ins. Co.</em>, No. 20-CV-04468-EMC, 2021 WL 6113191, at *9 (N.D. Cal. Dec. 27, 2021)</a> (cited by DG Plumbing) (\"Under [the insured's] argument, no settlement made under pressure of any litigation risk would be voluntary.\"). DG Plumbing gets this wrong because it is ignoring a recognized purpose of the no voluntary payments provision: preservation of the insurer's contractual right to completely control and direct the defense or compromise of a covered suit against the insured. <a href=\"#\" class=\"text-blue-600 underline\"><em>Insua v. Scottsdale Ins. Co.</em>, 104 Cal. App. 4th 737, 742 (2002)</a> (quotation omitted); see also <a href=\"#\" class=\"text-blue-600 underline\"><em>San Francisco Bay Area Rapid Transit Dist.</em>, 2021 WL 6113191, at *8</a> (citation omitted) (\"The point of the clause is to permit the insurer's participation in a settlement that would present a risk of exposure to the insured.\"). By voluntarily assuming the Remediation Expenses without Richmond's consent, DG Plumbing deprived Richmond of those standard contractual rights. DG Plumbing has no right under the Policy to unilaterally resolve a potential pre-\"suit\" claim based on DG Plumbing's own conclusion that it would be liable for the same.\nAccordingly, none of the risks that DG Plumbing allegedly faced excused its failure to comply with the Policy's no voluntary payments provision.",
     ],
   },
   {
@@ -388,6 +388,7 @@ interface SupportingAuthoritiesPanelProps {
   onNextOutline?: () => void;
   onSkipToGenerateDraft?: () => void;
   onEditOutline?: () => void;
+  onQuote?: (text: string) => void;
   flowType?: "brief" | "judicial";
 }
 
@@ -396,6 +397,7 @@ export function SupportingAuthoritiesPanel({
   onNextOutline,
   onSkipToGenerateDraft,
   onEditOutline,
+  onQuote,
   flowType = "brief",
 }: SupportingAuthoritiesPanelProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
@@ -408,12 +410,15 @@ export function SupportingAuthoritiesPanel({
     Object.fromEntries(judicialClaims.map((c) => [c.id, null]))
   );
   const [comments, setComments] = React.useState<Record<string, string>>(
-    Object.fromEntries(judicialClaims.map((c) => [c.id, "Cause of action denied"]))
+    Object.fromEntries(judicialClaims.map((c) => [c.id, "Accordingly, the Court DENIES Defendant's Motion as to Plaintiff's breach of contract claim WITHOUT PREJUDICE."]))
   );
   const [editingComment, setEditingComment] = React.useState<Record<string, boolean>>(
     Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
   );
   const [showComment, setShowComment] = React.useState<Record<string, boolean>>(
+    Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
+  );
+  const [hoveredDecision, setHoveredDecision] = React.useState<Record<string, boolean>>(
     Object.fromEntries(judicialClaims.map((c) => [c.id, false]))
   );
 
@@ -504,9 +509,106 @@ export function SupportingAuthoritiesPanel({
                     </div>
                   </div>
 
+                  {/* Legal research row for breach-of-contract — always visible */}
+                  {claim.id === "breach-of-contract" && (
+                    <div className="border-b border-[#e5e5e5] bg-white px-5 py-4">
+                      <div className="mb-3 flex items-center gap-1.5">
+                        <Sparkles className="size-4 text-orange-500" />
+                        <p className="text-sm font-semibold text-[#212223]">Legal research</p>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;To establish a breach of contract, Plaintiff must demonstrate (1) the existence of a valid contract, (2) Plaintiff&apos;s performance or excuse for nonperformance, (3) Defendant&apos;s breach of the contract, and (4) resulting damages to Plaintiff because of the breach.&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Pyramid Techs., Inc. v. Hartford Cas. Ins. Co.</em>, 752 F. 3d 807, 818 (9th Cir. 2014)</a> (citing <a href="#" className="text-[#6366f1] underline"><em>Abdelhamid v. Fire Ins. Exch.</em>, 182 Cal.App.4th 990, 106 Cal. Rptr. 3d 26, 33 (2010)</a>).
+                        </div>
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;Moreover, when an insurer is moving to dismiss a plaintiff&apos;s complaint based on the language of the insurance policy, it must establish conclusively that this language &quot;unambiguously negates beyond reasonable controversy the construction alleged in the body of the complaint.&quot;&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Palacin v. Allstate Ins. Co.</em>, 119 Cal. App. 4th 855, 862, 14 Cal.Rptr.3d 731 (2004)</a> (citing <a href="#" className="text-[#6366f1] underline"><em>Columbia Cas. Co. v. Nw Nat&apos;l. Ins. Co.</em>, 231 Cal. App. 3d 457, 468, 282 Cal.Rptr. 389 (1991)</a>).
+                        </div>
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;To meet this burden, Defendant must show that the language in the policy supporting their position is &quot;so clear that parole evidence would be inadmissible to refute it.&quot;&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Id.</em></a> (citing <a href="#" className="text-[#6366f1] underline">231 Cal. App. 3d at 469, 282 Cal.Rptr. 389</a>).
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-full border-[#e5e5e5] bg-white px-4 text-[#212223] hover:bg-[#f7f7f7]"
+                        >
+                          Continue with AI Deep Research
+                          <ExternalLink className="ml-2 size-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Legal research row for bad-faith — always visible */}
+                  {claim.id === "bad-faith" && (
+                    <div className="border-b border-[#e5e5e5] bg-white px-5 py-4">
+                      <div className="mb-3 flex items-center gap-1.5">
+                        <Sparkles className="size-4 text-orange-500" />
+                        <p className="text-sm font-semibold text-[#212223]">Legal research</p>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;To establish a claim for a breach of the implied covenant of good faith and fair dealing, Plaintiff must demonstrate (1) benefits due under the policy must have been withheld; and (2) the reason for withholding benefits must have been unreasonable or without proper cause.&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Wilshire Manor Apartments, LLC v. State Farm Gen. Ins. Co.</em>, 732 Fed. Appx. 613, 614 (9th Cir. 2018)</a>
+                        </div>
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;California courts have held that when there is no breach of contract, there necessarily is no breach of the implied covenant of good faith and fair dealing.&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Razuki v. AmGUARD Ins. Co.</em>, No. 24-2352, 2025 WL 1604592, at *1 (9th Cir. June 6, 2025)</a>
+                        </div>
+                        <div className="text-sm leading-relaxed text-[#212223]">
+                          &hellip;It is clear that if there is no <em>potential</em> for coverage and, hence, no duty to defend under the terms of the policy, there can be no action for breach of the implied covenant of good faith and fair dealing because the covenant is based on the contractual relationship between the insured and the insurer.&hellip;
+                          <br />
+                          <a href="#" className="text-[#6366f1] underline"><em>Waller</em>, 11 Cal. 4th at 36, 44 Cal.Rptr.2d 370, 900 P.2d 619</a>
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-full border-[#e5e5e5] bg-white px-4 text-[#212223] hover:bg-[#f7f7f7]"
+                        >
+                          Continue with AI Deep Research
+                          <ExternalLink className="ml-2 size-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Decision row — full width, header background, no column divider */}
-                  <div className="bg-[#ebf0ed] px-5 py-4">
-                    <p className="mb-3 text-sm font-semibold text-[#212223]">Decision:</p>
+                  <div
+                    className="relative bg-[#ebf0ed] px-5 py-4"
+                    onMouseEnter={() => setHoveredDecision((prev) => ({ ...prev, [claim.id]: true }))}
+                    onMouseLeave={() => setHoveredDecision((prev) => ({ ...prev, [claim.id]: false }))}
+                  >
+                    {hoveredDecision[claim.id] && onQuote && (
+                      <button
+                        onClick={() => onQuote(
+                          claim.id === "breach-of-contract"
+                            ? "Decision on breach of contract"
+                            : "Decision on breach of the implied covenant of good faith and fair dealing"
+                        )}
+                        className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
+                        title="Quote this message"
+                      >
+                        <Reply className="size-4" />
+                      </button>
+                    )}
+                    <div className="mb-3">
+                      <p className="text-sm font-semibold text-[#212223]">
+                        {claim.id === "breach-of-contract"
+                          ? "Decision on breach of contract:"
+                          : "Decision on breach of the implied covenant of good faith and fair dealing:"}
+                      </p>
+                    </div>
                     <div className="flex items-center gap-6">
                       {(["plaintiff", "defendant", "neither"] as const).map((option) => {
                         const labels = { plaintiff: "Agree with Plaintiff", defendant: "Agree with Defendant", neither: "Neither" };
@@ -537,40 +639,6 @@ export function SupportingAuthoritiesPanel({
                         );
                       })}
                     </div>
-
-                    {/* Legal Research card — shown for bad-faith when Neither is selected */}
-                    {claim.id === "bad-faith" && decision === "neither" && (
-                      <div className="mt-4 rounded-lg border border-[#e5e5e5] bg-white p-5">
-                        <p className="mb-3 text-sm font-semibold text-[#212223]">Legal research</p>
-                        <div className="space-y-4">
-                          <div className="text-sm leading-relaxed text-[#212223]">
-                            &hellip;To establish a claim for a breach of the implied covenant of good faith and fair dealing, Plaintiff must demonstrate (1) benefits due under the policy must have been withheld; and (2) the reason for withholding benefits must have been unreasonable or without proper cause.&hellip;
-                            <br />
-                            <a href="#" className="text-blue-600 hover:underline"><em>Wilshire Manor Apartments, LLC v. State Farm Gen. Ins. Co.</em>, 732 Fed. Appx. 613, 614 (9th Cir. 2018)</a>
-                          </div>
-                          <div className="text-sm leading-relaxed text-[#212223]">
-                            &hellip;California courts have held that when there is no breach of contract, there necessarily is no breach of the implied covenant of good faith and fair dealing.&hellip;
-                            <br />
-                            <a href="#" className="text-blue-600 hover:underline"><em>Razuki v. AmGUARD Ins. Co.</em>, No. 24-2352, 2025 WL 1604592, at *1 (9th Cir. June 6, 2025)</a>
-                          </div>
-                          <div className="text-sm leading-relaxed text-[#212223]">
-                            &hellip;It is clear that if there is no <em>potential</em> for coverage and, hence, no duty to defend under the terms of the policy, there can be no action for breach of the implied covenant of good faith and fair dealing because the covenant is based on the contractual relationship between the insured and the insurer.&hellip;
-                            <br />
-                            <a href="#" className="text-blue-600 hover:underline"><em>Waller</em>, 11 Cal. 4th at 36, 44 Cal.Rptr.2d 370, 900 P.2d 619</a>
-                          </div>
-                        </div>
-                        <div className="mt-4">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="rounded-full border-[#e5e5e5] bg-white px-4 text-[#212223] hover:bg-[#f7f7f7]"
-                          >
-                            Continue with AI Deep Research
-                            <ExternalLink className="ml-2 size-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    )}
 
                     {/* Comment area — shown for non-bad-faith claims */}
                     {claim.id !== "bad-faith" && commentVisible && (
@@ -628,8 +696,8 @@ export function SupportingAuthoritiesPanel({
     </div>
   )}
 
-  {/* Add reasoning button for bad-faith — shown always when decision is made */}
-  {claim.id === "bad-faith" && decision && (
+  {/* Add reasoning button for bad-faith — shown whenever comment is not yet visible */}
+  {claim.id === "bad-faith" && !commentVisible && (
     <div className="mt-3">
       <button
         onClick={() => setCommentVisible(true)}

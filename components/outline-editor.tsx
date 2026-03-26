@@ -95,22 +95,29 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-6">
-        <div ref={contentRef} className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8">
-          {/* Header */}
-          <div className="mb-1 flex items-center justify-between">
-            <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">
-              OUTLINE
-            </p>
-            {flowType === "judicial" && (
+        {/* Judicial header — above the white card */}
+        {flowType === "judicial" && (
+          <div className="mx-auto mb-4 max-w-3xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">Outline</p>
+                <h1 className="text-2xl font-semibold text-[#212223]">Review and edit your outline</h1>
+              </div>
               <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] px-3 py-1.5 text-xs text-[#212223] hover:bg-[#f2f2f2]">
                 <Upload className="size-3" />
                 Upload an outline
               </button>
-            )}
+            </div>
           </div>
-          
-          {flowType === "brief" ? (
+        )}
+
+        <div ref={contentRef} className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8">
+          {flowType === "brief" && (
             <>
+              {/* Header — brief only, stays inside the white card */}
+              <div className="mb-1">
+                <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">OUTLINE</p>
+              </div>
               <h1 className="mb-2 text-3xl font-bold text-[#212223]">
                 Motion to Dismiss First Amended Complaint
               </h1>
@@ -118,10 +125,6 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                 Defendant Defendant — Love v. Airbnb, Inc., et al., No. 2:25-cv-01779-AB(KSx) (C.D. Cal.)
               </p>
             </>
-          ) : (
-            <h1 className="mb-6 text-2xl font-semibold text-[#212223]">
-              Review and edit your outline
-            </h1>
           )}
 
           {flowType === "judicial" ? (
