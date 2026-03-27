@@ -112,7 +112,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-6">
         {/* Judicial header — above the white card */}
         {flowType === "judicial" && (
-          <div className="mx-auto mb-4 max-w-3xl" style={{ width: `${zoom}%`, maxWidth: "none" }}>
+          <div className="mx-auto mb-4" style={{ width: `min(${zoom}%, calc(100% - 2rem))`, maxWidth: "100%" }}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">Outline</p>
@@ -129,7 +129,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
         <div
           ref={contentRef}
           className="mx-auto rounded-lg border border-[#e5e5e5] bg-white p-6"
-          style={{ width: `${zoom}%`, maxWidth: "none" }}
+          style={{ width: `min(${zoom}%, calc(100% - 2rem))`, maxWidth: "100%" }}
         >
           {flowType === "brief" && (
             <>
