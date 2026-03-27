@@ -7,6 +7,7 @@ import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, Chev
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { sourcesData } from "@/lib/sources-data";
 
 interface Message {
   id: string;
@@ -78,6 +79,7 @@ export function ChatDrawer({
   const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const [inputValue, setInputValue] = React.useState("");
   const [internalQuotedText, setInternalQuotedText] = React.useState<string | null>(null);
+  const [sourceView, setSourceView] = React.useState<"uploadedDocuments" | "casesAndStatutes">("uploadedDocuments");
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
   
   // Use prop if provided, otherwise use internal state
@@ -361,7 +363,45 @@ export function ChatDrawer({
         )}
 
         {activeTab === "sources" && (
-          <div className="text-sm text-[#737373]">No sources yet.</div>
+          <div className="space-y-4">
+            {/* View Selector Dropdown */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-[#212223]">View:</span>
+              <button className="flex items-center gap-2 rounded-full border border-[#cccccc] bg-white px-3 py-1.5 text-sm text-[#212223] hover:bg-[#f2f2f2]">
+                <span>
+                  {sourceView === "uploadedDocuments" ? "Uploaded documents" : "Cases and statutes"}
+                </span>
+                <ChevronDown className="size-4 text-[#737373]" />
+              </button>
+            </div>
+
+            {/* Uploaded Documents View */}
+            {sourceView === "uploadedDocuments" && (
+              <div className="space-y-2">
+                {sourcesData.uploadedDocuments.map((doc, idx) => (
+                  <div key={idx} className="flex items-start gap-3 rounded-lg border border-[#e5e5e5] p-3 hover:bg-[#f9f9f9]">
+                    <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
+                      <p className="text-xs text-[#737373]">Uploaded at {doc.uploadedAt}.</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Cases and Statutes View */}
+            {sourceView === "casesAndStatutes" && (
+              <div className="space-y-2">
+                {sourcesData.casesAndStatutes.map((item, idx) => (
+                  <div key={idx} className="rounded-lg border border-[#e5e5e5] p-3 hover:bg-[#f9f9f9]">
+                    <p className="text-sm font-medium text-[#212223] break-words">{item.citation}</p>
+                    <p className="text-xs text-[#737373] mt-1">{item.topic}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         )}
 
         {activeTab === "versions" && (
