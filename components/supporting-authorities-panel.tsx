@@ -656,13 +656,30 @@ export function SupportingAuthoritiesPanel({
         {/* Main content column */}
         <div className="flex-1">
           {/* Header */}
-          <div className="mb-6">
+          <div className="mb-8">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-              {flowType === "judicial" ? "DECIDE" : "SUPPORTING AUTHORITIES"}
+              {flowType === "judicial" ? "DECIDE" : "DEVELOP ARGUMENTS"}
             </p>
-            <h1 className="text-2xl font-semibold text-[#212223]">
-              {flowType === "judicial" ? "Indicate how you would like to resolve the disputes" : "Select the desired authorities"}
+            <h1 className="mb-4 text-2xl font-semibold text-[#212223]">
+              {flowType === "judicial" ? "Indicate how you would like to resolve the disputes" : "Add and organize relevant facts and authorities"}
             </h1>
+            {flowType !== "judicial" && (
+              <>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  Review the supporting and contrary facts and authorities to bolster your arguments. Move the authority and fact cards below to outline each argument, and use the{" "}
+                  <span className="font-medium">View related</span> buttons to find additional support for each statement. Use{" "}
+                  <span className="font-medium">Add facts or authorities</span> to find new facts and authorities.
+                </p>
+                <div className="flex gap-4">
+                  <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
+                    Expand all
+                  </button>
+                  <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
+                    Collapse all
+                  </button>
+                </div>
+              </>
+            )}
           </div>
 
         {/* Argument Sections */}
