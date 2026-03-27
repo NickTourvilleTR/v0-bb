@@ -736,18 +736,10 @@ export function SupportingAuthoritiesPanel({
                       </div>
                       
                       {/* Citation name with badge slot */}
-                      <div className="mb-4 flex items-center gap-2">
-                        <Checkbox
-                          checked={selectedCitations.includes(citation.id)}
-                          onCheckedChange={() => toggleCitation(citation.id)}
-                          className="border-[#737373] data-[state=checked]:border-[#2e6b5c] data-[state=checked]:bg-[#2e6b5c]"
-                        />
-                        <a href="#" className="inline-flex items-center gap-1 text-sm font-medium text-[#2e6b5c] underline hover:text-[#1d4b34]">
+                      <div className="mb-1 flex items-center gap-2">
+                        <a href="#" className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 underline hover:text-blue-800">
                           {citation.caseName}
-                          <svg className="size-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3.5 1.5H10.5V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                            <path d="M10.5 1.5L1.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                          <ExternalLink className="size-3.5" />
                         </a>
                         {/* Badge slot - empty for now */}
                         <div className="flex gap-1">
