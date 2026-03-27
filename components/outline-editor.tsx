@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { 
   Undo2, 
   Redo2, 
-  Plus, 
   Minus, 
   Bold, 
   Italic, 
@@ -13,7 +12,8 @@ import {
   MoreHorizontal,
   ChevronDown,
   ChevronUp,
-  Upload
+  Upload,
+  Plus,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
@@ -26,6 +26,8 @@ interface OutlineEditorProps {
 
 export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: OutlineEditorProps) {
   const [expandedSections, setExpandedSections] = React.useState<string[]>(flowType === "judicial" ? ["factual-procedural"] : ["preliminary-statement"]);
+  const [zoom, setZoom] = React.useState(150);
+  const zoomLevels = [75, 100, 125, 150, 175, 200];
   const contentRef = React.useRef<HTMLDivElement>(null);
   const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
 
@@ -49,10 +51,26 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
         </Button>
         
         <div className="mx-2 h-5 w-px bg-[#e5e5e5]" />
-        
-        <Button variant="ghost" size="icon" className="size-8 text-[#737373] hover:text-[#212223]">
-          <Plus className="size-4" />
-        </Button>
+
+        {/* Zoom control */}
+        <div className="flex items-center">
+          <button
+            onClick={() => setZoom(z => Math.max(zoomLevels[0], zoomLevels[zoomLevels.indexOf(z) - 1] ?? zoomLevels[0]))}
+            className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+          >
+            <Minus className="size-3" />
+          </button>
+          <span className="min-w-[3rem] text-center text-sm text-[#212223]">{zoom}%</span>
+          <button
+            onClick={() => setZoom(z => Math.min(zoomLevels[zoomLevels.length - 1], zoomLevels[zoomLevels.indexOf(z) + 1] ?? zoomLevels[zoomLevels.length - 1]))}
+            className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+          >
+            <Plus className="size-3" />
+          </button>
+          <button className="flex items-center gap-0.5 rounded px-1 py-1 text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]">
+            <ChevronDown className="size-3" />
+          </button>
+        </div>
         
         <div className="mx-2 h-5 w-px bg-[#e5e5e5]" />
         
@@ -97,7 +115,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-6">
         {/* Judicial header — above the white card */}
         {flowType === "judicial" && (
-          <div className="mx-auto mb-4 max-w-3xl">
+          <div className="mx-auto mb-4 max-w-3xl" style={{ width: `${zoom}%`, maxWidth: "none" }}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">Outline</p>
@@ -111,7 +129,11 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
           </div>
         )}
 
-        <div ref={contentRef} className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8">
+        <div
+          ref={contentRef}
+          className="mx-auto rounded-lg border border-[#e5e5e5] bg-white p-8"
+          style={{ width: `${zoom}%`, maxWidth: "none" }}
+        >
           {flowType === "brief" && (
             <>
               {/* Header — brief only, stays inside the white card */}
@@ -840,15 +862,16 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
             </>
           )}
 
-          {/* Bottom Action Button */}
-          <div className="flex items-center justify-center gap-3 pt-8">
-            <Button
-              onClick={onNextDraft}
-              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-            >
-              Next: Draft
-            </Button>
-          </div>
+        </div>
+
+        {/* Bottom Action Button — on gray background, outside white card */}
+        <div className="flex items-center justify-center gap-3 py-8">
+          <Button
+            onClick={onNextDraft}
+            className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+          >
+            Next: Draft
+          </Button>
         </div>
       </div>
       <SelectionContextMenu
