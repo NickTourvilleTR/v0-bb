@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply } from "lucide-react";
+import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, RotateCcw, Move, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 
@@ -393,6 +393,163 @@ interface SupportingAuthoritiesPanelProps {
   flowType?: "brief" | "judicial";
 }
 
+function CitationSubCard({ citation }: { citation: Citation }) {
+  return (
+    <div className="rounded-lg border border-[#e5e5e5] bg-white p-5">
+      {/* Type label and description */}
+      <div className="mb-4">
+        <p className="mb-1 text-sm font-semibold text-[#212223]">
+          {citation.type === "authority" ? "Supporting authority" : "Supporting fact"}
+        </p>
+        <p className="text-sm leading-relaxed text-[#212223]">{citation.description}</p>
+      </div>
+
+      {/* Citation name with badge slot */}
+      <div className="mb-1 flex items-center gap-2">
+        <a href="#" className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 underline hover:text-blue-800">
+          {citation.caseName}
+          <ExternalLink className="size-3.5" />
+        </a>
+        {/* Badge slot - empty for now */}
+        <div className="flex gap-1" />
+      </div>
+
+      {/* Citation reference */}
+      {citation.caseRef && (
+        <p className="mb-4 text-sm text-[#737373]">{citation.caseRef}</p>
+      )}
+
+      {/* Summary, Relevance, Need to Know */}
+      <div className="space-y-4 border-t border-[#e5e5e5] pt-4">
+        <div>
+          <p className="text-sm font-semibold text-[#212223]">Summary:</p>
+          <p className="mt-1 text-sm leading-relaxed text-[#212223]">{citation.summary}</p>
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-[#212223]">Relevance:</p>
+          <p className="mt-1 text-sm leading-relaxed text-[#212223]">{citation.relevance}</p>
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-[#212223]">Need to Know:</p>
+          <p className="mt-1 text-sm leading-relaxed text-[#212223]">{citation.needToKnow}</p>
+        </div>
+      </div>
+
+      {/* View related authorities button */}
+      <div className="mt-4 border-t border-[#e5e5e5] pt-4">
+        <Button
+          variant="outline"
+          size="sm"
+          className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
+        >
+          View related authorities
+          <ExternalLink className="ml-2 size-3" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function AuthorityCard({
+  authority,
+  groupNumber,
+  isFirstInGroup,
+  isFirstEntry,
+}: {
+  authority: Authority;
+  groupNumber: number;
+  isFirstInGroup: boolean;
+  isFirstEntry: boolean;
+  selectedCitations: string[];
+  toggleCitation: (id: string) => void;
+}) {
+  const [hovered, setHovered] = React.useState(false);
+  const [collapsed, setCollapsed] = React.useState(false);
+
+  return (
+    <div className={!isFirstEntry ? (isFirstInGroup ? "mt-10" : "mt-8") : ""}>
+      {/* Main section header */}
+      {isFirstInGroup && (
+        <h2 className="mb-4 text-lg font-semibold text-[#212223]">
+          {groupNumber}. {authority.title}
+        </h2>
+      )}
+
+      {/* Gray card */}
+      <div
+        className={cn(
+          "rounded-lg border bg-[#f5f7f6] p-4 transition-colors",
+          hovered ? "border-[#2e6b5c]" : "border-[#e5e5e5]"
+        )}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {/* Card header row: drag dots + title + action icons */}
+        <div className="mb-4 flex items-center gap-2">
+          {/* Drag handle */}
+          <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3]" />
+
+          {/* Sub-argument heading */}
+          {authority.subTitle && (
+            <h3 className="flex-1 text-base font-semibold text-[#212223]">
+              {authority.subTitle}
+            </h3>
+          )}
+
+          {/* Action icons — always reserve space, only show on hover */}
+          <div className={cn("flex items-center gap-1 transition-opacity", hovered ? "opacity-100" : "opacity-0")}>
+            <button
+              className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
+              title="Revert"
+            >
+              <RotateCcw className="size-3.5" />
+            </button>
+            <button
+              className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
+              title="Move"
+            >
+              <Move className="size-4" />
+            </button>
+            <button
+              className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-red-600"
+              title="Delete"
+            >
+              <Trash2 className="size-4" />
+            </button>
+            <button
+              className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
+              title={collapsed ? "Expand" : "Collapse"}
+              onClick={() => setCollapsed((c) => !c)}
+            >
+              {collapsed ? <ChevronDown className="size-4" /> : <ChevronUp className="size-4" />}
+            </button>
+          </div>
+
+          {/* Collapse chevron always visible (outside hover group) */}
+          {!hovered && (
+            <button
+              className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
+              title={collapsed ? "Expand" : "Collapse"}
+              onClick={() => setCollapsed((c) => !c)}
+            >
+              {collapsed ? <ChevronDown className="size-4" /> : <ChevronUp className="size-4" />}
+            </button>
+          )}
+        </div>
+
+        {/* White sub-cards */}
+        {!collapsed && (
+          <div className="space-y-4">
+            {authority.citations.map((citation) => (
+              <CitationSubCard key={citation.id} citation={citation} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function SupportingAuthoritiesPanel({
   className,
   onNextOutline,
@@ -706,84 +863,15 @@ export function SupportingAuthoritiesPanel({
             const isFirstEntry = authorityIndex === 0;
 
             return (
-            <div key={authority.id} className={!isFirstEntry ? (isFirstInGroup ? "mt-10" : "mt-8") : ""}>
-              {/* Main section header — only shown once per unique title */}
-              {isFirstInGroup && (
-                <h2 className="mb-4 text-lg font-semibold text-[#212223]">
-                  {groupNumber}. {authority.title}
-                </h2>
-              )}
-              
-              {/* Gray card container for sub-argument */}
-              <div className="rounded-lg border border-[#e5e5e5] bg-[#f5f7f6] p-4">
-                {/* Sub-argument heading inside gray card */}
-                {authority.subTitle && (
-                  <h3 className="mb-4 text-base font-semibold text-[#212223]">
-                    {authority.subTitle}
-                  </h3>
-                )}
-                
-                {/* White sub-cards for each citation */}
-                <div className="space-y-4">
-                  {authority.citations.map((citation) => (
-                    <div key={citation.id} className="rounded-lg border border-[#e5e5e5] bg-white p-5">
-                      {/* Top section: Type label and description */}
-                      <div className="mb-4">
-                        <p className="mb-1 text-sm font-semibold text-[#212223]">
-                          {citation.type === "authority" ? "Supporting authority" : "Supporting fact"}
-                        </p>
-                        <p className="text-sm leading-relaxed text-[#212223]">{citation.description}</p>
-                      </div>
-                      
-                      {/* Citation name with badge slot */}
-                      <div className="mb-1 flex items-center gap-2">
-                        <a href="#" className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 underline hover:text-blue-800">
-                          {citation.caseName}
-                          <ExternalLink className="size-3.5" />
-                        </a>
-                        {/* Badge slot - empty for now */}
-                        <div className="flex gap-1">
-                          {/* Badges will go here */}
-                        </div>
-                      </div>
-                      
-                      {/* Citation reference */}
-                      {citation.caseRef && (
-                        <p className="mb-4 text-sm text-[#737373]">{citation.caseRef}</p>
-                      )}
-                      
-                      {/* Summary, Relevance, Need to Know sections */}
-                      <div className="space-y-4 border-t border-[#e5e5e5] pt-4">
-                        <div>
-                          <p className="text-sm font-semibold text-[#212223]">Summary:</p>
-                          <p className="mt-1 text-sm leading-relaxed text-[#212223]">{citation.summary}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-[#212223]">Relevance:</p>
-                          <p className="mt-1 text-sm leading-relaxed text-[#212223]">{citation.relevance}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-[#212223]">Need to Know:</p>
-                          <p className="mt-1 text-sm leading-relaxed text-[#212223]">{citation.needToKnow}</p>
-                        </div>
-                      </div>
-                      
-                      {/* View related authorities button */}
-                      <div className="mt-4 border-t border-[#e5e5e5] pt-4">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
-                        >
-                          View related authorities
-                          <ExternalLink className="ml-2 size-3" />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <AuthorityCard
+              key={authority.id}
+              authority={authority}
+              groupNumber={groupNumber}
+              isFirstInGroup={isFirstInGroup}
+              isFirstEntry={isFirstEntry}
+              selectedCitations={selectedCitations}
+              toggleCitation={toggleCitation}
+            />
             );
           });
         })()}
