@@ -394,15 +394,54 @@ interface SupportingAuthoritiesPanelProps {
 }
 
 function CitationSubCard({ citation }: { citation: Citation }) {
+  const [hovered, setHovered] = React.useState(false);
+
   return (
-    <div className="rounded-lg border border-[#e5e5e5] bg-white p-5">
-      {/* Type label and description */}
-      <div className="mb-4">
-        <p className="mb-1 text-sm font-semibold text-[#212223]">
+    <div
+      className={cn(
+        "rounded-lg border bg-white p-5 transition-colors",
+        hovered ? "border-[#2e6b5c]" : "border-[#e5e5e5]"
+      )}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Header: drag dots + type label + action icons */}
+      <div className="mb-4 flex items-center gap-2">
+        {/* Drag handle */}
+        <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3]" />
+
+        {/* Type label */}
+        <p className="text-sm font-semibold text-[#212223]">
           {citation.type === "authority" ? "Supporting authority" : "Supporting fact"}
         </p>
-        <p className="text-sm leading-relaxed text-[#212223]">{citation.description}</p>
+
+        {/* Action icons — show on hover */}
+        {hovered && (
+          <div className="ml-auto flex items-center gap-1">
+            <button
+              className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
+              title="Revert"
+            >
+              <RotateCcw className="size-3.5" />
+            </button>
+            <button
+              className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
+              title="Move"
+            >
+              <Move className="size-4" />
+            </button>
+            <button
+              className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-red-600"
+              title="Delete"
+            >
+              <Trash2 className="size-4" />
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Description */}
+      <p className="mb-3 text-sm leading-relaxed text-[#212223]">{citation.description}</p>
 
       {/* Citation name with badge slot */}
       <div className="mb-1 flex items-center gap-2">
