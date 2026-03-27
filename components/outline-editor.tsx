@@ -26,7 +26,7 @@ interface OutlineEditorProps {
 
 export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: OutlineEditorProps) {
   const [expandedSections, setExpandedSections] = React.useState<string[]>(flowType === "judicial" ? ["factual-procedural"] : ["preliminary-statement"]);
-  const [zoom, setZoom] = React.useState(150);
+  const [zoom, setZoom] = React.useState(125);
   const zoomLevels = [75, 100, 125, 150, 175, 200];
   const contentRef = React.useRef<HTMLDivElement>(null);
   const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
@@ -66,9 +66,6 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
             className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
           >
             <Plus className="size-3" />
-          </button>
-          <button className="flex items-center gap-0.5 rounded px-1 py-1 text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]">
-            <ChevronDown className="size-3" />
           </button>
         </div>
         
@@ -131,7 +128,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
 
         <div
           ref={contentRef}
-          className="mx-auto rounded-lg border border-[#e5e5e5] bg-white p-8"
+          className="mx-auto rounded-lg border border-[#e5e5e5] bg-white p-6"
           style={{ width: `${zoom}%`, maxWidth: "none" }}
         >
           {flowType === "brief" && (

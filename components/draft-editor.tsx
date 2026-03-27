@@ -31,7 +31,7 @@ interface DraftEditorProps {
 
 export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: DraftEditorProps) {
   const [fontSize, setFontSize] = React.useState(36);
-  const [zoom, setZoom] = React.useState(150);
+  const [zoom, setZoom] = React.useState(125);
   const zoomLevels = [75, 100, 125, 150, 175, 200];
   const contentRef = React.useRef<HTMLDivElement>(null);
   const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
@@ -64,9 +64,6 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
             className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
           >
             <Plus className="size-3" />
-          </button>
-          <button className="flex items-center gap-0.5 rounded px-1 py-1 text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]">
-            <ChevronDown className="size-3" />
           </button>
         </div>
 
@@ -149,7 +146,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
           </div>
         )}
 
-        <div ref={contentRef} className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm w-full">
+        <div ref={contentRef} className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm w-full">
           {/* Header — brief only, stays inside the white card */}
           {flowType !== "judicial" && (
             <div className="mb-6">
