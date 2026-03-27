@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   Gavel,
   Scale,
+  PencilPlus,
 } from "lucide-react";
 
 interface Step {
@@ -23,7 +24,7 @@ const steps: Step[] = [
   { id: "argue2", label: "Argue", icon: <MessagesSquare className="size-5" /> },
   { id: "develop", label: "Develop", icon: <Layers className="size-5" /> },
   { id: "outline", label: "Outline", icon: <FileText className="size-5" /> },
-  { id: "draft", label: "Draft", icon: <FileText className="size-5" /> },
+  { id: "draft", label: "Draft", icon: <PencilPlus className="size-5" /> },
   { id: "verify", label: "Verify", icon: <CheckCircle2 className="size-5" /> },
   { id: "opposition", label: "Opposition", icon: <Users className="size-5" /> },
   { id: "finalize", label: "Finalize", icon: <Gavel className="size-5" /> },
@@ -34,7 +35,7 @@ export const judicialSteps: Step[] = [
   { id: "argue2", label: "Claims", icon: <MessagesSquare className="size-5" /> },
   { id: "develop", label: "Decide", icon: <Scale className="size-5" /> },
   { id: "outline", label: "Outline", icon: <FileText className="size-5" /> },
-  { id: "draft", label: "Draft", icon: <FileText className="size-5" /> },
+  { id: "draft", label: "Draft", icon: <PencilPlus className="size-5" /> },
   { id: "verify", label: "Verify", icon: <CheckCircle2 className="size-5" /> },
   { id: "finalize", label: "Finalize", icon: <Gavel className="size-5" /> },
 ];

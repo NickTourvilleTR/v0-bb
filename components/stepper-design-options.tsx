@@ -10,6 +10,7 @@ import {
   Check,
   Circle,
   ArrowRight,
+  PencilPlus,
 } from "lucide-react";
 
 interface Step {
@@ -23,7 +24,7 @@ const steps: Step[] = [
   { id: "argue", label: "Argue", icon: <Scale className="size-4" /> },
   { id: "develop", label: "Develop", icon: <Building2 className="size-4" /> },
   { id: "outline", label: "Outline", icon: <FileText className="size-4" /> },
-  { id: "draft", label: "Draft", icon: <FileText className="size-4" /> },
+  { id: "draft", label: "Draft", icon: <PencilPlus className="size-4" /> },
 ];
 
 const currentStep = "develop";
