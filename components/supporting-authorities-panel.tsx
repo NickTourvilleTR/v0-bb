@@ -517,14 +517,19 @@ function AuthorityCard({
       {/* Gray card */}
       <div
         className={cn(
-          "rounded-lg border bg-[#f5f7f6] p-4 transition-colors",
+          "rounded-lg border bg-[#f5f7f6] transition-colors",
           hovered ? "border-[#2e6b5c]" : "border-[#e5e5e5]"
         )}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {/* Card header row: drag dots + title + action icons */}
-        <div className="mb-4 flex items-center gap-2">
+        {/* Sticky card header row */}
+        <div
+          className={cn(
+            "sticky top-0 z-10 flex items-center gap-2 rounded-t-lg bg-[#f5f7f6] px-4 py-3 transition-colors",
+            hovered ? "border-b border-[#2e6b5c]" : "border-b border-[#e5e5e5]"
+          )}
+        >
           {/* Drag handle */}
           <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3]" />
 
@@ -578,7 +583,7 @@ function AuthorityCard({
 
         {/* White sub-cards */}
         {!collapsed && (
-          <div className="space-y-4">
+          <div className="space-y-4 p-4">
             {authority.citations.map((citation) => (
               <CitationSubCard key={citation.id} citation={citation} />
             ))}
