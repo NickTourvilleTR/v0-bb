@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { List, ScanEye, Plus, FileText } from "lucide-react";
+import { List, FileSearch, Plus, FileText } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 
@@ -188,7 +188,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               onClick={() => setShowOutlinePreview(true)}
               className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]"
             >
-              <ScanEye className="size-5 text-[#1d4b34]" />
+              <FileSearch className="size-5 text-[#1d4b34]" />
             </button>
           </div>
 
@@ -225,7 +225,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               </div>
               <span>Select all</span>
             </button>
-            <span className="text-sm text-[#737373]">•</span>
+            <span className="text-sm text-[#737373]">��</span>
               <span className="text-sm text-[#737373]">{selectedCount} {flowType === "judicial" ? "Claims" : "Arguments"} selected</span>
           </div>
 
