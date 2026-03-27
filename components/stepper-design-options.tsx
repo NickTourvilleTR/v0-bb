@@ -5,13 +5,13 @@ import {
   ClipboardList,
   Scale,
   Building2,
-  ListTree,
   FileText,
   ChevronRight,
   Check,
   Circle,
   ArrowRight,
 } from "lucide-react";
+import { PencilPlusIcon } from "@/components/pencil-plus-icon";
 
 interface Step {
   id: string;
@@ -23,8 +23,8 @@ const steps: Step[] = [
   { id: "intake", label: "Intake", icon: <ClipboardList className="size-4" /> },
   { id: "argue", label: "Argue", icon: <Scale className="size-4" /> },
   { id: "develop", label: "Develop", icon: <Building2 className="size-4" /> },
-  { id: "outline", label: "Outline", icon: <ListTree className="size-4" /> },
-  { id: "draft", label: "Draft", icon: <FileText className="size-4" /> },
+  { id: "outline", label: "Outline", icon: <FileText className="size-4" /> },
+  { id: "draft", label: "Draft", icon: <PencilPlusIcon className="size-4" /> },
 ];
 
 const currentStep = "develop";

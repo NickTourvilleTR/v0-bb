@@ -3,8 +3,9 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { List, ScanEye } from "lucide-react";
+import { List } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
+import { FilePreviewIcon } from "@/components/file-preview-icon";
 
 interface Argument {
   id: string;
@@ -129,7 +130,7 @@ export function ArgumentsPanel({ className, showUserArgument = false, onEditOutl
             <List className="size-5 text-[#212223]" />
           </button>
           <button onClick={() => setShowOutlinePreview(true)} className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-            <ScanEye className="size-5 text-[#1d4b34]" />
+            <FilePreviewIcon className="size-5 text-[#1d4b34]" />
           </button>
         </div>
 

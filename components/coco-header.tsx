@@ -7,9 +7,10 @@ import { cn } from "@/lib/utils";
 interface CocoHeaderProps {
   title: string;
   className?: string;
+  onDownload?: () => void;
 }
 
-export function CocoHeader({ title, className }: CocoHeaderProps) {
+export function CocoHeader({ title, className, onDownload }: CocoHeaderProps) {
   return (
     <header
       className={cn(
@@ -40,6 +41,7 @@ export function CocoHeader({ title, className }: CocoHeaderProps) {
           variant="outline"
           size="icon"
           className="size-9 border-[#e5e5e5] text-[#404040] hover:bg-[#f2f2f2]"
+          onClick={onDownload}
         >
           <Download className="size-4" />
         </Button>
