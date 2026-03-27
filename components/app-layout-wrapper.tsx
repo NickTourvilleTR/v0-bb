@@ -80,6 +80,8 @@ export function AppLayoutWrapper({
 }: AppLayoutWrapperProps) {
   const [drawerTab, setDrawerTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
   const [drawerWidth, setDrawerWidth] = React.useState(380);
+  const [isDocumentOpen, setIsDocumentOpen] = React.useState(false);
+  const previousWidthRef = React.useRef(380);
   const isDragging = React.useRef(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -96,6 +98,20 @@ export function AppLayoutWrapper({
   const handleSourcesClick = () => {
     setDrawerTab("sources");
     setDrawerOpen(true);
+  };
+
+  const handleDocumentOpen = () => {
+    if (containerRef.current) {
+      previousWidthRef.current = drawerWidth;
+      const containerWidth = containerRef.current.getBoundingClientRect().width;
+      setDrawerWidth(Math.round(containerWidth / 2));
+      setIsDocumentOpen(true);
+    }
+  };
+
+  const handleDocumentClose = () => {
+    setDrawerWidth(previousWidthRef.current);
+    setIsDocumentOpen(false);
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -135,8 +151,8 @@ export function AppLayoutWrapper({
       <div className="relative flex flex-1 flex-col overflow-hidden bg-[#fcfcfc]">
         {children}
 
-        {/* Inline chat input - visible when drawer is closed */}
-        {!drawerOpen && onSendMessage && (
+        {/* Inline chat input - visible when drawer is closed OR when a non-chat tab is active */}
+        {(!drawerOpen || drawerTab !== "chat") && onSendMessage && (
           <div className="absolute bottom-4 left-1/2 z-20 w-full max-w-xl -translate-x-1/2 px-4">
             <form
               onSubmit={(e) => {
@@ -145,7 +161,9 @@ export function AppLayoutWrapper({
                 const value = input?.value.trim();
                 if (value) {
                   onSendMessage(value);
-                  setDrawerOpen(true);
+                  if (!drawerOpen) {
+                    setDrawerOpen(true);
+                  }
                   setDrawerTab("chat");
                   input.value = "";
                 }
@@ -219,6 +237,9 @@ export function AppLayoutWrapper({
         prefillText={prefillText}
         onSendMessage={onSendMessage}
         width={drawerOpen ? drawerWidth : undefined}
+        onDocumentOpen={handleDocumentOpen}
+        onDocumentClose={handleDocumentClose}
+        onTabChange={setDrawerTab}
       />
     </div>
   );

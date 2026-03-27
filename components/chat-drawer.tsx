@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { gyantComplaintPages } from "@/lib/document-content";
 import { Logo } from "@/components/logo";
-import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Download, Reply, Flag, Grip, Mail } from "lucide-react";
+import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronDown, ChevronUp, Download, Reply, Flag, Grip, Mail, ArrowLeft, Undo2, Redo2, ZoomIn, ZoomOut, ExternalLink } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -43,6 +44,10 @@ interface ChatDrawerProps {
   onClearQuote?: () => void;
   prefillText?: string;
   width?: number;
+  flowType?: "brief" | "judicial";
+  onDocumentOpen?: () => void;
+  onDocumentClose?: () => void;
+  onTabChange?: (tab: "chat" | "notes" | "versions" | "sources") => void;
   onSendMessage?: (message: string) => void;
 }
 
@@ -73,18 +78,42 @@ export function ChatDrawer({
   prefillText,
   width,
   flowType = "brief",
+  onDocumentOpen,
+  onDocumentClose,
+  onTabChange,
   onSendMessage,
 }: ChatDrawerProps) {
-  const [activeTab, setActiveTab] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
+  const [activeTab, setActiveTabInternal] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
+  const setActiveTab = React.useCallback((tab: "chat" | "notes" | "versions" | "sources") => {
+    setActiveTabInternal(tab);
+    onTabChange?.(tab);
+  }, [onTabChange]);
   const [inputValue, setInputValue] = React.useState("");
   const [internalQuotedText, setInternalQuotedText] = React.useState<string | null>(null);
+  const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
+  const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
+  const [openedDocument, setOpenedDocument] = React.useState<{ name: string; time: string } | null>(null);
+  const sourcesDropdownRef = React.useRef<HTMLDivElement>(null);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (sourcesDropdownRef.current && !sourcesDropdownRef.current.contains(event.target as Node)) {
+        setSourcesDropdownOpen(false);
+      }
+    }
+    if (sourcesDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [sourcesDropdownOpen]);
   
   // Use prop if provided, otherwise use internal state
   const quotedText = quotedTextProp ?? internalQuotedText;
 
   React.useEffect(() => {
-    setActiveTab(defaultTab);
+    setActiveTabInternal(defaultTab);
   }, [defaultTab]);
 
   React.useEffect(() => {
@@ -146,50 +175,54 @@ export function ChatDrawer({
       className="flex h-full shrink-0 flex-col border-l border-[#e5e5e5] bg-white"
       style={{ width: width ? `${width}px` : "340px" }}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-[#e5e5e5] px-4 py-3">
-        <div className="flex items-center gap-2">
-          <Logo className="size-5" />
-          <span className="text-sm font-medium text-[#212223]">CoCounsel</span>
+      {/* Header - hidden when document is open */}
+      {!openedDocument && (
+        <div className="flex items-center justify-between border-b border-[#e5e5e5] px-4 py-3">
+          <div className="flex items-center gap-2">
+            <Logo className="size-5" />
+            <span className="text-sm font-medium text-[#212223]">CoCounsel</span>
+          </div>
+          <button
+            onClick={onToggle}
+            className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
+          >
+            <X className="size-4" />
+          </button>
         </div>
-        <button
-          onClick={onToggle}
-          className="flex size-7 items-center justify-center rounded-md text-[#737373] hover:bg-[#f2f2f2] hover:text-[#212223]"
-        >
-          <X className="size-4" />
-        </button>
-      </div>
+      )}
 
-      {/* Tabs */}
-      <div className="flex border-b border-[#e5e5e5]">
-        {(["chat", "sources", "notes"] as const).map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={cn(
-              "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
-              activeTab === tab
-                ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
-                : "text-[#737373] hover:text-[#212223]"
-            )}
-          >
-            {tab}
-          </button>
-        ))}
-        {showVersionsTab && (
-          <button
-            onClick={() => setActiveTab("versions")}
-            className={cn(
-              "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
-              activeTab === "versions"
-                ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
-                : "text-[#737373] hover:text-[#212223]"
-            )}
-          >
-            Versions
-          </button>
-        )}
-      </div>
+      {/* Tabs - hidden when document is open */}
+      {!openedDocument && (
+        <div className="flex border-b border-[#e5e5e5]">
+          {(["chat", "sources", "notes"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={cn(
+                "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
+                activeTab === tab
+                  ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
+                  : "text-[#737373] hover:text-[#212223]"
+              )}
+            >
+              {tab}
+            </button>
+          ))}
+          {showVersionsTab && (
+            <button
+              onClick={() => setActiveTab("versions")}
+              className={cn(
+                "flex-1 py-2.5 text-xs font-medium capitalize transition-colors",
+                activeTab === "versions"
+                  ? "border-b-2 border-[#1d4b34] text-[#1d4b34]"
+                  : "text-[#737373] hover:text-[#212223]"
+              )}
+            >
+              Versions
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-4">
@@ -360,8 +393,141 @@ export function ChatDrawer({
           <div className="text-sm text-[#737373]">No notes yet.</div>
         )}
 
-        {activeTab === "sources" && (
-          <div className="text-sm text-[#737373]">No sources yet.</div>
+        {activeTab === "sources" && !openedDocument && (
+          <div className="flex flex-col gap-3">
+            {/* View dropdown */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-[#737373]">View:</span>
+              <div ref={sourcesDropdownRef} className="relative">
+                <button
+                  onClick={() => setSourcesDropdownOpen(!sourcesDropdownOpen)}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#1d4b34] px-3 py-1 text-sm font-medium text-[#1d4b34]"
+                >
+                  {sourcesView === "uploaded" ? "Uploaded documents" : "Cases & statutes"}
+                  <ChevronDown className={cn("size-3.5 transition-transform", sourcesDropdownOpen && "rotate-180")} />
+                </button>
+                {sourcesDropdownOpen && (
+                  <div className="absolute left-0 top-full z-50 mt-1 min-w-[200px] overflow-hidden rounded-lg border border-[#e5e5e5] bg-white shadow-lg">
+                    <button
+                      onClick={() => { setSourcesView("uploaded"); setSourcesDropdownOpen(false); }}
+                      className={cn(
+                        "flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-[#f7f7f7]",
+                        sourcesView === "uploaded" ? "font-medium text-[#212223]" : "text-[#737373]"
+                      )}
+                    >
+                      Uploaded documents
+                    </button>
+                    <button
+                      onClick={() => { setSourcesView("cases"); setSourcesDropdownOpen(false); }}
+                      className={cn(
+                        "flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-[#f7f7f7]",
+                        sourcesView === "cases" ? "font-medium text-[#212223]" : "text-[#737373]"
+                      )}
+                    >
+                      Cases & statutes
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Document list */}
+            {sourcesView === "uploaded" && (
+              <div className="flex flex-col gap-1">
+                {[
+                  { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
+                  { name: "Gyant v. NFM - Answer.pdf", time: "9:17 a.m." },
+                  { name: "Hansen Deposition.pdf", time: "9:17 a.m." },
+                  { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", time: "9:17 a.m." },
+                  { name: "ROR Letter.docx", time: "9:17 a.m." },
+                  { name: "Letter to NFM Dated September 19, 2023.docx", time: "9:17 a.m." },
+                ].map((doc) => (
+                  <button
+                    key={doc.name}
+                    onClick={() => {
+                      setOpenedDocument(doc);
+                      onDocumentOpen?.();
+                    }}
+                    className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
+                  >
+                    <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
+                      <p className="text-xs text-[#737373]">Uploaded at {doc.time}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {sourcesView === "cases" && (
+              <div className="text-sm text-[#737373]">No cases or statutes yet.</div>
+            )}
+          </div>
+        )}
+
+        {/* Document Viewer */}
+        {activeTab === "sources" && openedDocument && (
+          <div className="flex flex-col gap-4">
+            {/* Back to Sources */}
+            <button
+              onClick={() => {
+                setOpenedDocument(null);
+                onDocumentClose?.();
+              }}
+              className="flex items-center gap-2 text-sm text-[#212223] hover:text-[#1d4b34] transition-colors"
+            >
+              <ArrowLeft className="size-4" />
+              Back to Sources
+            </button>
+
+            {/* Document title */}
+            <div>
+              <a
+                href="#"
+                className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#1d4b34] underline decoration-[#1d4b34] underline-offset-2 hover:text-[#163d2a]"
+              >
+                {openedDocument.name}
+                <ExternalLink className="size-4" />
+              </a>
+              <p className="mt-1 text-sm text-[#737373]">Uploaded at {openedDocument.time}</p>
+            </div>
+
+            {/* Toolbar */}
+            <div className="sticky top-0 z-10 flex items-center justify-between rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
+              <div className="flex items-center gap-1">
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <Undo2 className="size-4" />
+                </button>
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <Redo2 className="size-4" />
+                </button>
+                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <ZoomOut className="size-4" />
+                </button>
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <ZoomIn className="size-4" />
+                </button>
+                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                  <Download className="size-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Document Content - continuous scroll */}
+            <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
+              {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : []).map((page, index) => (
+                <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
+                  <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
+                  <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
+                    {page.content}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
 
         {activeTab === "versions" && (
