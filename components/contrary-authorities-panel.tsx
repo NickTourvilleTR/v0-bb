@@ -4,6 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Plus, List } from "lucide-react";
+import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 
 interface ContraryAuthoritiesPanelProps {
   className?: string;
@@ -11,9 +12,11 @@ interface ContraryAuthoritiesPanelProps {
 }
 
 export function ContraryAuthoritiesPanel({ className, onNextFinalize }: ContraryAuthoritiesPanelProps) {
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
   return (
     <div className={cn("flex h-full flex-col overflow-y-auto", className)}>
-      <div className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
+      <div ref={contentRef} className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
         {/* Left sidebar button - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
           <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
@@ -124,6 +127,12 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
           </div>
         </div>
       </div>
+      <SelectionContextMenu
+        position={position}
+        onAddFacts={hide}
+        onAddAuthorities={hide}
+        onAskQuestion={hide}
+      />
     </div>
   );
 }

@@ -26,7 +26,7 @@ import { DraftEditor } from "@/components/draft-editor";
 import { VerifyPanel } from "@/components/verify-panel";
 import { FinalizePanel } from "@/components/finalize-panel";
 import { IntakeScreen } from "@/components/intake-screen";
-import { ArgueScreen } from "@/components/argue-screen";
+import { ArgueScreen, arguments_data } from "@/components/argue-screen";
 import { LibraryScreen } from "@/components/library-screen";
 import { AppLayoutWrapper } from "@/components/app-layout-wrapper";
 import { LoginScreen } from "@/components/login-screen";
@@ -92,6 +92,7 @@ function AuthenticatedApp() {
   const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
   const [selectedBriefType, setSelectedBriefType] = React.useState<string | null>(null);
   const [quotedText, setQuotedText] = React.useState<string | null>(null);
+  const [argumentsState, setArgumentsState] = React.useState<any[]>(arguments_data);
   const [flowType, setFlowType] = React.useState<"brief" | "judicial">("brief");
   
   // Dynamic header title based on flow and selected motion
@@ -132,6 +133,29 @@ function AuthenticatedApp() {
   // Handler for inline chat input (when drawer is closed)
   const handleInlineSend = (message: string) => {
     addChatMessage("user", message);
+    
+    // Check if this is the prefilled lumping defendants argument
+    if (currentScreen === "argue2" && message.includes("lumps all defendants together")) {
+      // Create new argument object
+      const newArgumentNumber = argumentsState.length + 1;
+      const newArgument = {
+        id: `lumping-defendants-${Date.now()}`,
+        number: newArgumentNumber,
+        title: "The complaint's group pleading fails to state a claim against S&S because it does not distinguish S&S's conduct from that of the other defendants.",
+        points: [
+          "Love's complaint lumps all defendants together without specifying which defendant committed which alleged act.",
+          "The only allegations specific to S&S are that it published One Italian Summer and that one editor is married to Love's former literary agent who previously rejected her manuscript.",
+          "Under Iqbal and Twombly, a complaint must allege facts specific to each defendant; \"everyone did everything\" allegations do not satisfy Rule 8's plausibility standard as to any individual defendant.",
+        ],
+        appliesTo: "Causes of Action 2–14 (Breach of Fiduciary Duty, Intentional Interference with Contractual Relations, Tortious Interference with Business Advantage, Intentional Misrepresentation, Negligent Misrepresentation, Negligence, Intentional Infliction of Emotional Distress, Stalking, Conspiracy, Unfair Business Practices, Accounting, Constructive Trust, and Declaratory Judgment)",
+        checked: true,
+      };
+      
+      setArgumentsState(prev => [...prev, newArgument]);
+      
+      // Add CoCounsel's response
+      addChatMessage("assistant", "I've added a new argument based on your request. Argument 6 has been added to your list: <strong>The complaint's group pleading fails to state a claim against S&S.</strong>");
+    }
   };
 
   // Auto-scroll to bottom when screen changes with smooth animation
@@ -189,15 +213,19 @@ function AuthenticatedApp() {
   const handleFileUpload = () => {
     if (flowType === "judicial") {
       addChatMessage("user", "Uploaded 5 documents");
-      addChatMessage("assistant", "I've analyzed the uploaded documents. Here is your intake summary.");
-      setCurrentScreen("intake");
+      setCurrentScreen("uploading");
+      // Simulate analyzing documents, then go to intake
+      setTimeout(() => {
+        addChatMessage("assistant", "I've analyzed the uploaded documents. Here is your intake summary.");
+        setCurrentScreen("intake");
+      }, 3000);
     } else {
       addChatMessage("user", "Uploaded 6 documents");
       setCurrentScreen("uploading");
-      // Simulate analyzing documents, then show case details
+      // Simulate analyzing documents, then go straight to intake
       setTimeout(() => {
-        addChatMessage("assistant", "I've extracted the following details from your uploaded documents. <strong>Review and enter any edit instructions as necessary.</strong>");
-        setCurrentScreen("case-details");
+        addChatMessage("assistant", "I've analyzed the uploaded documents. Review and make your selections to proceed.");
+        setCurrentScreen("intake");
       }, 3000);
     }
   };
@@ -266,8 +294,16 @@ function AuthenticatedApp() {
 
   const handleNextOutline = () => {
     addChatMessage("user", "Next: Outline");
-    addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments before generating the full outline.");
-    setCurrentScreen("outline");
+    if (flowType === "judicial") {
+      addChatMessage("assistant", "Generating your opinion outline based on the selected claims and decisions...");
+    } else {
+      addChatMessage("assistant", "Generating your brief outline based on the selected arguments and authorities...");
+    }
+    setCurrentScreen("outline-loading");
+    setTimeout(() => {
+      addChatMessage("assistant", "Your outline is ready. Review the structure and headings, then proceed to generate the full draft.");
+      setCurrentScreen("outline-ready");
+    }, 3000);
   };
 
   const handleGenerateOutline = () => {
@@ -285,9 +321,7 @@ function AuthenticatedApp() {
   };
 
   const handleNextDraft = () => {
-    addChatMessage("user", "Next: Draft");
-    addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
-    setCurrentScreen("draft");
+    handleGenerateDraft();
   };
 
   const handleGenerateDraft = () => {
@@ -407,6 +441,7 @@ function AuthenticatedApp() {
           >
             <IntakeScreen 
               flowType={flowType}
+              onGenerateDraft={handleGenerateDraft}
               onNextSelectArguments={() => {
                 const buttonLabel = flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments";
                 addChatMessage("user", buttonLabel);
@@ -417,12 +452,9 @@ function AuthenticatedApp() {
                 }
                 setCurrentScreen("argue2");
               }}
-              onSkipToGenerateDraft={() => {
-                addChatMessage("user", "Skip to generate draft");
-                addChatMessage("assistant", "Skipping ahead to draft generation with default arguments.");
-                setCurrentScreen("draft");
-              }}
-              onEditOutline={() => setCurrentScreen("outline")}
+              onSkipToGenerateDraft={handleGenerateDraft}
+              onEditOutline={handleNextOutline}
+              onQuote={(text) => handleQuote(text)}
             />
           </AppLayoutWrapper>
         </div>
@@ -448,21 +480,13 @@ function AuthenticatedApp() {
           onSendMessage={handleInlineSend}
             currentStep="outline"
             onGenerateOutline={handleGenerateOutline}
-            onSkipToGenerateDraft={() => {
-              addChatMessage("user", "Skip to generate draft");
-              addChatMessage("assistant", "Skipping ahead to draft generation.");
-              setCurrentScreen("draft");
-            }}
+            onSkipToGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
           >
             <OutlineScreen 
               flowType={flowType}
               onGenerateOutline={handleGenerateOutline} 
-              onNextDraft={() => {
-                addChatMessage("user", "Skip to generate draft");
-                addChatMessage("assistant", "Skipping ahead to draft generation.");
-                setCurrentScreen("draft");
-              }} 
+              onNextDraft={handleGenerateDraft}
             />
           </AppLayoutWrapper>
         </div>
@@ -513,20 +537,13 @@ function AuthenticatedApp() {
           messages={chatMessages}
           onSendMessage={handleInlineSend}
             currentStep="outline-ready"
-            onNextDraft={() => {
-              addChatMessage("user", "Next: Draft");
-              addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
-              setCurrentScreen("draft");
-            }}
+            onNextDraft={handleGenerateDraft}
             showVersionsTab={true}
           >
             <OutlineEditor 
               flowType={flowType}
-              onNextDraft={() => {
-              addChatMessage("user", "Next: Draft");
-              addChatMessage("assistant", "Time to generate your draft. Review the settings and click Generate draft when ready.");
-              setCurrentScreen("draft");
-            }} />
+              onNextDraft={handleGenerateDraft}
+            />
           </AppLayoutWrapper>
         </div>
       </div>
@@ -707,7 +724,7 @@ function AuthenticatedApp() {
                   addChatMessage("assistant", "Skipping ahead to finalize your brief.");
                   setCurrentScreen("finalize");
                 }}
-                onEditOutline={() => setCurrentScreen("outline")}
+                onEditOutline={handleNextOutline}
               />
             )}
           </AppLayoutWrapper>
@@ -823,40 +840,17 @@ function AuthenticatedApp() {
           onSendMessage={handleInlineSend}
             currentStep="support"
             flowType={flowType}
-            onNextOutline={() => {
-              addChatMessage("user", "Next: Outline");
-              if (flowType === "judicial") {
-                addChatMessage("assistant", "Now let's structure your opinion. Review the outline sections and make any adjustments.");
-              } else {
-                addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
-              }
-              setCurrentScreen("outline");
-            }}
-            onSkipToGenerateDraft={() => {
-              addChatMessage("user", "Skip to generate draft");
-              addChatMessage("assistant", "Skipping ahead to draft generation.");
-              setCurrentScreen("draft");
-            }}
+            onNextOutline={handleNextOutline}
+            onSkipToGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
               <SupportingAuthoritiesPanel 
                 flowType={flowType}
-                onNextOutline={() => {
-                  addChatMessage("user", "Next: Outline");
-                  if (flowType === "judicial") {
-                    addChatMessage("assistant", "Now let's structure your opinion. Review the outline sections and make any adjustments.");
-                  } else {
-                    addChatMessage("assistant", "Now let's structure your brief. Review the outline sections and make any adjustments.");
-                  }
-                  setCurrentScreen("outline");
-                }}
-                onSkipToGenerateDraft={() => {
-                  addChatMessage("user", "Skip to generate draft");
-                  addChatMessage("assistant", "Skipping ahead to draft generation.");
-                  setCurrentScreen("draft");
-                }}
-                onEditOutline={() => setCurrentScreen("outline")}
+                onNextOutline={handleNextOutline}
+                onSkipToGenerateDraft={handleGenerateDraft}
+                onEditOutline={handleNextOutline}
+                onQuote={handleQuote}
               />
             </div>
           </AppLayoutWrapper>
@@ -884,25 +878,21 @@ function AuthenticatedApp() {
             currentStep="argue"
             flowType={flowType}
             onNextSupportingAuthority={handleNextSupportingAuthority}
-            onSkipToGenerateDraft={() => {
-              addChatMessage("user", "Skip to generate draft");
-              addChatMessage("assistant", "Skipping ahead to draft generation.");
-              setCurrentScreen("draft");
-            }}
+            onSkipToGenerateDraft={handleGenerateDraft}
             showVersionsTab={true}
+            quotedText={quotedText}
+            onClearQuote={handleClearQuote}
+            prefillText={quotedText === "Add additional argument" ? "Please add an argument that the complaint improperly lumps all defendants together. The argument should be that the complaint fails to distinguish between defendants and therefore doesn't meet pleading standards as to S&S specifically." : undefined}
           >
             <div className="flex-1 overflow-y-auto">
               <ArgueScreen 
                 flowType={flowType}
                 onNextSupportingAuthority={handleNextSupportingAuthority}
-                onEditOutline={() => {
-                  setCurrentScreen("outline");
-                }}
-                onSkipToGenerateDraft={() => {
-                  addChatMessage("user", "Skip to generate draft");
-                  addChatMessage("assistant", "Skipping ahead to draft generation.");
-                  setCurrentScreen("draft");
-                }}
+                onEditOutline={handleNextOutline}
+                onSkipToGenerateDraft={handleGenerateDraft}
+                onQuote={handleQuote}
+                argumentsState={flowType === "judicial" ? undefined : argumentsState}
+                setArgumentsState={flowType === "judicial" ? undefined : setArgumentsState}
               />
             </div>
           </AppLayoutWrapper>
@@ -1024,83 +1014,34 @@ function AuthenticatedApp() {
             >
               <div ref={scrollRef} className="flex-1 overflow-y-auto bg-white">
               <div className="mx-auto w-full max-w-3xl flex-1 px-6 py-8">
-                {/* Initial User Message - Always shown */}
-                <CocoChatMessage
-                  type="user"
-                  userName="Jane Lawson"
-                  timestamp="9:07 a.m."
-                  className="mb-6"
-                >
-                  <p className="text-[#212223]">
-                    {flowType === "judicial" ? "Help me with judicial drafting" : "Help me draft a legal brief"}
-                  </p>
-                </CocoChatMessage>
 
                 {/* Judicial Work Product Card */}
                 {flowType === "judicial" && isAtOrPast("judicial-work-product") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <JudicialWorkProductCard
                       onSubmit={handleWorkProductSubmit}
                       onQuote={handleQuote}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Motion Search Card */}
                 {flowType === "brief" && isAtOrPast("motion-search") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderCard
                       onSubmit={handleMotionSearchSubmit}
                       onQuote={handleQuote}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Brief Type Card - only for brief flow */}
                 {flowType === "brief" && isAtOrPast("brief-type") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderTypeCard
                       onSubmit={handleBriefTypeSubmit}
                     />
-                  </CocoChatMessage>
-                )}
-
-                {/* User brief type message - only for brief flow, only after selection */}
-                {flowType === "brief" && isAtOrPast("file-upload") && selectedBriefType && (
-                  <CocoChatMessage
-                    type="user"
-                    userName="Jane Lawson"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
-                    <p className="text-[#212223]">
-                      {{ primary: "Primary", opposition: "Opposition", reply: "Reply" }[selectedBriefType] ?? selectedBriefType}
-                    </p>
-                  </CocoChatMessage>
-                )}
-
-                {/* User "Opinion" message - only for judicial flow */}
-                {flowType === "judicial" && isAtOrPast("file-upload") && (
-                  <CocoChatMessage
-                    type="user"
-                    userName="Jane Lawson"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
-                    <p className="text-[#212223]">Opinion</p>
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* File Upload Card */}
@@ -1108,11 +1049,7 @@ function AuthenticatedApp() {
                   (flowType === "judicial" && isAtOrPast("file-upload")) ||
                   (flowType === "brief" && isAtOrPast("file-upload") && selectedBriefType)
                 ) && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderUploadCard
                       showFile={isAtOrPast("uploading")}
                       disabled={isAtOrPast("uploading")}
@@ -1122,48 +1059,36 @@ function AuthenticatedApp() {
                       tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
                       defaultFilesToUse={flowType === "judicial" ? judicialDefaultFiles : undefined}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Uploading/Analyzing Progress Card */}
                 {currentScreen === "uploading" && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:10a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderProgressCard 
                       progress={40} 
                       tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Combined Case Details and Additional Details Card */}
                 {isAtOrPast("case-details") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:25 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderCombinedDetailsCard
                       defaultParty={isAtOrPast("ready-to-build") ? "defendant2" : ""}
                       disabled={isAtOrPast("ready-to-build")}
                       onContinue={handleCaseDetailsContinue}
                       onSkip={handleCaseDetailsSkip}
                     />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* Ready to Build Card */}
                 {isAtOrPast("ready-to-build") && !isAtOrPast("generating") && (
-                  <CocoChatMessage
-                    type="assistant"
-                    timestamp="9:36 a.m."
-                    className="mb-6"
-                  >
+                  <div className="mb-6">
                     <BriefBuilderReadyCard onStartBuilding={handleStartBuilding} />
-                  </CocoChatMessage>
+                  </div>
                 )}
 
                 {/* User "Start building" message */}

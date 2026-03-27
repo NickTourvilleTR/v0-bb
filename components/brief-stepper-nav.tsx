@@ -10,6 +10,7 @@ import {
   Users,
   CheckCircle2,
   Gavel,
+  Scale,
 } from "lucide-react";
 
 interface Step {
@@ -32,7 +33,7 @@ const steps: Step[] = [
 export const judicialSteps: Step[] = [
   { id: "intake", label: "Intake", icon: <ClipboardList className="size-5" /> },
   { id: "argue2", label: "Claims", icon: <MessagesSquare className="size-5" /> },
-  { id: "develop", label: "Decide", icon: <Layers className="size-5" /> },
+  { id: "develop", label: "Decide", icon: <Scale className="size-5" /> },
   { id: "outline", label: "Outline", icon: <ListTree className="size-5" /> },
   { id: "draft", label: "Draft", icon: <FileText className="size-5" /> },
   { id: "verify", label: "Verify", icon: <CheckCircle2 className="size-5" /> },

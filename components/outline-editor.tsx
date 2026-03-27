@@ -16,6 +16,7 @@ import {
   Upload
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 
 interface OutlineEditorProps {
   className?: string;
@@ -24,7 +25,9 @@ interface OutlineEditorProps {
 }
 
 export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: OutlineEditorProps) {
-  const [expandedSections, setExpandedSections] = React.useState<string[]>(flowType === "judicial" ? ["factual-procedural"] : ["factual-background"]);
+  const [expandedSections, setExpandedSections] = React.useState<string[]>(flowType === "judicial" ? ["factual-procedural"] : ["preliminary-statement"]);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections((prev) =>
@@ -92,27 +95,37 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-6">
-        <div className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8">
-          {/* Header */}
-          <div className="mb-1 flex items-center justify-between">
-            <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">
-              OUTLINE
-            </p>
-            {flowType === "judicial" && (
+        {/* Judicial header — above the white card */}
+        {flowType === "judicial" && (
+          <div className="mx-auto mb-4 max-w-3xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">Outline</p>
+                <h1 className="text-2xl font-semibold text-[#212223]">Review and edit your outline</h1>
+              </div>
               <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] px-3 py-1.5 text-xs text-[#212223] hover:bg-[#f2f2f2]">
                 <Upload className="size-3" />
                 Upload an outline
               </button>
-            )}
+            </div>
           </div>
-          <h1 className="mb-6 text-2xl font-semibold text-[#212223]">
-            Confirm your outline selections
-          </h1>
+        )}
 
-          {/* Document Length */}
-          <div className="mb-6 rounded bg-[#f7f7f7] px-4 py-2">
-            <span className="text-sm text-[#212223]">Document length: {flowType === "judicial" ? "~15 pages" : "~17 pages"}</span>
-          </div>
+        <div ref={contentRef} className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-8">
+          {flowType === "brief" && (
+            <>
+              {/* Header — brief only, stays inside the white card */}
+              <div className="mb-1">
+                <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">OUTLINE</p>
+              </div>
+              <h1 className="mb-2 text-3xl font-bold text-[#212223]">
+                Motion to Dismiss First Amended Complaint
+              </h1>
+              <p className="mb-6 text-lg text-[#737373]">
+                Defendant Defendant — Love v. Airbnb, Inc., et al., No. 2:25-cv-01779-AB(KSx) (C.D. Cal.)
+              </p>
+            </>
+          )}
 
           {flowType === "judicial" ? (
             // JUDICIAL FLOW OUTLINE
@@ -165,23 +178,47 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
               </div>
             </>
           ) : (
-            // BRIEF FLOW OUTLINE
+            // BRIEF FLOW OUTLINE - Motion to Dismiss
             <>
-              {/* Section I */}
+              {/* Section I: PRELIMINARY STATEMENT */}
               <div className="border-b border-[#e5e5e5]">
                 <button
-                  onClick={() => toggleSection("table-of-authorities")}
+                  onClick={() => toggleSection("preliminary-statement")}
                   className="flex w-full items-center justify-between py-4"
                 >
                   <h2 className="text-lg font-semibold text-[#212223]">
-                    I. TABLE OF AUTHORITIES
+                    I. PRELIMINARY STATEMENT
                   </h2>
-                  {expandedSections.includes("table-of-authorities") ? (
+                  {expandedSections.includes("preliminary-statement") ? (
                     <ChevronUp className="size-5 text-[#737373]" />
                   ) : (
                     <ChevronDown className="size-5 text-[#737373]" />
                   )}
                 </button>
+                {expandedSections.includes("preliminary-statement") && (
+                  <div className="space-y-3">
+                    <p className="text-sm text-[#212223]">
+                      <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
+                      Plaintiff Adrienne Love alleges a vast conspiracy — encompassing the author, publisher, literary agents, editors, and a movie studio — to steal her life story as depicted in her unpublished memoir Eat the Lemon and exploit it in Rebecca Serle&apos;s novel One Italian Summer, published by S&S. <span className="text-[#737373]">(FAC ¶¶46-48)</span>
+                    </p>
+                    <p className="text-sm text-[#212223]">
+                      <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
+                      Love further alleges that the conspirators stalked her, sent strangers claiming to work for the FBI to confront her, and caused two mysterious deaths to intimidate her into silence. <span className="text-[#737373]">(FAC ¶¶63, 65)</span>
+                    </p>
+                    <p className="text-sm text-[#212223]">
+                      <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
+                      Love has now filed a First Amended Complaint that is substantially identical to her original complaint, asserting copyright infringement and 13 state law claims against S&S. <span className="text-[#737373]">(FAC ¶¶130-264)</span>
+                    </p>
+                    <p className="text-sm text-[#212223]">
+                      <span className="mr-2 inline-block shrink-0 rounded border border-[#fcd34d] bg-[#fffbeb] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#b45309]">Law</span>
+                      A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC&apos;s fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#737373]">(FRCP 12(b)(6))</span>
+                    </p>
+                    <p className="text-sm text-[#212223]">
+                      <span className="mr-2 inline-block shrink-0 rounded border border-[#6ee7b7] bg-[#ecfdf5] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#065f46]">Conclusion</span>
+                      Because (1) the two works are not substantially similar in protectable expression, (2) the state law claims lack specific allegations of conduct by S&S, and (3) many state law claims are untimely and/or preempted, the FAC should be dismissed with prejudice.
+                    </p>
+                  </div>
+                )}
               </div>
             </>
           )}
@@ -257,7 +294,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
               className="flex w-full items-center justify-between py-4"
             >
               <h2 className="text-lg font-semibold text-[#212223]">
-                II. FACTUAL BACKGROUND (Chronological)
+                II. FACTUAL BACKGROUND
               </h2>
               {expandedSections.includes("factual-background") ? (
                 <ChevronUp className="size-5 text-[#737373]" />
@@ -267,116 +304,48 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
             </button>
 
             {expandedSections.includes("factual-background") && (
-              <div className="pb-6">
-                {/* Subsection A */}
-                <div className="mb-6">
-                  <h3 className="mb-2 text-base font-semibold text-[#212223]">
-                    A. The Parties
-                  </h3>
-                  <p className="mb-2 text-sm text-[#737373]">Paragraph 1:</p>
-                  <ul className="ml-6 space-y-2 text-sm text-[#212223]">
-                    <li className="list-disc">
-                      Plaintiff: Author of unpublished memoir <em>Eat the Lemon</em>
-                      <ul className="ml-6 mt-1 space-y-1">
-                        <li className="list-disc">
-                          Registered two versions with Copyright Office (July 2020, February 2021)
-                        </li>
-                        <li className="list-disc">
-                          Work completed in 2021 per copyright registration
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="list-disc">
-                      Defendant S&S: Publisher of <em>One Italian Summer</em>
-                      <ul className="ml-6 mt-1 space-y-1">
-                        <li className="list-disc">
-                          Book first announced March 2021 (sample chapter released)
-                        </li>
-                        <li className="list-disc">
-                          Published March 2022
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Subsection B */}
-                <div className="mb-6">
-                  <h3 className="mb-2 text-base font-semibold text-[#212223]">
-                    B. The Alleged Conspiracy
-                  </h3>
-                  <p className="mb-2 text-sm text-[#737373]">Paragraph 2:</p>
-                  <ul className="ml-6 space-y-2 text-sm text-[#212223]">
-                    <li className="list-disc">
-                      Plaintiff claims network of conspirators delivered manuscript to Serle
-                    </li>
-                    <li className="list-disc">
-                      Alleges conspiracy to misappropriate her life story
-                    </li>
-                    <li className="list-disc">
-                      Claims defendants altered story to cast her negatively and intimidate her
-                    </li>
-                    <li className="list-disc">
-                      Asserts surveillance, mysterious encounters, and two mysterious deaths
-                    </li>
-                    <li className="list-disc">
-                      28 defendants sued including S&S
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Subsection C */}
-                <div className="mb-6">
-                  <h3 className="mb-2 text-base font-semibold text-[#212223]">
-                    C. The Two Works Compared
-                  </h3>
-                  
-                  <p className="mb-2 text-sm text-[#737373]">Paragraph 3:</p>
-                  <p className="mb-2 ml-2 text-sm font-medium text-[#212223]">1. <em>Eat the Lemon</em></p>
-                  <ul className="ml-8 mb-4 space-y-1 text-sm text-[#212223]">
-                    <li className="list-disc">Personal memoir describing true experiences</li>
-                    <li className="list-disc">Centers on coming to terms with tumultuous family life and mother's death (decade prior)</li>
-                    <li className="list-disc">Begins with Love traveling Amalfi Coast with boyfriend Brad</li>
-                    <li className="list-disc">Mother died from cancer; briefly studied cooking on Amalfi Coast when Love was child</li>
-                    <li className="list-disc">Details romantic adventures, flashbacks to family life</li>
-                    <li className="list-disc">Love returns to Italy alone to locate mother's cooking teacher</li>
-                    <li className="list-disc">Befriends Adele and her family; receives warmth from Rosa (Adele's mother)</li>
-                    <li className="list-disc">Locates assistant to mother's cooking teacher; learns mother was happy during that period</li>
-                    <li className="list-disc">Ends with Love reveling in meeting "magical elderly woman" and kissing Rosa's shoulder</li>
-                  </ul>
-
-                  <p className="mb-2 text-sm text-[#737373]">Paragraph 4:</p>
-                  <p className="mb-2 ml-2 text-sm font-medium text-[#212223]">2. <em>One Italian Summer</em></p>
-                  <ul className="ml-8 space-y-1 text-sm text-[#212223]">
-                    <li className="list-disc">Avowed work of fiction incorporating magical realism</li>
-                    <li className="list-disc">Narrator Katy just lost mother to cancer</li>
-                    <li className="list-disc">Mother was "great love of her life"; tells husband she doesn't know if she can stay married</li>
-                    <li className="list-disc">Travels alone to Positano for trip originally planned with mother</li>
-                    <li className="list-disc">Meets handsome American Adam who pursues her</li>
-                    <li className="list-disc">Central device: Katy travels back in time, meets 30-year-old version of her mother</li>
-                    <li className="list-disc">Discovers mother abandoned her as infant to travel to Italy</li>
-                    <li className="list-disc">Mother pursuing interior design job; Adam considering purchasing hotels</li>
-                    <li className="list-disc">Katy realizes she's in 1992 timeline</li>
-                    <li className="list-disc">Confronts whether to force mother to return to family</li>
-                    <li className="list-disc">Returns to present; husband Eric joins her</li>
-                    <li className="list-disc">Re-commits to marriage</li>
-                    <li className="list-disc">Central message: Seeing mother as independent person empowers Katy to see herself same way</li>
-                    <li className="list-disc">Ends with spreading mother's ashes in Italian sea</li>
-                  </ul>
-                </div>
-
-                {/* Subsection D */}
+              <div className="pb-6 space-y-6">
+                {/* Subsection A: The Parties */}
                 <div>
-                  <h3 className="mb-2 text-base font-semibold text-[#212223]">
-                    D. Procedural History
-                  </h3>
-                  <p className="mb-2 text-sm text-[#737373]">Paragraph 5:</p>
-                  <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                    <li className="list-disc">Original Complaint filed February 28, 2025</li>
-                    <li className="list-disc">S&S filed Motion to Dismiss June 30, 2025</li>
-                    <li className="list-disc">Love filed Opposition August 18, 2025</li>
-                    <li className="list-disc">First Amended Complaint filed August 20, 2025</li>
-                    <li className="list-disc">Current Motion to Dismiss filed September 12, 2025</li>
+                  <h3 className="mb-3 text-base font-semibold text-[#212223]">A. The Parties</h3>
+                  <ul className="ml-6 space-y-2 text-sm text-[#212223]">
+                    <li className="list-disc">Plaintiff Love authored Eat the Lemon, an unpublished personal memoir, registered with the Copyright Office in July 2020 and February 2021 draft versions; the work was completed in 2021.</li>
+                    <li className="list-disc">S&S published One Italian Summer by Rebecca Serle, first announced in March 2021 (with a sample chapter released) and published in March 2022.</li>
+                  </ul>
+                </div>
+
+                {/* Subsection B: The Alleged Conspiracy */}
+                <div>
+                  <h3 className="mb-3 text-base font-semibold text-[#212223]">B. The Alleged Conspiracy</h3>
+                  <ul className="ml-6 space-y-2 text-sm text-[#212223]">
+                    <li className="list-disc">Love claims a network of conspirators, including her own trusted advisors, determined that her life story would be more profitably told by Serle and arranged to deliver her manuscript to Serle.</li>
+                    <li className="list-disc">Love alleges the manuscript was shared with numerous parties in May–June 2019, then specifically sent to literary agents with connections to Serle in early 2020, and to an S&S editor in early 2021.</li>
+                    <li className="list-disc">Love alleges the conspiracy extended to intimidation tactics: surveillance, strangers claiming FBI affiliation, and two unexplained deaths.</li>
+                    <li className="list-disc">Love alleges that One Italian Summer both copied and distorted her life story — claiming simultaneously that it is an unlawful copy and that it was altered to cast her in a negative light.</li>
+                    <li className="list-disc">Correspondence between Serle and her literary agent demonstrates that Serle formulated the concept and basic plot of One Italian Summer in June 2019, before Love&apos;s manuscript was supposedly circulating in her orbit.</li>
+                  </ul>
+                </div>
+
+                {/* Subsection C: The Two Works Compared */}
+                <div>
+                  <h3 className="mb-3 text-base font-semibold text-[#212223]">C. The Two Works Compared</h3>
+                  
+                  <p className="mb-2 ml-2 text-sm font-medium text-[#212223]">Eat the Lemon</p>
+                  <ul className="ml-8 mb-4 space-y-1 text-sm text-[#212223]">
+                    <li className="list-disc">A personal memoir describing Love&apos;s true experiences processing her tumultuous family life and her mother&apos;s death (from cancer, a decade prior) through extended immersion in Italy&apos;s Amalfi Coast.</li>
+                    <li className="list-disc">Love travels to the Amalfi Coast initially with her boyfriend Brad; later returns alone to locate her mother&apos;s former cooking teacher and complete her mother&apos;s cookbook.</li>
+                    <li className="list-disc">Love&apos;s upbringing is depicted as deeply unhappy: her father abandoned the family, her stepfather was emotionally abusive and defrauded her, and her relationship with her mother is characterized as cold and loveless.</li>
+                    <li className="list-disc">Love befriends Adele (a landlady) and her mother Rosa, who becomes a surrogate mother figure; Love eventually meets Marietta, the assistant to her mother&apos;s now-deceased cooking teacher, who shares happy memories of her mother.</li>
+                    <li className="list-disc">The memoir spans approximately eighteen months across three separate trips to Italy; narrative structure is episodic/vignette-based with no driving plot toward resolution.</li>
+                  </ul>
+
+                  <p className="mb-2 ml-2 text-sm font-medium text-[#212223]">One Italian Summer</p>
+                  <ul className="ml-8 space-y-1 text-sm text-[#212223]">
+                    <li className="list-disc">An avowed work of fiction incorporating magical realism; narrator Katy&apos;s mother has just died of cancer and Katy travels alone to Positano for a trip they had planned together.</li>
+                    <li className="list-disc">The central narrative device is Katy encountering and befriending a 30-year-old version of her mother — a person she never knew — in what turns out to be a different timeline (1992).</li>
+                    <li className="list-disc">Katy&apos;s relationship with her mother was loving and defining; her character arc involves learning to see her mother as an independent person with her own desires and sacrifices.</li>
+                    <li className="list-disc">Katy discovers her mother abandoned her as an infant to travel to Italy, leading to confrontation and eventual reconciliation; Katy also navigates a marital crisis and an affair in the alternate timeline.</li>
+                    <li className="list-disc">The novel spans a few weeks; plot builds steadily toward multiple resolutions (mother relationship, marriage, hotel subplot).</li>
                   </ul>
                 </div>
               </div>
@@ -561,12 +530,13 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
             </>
           ) : (
             // BRIEF FLOW: ARGUMENT
+            <>
             <div className="border-b border-[#e5e5e5]">
               <button
                 onClick={() => toggleSection("argument")}
-                className="flex w-full items-center justify-between px-1 py-3 text-left"
+                className="flex w-full items-center justify-between py-4"
               >
-                <h2 className="text-lg font-bold text-[#212223]">
+                <h2 className="text-lg font-semibold text-[#212223]">
                   III. ARGUMENT
                 </h2>
                 {expandedSections.includes("argument") ? (
@@ -576,240 +546,298 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                 )}
               </button>
               {expandedSections.includes("argument") && (
-                <div className="space-y-6 pb-6 pl-4">
-                {/* Subsection A: Copyright Infringement */}
-                <div>
-                  <h3 className="mb-4 text-base font-bold text-[#212223]">
-                    A. Copyright Infringement Claim Fails as Matter of Law
-                  </h3>
-                  
-                  {/* Paragraph 6 */}
-                  <div className="mb-4">
-                    <p className="mb-2 text-sm text-[#737373]">Paragraph 6:</p>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
-                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
-                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
-                    </ul>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
-                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">Plaintiff must prove: (1) copying of copyrighted material; (2) unlawful appropriation <a href="#" className="text-[#0062c4] hover:underline">Benay v. Warner Bros. Ent., Inc., 607 F.3d 620 (9th Cir. 2010)</a></li>
-                      <li className="list-disc">Unlawful appropriation requires "substantial similarity" in protected expression</li>
-                      <li className="list-disc">Extrinsic test may be decided as matter of law at motion to dismiss stage <a href="#" className="text-[#0062c4] hover:underline">Berkic v. Crichton, 761 F.2d 1289 (9th Cir. 1985)</a></li>
-                      <li className="list-disc">Court may consider works where judicially noticed and no substantial similarity exists <a href="#" className="text-[#0062c4] hover:underline">Biasi v. Sheehan Networks, Inc., ... 2025 WL 2086047 (Sept. 8, 2025)</a></li>
-                    </ul>
-                  </div>
-
-                  {/* Paragraph 7 */}
-                  <div className="mb-4">
-                    <p className="mb-2 text-sm text-[#737373]">Paragraph 7:</p>
-                    <p className="mb-2 text-sm font-medium text-[#212223]">2. Biographical Facts Are Not Protectable</p>
-                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">Love characterizes <em>Eat the Lemon</em> as "personal memoir based on her own life"</li>
-                      <li className="list-disc">Alleges <em>One Italian Summer</em> contains "intricate personal details from Love's life"</li>
-                      <li className="list-disc">Facts of one's life are not subject to copyright protection <a href="#" className="text-[#0062c4] hover:underline">Blatty v. Warner Bros. Ent., 2011 WL 13217379 (C.D. Cal. Apr. 21, 2011)</a></li>
-                      <li className="list-disc">Courts reject copyright claims based on similarities between autobiographies and other works <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
-                      <li className="list-disc">Example: <em>Corbello (Four Seasons autobiography)</em>, <em>Vollejo (Escobar mistress memoir)</em>, <em>Hathaway</em>, <em>Newt</em>, <em>Idema</em>, <em>Egleston</em></li>
-                    </ul>
-                  </div>
-
-                  {/* Paragraph 8 */}
-                  <div className="mb-4">
-                    <p className="mb-2 text-sm text-[#737373]">Paragraph 8:</p>
-                    <p className="mb-2 text-sm font-medium text-[#212223]">3. Even if Treated as Fiction, No Substantial Similarity</p>
-                    
-                    {/* a. Plot and Sequence */}
-                    <div className="mb-3 ml-4">
-                      <p className="mb-1 text-sm font-medium text-[#212223]">a. Plot and Sequence of Events</p>
-                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                        <li className="list-disc">General plot ideas not protected; must compare concrete elements <a href="#" className="text-[#0062c4] hover:underline">Cavalier v. Random House, Inc., 297 F.3d 815 (9th Cir. 2002)</a></li>
-                        <li className="list-disc">Only shared unprotectable premise: woman travels alone to Amalfi Coast seeking connection with deceased mother; <a href="#" className="text-[#0062c4] hover:underline">Capella Chef's Toa, LLC v. Macy's, Inc., 2016 WL 1122946 (C.S. Cal. Aug. 10, 2016)</a></li>
-                        <li className="list-disc">Central developments vastly different:
-                          <ul className="ml-6 mt-1 space-y-1">
-                            <li className="list-disc"><em>One Italian Summer</em>: Time travel, meeting young mother, discovering abandonment, confronting mother's independence</li>
-                            <li className="list-disc"><em>Eat the Lemon</em>: Finding surrogate family, meeting person who knew happy mother</li>
-                          </ul>
-                        </li>
-                        <li className="list-disc">Timing different: Katy leaves within week of death; Love travels decade later</li>
-                        <li className="list-disc">Superficial similarities are scenes a faire flowing from premise</li>
-                        <li className="list-disc">Storylines develop differently:
-                          <ul className="ml-6 mt-1 space-y-1">
-                            <li className="list-disc">Reconciliation with husband (Katy) vs. no reunion (Love/Brad)</li>
-                            <li className="list-disc">Prominent romance subplot (Katy/Adam) vs. peripheral relationship (Love/Peppe)</li>
-                            <li className="list-disc">Cooking with literal mother (Katy) vs. mother figure (Love/Rosa)</li>
-                          </ul>
-                        </li>
-                        <li className="list-disc">Random similarities cannot establish substantial similarity <a href="#" className="text-[#0062c4] hover:underline">Blatty v. Warner Bros. Ent., 2011 WL 13217379 (C.D. Cal. Apr. 21, 2011)</a></li>
-                      </ul>
-                    </div>
-
-                    {/* b. Characters */}
-                    <div className="mb-3 ml-4">
-                      <p className="mb-1 text-sm text-[#737373]">Paragraph 9:</p>
-                      <p className="mb-1 text-sm font-medium text-[#212223]">b. Characters</p>
-                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                        <li className="list-disc">Characters generally not protected unless "especially distinctive" <a href="#" className="text-[#0062c4] hover:underline">Berkic v. Crichton, 761 F.2d 1289 (9th Cir. 1985)</a></li>
-                        <li className="list-disc">Both protagonists grieve mother lost to cancer (unprotectable general plot point)</li>
-                        <li className="list-disc">Characters portrayed quite differently:
-                          <ul className="ml-6 mt-1 space-y-1">
-                            <li className="list-disc">Family context: Tumultuous upbringing (Love) vs. loving, happy family (Katy)</li>
-                            <li className="list-disc">Mother relationships: Cold, unhappy memories (Love) vs. warm, close bond (Katy)</li>
-                          </ul>
-                        </li>
-                        <li className="list-disc">Mother characters differ significantly:
-                          <ul className="ml-6 mt-1 space-y-1">
-                            <li className="list-disc">Cooking relationship to Italy differs</li>
-                            <li className="list-disc">Personality: Warm/happy (Katy's mother) vs. cold/unhappy (Love's mother)</li>
-                          </ul>
-                        </li>
-                        <li className="list-disc">Minor character similarities unremarkable or scenes-a-faire</li>
-                      </ul>
-                    </div>
-
-                    {/* c. Dialogue */}
-                    <div className="mb-3 ml-4">
-                      <p className="mb-1 text-sm text-[#737373]">Paragraph 10:</p>
-                      <p className="mb-1 text-sm font-medium text-[#212223]">c. Dialogue</p>
-                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                        <li className="list-disc">No similar dialogue alleged</li>
-                      </ul>
-                    </div>
-
-                    {/* d. Setting */}
-                    <div className="mb-3 ml-4">
-                      <p className="mb-1 text-sm text-[#737373]">Paragraph 11:</p>
-                      <p className="mb-1 text-sm font-medium text-[#212223]">d. Setting</p>
-                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                        <li className="list-disc">Both set on Amalfi Coast (not protectable) <a href="#" className="text-[#0062c4] hover:underline">Blatty v. Warner Bros. Ent., 2011 WL 13217379 (C.D. Cal. Apr. 21, 2011)</a></li>
-                        <li className="list-disc">Misleading characterization: Katy stays in Positano; Love travels widely</li>
-                        <li className="list-disc">Love stays in rental apartment, not family-run hotel</li>
-                        <li className="list-disc">Same city setting insufficient for substantial similarity</li>
-                        <li className="list-disc">Temporal setting different: Present with flashbacks (Eat the Lemon) vs. dual timelines present/1992 (One Italian Summer)</li>
-                      </ul>
-                    </div>
-
-                    {/* e. Theme */}
-                    <div className="mb-3 ml-4">
-                      <p className="mb-1 text-sm text-[#737373]">Paragraph 12:</p>
-                      <p className="mb-1 text-sm font-medium text-[#212223]">e. Theme</p>
-                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                        <li className="list-disc">General theme of connection to deceased mother not protectable <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
-                        <li className="list-disc">Specific themes differ:
-                          <ul className="ml-6 mt-1 space-y-1">
-                            <li className="list-disc"><em>One Italian Summer</em>: Seeing mother as independent person empowers self-realization</li>
-                            <li className="list-disc"><em>Eat the Lemon</em>: Overcoming unhappy memories, experiencing real family for first time</li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* f. Mood and Pace */}
-                    <div className="mb-3 ml-4">
-                      <p className="mb-1 text-sm text-[#737373]">Paragraph 13:</p>
-                      <p className="mb-1 text-sm font-medium text-[#212223]">f. Mood and Pace</p>
-                      <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                        <li className="list-disc">Mood significantly different:
-                          <ul className="ml-6 mt-1 space-y-1">
-                            <li className="list-disc"><em>One Italian Summer</em>: Drama and suspense through plot twists</li>
-                            <li className="list-disc"><em>Eat the Lemon</em>: Series of vignettes, much darker tone, trauma from cancer and abuse</li>
-                          </ul>
-                        </li>
-                        <li className="list-disc">Pace different:
-                          <ul className="ml-6 mt-1 space-y-1">
-                            <li className="list-disc"><em>One Italian Summer</em>: Few weeks, steady movement toward resolution</li>
-                            <li className="list-disc"><em>Eat the Lemon</em>: Year and a half across three visits, no speeding toward resolution</li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Paragraph 14 */}
-                  <div className="mb-4">
-                    <p className="mb-2 text-sm text-[#737373]">Paragraph 14:</p>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
-                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
-                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
-                    </ul>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
-                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">No substantial similarity in protected expression <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
-                      <li className="list-disc">Dismissal with prejudice warranted where deficiencies stem from fundamental characteristics of works <a href="#" className="text-[#0062c4] hover:underline">Blatty v. Warner Bros. Ent., 2011 WL 13217379 (C.D. Cal. Apr. 21, 2011)</a></li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Subsection B: State Law Claims */}
-                <div>
-                  <h3 className="mb-4 text-base font-bold text-[#212223]">
-                    B. State Law Claims Fail as Matter of Law
-                  </h3>
-
-                  {/* Paragraph 15 */}
-                  <div className="mb-4">
-                    <p className="mb-2 text-sm text-[#737373]">Paragraph 15:</p>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
-                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
-                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
-                    </ul>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
-                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">All state law claims premised on conspiracy to infringe and intimidate <a href="#" className="text-[#0062c4] hover:underline">Benay v. Warner Bros. Ent., Inc., 607 F.3d 620 (9th Cir. 2010)</a></li>
-                      <li className="list-disc">No copyright infringement occurred</li>
-                      <li className="list-disc">Implausible that complex conspiracy existed to conceal non-existent infringement</li>
-                    </ul>
-                  </div>
-
-                  {/* Paragraph 16 */}
-                  <div className="mb-4">
-                    <p className="mb-2 text-sm text-[#737373]">Paragraph 16:</p>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
-                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
-                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
-                    </ul>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
-                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">Only allegations: Published book, editor married to former agent, editor rejected manuscript</li>
-                      <li className="list-disc">Conclusory assertion S&S was "agent" insufficient</li>
-                    </ul>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Specific defenses by claim:</p>
-                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc"><strong>Breach of Fiduciary Duty:</strong> Possessing/reviewing manuscript cannot create fiduciary duty <a href="#" className="text-[#0062c4] hover:underline">Benay v. Warner Bros. Ent., Inc., 607 F.3d 620 (9th Cir. 2010)</a></li>
-                      <li className="list-disc"><strong>Intentional Interference (Contractual/Business):</strong> No facts showing S&S knowledge or intentional disruption</li>
-                      <li className="list-disc"><strong>Misrepresentation (Intentional/Negligent):</strong> No misrepresentation to Love alleged or reliance</li>
-                      <li className="list-disc"><strong>Negligence:</strong> No duty or breach alleged specifically as to S&S</li>
-                      <li className="list-disc"><strong>Intentional Infliction of Emotional Distress:</strong> No extreme/outrageous conduct by S&S alleged</li>
-                      <li className="list-disc"><strong>Stalking:</strong> No pattern of conduct by S&S alleged</li>
-                      <li className="list-disc"><strong>Conspiracy:</strong> No underlying tortious act or agreement by S&S alleged</li>
-                      <li className="list-disc"><strong>Unfair Business Practices:</strong> No predicate violation by S&S adequately alleged</li>
-                      <li className="list-disc"><strong>Accounting/Constructive Trust:</strong> Depend on copyright claim which fails</li>
-                      <li className="list-disc"><strong>Declaratory Judgment:</strong> No agreements with S&S alleged</li>
-                      <li className="list-disc">"Everyone did everything" allegations improper and warrant dismissal <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
-                    </ul>
-                  </div>
-
-                  {/* Paragraph 17 */}
+                <div className="space-y-6 pb-6">
+                  {/* Subsection A: Copyright Infringement */}
                   <div>
-                    <p className="mb-2 text-sm text-[#737373]">Paragraph 17:</p>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Selected arguments:</p>
-                    <ul className="ml-6 mb-2 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">Complaint fails to meet Twombly/Iqbal plausibility standard</li>
-                      <li className="list-disc">Allegations are conclusory and lack factual support</li>
-                    </ul>
-                    <p className="mb-1 text-sm font-medium text-[#212223]">Supporting authorities:</p>
-                    <ul className="ml-6 space-y-1 text-sm text-[#212223]">
-                      <li className="list-disc">S&S joins CAA's Motion to Dismiss on these additional grounds</li>
-                      <li className="list-disc"><strong>Time-barred claims:</strong> Constructive trust, intentional interference with contractual relations, tortious interference with business advantage, negligence, intentional infliction of emotional distress, intentional and negligent misrepresentation <a href="#" className="text-[#0062c4] hover:underline">Briggs v. Cameron, 2020 WL 6118493 (N.D. Cal. Oct. 16, 2020)</a></li>
-                      <li className="list-disc"><strong>Preempted claims:</strong> Breach of fiduciary duty, intentional interference with contractual relationships, tortious interference with prospective business advantage, negligence, intentional infliction of emotional distress, conspiracy, <a href="#" className="text-[#0062c4] hover:underline">Business & Professions Code § 17200</a>, accounting, constructive trust</li>
-                    </ul>
+                    <h3 className="mb-4 text-base font-semibold text-[#212223]">
+                      A. Love&apos;s Copyright Infringement Claim Fails as a Matter of Law
+                    </h3>
+                    
+                    {/* Subsubsection 1: Biographical Facts */}
+                    <div className="mb-6 ml-4">
+                      <h4 className="mb-3 text-sm font-semibold text-[#212223]">1. The Alleged Similarities Involve Biographical Facts Not Subject to Copyright Protection</h4>
+                      <div className="space-y-2">
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          <span className="text-[#212223]">To state a copyright infringement claim, a plaintiff must plead copying of copyrighted material and unlawful appropriation. Woodland v. Hill, 136 F.4th 1199, 1205 (9th Cir. 2025).</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          <span className="text-[#212223]">Copyright protects original expression, not facts. &quot;No author may copyright . . . the facts he narrates.&quot; Feist Publ&apos;ns, Inc. v. Rural Tel. Serv. Co., 499 U.S. 340, 344–45 (1991).</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          <span className="text-[#212223]">Courts have denied copyright protection to facts set forth in biographical works, including memoirs and autobiographies. 1 Nimmer on Copyright § 2.11 (2025).</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          <span className="text-[#212223]">Corbello v. Valli, 974 F.3d 965, 984 (9th Cir. 2020): where a work is &quot;emphatic[ally]&quot; represented as nonfiction autobiography, a fictional work does not infringe even if it draws on the autobiographical facts recounted.</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          <span className="text-[#212223]">Love&apos;s FAC explicitly characterizes Eat the Lemon as a &quot;personal memoir based on her own life&quot; and alleges that One Italian Summer &quot;interjects [Serle] into Love&apos;s life&quot; and is &quot;replete with intricate personal details from Love&apos;s life.&quot;</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          <span className="text-[#212223]">Every alleged similarity between the two works — the mother dying of cancer, the Italy trips, the cooking teacher connection — corresponds to facts Love herself represented as true biographical events.</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                          <span className="text-[#212223]">Because the alleged similarities are biographical facts rather than original creative expression, they are categorically unprotectable under copyright law, and the infringement claim fails on this threshold basis alone.</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Subsubsection 2: No Substantial Similarity */}
+                    <div className="ml-4">
+                      <h4 className="mb-3 text-sm font-semibold text-[#212223]">2. Even Treating Eat the Lemon as Fiction, the Works Are Not Substantially Similar</h4>
+                      
+                      {/* Standard */}
+                      <div className="mb-4">
+                        <p className="mb-2 text-sm font-medium text-[#737373]">Standard</p>
+                        <div className="space-y-2">
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">To survive a motion to dismiss, a plaintiff must satisfy both the extrinsic and intrinsic tests for substantial similarity. Skidmore v. Led Zeppelin, 952 F.3d 1051, 1064 (9th Cir. 2020).</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">The extrinsic test — which focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events&quot; — may be decided by the court as a matter of law at the pleading stage.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">The first step is to filter out unprotectable elements: ideas, historical facts, common phrases, scenes-a-faire, and stock themes. Corbello, 974 F.3d at 975.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">Dismissal with prejudice is appropriate where the deficiency stems from the &quot;fundamental characteristics of the works themselves&quot; rather than pleading deficiency.</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* a. Plot and Sequence of Events */}
+                      <div className="mb-4 ml-4">
+                        <p className="mb-2 text-sm font-medium text-[#212223]">a. Plot and Sequence of Events</p>
+                        <div className="space-y-2">
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">&quot;No one can own the basic idea for a story. General plot ideas are not protected by copyright law.&quot; Berkic v. Crichton, 761 F.2d 1289, 1293 (9th Cir. 1985).</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">Courts routinely reject substantial similarity claims where works&apos; plotlines had similarities &quot;but developed quite differently.&quot;</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">Scenes-a-faire that &quot;flow naturally or necessarily from a basic plot premise&quot; are not protectable. Corbello, 974 F.3d at 975.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            <span className="text-[#212223]">The sole overlapping premise is a woman who travels alone to the Amalfi Coast to connect with her deceased mother — a general, unprotectable plot point.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            <span className="text-[#212223]">One Italian Summer&apos;s central developments — time travel, meeting a younger version of one&apos;s mother, discovering an infant abandonment — have no counterpart in Eat the Lemon.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            <span className="text-[#212223]">Superficial alleged similarities (leaving a partner behind, meeting a love interest, cooking with a mother figure, Amalfi lemons, Frank Sinatra music, golden imagery) are either scenes-a-faire flowing from the Amalfi Coast setting, or random scattered details.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            <span className="text-[#212223]">Beyond the unprotectable common premise, the plots and sequences of events in the two works are wholly different and share no protectable expression.</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* b. Characters */}
+                      <div className="mb-4 ml-4">
+                        <p className="mb-2 text-sm font-medium text-[#212223]">b. Characters</p>
+                        <div className="space-y-2">
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">Literary characters are generally not subject to copyright protection unless &quot;especially distinctive.&quot; Olson v. NBC, 855 F.2d 1446, 1451–52 (9th Cir. 1988).</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            <span className="text-[#212223]">Both protagonists grieve a mother lost to cancer — a general, unprotectable plot point. Otherwise, the characters are opposites: Love endured abandonment, abuse, and a cold relationship with her mother; Katy had a loving, defining bond.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            <span className="text-[#212223]">The mother characters are likewise distinct: in OIS, the mother is warm and independently ambitious; in ETL, the mother is cold, unhappy, and defined by her connection to Italian cooking.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            <span className="text-[#212223]">No protectable character similarities exist between the two works.</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* c. Dialogue */}
+                      <div className="mb-4 ml-4">
+                        <p className="mb-2 text-sm font-medium text-[#212223]">c. Dialogue</p>
+                        <div className="space-y-2">
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            <span className="text-[#212223]">Love alleges no similar dialogue between the two works.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            <span className="text-[#212223]">This element provides no basis for a substantial similarity finding.</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* d. Setting */}
+                      <div className="mb-4 ml-4">
+                        <p className="mb-2 text-sm font-medium text-[#212223]">d. Setting</p>
+                        <div className="space-y-2">
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">&quot;The mere fact that&quot; two works are &quot;set in the same city does not give rise to a finding of substantial similarity.&quot; Silas v. HBO, 201 F. Supp. 3d 1158, 1176 (C.D. Cal. 2016).</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            <span className="text-[#212223]">One Italian Summer is set entirely in Positano; Eat the Lemon ranges widely across the Amalfi Coast, with the protagonist staying in a rental apartment, not a hotel.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            <span className="text-[#212223]">No protectable setting similarities exist between the two works.</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* e. Theme */}
+                      <div className="mb-4 ml-4">
+                        <p className="mb-2 text-sm font-medium text-[#212223]">e. Theme</p>
+                        <div className="space-y-2">
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            <span className="text-[#212223]">A general theme &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a substantial similarity finding.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            <span className="text-[#212223]">The thematic concerns are opposite: OIS is about dismantling an idealized image of a beloved mother; ETL is about overcoming deeply unhappy memories of a cold, difficult mother.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            <span className="text-[#212223]">No protectable thematic similarities exist between the two works.</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* f. Mood and Pace */}
+                      <div className="ml-4">
+                        <p className="mb-2 text-sm font-medium text-[#212223]">f. Mood and Pace</p>
+                        <div className="space-y-2">
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            <span className="text-[#212223]">OIS is driven by plot twists, drama, and suspense across a compressed timeline of a few weeks. ETL is a darker, trauma-inflected work told as episodic vignettes across eighteen months.</span>
+                          </div>
+                          <div className="flex gap-2 text-sm">
+                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            <span className="text-[#212223]">The mood and pace of the two works are fundamentally different and share no protectable expression.</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Subsection B: State Law Claims */}
+                  <div>
+                    <h3 className="mb-4 text-base font-semibold text-[#212223]">
+                      B. Love&apos;s State Law Claims Fail as to S&S
+                    </h3>
+                    
+                    {/* 1. Conspiracy Allegations Implausible */}
+                    <div className="mb-6 ml-4">
+                      <h4 className="mb-3 text-sm font-semibold text-[#212223]">1. The Conspiracy Allegations Are Fundamentally Implausible</h4>
+                      <div className="space-y-2">
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          <span className="text-[#212223]">A complex conspiracy to commit and conceal infringement is implausible where, as a matter of law, no infringement occurred. Briggs v. Cameron, 2020 WL 6118493, at *3 (N.D. Cal. 2020).</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          <span className="text-[#212223]">Every one of Love&apos;s 13 state law claims is predicated on the alleged conspiracy to infringe her copyright and intimidate her into silence about it.</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                          <span className="text-[#212223]">Because no infringement occurred as a matter of law, the entire conspiratorial premise of Love&apos;s state law claims is implausible, and each claim fails on this basis.</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 2. No Specific Conduct by S&S */}
+                    <div className="mb-6 ml-4">
+                      <h4 className="mb-3 text-sm font-semibold text-[#212223]">2. Love Has Not Alleged Specific Conduct by S&S</h4>
+                      <div className="space-y-2">
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          <span className="text-[#212223]">&quot;Everyone did everything&quot; group pleading is improper and warrants dismissal. Destfino v. Reiswig, 630 F.3d 952, 958–59 (9th Cir. 2011).</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          <span className="text-[#212223]">The only S&S-specific allegations are: (1) S&S published OIS; (2) one S&S editor is married to a former Love literary agent; and (3) another S&S editor rejected Love&apos;s manuscript two weeks before the OIS announcement.</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          <span className="text-[#212223]">Individual state law claims fail for additional reasons: Breach of Fiduciary Duty (no duty created by possessing manuscript); Intentional/Tortious Interference (no knowledge or intentional disruption); Misrepresentation (no statement to Love); Negligence (no duty alleged); IIED (no extreme conduct); Stalking (no pattern); Civil Conspiracy (no agreement); UCL § 17200 (no predicate violation); Accounting/Constructive Trust (derivative of failed copyright claim); Declaratory Judgment (no agreements with S&S).</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                          <span className="text-[#212223]">Each state law claim fails independently for lack of any plausible, S&S-specific factual allegation sufficient to support liability.</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 3. Untimely and/or Preempted */}
+                    <div className="ml-4">
+                      <h4 className="mb-3 text-sm font-semibold text-[#212223]">3. Many State Law Claims Are Untimely and/or Preempted (Joining CAA&apos;s Motion)</h4>
+                      <div className="space-y-2">
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          <span className="text-[#212223]">The following claims are time-barred: constructive trust, intentional interference with contractual relations, tortious interference with business advantage, negligence, IIED, and intentional and negligent misrepresentation. (As set forth in CAA&apos;s Motion to Dismiss, joined in full.)</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          <span className="text-[#212223]">The following claims are preempted by the Copyright Act: breach of fiduciary duty, intentional interference, tortious interference, negligence, IIED, civil conspiracy, UCL § 17200, accounting, and constructive trust. (As set forth in CAA&apos;s Motion to Dismiss, joined in full.)</span>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                          <span className="text-[#212223]">Each of these claims is independently subject to dismissal on timeliness and/or preemption grounds.</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+
+            {/* Section IV: CONCLUSION */}
+            <div>
+              <button
+                onClick={() => toggleSection("conclusion")}
+                className="flex w-full items-center justify-between py-4"
+              >
+                <h2 className="text-lg font-semibold text-[#212223]">
+                  IV. CONCLUSION
+                </h2>
+                {expandedSections.includes("conclusion") ? (
+                  <ChevronUp className="size-5 text-[#737373]" />
+                ) : (
+                  <ChevronDown className="size-5 text-[#737373]" />
+                )}
+              </button>
+              {expandedSections.includes("conclusion") && (
+                <div className="pb-6 space-y-3">
+                  <p className="text-sm text-[#212223]">The copyright claim fails as a matter of law because (a) the alleged similarities involve unprotectable biographical facts, and (b) even under a fictional-work analysis, the two works share no substantial similarity in any protectable element — plot, characters, dialogue, setting, theme, mood, or pace.</p>
+                  <p className="text-sm text-[#212223]">The state law claims fail because (a) there is no underlying infringement to conspire to conceal; (b) Love has not alleged conduct by S&S specifically sufficient to support any of the asserted claims; and (c) many are untimely and/or preempted.</p>
+                  <p className="text-sm font-medium text-[#212223]">S&S respectfully requests dismissal of the First Amended Complaint with prejudice.</p>
+                </div>
+              )}
+            </div>
+            </>
           )}
 
           {/* Bottom Action Button */}
@@ -823,6 +851,12 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
           </div>
         </div>
       </div>
+      <SelectionContextMenu
+        position={position}
+        onAddFacts={hide}
+        onAddAuthorities={hide}
+        onAskQuestion={hide}
+      />
     </div>
   );
 }
