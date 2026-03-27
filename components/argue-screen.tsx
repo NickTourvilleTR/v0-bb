@@ -4,9 +4,10 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { List, FileSearch, Plus, FileText } from "lucide-react";
+import { List, Plus, FileText } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
+import { FilePreviewIcon } from "@/components/file-preview-icon";
 
 interface ArgueScreenProps {
   className?: string;
@@ -188,7 +189,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               onClick={() => setShowOutlinePreview(true)}
               className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]"
             >
-              <FileSearch className="size-5 text-[#1d4b34]" />
+              <FilePreviewIcon className="size-5 text-[#1d4b34]" />
             </button>
           </div>
 

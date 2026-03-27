@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Notebook, FileText, AlertTriangle, ChevronRight, List, FileSearch } from "lucide-react";
+import { ChevronDown, ChevronUp, Notebook, FileText, AlertTriangle, ChevronRight, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
+import { FilePreviewIcon } from "@/components/file-preview-icon";
 
 interface VerifyPanelProps {
   onNextOpposition?: () => void;
@@ -28,7 +29,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
             <List className="size-5 text-[#212223]" />
           </button>
           <button onClick={() => setShowOutlinePreview(true)} className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-            <FileSearch className="size-5 text-[#1d4b34]" />
+            <FilePreviewIcon className="size-5 text-[#1d4b34]" />
           </button>
         </div>
 
