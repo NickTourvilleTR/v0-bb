@@ -67,7 +67,7 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowT
   const outlineItems = flowType === "judicial" ? judicialOutlineItems : briefOutlineItems;
   return (
     <div className={cn("flex flex-1 flex-col items-center overflow-y-auto px-8 py-12", className)}>
-      <div className="mx-auto w-full max-w-2xl">
+      <div style={{ width: "800px" }} className="mx-auto w-full">
           {/* Icon */}
           <div className="mb-6 flex justify-center">
             <ListTree className="size-16 text-[#737373]" strokeWidth={1} />
