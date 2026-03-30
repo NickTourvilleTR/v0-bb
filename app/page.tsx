@@ -688,6 +688,12 @@ function AuthenticatedApp() {
             }} onOpenSettings={() => setShowDraftSettings(true)} />
           </AppLayoutWrapper>
         </div>
+        <DraftSettingsOverlay
+          isOpen={showDraftSettings}
+          onClose={handleCloseDraftSettings}
+          onGenerateDraft={handleGenerateDraft}
+          flowType={flowType}
+        />
       </div>
     );
   }

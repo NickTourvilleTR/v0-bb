@@ -8,6 +8,7 @@ import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronDown, Chev
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface Message {
   id: string;
@@ -225,10 +226,11 @@ export function ChatDrawer({
       )}
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4">
-        {activeTab === "chat" && (
-          <>
-            {/* CoCounsel intro message */}
+      <TooltipProvider delayDuration={300}>
+        <div className="flex-1 overflow-y-auto p-4">
+          {activeTab === "chat" && (
+            <>
+              {/* CoCounsel intro message */}
             <div className="mb-4 flex items-start gap-2">
               <Logo className="mt-0.5 size-5 shrink-0" />
               <div>
@@ -316,109 +318,64 @@ export function ChatDrawer({
               <MessageCard
                 onQuote={() => handleQuote(flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief.")}
               >
-                <p className="text-sm text-[#212223]">
-                  {flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief."}
-                </p>
+                <p className="text-sm text-[#212223]">{flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief."}</p>
               </MessageCard>
             )}
 
             {/* Finalize Step Card */}
             {currentStep === "finalize" && (
               <MessageCard
-                onQuote={() => handleQuote(flowType === "judicial" ? "The opinion finalization summary is ready for review." : "The brief finalization summary is ready for review.")}
+                onQuote={() => handleQuote("Your brief is ready to download or email. You can make final edits and share your work.")}
               >
-                <p className="text-sm text-[#212223]">
-                  {flowType === "judicial" ? "The opinion finalization summary is ready for review." : "The brief finalization summary is ready for review."}
-                </p>
+                <p className="text-sm text-[#212223]">Your brief is ready to download or email. You can make final edits and share your work.</p>
               </MessageCard>
             )}
 
             <div ref={messagesEndRef} />
-          </>
-        )}
+            </>
+          )}
 
-        {activeTab === "notes" && (
-          <div className="text-sm text-[#737373]">No notes yet.</div>
-        )}
+          {activeTab === "notes" && (
+            <div className="text-sm text-[#737373]">No notes yet.</div>
+          )}
 
-        {activeTab === "sources" && !openedDocument && (
-          <div className="flex flex-col gap-3">
-            {/* View dropdown */}
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-[#737373]">View:</span>
-              <div ref={sourcesDropdownRef} className="relative">
+          {activeTab === "sources" && !openedDocument && (
+            <div className="flex flex-col gap-1">
+              {[
+                { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
+                { name: "Gyant v. NFM - Answer.pdf", time: "9:17 a.m." },
+                { name: "Hansen Deposition.pdf", time: "9:17 a.m." },
+                { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", time: "9:17 a.m." },
+                { name: "ROR Letter.docx", time: "9:17 a.m." },
+                { name: "Letter to NFM Dated September 19, 2023.docx", time: "9:17 a.m." },
+              ].map((doc) => (
                 <button
-                  onClick={() => setSourcesDropdownOpen(!sourcesDropdownOpen)}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-[#1d4b34] px-3 py-1 text-sm font-medium text-[#1d4b34]"
+                  key={doc.name}
+                  onClick={() => {
+                    setOpenedDocument(doc);
+                    onDocumentOpen?.();
+                  }}
+                  className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
                 >
-                  {sourcesView === "uploaded" ? "Uploaded documents" : "Cases & statutes"}
-                  <ChevronDown className={cn("size-3.5 transition-transform", sourcesDropdownOpen && "rotate-180")} />
-                </button>
-                {sourcesDropdownOpen && (
-                  <div className="absolute left-0 top-full z-50 mt-1 min-w-[200px] overflow-hidden rounded-lg border border-[#e5e5e5] bg-white shadow-lg">
-                    <button
-                      onClick={() => { setSourcesView("uploaded"); setSourcesDropdownOpen(false); }}
-                      className={cn(
-                        "flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-[#f7f7f7]",
-                        sourcesView === "uploaded" ? "font-medium text-[#212223]" : "text-[#737373]"
-                      )}
-                    >
-                      Uploaded documents
-                    </button>
-                    <button
-                      onClick={() => { setSourcesView("cases"); setSourcesDropdownOpen(false); }}
-                      className={cn(
-                        "flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-[#f7f7f7]",
-                        sourcesView === "cases" ? "font-medium text-[#212223]" : "text-[#737373]"
-                      )}
-                    >
-                      Cases & statutes
-                    </button>
+                  <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
+                    <p className="text-xs text-[#737373]">Uploaded at {doc.time}</p>
                   </div>
-                )}
-              </div>
+                </button>
+              ))}
             </div>
+          )}
 
-            {/* Document list */}
-            {sourcesView === "uploaded" && (
-              <div className="flex flex-col gap-1">
-                {[
-                  { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
-                  { name: "Gyant v. NFM - Answer.pdf", time: "9:17 a.m." },
-                  { name: "Hansen Deposition.pdf", time: "9:17 a.m." },
-                  { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", time: "9:17 a.m." },
-                  { name: "ROR Letter.docx", time: "9:17 a.m." },
-                  { name: "Letter to NFM Dated September 19, 2023.docx", time: "9:17 a.m." },
-                ].map((doc) => (
-                  <button
-                    key={doc.name}
-                    onClick={() => {
-                      setOpenedDocument(doc);
-                      onDocumentOpen?.();
-                    }}
-                    className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
-                  >
-                    <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
-                      <p className="text-xs text-[#737373]">Uploaded at {doc.time}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
+          {activeTab === "sources" && sourcesView === "cases" && !openedDocument && (
+            <div className="text-sm text-[#737373]">No cases or statutes yet.</div>
+          )}
 
-            {sourcesView === "cases" && (
-              <div className="text-sm text-[#737373]">No cases or statutes yet.</div>
-            )}
-          </div>
-        )}
-
-        {/* Document Viewer */}
-        {activeTab === "sources" && openedDocument && (
-          <div className="flex flex-col gap-4">
-            {/* Back to Sources */}
-            <button
+          {/* Document Viewer */}
+          {activeTab === "sources" && openedDocument && (
+            <div className="flex flex-col gap-4">
+              {/* Back to Sources */}
+              <button
               onClick={() => {
                 setOpenedDocument(null);
                 onDocumentClose?.();
@@ -475,15 +432,14 @@ export function ChatDrawer({
                 </div>
               ))}
             </div>
-          </div>
-        )}
+            </div>
+          )}
 
-        {activeTab === "versions" && (
-          <div className="text-sm text-[#737373]">No versions yet.</div>
-        )}
-      </div>
-
-      {/* Intake Step Card - above input */}
+          {activeTab === "versions" && (
+            <div className="text-sm text-[#737373]">No versions yet.</div>
+          )}
+        </div>
+      </TooltipProvider>
       {currentStep === "intake" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
@@ -644,16 +600,23 @@ function MessageCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Quote Reply Button */}
-      <button
-        onClick={onQuote}
-        className={cn(
-          "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
-          isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
-        )}
-        title="Quote reply"
-      >
-        <Reply className="size-3.5" />
-      </button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            onClick={onQuote}
+            className={cn(
+              "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
+              isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
+            )}
+          >
+            <Reply className="size-3.5" />
+          </button>
+        </TooltipTrigger>
+        <TooltipContent side="bottom" className="text-center">
+          <p><strong>Open chat</strong></p>
+          <p className="text-xs opacity-80">to ask about this section</p>
+        </TooltipContent>
+      </Tooltip>
       {children}
     </div>
   );
