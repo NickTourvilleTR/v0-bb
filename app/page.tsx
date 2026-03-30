@@ -23,6 +23,7 @@ import { OutlineEditor } from "@/components/outline-editor";
 import { DraftScreen } from "@/components/draft-screen";
 import { DraftLoadingScreen } from "@/components/draft-loading-screen";
 import { DraftEditor } from "@/components/draft-editor";
+import { DraftSettingsOverlay } from "@/components/draft-settings-overlay";
 import { VerifyPanel } from "@/components/verify-panel";
 import { FinalizePanel } from "@/components/finalize-panel";
 import { IntakeScreen } from "@/components/intake-screen";
@@ -94,6 +95,7 @@ function AuthenticatedApp() {
   const [quotedText, setQuotedText] = React.useState<string | null>(null);
   const [argumentsState, setArgumentsState] = React.useState<any[]>(arguments_data);
   const [flowType, setFlowType] = React.useState<"brief" | "judicial">("brief");
+  const [showDraftSettings, setShowDraftSettings] = React.useState(false);
   
   // Dynamic header title based on flow and selected motion
   const headerTitle = flowType === "judicial" ? "Judicial drafting" : (selectedMotion ? "Motion to Dismiss" : "Brief Builder");
@@ -321,10 +323,19 @@ function AuthenticatedApp() {
   };
 
   const handleNextDraft = () => {
-    handleGenerateDraft();
+    setShowDraftSettings(true);
+  };
+
+  const handleShowDraftSettings = () => {
+    setShowDraftSettings(true);
+  };
+
+  const handleCloseDraftSettings = () => {
+    setShowDraftSettings(false);
   };
 
   const handleGenerateDraft = () => {
+    setShowDraftSettings(false);
     addChatMessage("user", "Generate draft");
     const draftingMsg = flowType === "judicial" 
       ? "Drafting your opinion based on the outline and supporting materials..."
@@ -402,22 +413,30 @@ function AuthenticatedApp() {
   // Library layout
   if (currentScreen === "library") {
     return (
-      <div className="flex h-screen bg-white">
-        <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
-        <div className="flex flex-1 flex-col overflow-hidden">
-          <AppLayoutWrapper
-            drawerOpen={drawerOpen}
-            setDrawerOpen={setDrawerOpen}
-            notesOpen={notesOpen}
-            setNotesOpen={setNotesOpen}
-            messages={chatMessages}
-            currentStep="library"
-            onSendMessage={handleInlineSend}
-          >
-            <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
-          </AppLayoutWrapper>
+      <>
+        <div className="flex h-screen bg-white">
+          <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
+          <div className="flex flex-1 flex-col overflow-hidden">
+            <AppLayoutWrapper
+              drawerOpen={drawerOpen}
+              setDrawerOpen={setDrawerOpen}
+              notesOpen={notesOpen}
+              setNotesOpen={setNotesOpen}
+              messages={chatMessages}
+              currentStep="library"
+              onSendMessage={handleInlineSend}
+            >
+              <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
+            </AppLayoutWrapper>
+          </div>
         </div>
-      </div>
+        <DraftSettingsOverlay
+          isOpen={showDraftSettings}
+          onClose={handleCloseDraftSettings}
+          onGenerateDraft={handleGenerateDraft}
+          flowType={flowType}
+        />
+      </>
     );
   }
 
@@ -441,7 +460,7 @@ function AuthenticatedApp() {
           >
             <IntakeScreen 
               flowType={flowType}
-              onGenerateDraft={handleGenerateDraft}
+              onGenerateDraft={handleShowDraftSettings}
               onNextSelectArguments={() => {
                 const buttonLabel = flowType === "judicial" ? "Next: Select claims" : "Next: Select arguments";
                 addChatMessage("user", buttonLabel);
@@ -452,12 +471,18 @@ function AuthenticatedApp() {
                 }
                 setCurrentScreen("argue2");
               }}
-              onSkipToGenerateDraft={handleGenerateDraft}
+              onSkipToGenerateDraft={handleShowDraftSettings}
               onEditOutline={handleNextOutline}
               onQuote={(text) => handleQuote(text)}
             />
           </AppLayoutWrapper>
         </div>
+        <DraftSettingsOverlay
+          isOpen={showDraftSettings}
+          onClose={handleCloseDraftSettings}
+          onGenerateDraft={handleGenerateDraft}
+          flowType={flowType}
+        />
       </div>
     );
   }
@@ -480,16 +505,22 @@ function AuthenticatedApp() {
           onSendMessage={handleInlineSend}
             currentStep="outline"
             onGenerateOutline={handleGenerateOutline}
-            onSkipToGenerateDraft={handleGenerateDraft}
+            onSkipToGenerateDraft={handleShowDraftSettings}
             showVersionsTab={true}
           >
             <OutlineScreen 
               flowType={flowType}
               onGenerateOutline={handleGenerateOutline} 
-              onNextDraft={handleGenerateDraft}
+              onNextDraft={handleShowDraftSettings}
             />
           </AppLayoutWrapper>
         </div>
+        <DraftSettingsOverlay
+          isOpen={showDraftSettings}
+          onClose={handleCloseDraftSettings}
+          onGenerateDraft={handleGenerateDraft}
+          flowType={flowType}
+        />
       </div>
     );
   }
@@ -537,15 +568,21 @@ function AuthenticatedApp() {
           messages={chatMessages}
           onSendMessage={handleInlineSend}
             currentStep="outline-ready"
-            onNextDraft={handleGenerateDraft}
+            onNextDraft={handleShowDraftSettings}
             showVersionsTab={true}
           >
             <OutlineEditor 
               flowType={flowType}
-              onNextDraft={handleGenerateDraft}
+              onNextDraft={handleShowDraftSettings}
             />
           </AppLayoutWrapper>
         </div>
+        <DraftSettingsOverlay
+          isOpen={showDraftSettings}
+          onClose={handleCloseDraftSettings}
+          onGenerateDraft={handleGenerateDraft}
+          flowType={flowType}
+        />
       </div>
     );
   }
@@ -569,9 +606,15 @@ function AuthenticatedApp() {
             currentStep="draft"
             showVersionsTab={true}
           >
-            <DraftScreen flowType={flowType} onGenerateDraft={handleGenerateDraft} />
+            <DraftScreen flowType={flowType} onGenerateDraft={handleShowDraftSettings} />
           </AppLayoutWrapper>
         </div>
+        <DraftSettingsOverlay
+          isOpen={showDraftSettings}
+          onClose={handleCloseDraftSettings}
+          onGenerateDraft={handleGenerateDraft}
+          flowType={flowType}
+        />
       </div>
     );
   }
@@ -841,20 +884,26 @@ function AuthenticatedApp() {
             currentStep="support"
             flowType={flowType}
             onNextOutline={handleNextOutline}
-            onSkipToGenerateDraft={handleGenerateDraft}
+            onSkipToGenerateDraft={handleShowDraftSettings}
             showVersionsTab={true}
           >
             <div className="flex-1 overflow-y-auto">
               <SupportingAuthoritiesPanel 
                 flowType={flowType}
                 onNextOutline={handleNextOutline}
-                onSkipToGenerateDraft={handleGenerateDraft}
+                onSkipToGenerateDraft={handleShowDraftSettings}
                 onEditOutline={handleNextOutline}
                 onQuote={handleQuote}
               />
             </div>
           </AppLayoutWrapper>
         </div>
+        <DraftSettingsOverlay
+          isOpen={showDraftSettings}
+          onClose={handleCloseDraftSettings}
+          onGenerateDraft={handleGenerateDraft}
+          flowType={flowType}
+        />
       </div>
     );
   }
@@ -878,7 +927,7 @@ function AuthenticatedApp() {
             currentStep="argue"
             flowType={flowType}
             onNextSupportingAuthority={handleNextSupportingAuthority}
-            onSkipToGenerateDraft={handleGenerateDraft}
+            onSkipToGenerateDraft={handleShowDraftSettings}
             showVersionsTab={true}
             quotedText={quotedText}
             onClearQuote={handleClearQuote}
@@ -889,7 +938,7 @@ function AuthenticatedApp() {
                 flowType={flowType}
                 onNextSupportingAuthority={handleNextSupportingAuthority}
                 onEditOutline={handleNextOutline}
-                onSkipToGenerateDraft={handleGenerateDraft}
+                onSkipToGenerateDraft={handleShowDraftSettings}
                 onQuote={handleQuote}
                 argumentsState={flowType === "judicial" ? undefined : argumentsState}
                 setArgumentsState={flowType === "judicial" ? undefined : setArgumentsState}
@@ -897,6 +946,12 @@ function AuthenticatedApp() {
             </div>
           </AppLayoutWrapper>
         </div>
+        <DraftSettingsOverlay
+          isOpen={showDraftSettings}
+          onClose={handleCloseDraftSettings}
+          onGenerateDraft={handleGenerateDraft}
+          flowType={flowType}
+        />
       </div>
     );
   }
@@ -1138,6 +1193,13 @@ function AuthenticatedApp() {
           </>
         )}
       </div>
+      {/* Draft Settings Overlay */}
+      <DraftSettingsOverlay
+        isOpen={showDraftSettings}
+        onClose={handleCloseDraftSettings}
+        onGenerateDraft={handleGenerateDraft}
+        flowType={flowType}
+      />
     </div>
   );
 }
