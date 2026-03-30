@@ -427,16 +427,15 @@ function AuthenticatedApp() {
               onSendMessage={handleInlineSend}
             >
               <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
-            </AppLayoutWrapper>
-          </div>
+          </AppLayoutWrapper>
         </div>
-        <DraftSettingsOverlay
-          isOpen={showDraftSettings}
-          onClose={handleCloseDraftSettings}
-          onGenerateDraft={handleGenerateDraft}
-          flowType={flowType}
-        />
-      </>
+      </div>
+      <DraftSettingsOverlay
+        isOpen={showDraftSettings}
+        onClose={handleCloseDraftSettings}
+        onGenerateDraft={handleGenerateDraft}
+        flowType={flowType}
+      />
     );
   }
 
