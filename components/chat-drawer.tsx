@@ -226,9 +226,9 @@ export function ChatDrawer({
       )}
 
       {/* Messages Area */}
+      {activeTab === "chat" && (
       <TooltipProvider delayDuration={300}>
         <div className="flex-1 overflow-y-auto p-4">
-          {activeTab === "chat" && (
           <>
             {/* CoCounsel intro message */}
             <div className="mb-4 flex items-start gap-2">
@@ -624,6 +624,7 @@ export function ChatDrawer({
             <a href="#" className="text-[#212223] underline">private and secure</a>.
           </p>
         </div>
+          </>
       </TooltipProvider>
       )}
     </div>
