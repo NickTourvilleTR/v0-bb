@@ -297,7 +297,8 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 </div>
 
                 {/* Jurisdiction and Party Selection Section */}
-                <div className="rounded-lg border border-[#e5e5e5] bg-white p-5">
+                <h4 className="mb-3 text-sm font-semibold text-[#212223]">Complaint details</h4>
+                <div className="mb-8 rounded-lg border border-[#e5e5e5] bg-white p-5">
                   <div className="space-y-4">
                     {/* Jurisdiction */}
                     <div>
