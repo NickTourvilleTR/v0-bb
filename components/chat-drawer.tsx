@@ -618,8 +618,6 @@ export function ChatDrawer({
             <a href="#" className="text-[#212223] underline">private and secure</a>.
           </p>
         </div>
-          </>
-      </TooltipProvider>
       )}
     </div>
   );
