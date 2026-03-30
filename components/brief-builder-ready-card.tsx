@@ -30,7 +30,7 @@ export function BriefBuilderReadyCard({
               Motion to dismiss
             </span>
             <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-sm text-[#212223]">
-              Primary brief
+              Supporting brief
             </span>
           </div>
         )}
