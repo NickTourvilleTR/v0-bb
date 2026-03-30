@@ -332,46 +332,44 @@ export function ChatDrawer({
             )}
 
             <div ref={messagesEndRef} />
-          </>
-        )}
+            </>
+          )}
 
-        {activeTab === "notes" && (
-          <div className="text-sm text-[#737373]">No notes yet.</div>
-        )}
+          {activeTab === "notes" && (
+            <div className="text-sm text-[#737373]">No notes yet.</div>
+          )}
 
-        {activeTab === "sources" && (
-              <div className="flex flex-col gap-1">
-                {[
-                  { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
-                  { name: "Gyant v. NFM - Answer.pdf", time: "9:17 a.m." },
-                  { name: "Hansen Deposition.pdf", time: "9:17 a.m." },
-                  { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", time: "9:17 a.m." },
-                  { name: "ROR Letter.docx", time: "9:17 a.m." },
-                  { name: "Letter to NFM Dated September 19, 2023.docx", time: "9:17 a.m." },
-                ].map((doc) => (
-                  <button
-                    key={doc.name}
-                    onClick={() => {
-                      setOpenedDocument(doc);
-                      onDocumentOpen?.();
-                    }}
-                    className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
-                  >
-                    <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
-                      <p className="text-xs text-[#737373]">Uploaded at {doc.time}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
+          {activeTab === "sources" && !openedDocument && (
+            <div className="flex flex-col gap-1">
+              {[
+                { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
+                { name: "Gyant v. NFM - Answer.pdf", time: "9:17 a.m." },
+                { name: "Hansen Deposition.pdf", time: "9:17 a.m." },
+                { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", time: "9:17 a.m." },
+                { name: "ROR Letter.docx", time: "9:17 a.m." },
+                { name: "Letter to NFM Dated September 19, 2023.docx", time: "9:17 a.m." },
+              ].map((doc) => (
+                <button
+                  key={doc.name}
+                  onClick={() => {
+                    setOpenedDocument(doc);
+                    onDocumentOpen?.();
+                  }}
+                  className="flex items-start gap-3 rounded-lg p-3 text-left transition-colors hover:bg-[#f7f7f7]"
+                >
+                  <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
+                    <p className="text-xs text-[#737373]">Uploaded at {doc.time}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
 
-            {sourcesView === "cases" && (
-              <div className="text-sm text-[#737373]">No cases or statutes yet.</div>
-            )}
-          </div>
-        )}
+          {activeTab === "sources" && sourcesView === "cases" && !openedDocument && (
+            <div className="text-sm text-[#737373]">No cases or statutes yet.</div>
+          )}
 
         {/* Document Viewer */}
         {activeTab === "sources" && openedDocument && (
@@ -582,7 +580,7 @@ export function ChatDrawer({
           </p>
         </div>
       )}
-        </div>
+      </div>
       </TooltipProvider>
     </div>
   );
