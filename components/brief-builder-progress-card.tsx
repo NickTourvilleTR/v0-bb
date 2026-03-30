@@ -19,7 +19,7 @@ export function BriefBuilderProgressCard({
   className,
   tags = [
     { label: "Motion to dismiss", color: "#1d4b34" },
-    { label: "Primary brief", color: "#1d4b34" },
+    { label: "Supporting brief", color: "#1d4b34" },
   ],
 }: BriefBuilderProgressCardProps) {
   const [emailMe, setEmailMe] = React.useState(false);

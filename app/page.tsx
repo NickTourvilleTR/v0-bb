@@ -200,12 +200,12 @@ function AuthenticatedApp() {
   const handleMotionSearchSubmit = (motionId?: string) => {
     setSelectedMotion(motionId || "dismiss");
     addChatMessage("user", "Motion to Dismiss");
-    addChatMessage("assistant", "To ensure the draft fits your scenario, are you drafting a <strong>Primary</strong>, <strong>Opposition</strong>, or <strong>Reply</strong> brief?");
+    addChatMessage("assistant", "To ensure the draft fits your scenario, are you drafting a <strong>Supporting</strong>, <strong>Opposition</strong>, or <strong>Reply</strong> brief?");
     setCurrentScreen("brief-type");
   };
 
   const handleBriefTypeSubmit = (type: string) => {
-    const labels: Record<string, string> = { primary: "Primary", opposition: "Opposition", reply: "Reply" };
+    const labels: Record<string, string> = { primary: "Supporting", opposition: "Opposition", reply: "Reply" };
     setSelectedBriefType(type);
     addChatMessage("user", labels[type] || type);
     addChatMessage("assistant", "Please upload any relevant documents such as the <strong>original complaint, answer, and reply</strong> (if applicable). You can also upload any <strong>pertinent exhibits or templates</strong>.");
@@ -1111,7 +1111,7 @@ function AuthenticatedApp() {
                       onUpload={handleFileUpload}
                       headerTitle={flowType === "judicial" ? "Upload documents" : "Upload documents"}
                       description={flowType === "judicial" ? "Sure, I can help you draft an opinion. To provide you with the most useful guidance, I should start by analyzing the relevant briefs. You can also upload any pertinent records, prior court materials, templates, or other documents you would like to use for your opinion." : "To provide you with the most useful guidance, I should start by analyzing the original complaint. You can also upload any pertinent exhibits, and other relevant documents."}
-                      tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
+                      tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Supporting brief", color: "#1d4b34" }]}
                       defaultFilesToUse={flowType === "judicial" ? judicialDefaultFiles : undefined}
                     />
                   </div>
@@ -1122,7 +1122,7 @@ function AuthenticatedApp() {
                   <div className="mb-6">
                     <BriefBuilderProgressCard 
                       progress={40} 
-                      tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Primary brief", color: "#1d4b34" }]}
+                      tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Supporting brief", color: "#1d4b34" }]}
                     />
                   </div>
                 )}

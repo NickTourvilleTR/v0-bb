@@ -44,7 +44,7 @@ export function BriefBuilderGeneratingCard({
               Motion to dismiss
             </span>
             <span className="rounded-md bg-[#ebf0ed] px-2 py-1 text-xs text-[#1d4b34]">
-              Primary brief
+              Supporting brief
             </span>
           </div>
         )}
