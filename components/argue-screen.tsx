@@ -196,13 +196,18 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
           {/* Main content column */}
           <div ref={flowType === "brief" ? contentRef : undefined} className="flex-1 max-w-3xl">
             {/* Header */}
-            <div className="mb-6">
+            <div className="mb-8">
               <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
-                {flowType === "judicial" ? "CLAIMS" : "ARGUE"}
+                {flowType === "judicial" ? "CLAIMS" : "SELECT ARGUMENTS"}
               </p>
-              <h1 className="text-2xl font-semibold text-[#212223]">
-                {flowType === "judicial" ? "Select claims to decide on" : "Select the desired arguments"}
+              <h1 className="mb-3 text-3xl font-bold text-[#212223]">
+                {flowType === "judicial" ? "Select claims to decide on" : "Select and organize the desired arguments"}
               </h1>
+              {flowType === "brief" && (
+                <p className="text-base leading-relaxed text-[#212223]">
+                  Select the arguments you would like to proceed with and drag them into the desired order. You can also use the chat to describe any facts or additional details to focus on.
+                </p>
+              )}
             </div>
 
           {/* Select All */}
