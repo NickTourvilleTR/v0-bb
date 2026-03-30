@@ -109,16 +109,6 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowT
                     </a>
                   )}
                 </div>
-                <span
-                  className={cn(
-                    "shrink-0 rounded px-2 py-1 text-xs font-medium",
-                    item.status === "edited"
-                      ? "bg-[#ebf0ed] text-[#2e6b5c]"
-                      : "bg-[#f2f2f2] text-[#737373]"
-                  )}
-                >
-                  {item.status === "edited" ? "Edited" : "Unchanged"}
-                </span>
               </div>
             ))}
           </div>
