@@ -332,7 +332,6 @@ export function ChatDrawer({
             )}
 
             <div ref={messagesEndRef} />
-            </>
           )}
 
           {activeTab === "notes" && (
@@ -373,7 +372,6 @@ export function ChatDrawer({
 
           {/* Document Viewer */}
           {activeTab === "sources" && openedDocument && (
-          <div className="flex flex-col gap-4">
             {/* Back to Sources */}
             <button
               onClick={() => {
