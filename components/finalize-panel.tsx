@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronDown, PlaySquare } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, X, PlaySquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ActivityItem {
@@ -78,9 +78,15 @@ export function FinalizePanel({ flowType = "brief" }: FinalizePanelProps) {
           <div className="flex items-center justify-between border-b border-[#e5e5e5] px-6 py-4">
             <h2 className="text-xl font-semibold text-[#212223]">Activity summary</h2>
             <div className="flex items-center gap-2 text-sm">
-              <button className="text-[#005da2] hover:underline">Expand all</button>
+              <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
+                <ChevronUp className="size-4" />
+                Expand all
+              </button>
               <span className="text-[#737373]">|</span>
-              <button className="text-[#005da2] hover:underline">Collapse all</button>
+              <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
+                <X className="size-4" />
+                Collapse all
+              </button>
             </div>
           </div>
 
@@ -128,9 +134,15 @@ export function FinalizePanel({ flowType = "brief" }: FinalizePanelProps) {
             <div className="flex items-center justify-between border-b border-[#e5e5e5] px-6 py-4">
               <h2 className="text-xl font-semibold text-[#212223]">Document includes</h2>
               <div className="flex items-center gap-2 text-sm">
-                <button className="text-[#005da2] hover:underline">Expand all</button>
+                <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
+                  <ChevronUp className="size-4" />
+                  Expand all
+                </button>
                 <span className="text-[#737373]">|</span>
-                <button className="text-[#005da2] hover:underline">Collapse all</button>
+                <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
+                  <X className="size-4" />
+                  Collapse all
+                </button>
               </div>
             </div>
 
