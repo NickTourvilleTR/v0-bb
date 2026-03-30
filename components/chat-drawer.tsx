@@ -580,7 +580,7 @@ export function ChatDrawer({
           </p>
         </div>
       )}
-      </div>
+        </div>
       </TooltipProvider>
     </div>
   );
