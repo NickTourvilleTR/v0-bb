@@ -142,7 +142,6 @@ const argumentsSelected = [
 ];
 
 const complaintSections = [
-  "Parties and Jurisdiction",
   "Plaintiff's Work and Copyright",
   "Development, Submissions, and Industry Interest",
   "Alleged Access and Timeline Around OIS",
@@ -152,11 +151,6 @@ const complaintSections = [
 ];
 
 const complaintContent: { [key: string]: string[] } = {
-  "Parties and Jurisdiction": [
-    "Plaintiff is Adrienne Love, a California resident.",
-    "Defendants include Acme Corp, Sound Made Public, Folio Literary Agency, The Gotham Group, 3 Arts, CAA, WME, Pinnacle Publishing/Atria, Paramount, Temple Hill, TFC, and individual industry professionals and author Rebecca Serle.",
-    "Jurisdiction is based on federal copyright claims and supplemental jurisdiction, with venue alleged proper in this District.",
-  ],
   "Plaintiff's Work and Copyright": [
     "Love wrote a memoir titled \"Eat the Lemon: A Journey to Amalfi in Search of My Mother's Missing Cookbook\" after trips to Positano in 2017, while at Djerassi.",
     "She alleges ownership of U.S. Copyright Registration No. TXu002385900 for the ETL Work, attached as Exhibit A.",
@@ -302,38 +296,50 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                   ))}
                 </div>
 
-                {/* Party selection section */}
-                <p className="mb-3 text-sm text-[#212223]">I&apos;ve also identified the following parties in the case.</p>
-                <div className="mb-6 rounded-lg border border-[#e5e5e5] p-4">
-                  <p className="mb-3 text-sm font-medium text-[#212223]">Please indicate which party you represent:</p>
-                  <div className="space-y-2.5">
-                    {briefParties.map((party) => (
-                      <label
-                        key={party.name}
-                        className={cn(
-                          "flex items-center gap-3",
-                          party.functional ? "cursor-pointer" : party.disabled ? "cursor-default" : "cursor-not-allowed"
-                        )}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedParties.includes(party.name)}
-                          onChange={() => party.functional && toggleParty(party.name)}
-                          disabled={party.disabled}
-                          className={cn(
-                            "size-4 rounded border-[#a3a3a3] accent-[#1d4b34]",
-                            !party.functional && !party.disabled && "cursor-not-allowed",
-                            party.disabled && "opacity-30"
-                          )}
-                        />
-                        <span className={cn(
-                          "text-sm",
-                          party.disabled ? "text-[#a3a3a3]" : "text-[#212223]"
-                        )}>
-                          <span className="font-medium">{party.label}:</span> {party.name}
-                        </span>
-                      </label>
-                    ))}
+                {/* Jurisdiction and Party Selection Section */}
+                <div className="rounded-lg border border-[#e5e5e5] bg-white p-5">
+                  <div className="space-y-4">
+                    {/* Jurisdiction */}
+                    <div>
+                      <p className="text-sm">
+                        <span className="font-semibold text-[#212223]">Jurisdiction:</span>{" "}
+                        <span className="text-[#212223]">California</span>
+                      </p>
+                    </div>
+
+                    {/* Party you represent */}
+                    <div>
+                      <p className="mb-3 text-sm font-semibold text-[#212223]">Party you represent:</p>
+                      <div className="space-y-2.5">
+                        {briefParties.map((party) => (
+                          <label
+                            key={party.name}
+                            className={cn(
+                              "flex items-center gap-3",
+                              party.functional ? "cursor-pointer" : party.disabled ? "cursor-default" : "cursor-not-allowed"
+                            )}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={selectedParties.includes(party.name)}
+                              onChange={() => party.functional && toggleParty(party.name)}
+                              disabled={party.disabled}
+                              className={cn(
+                                "size-4 rounded border-[#a3a3a3] accent-[#1d4b34]",
+                                !party.functional && !party.disabled && "cursor-not-allowed",
+                                party.disabled && "opacity-30"
+                              )}
+                            />
+                            <span className={cn(
+                              "text-sm",
+                              party.disabled ? "text-[#a3a3a3]" : "text-[#212223]"
+                            )}>
+                              <span className="font-medium">{party.label}:</span> {party.name}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
