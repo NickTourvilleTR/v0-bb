@@ -14,7 +14,7 @@ export function DraftScreen({ className, onGenerateDraft, flowType = "brief" }: 
   return (
     <div className={cn("flex flex-1 flex-col items-center justify-center px-8", className)}>
       {/* White document space */}
-      <div style={{ width: "800px" }} className="flex flex-col items-center">
+      <div style={{ width: "800px", maxWidth: "100%" }} className="w-full flex flex-col items-center">
       <div className="mb-6">
         <svg
           width="64"
