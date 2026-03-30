@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, RotateCcw, Move, Trash2, ChevronUp, ChevronDown } from "lucide-react";
+import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 
@@ -422,7 +422,7 @@ function CitationSubCard({ citation }: { citation: Citation }) {
               className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
               title="Revert"
             >
-              <RotateCcw className="size-3.5" />
+              <Reply className="size-3.5" />
             </button>
             <button
               className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
@@ -556,7 +556,7 @@ function AuthorityCard({
               className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
               title="Revert"
             >
-              <RotateCcw className="size-3.5" />
+              <Reply className="size-3.5" />
             </button>
             <button
               className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"

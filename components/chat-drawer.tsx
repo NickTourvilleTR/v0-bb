@@ -8,6 +8,7 @@ import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronDown, Chev
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface Message {
   id: string;
@@ -644,16 +645,25 @@ function MessageCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Quote Reply Button */}
-      <button
-        onClick={onQuote}
-        className={cn(
-          "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
-          isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
-        )}
-        title="Quote reply"
-      >
-        <Reply className="size-3.5" />
-      </button>
+      <TooltipProvider delayDuration={300}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={onQuote}
+              className={cn(
+                "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
+                isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
+              )}
+            >
+              <Reply className="size-3.5" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" className="max-w-[140px] text-center">
+            <p className="font-semibold">Open chat</p>
+            <p className="font-normal opacity-80">to ask about this section</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       {children}
     </div>
   );
