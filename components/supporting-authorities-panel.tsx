@@ -670,10 +670,11 @@ export function SupportingAuthoritiesPanel({
                   <span className="font-medium">View related</span> buttons to find additional support for each statement. Use{" "}
                   <span className="font-medium">Add facts or authorities</span> to find new facts and authorities.
                 </p>
-                <div className="flex gap-4">
+                <div className="flex items-center gap-4">
                   <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
                     Expand all
                   </button>
+                  <div className="h-4 w-px bg-[#e5e5e5]"></div>
                   <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
                     Collapse all
                   </button>
