@@ -42,7 +42,7 @@ export function BriefBuilderUploadCard({
   description = "To provide you with the most useful guidance, I should start by analyzing the original complaint. You can also upload any pertinent exhibits, and other relevant documents.",
   tags = [
     { label: "Motion to dismiss", color: "#1d4b34" },
-    { label: "Primary brief", color: "#1d4b34" },
+    { label: "Supporting brief", color: "#1d4b34" },
   ],
   defaultFilesToUse = defaultFiles,
 }: BriefBuilderUploadCardProps) {
