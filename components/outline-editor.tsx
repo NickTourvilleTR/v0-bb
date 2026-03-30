@@ -130,7 +130,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
         <div
           ref={contentRef}
           className="mx-auto rounded-lg border border-[#e5e5e5] bg-white p-6"
-          style={{ width: `min(${zoom}%, calc(100% - 2rem))`, maxWidth: "100%" }}
+          style={{ width: `min(${zoom}%, 800px)`, maxWidth: "calc(100% - 2rem)" }}
         >
           {flowType === "brief" && (
             <>

@@ -137,7 +137,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
 
       {/* Document Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-8">
-        <div className="mx-auto" style={{ width: `min(${zoom}%, calc(100% - 2rem))`, maxWidth: "100%" }}>
+        <div className="mx-auto" style={{ width: `min(${zoom}%, 800px)`, maxWidth: "calc(100% - 2rem)" }}>
         {/* Judicial header — above the white card */}
         {flowType === "judicial" && (
           <div className="mb-4">
@@ -154,7 +154,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
           </div>
         )}
 
-        <div ref={contentRef} className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm w-full">
+        <div ref={contentRef} className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
           {/* Header — brief only, stays inside the white card */}
           {flowType !== "judicial" && (
             <div className="mb-6">
