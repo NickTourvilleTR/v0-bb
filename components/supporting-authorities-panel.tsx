@@ -674,7 +674,7 @@ export function SupportingAuthoritiesPanel({
                   <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
                     Expand all
                   </button>
-                  <div className="h-4 w-px bg-[#e5e5e5]"></div>
+                  <span className="text-[#e5e5e5]">|</span>
                   <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
                     Collapse all
                   </button>
