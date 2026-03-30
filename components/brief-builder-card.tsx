@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Pencil, Reply } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
@@ -92,13 +93,17 @@ export function BriefBuilderCard({
     >
       {/* Quote Reply Button - Simple Icon Button Variant */}
       {isHovered && (
-        <button
-          onClick={handleQuoteClick}
-          className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
-          title="Quote this message"
-        >
-          <Reply className="size-4" />
-        </button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={handleQuoteClick}
+              className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
+            >
+              <Reply className="size-4" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="top">Quote this message</TooltipContent>
+        </Tooltip>
       )}
       {/* Header */}
       <h3 className="mb-6 text-lg font-semibold text-[#212223]">Select motion type</h3>

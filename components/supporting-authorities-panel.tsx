@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, RotateCcw, Move, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface Citation {
   id: string;
@@ -824,13 +825,23 @@ export function SupportingAuthoritiesPanel({
                     onMouseEnter={() => setHoveredDecision((prev) => ({ ...prev, [claim.id]: true }))}
                     onMouseLeave={() => setHoveredDecision((prev) => ({ ...prev, [claim.id]: false }))}
                   >
-                    {hoveredDecision[claim.id] && onQuote && (
-                      <button
-                        onClick={() => onQuote(
-                          claim.id === "breach-of-contract"
-                            ? "Decision on breach of contract"
-                            : "Decision on breach of the implied covenant of good faith and fair dealing"
-                        )}
+  {hoveredDecision[claim.id] && onQuote && (
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <button
+        onClick={() => onQuote(
+          claim.id === "breach-of-contract"
+            ? "Decision on breach of contract"
+            : "Decision on breach of the implied covenant of good faith and fair dealing"
+        )}
+        className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
+      >
+        <Reply className="size-4" />
+      </button>
+    </TooltipTrigger>
+    <TooltipContent side="top">Quote this message</TooltipContent>
+  </Tooltip>
+  )}
                         className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
                         title="Quote this message"
                       >
