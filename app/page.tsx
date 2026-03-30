@@ -369,8 +369,8 @@ function AuthenticatedApp() {
       intake: "intake",
       argue2: "argue2",
       develop: "support",
-      outline: "outline",
-      draft: "draft",
+      outline: "outline-ready",
+      draft: "draft-ready",
       opposition: "distinguish",
       verify: "verify",
       finalize: "finalize",
@@ -685,7 +685,7 @@ function AuthenticatedApp() {
               addChatMessage("user", verifyMsg);
               addChatMessage("assistant", verifyingMsg);
               setCurrentScreen("verify");
-            }} />
+            }} onOpenSettings={() => setShowDraftSettings(true)} />
           </AppLayoutWrapper>
         </div>
       </div>

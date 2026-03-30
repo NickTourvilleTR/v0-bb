@@ -474,16 +474,26 @@ function CitationSubCard({ citation }: { citation: Citation }) {
         </div>
       </div>
 
-      {/* View related authorities button */}
+      {/* Add authorities + View related authorities buttons */}
       <div className="mt-4 border-t border-[#e5e5e5] pt-4">
-        <Button
-          variant="outline"
-          size="sm"
-          className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
-        >
-          View related authorities
-          <ExternalLink className="ml-2 size-3" />
-        </Button>
+        <div className="flex items-center gap-4">
+          <Button
+            variant="outline"
+            size="sm"
+            className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
+          >
+            Add authorities
+          </Button>
+          <span className="text-[#e5e5e5]">|</span>
+          <Button
+            variant="outline"
+            size="sm"
+            className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
+          >
+            View related authorities
+            <ExternalLink className="ml-2 size-3" />
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -670,10 +680,11 @@ export function SupportingAuthoritiesPanel({
                   <span className="font-medium">View related</span> buttons to find additional support for each statement. Use{" "}
                   <span className="font-medium">Add facts or authorities</span> to find new facts and authorities.
                 </p>
-                <div className="flex gap-4">
+                <div className="flex items-center gap-4">
                   <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
                     Expand all
                   </button>
+                  <span className="text-[#e5e5e5]">|</span>
                   <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
                     Collapse all
                   </button>

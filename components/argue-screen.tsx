@@ -284,6 +284,8 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                                   <li key={idx} className="text-sm text-[#212223]">{point}</li>
                                 ))}
                               </ul>
+
+
                             </div>
                           </div>
                         </div>
@@ -326,6 +328,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                           <li className="text-sm text-[#212223]">{argument.appliesTo}</li>
                         </ul>
                       </div>
+
                     </div>
                   </div>
                 </div>

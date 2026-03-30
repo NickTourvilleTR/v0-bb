@@ -25,7 +25,8 @@ interface OutlineEditorProps {
 }
 
 export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: OutlineEditorProps) {
-  const [expandedSections, setExpandedSections] = React.useState<string[]>(flowType === "judicial" ? ["factual-procedural"] : ["preliminary-statement"]);
+  const allSectionIds = ["factual-procedural", "legal-standards", "analysis", "disposition", "tentative-ruling", "preliminary-statement", "factual-background", "argument", "conclusion"];
+  const [expandedSections, setExpandedSections] = React.useState<string[]>(allSectionIds);
   const [zoom, setZoom] = React.useState(125);
   const zoomLevels = [75, 100, 125, 150, 175, 200];
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -217,23 +218,18 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                 {expandedSections.includes("preliminary-statement") && (
                   <div className="space-y-3">
                     <p className="text-sm text-[#212223]">
-                      <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
                       Plaintiff Adrienne Love alleges a vast conspiracy — encompassing the author, publisher, literary agents, editors, and a movie studio — to steal her life story as depicted in her unpublished memoir Eat the Lemon and exploit it in Rebecca Serle&apos;s novel One Italian Summer, published by S&S. <span className="text-[#737373]">(FAC ¶¶46-48)</span>
                     </p>
                     <p className="text-sm text-[#212223]">
-                      <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
                       Love further alleges that the conspirators stalked her, sent strangers claiming to work for the FBI to confront her, and caused two mysterious deaths to intimidate her into silence. <span className="text-[#737373]">(FAC ¶¶63, 65)</span>
                     </p>
                     <p className="text-sm text-[#212223]">
-                      <span className="mr-2 inline-block shrink-0 rounded border border-[#93c5fd] bg-[#eff6ff] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#1d4ed8]">Facts</span>
                       Love has now filed a First Amended Complaint that is substantially identical to her original complaint, asserting copyright infringement and 13 state law claims against S&S. <span className="text-[#737373]">(FAC ¶¶130-264)</span>
                     </p>
                     <p className="text-sm text-[#212223]">
-                      <span className="mr-2 inline-block shrink-0 rounded border border-[#fcd34d] bg-[#fffbeb] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#b45309]">Law</span>
                       A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC&apos;s fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#737373]">(FRCP 12(b)(6))</span>
                     </p>
                     <p className="text-sm text-[#212223]">
-                      <span className="mr-2 inline-block shrink-0 rounded border border-[#6ee7b7] bg-[#ecfdf5] px-1.5 py-px align-middle text-xs font-medium leading-none text-[#065f46]">Conclusion</span>
                       Because (1) the two works are not substantially similar in protectable expression, (2) the state law claims lack specific allegations of conduct by S&S, and (3) many state law claims are untimely and/or preempted, the FAC should be dismissed with prejudice.
                     </p>
                   </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Scissors, Reply } from "lucide-react";
+import { Pencil, Reply } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
@@ -122,7 +122,7 @@ export function JudicialWorkProductCard({
         >
           <div>
             <div className="flex items-center gap-2">
-              <Scissors className="size-4 text-[#737373]" />
+              <Pencil className="size-4 text-[#737373]" />
               <h4 className="font-semibold text-[#212223]">Go to draft a different document</h4>
             </div>
             <p className="mt-1 text-sm text-[#737373]">Describe the kind of judicial document you&apos;d like to draft.</p>
