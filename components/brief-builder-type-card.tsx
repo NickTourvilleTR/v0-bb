@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const briefTypes = [
-  { id: "primary", label: "Primary" },
+  { id: "primary", label: "Motion" },
   { id: "opposition", label: "Opposition" },
   { id: "reply", label: "Reply" },
 ];
@@ -45,7 +45,7 @@ export function BriefBuilderTypeCard({
       {/* Question */}
       <p className="mb-6 text-[#212223]">
         I can help you draft a brief supporting a motion to dismiss. To ensure the draft fits your scenario, are you drafting a{" "}
-        <strong>Primary</strong>, <strong>Reply</strong>, or <strong>Opposition</strong> brief?
+        <strong>Motion</strong>, <strong>Reply</strong>, or <strong>Opposition</strong> brief?
       </p>
 
       {/* Clickable Options */}
