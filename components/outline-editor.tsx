@@ -573,31 +573,31 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <h4 className="mb-3 text-sm font-semibold text-[#212223]">1. The Alleged Similarities Involve Biographical Facts Not Subject to Copyright Protection</h4>
                       <div className="space-y-2">
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          
                           <span className="text-[#212223]">To state a copyright infringement claim, a plaintiff must plead copying of copyrighted material and unlawful appropriation. Woodland v. Hill, 136 F.4th 1199, 1205 (9th Cir. 2025).</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          
                           <span className="text-[#212223]">Copyright protects original expression, not facts. &quot;No author may copyright . . . the facts he narrates.&quot; Feist Publ&apos;ns, Inc. v. Rural Tel. Serv. Co., 499 U.S. 340, 344–45 (1991).</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          
                           <span className="text-[#212223]">Courts have denied copyright protection to facts set forth in biographical works, including memoirs and autobiographies. 1 Nimmer on Copyright § 2.11 (2025).</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          
                           <span className="text-[#212223]">Corbello v. Valli, 974 F.3d 965, 984 (9th Cir. 2020): where a work is &quot;emphatic[ally]&quot; represented as nonfiction autobiography, a fictional work does not infringe even if it draws on the autobiographical facts recounted.</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          
                           <span className="text-[#212223]">Love&apos;s FAC explicitly characterizes Eat the Lemon as a &quot;personal memoir based on her own life&quot; and alleges that One Italian Summer &quot;interjects [Serle] into Love&apos;s life&quot; and is &quot;replete with intricate personal details from Love&apos;s life.&quot;</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          
                           <span className="text-[#212223]">Every alleged similarity between the two works — the mother dying of cancer, the Italy trips, the cooking teacher connection — corresponds to facts Love herself represented as true biographical events.</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                          
                           <span className="text-[#212223]">Because the alleged similarities are biographical facts rather than original creative expression, they are categorically unprotectable under copyright law, and the infringement claim fails on this threshold basis alone.</span>
                         </div>
                       </div>
@@ -612,19 +612,19 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#737373]">Standard</p>
                         <div className="space-y-2">
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">To survive a motion to dismiss, a plaintiff must satisfy both the extrinsic and intrinsic tests for substantial similarity. Skidmore v. Led Zeppelin, 952 F.3d 1051, 1064 (9th Cir. 2020).</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">The extrinsic test — which focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events&quot; — may be decided by the court as a matter of law at the pleading stage.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">The first step is to filter out unprotectable elements: ideas, historical facts, common phrases, scenes-a-faire, and stock themes. Corbello, 974 F.3d at 975.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">Dismissal with prejudice is appropriate where the deficiency stems from the &quot;fundamental characteristics of the works themselves&quot; rather than pleading deficiency.</span>
                           </div>
                         </div>
@@ -635,31 +635,31 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#212223]">a. Plot and Sequence of Events</p>
                         <div className="space-y-2">
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">&quot;No one can own the basic idea for a story. General plot ideas are not protected by copyright law.&quot; Berkic v. Crichton, 761 F.2d 1289, 1293 (9th Cir. 1985).</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">Courts routinely reject substantial similarity claims where works&apos; plotlines had similarities &quot;but developed quite differently.&quot;</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">Scenes-a-faire that &quot;flow naturally or necessarily from a basic plot premise&quot; are not protectable. Corbello, 974 F.3d at 975.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            
                             <span className="text-[#212223]">The sole overlapping premise is a woman who travels alone to the Amalfi Coast to connect with her deceased mother — a general, unprotectable plot point.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            
                             <span className="text-[#212223]">One Italian Summer&apos;s central developments — time travel, meeting a younger version of one&apos;s mother, discovering an infant abandonment — have no counterpart in Eat the Lemon.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            
                             <span className="text-[#212223]">Superficial alleged similarities (leaving a partner behind, meeting a love interest, cooking with a mother figure, Amalfi lemons, Frank Sinatra music, golden imagery) are either scenes-a-faire flowing from the Amalfi Coast setting, or random scattered details.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            
                             <span className="text-[#212223]">Beyond the unprotectable common premise, the plots and sequences of events in the two works are wholly different and share no protectable expression.</span>
                           </div>
                         </div>
@@ -670,19 +670,19 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#212223]">b. Characters</p>
                         <div className="space-y-2">
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">Literary characters are generally not subject to copyright protection unless &quot;especially distinctive.&quot; Olson v. NBC, 855 F.2d 1446, 1451–52 (9th Cir. 1988).</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            
                             <span className="text-[#212223]">Both protagonists grieve a mother lost to cancer — a general, unprotectable plot point. Otherwise, the characters are opposites: Love endured abandonment, abuse, and a cold relationship with her mother; Katy had a loving, defining bond.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            
                             <span className="text-[#212223]">The mother characters are likewise distinct: in OIS, the mother is warm and independently ambitious; in ETL, the mother is cold, unhappy, and defined by her connection to Italian cooking.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            
                             <span className="text-[#212223]">No protectable character similarities exist between the two works.</span>
                           </div>
                         </div>
@@ -693,11 +693,11 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#212223]">c. Dialogue</p>
                         <div className="space-y-2">
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            
                             <span className="text-[#212223]">Love alleges no similar dialogue between the two works.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            
                             <span className="text-[#212223]">This element provides no basis for a substantial similarity finding.</span>
                           </div>
                         </div>
@@ -708,15 +708,15 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#212223]">d. Setting</p>
                         <div className="space-y-2">
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">&quot;The mere fact that&quot; two works are &quot;set in the same city does not give rise to a finding of substantial similarity.&quot; Silas v. HBO, 201 F. Supp. 3d 1158, 1176 (C.D. Cal. 2016).</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            
                             <span className="text-[#212223]">One Italian Summer is set entirely in Positano; Eat the Lemon ranges widely across the Amalfi Coast, with the protagonist staying in a rental apartment, not a hotel.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            
                             <span className="text-[#212223]">No protectable setting similarities exist between the two works.</span>
                           </div>
                         </div>
@@ -727,15 +727,15 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#212223]">e. Theme</p>
                         <div className="space-y-2">
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                            
                             <span className="text-[#212223]">A general theme &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a substantial similarity finding.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            
                             <span className="text-[#212223]">The thematic concerns are opposite: OIS is about dismantling an idealized image of a beloved mother; ETL is about overcoming deeply unhappy memories of a cold, difficult mother.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            
                             <span className="text-[#212223]">No protectable thematic similarities exist between the two works.</span>
                           </div>
                         </div>
@@ -746,11 +746,11 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#212223]">f. Mood and Pace</p>
                         <div className="space-y-2">
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                            
                             <span className="text-[#212223]">OIS is driven by plot twists, drama, and suspense across a compressed timeline of a few weeks. ETL is a darker, trauma-inflected work told as episodic vignettes across eighteen months.</span>
                           </div>
                           <div className="flex gap-2 text-sm">
-                            <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                            
                             <span className="text-[#212223]">The mood and pace of the two works are fundamentally different and share no protectable expression.</span>
                           </div>
                         </div>
@@ -769,15 +769,15 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <h4 className="mb-3 text-sm font-semibold text-[#212223]">1. The Conspiracy Allegations Are Fundamentally Implausible</h4>
                       <div className="space-y-2">
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          
                           <span className="text-[#212223]">A complex conspiracy to commit and conceal infringement is implausible where, as a matter of law, no infringement occurred. Briggs v. Cameron, 2020 WL 6118493, at *3 (N.D. Cal. 2020).</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          
                           <span className="text-[#212223]">Every one of Love&apos;s 13 state law claims is predicated on the alleged conspiracy to infringe her copyright and intimidate her into silence about it.</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                          
                           <span className="text-[#212223]">Because no infringement occurred as a matter of law, the entire conspiratorial premise of Love&apos;s state law claims is implausible, and each claim fails on this basis.</span>
                         </div>
                       </div>
@@ -788,19 +788,19 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <h4 className="mb-3 text-sm font-semibold text-[#212223]">2. Love Has Not Alleged Specific Conduct by S&S</h4>
                       <div className="space-y-2">
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          
                           <span className="text-[#212223]">&quot;Everyone did everything&quot; group pleading is improper and warrants dismissal. Destfino v. Reiswig, 630 F.3d 952, 958–59 (9th Cir. 2011).</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          
                           <span className="text-[#212223]">The only S&S-specific allegations are: (1) S&S published OIS; (2) one S&S editor is married to a former Love literary agent; and (3) another S&S editor rejected Love&apos;s manuscript two weeks before the OIS announcement.</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#fef3f0] px-2 py-0.5 text-xs font-medium text-[#d64000]">Facts</span>
+                          
                           <span className="text-[#212223]">Individual state law claims fail for additional reasons: Breach of Fiduciary Duty (no duty created by possessing manuscript); Intentional/Tortious Interference (no knowledge or intentional disruption); Misrepresentation (no statement to Love); Negligence (no duty alleged); IIED (no extreme conduct); Stalking (no pattern); Civil Conspiracy (no agreement); UCL § 17200 (no predicate violation); Accounting/Constructive Trust (derivative of failed copyright claim); Declaratory Judgment (no agreements with S&S).</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                          
                           <span className="text-[#212223]">Each state law claim fails independently for lack of any plausible, S&S-specific factual allegation sufficient to support liability.</span>
                         </div>
                       </div>
@@ -811,15 +811,15 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <h4 className="mb-3 text-sm font-semibold text-[#212223]">3. Many State Law Claims Are Untimely and/or Preempted (Joining CAA&apos;s Motion)</h4>
                       <div className="space-y-2">
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          
                           <span className="text-[#212223]">The following claims are time-barred: constructive trust, intentional interference with contractual relations, tortious interference with business advantage, negligence, IIED, and intentional and negligent misrepresentation. (As set forth in CAA&apos;s Motion to Dismiss, joined in full.)</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#ebf0ed] px-2 py-0.5 text-xs font-medium text-[#1d4b34]">Law</span>
+                          
                           <span className="text-[#212223]">The following claims are preempted by the Copyright Act: breach of fiduciary duty, intentional interference, tortious interference, negligence, IIED, civil conspiracy, UCL § 17200, accounting, and constructive trust. (As set forth in CAA&apos;s Motion to Dismiss, joined in full.)</span>
                         </div>
                         <div className="flex gap-2 text-sm">
-                          <span className="shrink-0 rounded bg-[#f0f4ff] px-2 py-0.5 text-xs font-medium text-[#0055cc]">Conclusion</span>
+                          
                           <span className="text-[#212223]">Each of these claims is independently subject to dismissal on timeliness and/or preemption grounds.</span>
                         </div>
                       </div>
