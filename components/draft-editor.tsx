@@ -138,32 +138,30 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
       {/* Document Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-8">
         <div className="mx-auto" style={{ width: `min(${zoom}%, 800px)`, maxWidth: "calc(100% - 2rem)" }}>
-        {/* Judicial header — above the white card */}
-        {flowType === "judicial" && (
+          {/* Header — above the white card, same width */}
           <div className="mb-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">Draft</p>
-                <h1 className="text-2xl font-semibold text-[#212223]">Review and edit your draft opinion</h1>
+            {flowType === "judicial" ? (
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wider text-[#737373]">Draft</p>
+                  <h1 className="text-2xl font-semibold text-[#212223]">Review and edit your draft opinion</h1>
+                </div>
+                <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] px-3 py-1.5 text-xs text-[#212223] hover:bg-[#f2f2f2]">
+                  <Upload className="size-3" />
+                  Upload files for styling
+                </button>
               </div>
-              <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] px-3 py-1.5 text-xs text-[#212223] hover:bg-[#f2f2f2]">
-                <Upload className="size-3" />
-                Upload files for styling
-              </button>
-            </div>
+            ) : (
+              <>
+                <p className="text-xs uppercase tracking-wide text-[#737373]">DRAFT</p>
+                <h1 className="text-2xl font-semibold text-[#212223]">
+                  Review and edit your draft brief
+                </h1>
+              </>
+            )}
           </div>
-        )}
 
         <div ref={contentRef} className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
-          {/* Header — brief only, stays inside the white card */}
-          {flowType !== "judicial" && (
-            <div className="mb-6">
-              <p className="text-xs uppercase tracking-wide text-[#737373]">DRAFT</p>
-              <h1 className="text-2xl font-semibold text-[#212223]">
-                Review and edit your draft brief
-              </h1>
-            </div>
-          )}
 
           {flowType === "judicial" ? (
             // JUDICIAL FLOW: OPINION CONTENT
