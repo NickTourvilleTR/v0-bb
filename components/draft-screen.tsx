@@ -37,13 +37,13 @@ export function DraftScreen({ className, onGenerateDraft, flowType = "brief" }: 
       </h1>
 
       {/* Description */}
-      <p className="mb-8 max-w-lg text-center text-[#737373]">
+      <p className="mb-8 text-center text-[#737373]">
         Based on your selections and outline, we'll generate a draft of your {flowType === "judicial" ? "opinion" : "brief"} that you can edit further. This may take up to 30 minutes.
       </p>
 
       {/* Upload Prior Opinions Section (Judicial Flow) */}
       {flowType === "judicial" && (
-        <div className="mb-8 max-w-lg rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-4">
+        <div className="mb-8 rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-4">
           <div className="flex items-start gap-3">
             <Upload className="mt-0.5 size-5 flex-shrink-0 text-[#737373]" />
             <div>
