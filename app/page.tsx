@@ -429,7 +429,8 @@ function AuthenticatedApp() {
               <LibraryScreen onBriefBuilderClick={handleStartSubmit} />
           </AppLayoutWrapper>
         </div>
-      </div>
+        </div>
+      </>
       <DraftSettingsOverlay
         isOpen={showDraftSettings}
         onClose={handleCloseDraftSettings}
