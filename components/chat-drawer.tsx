@@ -523,6 +523,18 @@ export function ChatDrawer({
         </div>
       )}
 
+      {/* Develop Step Card - above input */}
+      {(currentStep === "support" || currentStep === "support-loading") && activeTab === "chat" && (
+        <div className="border-t border-[#e5e5e5] p-4">
+          <div className="flex flex-wrap gap-2 overflow-x-auto">
+            {flowType !== "judicial" && (
+              <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to generate draft</Button>
+            )}
+            <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Outline</Button>
+          </div>
+        </div>
+      )}
+
       {/* Chat Input */}
       {!hideInput && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
