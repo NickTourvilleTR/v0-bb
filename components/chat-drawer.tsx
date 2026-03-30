@@ -264,12 +264,11 @@ export function ChatDrawer({
               <MessageCard
                 onQuote={() => handleQuote(flowType === "judicial" ? "Decide how to resolve disputed issues." : "Supporting authorities are ready for review. I've pre-selected the stronger supporting authorities for your brief.")}
               >
-                <div className="flex flex-wrap gap-2 overflow-x-auto">
-                  {flowType !== "judicial" && (
-                    <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to generate draft</Button>
-                  )}
-                  <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Outline</Button>
-                </div>
+                <p className="text-sm text-[#212223]">
+                  {flowType === "judicial"
+                    ? "Decide how to resolve disputed issues."
+                    : "Supporting authorities are ready for review. I've pre-selected the stronger supporting authorities for your brief."}
+                </p>
               </MessageCard>
             )}
 
