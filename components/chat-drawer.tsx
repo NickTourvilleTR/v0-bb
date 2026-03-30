@@ -332,6 +332,7 @@ export function ChatDrawer({
             )}
 
             <div ref={messagesEndRef} />
+            </>
           )}
 
           {activeTab === "notes" && (
