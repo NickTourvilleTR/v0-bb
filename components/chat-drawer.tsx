@@ -8,7 +8,6 @@ import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronDown, Chev
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface Message {
   id: string;
@@ -226,9 +225,8 @@ export function ChatDrawer({
       )}
 
       {/* Messages Area */}
-      {activeTab === "chat" && (
-      <TooltipProvider delayDuration={300}>
-        <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto p-4">
+        {activeTab === "chat" && (
           <>
             {/* CoCounsel intro message */}
             <div className="mb-4 flex items-start gap-2">
@@ -318,20 +316,16 @@ export function ChatDrawer({
               <MessageCard
                 onQuote={() => handleQuote(flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief.")}
               >
-                <p className="text-sm text-[#212223]">
-                  {flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief."}
-                </p>
+                <p className="text-sm text-[#212223]">{flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief."}</p>
               </MessageCard>
             )}
 
             {/* Finalize Step Card */}
             {currentStep === "finalize" && (
               <MessageCard
-                onQuote={() => handleQuote(flowType === "judicial" ? "The opinion finalization summary is ready for review." : "The brief finalization summary is ready for review.")}
+                onQuote={() => handleQuote("Your brief is ready to download or email. You can make final edits and share your work.")}
               >
-                <p className="text-sm text-[#212223]">
-                  {flowType === "judicial" ? "The opinion finalization summary is ready for review." : "The brief finalization summary is ready for review."}
-                </p>
+                <p className="text-sm text-[#212223]">Your brief is ready to download or email. You can make final edits and share your work.</p>
               </MessageCard>
             )}
 
@@ -648,23 +642,16 @@ function MessageCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Quote Reply Button */}
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <button
-            onClick={onQuote}
-            className={cn(
-              "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
-              isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
-            )}
-          >
-            <Reply className="size-3.5" />
-          </button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom" className="max-w-[140px] text-center">
-          <p className="font-semibold">Open chat</p>
-          <p className="font-normal opacity-80">to ask about this section</p>
-        </TooltipContent>
-      </Tooltip>
+      <button
+        onClick={onQuote}
+        className={cn(
+          "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
+          isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
+        )}
+        title="Open chat to ask about this section"
+      >
+        <Reply className="size-3.5" />
+      </button>
       {children}
     </div>
   );
