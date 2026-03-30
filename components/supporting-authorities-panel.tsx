@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface Citation {
   id: string;
@@ -418,12 +419,21 @@ function CitationSubCard({ citation }: { citation: Citation }) {
         {/* Action icons — show on hover */}
         {hovered && (
           <div className="ml-auto flex items-center gap-1">
-            <button
-              className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
-              title="Revert"
-            >
-              <Reply className="size-3.5" />
-            </button>
+            <TooltipProvider delayDuration={300}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
+                  >
+                    <Reply className="size-3.5" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className="text-center">
+                  <p><strong>Open chat</strong></p>
+                  <p className="text-xs opacity-80">to ask about this section</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
             <button
               className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
               title="Move"
@@ -552,12 +562,21 @@ function AuthorityCard({
 
           {/* Action icons — always reserve space, only show on hover */}
           <div className={cn("flex items-center gap-1 transition-opacity", hovered ? "opacity-100" : "opacity-0")}>
-            <button
-              className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
-              title="Revert"
-            >
-              <Reply className="size-3.5" />
-            </button>
+            <TooltipProvider delayDuration={300}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
+                  >
+                    <Reply className="size-3.5" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className="text-center">
+                  <p><strong>Open chat</strong></p>
+                  <p className="text-xs opacity-80">to ask about this section</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
             <button
               className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
               title="Move"
