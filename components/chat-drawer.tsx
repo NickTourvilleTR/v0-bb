@@ -371,8 +371,8 @@ export function ChatDrawer({
             <div className="text-sm text-[#737373]">No cases or statutes yet.</div>
           )}
 
-        {/* Document Viewer */}
-        {activeTab === "sources" && openedDocument && (
+          {/* Document Viewer */}
+          {activeTab === "sources" && openedDocument && (
           <div className="flex flex-col gap-4">
             {/* Back to Sources */}
             <button
