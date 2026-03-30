@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { Pencil } from "lucide-react";
 
 const briefTypes = [
   { id: "primary", label: "Supporting" },
@@ -44,8 +45,7 @@ export function BriefBuilderTypeCard({
 
       {/* Question */}
       <p className="mb-6 text-[#212223]">
-        I can help you draft a brief supporting a motion to dismiss. To ensure the draft fits your scenario, are you drafting a{" "}
-        <strong>Supporting</strong>, <strong>Reply</strong>, or <strong>Opposition</strong> brief?
+        To ensure the draft fits your scenario, are you drafting a <strong>Supporting</strong>, <strong>Opposition</strong>, <strong>Reply</strong>, or another type of brief?
       </p>
 
       {/* Clickable Options */}
@@ -62,7 +62,7 @@ export function BriefBuilderTypeCard({
             )}
           >
             <div className={cn(
-              "flex size-4 items-center justify-center rounded-full border-2",
+              "flex size-4 items-center justify-center rounded-full border-2 flex-shrink-0",
               selected === type.id 
                 ? "border-[#1d4b34]" 
                 : "border-[#737373]"
@@ -74,6 +74,18 @@ export function BriefBuilderTypeCard({
             <span className="text-[#212223]">{type.label}</span>
           </button>
         ))}
+        <button
+          onClick={() => handleSelect("another")}
+          className={cn(
+            "flex w-full items-center gap-3 rounded-lg border bg-white px-4 py-3 text-left transition-colors",
+            selected === "another" 
+              ? "border-[#1d4b34] bg-[#f0f5f3]" 
+              : "border-[#e5e5e5] hover:bg-[#f7f7f7]"
+          )}
+        >
+          <Pencil className="size-4 flex-shrink-0 text-[#737373]" />
+          <span className="text-[#212223]">Another type of brief</span>
+        </button>
       </div>
     </div>
   );
