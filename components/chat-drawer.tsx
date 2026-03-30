@@ -372,8 +372,9 @@ export function ChatDrawer({
 
           {/* Document Viewer */}
           {activeTab === "sources" && openedDocument && (
-            {/* Back to Sources */}
-            <button
+            <div className="flex flex-col gap-4">
+              {/* Back to Sources */}
+              <button
               onClick={() => {
                 setOpenedDocument(null);
                 onDocumentClose?.();
@@ -430,15 +431,13 @@ export function ChatDrawer({
                 </div>
               ))}
             </div>
-          </div>
-        )}
+          )}
 
-        {activeTab === "versions" && (
-          <div className="text-sm text-[#737373]">No versions yet.</div>
-        )}
-      </div>
-
-      {/* Intake Step Card - above input */}
+          {activeTab === "versions" && (
+            <div className="text-sm text-[#737373]">No versions yet.</div>
+          )}
+        </div>
+      </TooltipProvider>
       {currentStep === "intake" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
@@ -578,8 +577,6 @@ export function ChatDrawer({
           </p>
         </div>
       )}
-        </div>
-      </TooltipProvider>
     </div>
   );
 }
