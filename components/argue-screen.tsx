@@ -285,18 +285,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                                 ))}
                               </ul>
 
-                              {/* Add authorities and View related authorities buttons */}
-                              <div className="mt-4 border-t border-[#e5e5e5] pt-4">
-                                <div className="flex items-center gap-4">
-                                  <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
-                                    Add authorities
-                                  </button>
-                                  <div className="h-4 w-px bg-[#e5e5e5]"></div>
-                                  <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
-                                    View related authorities
-                                  </button>
-                                </div>
-                              </div>
+
                             </div>
                           </div>
                         </div>
@@ -339,18 +328,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                           <li className="text-sm text-[#212223]">{argument.appliesTo}</li>
                         </ul>
                       </div>
-                      {/* Add authorities and View related authorities buttons */}
-                      <div className="mt-4 border-t border-[#e5e5e5] pt-4">
-                        <div className="flex items-center gap-4">
-                          <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
-                            Add authorities
-                          </button>
-                          <div className="h-4 w-px bg-[#e5e5e5]"></div>
-                          <button className="text-sm font-medium text-blue-600 underline hover:text-blue-800">
-                            View related authorities
-                          </button>
-                        </div>
-                      </div>
+
                     </div>
                   </div>
                 </div>
