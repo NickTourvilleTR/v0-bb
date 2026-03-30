@@ -289,20 +289,16 @@ export function ChatDrawer({
               <MessageCard
                 onQuote={() => handleQuote("Your outline is ready. Review the structure and headings, then proceed to generate the full draft.")}
               >
-                <div className="flex flex-wrap gap-2 overflow-x-auto">
-                  <Button size="sm" onClick={onNextDraft} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Draft</Button>
-                </div>
+                <p className="text-sm text-[#212223]">Your outline is ready. Review the structure and headings, then proceed to generate the full draft.</p>
               </MessageCard>
             )}
 
             {/* Draft Step Card */}
             {(currentStep === "draft" || currentStep === "draft-loading" || currentStep === "draft-ready") && (
               <MessageCard
-                onQuote={() => handleQuote("Generate your draft based on your selections and outline.")}
+                onQuote={() => handleQuote("Your draft is ready. Review and edit the content, then proceed to verify.")}
               >
-                <div className="flex flex-wrap gap-2 overflow-x-auto">
-                  <Button size="sm" onClick={onNextVerify} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Verify</Button>
-                </div>
+                <p className="text-sm text-[#212223]">Your draft is ready. Review and edit the content, then proceed to verify.</p>
               </MessageCard>
             )}
 
@@ -311,10 +307,7 @@ export function ChatDrawer({
               <MessageCard
                 onQuote={() => handleQuote("Review the opposition brief analysis.")}
               >
-                <div className="flex flex-wrap gap-2 overflow-x-auto">
-                  <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to finalize</Button>
-                  <Button size="sm" onClick={onNextFinalize} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Finalize</Button>
-                </div>
+                <p className="text-sm text-[#212223]">Review the opposition brief analysis.</p>
               </MessageCard>
             )}
 
@@ -323,10 +316,9 @@ export function ChatDrawer({
               <MessageCard
                 onQuote={() => handleQuote(flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief.")}
               >
-                <div className="flex flex-wrap gap-2 overflow-x-auto">
-                  <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to finalize</Button>
-                  <Button size="sm" onClick={flowType === "judicial" ? onVerifyBrief : onNextOpposition} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">{flowType === "judicial" ? "Start verification" : "Next: Opposition brief"}</Button>
-                </div>
+                <p className="text-sm text-[#212223]">
+                  {flowType === "judicial" ? "Verification ready for you to review." : "I've verified all citations and cross-references in your brief."}
+                </p>
               </MessageCard>
             )}
 
@@ -335,16 +327,9 @@ export function ChatDrawer({
               <MessageCard
                 onQuote={() => handleQuote(flowType === "judicial" ? "The opinion finalization summary is ready for review." : "The brief finalization summary is ready for review.")}
               >
-                <div className="flex flex-wrap gap-2 overflow-x-auto">
-                  <Button size="sm" variant="outline" className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">
-                    <Mail className="mr-2 size-4" />
-                    Email
-                  </Button>
-                  <Button size="sm" className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">
-                    <Download className="mr-2 size-4" />
-                    {flowType === "judicial" ? "Download opinion" : "Download brief"}
-                  </Button>
-                </div>
+                <p className="text-sm text-[#212223]">
+                  {flowType === "judicial" ? "The opinion finalization summary is ready for review." : "The brief finalization summary is ready for review."}
+                </p>
               </MessageCard>
             )}
 
@@ -530,6 +515,60 @@ export function ChatDrawer({
               <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to generate draft</Button>
             )}
             <Button size="sm" onClick={onNextOutline} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Outline</Button>
+          </div>
+        </div>
+      )}
+
+      {/* Outline Step Card - above input */}
+      {(currentStep === "outline-loading" || currentStep === "outline-ready") && activeTab === "chat" && (
+        <div className="border-t border-[#e5e5e5] p-4">
+          <div className="flex flex-wrap gap-2 overflow-x-auto">
+            <Button size="sm" onClick={onNextDraft} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Draft</Button>
+          </div>
+        </div>
+      )}
+
+      {/* Draft Step Card - above input */}
+      {(currentStep === "draft" || currentStep === "draft-loading" || currentStep === "draft-ready") && activeTab === "chat" && (
+        <div className="border-t border-[#e5e5e5] p-4">
+          <div className="flex flex-wrap gap-2 overflow-x-auto">
+            <Button size="sm" onClick={onNextVerify} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Verify</Button>
+          </div>
+        </div>
+      )}
+
+      {/* Verify Step Card - above input */}
+      {currentStep === "verify" && activeTab === "chat" && (
+        <div className="border-t border-[#e5e5e5] p-4">
+          <div className="flex flex-wrap gap-2 overflow-x-auto">
+            <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to finalize</Button>
+            <Button size="sm" onClick={flowType === "judicial" ? onVerifyBrief : onNextOpposition} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">{flowType === "judicial" ? "Start verification" : "Next: Opposition brief"}</Button>
+          </div>
+        </div>
+      )}
+
+      {/* Opposition Step Card - above input */}
+      {currentStep === "opposition" && activeTab === "chat" && (
+        <div className="border-t border-[#e5e5e5] p-4">
+          <div className="flex flex-wrap gap-2 overflow-x-auto">
+            <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to finalize</Button>
+            <Button size="sm" onClick={onNextFinalize} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Finalize</Button>
+          </div>
+        </div>
+      )}
+
+      {/* Finalize Step Card - above input */}
+      {currentStep === "finalize" && activeTab === "chat" && (
+        <div className="border-t border-[#e5e5e5] p-4">
+          <div className="flex flex-wrap gap-2 overflow-x-auto">
+            <Button size="sm" variant="outline" className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">
+              <Mail className="mr-2 size-4" />
+              Email
+            </Button>
+            <Button size="sm" className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">
+              <Download className="mr-2 size-4" />
+              {flowType === "judicial" ? "Download opinion" : "Download brief"}
+            </Button>
           </div>
         </div>
       )}
