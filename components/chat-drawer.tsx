@@ -226,10 +226,11 @@ export function ChatDrawer({
       )}
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4">
-        {activeTab === "chat" && (
-          <>
-            {/* CoCounsel intro message */}
+      <TooltipProvider delayDuration={300}>
+        <div className="flex-1 overflow-y-auto p-4">
+          {activeTab === "chat" && (
+            <>
+              {/* CoCounsel intro message */}
             <div className="mb-4 flex items-start gap-2">
               <Logo className="mt-0.5 size-5 shrink-0" />
               <div>
@@ -338,46 +339,7 @@ export function ChatDrawer({
           <div className="text-sm text-[#737373]">No notes yet.</div>
         )}
 
-        {activeTab === "sources" && !openedDocument && (
-          <div className="flex flex-col gap-3">
-            {/* View dropdown */}
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-[#737373]">View:</span>
-              <div ref={sourcesDropdownRef} className="relative">
-                <button
-                  onClick={() => setSourcesDropdownOpen(!sourcesDropdownOpen)}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-[#1d4b34] px-3 py-1 text-sm font-medium text-[#1d4b34]"
-                >
-                  {sourcesView === "uploaded" ? "Uploaded documents" : "Cases & statutes"}
-                  <ChevronDown className={cn("size-3.5 transition-transform", sourcesDropdownOpen && "rotate-180")} />
-                </button>
-                {sourcesDropdownOpen && (
-                  <div className="absolute left-0 top-full z-50 mt-1 min-w-[200px] overflow-hidden rounded-lg border border-[#e5e5e5] bg-white shadow-lg">
-                    <button
-                      onClick={() => { setSourcesView("uploaded"); setSourcesDropdownOpen(false); }}
-                      className={cn(
-                        "flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-[#f7f7f7]",
-                        sourcesView === "uploaded" ? "font-medium text-[#212223]" : "text-[#737373]"
-                      )}
-                    >
-                      Uploaded documents
-                    </button>
-                    <button
-                      onClick={() => { setSourcesView("cases"); setSourcesDropdownOpen(false); }}
-                      className={cn(
-                        "flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors hover:bg-[#f7f7f7]",
-                        sourcesView === "cases" ? "font-medium text-[#212223]" : "text-[#737373]"
-                      )}
-                    >
-                      Cases & statutes
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Document list */}
-            {sourcesView === "uploaded" && (
+        {activeTab === "sources" && (
               <div className="flex flex-col gap-1">
                 {[
                   { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
@@ -620,6 +582,8 @@ export function ChatDrawer({
           </p>
         </div>
       )}
+        </div>
+      </TooltipProvider>
     </div>
   );
 }
@@ -641,25 +605,23 @@ function MessageCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Quote Reply Button */}
-      <TooltipProvider delayDuration={300}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              onClick={onQuote}
-              className={cn(
-                "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
-                isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
-              )}
-            >
-              <Reply className="size-3.5" />
-            </button>
-          </TooltipTrigger>
-          <TooltipContent side="bottom" className="text-center">
-            <p><strong>Open chat</strong></p>
-            <p className="text-xs opacity-80">to ask about this section</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            onClick={onQuote}
+            className={cn(
+              "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
+              isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
+            )}
+          >
+            <Reply className="size-3.5" />
+          </button>
+        </TooltipTrigger>
+        <TooltipContent side="bottom" className="text-center">
+          <p><strong>Open chat</strong></p>
+          <p className="text-xs opacity-80">to ask about this section</p>
+        </TooltipContent>
+      </Tooltip>
       {children}
     </div>
   );
