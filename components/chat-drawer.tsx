@@ -226,7 +226,8 @@ export function ChatDrawer({
       )}
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <TooltipProvider delayDuration={300}>
+        <div className="flex-1 overflow-y-auto p-4">
         {activeTab === "chat" && (
           <>
             {/* CoCounsel intro message */}
@@ -623,6 +624,7 @@ export function ChatDrawer({
             <a href="#" className="text-[#212223] underline">private and secure</a>.
           </p>
         </div>
+        </TooltipProvider>
       )}
     </div>
   );
@@ -645,25 +647,23 @@ function MessageCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Quote Reply Button */}
-      <TooltipProvider delayDuration={300}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              onClick={onQuote}
-              className={cn(
-                "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
-                isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
-              )}
-            >
-              <Reply className="size-3.5" />
-            </button>
-          </TooltipTrigger>
-          <TooltipContent side="bottom" className="max-w-[140px] text-center">
-            <p className="font-semibold">Open chat</p>
-            <p className="font-normal opacity-80">to ask about this section</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            onClick={onQuote}
+            className={cn(
+              "absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white shadow-sm transition-all duration-150",
+              isHovered ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
+            )}
+          >
+            <Reply className="size-3.5" />
+          </button>
+        </TooltipTrigger>
+        <TooltipContent side="bottom" className="max-w-[140px] text-center">
+          <p className="font-semibold">Open chat</p>
+          <p className="font-normal opacity-80">to ask about this section</p>
+        </TooltipContent>
+      </Tooltip>
       {children}
     </div>
   );
