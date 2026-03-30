@@ -685,7 +685,7 @@ function AuthenticatedApp() {
               addChatMessage("user", verifyMsg);
               addChatMessage("assistant", verifyingMsg);
               setCurrentScreen("verify");
-            }} />
+            }} onOpenSettings={() => setShowDraftSettings(true)} />
           </AppLayoutWrapper>
         </div>
       </div>

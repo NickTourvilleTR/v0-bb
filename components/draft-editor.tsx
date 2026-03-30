@@ -27,9 +27,10 @@ interface DraftEditorProps {
   className?: string;
   onVerifyBrief?: () => void;
   flowType?: "brief" | "judicial";
+  onOpenSettings?: () => void;
 }
 
-export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: DraftEditorProps) {
+export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOpenSettings }: DraftEditorProps) {
   const [fontSize, setFontSize] = React.useState(36);
   const [zoom, setZoom] = React.useState(125);
   const zoomLevels = [75, 100, 125, 150, 175, 200];
@@ -121,10 +122,17 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief" }: Dr
 
         <div className="mx-2 h-5 w-px bg-[#e5e5e5]" />
 
-        {/* More Options */}
-        <Button variant="ghost" size="sm" className="size-8 p-0 text-[#737373] hover:text-[#212223]">
-          <MoreHorizontal className="size-4" />
+        {/* Voice/Tone Button */}
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="h-8 gap-1 px-3 text-sm text-[#212223] hover:bg-[#f2f2f2]"
+          onClick={onOpenSettings}
+        >
+          Voice/tone
         </Button>
+
+        <div className="mx-2 h-5 w-px bg-[#e5e5e5]" />
       </div>
 
       {/* Document Content */}
