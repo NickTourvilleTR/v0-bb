@@ -465,6 +465,10 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
                   </p>
                 </div>
 
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  The two works share no substantial similarity in their plots or sequences of events.
+                </p>
+
                 {/* b. Characters */}
                 <div className="mb-4 ml-4">
                   <p className="mb-3 font-bold text-[#212223]">b. Characters</p>
