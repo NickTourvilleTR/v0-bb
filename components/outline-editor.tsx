@@ -227,6 +227,9 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC&apos;s fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#737373]">(FRCP 12(b)(6))</span>
                       </li>
                     </ul>
+                    <p className="mt-4 text-sm text-[#212223]">
+                      Because (1) the two works are not substantially similar in protectable expression, (2) the state law claims lack specific allegations of conduct by S&S, and (3) many state law claims are untimely and/or preempted, the FAC should be dismissed with prejudice.
+                    </p>
                   </div>
                 )}
               </div>
@@ -574,6 +577,9 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <li>Love&apos;s FAC explicitly characterizes Eat the Lemon as a &quot;personal memoir based on her own life&quot; and alleges that One Italian Summer &quot;interjects [Serle] into Love&apos;s life&quot; and is &quot;replete with intricate personal details from Love&apos;s life.&quot; Love further alleges that friends told her the novel &quot;was Love&apos;s story&quot; and that One Italian Summer gave Katy&apos;s father the same name as Love&apos;s real-life father.</li>
                         <li>Every alleged similarity between the two works — the mother dying of cancer, the Italy trips, the cooking teacher connection — corresponds to facts Love herself represented as true biographical events.</li>
                       </ul>
+                      <p className="mt-3 text-sm text-[#212223]">
+                        Because the alleged similarities are biographical facts rather than original creative expression, they are categorically unprotectable under copyright law, and the infringement claim fails on this threshold basis alone.
+                      </p>
                     </div>
 
                     {/* Subsubsection 2: No Substantial Similarity */}
@@ -602,6 +608,9 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                           <li>One Italian Summer&apos;s central developments — time travel, meeting a younger version of one&apos;s mother, discovering an infant abandonment — have no counterpart in Eat the Lemon. Eat the Lemon&apos;s central developments — finding a surrogate family, meeting someone with happy memories of the mother — have no counterpart in One Italian Summer.</li>
                           <li>Superficial alleged similarities (leaving a partner behind, meeting a love interest, cooking with a mother figure, Amalfi lemons, Frank Sinatra music, golden imagery, a boat driver named Antonio, Aveeno face cream) are either scenes-a-faire flowing from the Amalfi Coast setting, or random scattered details that develop entirely differently in context.</li>
                       </ul>
+                      <p className="mt-3 text-sm text-[#212223]">
+                        Beyond the unprotectable common premise, the plots and sequences of events in the two works are wholly different and share no protectable expression.
+                      </p>
                     </div>
 
                       {/* b. Characters */}
@@ -614,24 +623,32 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                           <li>The mother characters are likewise distinct: in One Italian Summer, the mother is warm and domestically accomplished but independently ambitious; in Eat the Lemon, the mother is cold, unhappy, and defined by her connection to Italian cooking. A critical plot point in Eat the Lemon is Love&apos;s surprise at learning her mother was ever happy.</li>
                           <li>Alleged similarities between minor characters (love interest Peppe vs. Adam; a &quot;beautiful&quot; hotel manager) are unremarkable scenes-a-faire of travel stories.</li>
                         </ul>
+                        <p className="mt-3 text-sm text-[#212223]">
+                          No protectable character similarities exist between the two works.
+                        </p>
                       </div>
 
                       {/* c. Dialogue */}
                       <div className="mb-4 ml-4">
                         <p className="mb-2 text-sm font-medium text-[#212223]">c. Dialogue</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
-                        <li>Love alleges no similar dialogue between the two works.</li>
-                      </ul>
-                    </div>
+                          <li>Love alleges no similar dialogue between the two works.</li>
+                        </ul>
+                        <p className="mt-3 text-sm text-[#212223]">
+                          This element provides no basis for a substantial similarity finding.
+                        </p>
+                      </div>
 
                       {/* d. Setting */}
                       <div className="mb-4 ml-4">
                         <p className="mb-2 text-sm font-medium text-[#212223]">d. Setting</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
                           <li>&quot;[T]he mere fact that&quot; two works are &quot;set in the same city does not give rise to a finding of substantial similarity.&quot; Silas v. HBO, 201 F. Supp. 3d 1158, 1176 (C.D. Cal. 2016). A setting that &quot;naturally and necessarily flows from the basic plot premise . . . constitutes scenes-a-faire.&quot; Cavalier, 297 F.3d at 824.</li>
-                          <li>One Italian Summer is set entirely in Positano; Eat the Lemon ranges widely across the Amalfi Coast, with the protagonist staying in a rental apartment, not a hotel. The temporal settings also differ: Eat the Lemon is set entirely in the present; One Italian Summer operates across two timelines, one in the present and one in 1992.</li>
-                          <li>No protectable setting similarities exist between the two works.</li>
+                        <li>One Italian Summer is set entirely in Positano; Eat the Lemon ranges widely across the Amalfi Coast, with the protagonist staying in a rental apartment, not a hotel. The temporal settings also differ: Eat the Lemon is set entirely in the present; One Italian Summer operates across two timelines, one in the present and one in 1992.</li>
                         </ul>
+                        <p className="mt-3 text-sm text-[#212223]">
+                          No protectable setting similarities exist between the two works.
+                        </p>
                       </div>
 
                       {/* e. Theme */}
@@ -641,15 +658,21 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                           <li>A general theme &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a substantial similarity finding. Masterson v. Walt Disney Co., 821 F. App&apos;x 779, 782 (9th Cir. 2020).</li>
                           <li>The general theme of a woman finding connection with her deceased mother by visiting Italy is unprotectable. Beyond that, the thematic concerns are opposite: One Italian Summer is about dismantling an idealized image of a beloved mother; Eat the Lemon is about overcoming deeply unhappy memories of a cold, difficult mother.</li>
                         </ul>
+                        <p className="mt-3 text-sm text-[#212223]">
+                          No protectable thematic similarities exist between the two works.
+                        </p>
                       </div>
 
                       {/* f. Mood and Pace */}
                       <div className="ml-4">
                         <p className="mb-2 text-sm font-medium text-[#212223]">f. Mood and Pace</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
-                        <li>One Italian Summer is driven by plot twists, drama, and suspense across a compressed timeline of a few weeks. Eat the Lemon is a darker, trauma-inflected work told as episodic vignettes across eighteen months, with no driving plotlines toward resolution.</li>
-                      </ul>
-                    </div>
+                          <li>One Italian Summer is driven by plot twists, drama, and suspense across a compressed timeline of a few weeks. Eat the Lemon is a darker, trauma-inflected work told as episodic vignettes across eighteen months, with no driving plotlines toward resolution.</li>
+                        </ul>
+                        <p className="mt-3 text-sm text-[#212223]">
+                          The mood and pace of the two works are fundamentally different and share no protectable expression.
+                        </p>
+                      </div>
                     </div>
                   </div>
 
@@ -666,6 +689,9 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <li>A complex conspiracy to commit and conceal infringement is implausible where, as a matter of law, no infringement occurred. Briggs v. Cameron, 2020 WL 6118493, at *3 (N.D. Cal. 2020).</li>
                         <li>Every one of Love&apos;s 13 state law claims is predicated on the alleged conspiracy to infringe her copyright and intimidate her into silence about it.</li>
                       </ul>
+                      <p className="mt-3 text-sm text-[#212223]">
+                        Because no infringement occurred as a matter of law, the entire conspiratorial premise of Love&apos;s state law claims is implausible, and each claim fails on this basis.
+                      </p>
                     </div>
 
                     {/* 2. No Specific Conduct by S&S */}
@@ -698,6 +724,9 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <li>The following claims are time-barred: constructive trust, intentional interference with contractual relations, tortious interference with business advantage, negligence, IIED, and intentional and negligent misrepresentation. (As set forth in CAA&apos;s Motion to Dismiss, joined in full.)</li>
                         <li>The following claims are preempted by the Copyright Act: breach of fiduciary duty, intentional interference, tortious interference, negligence, IIED, civil conspiracy, UCL § 17200, accounting, and constructive trust. (As set forth in CAA&apos;s Motion to Dismiss, joined in full.)</li>
                       </ul>
+                      <p className="mt-3 text-sm text-[#212223]">
+                        Each of these claims is independently subject to dismissal on timeliness and/or preemption grounds.
+                      </p>
                     </div>
                   </div>
                 </div>
