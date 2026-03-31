@@ -562,6 +562,70 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
                   The state law claims should be dismissed for the additional reason that Love has not pleaded facts sufficient to establish S&S's liability on any individual claim. The only allegations in the FAC directed specifically at S&S are: (1) that S&S published <em>One Italian Summer</em>; (2) that an S&S editor is married to a former Love literary agent; and (3) that a different S&S editor rejected Love's manuscript approximately two weeks before the announcement of <em>One Italian Summer</em>. FAC ¶¶ 47–48, 60, 78. Beyond those three facts, Love's FAC relies on collective, undifferentiated allegations that do not specify what S&S itself did or failed to do. Such "everyone did everything" pleading is improper and cannot sustain Love's claims. <em>Destfino v. Reiswig</em>, 630 F.3d 952, 958–59 (9th Cir. 2011); <em>Sebastian Brown Prods., LLC v. Muzooka, Inc.</em>, 143 F. Supp. 3d 1026, 1037 (N.D. Cal. 2015).
                 </p>
+
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  Examining the individual claims against S&S confirms this deficiency:
+                </p>
+
+                <div className="ml-4 space-y-4 text-sm leading-relaxed text-[#212223]">
+                  <div>
+                    <p className="font-bold"><em>Breach of Fiduciary Duty.</em></p>
+                    <p>Love alleges that S&S "possessed and reviewed" her manuscript, giving rise to a fiduciary duty. FAC ¶ 141. But a publisher's review of an unsolicited or submitted manuscript does not give rise to a fiduciary obligation. A fiduciary duty requires facts showing that the defendant "knowingly undertook to act on behalf of and for the benefit of" the plaintiff. <em>Blatty v. Warner Bros. Ent.</em>, 2011 WL 13217379, at *8–9 (C.D. Cal. Apr. 21, 2011). Love has alleged no such undertaking by S&S.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Intentional Interference with Contractual Relations and Tortious Interference with Business Advantage.</em></p>
+                    <p>These claims require, respectively, knowledge of the specific contractual or business relationship purportedly disrupted and intentional acts directed at causing that disruption. <em>Disney Enters., Inc. v. Redbox Automated Retail, LLC</em>, 2018 WL 1942139, at *9 (C.D. Cal. Feb. 20, 2018); <em>Celebrity Chefs Tour, LLC v. Macy's, Inc.</em>, 2015 WL 11237460, at *19 (S.D. Cal. Aug. 10, 2015). Love does not allege that S&S was aware of any specific contract or business relationship, let alone that it took deliberate steps to interfere with one.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Intentional and Negligent Misrepresentation.</em></p>
+                    <p>Both claims require a specific misrepresentation by the defendant on which the plaintiff relied to her detriment. <em>Solo v. Dawson</em>, 2010 WL 11508000, at *21 (C.D. Cal. Feb. 8, 2010); <em>Ryder v. Lightstorm Ent., Inc.</em>, 246 Cal. App. 4th 1064, 1079 (2016). Love does not allege that S&S made any representation to her, let alone one she acted upon.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Negligence.</em></p>
+                    <p>A negligence claim requires, among other elements, a duty of care owed by the defendant to the plaintiff and a specific breach of that duty. <em>McCormick v. Sony Pictures Entm't</em>, 2008 WL 11336160, at *7 (C.D. Cal. Nov. 17, 2008). Love has not alleged facts establishing any duty S&S owed to her, nor has she identified any specific act or omission by S&S constituting a breach.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Intentional Infliction of Emotional Distress.</em></p>
+                    <p>IIED requires conduct that is "extreme and outrageous"—conduct so beyond the bounds of decency as to be considered atrocious and utterly intolerable in a civilized community. <em>McCrudden v. DeMarco</em>, 2022 WL 17369135, at *13 (C.D. Cal. Oct. 6, 2022). Love has alleged no such conduct by S&S specifically.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Stalking.</em></p>
+                    <p>A civil stalking claim requires a pattern of conduct by the defendant directed at following, alarming, surveilling, or harassing the plaintiff. Cal. Civ. Code § 1708.7(a). Love has made no factual allegation connecting S&S to any such conduct.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Civil Conspiracy.</em></p>
+                    <p>A conspiracy claim requires both an agreement to commit a tortious act and the commission of that act. <em>Idema v. Dreamworks, Inc.</em>, 162 F. Supp. 2d 1129, 1197 (C.D. Cal. 2001). Love has not alleged facts plausibly showing that S&S entered into any agreement to commit a tort, nor that it committed one.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Unfair Business Practices (Cal. Bus. & Prof. Code § 17200).</em></p>
+                    <p>A UCL claim depends entirely on the viability of the predicate legal violations alleged. Where the plaintiff cannot establish the predicate violations, the UCL claim fails alongside them. <em>Eidmann v. Walgreen Co.</em>, 522 F. Supp. 3d 634, 647 (N.D. Cal. 2021). Because Love has not adequately alleged any predicate violation by S&S, her UCL claim fails.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Accounting and Constructive Trust.</em></p>
+                    <p>Both of these equitable remedies depend on the success of a substantive underlying claim. <em>Glue-Fold, Inc. v. Slautterback Corp.</em>, 82 Cal. App. 4th 1018, 1023 n.3 (2000). Because Love's copyright infringement claim and all predicate state law claims fail, these derivative claims fail with them.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Declaratory Judgment.</em></p>
+                    <p>Love seeks a declaration as to her rights and S&S's obligations under alleged agreements between them. FAC ¶ 264. The FAC identifies no agreement between Love and S&S. This claim fails for that reason.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Untimeliness and Preemption */}
+              <div className="mb-4 ml-4">
+                <h4 className="mb-3 font-bold text-[#212223]">3. Many State Law Claims Are Also Untimely and/or Preempted.</h4>
+                <p className="text-sm leading-relaxed text-[#212223]">
+                  As set forth in the motion to dismiss filed by CAA, which S&S joins in its entirety, many of Love's state law claims face independent obstacles of untimeliness and preemption. Specifically, the following claims are barred by the applicable statutes of limitation: constructive trust, intentional interference with contractual relations, tortious interference with business advantage, negligence, IIED, and intentional and negligent misrepresentation. In addition, the following claims are preempted by the Copyright Act: breach of fiduciary duty, intentional interference with contractual relations, tortious interference with prospective business advantage, negligence, IIED, civil conspiracy, UCL § 17200, accounting, and constructive trust. Each of these claims is subject to dismissal on these additional, independent grounds.
+                </p>
               </div>
             </div>
           </div>
