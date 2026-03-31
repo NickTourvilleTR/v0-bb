@@ -697,7 +697,6 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
                         <li>The following claims are time-barred: constructive trust, intentional interference with contractual relations, tortious interference with business advantage, negligence, IIED, and intentional and negligent misrepresentation. (As set forth in CAA&apos;s Motion to Dismiss, joined in full.)</li>
                         <li>The following claims are preempted by the Copyright Act: breach of fiduciary duty, intentional interference, tortious interference, negligence, IIED, civil conspiracy, UCL § 17200, accounting, and constructive trust. (As set forth in CAA&apos;s Motion to Dismiss, joined in full.)</li>
-                        <li>Each of these claims is independently subject to dismissal on timeliness and/or preemption grounds.</li>
                       </ul>
                     </div>
                   </div>
