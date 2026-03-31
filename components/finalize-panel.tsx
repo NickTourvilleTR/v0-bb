@@ -37,6 +37,123 @@ const documentItems = [
   "Legal arguments",
 ];
 
+const complianceItems = [
+  {
+    title: "Page Limits",
+    status: "Compliant" as const,
+    content: {
+      rule: { label: "Local Rule 11-6.1", href: "#" },
+      rows: [
+        { icon: "info", text: "Requirement: Maximum 25 pages (excluding the caption (if on a separate cover page), the table of contents, the table of authorities, the signature block, and any indices and exhibits)" },
+        { icon: "info", text: "Current: 23 pages" },
+        { icon: "check", text: "Motion is within the 25-page limit." },
+      ],
+    },
+  },
+  {
+    title: "Formatting",
+    status: "Compliant" as const,
+    content: null,
+  },
+  {
+    title: "Table of Contents",
+    status: "Compliant" as const,
+    content: null,
+  },
+  {
+    title: "Table of Authorities",
+    status: "Compliant" as const,
+    content: null,
+  },
+  {
+    title: "Notice of Motion",
+    status: "Action Needed" as const,
+    content: null,
+  },
+  {
+    title: "Meet and Confer",
+    status: "Action Needed" as const,
+    content: null,
+  },
+  {
+    title: "Proposed Order",
+    status: "Action Needed" as const,
+    content: null,
+  },
+];
+
+function ComplianceItems() {
+  const [openItem, setOpenItem] = useState<string | null>(null);
+
+  return (
+    <div className="overflow-hidden rounded-lg border border-[#e5e5e5] bg-white">
+      {complianceItems.map((item, index) => {
+        const isOpen = openItem === item.title;
+        const isLast = index === complianceItems.length - 1;
+        return (
+          <div key={item.title} className={!isLast ? "border-b border-[#e5e5e5]" : ""}>
+            <button
+              onClick={() => setOpenItem(isOpen ? null : item.title)}
+              className="flex w-full items-center justify-between px-6 py-4 hover:bg-[#fafafa] transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                {isOpen
+                  ? <ChevronDown className="size-5 text-[#737373]" />
+                  : <ChevronDown className="size-5 -rotate-90 text-[#737373]" />
+                }
+                <span className="font-semibold text-[#212223]">{item.title}</span>
+              </div>
+              <div
+                className={`flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
+                  item.status === "Compliant"
+                    ? "bg-[#e5f1e9] text-[#1d4b34]"
+                    : "bg-[#fff8e5] text-[#ab3300]"
+                }`}
+              >
+                {item.status === "Compliant" ? (
+                  <div className="flex size-4 items-center justify-center rounded-full bg-[#1d4b34]">
+                    <Check className="size-2.5 text-white" />
+                  </div>
+                ) : (
+                  <AlertTriangle className="size-4" />
+                )}
+                {item.status}
+              </div>
+            </button>
+
+            {isOpen && item.content && (
+              <div className="border-t border-[#e5e5e5] px-6 py-5 space-y-4">
+                {item.content.rule && (
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-5 shrink-0 items-center justify-center rounded-full border border-[#737373] text-[#737373]">
+                      <span className="text-[10px] font-bold">i</span>
+                    </div>
+                    <a href={item.content.rule.href} className="text-sm font-medium text-blue-600 hover:underline">
+                      {item.content.rule.label}
+                    </a>
+                  </div>
+                )}
+                {item.content.rows.map((row, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    {row.icon === "info" ? (
+                      <div className="flex size-5 shrink-0 items-center justify-center rounded-full border border-[#737373] text-[#737373] mt-0.5">
+                        <span className="text-[10px] font-bold">i</span>
+                      </div>
+                    ) : (
+                      <Check className="size-5 shrink-0 text-[#737373] mt-0.5" />
+                    )}
+                    <span className="text-sm text-[#212223]">{row.text}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 interface FinalizePanelProps {
   flowType?: "brief" | "judicial";
 }
@@ -97,45 +214,7 @@ export function FinalizePanel({ flowType = "brief" }: FinalizePanelProps) {
           </div>
 
           {/* Compliance Items */}
-          <div className="space-y-2 rounded-lg border border-[#e5e5e5] bg-white">
-            {[
-              { title: "Page Limits", status: "Compliant" },
-              { title: "Formatting", status: "Compliant" },
-              { title: "Table of Contents", status: "Compliant" },
-              { title: "Table of Authorities", status: "Compliant" },
-              { title: "Notice of Motion", status: "Action Needed" },
-              { title: "Meet and Confer", status: "Action Needed" },
-              { title: "Proposed Order", status: "Action Needed" },
-            ].map((item, index) => (
-              <div
-                key={item.title}
-                className={`flex items-center justify-between px-6 py-4 ${
-                  index !== 6 ? "border-b border-[#e5e5e5]" : ""
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <ChevronDown className="size-5 text-[#737373]" />
-                  <span className="font-medium text-[#212223]">{item.title}</span>
-                </div>
-                <div
-                  className={`flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
-                    item.status === "Compliant"
-                      ? "bg-[#e5f1e9] text-[#1d4b34]"
-                      : "bg-[#fff8e5] text-[#ab3300]"
-                  }`}
-                >
-                  {item.status === "Compliant" ? (
-                    <div className="flex size-4 items-center justify-center rounded-full bg-[#1d4b34]">
-                      <Check className="size-2.5 text-white" />
-                    </div>
-                  ) : (
-                    <AlertTriangle className="size-4" />
-                  )}
-                  {item.status}
-                </div>
-              </div>
-            ))}
-          </div>
+          <ComplianceItems />
         </div>
 
         {/* Activity Summary */}
