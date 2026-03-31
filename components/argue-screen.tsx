@@ -386,7 +386,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               onClick={onNextSupportingAuthority}
               className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
             >
-              Next: {flowType === "judicial" ? "Decide on selected claims" : "Supporting authority"}
+              Next: {flowType === "judicial" ? "Decide on selected claims" : "Develop"}
             </Button>
           </div>
           </div>
