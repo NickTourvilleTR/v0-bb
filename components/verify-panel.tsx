@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, AlertTriangle, List, Plus } from "lucide-react";
+import { FileText, AlertTriangle, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
@@ -63,12 +63,6 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
             <p>[Telephone]</p>
             <p>[Facsimile]</p>
           </div>
-
-          {/* Add Party Button */}
-          <button className="mb-8 flex items-center gap-2 rounded-md border border-[#cccccc] px-3 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
-            <Plus className="size-4" />
-            Add a Party/Attorney
-          </button>
 
           {/* Court Header */}
           <div className="mb-8 text-center">
