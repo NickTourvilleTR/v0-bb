@@ -16,7 +16,14 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
-      <div className="mx-auto flex w-full max-w-3xl gap-6 px-6 py-8">
+      <div className="mx-auto flex w-full max-w-4xl gap-6 px-6 py-8">
+        {/* Left sidebar - TOC button */}
+        <div className="flex flex-col pt-6">
+          <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <List className="size-5 text-[#212223]" />
+          </button>
+        </div>
+
         {/* Main content column */}
         <div className="flex-1">
         {/* Header */}
@@ -24,14 +31,9 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
             VERIFY
           </p>
-          <div className="mb-4 flex items-center gap-3">
-            <h1 className="text-2xl font-semibold text-[#212223]">
-              Document verification results
-            </h1>
-            <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-              <List className="size-5 text-[#212223]" />
-            </button>
-          </div>
+          <h1 className="mb-4 text-2xl font-semibold text-[#212223]">
+            Document verification results
+          </h1>
 
           {/* Filter badges */}
           <div className="flex items-center gap-3">
