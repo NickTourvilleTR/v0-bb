@@ -231,8 +231,8 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               </div>
               <span>Select all</span>
             </button>
-            <span className="text-sm text-[#737373]">��</span>
-              <span className="text-sm text-[#737373]">{selectedCount} {flowType === "judicial" ? "Claims" : "Arguments"} selected</span>
+            <span className="text-sm text-[#737373]">|</span>
+            <span className="text-sm text-[#737373]">{selectedCount} {flowType === "judicial" ? "Claims" : "Arguments"} selected</span>
           </div>
 
           {/* Arguments List */}
