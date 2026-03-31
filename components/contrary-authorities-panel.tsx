@@ -3,8 +3,9 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Plus, List } from "lucide-react";
+import { Plus } from "lucide-react";
 import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
+import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
 
 interface ContraryAuthoritiesPanelProps {
   className?: string;
@@ -19,9 +20,13 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
       <div ref={contentRef} className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
         {/* Left sidebar button - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
-          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-            <List className="size-5 text-[#212223]" />
-          </button>
+          <JumpToMenu 
+            sections={[
+              { id: "opposition-party-attorney", label: "Party/Attorney", level: "top" },
+              { id: "opposition-court-header", label: "Court Header", level: "top" },
+              { id: "opposition-brief-content", label: "Brief Content", level: "top" },
+            ] as JumpToSection[]}
+          />
         </div>
 
         {/* Main content column */}
@@ -37,7 +42,7 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
           </div>
 
           {/* Party/Attorney Form Fields */}
-          <div className="mb-6 space-y-2">
+          <div id="opposition-party-attorney" className="mb-6 space-y-2">
             <p className="text-base text-[#212223]">[Party/Attorney]</p>
             <p className="text-base text-[#212223]">[Email]</p>
             <p className="text-base text-[#212223]">[Street/Address]</p>
@@ -57,7 +62,7 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
           {/* Court Document Preview */}
           <div className="space-y-8">
             {/* Court Header */}
-            <div className="text-center">
+            <div id="opposition-court-header" className="text-center">
               <p className="text-lg font-semibold uppercase tracking-wide text-[#212223]">
                 IN THE UNITED STATES DISTRICT COURT
               </p>
@@ -97,7 +102,7 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
             <hr className="border-t border-[#212223]" />
 
             {/* Legal Brief Content */}
-            <div className="space-y-6 pt-4 text-base leading-relaxed text-[#212223]">
+            <div id="opposition-brief-content" className="space-y-6 pt-4 text-base leading-relaxed text-[#212223]">
               <p>
                 Defendants' substantial similarity argument proceeds as if a plaintiff alleging copyright infringement in a memoir is limited to protecting only the most ornate literary flourishes while surrendering every narrative element to the public domain. That is not the law. While it is true that facts standing alone are not protectable, <em>Feist Publications, Inc. v. Rural Tel. Serv. Co.</em>, 499 U.S. 340, 344–45 (1991), it is equally settled that "the particular sequence in which an author strings a significant number of unprotectable elements can itself be a protectable element." <em>Metcalf v. Bochco</em>, 294 F.3d 1069, 1074 (9th Cir. 2002). The "original selection and arrangement" of otherwise generic components constitutes protectable expression, and infringement may be established by demonstrating that the defendant copied that arrangement. <em>Id.</em>; <em>see also Skidmore v. Led Zeppelin</em>, 952 F.3d 1051, 1074 (9th Cir. 2020).
               </p>

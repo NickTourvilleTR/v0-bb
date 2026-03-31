@@ -4,10 +4,11 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { List, Plus, FileText } from "lucide-react";
+import { Plus, FileText } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
+import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
 
 interface ArgueScreenProps {
   className?: string;
@@ -182,9 +183,24 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
         <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8 pb-32">
           {/* Left sidebar buttons - sticky */}
           <div className="sticky top-8 flex h-fit flex-col gap-2">
-            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-              <List className="size-5 text-[#212223]" />
-            </button>
+            <JumpToMenu 
+              sections={
+                flowType === "judicial"
+                  ? judicial_claims_grouped.flatMap((group) => [
+                      { id: `argue-party-${group.partyHeader.replace(/\s+/g, "-").toLowerCase()}`, label: group.partyHeader, level: "top" } as JumpToSection,
+                      ...group.claims.map((claim) => ({
+                        id: `argue-${claim.id}`,
+                        label: claim.title,
+                        level: "sub",
+                      } as JumpToSection)),
+                    ])
+                  : argumentsState.map((arg) => ({
+                      id: `argue-${arg.id}`,
+                      label: `${arg.number}. ${arg.title}`,
+                      level: "top",
+                    } as JumpToSection))
+              }
+            />
             <button 
               onClick={() => setShowOutlinePreview(true)}
               className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]"
@@ -242,7 +258,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               judicial_claims_grouped.map((group) => (
                 <div key={group.partyHeader}>
                   {/* Party Header */}
-                  <h2 className="mb-4 text-lg font-semibold text-[#212223]">{group.partyHeader}</h2>
+                  <h2 id={`argue-party-${group.partyHeader.replace(/\s+/g, "-").toLowerCase()}`} className="mb-4 text-lg font-semibold text-[#212223]">{group.partyHeader}</h2>
                   
                   {/* Claims under this party */}
                   <div className="space-y-4">
@@ -253,6 +269,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                       return (
                         <div
                           key={claim.id}
+                          id={`argue-${claim.id}`}
                           className={cn(
                             "rounded-lg border p-5",
                             isChecked ? "border-[#1d4b34] bg-[#f5f7f6]" : "border-[#e5e5e5] bg-white"
@@ -304,6 +321,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               argumentsState.map((argument) => (
                 <div
                   key={argument.id}
+                  id={`argue-${argument.id}`}
                   className={cn(
                     "rounded-lg border p-5",
                     argument.checked ? "border-[#1d4b34] bg-[#f5f7f6]" : "border-[#e5e5e5] bg-white"

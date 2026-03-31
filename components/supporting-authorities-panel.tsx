@@ -4,10 +4,11 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
+import { Notebook, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
 
 interface Citation {
   id: string;
@@ -394,14 +395,36 @@ interface SupportingAuthoritiesPanelProps {
   flowType?: "brief" | "judicial";
 }
 
-function CitationSubCard({ citation }: { citation: Citation }) {
+function CitationSubCard({
+  citation,
+  onDragStart,
+  onDragEnd,
+  isDragOver,
+  onDragOver,
+  onDragLeave,
+  onDrop,
+}: {
+  citation: Citation;
+  onDragStart: (e: React.DragEvent) => void;
+  onDragEnd: (e: React.DragEvent) => void;
+  isDragOver: boolean;
+  onDragOver: (e: React.DragEvent) => void;
+  onDragLeave: (e: React.DragEvent) => void;
+  onDrop: (e: React.DragEvent) => void;
+}) {
   const [hovered, setHovered] = React.useState(false);
 
   return (
     <div
+      draggable
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
       className={cn(
         "rounded-lg border bg-white p-5 transition-colors",
-        hovered ? "border-[#2e6b5c]" : "border-[#e5e5e5]"
+        isDragOver ? "border-[#1d4b34] ring-2 ring-[#1d4b34] ring-offset-1" : hovered ? "border-[#2e6b5c]" : "border-[#e5e5e5]"
       )}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -409,7 +432,7 @@ function CitationSubCard({ citation }: { citation: Citation }) {
       {/* Header: drag dots + type label + action icons */}
       <div className="mb-4 flex items-center gap-2">
         {/* Drag handle */}
-        <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3]" />
+        <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3] active:cursor-grabbing" />
 
         {/* Type label */}
         <p className="text-sm font-semibold text-[#212223]">
@@ -514,19 +537,55 @@ function AuthorityCard({
   groupNumber,
   isFirstInGroup,
   isFirstEntry,
+  collapsed,
+  onCollapsedChange,
+  onCardDragStart,
+  onCardDragEnd,
+  isCardDragOver,
+  onCardDragOver,
+  onCardDragLeave,
+  onCardDrop,
+  dragOverCitationId,
+  onCitationDragStart,
+  onCitationDragEnd,
+  onCitationDragOver,
+  onCitationDragLeave,
+  onCitationDrop,
 }: {
   authority: Authority;
   groupNumber: number;
   isFirstInGroup: boolean;
   isFirstEntry: boolean;
+  collapsed: boolean;
+  onCollapsedChange: (value: boolean) => void;
   selectedCitations: string[];
   toggleCitation: (id: string) => void;
+  onCardDragStart: (e: React.DragEvent) => void;
+  onCardDragEnd: (e: React.DragEvent) => void;
+  isCardDragOver: boolean;
+  onCardDragOver: (e: React.DragEvent) => void;
+  onCardDragLeave: (e: React.DragEvent) => void;
+  onCardDrop: (e: React.DragEvent) => void;
+  dragOverCitationId: string | null;
+  onCitationDragStart: (e: React.DragEvent, citationId: string) => void;
+  onCitationDragEnd: (e: React.DragEvent) => void;
+  onCitationDragOver: (e: React.DragEvent, citationId: string) => void;
+  onCitationDragLeave: (e: React.DragEvent) => void;
+  onCitationDrop: (e: React.DragEvent, targetAuthorityId: string, targetCitationId: string) => void;
 }) {
   const [hovered, setHovered] = React.useState(false);
-  const [collapsed, setCollapsed] = React.useState(false);
 
   return (
-    <div className={!isFirstEntry ? (isFirstInGroup ? "mt-10" : "mt-8") : ""}>
+    <div
+      id={`develop-${authority.id}`}
+      onDragOver={onCardDragOver}
+      onDragLeave={onCardDragLeave}
+      onDrop={onCardDrop}
+      className={cn(
+        !isFirstEntry ? (isFirstInGroup ? "mt-10" : "mt-8") : "",
+        isCardDragOver ? "rounded-lg ring-2 ring-[#1d4b34] ring-offset-2" : ""
+      )}
+    >
       {/* Main section header */}
       {isFirstInGroup && (
         <h2 className="mb-4 text-lg font-semibold text-[#212223]">
@@ -545,13 +604,16 @@ function AuthorityCard({
       >
         {/* Sticky card header row */}
         <div
+          draggable
+          onDragStart={onCardDragStart}
+          onDragEnd={onCardDragEnd}
           className={cn(
             "sticky top-0 z-10 flex items-center gap-2 rounded-t-lg bg-[#f5f7f6] px-4 py-3 transition-colors",
             hovered ? "border-b border-[#2e6b5c]" : "border-b border-[#e5e5e5]"
           )}
         >
           {/* Drag handle */}
-          <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3]" />
+          <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3] active:cursor-grabbing" />
 
           {/* Sub-argument heading */}
           {authority.subTitle && (
@@ -592,7 +654,7 @@ function AuthorityCard({
             <button
               className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
               title={collapsed ? "Expand" : "Collapse"}
-              onClick={() => setCollapsed((c) => !c)}
+              onClick={() => onCollapsedChange(!collapsed)}
             >
               {collapsed ? <ChevronDown className="size-4" /> : <ChevronUp className="size-4" />}
             </button>
@@ -603,7 +665,7 @@ function AuthorityCard({
             <button
               className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
               title={collapsed ? "Expand" : "Collapse"}
-              onClick={() => setCollapsed((c) => !c)}
+              onClick={() => onCollapsedChange(!collapsed)}
             >
               {collapsed ? <ChevronDown className="size-4" /> : <ChevronUp className="size-4" />}
             </button>
@@ -614,7 +676,16 @@ function AuthorityCard({
         {!collapsed && (
           <div className="space-y-4 p-4">
             {authority.citations.map((citation) => (
-              <CitationSubCard key={citation.id} citation={citation} />
+              <CitationSubCard
+                key={citation.id}
+                citation={citation}
+                onDragStart={(e) => onCitationDragStart(e, citation.id)}
+                onDragEnd={onCitationDragEnd}
+                isDragOver={dragOverCitationId === citation.id}
+                onDragOver={(e) => onCitationDragOver(e, citation.id)}
+                onDragLeave={onCitationDragLeave}
+                onDrop={(e) => onCitationDrop(e, authority.id, citation.id)}
+              />
             ))}
           </div>
         )}
@@ -666,7 +737,187 @@ export function SupportingAuthoritiesPanel({
     );
   };
 
-  const authorities = defaultAuthorities;
+  // Drag state — moved authorities to state so drag reordering triggers re-renders
+  const [authorities, setAuthorities] = React.useState<Authority[]>(defaultAuthorities);
+
+  // Collapse/expand state for all gray cards
+  const [collapsedCards, setCollapsedCards] = React.useState<Record<string, boolean>>({});
+
+  const toggleCardCollapse = (authorityId: string) => {
+    setCollapsedCards((prev) => ({
+      ...prev,
+      [authorityId]: !prev[authorityId],
+    }));
+  };
+
+  const expandAll = () => {
+    setCollapsedCards({});
+  };
+
+  const collapseAll = () => {
+    const collapsed: Record<string, boolean> = {};
+    authorities.forEach((auth) => {
+      collapsed[auth.id] = true;
+    });
+    setCollapsedCards(collapsed);
+  };
+
+  // Gray card (authority) drag
+  const draggingCardId = React.useRef<string | null>(null);
+  const [dragOverCardId, setDragOverCardId] = React.useState<string | null>(null);
+
+  // White card (citation) drag
+  const draggingCitationInfo = React.useRef<{ authorityId: string; citationId: string } | null>(null);
+  const [dragOverCitationInfo, setDragOverCitationInfo] = React.useState<{ authorityId: string; citationId: string } | null>(null);
+
+  // Track what type of item is being dragged so we can handle cross-authority drops
+  const dragType = React.useRef<"card" | "citation" | null>(null);
+
+  /* ── Gray card handlers ── */
+  const handleCardDragStart = (e: React.DragEvent, authorityId: string) => {
+    dragType.current = "card";
+    draggingCardId.current = authorityId;
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleCardDragEnd = () => {
+    draggingCardId.current = null;
+    dragType.current = null;
+    setDragOverCardId(null);
+  };
+
+  const handleCardDragOver = (e: React.DragEvent, authorityId: string) => {
+    if (dragType.current !== "card") return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = "move";
+    if (dragOverCardId !== authorityId) setDragOverCardId(authorityId);
+  };
+
+  const handleCardDragLeave = (e: React.DragEvent, authorityId: string) => {
+    if (dragType.current !== "card") return;
+    // Only clear if leaving the card wrapper entirely
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setDragOverCardId((prev) => (prev === authorityId ? null : prev));
+    }
+  };
+
+  const handleCardDrop = (e: React.DragEvent, targetAuthorityId: string) => {
+    if (dragType.current !== "card") return;
+    e.preventDefault();
+    e.stopPropagation();
+    const fromId = draggingCardId.current;
+    if (!fromId || fromId === targetAuthorityId) {
+      setDragOverCardId(null);
+      return;
+    }
+    setAuthorities((prev) => {
+      const next = [...prev];
+      const fromIdx = next.findIndex((a) => a.id === fromId);
+      const toIdx = next.findIndex((a) => a.id === targetAuthorityId);
+      if (fromIdx === -1 || toIdx === -1) return prev;
+      const [moved] = next.splice(fromIdx, 1);
+      next.splice(toIdx, 0, moved);
+      return next;
+    });
+    draggingCardId.current = null;
+    dragType.current = null;
+    setDragOverCardId(null);
+  };
+
+  /* ── White card (citation) handlers ── */
+  const handleCitationDragStart = (e: React.DragEvent, authorityId: string, citationId: string) => {
+    dragType.current = "citation";
+    draggingCitationInfo.current = { authorityId, citationId };
+    e.dataTransfer.effectAllowed = "move";
+    // Stop propagation so the gray card's drag doesn't fire
+    e.stopPropagation();
+  };
+
+  const handleCitationDragEnd = () => {
+    draggingCitationInfo.current = null;
+    dragType.current = null;
+    setDragOverCitationInfo(null);
+    setDragOverCardId(null);
+  };
+
+  const handleCitationDragOver = (e: React.DragEvent, targetAuthorityId: string, targetCitationId: string) => {
+    if (dragType.current !== "citation") return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = "move";
+    const current = dragOverCitationInfo;
+    if (!current || current.authorityId !== targetAuthorityId || current.citationId !== targetCitationId) {
+      setDragOverCitationInfo({ authorityId: targetAuthorityId, citationId: targetCitationId });
+    }
+  };
+
+  const handleCitationDragLeave = (e: React.DragEvent) => {
+    if (dragType.current !== "citation") return;
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setDragOverCitationInfo(null);
+    }
+  };
+
+  // When a citation is dropped onto another citation or a gray card area
+  const handleCitationDrop = (e: React.DragEvent, targetAuthorityId: string, targetCitationId: string | null) => {
+    if (dragType.current !== "citation") return;
+    e.preventDefault();
+    e.stopPropagation();
+    const from = draggingCitationInfo.current;
+    if (!from) return;
+
+    setAuthorities((prev) => {
+      const next = prev.map((a) => ({ ...a, citations: [...a.citations] }));
+      const fromAuth = next.find((a) => a.id === from.authorityId);
+      const toAuth = next.find((a) => a.id === targetAuthorityId);
+      if (!fromAuth || !toAuth) return prev;
+
+      // Remove from source
+      const fromCitIdx = fromAuth.citations.findIndex((c) => c.id === from.citationId);
+      if (fromCitIdx === -1) return prev;
+      const [movedCit] = fromAuth.citations.splice(fromCitIdx, 1);
+
+      // Insert into target
+      if (targetCitationId === null) {
+        // Drop onto gray card area (no specific citation) — append
+        toAuth.citations.push(movedCit);
+      } else {
+        const toCitIdx = toAuth.citations.findIndex((c) => c.id === targetCitationId);
+        if (toCitIdx === -1) {
+          toAuth.citations.push(movedCit);
+        } else {
+          toAuth.citations.splice(toCitIdx, 0, movedCit);
+        }
+      }
+      return next;
+    });
+
+    draggingCitationInfo.current = null;
+    dragType.current = null;
+    setDragOverCitationInfo(null);
+    setDragOverCardId(null);
+  };
+
+  // Handle drops onto the gray card itself (not a specific citation) for cross-card moves
+  const handleCardAreaDrop = (e: React.DragEvent, targetAuthorityId: string) => {
+    if (dragType.current === "citation") {
+      handleCitationDrop(e, targetAuthorityId, null);
+    } else if (dragType.current === "card") {
+      handleCardDrop(e, targetAuthorityId);
+    }
+  };
+
+  const handleCardAreaDragOver = (e: React.DragEvent, authorityId: string) => {
+    if (dragType.current === "citation") {
+      e.preventDefault();
+      e.stopPropagation();
+      e.dataTransfer.dropEffect = "move";
+      if (dragOverCardId !== authorityId) setDragOverCardId(authorityId);
+    } else {
+      handleCardDragOver(e, authorityId);
+    }
+  };
 
   return (
     <div className={cn("flex h-full flex-col overflow-y-auto", className)}>
@@ -674,9 +925,13 @@ export function SupportingAuthoritiesPanel({
       <div className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
         {/* Left sidebar buttons - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
-          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-            <List className="size-5 text-[#212223]" />
-          </button>
+          <JumpToMenu 
+            sections={authorities.map((auth) => ({
+              id: `develop-${auth.id}`,
+              label: auth.subTitle || auth.title,
+              level: "top",
+            } as JumpToSection))}
+          />
           <button onClick={() => setShowOutlinePreview(true)} className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
               <FilePreviewIcon className="size-5 text-[#1d4b34]" />
           </button>
@@ -700,12 +955,12 @@ export function SupportingAuthoritiesPanel({
                   <span className="font-medium">Add facts or authorities</span> to find new facts and authorities.
                 </p>
                 <div className="flex items-center gap-2">
-                  <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
+                  <button onClick={expandAll} className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
                     <ChevronsUpDown className="size-4" />
                     Expand all
                   </button>
                   <span className="text-[#e5e5e5]">|</span>
-                  <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
+                  <button onClick={collapseAll} className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
                     <ChevronsDownUp className="size-4" />
                     Collapse all
                   </button>
@@ -962,8 +1217,26 @@ export function SupportingAuthoritiesPanel({
               groupNumber={groupNumber}
               isFirstInGroup={isFirstInGroup}
               isFirstEntry={isFirstEntry}
+              collapsed={collapsedCards[authority.id] ?? false}
+              onCollapsedChange={(value) => toggleCardCollapse(authority.id)}
               selectedCitations={selectedCitations}
               toggleCitation={toggleCitation}
+              onCardDragStart={(e) => handleCardDragStart(e, authority.id)}
+              onCardDragEnd={handleCardDragEnd}
+              isCardDragOver={dragOverCardId === authority.id && draggingCardId.current !== null}
+              onCardDragOver={(e) => handleCardAreaDragOver(e, authority.id)}
+              onCardDragLeave={(e) => handleCardDragLeave(e, authority.id)}
+              onCardDrop={(e) => handleCardAreaDrop(e, authority.id)}
+              dragOverCitationId={
+                dragOverCitationInfo?.authorityId === authority.id
+                  ? dragOverCitationInfo.citationId
+                  : null
+              }
+              onCitationDragStart={(e, citationId) => handleCitationDragStart(e, authority.id, citationId)}
+              onCitationDragEnd={handleCitationDragEnd}
+              onCitationDragOver={(e, citationId) => handleCitationDragOver(e, authority.id, citationId)}
+              onCitationDragLeave={handleCitationDragLeave}
+              onCitationDrop={(e, _targetAuthorityId, targetCitationId) => handleCitationDrop(e, authority.id, targetCitationId)}
             />
             );
           });

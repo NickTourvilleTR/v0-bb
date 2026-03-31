@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
+import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
 
 interface OutlineEditorProps {
   className?: string;
@@ -111,8 +112,33 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-6">
+        <div className="mx-auto flex max-w-5xl gap-6">
+          {/* Left sidebar button - sticky */}
+          <div className="sticky top-8 flex h-fit flex-col gap-2">
+            <JumpToMenu 
+              sections={
+                flowType === "judicial"
+                  ? [
+                      { id: "outline-factual-procedural", label: "I. Factual and Procedural Background", level: "top" },
+                      { id: "outline-legal-standards", label: "II. Applicable Legal Standards", level: "top" },
+                      { id: "outline-analysis", label: "III. Analysis", level: "top" },
+                      { id: "outline-disposition", label: "IV. Disposition", level: "top" },
+                      { id: "outline-tentative-ruling", label: "V. Tentative Ruling", level: "top" },
+                    ] as JumpToSection[]
+                  : [
+                      { id: "outline-preliminary-statement", label: "I. Preliminary Statement", level: "top" },
+                      { id: "outline-factual-background", label: "II. Factual Background", level: "top" },
+                      { id: "outline-argument", label: "III. Argument", level: "top" },
+                      { id: "outline-conclusion", label: "IV. Conclusion", level: "top" },
+                    ] as JumpToSection[]
+              }
+            />
+          </div>
+
+          {/* Main content column */}
+          <div className="flex-1">
         {/* Header — above the white card, same width */}
-        <div className="mx-auto mb-4" style={{ width: `min(${zoom}%, 800px)`, maxWidth: "calc(100% - 2rem)" }}>
+        <div className="mb-4" style={{ width: `min(${zoom}%, 800px)`, maxWidth: "calc(100% - 2rem)" }}>
           {flowType === "judicial" ? (
             <div className="flex items-center justify-between">
               <div>
@@ -147,7 +173,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
             // JUDICIAL FLOW OUTLINE
             <>
               {/* Section I: FACTUAL AND PROCEDURAL BACKGROUND */}
-              <div className="border-b border-[#e5e5e5]">
+              <div id="outline-factual-procedural" className="border-b border-[#e5e5e5]">
                 <button
                   onClick={() => toggleSection("factual-procedural")}
                   className="flex w-full items-center justify-between py-4"
@@ -196,15 +222,15 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
           ) : (
             // BRIEF FLOW OUTLINE - Motion to Dismiss
             <>
-              {/* Section I: PRELIMINARY STATEMENT */}
-              <div className="border-b border-[#e5e5e5]">
-                <button
-                  onClick={() => toggleSection("preliminary-statement")}
-                  className="flex w-full items-center justify-between py-4"
-                >
-                  <h2 className="text-lg font-semibold text-[#212223]">
-                    I. PRELIMINARY STATEMENT
-                  </h2>
+{/* Section I: PRELIMINARY STATEMENT */}
+            <div id="outline-preliminary-statement" className="border-b border-[#e5e5e5]">
+              <button
+                onClick={() => toggleSection("preliminary-statement")}
+                className="flex w-full items-center justify-between py-4"
+              >
+                <h2 className="text-lg font-semibold text-[#212223]">
+                  I. PRELIMINARY STATEMENT
+                </h2>
                   {expandedSections.includes("preliminary-statement") ? (
                     <ChevronUp className="size-5 text-[#737373]" />
                   ) : (
@@ -238,7 +264,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
 
           {/* Section II */}
           {flowType === "judicial" ? (
-            <div className="border-b border-[#e5e5e5]">
+            <div id="outline-legal-standards" className="border-b border-[#e5e5e5]">
               <button
                 onClick={() => toggleSection("legal-standards")}
                 className="flex w-full items-center justify-between py-4"
@@ -301,7 +327,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
               )}
             </div>
           ) : (
-          <div className="border-b border-[#e5e5e5]">
+          <div id="outline-factual-background" className="border-b border-[#e5e5e5]">
             <button
               onClick={() => toggleSection("factual-background")}
               className="flex w-full items-center justify-between py-4"
@@ -368,16 +394,16 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
 
           {/* Section III */}
           {flowType === "judicial" ? (
-            // JUDICIAL FLOW: ANALYSIS, DISPOSITION, AND TENTATIVE RULING
-            <>
-            <div className="border-b border-[#e5e5e5]">
-              <button
-                onClick={() => toggleSection("analysis")}
-                className="flex w-full items-center justify-between py-4"
-              >
-                <h2 className="text-lg font-semibold text-[#212223]">
-                  III. ANALYSIS
-                </h2>
+// JUDICIAL FLOW: ANALYSIS, DISPOSITION, AND TENTATIVE RULING
+          <>
+          <div id="outline-analysis" className="border-b border-[#e5e5e5]">
+            <button
+              onClick={() => toggleSection("analysis")}
+              className="flex w-full items-center justify-between py-4"
+            >
+              <h2 className="text-lg font-semibold text-[#212223]">
+                III. ANALYSIS
+              </h2>
                 {expandedSections.includes("analysis") ? (
                   <ChevronUp className="size-5 text-[#737373]" />
                 ) : (
@@ -472,15 +498,15 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
               )}
             </div>
 
-            {/* Section IV: RECOMMENDED DISPOSITION */}
-            <div className="border-b border-[#e5e5e5]">
-              <button
-                onClick={() => toggleSection("disposition")}
-                className="flex w-full items-center justify-between py-4"
-              >
-                <h2 className="text-lg font-semibold text-[#212223]">
-                  IV. RECOMMENDED DISPOSITION
-                </h2>
+{/* Section IV: RECOMMENDED DISPOSITION */}
+          <div id="outline-disposition" className="border-b border-[#e5e5e5]">
+            <button
+              onClick={() => toggleSection("disposition")}
+              className="flex w-full items-center justify-between py-4"
+            >
+              <h2 className="text-lg font-semibold text-[#212223]">
+                IV. RECOMMENDED DISPOSITION
+              </h2>
                 {expandedSections.includes("disposition") ? (
                   <ChevronUp className="size-5 text-[#737373]" />
                 ) : (
@@ -509,15 +535,15 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
               )}
             </div>
 
-            {/* Section V: PROPOSED TENTATIVE RULING */}
-            <div>
-              <button
-                onClick={() => toggleSection("tentative-ruling")}
-                className="flex w-full items-center justify-between py-4"
-              >
-                <h2 className="text-lg font-semibold text-[#212223]">
-                  V. PROPOSED TENTATIVE RULING
-                </h2>
+{/* Section V: PROPOSED TENTATIVE RULING */}
+          <div id="outline-tentative-ruling">
+            <button
+              onClick={() => toggleSection("tentative-ruling")}
+              className="flex w-full items-center justify-between py-4"
+            >
+              <h2 className="text-lg font-semibold text-[#212223]">
+                V. PROPOSED TENTATIVE RULING
+              </h2>
                 {expandedSections.includes("tentative-ruling") ? (
                   <ChevronUp className="size-5 text-[#737373]" />
                 ) : (
@@ -542,16 +568,16 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
             </div>
             </>
           ) : (
-            // BRIEF FLOW: ARGUMENT
-            <>
-            <div className="border-b border-[#e5e5e5]">
-              <button
-                onClick={() => toggleSection("argument")}
-                className="flex w-full items-center justify-between py-4"
-              >
-                <h2 className="text-lg font-semibold text-[#212223]">
-                  III. ARGUMENT
-                </h2>
+// BRIEF FLOW: ARGUMENT
+          <>
+          <div id="outline-argument" className="border-b border-[#e5e5e5]">
+            <button
+              onClick={() => toggleSection("argument")}
+              className="flex w-full items-center justify-between py-4"
+            >
+              <h2 className="text-lg font-semibold text-[#212223]">
+                III. ARGUMENT
+              </h2>
                 {expandedSections.includes("argument") ? (
                   <ChevronUp className="size-5 text-[#737373]" />
                 ) : (
@@ -737,7 +763,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
             </div>
 
             {/* Section IV: CONCLUSION */}
-            <div>
+            <div id="outline-conclusion">
               <button
                 onClick={() => toggleSection("conclusion")}
                 className="flex w-full items-center justify-between py-4"
@@ -774,6 +800,8 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
           >
             Next: Draft
           </Button>
+        </div>
+          </div>
         </div>
       </div>
       <SelectionContextMenu
