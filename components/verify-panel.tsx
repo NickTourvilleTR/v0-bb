@@ -111,8 +111,8 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
         <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
           {/* Issues Navigation Bar */}
           {showIssuesNavBar && (
-            <div className="sticky top-0 z-10 -mx-6 -mt-6 mb-6 flex items-center justify-center border-b border-[#e5e5e5] bg-white px-4 py-3">
-              <div className="flex items-center gap-3">
+            <div className="sticky top-4 z-10 -mt-2 mb-6 flex items-center justify-center">
+              <div className="flex items-center gap-3 rounded-full border border-[#cccccc] bg-white px-4 py-2 shadow-lg">
                 <button 
                   onClick={goToPreviousIssue}
                   className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
