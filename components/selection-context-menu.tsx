@@ -114,7 +114,7 @@ export function SelectionContextMenu({
         className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7] transition-colors"
       >
         <Scale className="size-4 text-[#525252]" />
-        Add authorities
+        + Add authorities
       </button>
       <div className="h-5 w-px bg-[#e5e5e5]" />
       <button

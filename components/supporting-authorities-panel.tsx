@@ -492,7 +492,7 @@ function CitationSubCard({ citation }: { citation: Citation }) {
             size="sm"
             className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
           >
-            Add authorities
+            + Add authorities
           </Button>
           <span className="text-[#e5e5e5]">|</span>
           <Button
@@ -976,7 +976,7 @@ export function SupportingAuthoritiesPanel({
             size="sm"
             className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
           >
-            Add authorities
+            + Add authorities
           </Button>
         </div>
 
