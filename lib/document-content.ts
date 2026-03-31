@@ -506,3 +506,172 @@ ATTORNEYS FOR PLAINTIFF, GYANT PROPERTIES, LLC`,
 Page 23 of 23`,
   },
 ]
+
+// Metcalf v. Bochco case content
+export const metcalfVBochcoPages: { pageHeader: string; content: string }[] = [
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 1",
+    content: `Metcalf v. Bochco, 294 F.3d 1069 (2002)
+2002 Copr.L.Dec. P 28,447, 63 U.S.P.Q.2d 1412, 02 Cal. Daily Op. Serv. 5202...
+
+© 2026 Thomson Reuters. No claim to original U.S. Government Works.
+
+KeyCite Red Flag - Overruled by Skidmore as Trustee for Randy Craig Wolfe Trust v. Led Zeppelin, 9th Cir.(Cal.), March 9, 2020
+
+294 F.3d 1069
+United States Court of Appeals,
+Ninth Circuit.
+
+Jerome C. METCALF, an individual; Laurie Metcalf, an individual, Plaintiffs–Appellants,
+v.
+Steven BOCHCO, an individual; Bochco Steven Productions, a corporation; CBS Entertainment, Inc., a corporation; CBS Productions, Inc., a corporation; Michael L. Warren, an individual; Nicholas Wootton, an individual; Paris Barclay, an individual, Defendants–Appellees.
+
+Nos. 01–55811, 01–56249, 01–56250.
+|
+Argued and Submitted March 13, 2002.
+|
+Filed June 12, 2002.
+
+Synopsis
+Authors of screenplay for television show about inner city hospital brought action against competitors for copyright infringement. The United States District Court for the Central District of California, Robert J. Kelleher, Senior District Judge, granted competitors' motion for summary judgment. Authors appealed. The Court of Appeals, Kozinski, J., held that: (1) Authors of screenplay for television show about inner city hospital owned portions of screenplay they wrote, but did not own portions of play that were written by writers hired by their corporation, or another similar screenplay written by those writers, as those were works for hire, and (2) issue of fact as to whether competitor's screenplay for television show about inner city hospital was substantially similar to authors' screenplay precluded summary judgment in authors' copyright infringement action.
+
+Reversed.`,
+  },
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 2",
+    content: `West Headnotes (8)
+
+[1] Copyrights and Intellectual Property – Independent contractors
+    Labor and Employment – Contracts
+In the absence of a written agreement, to determine whether the writer of a work is an employee who does not own the work, or instead an independent contractor who does, courts apply principles of general common law of agency.
+1 Case that cites this headnote
+
+[2] Copyrights and Intellectual Property – Rights as to separate contributions; collective works privilege
+    Copyrights and Intellectual Property – Works Made for Hire
+Authors of screenplay for television show about inner city hospital owned portions of screenplay they wrote, but did not own portions of play that were written by writers hired by their corporation, or another similar screenplay written by those writers, as those were works for hire. 17 U.S.C.A. § 201(b).
+4 Cases that cite this headnote
+
+[3] Corporations and Business Organizations – Capacity of corporation to sue and be sued
+    Federal Civil Procedure – Amendments
+Authors' of screenplay may have been able to amend their complaint to include their former corporation as a plaintiff in copyright infringement action; although corporation was defunct, it could still pursue claims that arose after its dissolution.
+6 Cases that cite this headnote
+
+[4] Copyrights and Intellectual Property – Intrinsic and extrinsic similarity
+    Summary Judgment – Copyrights
+Courts employ a two-part analysis, an extrinsic test and an intrinsic test, to determine whether two works are substantially similar, although on summary judgment, only the extrinsic test is relevant, because a plaintiff avoids summary judgment by satisfying it.
+69 Cases that cite this headnote
+
+[5] Copyrights and Intellectual Property – Intrinsic and extrinsic similarity
+Extrinsic test for copyright infringement is an objective one that focuses on articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.
+50 Cases that cite this headnote`,
+  },
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 3",
+    content: `[6] Copyrights and Intellectual Property – Copyright Infringement
+    Summary Judgment – Copyrights
+Issue of fact as to whether competitor's screenplay for television show about inner city hospital was substantially similar to authors' screenplay precluded summary judgment in authors' copyright infringement action.
+8 Cases that cite this headnote
+
+[7] Copyrights and Intellectual Property – Plots and characters
+General plot ideas are not protected by copyright law, but remain forever the common property of artistic mankind; nor does copyright law protect scenes that flow naturally from unprotectable basic plot premises; instead, protectable expression includes the specific details of an author's rendering of ideas, or the actual concrete elements that make up the total sequence of events and the relationships between the major characters.
+79 Cases that cite this headnote
+
+[8] Copyrights and Intellectual Property – Substantial similarity in general
+A common pattern that is sufficiently concrete warrants a finding of substantial similarity, for purposes of copyright infringement actions.
+24 Cases that cite this headnote
+
+Attorneys and Law Firms
+*1071 Robert F. Helfing, Sedgwick, Detert, Moran & Arnold, Los Angeles, California, argued for the plaintiffs-appellants.
+
+Edward A. Ruttenberg, Leopold, Petrich & Smith, P.C., Los Angeles, California, argued for the defendants-appellees. Robert S. Gutierrez, Leopold, Petrich & Smith, P.C., and Thomas M. Norminton, Norminton & Wiita, Beverly Hills, California, assisted on the brief.
+
+Appeal from the United States District Court for the Central District of California; Robert J. Kelleher, Senior District Judge, Presiding. D.C. No. CV–00–04550–RJK.
+
+Before KOZINSKI and GOULD, Circuit Judges, and BREYER, District Judge.*
+
+OPINION
+KOZINSKI, Circuit Judge:
+We delve once again into the turbid waters of the "extrinsic test" for substantial similarity under the Copyright Act.`,
+  },
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 4",
+    content: `Facts
+
+In November 1989, Jerome Metcalf read two newspaper articles about the Army's practice of training surgeons at inner-city hospitals to expose them to combat-like conditions. Based on these articles, Jerome and his wife Laurie ("the Metcalfs") conceived a story about a county hospital in inner-city Los Angeles and the struggles of its predominantly black staff. Along with third party Joan Ray, the Metcalfs formed a corporation ("CCA") to develop the idea into a full-length motion picture. Jerome then discussed the idea with defendant Michael Warren, a friend and actor who had starred in television shows produced by defendant Steven Bochco, including "Hill Street Blues." Warren liked the idea and encouraged Jerome to write a project summary or "treatment," *1072 with the promise that he would present it to Bochco.
+
+CCA commissioned a writer to prepare a treatment based on the Metcalfs' idea. Unhappy with the result, the Metcalfs wrote their own treatment, titled it "Give Something Back," and gave it to Warren. Warren said he liked it and relayed it to Bochco. Warren later told Jerome that Bochco also liked the treatment, but declined to use it because he was busy with other projects.
+
+CCA then hired another author to write a screenplay based on the treatment. Warren also reviewed this work, titled "As Long As They Kill Themselves," and submitted it to Bochco. Near the end of 1991, Warren again told Jerome that Bochco lacked the time to develop the Metcalfs' idea.
+
+Undaunted, the Metcalfs revised the screenplay and retitled it "About Face." In 1992, they pitched the work to Bochco (again via Warren) and defendant CBS, but neither avenue proved fruitful. CBS explained that it had another hospital series in development at the time.
+
+Much to the Metcalfs' surprise, on January 16, 2000, the television series "City of Angels" premiered on CBS. The pilot and first episode were produced and written by Bochco, starred Warren, and featured a county-run, inner-city hospital in Los Angeles with a predominantly black staff.`,
+  },
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 5",
+    content: `The Metcalfs filed suit in state court against Bochco, Bochco Steven Enterprises, CBS Entertainment, CBS Productions, Michael Warren, Nicholas Wootton and Paris Barclay (collectively, "Bochco"), alleging various claims based upon theft of literary property. Bochco removed the action to federal court. The Metcalfs filed an amended complaint that added a claim of copyright infringement. Bochco successfully moved to dismiss the Metcalfs' state-law claims, then moved for summary judgment on the remaining copyright claim. Bochco argued that the Metcalfs could not prove ownership of the allegedly copied works because the works were owned by CCA, and that the "City of Angels" series was not substantially similar to those works.
+
+The district court held that the Metcalfs owned valid copyrights in "Give Something Back," "As Long As They Kill Themselves," and "About Face," and that the evidence was sufficient to establish that Bochco had access to these works. However, the court granted Bochco's summary judgment motion on the ground that the Metcalf and Bochco works were not substantially similar. The district court also awarded Bochco $83,316.81 in attorneys' fees. The Metcalfs appeal.
+
+Discussion
+
+To prevail on their infringement claim, the Metcalfs must show that they own the works in question and that Bochco copied them. Shaw v. Lindheim, 919 F.2d 1353, 1356 (9th Cir.1990). Copying may be established by showing that the Metcalf and Bochco works are substantially similar in their protected elements and that Bochco had access to the works. Id.
+
+[1] [2] 1. The Metcalfs, and not CCA, own the treatment "Give Something Back" and those portions of the screenplay "About Face" that the Metcalfs wrote. These are not "work[s] made for hire" for CCA. 17 U.S.C. § 201(b). In the absence of a written agreement, to determine whether the writer of a work is an employee who does not own the work, or instead *1073 an independent contractor who does, we apply "principles of general common law of agency." Cmty. for Creative Non–Violence v. Reid, 490 U.S. 730, 734, 751, 109 S.Ct. 2166, 104 L.Ed.2d 811 (1989).`,
+  },
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 6",
+    content: `Under these principles, the Metcalfs were independent contractors who retained the rights to "Give Something Back" and the Metcalf-authored portions of "About Face." They were not on payroll and did not receive benefits. See id. at 753, 109 S.Ct. 2166. Screenplay production was not "regular business" for CCA, id.; rather, CCA was formed specifically to develop the Metcalfs' idea. The Metcalfs used their own tools to write, and had discretion over "when and how long to work." Id. at 752–53, 109 S.Ct. 2166.
+
+[3] The Metcalfs, however, do not own the screenplay "As Long As They Kill Themselves" or those portions of "About Face" that they did not write. These are "work[s] made for hire," 17 U.S.C. § 201(b), and are thus owned by CCA. According to the written contract between CCA and the writer of "As Long As They Kill Themselves," the screenplay is a "work made for hire" for CCA, which "is and shall be considered the author of said Material for all purposes and the sole and exclusive owner of all of the rights comprised in the copyright."
+
+[4] 2. We employ a two-part analysis—an extrinsic test and an intrinsic test—to determine whether two works are substantially similar. Shaw, 919 F.2d at 1356. However, on summary judgment, "only the extrinsic test is relevant," because a plaintiff avoids summary judgment by satisfying it. Smith v. Jackson, 84 F.3d 1213, 1218 (9th Cir.1996).
+
+[5] [6] The extrinsic test is an objective one that focuses on "articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events." Kouf v. Walt Disney Pictures & Television, 16 F.3d 1042, 1045 (9th Cir.1994) (citation and internal quotation marks omitted). Even without considering "As Long As They Kill Themselves," we conclude that the Metcalfs satisfied this test and raised a genuine issue of triable fact on the question of substantial similarity.`,
+  },
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 7",
+    content: `The similarities between the relevant works are striking: Both the Metcalf and Bochco works are set in overburdened county hospitals in inner-city Los Angeles with mostly black staffs. Both deal with issues of poverty, race relations and urban blight. The works' main characters are both young, good-looking, muscular black surgeons who grew up in the neighborhood where the hospital is located. Both surgeons struggle to choose between the financial benefits of private practice and the emotional rewards of working in the inner city. Both are romantically involved with young professional women when they arrive at the hospital, but develop strong attractions to hospital administrators. Both new relationships flourish and culminate in a kiss, but are later strained when the administrator observes a display of physical intimacy between the main character and his original love interest. Both administrators are in their thirties, were once married but are now single, without children and devoted to their careers and *1074 to the hospital. In both works, the hospital's bid for reaccreditation is vehemently opposed by a Hispanic politician. "[T]he totality of the similarities ... goes beyond the necessities of the ... theme and belies any claim of literary accident." Shaw, 919 F.2d at 1363. The cumulative weight of these similarities allows the Metcalfs to survive summary judgment.
+
+[7] Bochco correctly argues that copyright law protects a writer's expression of ideas, but not the ideas themselves. Kouf, 16 F.3d at 1045. "General plot ideas are not protected by copyright law; they remain forever the common property of artistic mankind." Berkic v. Crichton, 761 F.2d 1289, 1293 (9th Cir.1985). Nor does copyright law protect "scenes a faire," or scenes that flow naturally from unprotectable basic plot premises. Id.; See v. Durang, 711 F.2d 141, 143 (9th Cir.1983). Instead, protectable expression includes the specific details of an author's rendering of ideas, or "the actual concrete elements that make up the total sequence of events and the relationships between the major characters." Berkic, 761 F.2d at 1293.`,
+  },
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 8",
+    content: `Here, the similarities proffered by the Metcalfs are not protectable when considered individually; they are either too generic or constitute "scenes a faire." Berkic, 761 F.2d at 1293; Kouf, 16 F.3d at 1045. One cannot copyright the idea of an idealistic young professional choosing between financial and emotional reward, or of love triangles among young professionals that eventually become strained, or of political forces interfering with private action.
+
+[8] However, the presence of so many generic similarities and the common patterns in which they arise do help the Metcalfs satisfy the extrinsic test. The particular sequence in which an author strings a significant number of unprotectable elements can itself be a protectable element. Each note in a scale, for example, is not protectable, but a pattern of notes in a tune may earn copyright protection. A common "pattern [that] is sufficiently concrete ... warrant[s] a finding of substantial similarity." Shaw, 919 F.2d at 1363; see id. ("Even if none of these [common] plot elements is remarkably unusual in and of itself, the fact that both [works] contain all of these similar events gives rise to a triable question of substantial similarity of protected expression."); id. (where main characters are both well dressed, wealthy, self-assured and have expensive tastes, "the totality of the [se] similarities ... goes beyond the necessities of [defendants' work's] theme and belies any claim of literary accident").
+
+Neither Apple Computer, Inc. v. Microsoft Corp., 35 F.3d 1435 (9th Cir.1994), nor Cavalier v. Random House, Inc., 2002 WL 1042182, slip op. 7427, 2002 U.S.App. LEXIS 9554 (9th Cir. May 21, 2002), hold otherwise; nor could they, as Shaw was the law of the circuit when they were decided.`,
+  },
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 9",
+    content: `In Apple Computer, we held that the basic ideas of a desktop metaphor in a computer's operating system—windows on the computer screen, icons representing familiar office objects, drop-down menus and objects that open and close—were not individually protectable. 35 F.3d at 1443–44. However, consistent with Shaw, we also held that infringement can "be based on original selection and arrangement of unprotected elements." Id. at 1446. In fact, Apple was entitled to and did license the way in which it "put [unprotectable] ideas together" through the "creative[]" use of "animation, overlapping windows, and well-designed icons." Id. at 1443.
+
+In Cavalier, we did not address the protectability of the selection and sequence of generic elements. Plaintiffs argued unsuccessfully that the many "random similarities scattered throughout the works" satisfied the extrinsic test, *1075 No. 00–56192, slip op. at 7443 (emphasis added) (quoting Litchfield v. Spielberg, 736 F.2d 1352, 1356 (9th Cir.1984)), but apparently did not make an argument based on the overall selection and sequencing of these similarities. See id. at 7441.
+
+The Metcalfs' case is strengthened considerably by Bochco's concession of access to their works. Shaw, 919 F.2d at 1361. Indeed, here we have more than access: One of the defendants, Michael Warren, allegedly stated that he had read three versions of the script, and had passed them on to defendant Steven Bochco, who had also read them and liked them. Warren and Bochco were intimately involved with "City of Angels," as star and writer, respectively. If the trier of fact were to believe that Warren and Bochco actually read the scripts, as alleged by the Metcalfs, it could easily infer that the many similarities between plaintiffs' scripts and defendants' work were the result of copying, not mere coincidence.
+
+Because we reverse the district court's ruling on the merits, we, of course, also reverse the award of attorneys' fees to Bochco.
+
+REVERSED.`,
+  },
+  {
+    pageHeader: "Metcalf v. Bochco, 294 F.3d 1069 (2002) - Page 10",
+    content: `All Citations
+294 F.3d 1069, 2002 Copr.L.Dec. P 28,447, 63 U.S.P.Q.2d 1412, 02 Cal. Daily Op. Serv. 5202, 2002 Daily Journal D.A.R. 6585
+
+Footnotes
+
+* The Honorable Charles R. Breyer, United States District Judge for the Northern District of California, sitting by designation.
+
+1 Because we review a summary judgment against plaintiffs, we recite the facts as alleged by them. San Francisco Baykeeper v. Whitman, 287 F.3d 764, 767 (9th Cir.2002).
+
+2 Bochco, Wootton and Barclay were jointly credited with having created and written the "City of Angels" television series.
+
+3 We note that the Metcalfs may be able to amend their complaint to include CCA as a plaintiff, see Fed.R.Civ.P. 15, or file a new claim on CCA's behalf. Although CCA is now defunct, it may still pursue "claim[s] that arose after its dissolution, ... just as an estate is permitted to prosecute a cause of action arising after the decedent's death." Peñasquitos, Inc. v. Superior Court, 53 Cal.3d 1180, 283 Cal.Rptr. 135, 812 P.2d 154, 161 n.8 (1991); see Fed.R.Civ.P. 17(b) ("The capacity of a corporation to sue or be sued shall be determined by the law under which it was organized.").
+
+4 We imply no conclusion as to what the result might have been had this argument been made. Because the record in Cavalier is not before us, we cannot judge how that case would have been decided had the plaintiff there raised an argument it did not raise.
+
+End of Document                                    © 2026 Thomson Reuters. No claim to original U.S. Government Works.`,
+  },
+]

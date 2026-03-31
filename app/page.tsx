@@ -96,6 +96,7 @@ function AuthenticatedApp() {
   const [argumentsState, setArgumentsState] = React.useState<any[]>(arguments_data);
   const [flowType, setFlowType] = React.useState<"brief" | "judicial">("brief");
   const [showDraftSettings, setShowDraftSettings] = React.useState(false);
+  const [openMetcalfSourceRequest, setOpenMetcalfSourceRequest] = React.useState<{ name: string; scrollToHighlight?: boolean } | null>(null);
   
   // Dynamic header title based on flow and selected motion
   const headerTitle = flowType === "judicial" ? "Judicial drafting" : (selectedMotion ? "Motion to Dismiss" : "Brief Builder");
@@ -726,6 +727,8 @@ function AuthenticatedApp() {
               setCurrentScreen("finalize");
             }}
             showVersionsTab={true}
+            openSourceRequest={openMetcalfSourceRequest}
+            onClearSourceRequest={() => setOpenMetcalfSourceRequest(null)}
           >
             {flowType === "judicial" ? (
               <div className="flex flex-1 flex-col items-center justify-center px-8">
@@ -774,6 +777,10 @@ function AuthenticatedApp() {
                   setCurrentScreen("finalize");
                 }}
                 onEditOutline={handleNextOutline}
+                onOpenMetcalfSource={() => {
+                  setOpenMetcalfSourceRequest({ name: "Metcalf v. Bochco", scrollToHighlight: true });
+                  setDrawerOpen(true);
+                }}
               />
             )}
           </AppLayoutWrapper>

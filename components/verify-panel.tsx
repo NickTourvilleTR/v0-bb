@@ -8,31 +8,83 @@ interface VerifyPanelProps {
   onNextOpposition?: () => void;
   onSkipToFinalize?: () => void;
   onEditOutline?: () => void;
+  onOpenMetcalfSource?: () => void;
 }
 
-export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline }: VerifyPanelProps) {
+export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline, onOpenMetcalfSource }: VerifyPanelProps) {
+  const [showOutlinePreview, setShowOutlinePreview] = useState(false);
+  const [showVerificationDetails, setShowVerificationDetails] = useState(false);
+  const [showMastersonVerificationDetails, setShowMastersonVerificationDetails] = useState(false);
+  const [showIssuesNavBar, setShowIssuesNavBar] = useState(false);
+  const [currentIssueIndex, setCurrentIssueIndex] = useState(0);
+  const verificationDetailsRef = useRef<HTMLDivElement>(null);
+  const mastersonVerificationDetailsRef = useRef<HTMLDivElement>(null);
+  const metcalfWarningRef = useRef<HTMLButtonElement>(null);
+  const mastersonWarningRef = useRef<HTMLButtonElement>(null);
+
+  const totalIssues = 2;
+
+  const scrollToIssue = (index: number) => {
+    setCurrentIssueIndex(index);
+    if (index === 0) {
+      metcalfWarningRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (index === 1) {
+      mastersonWarningRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  const handlePotentialIssuesClick = () => {
+    setShowIssuesNavBar(true);
+    setCurrentIssueIndex(0);
+    setTimeout(() => {
+      metcalfWarningRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
+  };
+
+  const goToPreviousIssue = () => {
+    const newIndex = currentIssueIndex === 0 ? totalIssues - 1 : currentIssueIndex - 1;
+    scrollToIssue(newIndex);
+  };
+
+  const goToNextIssue = () => {
+    const newIndex = currentIssueIndex === totalIssues - 1 ? 0 : currentIssueIndex + 1;
+    scrollToIssue(newIndex);
+  };
+
+  const handleWarningClick = () => {
+    const newState = !showVerificationDetails;
+    setShowVerificationDetails(newState);
+    if (newState) {
+      setTimeout(() => {
+        verificationDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
+      // Open the Metcalf v. Bochco source and scroll to the highlighted paragraph
+      onOpenMetcalfSource?.();
+    }
+  };
+
+  const handleMastersonWarningClick = () => {
+    const newState = !showMastersonVerificationDetails;
+    setShowMastersonVerificationDetails(newState);
+    if (newState) {
+      setTimeout(() => {
+        mastersonVerificationDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
+    }
+  };
+
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
-      <div className="mx-auto flex w-full max-w-6xl gap-6 px-6 py-8">
-        {/* Left sidebar button - sticky */}
+      <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8">
+        {/* Left sidebar buttons - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
-          <JumpToMenu 
-            sections={[
-              { id: "verify-introduction", label: "I. Introduction", level: "top" },
-              { id: "verify-factual-background", label: "II. Factual Background", level: "top" },
-              { id: "verify-parties", label: "A. The Parties", level: "sub" },
-              { id: "verify-conspiracy", label: "B. The Alleged Conspiracy", level: "sub" },
-              { id: "verify-works-compared", label: "C. The Two Works Compared", level: "sub" },
-              { id: "verify-procedural", label: "D. Procedural History", level: "sub" },
-              { id: "verify-argument", label: "III. Argument", level: "top" },
-              { id: "verify-copyright", label: "A. Copyright Infringement Claim", level: "sub" },
-              { id: "verify-state-law", label: "B. State Law Claims Fail", level: "sub" },
-            ] as JumpToSection[]}
-          />
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+            <List className="size-5 text-[#212223]" />
+          </button>
         </div>
 
         {/* Main content column */}
-        <div className="flex-1">
+        <div className="flex-1 max-w-3xl">
         {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -42,22 +94,57 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
             Document verification results
           </h1>
 
-          {/* Filter badges */}
+          {/* Potential issues button */}
           <div className="flex items-center gap-3">
-            <span className="text-sm text-[#737373]">Filter by:</span>
-            <button className="flex items-center gap-1.5 rounded-full bg-[#1d4b34] px-3 py-1.5 text-sm text-white">
-              <FileText className="size-4" />
-              46 total statements
-            </button>
-            <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] bg-white px-3 py-1.5 text-sm text-[#212223]">
+            <button 
+              onClick={handlePotentialIssuesClick}
+              className="flex items-center gap-1.5 rounded-full border border-[#cccccc] bg-white px-3 py-1.5 text-sm text-[#212223] hover:bg-[#f5f5f5] transition-colors"
+            >
               <AlertTriangle className="size-4 text-[#ab3300]" />
-              4 potential issues
+              2 potential issues
             </button>
           </div>
         </div>
 
         {/* Legal Document */}
-        <div className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
+        <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
+          {/* Issues Navigation Bar */}
+          {showIssuesNavBar && (
+            <div className="sticky top-4 z-10 -mt-2 mb-6 flex items-center justify-center">
+              <div className="flex items-center gap-3 rounded-full border border-[#cccccc] bg-white px-4 py-2 shadow-lg">
+                <button 
+                  onClick={goToPreviousIssue}
+                  className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
+                >
+                  <ChevronLeft className="size-5" />
+                </button>
+                
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className="size-4 text-[#ab3300]" />
+                  <span className="text-sm font-medium text-[#212223]">
+                    Issue {currentIssueIndex + 1} of {totalIssues}
+                  </span>
+                </div>
+                
+                <button 
+                  onClick={goToNextIssue}
+                  className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
+                >
+                  <ChevronRight className="size-5" />
+                </button>
+                
+                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                
+                <button 
+                  onClick={() => setShowIssuesNavBar(false)}
+                  className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Party/Attorney Fields */}
           <div className="mb-8 space-y-2 text-sm text-[#212223]">
             <p>[Party/Attorney]</p>
@@ -194,7 +281,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                   While in Italy, Love and Brad befriend Adele, a woman who rents them an apartment, and Love confides to Adele that her mother once studied cooking in Amalfi. Id. at 11, 34–37. Shortly after Love and Brad return to San Francisco, Love decides to go back to Italy alone, this time with a specific mission: to locate her mother&apos;s former cooking teacher and complete a cookbook her mother had assembled during her time in Italy. Id. at 45. Brad largely disappears from the narrative at this point.
                 </p>
                 <p className="text-sm leading-relaxed text-[#212223]">
-                  The remainder of the memoir follows Love&apos;s deepening connection to Adele, her family, and the rhythms of Italian life. On her mother&apos;s birthday, Love hosts a dinner party and prepares a recipe from her mother&apos;s cookbook; Adele&apos;s mother Rosa, who is an experienced cook, steps in to lead the preparation. Id. at 70, 73–78. Rosa later teaches Love to cook—offering a form of maternal warmth Love had never received from her own mother. Id. at 80–81, 93. Love also befriends a local woman named Anita, who helps her track down the identity of her mother&apos;s cooking teacher, only to learn that the teacher has died. Id. at 85–86. After a brief return to California, Love travels back to Italy and is introduced to Marietta, who was the cooking teacher&apos;s assistant and knew Love&apos;s mother during her time in Amalfi. Id. at 89–90, 94–95. From Marietta, Love learns that her mother was happy during the period Marietta knew her—a revelation that provides Love with a measure of peace she had not previously found. Id. at 95. The memoir ends with Love cherishing this new understanding of her mother and embracing Rosa as the mother figure she never had. Id. at 100.
+                  The remainder of the memoir follows Love&apos;s deepening connection to Adele, her family, and the rhythms of Italian life. On her mother&apos;s birthday, Love hosts a dinner party and prepares a recipe from her mother&apos;s cookbook; Adele&apos;s mother Rosa, who is an experienced cook, steps in to lead the preparation. Id. at 70, 73–78. Rosa later teaches Love to cook—offering a form of maternal warmth Love had never received from her own mother. Id. at 80–81, 93. Love also befriends a local woman named Anita, who helps her track down the identity of her mother&apos;s cooking teacher, only to learn that the teacher has died. Id. at 85–86. After a brief return to California, Love travels back to Italy and is introduced to Marietta, who was the cooking teacher&apos;s assistant and knew Love&apos;s mother during her time in Amalfi. Id. at 89–90, 94–95. From Marietta, Love learns that her mother was happy during the period Marietta knew her�����a revelation that provides Love with a measure of peace she had not previously found. Id. at 95. The memoir ends with Love cherishing this new understanding of her mother and embracing Rosa as the mother figure she never had. Id. at 100.
                 </p>
               </div>
 
@@ -270,8 +357,35 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                     A plaintiff asserting copyright infringement must satisfy both an &quot;extrinsic&quot; and an &quot;intrinsic&quot; test for substantial similarity. <em>Skidmore v. Led Zeppelin</em>, 952 F.3d 1051, 1064 (9th Cir. 2020). While the intrinsic test is a jury question, the extrinsic test &quot;may be decided by the court as a matter of law,&quot; including at the motion-to-dismiss stage. <em>Woodland</em>, 136 F.4th at 1210. Where the works at issue are before the court and it is clear as a matter of law that they are not substantially similar, dismissal is proper. <em>Gallagher v. Lions Gate Ent. Inc.</em>, 2015 WL 12481504, at *2 (C.D. Cal. Sept. 11, 2015); <em>Hankins v. Titmouse Inc.</em>, 2025 U.S. Dist. LEXIS 147690, at *7 (C.D. Cal. July 30, 2025). Indeed, the Ninth Circuit has &quot;repeatedly affirmed dismissals&quot; in cases alleging infringement of literary works on substantial similarity grounds. <em>Masterson v. Walt Disney Co.</em>, 821 F. App&apos;x 779, 780 &amp; n.1 (9th Cir. 2020).
                   </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot; <em>Metcalf v. Bochco</em>, 294 F.3d 1069, 1073 (9th Cir. 2002). Critically, the threshold step is to filter out unprotectable elements. <em>Woodland</em>, 136 F.4th at 1210. Non-protectable elements include ideas; historical facts; common phrases; scenes-a-faire (situations and incidents that flow naturally or necessarily from a basic plot premise or generic storyline); and familiar stock themes. <em>Corbello</em>, 974 F.3d at 975 (citing <em>Benay v. Warner Bros. Entm&apos;t., Inc.</em>, 607 F.3d 620, 624–25 (9th Cir. 2010)). Only after those elements are set aside does the court compare what remains. That comparative analysis conclusively forecloses any finding of substantial similarity here.
+                    For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot; <span className="inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Metcalf v. Bochco</em>, 294 F.3d 1069, 1073 (9th Cir. 2002)</a><button ref={metcalfWarningRef} onClick={handleWarningClick} className="inline-flex items-center justify-center transition-transform duration-150 hover:scale-125"><AlertTriangle className="inline size-4 text-[#ab3300]" /></button></span>. Critically, the threshold step is to filter out unprotectable elements. <em>Woodland</em>, 136 F.4th at 1210. Non-protectable elements include ideas; historical facts; common phrases; scenes-a-faire (situations and incidents that flow naturally or necessarily from a basic plot premise or generic storyline); and familiar stock themes. <em>Corbello</em>, 974 F.3d at 975 (citing <em>Benay v. Warner Bros. Entm&apos;t., Inc.</em>, 607 F.3d 620, 624–25 (9th Cir. 2010)). Only after those elements are set aside does the court compare what remains. That comparative analysis conclusively forecloses any finding of substantial similarity here.
                   </p>
+                  
+                  {showVerificationDetails && (
+                    <div ref={verificationDetailsRef} className="my-4 rounded-lg border border-solid border-[#cccccc] bg-[#fafafa] p-6 text-sm">
+                      <div className="mb-4 flex items-center justify-between">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-[#737373]">VERIFICATION DETAILS:</p>
+                        <button onClick={() => setShowVerificationDetails(false)} className="flex items-center justify-center rounded-md p-1 text-[#737373] transition-colors hover:bg-[#e5e5e5] hover:text-[#212223]">
+                          <X className="size-4" />
+                        </button>
+                      </div>
+                      
+                      <p className="mb-4 leading-relaxed text-[#212223]">
+                        <span className="font-bold">Statement:</span> For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot;
+                      </p>
+                      
+                      <p className="mb-6 leading-relaxed text-[#212223]">
+                        <a href="#" className="text-[#0062c4] hover:underline">Metcalf v. Bochco, 294 F.3d 1069 (2002)</a>
+                      </p>
+                      
+                      <div className="flex gap-3">
+                        <AlertTriangle className="mt-0.5 size-4 shrink-0 text-[#ab3300]" />
+                        <div>
+                          <p className="font-bold text-[#212223]">Problematic</p>
+                          <p className="text-[#212223]">The cited case finds copyright infringement, holding that even when the alleged similarities consist entirely of generic, individually unprotectable elements, the selection and arrangement of those elements—the particular sequence in which an author strings them together—can itself be protectable. The court used the musical analogy: each note in a scale is unprotectable, but a pattern of notes may earn copyright protection.</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* a. Plot */}
@@ -340,11 +454,34 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                 <div className="mb-4 ml-4">
                   <p className="mb-3 font-bold text-[#212223]">e. Theme</p>
                   <p className="mb-3 text-sm leading-relaxed text-[#212223]">
-                    A general thematic similarity that is &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a finding of substantial similarity. <em>Masterson</em>, 821 F. App&apos;x at 782. The general idea of a woman traveling to Italy to reach a greater understanding of—and peace with—her deceased mother is not protectable.
+                    A general thematic similarity that is &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a finding of substantial similarity. <span className="inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Masterson</em>, 821 F. App&apos;x at 782</a><button ref={mastersonWarningRef} onClick={handleMastersonWarningClick} className="inline-flex items-center justify-center transition-transform duration-150 hover:scale-125"><AlertTriangle className="inline size-4 text-[#ab3300]" /></button></span>. The general idea of a woman traveling to Italy to reach a greater understanding of—and peace with—her deceased mother is not protectable.
                   </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
                     Moreover, the specific thematic preoccupations of the two works are meaningfully different. <em>One Italian Summer</em> is fundamentally about dismantling an idealized image of a beloved mother in order to see her, for the first time, as an autonomous person—and about how that act of perception liberates Katy to claim her own autonomy. <em>Eat the Lemon</em> operates from an entirely different emotional premise. Love does not need to dismantle an idealized image; she carries no idealization to begin with. Her memoir is instead about the possibility of overcoming deeply unhappy memories of a difficult, emotionally distant mother—and about discovering, through her Italian family of choice, what real warmth and belonging feel like for the first time. The works are not substantially similar as to theme.
                   </p>
+                  
+                  {showMastersonVerificationDetails && (
+                    <div ref={mastersonVerificationDetailsRef} className="my-4 rounded-lg border border-solid border-[#cccccc] bg-[#fafafa] p-6 text-sm">
+                      <div className="mb-4 flex items-center justify-between">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-[#737373]">VERIFICATION DETAILS:</p>
+                        <button onClick={() => setShowMastersonVerificationDetails(false)} className="flex items-center justify-center rounded-md p-1 text-[#737373] transition-colors hover:bg-[#e5e5e5] hover:text-[#212223]">
+                          <X className="size-4" />
+                        </button>
+                      </div>
+                      
+                      <p className="mb-6 leading-relaxed text-[#212223]">
+                        <span className="font-bold">Statement:</span> A general thematic similarity that is &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a finding of substantial similarity.
+                      </p>
+                      
+                      <div className="flex gap-3">
+                        <AlertTriangle className="mt-0.5 size-4 shrink-0 text-[#ab3300]" />
+                        <div>
+                          <p className="font-bold text-[#212223]">Problematic</p>
+                          <p className="text-[#212223]">The Masterson case actually supports the proposition that general thematic similarities are not protectable. However, it also affirms that when multiple unprotectable elements are combined in a specific sequence, that arrangement may itself warrant copyright protection. This could potentially undermine the argument if opposing counsel argues that the combination of elements in Love&apos;s work constitutes a protectable arrangement.</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* f. Mood and Pace */}
@@ -520,6 +657,17 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
           </div>
         </div>
       </div>
+      {showOutlinePreview && (
+        <OutlinePreviewModal
+          onClose={() => setShowOutlinePreview(false)}
+          onEdit={() => {
+            setShowOutlinePreview(false);
+            onEditOutline?.();
+          }}
+        />
+      )}
+
+
     </div>
   );
 }
