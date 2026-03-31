@@ -665,7 +665,6 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
                         <li>A complex conspiracy to commit and conceal infringement is implausible where, as a matter of law, no infringement occurred. Briggs v. Cameron, 2020 WL 6118493, at *3 (N.D. Cal. 2020).</li>
                         <li>Every one of Love&apos;s 13 state law claims is predicated on the alleged conspiracy to infringe her copyright and intimidate her into silence about it.</li>
-                        <li>Because no infringement occurred as a matter of law, the entire conspiratorial premise of Love&apos;s state law claims is implausible, and each claim fails on this basis.</li>
                       </ul>
                     </div>
 
