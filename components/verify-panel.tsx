@@ -16,16 +16,16 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
-      <div className="mx-auto flex w-full max-w-4xl gap-6 px-6 py-8">
-        {/* Left sidebar - TOC button */}
-        <div className="flex flex-col pt-6">
-          <button className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
+      <div className="mx-auto flex w-full max-w-6xl gap-6 px-6 py-8">
+        {/* Left sidebar buttons - sticky */}
+        <div className="sticky top-8 flex h-fit flex-col gap-2">
+          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
             <List className="size-5 text-[#212223]" />
           </button>
         </div>
 
         {/* Main content column */}
-        <div className="flex-1">
+        <div className="mx-auto max-w-3xl flex-1">
         {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
