@@ -395,14 +395,36 @@ interface SupportingAuthoritiesPanelProps {
   flowType?: "brief" | "judicial";
 }
 
-function CitationSubCard({ citation }: { citation: Citation }) {
+function CitationSubCard({
+  citation,
+  onDragStart,
+  onDragEnd,
+  isDragOver,
+  onDragOver,
+  onDragLeave,
+  onDrop,
+}: {
+  citation: Citation;
+  onDragStart: (e: React.DragEvent) => void;
+  onDragEnd: (e: React.DragEvent) => void;
+  isDragOver: boolean;
+  onDragOver: (e: React.DragEvent) => void;
+  onDragLeave: (e: React.DragEvent) => void;
+  onDrop: (e: React.DragEvent) => void;
+}) {
   const [hovered, setHovered] = React.useState(false);
 
   return (
     <div
+      draggable
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
       className={cn(
         "rounded-lg border bg-white p-5 transition-colors",
-        hovered ? "border-[#2e6b5c]" : "border-[#e5e5e5]"
+        isDragOver ? "border-[#1d4b34] ring-2 ring-[#1d4b34] ring-offset-1" : hovered ? "border-[#2e6b5c]" : "border-[#e5e5e5]"
       )}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -410,7 +432,7 @@ function CitationSubCard({ citation }: { citation: Citation }) {
       {/* Header: drag dots + type label + action icons */}
       <div className="mb-4 flex items-center gap-2">
         {/* Drag handle */}
-        <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3]" />
+        <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3] active:cursor-grabbing" />
 
         {/* Type label */}
         <p className="text-sm font-semibold text-[#212223]">
@@ -515,6 +537,18 @@ function AuthorityCard({
   groupNumber,
   isFirstInGroup,
   isFirstEntry,
+  onCardDragStart,
+  onCardDragEnd,
+  isCardDragOver,
+  onCardDragOver,
+  onCardDragLeave,
+  onCardDrop,
+  dragOverCitationId,
+  onCitationDragStart,
+  onCitationDragEnd,
+  onCitationDragOver,
+  onCitationDragLeave,
+  onCitationDrop,
 }: {
   authority: Authority;
   groupNumber: number;
@@ -522,12 +556,33 @@ function AuthorityCard({
   isFirstEntry: boolean;
   selectedCitations: string[];
   toggleCitation: (id: string) => void;
+  onCardDragStart: (e: React.DragEvent) => void;
+  onCardDragEnd: (e: React.DragEvent) => void;
+  isCardDragOver: boolean;
+  onCardDragOver: (e: React.DragEvent) => void;
+  onCardDragLeave: (e: React.DragEvent) => void;
+  onCardDrop: (e: React.DragEvent) => void;
+  dragOverCitationId: string | null;
+  onCitationDragStart: (e: React.DragEvent, citationId: string) => void;
+  onCitationDragEnd: (e: React.DragEvent) => void;
+  onCitationDragOver: (e: React.DragEvent, citationId: string) => void;
+  onCitationDragLeave: (e: React.DragEvent) => void;
+  onCitationDrop: (e: React.DragEvent, targetAuthorityId: string, targetCitationId: string) => void;
 }) {
   const [hovered, setHovered] = React.useState(false);
   const [collapsed, setCollapsed] = React.useState(false);
 
   return (
-    <div id={`develop-${authority.id}`} className={!isFirstEntry ? (isFirstInGroup ? "mt-10" : "mt-8") : ""}>
+    <div
+      id={`develop-${authority.id}`}
+      onDragOver={onCardDragOver}
+      onDragLeave={onCardDragLeave}
+      onDrop={onCardDrop}
+      className={cn(
+        !isFirstEntry ? (isFirstInGroup ? "mt-10" : "mt-8") : "",
+        isCardDragOver ? "rounded-lg ring-2 ring-[#1d4b34] ring-offset-2" : ""
+      )}
+    >
       {/* Main section header */}
       {isFirstInGroup && (
         <h2 className="mb-4 text-lg font-semibold text-[#212223]">
@@ -546,13 +601,16 @@ function AuthorityCard({
       >
         {/* Sticky card header row */}
         <div
+          draggable
+          onDragStart={onCardDragStart}
+          onDragEnd={onCardDragEnd}
           className={cn(
             "sticky top-0 z-10 flex items-center gap-2 rounded-t-lg bg-[#f5f7f6] px-4 py-3 transition-colors",
             hovered ? "border-b border-[#2e6b5c]" : "border-b border-[#e5e5e5]"
           )}
         >
           {/* Drag handle */}
-          <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3]" />
+          <GripVertical className="size-4 shrink-0 cursor-grab text-[#a3a3a3] active:cursor-grabbing" />
 
           {/* Sub-argument heading */}
           {authority.subTitle && (
@@ -615,7 +673,16 @@ function AuthorityCard({
         {!collapsed && (
           <div className="space-y-4 p-4">
             {authority.citations.map((citation) => (
-              <CitationSubCard key={citation.id} citation={citation} />
+              <CitationSubCard
+                key={citation.id}
+                citation={citation}
+                onDragStart={(e) => onCitationDragStart(e, citation.id)}
+                onDragEnd={onCitationDragEnd}
+                isDragOver={dragOverCitationId === citation.id}
+                onDragOver={(e) => onCitationDragOver(e, citation.id)}
+                onDragLeave={onCitationDragLeave}
+                onDrop={(e) => onCitationDrop(e, authority.id, citation.id)}
+              />
             ))}
           </div>
         )}
@@ -667,7 +734,165 @@ export function SupportingAuthoritiesPanel({
     );
   };
 
-  const authorities = defaultAuthorities;
+  // Drag state — lifted into parent so AuthorityCard and CitationSubCard can share
+  const [authorities, setAuthorities] = React.useState<Authority[]>(defaultAuthorities);
+
+  // Gray card (authority) drag
+  const draggingCardId = React.useRef<string | null>(null);
+  const [dragOverCardId, setDragOverCardId] = React.useState<string | null>(null);
+
+  // White card (citation) drag
+  const draggingCitationInfo = React.useRef<{ authorityId: string; citationId: string } | null>(null);
+  const [dragOverCitationInfo, setDragOverCitationInfo] = React.useState<{ authorityId: string; citationId: string } | null>(null);
+
+  // Track what type of item is being dragged so we can handle cross-authority drops
+  const dragType = React.useRef<"card" | "citation" | null>(null);
+
+  /* ── Gray card handlers ── */
+  const handleCardDragStart = (e: React.DragEvent, authorityId: string) => {
+    dragType.current = "card";
+    draggingCardId.current = authorityId;
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleCardDragEnd = () => {
+    draggingCardId.current = null;
+    dragType.current = null;
+    setDragOverCardId(null);
+  };
+
+  const handleCardDragOver = (e: React.DragEvent, authorityId: string) => {
+    if (dragType.current !== "card") return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = "move";
+    if (dragOverCardId !== authorityId) setDragOverCardId(authorityId);
+  };
+
+  const handleCardDragLeave = (e: React.DragEvent, authorityId: string) => {
+    if (dragType.current !== "card") return;
+    // Only clear if leaving the card wrapper entirely
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setDragOverCardId((prev) => (prev === authorityId ? null : prev));
+    }
+  };
+
+  const handleCardDrop = (e: React.DragEvent, targetAuthorityId: string) => {
+    if (dragType.current !== "card") return;
+    e.preventDefault();
+    e.stopPropagation();
+    const fromId = draggingCardId.current;
+    if (!fromId || fromId === targetAuthorityId) {
+      setDragOverCardId(null);
+      return;
+    }
+    setAuthorities((prev) => {
+      const next = [...prev];
+      const fromIdx = next.findIndex((a) => a.id === fromId);
+      const toIdx = next.findIndex((a) => a.id === targetAuthorityId);
+      if (fromIdx === -1 || toIdx === -1) return prev;
+      const [moved] = next.splice(fromIdx, 1);
+      next.splice(toIdx, 0, moved);
+      return next;
+    });
+    draggingCardId.current = null;
+    dragType.current = null;
+    setDragOverCardId(null);
+  };
+
+  /* ── White card (citation) handlers ── */
+  const handleCitationDragStart = (e: React.DragEvent, authorityId: string, citationId: string) => {
+    dragType.current = "citation";
+    draggingCitationInfo.current = { authorityId, citationId };
+    e.dataTransfer.effectAllowed = "move";
+    // Stop propagation so the gray card's drag doesn't fire
+    e.stopPropagation();
+  };
+
+  const handleCitationDragEnd = () => {
+    draggingCitationInfo.current = null;
+    dragType.current = null;
+    setDragOverCitationInfo(null);
+    setDragOverCardId(null);
+  };
+
+  const handleCitationDragOver = (e: React.DragEvent, targetAuthorityId: string, targetCitationId: string) => {
+    if (dragType.current !== "citation") return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = "move";
+    const current = dragOverCitationInfo;
+    if (!current || current.authorityId !== targetAuthorityId || current.citationId !== targetCitationId) {
+      setDragOverCitationInfo({ authorityId: targetAuthorityId, citationId: targetCitationId });
+    }
+  };
+
+  const handleCitationDragLeave = (e: React.DragEvent) => {
+    if (dragType.current !== "citation") return;
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setDragOverCitationInfo(null);
+    }
+  };
+
+  // When a citation is dropped onto another citation or a gray card area
+  const handleCitationDrop = (e: React.DragEvent, targetAuthorityId: string, targetCitationId: string | null) => {
+    if (dragType.current !== "citation") return;
+    e.preventDefault();
+    e.stopPropagation();
+    const from = draggingCitationInfo.current;
+    if (!from) return;
+
+    setAuthorities((prev) => {
+      const next = prev.map((a) => ({ ...a, citations: [...a.citations] }));
+      const fromAuth = next.find((a) => a.id === from.authorityId);
+      const toAuth = next.find((a) => a.id === targetAuthorityId);
+      if (!fromAuth || !toAuth) return prev;
+
+      // Remove from source
+      const fromCitIdx = fromAuth.citations.findIndex((c) => c.id === from.citationId);
+      if (fromCitIdx === -1) return prev;
+      const [movedCit] = fromAuth.citations.splice(fromCitIdx, 1);
+
+      // Insert into target
+      if (targetCitationId === null) {
+        // Drop onto gray card area (no specific citation) — append
+        toAuth.citations.push(movedCit);
+      } else {
+        const toCitIdx = toAuth.citations.findIndex((c) => c.id === targetCitationId);
+        if (toCitIdx === -1) {
+          toAuth.citations.push(movedCit);
+        } else {
+          toAuth.citations.splice(toCitIdx, 0, movedCit);
+        }
+      }
+      return next;
+    });
+
+    draggingCitationInfo.current = null;
+    dragType.current = null;
+    setDragOverCitationInfo(null);
+    setDragOverCardId(null);
+  };
+
+  // Handle drops onto the gray card itself (not a specific citation) for cross-card moves
+  const handleCardAreaDrop = (e: React.DragEvent, targetAuthorityId: string) => {
+    if (dragType.current === "citation") {
+      handleCitationDrop(e, targetAuthorityId, null);
+    } else if (dragType.current === "card") {
+      handleCardDrop(e, targetAuthorityId);
+    }
+  };
+
+  const handleCardAreaDragOver = (e: React.DragEvent, authorityId: string) => {
+    if (dragType.current === "citation") {
+      e.preventDefault();
+      e.stopPropagation();
+      e.dataTransfer.dropEffect = "move";
+      if (dragOverCardId !== authorityId) setDragOverCardId(authorityId);
+    } else {
+      handleCardDragOver(e, authorityId);
+    }
+  };
 
   return (
     <div className={cn("flex h-full flex-col overflow-y-auto", className)}>
@@ -969,6 +1194,22 @@ export function SupportingAuthoritiesPanel({
               isFirstEntry={isFirstEntry}
               selectedCitations={selectedCitations}
               toggleCitation={toggleCitation}
+              onCardDragStart={(e) => handleCardDragStart(e, authority.id)}
+              onCardDragEnd={handleCardDragEnd}
+              isCardDragOver={dragOverCardId === authority.id && draggingCardId.current !== null}
+              onCardDragOver={(e) => handleCardAreaDragOver(e, authority.id)}
+              onCardDragLeave={(e) => handleCardDragLeave(e, authority.id)}
+              onCardDrop={(e) => handleCardAreaDrop(e, authority.id)}
+              dragOverCitationId={
+                dragOverCitationInfo?.authorityId === authority.id
+                  ? dragOverCitationInfo.citationId
+                  : null
+              }
+              onCitationDragStart={(e, citationId) => handleCitationDragStart(e, authority.id, citationId)}
+              onCitationDragEnd={handleCitationDragEnd}
+              onCitationDragOver={(e, citationId) => handleCitationDragOver(e, authority.id, citationId)}
+              onCitationDragLeave={handleCitationDragLeave}
+              onCitationDrop={(e, _targetAuthorityId, targetCitationId) => handleCitationDrop(e, authority.id, targetCitationId)}
             />
             );
           });
