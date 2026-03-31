@@ -67,7 +67,14 @@ const complianceItems = [
   {
     title: "Table of Contents",
     status: "Compliant" as const,
-    content: null,
+    content: {
+      rule: { label: "Local Rule 11-3.1", href: "#" },
+      rows: [
+        { icon: "info", text: "Requirement: Required for motions exceeding 10 pages" },
+        { icon: "info", text: "Current: Included" },
+        { icon: "check", text: "Table of contents is present and complete." },
+      ],
+    },
   },
   {
     title: "Table of Authorities",
