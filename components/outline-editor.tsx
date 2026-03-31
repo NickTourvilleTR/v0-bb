@@ -589,7 +589,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#737373]">Standard</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
                           <li>To survive a motion to dismiss, a plaintiff must satisfy both the extrinsic and intrinsic tests for substantial similarity. Skidmore v. Led Zeppelin, 952 F.3d 1051, 1064 (9th Cir. 2020).</li>
-                          <li>The extrinsic test — which focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events&quot; — may be decided by the court as a matter of law at the pleading stage.</li>
+                          <li>The extrinsic test — which focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events&quot; — may be decided by the court as a matter of law at the pleading stage. Woodland, 136 F.4th at 1210; Funky Films v. Time Warner Ent. Co., 462 F.3d 1072, 1077 (9th Cir. 2006).</li>
                           <li>The first step is to filter out unprotectable elements: ideas, historical facts, common phrases, scenes-a-faire, and stock themes. Corbello, 974 F.3d at 975.</li>
                           <li>Dismissal with prejudice is appropriate where the deficiency stems from the &quot;fundamental characteristics of the works themselves&quot; rather than pleading deficiency.</li>
                         </ul>
