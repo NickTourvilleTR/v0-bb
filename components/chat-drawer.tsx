@@ -428,7 +428,11 @@ export function ChatDrawer({
                 <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
                   <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
                   <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
-                    {page.content}
+                    {page.content.split('\n').map((line, lineIndex) => (
+                      <div key={lineIndex} className={line.startsWith('[1] [2] 1.') ? 'bg-yellow-100 px-3 py-2 rounded mb-2' : ''}>
+                        {line}
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))}
