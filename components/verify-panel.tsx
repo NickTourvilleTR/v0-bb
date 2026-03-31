@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { AlertTriangle, List, X } from "lucide-react";
+import { AlertTriangle, List, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
@@ -16,8 +16,43 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
   const [showOutlinePreview, setShowOutlinePreview] = useState(false);
   const [showVerificationDetails, setShowVerificationDetails] = useState(false);
   const [showMastersonVerificationDetails, setShowMastersonVerificationDetails] = useState(false);
+  const [currentIssueIndex, setCurrentIssueIndex] = useState(0);
   const verificationDetailsRef = useRef<HTMLDivElement>(null);
   const mastersonVerificationDetailsRef = useRef<HTMLDivElement>(null);
+  const metcalfWarningRef = useRef<HTMLButtonElement>(null);
+  const mastersonWarningRef = useRef<HTMLButtonElement>(null);
+  
+  const totalIssues = 2;
+  
+  const navigateToIssue = (index: number) => {
+    setCurrentIssueIndex(index);
+    if (index === 0) {
+      // Navigate to Metcalf warning
+      setShowVerificationDetails(true);
+      setShowMastersonVerificationDetails(false);
+      setTimeout(() => {
+        verificationDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
+      onOpenMetcalfSource?.();
+    } else if (index === 1) {
+      // Navigate to Masterson warning
+      setShowMastersonVerificationDetails(true);
+      setShowVerificationDetails(false);
+      setTimeout(() => {
+        mastersonVerificationDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
+    }
+  };
+  
+  const goToPreviousIssue = () => {
+    const newIndex = currentIssueIndex === 0 ? totalIssues - 1 : currentIssueIndex - 1;
+    navigateToIssue(newIndex);
+  };
+  
+  const goToNextIssue = () => {
+    const newIndex = currentIssueIndex === totalIssues - 1 ? 0 : currentIssueIndex + 1;
+    navigateToIssue(newIndex);
+  };
 
   const handleWarningClick = () => {
     const newState = !showVerificationDetails;
@@ -62,11 +97,23 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
             Document verification results
           </h1>
 
-          {/* Potential issues button */}
-          <div className="flex items-center gap-3">
-            <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] bg-white px-3 py-1.5 text-sm text-[#212223]">
+          {/* Potential issues carousel */}
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={goToPreviousIssue}
+              className="flex size-8 items-center justify-center rounded-full border border-[#cccccc] bg-white text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
+            >
+              <ChevronLeft className="size-4" />
+            </button>
+            <div className="flex items-center gap-2 rounded-full border border-[#cccccc] bg-white px-3 py-1.5">
               <AlertTriangle className="size-4 text-[#ab3300]" />
-              2 potential issues
+              <span className="text-sm text-[#212223]">Issue {currentIssueIndex + 1} of {totalIssues}</span>
+            </div>
+            <button 
+              onClick={goToNextIssue}
+              className="flex size-8 items-center justify-center rounded-full border border-[#cccccc] bg-white text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
+            >
+              <ChevronRight className="size-4" />
             </button>
           </div>
         </div>
