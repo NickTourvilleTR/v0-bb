@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { FileText, AlertTriangle, List, CheckCircle2 } from "lucide-react";
+import { FileText, AlertTriangle, List, CheckCircle2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
@@ -280,7 +280,12 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                   
                   {showVerificationDetails && (
                     <div ref={verificationDetailsRef} className="my-4 rounded-lg border border-solid border-[#cccccc] bg-[#fafafa] p-6 text-sm">
-                      <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[#737373]">VERIFICATION DETAILS:</p>
+                      <div className="mb-4 flex items-center justify-between">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-[#737373]">VERIFICATION DETAILS:</p>
+                        <button onClick={() => setShowVerificationDetails(false)} className="flex items-center justify-center rounded-md p-1 text-[#737373] transition-colors hover:bg-[#e5e5e5] hover:text-[#212223]">
+                          <X className="size-4" />
+                        </button>
+                      </div>
                       
                       <p className="mb-6 leading-relaxed text-[#212223]">
                         <span className="font-bold">Statement:</span> For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot;
