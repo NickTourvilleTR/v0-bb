@@ -395,7 +395,7 @@ export function ChatDrawer({
                 {openedDocument.name}
                 <ExternalLink className="size-4" />
               </a>
-              <p className="mt-1 text-sm text-[#737373]">Uploaded at {openedDocument.time}</p>
+              <p className="mt-1 text-sm text-[#737373]">{openedDocument.metadata}</p>
             </div>
 
             {/* Toolbar */}
