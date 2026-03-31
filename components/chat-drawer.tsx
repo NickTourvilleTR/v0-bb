@@ -342,12 +342,12 @@ export function ChatDrawer({
           {activeTab === "sources" && !openedDocument && (
             <div className="flex flex-col gap-1">
               {[
-                { name: "Gyant v. NFM - Complaint.pdf", time: "9:17 a.m." },
-                { name: "Metcalf v. Bochco", time: "9:17 a.m." },
-                { name: "Hansen Deposition.pdf", time: "9:17 a.m." },
-                { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", time: "9:17 a.m." },
-                { name: "ROR Letter.docx", time: "9:17 a.m." },
-                { name: "Letter to NFM Dated September 19, 2023.docx", time: "9:17 a.m." },
+                { name: "Gyant v. NFM - Complaint.pdf", metadata: "Uploaded at 9:17 a.m." },
+                { name: "Metcalf v. Bochco", metadata: "United States Court of Appeals, Ninth Circuit. | June 12, 2002 | 294 F.3d 1069 | 2002 Copr.L.Dec. P 28,447 | 63 U.S.P.Q.2d 1412" },
+                { name: "Hansen Deposition.pdf", metadata: "Uploaded at 9:17 a.m." },
+                { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", metadata: "Uploaded at 9:17 a.m." },
+                { name: "ROR Letter.docx", metadata: "Uploaded at 9:17 a.m." },
+                { name: "Letter to NFM Dated September 19, 2023.docx", metadata: "Uploaded at 9:17 a.m." },
               ].map((doc) => (
                 <button
                   key={doc.name}
@@ -360,7 +360,7 @@ export function ChatDrawer({
                   <FileText className="mt-0.5 size-5 shrink-0 text-[#737373]" />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-medium text-[#212223] break-words">{doc.name}</p>
-                    <p className="text-xs text-[#737373]">Uploaded at {doc.time}</p>
+                    <p className="text-xs text-[#737373]">{doc.metadata}</p>
                   </div>
                 </button>
               ))}
