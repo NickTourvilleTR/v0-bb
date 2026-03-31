@@ -599,7 +599,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <div className="mb-4 ml-4">
                         <p className="mb-2 text-sm font-medium text-[#212223]">a. Plot and Sequence of Events</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
-                          <li>&quot;No one can own the basic idea for a story. General plot ideas are not protected by copyright law.&quot; Berkic v. Crichton, 761 F.2d 1289, 1293 (9th Cir. 1985).</li>
+                          <li>&quot;No one can own the basic idea for a story. General plot ideas are not protected by copyright law.&quot; Berkic v. Crichton, 761 F.2d 1289, 1293 (9th Cir. 1985). Courts compare &quot;the actual concrete elements that make up the total sequence of events,&quot; not general premises. Funky Films, 462 F.3d at 1077.</li>
                           <li>Courts routinely reject substantial similarity claims where works&apos; plotlines had similarities &quot;but developed quite differently.&quot;</li>
                           <li>Scenes-a-faire that &quot;flow naturally or necessarily from a basic plot premise&quot; are not protectable. Corbello, 974 F.3d at 975.</li>
                           <li>The sole overlapping premise is a woman who travels alone to the Amalfi Coast to connect with her deceased mother — a general, unprotectable plot point.</li>
