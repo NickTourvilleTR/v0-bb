@@ -737,6 +737,9 @@ export function SupportingAuthoritiesPanel({
     );
   };
 
+  // Drag state — moved authorities to state so drag reordering triggers re-renders
+  const [authorities, setAuthorities] = React.useState<Authority[]>(defaultAuthorities);
+
   // Collapse/expand state for all gray cards
   const [collapsedCards, setCollapsedCards] = React.useState<Record<string, boolean>>({});
 
