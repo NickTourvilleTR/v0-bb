@@ -90,7 +90,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
               <p className="mb-2 text-sm text-[#212223]">Case No. 2:25-cv-01779-AB(KSx)</p>
               <p className="mb-6 text-sm text-[#212223]">Hon. André Birotte Jr.</p>
               <p className="mb-2 text-sm font-semibold uppercase text-[#212223]">
-                DEFENDANT DEFENDANT&apos;S JOINDER IN<br/>
+                DEFENDANT SIMON &amp; SCHUSTER, LLC&apos;S JOINDER IN<br/>
                 CREATIVE ARTISTS AGENCY, LLC&apos;S MOTION TO<br/>
                 DISMISS FIRST AMENDED COMPLAINT AND<br/>
                 MOTION TO DISMISS FIRST AMENDED<br/>
