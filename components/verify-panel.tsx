@@ -268,16 +268,16 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                   </p>
                   
                   {showVerificationDetails && (
-                    <div className="my-4 rounded-lg border border-solid border-[#cccccc] bg-[#fafafa] p-6">
+                    <div className="my-4 rounded-lg border border-solid border-[#cccccc] bg-[#fafafa] p-6 text-sm">
                       <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[#737373]">VERIFICATION DETAILS:</p>
                       
-                      <p className="mb-6 text-base leading-relaxed text-[#212223]">
+                      <p className="mb-6 leading-relaxed text-[#212223]">
                         <span className="font-bold">Statement:</span> For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot;
                       </p>
                       
                       <div className="space-y-5">
                         <div className="flex gap-3">
-                          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#1d4b34]" />
+                          <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#1d4b34]" />
                           <div>
                             <p className="font-bold text-[#212223]">Citation Exists</p>
                             <p className="text-[#212223]"><em>Metcalf v. Bochco</em>, 294 F.3d 1069 (9th Cir. 2002) exists. Pinpoint page 1073 located.</p>
@@ -285,7 +285,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                         </div>
                         
                         <div className="flex gap-3">
-                          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#1d4b34]" />
+                          <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#1d4b34]" />
                           <div>
                             <p className="font-bold text-[#212223]">Citation Format</p>
                             <p className="text-[#212223]">Meets Bluebook formatting requirements.</p>
@@ -293,7 +293,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                         </div>
                         
                         <div className="flex gap-3">
-                          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#1d4b34]" />
+                          <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#1d4b34]" />
                           <div>
                             <p className="font-bold text-[#212223]">KeyCite Status</p>
                             <p className="text-[#212223]">Cited by 180 cases. Distinguished in 9 cases regarding different factual contents.</p>
@@ -301,7 +301,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                         </div>
                         
                         <div className="flex gap-3">
-                          <AlertTriangle className="mt-0.5 size-5 shrink-0 text-[#ab3300]" />
+                          <AlertTriangle className="mt-0.5 size-4 shrink-0 text-[#ab3300]" />
                           <div>
                             <p className="font-bold text-[#212223]">Problematic</p>
                             <p className="text-[#212223]">The cited case finds copyright infringement, holding that even when the alleged similarities consist entirely of generic, individually unprotectable elements, the selection and arrangement of those elements—the particular sequence in which an author strings them together—can itself be protectable. The court used the musical analogy: each note in a scale is unprotectable, but a pattern of notes may earn copyright protection.</p>
