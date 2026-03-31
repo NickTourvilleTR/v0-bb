@@ -526,8 +526,12 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
                   <p className="mb-3 text-sm leading-relaxed text-[#212223]">
                     The two works differ substantially in both mood and pace. <em>One Italian Summer</em> is a novel driven by narrative momentum and plot mechanics: time-travel, revelation, and a series of escalating dramatic confrontations. Readers are propelled forward by the awareness that the alternate timeline will not last, that Katy must decide what to do with the knowledge she has gained, and that she must ultimately choose what kind of life she wants to live. <em>Eat the Lemon</em>, by contrast, is a darker and more contemplative work, structured as a series of vignettes rather than a propulsive narrative. Its emotional weight derives from Love's documented traumas—watching her mother endure brutal cancer treatments, surviving years of emotional abuse from her stepfather—and the story builds not toward dramatic resolution but toward a quiet and hard-won measure of peace.
                   </p>
+                  <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                    The pace of the two works is likewise different. <em>One Italian Summer</em> unfolds over a matter of weeks and moves inexorably toward resolution. <em>Eat the Lemon</em> spans roughly eighteen months of intermittent travel and contains no equivalent narrative urgency.
+                  </p>
+
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    The pace of the two works is likewise different. <em>One Italian Summer</em> unfolds over a matter of weeks and moves inexorably toward resolution. <em>Eat the Lemon</em> spans roughly eighteen months of intermittent travel and contains no equivalent narrative urgency. The works are not substantially similar in mood or pace.
+                    The works are not substantially similar in mood or pace.
                   </p>
                 </div>
 
