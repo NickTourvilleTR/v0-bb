@@ -73,6 +73,79 @@ export function FinalizePanel({ flowType = "brief" }: FinalizePanelProps) {
           </Button>
         </div>
 
+        {/* Court Rule Compliance */}
+        <div className="mb-6">
+          <h2 className="mb-2 text-2xl font-semibold text-[#212223]">Court Rule Compliance</h2>
+          <p className="mb-4 text-sm text-[#737373]">Central District of California Local Rules</p>
+          
+          {/* Status Summary */}
+          <div className="mb-4 flex gap-3">
+            <div className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2">
+              <div className="flex size-5 items-center justify-center rounded-full bg-[#1d4b34]">
+                <Check className="size-3 text-white" />
+              </div>
+              <span className="text-sm font-medium text-[#212223]">4 Compliant</span>
+            </div>
+            <div className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2">
+              <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="#ab3300" strokeWidth="2">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+              </svg>
+              <span className="text-sm font-medium text-[#ab3300]">3 Action Needed</span>
+            </div>
+            <div className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2">
+              <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="#d32f2f" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="8" y1="16" x2="16" y2="8" />
+                <line x1="16" y1="16" x2="8" y2="8" />
+              </svg>
+              <span className="text-sm font-medium text-[#d32f2f]">0 Non-Compliant</span>
+            </div>
+          </div>
+
+          {/* Compliance Items */}
+          <div className="space-y-2 rounded-lg border border-[#e5e5e5] bg-white">
+            {[
+              { title: "Page Limits", status: "Compliant" },
+              { title: "Formatting", status: "Compliant" },
+              { title: "Table of Contents", status: "Compliant" },
+              { title: "Table of Authorities", status: "Compliant" },
+              { title: "Notice of Motion", status: "Action Needed" },
+              { title: "Meet and Confer", status: "Action Needed" },
+              { title: "Proposed Order", status: "Action Needed" },
+            ].map((item, index) => (
+              <div
+                key={item.title}
+                className={`flex items-center justify-between px-6 py-4 ${
+                  index !== 6 ? "border-b border-[#e5e5e5]" : ""
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <ChevronDown className="size-5 text-[#737373]" />
+                  <span className="font-medium text-[#212223]">{item.title}</span>
+                </div>
+                <div
+                  className={`flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
+                    item.status === "Compliant"
+                      ? "bg-[#e5f1e9] text-[#1d4b34]"
+                      : "bg-[#fff8e5] text-[#ab3300]"
+                  }`}
+                >
+                  {item.status === "Compliant" ? (
+                    <div className="flex size-4 items-center justify-center rounded-full bg-[#1d4b34]">
+                      <Check className="size-2.5 text-white" />
+                    </div>
+                  ) : (
+                    <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                    </svg>
+                  )}
+                  {item.status}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Activity Summary */}
         <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-white">
           <div className="flex items-center justify-between border-b border-[#e5e5e5] px-6 py-4">
