@@ -424,7 +424,7 @@ export function ChatDrawer({
 
             {/* Document Content - continuous scroll */}
             <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
-              {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : []).map((page, index) => (
+              {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" || openedDocument.name === "Gyant v. NFM - Complaint.pdf (Copy)" ? gyantComplaintPages : []).map((page, index) => (
                 <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
                   <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
                   <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
