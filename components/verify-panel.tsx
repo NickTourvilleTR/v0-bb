@@ -199,7 +199,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                   While in Italy, Love and Brad befriend Adele, a woman who rents them an apartment, and Love confides to Adele that her mother once studied cooking in Amalfi. Id. at 11, 34–37. Shortly after Love and Brad return to San Francisco, Love decides to go back to Italy alone, this time with a specific mission: to locate her mother&apos;s former cooking teacher and complete a cookbook her mother had assembled during her time in Italy. Id. at 45. Brad largely disappears from the narrative at this point.
                 </p>
                 <p className="text-sm leading-relaxed text-[#212223]">
-                  The remainder of the memoir follows Love&apos;s deepening connection to Adele, her family, and the rhythms of Italian life. On her mother&apos;s birthday, Love hosts a dinner party and prepares a recipe from her mother&apos;s cookbook; Adele&apos;s mother Rosa, who is an experienced cook, steps in to lead the preparation. Id. at 70, 73–78. Rosa later teaches Love to cook—offering a form of maternal warmth Love had never received from her own mother. Id. at 80–81, 93. Love also befriends a local woman named Anita, who helps her track down the identity of her mother&apos;s cooking teacher, only to learn that the teacher has died. Id. at 85–86. After a brief return to California, Love travels back to Italy and is introduced to Marietta, who was the cooking teacher&apos;s assistant and knew Love&apos;s mother during her time in Amalfi. Id. at 89–90, 94–95. From Marietta, Love learns that her mother was happy during the period Marietta knew her—a revelation that provides Love with a measure of peace she had not previously found. Id. at 95. The memoir ends with Love cherishing this new understanding of her mother and embracing Rosa as the mother figure she never had. Id. at 100.
+                  The remainder of the memoir follows Love&apos;s deepening connection to Adele, her family, and the rhythms of Italian life. On her mother&apos;s birthday, Love hosts a dinner party and prepares a recipe from her mother&apos;s cookbook; Adele&apos;s mother Rosa, who is an experienced cook, steps in to lead the preparation. Id. at 70, 73–78. Rosa later teaches Love to cook—offering a form of maternal warmth Love had never received from her own mother. Id. at 80–81, 93. Love also befriends a local woman named Anita, who helps her track down the identity of her mother&apos;s cooking teacher, only to learn that the teacher has died. Id. at 85–86. After a brief return to California, Love travels back to Italy and is introduced to Marietta, who was the cooking teacher&apos;s assistant and knew Love&apos;s mother during her time in Amalfi. Id. at 89–90, 94–95. From Marietta, Love learns that her mother was happy during the period Marietta knew her��a revelation that provides Love with a measure of peace she had not previously found. Id. at 95. The memoir ends with Love cherishing this new understanding of her mother and embracing Rosa as the mother figure she never had. Id. at 100.
                 </p>
               </div>
 
@@ -287,8 +287,12 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                         </button>
                       </div>
                       
-                      <p className="mb-6 leading-relaxed text-[#212223]">
+                      <p className="mb-4 leading-relaxed text-[#212223]">
                         <span className="font-bold">Statement:</span> For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot;
+                      </p>
+                      
+                      <p className="mb-6 leading-relaxed text-[#212223]">
+                        <a href="#" className="text-[#0062c4] hover:underline">...The Metcalfs, and not CCA, own the treatment &quot;Give Something Back&quot; and those portions of the screenplay &quot;About Face&quot; that the Metcalfs wrote. These are not &quot;work[s] made for hire&quot; for CCA. 17 U.S.C. § 201(b). In the absence of a written agreement, to determine whether the writer of a work is an employee who does not own the work, or instead *1073</a>
                       </p>
                       
                       <div className="flex gap-3">
