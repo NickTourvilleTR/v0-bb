@@ -614,8 +614,10 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#212223]">b. Characters</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
                           <li>Literary characters are generally not subject to copyright protection unless &quot;especially distinctive.&quot; Olson v. NBC, 855 F.2d 1446, 1451–52 (9th Cir. 1988).</li>
-                          <li>Both protagonists grieve a mother lost to cancer — a general, unprotectable plot point. Otherwise, the characters are opposites: Love endured abandonment, abuse, and a cold relationship with her mother; Katy had a loving, defining bond.</li>
-                          <li>The mother characters are likewise distinct: in OIS, the mother is warm and independently ambitious; in ETL, the mother is cold, unhappy, and defined by her connection to Italian cooking.</li>
+                          <li>Minor characters cannot anchor a substantial similarity finding. Cavalier, 297 F.3d at 825.</li>
+                          <li>Both protagonists grieve a mother lost to cancer — a general, unprotectable plot point. Otherwise, the characters are opposites: Love endured abandonment, abuse, and a cold relationship with her mother; Katy had a loving, defining bond with her mother and an intact family.</li>
+                          <li>The mother characters are likewise distinct: in One Italian Summer, the mother is warm and domestically accomplished but independently ambitious; in Eat the Lemon, the mother is cold, unhappy, and defined by her connection to Italian cooking. A critical plot point in Eat the Lemon is Love&apos;s surprise at learning her mother was ever happy.</li>
+                          <li>Alleged similarities between minor characters (love interest Peppe vs. Adam; a &quot;beautiful&quot; hotel manager) are unremarkable scenes-a-faire of travel stories.</li>
                           <li>No protectable character similarities exist between the two works.</li>
                         </ul>
                       </div>
