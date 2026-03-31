@@ -40,12 +40,9 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
             VERIFY
           </p>
-          <h1 className="mb-2 text-2xl font-semibold text-[#212223]">
-            Create your draft
+          <h1 className="mb-4 text-2xl font-semibold text-[#212223]">
+            Document verification results
           </h1>
-          <p className="mb-4 text-[#737373]">
-            Based on your selections and outline, we&apos;ll generate a draft of your brief that you can edit further. This may take up to 30 minutes.
-          </p>
 
           {/* Filter badges */}
           <div className="flex items-center gap-3">
