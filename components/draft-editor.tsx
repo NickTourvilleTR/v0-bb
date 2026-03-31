@@ -711,6 +711,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
           </Button>
         </div>
         </div>
+        </div>
       </div>
       <SelectionContextMenu
         position={position}
