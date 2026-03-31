@@ -268,7 +268,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                   </p>
                   
                   {showVerificationDetails && (
-                    <div className="my-4 rounded-lg border border-dashed border-[#cccccc] bg-[#fafafa] p-6">
+                    <div className="my-4 rounded-lg border border-solid border-[#cccccc] bg-[#fafafa] p-6">
                       <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[#737373]">VERIFICATION DETAILS:</p>
                       
                       <p className="mb-6 text-base leading-relaxed text-[#212223]">
