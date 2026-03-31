@@ -22,6 +22,7 @@ import {
   Upload,
 } from "lucide-react";
 import { SelectionContextMenu, useSelectionContextMenu } from "@/components/selection-context-menu";
+import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
 
 interface DraftEditorProps {
   className?: string;
@@ -137,7 +138,30 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
 
       {/* Document Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-8">
-        <div className="mx-auto" style={{ width: `min(${zoom}%, 800px)`, maxWidth: "calc(100% - 2rem)" }}>
+        <div className="mx-auto flex max-w-5xl gap-6">
+          {/* Left sidebar button - sticky */}
+          <div className="sticky top-8 flex h-fit flex-col gap-2">
+            <JumpToMenu 
+              sections={
+                flowType === "judicial"
+                  ? [
+                      { id: "draft-background", label: "I. Background", level: "top" },
+                      { id: "draft-legal-standard", label: "II. Legal Standard", level: "top" },
+                      { id: "draft-discussion", label: "III. Discussion", level: "top" },
+                      { id: "draft-conclusion", label: "IV. Conclusion", level: "top" },
+                    ] as JumpToSection[]
+                  : [
+                      { id: "draft-introduction", label: "I. Introduction", level: "top" },
+                      { id: "draft-factual-background", label: "II. Factual Background", level: "top" },
+                      { id: "draft-argument", label: "III. Argument", level: "top" },
+                      { id: "draft-conclusion", label: "IV. Conclusion", level: "top" },
+                    ] as JumpToSection[]
+              }
+            />
+          </div>
+
+          {/* Main content column */}
+          <div className="flex-1" style={{ width: `min(${zoom}%, 800px)`, maxWidth: "calc(100% - 2rem)" }}>
           {/* Header — above the white card, same width */}
           <div className="mb-4">
             {flowType === "judicial" ? (
@@ -199,7 +223,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
               </div>
 
               {/* I. Background */}
-              <div className="mb-8">
+              <div id="draft-background" className="mb-8">
                 <h2 className="mb-4 text-base font-bold text-[#212223]">I. Background</h2>
                 <h3 className="mb-3 font-semibold text-[#212223]">A. Facts</h3>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
@@ -282,7 +306,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
           </div>
 
           {/* I. INTRODUCTION - Updated to PRELIMINARY STATEMENT */}
-          <div className="mb-8">
+          <div id="draft-introduction" className="mb-8">
             <h2 className="mb-4 text-lg font-bold text-[#212223]">I. INTRODUCTION</h2>
             
             {/* Paragraph Content */}
@@ -314,7 +338,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
           </div>
 
           {/* II. FACTUAL BACKGROUND */}
-          <div className="mb-8">
+          <div id="draft-factual-background" className="mb-8">
             <h2 className="mb-4 text-lg font-bold text-[#212223]">II. FACTUAL BACKGROUND</h2>
             
             {/* A. The Parties */}
@@ -400,7 +424,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
           </div>
 
           {/* III. ARGUMENT */}
-          <div className="mb-8">
+          <div id="draft-argument" className="mb-8">
             <h2 className="mb-4 text-lg font-bold text-[#212223]">III. ARGUMENT</h2>
             
             {/* A. Copyright Infringement Claim */}
@@ -635,7 +659,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
           </div>
 
           {/* IV. CONCLUSION */}
-          <div className="mb-8">
+          <div id="draft-conclusion" className="mb-8">
             <h2 className="mb-4 text-lg font-bold text-[#212223]">IV. CONCLUSION</h2>
             <p className="mb-4 text-sm leading-relaxed text-[#212223]">
               Love's First Amended Complaint presents a sweeping conspiracy narrative that is unsupported by any plausible factual allegation and contradicted by the works at issue. The copyright infringement claim at the heart of that narrative fails as a matter of law because (a) the alleged similarities concern biographical facts that are categorically unprotectable, and (b) even analyzing <em>Eat the Lemon</em> as fiction, the two works diverge fundamentally across every dimension of the extrinsic test. Love's state law claims fall with the copyright claim because there was no infringement to conspire to commit or conceal, and because Love has not alleged any conduct by S&S specifically sufficient to support liability on any individual claim.
@@ -686,6 +710,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
             {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
           </Button>
         </div>
+          </div>
         </div>
       </div>
       <SelectionContextMenu

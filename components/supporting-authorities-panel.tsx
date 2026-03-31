@@ -4,10 +4,11 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
+import { Notebook, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
 
 interface Citation {
   id: string;
@@ -526,7 +527,7 @@ function AuthorityCard({
   const [collapsed, setCollapsed] = React.useState(false);
 
   return (
-    <div className={!isFirstEntry ? (isFirstInGroup ? "mt-10" : "mt-8") : ""}>
+    <div id={`develop-${authority.id}`} className={!isFirstEntry ? (isFirstInGroup ? "mt-10" : "mt-8") : ""}>
       {/* Main section header */}
       {isFirstInGroup && (
         <h2 className="mb-4 text-lg font-semibold text-[#212223]">
@@ -674,9 +675,13 @@ export function SupportingAuthoritiesPanel({
       <div className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
         {/* Left sidebar buttons - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
-          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-            <List className="size-5 text-[#212223]" />
-          </button>
+          <JumpToMenu 
+            sections={authorities.map((auth) => ({
+              id: `develop-${auth.id}`,
+              label: auth.subTitle || auth.title,
+              level: "top",
+            } as JumpToSection))}
+          />
           <button onClick={() => setShowOutlinePreview(true)} className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
               <FilePreviewIcon className="size-5 text-[#1d4b34]" />
           </button>
