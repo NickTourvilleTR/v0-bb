@@ -1,12 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { FileText, Scale, CircleHelp } from "lucide-react";
+import { FileText, Scale, CircleHelp, SlidersHorizontal } from "lucide-react";
 
 interface SelectionContextMenuProps {
   onAddFacts?: () => void;
   onAddAuthorities?: () => void;
   onAskQuestion?: () => void;
+  onEditTone?: () => void;
 }
 
 interface MenuPosition {
@@ -34,7 +35,7 @@ export function useSelectionContextMenu(containerRef: React.RefObject<HTMLElemen
     }
 
     const rect = range.getBoundingClientRect();
-    const menuWidth = 340;
+    const menuWidth = 440;
     const menuHeight = 44;
     const margin = 8;
 
@@ -90,6 +91,7 @@ export function SelectionContextMenu({
   onAddFacts,
   onAddAuthorities,
   onAskQuestion,
+  onEditTone,
 }: SelectionContextMenuProps & { position: MenuPosition | null }) {
   if (!position) return null;
 
@@ -117,10 +119,18 @@ export function SelectionContextMenu({
       <div className="h-5 w-px bg-[#e5e5e5]" />
       <button
         onClick={onAskQuestion}
-        className="flex items-center gap-2 rounded-r-xl px-4 py-2.5 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7] transition-colors"
+        className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7] transition-colors"
       >
         <CircleHelp className="size-4 text-[#525252]" />
         Ask a question
+      </button>
+      <div className="h-5 w-px bg-[#e5e5e5]" />
+      <button
+        onClick={onEditTone}
+        className="flex items-center gap-2 rounded-r-xl px-4 py-2.5 text-sm font-medium text-[#212223] hover:bg-[#f7f7f7] transition-colors"
+      >
+        <SlidersHorizontal className="size-4 text-[#525252]" />
+        Edit tone
       </button>
     </div>
   );
