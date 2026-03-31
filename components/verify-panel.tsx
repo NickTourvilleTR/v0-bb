@@ -264,50 +264,52 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                     A plaintiff asserting copyright infringement must satisfy both an &quot;extrinsic&quot; and an &quot;intrinsic&quot; test for substantial similarity. <em>Skidmore v. Led Zeppelin</em>, 952 F.3d 1051, 1064 (9th Cir. 2020). While the intrinsic test is a jury question, the extrinsic test &quot;may be decided by the court as a matter of law,&quot; including at the motion-to-dismiss stage. <em>Woodland</em>, 136 F.4th at 1210. Where the works at issue are before the court and it is clear as a matter of law that they are not substantially similar, dismissal is proper. <em>Gallagher v. Lions Gate Ent. Inc.</em>, 2015 WL 12481504, at *2 (C.D. Cal. Sept. 11, 2015); <em>Hankins v. Titmouse Inc.</em>, 2025 U.S. Dist. LEXIS 147690, at *7 (C.D. Cal. July 30, 2025). Indeed, the Ninth Circuit has &quot;repeatedly affirmed dismissals&quot; in cases alleging infringement of literary works on substantial similarity grounds. <em>Masterson v. Walt Disney Co.</em>, 821 F. App&apos;x 779, 780 &amp; n.1 (9th Cir. 2020).
                   </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot; <span className="relative inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Metcalf v. Bochco</em>, 294 F.3d 1069, 1073 (9th Cir. 2002)</a><button onClick={() => setShowVerificationDetails(!showVerificationDetails)} className="inline-flex items-center justify-center hover:opacity-80"><AlertTriangle className="inline size-4 text-[#ab3300]" /></button>{showVerificationDetails && (
-                      <div className="absolute left-0 top-full z-50 mt-2 w-[700px] rounded-lg border border-dashed border-[#cccccc] bg-[#fafafa] p-6">
-                        <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[#737373]">VERIFICATION DETAILS:</p>
+                    For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot; <span className="inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Metcalf v. Bochco</em>, 294 F.3d 1069, 1073 (9th Cir. 2002)</a><button onClick={() => setShowVerificationDetails(!showVerificationDetails)} className="inline-flex items-center justify-center hover:opacity-80"><AlertTriangle className="inline size-4 text-[#ab3300]" /></button></span>. Critically, the threshold step is to filter out unprotectable elements. <em>Woodland</em>, 136 F.4th at 1210. Non-protectable elements include ideas; historical facts; common phrases; scenes-a-faire (situations and incidents that flow naturally or necessarily from a basic plot premise or generic storyline); and familiar stock themes. <em>Corbello</em>, 974 F.3d at 975 (citing <em>Benay v. Warner Bros. Entm&apos;t., Inc.</em>, 607 F.3d 620, 624–25 (9th Cir. 2010)). Only after those elements are set aside does the court compare what remains. That comparative analysis conclusively forecloses any finding of substantial similarity here.
+                  </p>
+                  
+                  {showVerificationDetails && (
+                    <div className="my-4 rounded-lg border border-dashed border-[#cccccc] bg-[#fafafa] p-6">
+                      <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[#737373]">VERIFICATION DETAILS:</p>
+                      
+                      <p className="mb-6 text-base leading-relaxed text-[#212223]">
+                        <span className="font-bold">Statement:</span> For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot;
+                      </p>
+                      
+                      <div className="space-y-5">
+                        <div className="flex gap-3">
+                          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#1d4b34]" />
+                          <div>
+                            <p className="font-bold text-[#212223]">Citation Exists</p>
+                            <p className="text-[#212223]"><em>Metcalf v. Bochco</em>, 294 F.3d 1069 (9th Cir. 2002) exists. Pinpoint page 1073 located.</p>
+                          </div>
+                        </div>
                         
-                        <p className="mb-6 text-base leading-relaxed text-[#212223]">
-                          <span className="font-bold">Statement:</span> For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot;
-                        </p>
+                        <div className="flex gap-3">
+                          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#1d4b34]" />
+                          <div>
+                            <p className="font-bold text-[#212223]">Citation Format</p>
+                            <p className="text-[#212223]">Meets Bluebook formatting requirements.</p>
+                          </div>
+                        </div>
                         
-                        <div className="space-y-5">
-                          <div className="flex gap-3">
-                            <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#1d4b34]" />
-                            <div>
-                              <p className="font-bold text-[#212223]">Citation Exists</p>
-                              <p className="text-[#212223]"><em>Metcalf v. Bochco</em>, 294 F.3d 1069 (9th Cir. 2002) exists. Pinpoint page 1073 located.</p>
-                            </div>
+                        <div className="flex gap-3">
+                          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#1d4b34]" />
+                          <div>
+                            <p className="font-bold text-[#212223]">KeyCite Status</p>
+                            <p className="text-[#212223]">Cited by 180 cases. Distinguished in 9 cases regarding different factual contents.</p>
                           </div>
-                          
-                          <div className="flex gap-3">
-                            <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#1d4b34]" />
-                            <div>
-                              <p className="font-bold text-[#212223]">Citation Format</p>
-                              <p className="text-[#212223]">Meets Bluebook formatting requirements.</p>
-                            </div>
-                          </div>
-                          
-                          <div className="flex gap-3">
-                            <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#1d4b34]" />
-                            <div>
-                              <p className="font-bold text-[#212223]">KeyCite Status</p>
-                              <p className="text-[#212223]">Cited by 180 cases. Distinguished in 9 cases regarding different factual contents.</p>
-                            </div>
-                          </div>
-                          
-                          <div className="flex gap-3">
-                            <AlertTriangle className="mt-0.5 size-5 shrink-0 text-[#ab3300]" />
-                            <div>
-                              <p className="font-bold text-[#212223]">Problematic</p>
-                              <p className="text-[#212223]">The cited case finds copyright infringement, holding that even when the alleged similarities consist entirely of generic, individually unprotectable elements, the selection and arrangement of those elements—the particular sequence in which an author strings them together—can itself be protectable. The court used the musical analogy: each note in a scale is unprotectable, but a pattern of notes may earn copyright protection.</p>
-                            </div>
+                        </div>
+                        
+                        <div className="flex gap-3">
+                          <AlertTriangle className="mt-0.5 size-5 shrink-0 text-[#ab3300]" />
+                          <div>
+                            <p className="font-bold text-[#212223]">Problematic</p>
+                            <p className="text-[#212223]">The cited case finds copyright infringement, holding that even when the alleged similarities consist entirely of generic, individually unprotectable elements, the selection and arrangement of those elements—the particular sequence in which an author strings them together—can itself be protectable. The court used the musical analogy: each note in a scale is unprotectable, but a pattern of notes may earn copyright protection.</p>
                           </div>
                         </div>
                       </div>
-                    )}</span>. Critically, the threshold step is to filter out unprotectable elements. <em>Woodland</em>, 136 F.4th at 1210. Non-protectable elements include ideas; historical facts; common phrases; scenes-a-faire (situations and incidents that flow naturally or necessarily from a basic plot premise or generic storyline); and familiar stock themes. <em>Corbello</em>, 974 F.3d at 975 (citing <em>Benay v. Warner Bros. Entm&apos;t., Inc.</em>, 607 F.3d 620, 624–25 (9th Cir. 2010)). Only after those elements are set aside does the court compare what remains. That comparative analysis conclusively forecloses any finding of substantial similarity here.
-                  </p>
+                    </div>
+                  )}
                 </div>
 
                 {/* a. Plot */}
