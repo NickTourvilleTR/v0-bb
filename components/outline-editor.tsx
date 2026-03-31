@@ -691,7 +691,6 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                             <li>Declaratory Judgment: Love seeks a declaration regarding &quot;duties under alleged agreements,&quot; but alleges no agreements with S&S.</li>
                           </ul>
                         </li>
-                        <li>Each state law claim fails independently for lack of any plausible, S&S-specific factual allegation sufficient to support liability.</li>
                       </ul>
                     </div>
 
