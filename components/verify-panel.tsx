@@ -38,10 +38,10 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
         {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
-            DOCUMENT VERIFICATION RESULTS
+            VERIFY
           </p>
           <h1 className="mb-4 text-2xl font-semibold text-[#212223]">
-            Navigate potential issues and explore related case law to validate each statement in your brief.
+            Document verification results
           </h1>
 
           {/* Filter badges */}
