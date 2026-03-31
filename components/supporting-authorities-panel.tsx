@@ -969,6 +969,28 @@ export function SupportingAuthoritiesPanel({
           });
         })()}
 
+          {/* Add authorities - below last card */}
+          <div className="mt-8 border-t border-[#e5e5e5] pt-4">
+            <div className="flex items-center gap-4">
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
+              >
+                Add authorities
+              </Button>
+              <span className="text-[#e5e5e5]">|</span>
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
+              >
+                View related authorities
+                <ExternalLink className="ml-2 size-3" />
+              </Button>
+            </div>
+          </div>
+
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-6">
             {flowType !== "judicial" && (
