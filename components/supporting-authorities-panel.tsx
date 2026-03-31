@@ -537,6 +537,8 @@ function AuthorityCard({
   groupNumber,
   isFirstInGroup,
   isFirstEntry,
+  collapsed,
+  onCollapsedChange,
   onCardDragStart,
   onCardDragEnd,
   isCardDragOver,
@@ -554,6 +556,8 @@ function AuthorityCard({
   groupNumber: number;
   isFirstInGroup: boolean;
   isFirstEntry: boolean;
+  collapsed: boolean;
+  onCollapsedChange: (value: boolean) => void;
   selectedCitations: string[];
   toggleCitation: (id: string) => void;
   onCardDragStart: (e: React.DragEvent) => void;
@@ -570,7 +574,6 @@ function AuthorityCard({
   onCitationDrop: (e: React.DragEvent, targetAuthorityId: string, targetCitationId: string) => void;
 }) {
   const [hovered, setHovered] = React.useState(false);
-  const [collapsed, setCollapsed] = React.useState(false);
 
   return (
     <div
@@ -651,7 +654,7 @@ function AuthorityCard({
             <button
               className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
               title={collapsed ? "Expand" : "Collapse"}
-              onClick={() => setCollapsed((c) => !c)}
+              onClick={() => onCollapsedChange(!collapsed)}
             >
               {collapsed ? <ChevronDown className="size-4" /> : <ChevronUp className="size-4" />}
             </button>
@@ -662,7 +665,7 @@ function AuthorityCard({
             <button
               className="flex size-7 items-center justify-center rounded text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
               title={collapsed ? "Expand" : "Collapse"}
-              onClick={() => setCollapsed((c) => !c)}
+              onClick={() => onCollapsedChange(!collapsed)}
             >
               {collapsed ? <ChevronDown className="size-4" /> : <ChevronUp className="size-4" />}
             </button>
@@ -734,8 +737,27 @@ export function SupportingAuthoritiesPanel({
     );
   };
 
-  // Drag state — lifted into parent so AuthorityCard and CitationSubCard can share
-  const [authorities, setAuthorities] = React.useState<Authority[]>(defaultAuthorities);
+  // Collapse/expand state for all gray cards
+  const [collapsedCards, setCollapsedCards] = React.useState<Record<string, boolean>>({});
+
+  const toggleCardCollapse = (authorityId: string) => {
+    setCollapsedCards((prev) => ({
+      ...prev,
+      [authorityId]: !prev[authorityId],
+    }));
+  };
+
+  const expandAll = () => {
+    setCollapsedCards({});
+  };
+
+  const collapseAll = () => {
+    const collapsed: Record<string, boolean> = {};
+    authorities.forEach((auth) => {
+      collapsed[auth.id] = true;
+    });
+    setCollapsedCards(collapsed);
+  };
 
   // Gray card (authority) drag
   const draggingCardId = React.useRef<string | null>(null);
@@ -930,12 +952,12 @@ export function SupportingAuthoritiesPanel({
                   <span className="font-medium">Add facts or authorities</span> to find new facts and authorities.
                 </p>
                 <div className="flex items-center gap-2">
-                  <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
+                  <button onClick={expandAll} className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
                     <ChevronsUpDown className="size-4" />
                     Expand all
                   </button>
                   <span className="text-[#e5e5e5]">|</span>
-                  <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
+                  <button onClick={collapseAll} className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
                     <ChevronsDownUp className="size-4" />
                     Collapse all
                   </button>
@@ -1192,6 +1214,8 @@ export function SupportingAuthoritiesPanel({
               groupNumber={groupNumber}
               isFirstInGroup={isFirstInGroup}
               isFirstEntry={isFirstEntry}
+              collapsed={collapsedCards[authority.id] ?? false}
+              onCollapsedChange={(value) => toggleCardCollapse(authority.id)}
               selectedCitations={selectedCitations}
               toggleCitation={toggleCitation}
               onCardDragStart={(e) => handleCardDragStart(e, authority.id)}
