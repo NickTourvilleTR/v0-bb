@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X } from "lucide-react";
+import { Notebook, List, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -701,12 +701,12 @@ export function SupportingAuthoritiesPanel({
                 </p>
                 <div className="flex items-center gap-2">
                   <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
-                    <ChevronUp className="size-4" />
+                    <ChevronsUpDown className="size-4" />
                     Expand all
                   </button>
                   <span className="text-[#e5e5e5]">|</span>
                   <button className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
-                    <X className="size-4" />
+                    <ChevronsDownUp className="size-4" />
                     Collapse all
                   </button>
                 </div>
