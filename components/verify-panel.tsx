@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { FileText, AlertTriangle, List, X } from "lucide-react";
+import { AlertTriangle, List, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
@@ -62,13 +62,8 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
             Document verification results
           </h1>
 
-          {/* Filter badges */}
+          {/* Potential issues button */}
           <div className="flex items-center gap-3">
-            <span className="text-sm text-[#737373]">Filter by:</span>
-            <button className="flex items-center gap-1.5 rounded-full bg-[#1d4b34] px-3 py-1.5 text-sm text-white">
-              <FileText className="size-4" />
-              46 total statements
-            </button>
             <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] bg-white px-3 py-1.5 text-sm text-[#212223]">
               <AlertTriangle className="size-4 text-[#ab3300]" />
               2 potential issues
