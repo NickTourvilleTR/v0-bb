@@ -27,19 +27,14 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
   const navigateToIssue = (index: number) => {
     setCurrentIssueIndex(index);
     if (index === 0) {
-      // Navigate to Metcalf warning
-      setShowVerificationDetails(true);
-      setShowMastersonVerificationDetails(false);
+      // Navigate to Metcalf warning icon
       setTimeout(() => {
-        verificationDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        metcalfWarningRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 50);
-      onOpenMetcalfSource?.();
     } else if (index === 1) {
-      // Navigate to Masterson warning
-      setShowMastersonVerificationDetails(true);
-      setShowVerificationDetails(false);
+      // Navigate to Masterson warning icon
       setTimeout(() => {
-        mastersonVerificationDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        mastersonWarningRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 50);
     }
   };
@@ -332,7 +327,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
                     A plaintiff asserting copyright infringement must satisfy both an &quot;extrinsic&quot; and an &quot;intrinsic&quot; test for substantial similarity. <em>Skidmore v. Led Zeppelin</em>, 952 F.3d 1051, 1064 (9th Cir. 2020). While the intrinsic test is a jury question, the extrinsic test &quot;may be decided by the court as a matter of law,&quot; including at the motion-to-dismiss stage. <em>Woodland</em>, 136 F.4th at 1210. Where the works at issue are before the court and it is clear as a matter of law that they are not substantially similar, dismissal is proper. <em>Gallagher v. Lions Gate Ent. Inc.</em>, 2015 WL 12481504, at *2 (C.D. Cal. Sept. 11, 2015); <em>Hankins v. Titmouse Inc.</em>, 2025 U.S. Dist. LEXIS 147690, at *7 (C.D. Cal. July 30, 2025). Indeed, the Ninth Circuit has &quot;repeatedly affirmed dismissals&quot; in cases alleging infringement of literary works on substantial similarity grounds. <em>Masterson v. Walt Disney Co.</em>, 821 F. App&apos;x 779, 780 &amp; n.1 (9th Cir. 2020).
                   </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot; <span className="inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Metcalf v. Bochco</em>, 294 F.3d 1069, 1073 (9th Cir. 2002)</a><button onClick={handleWarningClick} className="inline-flex items-center justify-center transition-transform duration-150 hover:scale-125"><AlertTriangle className="inline size-4 text-[#ab3300]" /></button></span>. Critically, the threshold step is to filter out unprotectable elements. <em>Woodland</em>, 136 F.4th at 1210. Non-protectable elements include ideas; historical facts; common phrases; scenes-a-faire (situations and incidents that flow naturally or necessarily from a basic plot premise or generic storyline); and familiar stock themes. <em>Corbello</em>, 974 F.3d at 975 (citing <em>Benay v. Warner Bros. Entm&apos;t., Inc.</em>, 607 F.3d 620, 624–25 (9th Cir. 2010)). Only after those elements are set aside does the court compare what remains. That comparative analysis conclusively forecloses any finding of substantial similarity here.
+                    For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot; <span className="inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Metcalf v. Bochco</em>, 294 F.3d 1069, 1073 (9th Cir. 2002)</a><button ref={metcalfWarningRef} onClick={handleWarningClick} className="inline-flex items-center justify-center transition-transform duration-150 hover:scale-125"><AlertTriangle className="inline size-4 text-[#ab3300]" /></button></span>. Critically, the threshold step is to filter out unprotectable elements. <em>Woodland</em>, 136 F.4th at 1210. Non-protectable elements include ideas; historical facts; common phrases; scenes-a-faire (situations and incidents that flow naturally or necessarily from a basic plot premise or generic storyline); and familiar stock themes. <em>Corbello</em>, 974 F.3d at 975 (citing <em>Benay v. Warner Bros. Entm&apos;t., Inc.</em>, 607 F.3d 620, 624–25 (9th Cir. 2010)). Only after those elements are set aside does the court compare what remains. That comparative analysis conclusively forecloses any finding of substantial similarity here.
                   </p>
                   
                   {showVerificationDetails && (
@@ -429,7 +424,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
                 <div className="mb-4 ml-4">
                   <p className="mb-3 font-bold text-[#212223]">e. Theme</p>
                   <p className="mb-3 text-sm leading-relaxed text-[#212223]">
-                    A general thematic similarity that is &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a finding of substantial similarity. <span className="inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Masterson</em>, 821 F. App&apos;x at 782</a><button onClick={handleMastersonWarningClick} className="inline-flex items-center justify-center transition-transform duration-150 hover:scale-125"><AlertTriangle className="inline size-4 text-[#ab3300]" /></button></span>. The general idea of a woman traveling to Italy to reach a greater understanding of—and peace with—her deceased mother is not protectable.
+                    A general thematic similarity that is &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a finding of substantial similarity. <span className="inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Masterson</em>, 821 F. App&apos;x at 782</a><button ref={mastersonWarningRef} onClick={handleMastersonWarningClick} className="inline-flex items-center justify-center transition-transform duration-150 hover:scale-125"><AlertTriangle className="inline size-4 text-[#ab3300]" /></button></span>. The general idea of a woman traveling to Italy to reach a greater understanding of—and peace with—her deceased mother is not protectable.
                   </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
                     Moreover, the specific thematic preoccupations of the two works are meaningfully different. <em>One Italian Summer</em> is fundamentally about dismantling an idealized image of a beloved mother in order to see her, for the first time, as an autonomous person—and about how that act of perception liberates Katy to claim her own autonomy. <em>Eat the Lemon</em> operates from an entirely different emotional premise. Love does not need to dismantle an idealized image; she carries no idealization to begin with. Her memoir is instead about the possibility of overcoming deeply unhappy memories of a difficult, emotionally distant mother—and about discovering, through her Italian family of choice, what real warmth and belonging feel like for the first time. The works are not substantially similar as to theme.
