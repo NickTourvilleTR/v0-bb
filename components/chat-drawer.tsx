@@ -344,7 +344,7 @@ export function ChatDrawer({
               {[
                 { name: "Gyant v. NFM - Complaint.pdf", metadata: "Uploaded at 9:17 a.m." },
                 { name: "Gyant v. NFM - Complaint.pdf (Copy)", metadata: "Uploaded at 9:17 a.m." },
-                { name: "Metcalf v. Bochco", metadata: "United States Court of Appeals, Ninth Circuit. | June 12, 2002 | 294 F.3d 1069 | 2002 Copr.L.Dec. P 28,447 | 63 U.S.P.Q.2d 1412" },
+                { name: "Hall v. Swift", metadata: "Uploaded at 9:17 a.m." },
                 { name: "Hansen Deposition.pdf", metadata: "Uploaded at 9:17 a.m." },
                 { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", metadata: "Uploaded at 9:17 a.m." },
                 { name: "ROR Letter.docx", metadata: "Uploaded at 9:17 a.m." },
