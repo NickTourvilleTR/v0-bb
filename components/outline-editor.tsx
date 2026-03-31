@@ -131,7 +131,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                 Motion to Dismiss First Amended Complaint
               </h1>
               <p className="text-lg text-[#737373]">
-                Defendant Defendant — Love v. Airbnb, Inc., et al., No. 2:25-cv-01779-AB(KSx) (C.D. Cal.)
+                Defendant Simon & Schuster, LLC Love v. Airbnb, Inc., et al., No. 2:25-cv-01779-AB(KSx) (C.D. Cal.)
               </p>
             </>
           )}
