@@ -71,7 +71,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
             </button>
             <button className="flex items-center gap-1.5 rounded-full border border-[#cccccc] bg-white px-3 py-1.5 text-sm text-[#212223]">
               <AlertTriangle className="size-4 text-[#ab3300]" />
-              4 potential issues
+              2 potential issues
             </button>
           </div>
         </div>
