@@ -304,7 +304,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                       </p>
                       
                       <p className="mb-6 leading-relaxed text-[#212223]">
-                        <a href="#" className="text-[#0062c4] hover:underline">...The Metcalfs, and not CCA, own the treatment &quot;Give Something Back&quot; and those portions of the screenplay &quot;About Face&quot; that the Metcalfs wrote. These are not &quot;work[s] made for hire&quot; for CCA. 17 U.S.C. § 201(b). In the absence of a written agreement, to determine whether the writer of a work is an employee who does not own the work, or instead *1073</a>
+                        <a href="#" className="text-[#0062c4] hover:underline">Metcalf v. Bochco, 294 F.3d 1069 (2002)</a>
                       </p>
                       
                       <div className="flex gap-3">
