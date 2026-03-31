@@ -91,7 +91,14 @@ const complianceItems = [
   {
     title: "Notice of Motion",
     status: "Action Needed" as const,
-    content: null,
+    content: {
+      rule: { label: "Local Rule 7-3", href: "#" },
+      rows: [
+        { icon: "info", text: "Requirement: Must include hearing date, time, and courtroom" },
+        { icon: "info", text: "Current: Hearing date not specified" },
+        { icon: "alert", text: "Add a hearing date, time, and courtroom designation." },
+      ],
+    },
   },
   {
     title: "Meet and Confer",
@@ -162,10 +169,12 @@ function ComplianceItems() {
                       <div className="flex size-5 shrink-0 items-center justify-center rounded-full border border-[#737373] text-[#737373] mt-0.5">
                         <span className="text-[10px] font-bold">i</span>
                       </div>
-                    ) : (
+                    ) : row.icon === "check" ? (
                       <Check className="size-5 shrink-0 text-[#737373] mt-0.5" />
+                    ) : (
+                      <AlertTriangle className="size-5 shrink-0 text-[#ab3300] mt-0.5" />
                     )}
-                    <span className="text-sm text-[#212223]">{row.text}</span>
+                    <span className={`text-sm ${row.icon === "alert" ? "text-[#ab3300]" : "text-[#212223]"}`}>{row.text}</span>
                   </div>
                 ))}
               </div>
