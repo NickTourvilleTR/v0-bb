@@ -633,7 +633,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
 
       {/* Fixed Issues Navigation Bar */}
       {showIssuesNavBar && (
-        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 transform">
+        <div className="fixed top-6 left-1/2 z-50 -translate-x-1/2 transform">
           <div className="flex items-center gap-3 rounded-full border border-[#cccccc] bg-white px-4 py-2 shadow-lg">
             <button 
               onClick={goToPreviousIssue}
