@@ -2,9 +2,10 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ChevronRight, CircleCheck, FileText, List, Paperclip, Reply, Upload } from "lucide-react";
+import { ArrowRight, ChevronRight, CircleCheck, FileText, Paperclip, Reply, Upload } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
+import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
 
 interface IntakeScreenProps {
   className?: string;
@@ -245,9 +246,22 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
         <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8 pb-32">
           {/* Left sidebar buttons - sticky */}
           <div className="sticky top-8 flex h-fit flex-col gap-2">
-            <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-              <List className="size-5 text-[#212223]" />
-            </button>
+            <JumpToMenu 
+              sections={
+                flowType === "judicial" 
+                  ? [
+                      { id: "intake-work-product", label: "Work Product", level: "top" },
+                      { id: "intake-uploaded-files", label: "Uploaded Files", level: "top" },
+                      { id: "intake-case-details", label: "Case Details", level: "top" },
+                      { id: "intake-jurisdiction", label: "Jurisdiction", level: "top" },
+                    ] as JumpToSection[]
+                  : [
+                      { id: "intake-complaint-summary", label: "Complaint Summary", level: "top" },
+                      { id: "intake-complaint-details", label: "Complaint Details", level: "top" },
+                      { id: "intake-additional-details", label: "Additional Details", level: "top" },
+                    ] as JumpToSection[]
+              } 
+            />
             <button onClick={() => setShowOutlinePreview(true)} className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
               <FilePreviewIcon className="size-5 text-[#1d4b34]" />
             </button>
@@ -269,7 +283,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {flowType === "brief" && (
               <QuotableCard label="Complaint Summary" onQuote={onQuote} className="mb-6">
                 {/* Complaint Summary section */}
-                <h3 className="mb-3 text-base font-semibold text-[#212223]">Complaint Summary</h3>
+                <h3 id="intake-complaint-summary" className="mb-3 text-base font-semibold text-[#212223]">Complaint Summary</h3>
                 <div className="mb-6 divide-y divide-[#e5e5e5] rounded-lg border border-[#e5e5e5]">
                   {complaintSections.map((section) => (
                     <div key={section}>
@@ -297,7 +311,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 </div>
 
                 {/* Jurisdiction and Party Selection Section */}
-                <h4 className="mb-3 text-sm font-semibold text-[#212223]">Complaint details</h4>
+                <h4 id="intake-complaint-details" className="mb-3 text-sm font-semibold text-[#212223]">Complaint details</h4>
                 <div className="mb-8 rounded-lg border border-[#e5e5e5] bg-white p-5">
                   <div className="space-y-4">
                     {/* Jurisdiction */}
@@ -347,7 +361,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                 {/* Additional details section */}
                 <div>
                   <div className="mb-2 flex items-center gap-2">
-                    <h4 className="text-sm font-semibold text-[#212223]">Additional details</h4>
+                    <h4 id="intake-additional-details" className="text-sm font-semibold text-[#212223]">Additional details</h4>
                     <span className="rounded bg-[#f2f2f2] px-2 py-0.5 text-xs text-[#737373]">Optional</span>
                   </div>
                   <p className="mb-3 text-sm text-[#212223]">
@@ -381,7 +395,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {/* Judicial flow: work product card */}
             {flowType === "judicial" && (
               <QuotableCard label="Work product: Opinion" onQuote={onQuote} className="mb-6">
-                <h3 className="mb-3 text-sm font-medium text-[#212223]">Work product</h3>
+                <h3 id="intake-work-product" className="mb-3 text-sm font-medium text-[#212223]">Work product</h3>
                 <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-2.5 text-sm font-medium text-[#212223]">
                   Opinion
                 </div>
@@ -391,7 +405,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {/* Judicial flow: uploaded files card */}
             {flowType === "judicial" && (
               <QuotableCard label="Uploaded files" onQuote={onQuote} className="mb-6">
-                <h3 className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
+                <h3 id="intake-uploaded-files" className="mb-3 text-sm font-medium text-[#212223]">Uploaded files</h3>
                 <div className="flex flex-wrap gap-2">
                   {judicialUploadedFiles.map((file, index) => (
                     <div key={index} className="flex items-center gap-2 rounded-md border border-[#e5e5e5] bg-white px-3 py-2">
@@ -436,7 +450,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {/* Case Details Card - judicial only */}
             {flowType === "judicial" && (
             <QuotableCard label="Case details" onQuote={onQuote} className="mb-6">
-              <h3 className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
+              <h3 id="intake-case-details" className="mb-3 text-sm font-medium text-[#212223]">Case details</h3>
               <div className="rounded-md border border-[#d4d4d4] bg-[#f2f2f2] px-4 py-3">
                 <div className="space-y-2 text-sm text-[#212223]">
                   <p><span className="font-medium text-[#212223]">Judge:</span> David O. Carter</p>
@@ -452,7 +466,7 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
             {/* Jurisdiction Card - judicial flow only */}
             {flowType === "judicial" && (
               <QuotableCard label="Jurisdiction" onQuote={onQuote} className="mb-6">
-                <h3 className="mb-1 text-sm font-medium text-[#212223]">Jurisdiction</h3>
+                <h3 id="intake-jurisdiction" className="mb-1 text-sm font-medium text-[#212223]">Jurisdiction</h3>
                 <p className="mb-4 text-xs text-[#737373]">Sets the scope for your research</p>
                 <div className="space-y-3">
                   {[

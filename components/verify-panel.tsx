@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { AlertTriangle, List, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { FileText, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { OutlinePreviewModal } from "@/components/outline-preview-modal";
+import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
 
 interface VerifyPanelProps {
   onNextOpposition?: () => void;
@@ -202,7 +201,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
           </div>
 
           {/* I. INTRODUCTION */}
-          <div className="mb-8">
+          <div id="verify-introduction" className="mb-8">
             <h2 className="mb-4 text-lg font-bold text-[#212223]">I. INTRODUCTION</h2>
             
             {/* Paragraph Content */}
@@ -234,11 +233,11 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
           </div>
 
           {/* II. FACTUAL BACKGROUND */}
-          <div className="mb-8">
+          <div id="verify-factual-background" className="mb-8">
             <h2 className="mb-4 text-lg font-bold text-[#212223]">II. FACTUAL BACKGROUND</h2>
             
             {/* A. The Parties */}
-            <div className="mb-6">
+            <div id="verify-parties" className="mb-6">
               <h3 className="mb-2 font-bold text-[#212223]">A. The Parties</h3>
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
                 Love is the author of <em>Eat the Lemon</em>, an unpublished memoir she describes as a personal account of her own life experiences. FAC ¶¶ 33–34. She has registered two manuscript versions with the U.S. Copyright Office—a July 2020 draft and a February 2021 draft—and represents that the work was completed in 2021. Id. Ex. A.
@@ -249,7 +248,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
             </div>
 
             {/* B. The Alleged Conspiracy */}
-            <div className="mb-6">
+            <div id="verify-conspiracy" className="mb-6">
               <h3 className="mb-2 font-bold text-[#212223]">B. The Alleged Conspiracy</h3>
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
                 Love&apos;s central allegation is that a network of conspirators—including individuals she had trusted as her own advisors—decided that her life story would fetch greater commercial returns if told by Serle, an established novelist, rather than by Love herself. FAC ¶ 46. She contends that these conspirators arranged to funnel her manuscript to Serle, who then appropriated it for both <em>One Italian Summer</em> and a related film project currently in development. Id. ¶¶ 37–48, 50, 57–61, 78–79. Love further alleges that in May–June 2019 her literary agent shared the manuscript widely, that it was later sent to agents connected to Serle in early 2020, and that an S&amp;S editor received a copy in early 2021. Id. ¶¶ 26, 39, 42–43, 47, 58–61.
@@ -266,7 +265,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
             </div>
 
             {/* C. The Two Works Compared */}
-            <div className="mb-6">
+            <div id="verify-works-compared" className="mb-6">
               <h3 className="mb-2 font-bold text-[#212223]">C. The Two Works Compared</h3>
               
               {/* 1. Eat the Lemon */}
@@ -308,7 +307,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
             </div>
 
             {/* D. Procedural History */}
-            <div className="mb-6">
+            <div id="verify-procedural" className="mb-6">
               <h3 className="mb-2 font-bold text-[#212223]">D. Procedural History</h3>
               <p className="text-sm leading-relaxed text-[#212223]">
                 Love filed her original Complaint on February 28, 2025. S&amp;S accepted service in June 2025 and filed a Motion to Dismiss the original Complaint on June 30, 2025. ECF Nos. 19, 27–28. Love filed an Opposition on August 18, 2025, and two days later filed the First Amended Complaint, which is now the operative pleading. ECF Nos. 43–44. The FAC is substantially identical to the original Complaint, with the primary difference being that Love no longer asserts each state law claim against every defendant. Because the FAC suffers from the same fatal deficiencies as the original pleading, S&amp;S now moves to dismiss it with prejudice.
@@ -317,11 +316,11 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
           </div>
 
           {/* III. ARGUMENT */}
-          <div className="mb-8">
+          <div id="verify-argument" className="mb-8">
             <h2 className="mb-4 text-lg font-bold text-[#212223]">III. ARGUMENT</h2>
             
             {/* A. Copyright Claim */}
-            <div className="mb-6">
+            <div id="verify-copyright" className="mb-6">
               <h3 className="mb-4 font-bold text-[#212223]">A. Love&apos;s Copyright Infringement Claim Fails as a Matter of Law.</h3>
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
                 To state a claim for copyright infringement, a plaintiff must plead, among other things, &quot;the copying of copyrighted material and the unlawful appropriation of it.&quot; <em>Woodland v. Hill</em>, 136 F.4th 1199, 1205 (9th Cir. 2025). Unlawful appropriation requires proof that the defendant copied enough protected expression from the plaintiff&apos;s work to render the two works &quot;substantially similar.&quot; <em>Id.</em> at 1206. Love&apos;s copyright claim fails on this requirement for two independent reasons: the alleged similarities involve unprotectable biographical facts, and, even setting that aside, the two works are not substantially similar in any protectable element.
@@ -510,7 +509,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
             <hr className="my-6 border-t border-[#e0e0e0]" />
 
             {/* B. State Law Claims */}
-            <div className="mb-6">
+            <div id="verify-state-law" className="mb-6">
               <h3 className="mb-4 font-bold text-[#212223]">B. None of Love&apos;s State Law Claims States a Plausible Claim for Relief Against S&amp;S.</h3>
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
                 To the extent this Court elects to address Love&apos;s thirteen state law claims notwithstanding that federal jurisdiction rests entirely on the copyright count, those claims fail independently on multiple grounds.
