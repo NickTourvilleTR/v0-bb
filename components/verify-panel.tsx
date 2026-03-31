@@ -109,6 +109,43 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
 
         {/* Legal Document */}
         <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
+          {/* Issues Navigation Bar */}
+          {showIssuesNavBar && (
+            <div className="sticky top-0 z-10 -mx-6 -mt-6 mb-6 flex items-center justify-center border-b border-[#e5e5e5] bg-white px-4 py-3">
+              <div className="flex items-center gap-3">
+                <button 
+                  onClick={goToPreviousIssue}
+                  className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
+                >
+                  <ChevronLeft className="size-5" />
+                </button>
+                
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className="size-4 text-[#ab3300]" />
+                  <span className="text-sm font-medium text-[#212223]">
+                    Issue {currentIssueIndex + 1} of {totalIssues}
+                  </span>
+                </div>
+                
+                <button 
+                  onClick={goToNextIssue}
+                  className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
+                >
+                  <ChevronRight className="size-5" />
+                </button>
+                
+                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                
+                <button 
+                  onClick={() => setShowIssuesNavBar(false)}
+                  className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Party/Attorney Fields */}
           <div className="mb-8 space-y-2 text-sm text-[#212223]">
             <p>[Party/Attorney]</p>
@@ -631,42 +668,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
         />
       )}
 
-      {/* Fixed Issues Navigation Bar */}
-      {showIssuesNavBar && (
-        <div className="fixed top-6 left-1/2 z-50 -translate-x-1/2 transform">
-          <div className="flex items-center gap-3 rounded-full border border-[#cccccc] bg-white px-4 py-2 shadow-lg">
-            <button 
-              onClick={goToPreviousIssue}
-              className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
-            >
-              <ChevronLeft className="size-5" />
-            </button>
-            
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="size-4 text-[#ab3300]" />
-              <span className="text-sm font-medium text-[#212223]">
-                Issue {currentIssueIndex + 1} of {totalIssues}
-              </span>
-            </div>
-            
-            <button 
-              onClick={goToNextIssue}
-              className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
-            >
-              <ChevronRight className="size-5" />
-            </button>
-            
-            <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
-            
-            <button 
-              onClick={() => setShowIssuesNavBar(false)}
-              className="flex size-8 items-center justify-center rounded-full text-[#737373] hover:bg-[#f5f5f5] hover:text-[#212223] transition-colors"
-            >
-              <X className="size-4" />
-            </button>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
