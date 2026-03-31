@@ -226,9 +226,6 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <li>
                         A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC&apos;s fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#737373]">(FRCP 12(b)(6))</span>
                       </li>
-                      <li>
-                        Because (1) the two works are not substantially similar in protectable expression, (2) the state law claims lack specific allegations of conduct by S&S, and (3) many state law claims are untimely and/or preempted, the FAC should be dismissed with prejudice.
-                      </li>
                     </ul>
                   </div>
                 )}
