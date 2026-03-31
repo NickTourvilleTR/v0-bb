@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronDown, ChevronUp, X, PlaySquare, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, X, PlaySquare, ChevronsUpDown, ChevronsDownUp, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ActivityItem {
@@ -80,24 +80,18 @@ export function FinalizePanel({ flowType = "brief" }: FinalizePanelProps) {
           
           {/* Status Summary */}
           <div className="mb-4 flex gap-3">
-            <div className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2">
+            <div className="flex items-center gap-2 rounded-full bg-[#e5f1e9] px-4 py-2 border border-[#c7e5db]">
               <div className="flex size-5 items-center justify-center rounded-full bg-[#1d4b34]">
                 <Check className="size-3 text-white" />
               </div>
-              <span className="text-sm font-medium text-[#212223]">4 Compliant</span>
+              <span className="text-sm font-medium text-[#1d4b34]">4 Compliant</span>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2">
-              <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="#ab3300" strokeWidth="2">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
-              </svg>
+            <div className="flex items-center gap-2 rounded-full bg-[#fff8e5] px-4 py-2 border border-[#ffe8b6]">
+              <AlertTriangle className="size-5 text-[#ab3300]" />
               <span className="text-sm font-medium text-[#ab3300]">3 Action Needed</span>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2">
-              <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="#d32f2f" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="8" y1="16" x2="16" y2="8" />
-                <line x1="16" y1="16" x2="8" y2="8" />
-              </svg>
+            <div className="flex items-center gap-2 rounded-full bg-[#ffe5e5] px-4 py-2 border border-[#ffcccc]">
+              <X className="size-5 text-[#d32f2f]" />
               <span className="text-sm font-medium text-[#d32f2f]">0 Non-Compliant</span>
             </div>
           </div>
