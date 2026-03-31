@@ -1,6 +1,7 @@
 "use client";
 
-import { FileText, AlertTriangle } from "lucide-react";
+import { useState, useRef } from "react";
+import { FileText, AlertTriangle, List, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
 
