@@ -500,7 +500,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
                   <p className="mb-3 text-sm leading-relaxed text-[#212223]">
                     "The mere fact that" two works are "set in the same city does not give rise to a finding of substantial similarity." <em>Silas v. HBO</em>, 201 F. Supp. 3d 1158, 1176 (C.D. Cal. 2016). A setting that "naturally and necessarily flows from the basic plot premise . . . constitutes scenes-a-faire and cannot support a finding of substantial similarity." <em>Cavalier</em>, 297 F.3d at 824.
                   </p>
-                  <p className="text-sm leading-relaxed text-[#212223]">
+                  <p className="mb-4 text-sm leading-relaxed text-[#212223]">
                     Both works are set in part on Italy's Amalfi Coast, but the specifics of that setting diverge considerably. <em>One Italian Summer</em> takes place entirely in Positano, where Katy stays at a particular hotel. <em>Eat the Lemon</em> follows Love across a broader stretch of the Amalfi Coast over multiple trips spanning a year and a half, with Love staying not in a hotel but in a rented apartment. Any setting associated with the Amalfi Coast—hotel terraces, lemon groves, the Italian sea—flows naturally from the premise and locale and is therefore unprotectable. Beyond geography, the temporal settings also diverge: <em>Eat the Lemon</em> is set in the present, with periodic flashbacks; <em>One Italian Summer</em> operates across two distinct timelines, one contemporary and one set in 1992.
                   </p>
 
