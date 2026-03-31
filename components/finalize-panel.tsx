@@ -115,7 +115,14 @@ const complianceItems = [
   {
     title: "Proposed Order",
     status: "Action Needed" as const,
-    content: null,
+    content: {
+      rule: { label: "Local Rule 7-18", href: "#" },
+      rows: [
+        { icon: "info", text: "Requirement: Proposed order must accompany the motion" },
+        { icon: "info", text: "Current: Not attached" },
+        { icon: "alert", text: "Attach a proposed order granting the motion." },
+      ],
+    },
   },
 ];
 
