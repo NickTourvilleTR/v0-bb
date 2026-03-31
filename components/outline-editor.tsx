@@ -636,7 +636,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#212223]">d. Setting</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
                           <li>&quot;[T]he mere fact that&quot; two works are &quot;set in the same city does not give rise to a finding of substantial similarity.&quot; Silas v. HBO, 201 F. Supp. 3d 1158, 1176 (C.D. Cal. 2016). A setting that &quot;naturally and necessarily flows from the basic plot premise . . . constitutes scenes-a-faire.&quot; Cavalier, 297 F.3d at 824.</li>
-                          <li>One Italian Summer is set entirely in Positano; Eat the Lemon ranges widely across the Amalfi Coast, with the protagonist staying in a rental apartment, not a hotel.</li>
+                          <li>One Italian Summer is set entirely in Positano; Eat the Lemon ranges widely across the Amalfi Coast, with the protagonist staying in a rental apartment, not a hotel. The temporal settings also differ: Eat the Lemon is set entirely in the present; One Italian Summer operates across two timelines, one in the present and one in 1992.</li>
                           <li>No protectable setting similarities exist between the two works.</li>
                         </ul>
                       </div>
