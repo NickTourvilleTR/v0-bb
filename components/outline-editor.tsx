@@ -715,6 +715,9 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                           </ul>
                         </li>
                       </ul>
+                      <p className="mt-3 text-sm text-[#212223]">
+                        Each state law claim fails independently for lack of any plausible, S&S-specific factual allegation sufficient to support liability.
+                      </p>
                     </div>
 
                     {/* 3. Untimely and/or Preempted */}
