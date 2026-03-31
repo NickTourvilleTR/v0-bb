@@ -25,7 +25,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
         </div>
 
         {/* Main content column */}
-        <div className="flex-1">
+        <div className="mx-auto max-w-3xl flex-1">
         {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -50,7 +50,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
         </div>
 
         {/* Legal Document */}
-        <div className="mx-auto max-w-3xl rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
+        <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
           {/* Party/Attorney Fields */}
           <div className="mb-8 space-y-2 text-sm text-[#212223]">
             <p>[Party/Attorney]</p>
