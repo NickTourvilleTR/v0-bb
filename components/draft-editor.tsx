@@ -464,6 +464,8 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
                     Other alleged similarities—that both mothers possess lemon-themed decorative items, that Aveeno face cream is mentioned in connection with both mother characters, that Frank Sinatra music plays during a dinner in each work, that each protagonist befriends a local boat driver named Antonio, and that both works use golden imagery—are precisely the kind of "random similarities scattered throughout the works" that cannot sustain a finding of substantial similarity. <em>Cavalier v. Random House, Inc.</em>, 297 F.3d 815, 825 (9th Cir. 2002) (quoting <em>Litchfield v. Spielberg</em>, 736 F.2d 1352, 1356 (9th Cir. 1984)); <em>see also Gallagher</em>, 2015 WL 12481504, at *14 (dismissing copyright claim where complaint listed "thirty-three 'specific scene similarities'" between the works). These details—lemons, Sinatra, Italian sunshine—are scenes-a-faire endemic to any story set on the Amalfi Coast, and they are therefore unprotectable as a matter of law.
                   </p>
 
+                  <hr className="my-4 border-t border-[#e0e0e0]" />
+
                   <p className="text-sm leading-relaxed text-[#212223]">
                     The two works share no substantial similarity in their plots or sequences of events.
                   </p>
@@ -503,6 +505,8 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
                   <p className="text-sm leading-relaxed text-[#212223]">
                     Both works are set in part on Italy's Amalfi Coast, but the specifics of that setting diverge considerably. <em>One Italian Summer</em> takes place entirely in Positano, where Katy stays at a particular hotel. <em>Eat the Lemon</em> follows Love across a broader stretch of the Amalfi Coast over multiple trips spanning a year and a half, with Love staying not in a hotel but in a rented apartment. Any setting associated with the Amalfi Coast—hotel terraces, lemon groves, the Italian sea—flows naturally from the premise and locale and is therefore unprotectable. Beyond geography, the temporal settings also diverge: <em>Eat the Lemon</em> is set in the present, with periodic flashbacks; <em>One Italian Summer</em> operates across two distinct timelines, one contemporary and one set in 1992.
                   </p>
+
+                  <hr className="my-4 border-t border-[#e0e0e0]" />
 
                   <p className="text-sm leading-relaxed text-[#212223]">
                     The two works are not substantially similar in their protected setting elements.
