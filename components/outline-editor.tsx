@@ -601,9 +601,8 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                           <li>The sole overlapping premise is a woman who travels alone to the Amalfi Coast to connect with her deceased mother — a general, unprotectable plot point. Love herself acknowledged in her 2020 draft that &quot;another American woman finds herself in Italy&quot; is &quot;[w]hat could possibly be more cliché?&quot;</li>
                           <li>One Italian Summer&apos;s central developments — time travel, meeting a younger version of one&apos;s mother, discovering an infant abandonment — have no counterpart in Eat the Lemon. Eat the Lemon&apos;s central developments — finding a surrogate family, meeting someone with happy memories of the mother — have no counterpart in One Italian Summer.</li>
                           <li>Superficial alleged similarities (leaving a partner behind, meeting a love interest, cooking with a mother figure, Amalfi lemons, Frank Sinatra music, golden imagery, a boat driver named Antonio, Aveeno face cream) are either scenes-a-faire flowing from the Amalfi Coast setting, or random scattered details that develop entirely differently in context.</li>
-                          <li>Beyond the unprotectable common premise, the plots and sequences of events in the two works are wholly different and share no protectable expression.</li>
-                        </ul>
-                      </div>
+                      </ul>
+                    </div>
 
                       {/* b. Characters */}
                       <div className="mb-4 ml-4">
