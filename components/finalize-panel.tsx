@@ -103,7 +103,14 @@ const complianceItems = [
   {
     title: "Meet and Confer",
     status: "Action Needed" as const,
-    content: null,
+    content: {
+      rule: { label: "Local Rule 7-3", href: "#" },
+      rows: [
+        { icon: "info", text: "Requirement: Declaration of meet and confer required" },
+        { icon: "info", text: "Current: Not included" },
+        { icon: "alert", text: "Include a declaration confirming meet and confer efforts." },
+      ],
+    },
   },
   {
     title: "Proposed Order",
