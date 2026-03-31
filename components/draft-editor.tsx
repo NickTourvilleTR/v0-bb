@@ -283,55 +283,34 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
 
           {/* I. INTRODUCTION - Updated to PRELIMINARY STATEMENT */}
           <div className="mb-8">
-            <h2 className="mb-4 text-lg font-bold text-[#212223]">I. PRELIMINARY STATEMENT</h2>
+            <h2 className="mb-4 text-lg font-bold text-[#212223]">I. INTRODUCTION</h2>
             
-            {/* Bulleted Points */}
-            <ul className="space-y-3">
-              {/* Facts 1 */}
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  
-                  Plaintiff Adrienne Love alleges a vast conspiracy — encompassing the author, publisher, literary agents, editors, and a movie studio — to steal her life story as depicted in her unpublished memoir Eat the Lemon and exploit it in Rebecca Serle's novel One Italian Summer, published by S&S. <span className="text-[#737373]">(FAC ¶¶46-48)</span>
-                </span>
-              </li>
+            {/* Paragraph Content */}
+            <div className="space-y-4">
+              <p className="text-sm leading-relaxed text-[#212223]">
+                Plaintiff Adrienne Love claims to be the victim of an elaborate conspiracy to steal her life story. She alleges that a wide-ranging network of co-conspirators—including the author and publisher of the supposedly infringing novel, an array of literary agents and editors, and even a major film studio—coordinated to misappropriate her unpublished memoir, <em>Eat the Lemon</em>, and exploit it through Rebecca Serle&apos;s novel <em>One Italian Summer</em> and a related film project. Love further contends that these same conspirators undertook a campaign of surveillance and physical intimidation to pressure her into silence, including deploying strangers who claimed to work for federal law enforcement agencies, and that two mysterious deaths occurred in connection with the alleged scheme.
+              </p>
               
-              {/* Facts 2 */}
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  
-                  Love further alleges that the conspirators stalked her, sent strangers claiming to work for the FBI to confront her, and caused two mysterious deaths to intimidate her into silence. <span className="text-[#737373]">(FAC ¶¶63, 65)</span>
-                </span>
-              </li>
+              <p className="text-sm leading-relaxed text-[#212223]">
+                None of this happened. The allegations reflect an elaborate and unfortunate fiction of Love&apos;s own making. But this Court need not wade into a factual dispute to reach that conclusion—the record currently before the Court is sufficient to dispose of each of Love&apos;s claims as a matter of law.
+              </p>
               
-              {/* Facts 3 */}
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  
-                  Love has now filed a First Amended Complaint that is substantially identical to her original complaint, asserting copyright infringement and 13 state law claims against S&S. <span className="text-[#737373]">(FAC ¶¶130-264)</span>
-                </span>
-              </li>
+              <p className="text-sm leading-relaxed text-[#212223]">
+                Love&apos;s First Amended Complaint (&quot;FAC&quot;) fails for three independent reasons. First, the copyright infringement claim that anchors her entire case cannot survive even a cursory comparison of the two works at issue. To establish copyright infringement, Love must demonstrate that <em>One Italian Summer</em> is substantially similar to the protected expression in <em>Eat the Lemon</em>. She cannot do so because (a) the alleged similarities concern facts from Love&apos;s own biography, which are categorically unprotectable under copyright law, and (b) even if <em>Eat the Lemon</em> were analyzed as a work of fiction, the two works share no substantial similarity in any protectable element—their plots, characters, settings, themes, dialogue, mood, and pace are all materially different.
+              </p>
               
-              {/* Law */}
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  
-                  A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC&apos;s fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#0062c4]">(FRCP 12(b)(6))</span>
-                </span>
-              </li>
+              <p className="text-sm leading-relaxed text-[#212223]">
+                Second, Love&apos;s thirteen state law claims fail on their own terms as to Simon &amp; Schuster, LLC (&quot;S&amp;S&quot;). Each of those claims is premised on a conspiracy to commit and conceal copyright infringement that, as a matter of law, never occurred. Beyond that, Love has not alleged conduct specifically attributable to S&amp;S that would support liability on any of those claims.
+              </p>
               
-              {/* Conclusion */}
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  
-                  Because (1) the two works are not substantially similar in protectable expression, (2) the state law claims lack specific allegations of conduct by S&S, and (3) many state law claims are untimely and/or preempted, the FAC should be dismissed with prejudice.
-                </span>
-              </li>
-            </ul>
+              <p className="text-sm leading-relaxed text-[#212223]">
+                Third, as set forth in the Motion to Dismiss filed by Defendant Creative Artists Agency, LLC (&quot;CAA&quot;), which S&amp;S joins in its entirety, many of Love&apos;s state law claims are independently barred by applicable statutes of limitation and/or preempted by the Copyright Act.
+              </p>
+              
+              <p className="text-sm leading-relaxed text-[#212223]">
+                For all of these reasons, S&amp;S respectfully requests that this Court dismiss the First Amended Complaint with prejudice.
+              </p>
+            </div>
           </div>
 
           {/* II. FACTUAL BACKGROUND */}
@@ -377,7 +356,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
                   <em>Eat the Lemon</em> is, by Love's own description, a "personal memoir" recounting her true experiences. FAC ¶¶ 33, 36. The work centers on Love's efforts to come to terms with the loss of her mother—who died of cancer roughly a decade before the events described—and with the broader trauma of her family life, through extended periods of immersion in the culture and landscape of Italy's Amalfi Coast. Id. ¶¶ 112, 118, 124.
                 </p>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                  The memoir opens with Love and her boyfriend, Brad, traveling together down the Amalfi Coast. ETL at 3–4. Through a series of flashbacks, readers learn that Love's childhood was marked by deep unhappiness: her father abandoned the family when she was young, her stepfather was emotionally abusive and defrauded her of her mother's belongings after her mother's death, and her relationship with her mother was characterized by distance and coldness. Id. at 6–10, 17–18, 36, 38–39. Love herself reflects at one point that she could not recall a single warm memory of her mother. Id. at 60–61, 93.
+                  The memoir opens with Love and her boyfriend, Brad, traveling together down the Amalfi Coast. ETL at 3��4. Through a series of flashbacks, readers learn that Love's childhood was marked by deep unhappiness: her father abandoned the family when she was young, her stepfather was emotionally abusive and defrauded her of her mother's belongings after her mother's death, and her relationship with her mother was characterized by distance and coldness. Id. at 6–10, 17–18, 36, 38–39. Love herself reflects at one point that she could not recall a single warm memory of her mother. Id. at 60–61, 93.
                 </p>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
                   While in Italy, Love and Brad befriend Adele, a woman who rents them an apartment, and Love confides to Adele that her mother once studied cooking in Amalfi. Id. at 11, 34–37. Shortly after Love and Brad return to San Francisco, Love decides to go back to Italy alone, this time with a specific mission: to locate her mother's former cooking teacher and complete a cookbook her mother had assembled during her time in Italy. Id. at 45. Brad largely disappears from the narrative at this point.
