@@ -646,7 +646,7 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                         <p className="mb-2 text-sm font-medium text-[#212223]">e. Theme</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
                           <li>A general theme &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a substantial similarity finding. Masterson v. Walt Disney Co., 821 F. App&apos;x 779, 782 (9th Cir. 2020).</li>
-                          <li>The thematic concerns are opposite: OIS is about dismantling an idealized image of a beloved mother; ETL is about overcoming deeply unhappy memories of a cold, difficult mother.</li>
+                          <li>The general theme of a woman finding connection with her deceased mother by visiting Italy is unprotectable. Beyond that, the thematic concerns are opposite: One Italian Summer is about dismantling an idealized image of a beloved mother; Eat the Lemon is about overcoming deeply unhappy memories of a cold, difficult mother.</li>
                           <li>No protectable thematic similarities exist between the two works.</li>
                         </ul>
                       </div>
