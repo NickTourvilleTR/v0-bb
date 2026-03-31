@@ -620,10 +620,9 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <div className="mb-4 ml-4">
                         <p className="mb-2 text-sm font-medium text-[#212223]">c. Dialogue</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
-                          <li>Love alleges no similar dialogue between the two works.</li>
-                          <li>This element provides no basis for a substantial similarity finding.</li>
-                        </ul>
-                      </div>
+                        <li>Love alleges no similar dialogue between the two works.</li>
+                      </ul>
+                    </div>
 
                       {/* d. Setting */}
                       <div className="mb-4 ml-4">
