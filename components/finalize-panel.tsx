@@ -53,7 +53,16 @@ const complianceItems = [
   {
     title: "Formatting",
     status: "Compliant" as const,
-    content: null,
+    content: {
+      rule: { label: "Local Rule 11-3.2", href: "#" },
+      rows: [
+        { icon: "info", text: "Requirement: Formatted for 8 ½ x 11 inch paper" },
+        { icon: "info", text: "Requirement: Numbered on left margin" },
+        { icon: "info", text: "Requirement: No more than 28 lines per page" },
+        { icon: "info", text: "Current: Compliant on all formatting requirements" },
+        { icon: "check", text: "Document formatting meets all requirements." },
+      ],
+    },
   },
   {
     title: "Table of Contents",
