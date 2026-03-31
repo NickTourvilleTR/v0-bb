@@ -110,47 +110,36 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
             </h2>
           </div>
 
-          {/* I. PRELIMINARY STATEMENT */}
+          {/* I. INTRODUCTION */}
           <div className="mb-8">
-            <h2 className="mb-4 text-lg font-bold text-[#212223]">I. PRELIMINARY STATEMENT</h2>
+            <h2 className="mb-4 text-lg font-bold text-[#212223]">I. INTRODUCTION</h2>
             
-            {/* Bulleted Points */}
-            <ul className="space-y-3">
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  Plaintiff Adrienne Love alleges a vast conspiracy — encompassing the author, publisher, literary agents, editors, and a movie studio — to steal her life story as depicted in her unpublished memoir Eat the Lemon and exploit it in Rebecca Serle&apos;s novel One Italian Summer, published by S&amp;S. <span className="text-[#737373]">(FAC ¶¶46-48)</span>
-                </span>
-              </li>
+            {/* Paragraph Content */}
+            <div className="space-y-4">
+              <p className="text-sm leading-relaxed text-[#212223]">
+                Plaintiff Adrienne Love claims to be the victim of an elaborate conspiracy to steal her life story. She alleges that a wide-ranging network of co-conspirators—including the author and publisher of the supposedly infringing novel, an array of literary agents and editors, and even a major film studio—coordinated to misappropriate her unpublished memoir, <em>Eat the Lemon</em>, and exploit it through Rebecca Serle&apos;s novel <em>One Italian Summer</em> and a related film project. Love further contends that these same conspirators undertook a campaign of surveillance and physical intimidation to pressure her into silence, including deploying strangers who claimed to work for federal law enforcement agencies, and that two mysterious deaths occurred in connection with the alleged scheme.
+              </p>
               
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  Love further alleges that the conspirators stalked her, sent strangers claiming to work for the FBI to confront her, and caused two mysterious deaths to intimidate her into silence. <span className="text-[#737373]">(FAC ¶¶63, 65)</span>
-                </span>
-              </li>
+              <p className="text-sm leading-relaxed text-[#212223]">
+                None of this happened. The allegations reflect an elaborate and unfortunate fiction of Love&apos;s own making. But this Court need not wade into a factual dispute to reach that conclusion—the record currently before the Court is sufficient to dispose of each of Love&apos;s claims as a matter of law.
+              </p>
               
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  Love has now filed a First Amended Complaint that is substantially identical to her original complaint, asserting copyright infringement and 13 state law claims against S&amp;S. <span className="text-[#737373]">(FAC ¶¶130-264)</span>
-                </span>
-              </li>
+              <p className="text-sm leading-relaxed text-[#212223]">
+                Love&apos;s First Amended Complaint (&quot;FAC&quot;) fails for three independent reasons. First, the copyright infringement claim that anchors her entire case cannot survive even a cursory comparison of the two works at issue. To establish copyright infringement, Love must demonstrate that <em>One Italian Summer</em> is substantially similar to the protected expression in <em>Eat the Lemon</em>. She cannot do so because (a) the alleged similarities concern facts from Love&apos;s own biography, which are categorically unprotectable under copyright law, and (b) even if <em>Eat the Lemon</em> were analyzed as a work of fiction, the two works share no substantial similarity in any protectable element—their plots, characters, settings, themes, dialogue, mood, and pace are all materially different.
+              </p>
               
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC&apos;s fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#0062c4]">(FRCP 12(b)(6))</span>
-                </span>
-              </li>
+              <p className="text-sm leading-relaxed text-[#212223]">
+                Second, Love&apos;s thirteen state law claims fail on their own terms as to Simon &amp; Schuster, LLC (&quot;S&amp;S&quot;). Each of those claims is premised on a conspiracy to commit and conceal copyright infringement that, as a matter of law, never occurred. Beyond that, Love has not alleged conduct specifically attributable to S&amp;S that would support liability on any of those claims.
+              </p>
               
-              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
-                <span className="mt-px shrink-0 text-[#212223]">•</span>
-                <span>
-                  Because (1) the two works are not substantially similar in protectable expression, (2) the state law claims lack specific allegations of conduct by S&amp;S, and (3) many state law claims are untimely and/or preempted, the FAC should be dismissed with prejudice.
-                </span>
-              </li>
-            </ul>
+              <p className="text-sm leading-relaxed text-[#212223]">
+                Third, as set forth in the Motion to Dismiss filed by Defendant Creative Artists Agency, LLC (&quot;CAA&quot;), which S&amp;S joins in its entirety, many of Love&apos;s state law claims are independently barred by applicable statutes of limitation and/or preempted by the Copyright Act.
+              </p>
+              
+              <p className="text-sm leading-relaxed text-[#212223]">
+                For all of these reasons, S&amp;S respectfully requests that this Court dismiss the First Amended Complaint with prejudice.
+              </p>
+            </div>
           </div>
 
           {/* II. FACTUAL BACKGROUND */}
@@ -242,125 +231,227 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
             
             {/* A. Copyright Claim */}
             <div className="mb-6">
-              <h3 className="mb-4 font-bold text-[#212223]">A. Love&apos;s Copyright Infringement Claim Fails As A Matter Of Law.</h3>
+              <h3 className="mb-4 font-bold text-[#212223]">A. Love&apos;s Copyright Infringement Claim Fails as a Matter of Law.</h3>
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                To state a claim for copyright infringement, a plaintiff is required to plead &quot;among other things, (1) the copying of copyrighted material and (2) the unlawful appropriation of it.&quot; <a href="#" className="text-[#0062c4] hover:underline">Woodland v. Hill, 136 F.4th 1199, 1205 (9th Cir. 2025)</a>. &quot;To show unlawful appropriation, the plaintiff must prove that the defendant copied enough of the protected expression in the work to render the two works &apos;substantially similar.&apos;&quot; <em>Id.</em> at 1206. Here, Love&apos;s copyright claim fails as a matter of law because the two works are not substantially similar in their protected elements.
+                To state a claim for copyright infringement, a plaintiff must plead, among other things, &quot;the copying of copyrighted material and the unlawful appropriation of it.&quot; <em>Woodland v. Hill</em>, 136 F.4th 1199, 1205 (9th Cir. 2025). Unlawful appropriation requires proof that the defendant copied enough protected expression from the plaintiff&apos;s work to render the two works &quot;substantially similar.&quot; <em>Id.</em> at 1206. Love&apos;s copyright claim fails on this requirement for two independent reasons: the alleged similarities involve unprotectable biographical facts, and, even setting that aside, the two works are not substantially similar in any protectable element.
               </p>
               
               {/* 1. Biographical Facts */}
-              <div className="mb-4 ml-4">
-                <p className="mb-2 font-bold text-[#212223]">1. The Details Allegedly Copied Are Biographical Facts That Are Not Protectable.</p>
+              <div className="mb-6 ml-4">
+                <h4 className="mb-3 font-bold text-[#212223]">1. The Details Love Claims Were Copied Are Biographical Facts Not Subject to Copyright Protection.</h4>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                  Love&apos;s copyright claim fails on the threshold ground that the alleged copying involved the facts of her biography, which are not subject to copyright protection. Love&apos;s First Amended Complaint is explicit that the narrative details <em>One Italian Summer</em> supposedly lifted from <em>Eat the Lemon</em> correspond to the facts of her own life. She characterizes <em>Eat the Lemon</em> as a &quot;personal memoir based on her own life,&quot; and alleges that, with <em>One Italian Summer</em>, &quot;Serle effectively interjects herself into Love&apos;s life and stands in her shoes to tell the detailed story of Love&apos;s highly personal experiences.&quot; <a href="#" className="text-[#0062c4] hover:underline">FAC ¶¶ 33, 75</a>; see also <a href="#" className="text-[#0062c4] hover:underline">¶ 74</a> asserting <em>One Italian Summer</em> is &quot;replete with intricate personal details from Love&apos;s life and manuscript&quot;).
+                  Love&apos;s copyright claim fails at the threshold because the similarities she identifies between <em>Eat the Lemon</em> and <em>One Italian Summer</em> correspond to the facts of her own life—and facts, by definition, are not subject to copyright protection.
                 </p>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                  Love cannot claim copyright protection in the facts of her life. &quot;To qualify for copyright protection, a work must be original to the author.&quot; <a href="#" className="text-[#0062c4] hover:underline"><em>Feist Publ&apos;ns, Inc. v. Rural Tel. Serv. Co.</em>, 499 U.S. 340, 345 (1991)</a> Accordingly, &quot;no author may copyright . . . the facts he narrates.&quot; Id. at 344-45. Thus, an author cannot claim copyright ownership over the details of his or her life, even when they are set forth in a memoir or autobiography. <a href="#" className="text-[#0062c4] hover:underline"><em>See</em> 1 Nimmer On Copyright § 2.11 (2025)</a> (&quot;Courts have denied copyright protection not only to raw historical facts, but also to facts set forth in biographical works, in news stories, and in other forms of expression.&quot;).
+                  The Copyright Act protects original expression, not the underlying facts an author expresses. As the Supreme Court made clear in <em>Feist Publications, Inc. v. Rural Telephone Service Co.</em>, 499 U.S. 340, 344–45 (1991), &quot;no author may copyright . . . the facts he narrates.&quot; This principle applies with full force to memoirs and autobiographies. Courts have consistently held that an author cannot claim ownership over the details of her own life simply by setting them down on paper. <em>See</em> 1 Nimmer on Copyright § 2.11 (2025) (&quot;Courts have denied copyright protection not only to raw historical facts, but also to facts set forth in biographical works, in news stories, and in other forms of expression.&quot;).
+                </p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  The Ninth Circuit applied this rule directly in <em>Corbello v. Valli</em>, 974 F.3d 965 (9th Cir. 2020), a case with facts closely analogous to this one. There, the court rejected a copyright claim based on alleged similarities between a nonfiction autobiography of a member of the Four Seasons and the Broadway musical about the band. Because the similarities between the two works concerned facts from the author&apos;s actual experiences, those similarities were not protectable—even assuming the musical&apos;s creators had access to and drew on the autobiography. <em>Id.</em> at 971, 976–77, 984. Where a work &quot;emphatically&quot; represents itself as a nonfiction account, the fictional work does not infringe by incorporating the same facts, even if the author conducted extensive research to uncover them. <em>Id.</em> at 984. Other courts have applied the same principle in cases directly paralleling this one, where the allegation was that details from a plaintiff&apos;s memoir were incorporated into a fictional work. <em>See, e.g., Vallejo v. Narcos Prods. LLC</em>, 833 F. App&apos;x 250, 257–61 (11th Cir. 2020); <em>Hathaway v. Caputo</em>, 2021 WL 1862248, at *6–7 (D. Ariz. May 10, 2021); <em>Newt v. Twentieth Century Fox Film Corp.</em>, 2016 WL 4059691, at *7 n.11 (C.D. Cal. July 27, 2016); <em>Eggleston v. Twentieth Century Fox Film Corp.</em>, 2022 WL 3371601, at *4 (E.D. Mich. Aug. 16, 2022).
+                </p>
+                <p className="text-sm leading-relaxed text-[#212223]">
+                  The FAC makes plain that the same rule controls here. Love describes <em>Eat the Lemon</em> throughout as a &quot;personal memoir based on her own life.&quot; FAC ¶ 33. She alleges that <em>One Italian Summer</em> is &quot;replete with intricate personal details from Love&apos;s life,&quot; FAC ¶ 74, that Serle &quot;effectively interjects herself into Love&apos;s life&quot; to tell &quot;the detailed story of Love&apos;s highly personal experiences,&quot; FAC ¶ 75, and that Love&apos;s own friends recognized the novel as &quot;Love&apos;s story,&quot; FAC ¶ 62. Love even contends that <em>One Italian Summer</em> assigned to Katy&apos;s father the same first name as Love&apos;s real-life father—a detail not revealed anywhere in <em>Eat the Lemon</em> itself. FAC ¶ 88. In short, Love&apos;s own pleading establishes that the alleged similarities are biographical facts, not original creative expression. Because she cannot claim copyright in the facts of her own life, her infringement claim fails as a matter of law on this ground alone.
                 </p>
               </div>
 
               {/* 2. No Substantial Similarity */}
-              <div className="mb-4 ml-4">
-                <p className="mb-2 font-bold text-[#212223]">2. Even If Eat the Lemon Were Entitled To The Protection Afforded Fictional Works, There Would Still Be No Substantial Similarity.</p>
+              <div className="mb-6 ml-4">
+                <h4 className="mb-3 font-bold text-[#212223]">2. Even Treating <em>Eat the Lemon</em> as a Fictional Work, There Is No Substantial Similarity.</h4>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                  Even if <em>Eat the Lemon</em> is analyzed as if it were a fictional work, notwithstanding Love&apos;s emphatic representations about its non-fictional status, the result does not change. There would be no substantial similarity in protectable expression even if Love <em>were</em> entitled to claim copyright protection in the events and characters depicted in her memoir.
+                  Even if this Court were to set aside <em>Eat the Lemon</em>&apos;s status as a personal memoir and analyze its protectable expression as if it were a fictional work, the result does not change. Under any mode of analysis, the two works are not substantially similar in their protected elements.
                 </p>
 
-                {/* a. Plot */}
-                <div className="mb-3 ml-4">
-                  <p className="mb-2 font-bold text-[#212223]">a. Plot and Sequence of Events</p>
-                  <p className="mb-2 text-sm leading-relaxed text-[#212223]">
-                    It is fundamental that &quot;[n]o one can own the basic idea for a story. General plot ideas are not protected by copyright law; they remain forever the common property of artistic mankind.&quot; <a href="#" className="text-[#0062c4] hover:underline"><em>Berkic v. Crichton</em>, 761 F.2d 1289, 1293 (9th Cir. 1985)</a>. Thus, in applying the extrinsic test, a court must look &quot;beyond the vague, abstracted idea of a general plot.&quot; Id. Instead, the court &quot;compares, not the basic plot ideas for stories, but the actual concrete elements that make up the total sequence of events and the relationships between the major characters.&quot; <a href="#" className="text-[#0062c4] hover:underline"><em>Funky Films</em>, 462 F.3d at 1077</a>.
+                {/* Legal Standard */}
+                <div className="mb-4">
+                  <p className="mb-3 font-semibold text-[#212223]">Legal Standard</p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    A plaintiff asserting copyright infringement must satisfy both an &quot;extrinsic&quot; and an &quot;intrinsic&quot; test for substantial similarity. <em>Skidmore v. Led Zeppelin</em>, 952 F.3d 1051, 1064 (9th Cir. 2020). While the intrinsic test is a jury question, the extrinsic test &quot;may be decided by the court as a matter of law,&quot; including at the motion-to-dismiss stage. <em>Woodland</em>, 136 F.4th at 1210. Where the works at issue are before the court and it is clear as a matter of law that they are not substantially similar, dismissal is proper. <em>Gallagher v. Lions Gate Ent. Inc.</em>, 2015 WL 12481504, at *2 (C.D. Cal. Sept. 11, 2015); <em>Hankins v. Titmouse Inc.</em>, 2025 U.S. Dist. LEXIS 147690, at *7 (C.D. Cal. July 30, 2025). Indeed, the Ninth Circuit has &quot;repeatedly affirmed dismissals&quot; in cases alleging infringement of literary works on substantial similarity grounds. <em>Masterson v. Walt Disney Co.</em>, 821 F. App&apos;x 779, 780 &amp; n.1 (9th Cir. 2020).
                   </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    Beyond the unprotectable fact that <em>Eat the Lemon</em> and <em>One Italian Summer</em> both involve women who travel alone to the Amalfi Coast seeking connection with their deceased mothers, the works tell very different stories. The central developments in <em>One Italian Summer</em> are Katy travelling back in time after arriving in Positano, meeting and befriending a 30-year-old version of her mother, discovering that her mother abandoned her as an infant, and then being forced to confront, for the first time, her mother&apos;s status as an independent person. <em>Eat the Lemon</em> involves no such time travel or disillusioning revelations. Instead, the central developments are Love&apos;s finding a surrogate family in Italy, with whom she experiences true feelings of family for the first time, and meeting someone who knew her mother when she was younger and is able to share happy memories about her.
+                    For literary works, the extrinsic test focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot; <em>Metcalf v. Bochco</em>, 294 F.3d 1069, 1073 (9th Cir. 2002). Critically, the threshold step is to filter out unprotectable elements. <em>Woodland</em>, 136 F.4th at 1210. Non-protectable elements include ideas; historical facts; common phrases; scenes-a-faire (situations and incidents that flow naturally or necessarily from a basic plot premise or generic storyline); and familiar stock themes. <em>Corbello</em>, 974 F.3d at 975 (citing <em>Benay v. Warner Bros. Entm&apos;t., Inc.</em>, 607 F.3d 620, 624–25 (9th Cir. 2010)). Only after those elements are set aside does the court compare what remains. That comparative analysis conclusively forecloses any finding of substantial similarity here.
+                  </p>
+                </div>
+
+                {/* a. Plot */}
+                <div className="mb-4 ml-4">
+                  <p className="mb-3 font-bold text-[#212223]">a. Plot and Sequence of Events</p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    &quot;No one can own the basic idea for a story. General plot ideas are not protected by copyright law; they remain forever the common property of artistic mankind.&quot; <em>Berkic v. Crichton</em>, 761 F.2d 1289, 1293 (9th Cir. 1985). Courts applying the extrinsic test therefore look beyond a general plot premise and compare &quot;the actual concrete elements that make up the total sequence of events and the relationships between the major characters.&quot; <em>Funky Films</em>, 462 F.3d at 1077. Under this standard, courts routinely reject substantial similarity claims where the works share a common premise but &quot;developed quite differently.&quot; <em>Whitehead v. Netflix, Inc.</em>, 2022 WL 17342602, at *15 (N.D. Cal. Nov. 30, 2022) (quoting <em>Funky Films</em>, 462 F.3d at 1077–78).
+                  </p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    The only genuine overlap between <em>Eat the Lemon</em> and <em>One Italian Summer</em> at the level of plot is the general, unprotectable premise of a woman who travels alone to Italy&apos;s Amalfi Coast in order to connect with her deceased mother. That premise is not Love&apos;s to own. <em>See Berkic</em>, 761 F.2d at 1293; <em>see also Funky Films</em>, 462 F.3d at 1078; <em>Benay</em>, 607 F.3d at 625. Love herself seemed to recognize as much: in the prefatory note to her 2020 draft, she described that premise as &quot;another American woman finds herself in Italy&quot; and asked, &quot;[w]hat could possibly be more cliché?&quot;
+                  </p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    Once that unprotectable premise is set aside, the two works diverge fundamentally. The defining events of <em>One Italian Summer</em>—Katy traveling back in time, meeting and befriending a thirty-year-old version of her mother, discovering that her mother had abandoned her as an infant, and being forced to confront her mother as a wholly autonomous person separate from the role she had always played—have no counterpart in <em>Eat the Lemon</em>. That novel contains no time travel, no magical realism, no relationship with a younger version of the mother, and no shattering revelation about the mother&apos;s independent life. Conversely, the defining events of <em>Eat the Lemon</em>—Love&apos;s discovery of a surrogate family in Italy, her experience of genuine maternal warmth for the first time through Rosa, and her encounter with Marietta, who knew her mother when she was happy—are entirely absent from <em>One Italian Summer</em>.
+                  </p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    The alleged surface-level similarities that Love catalogs in the FAC do not cure this deficiency. That both protagonists leave a romantic partner behind to travel to Italy and encounter new love interests is a scene-a-faire that flows directly and naturally from the premise of a woman journeying to Italy to find herself; it is not protectable. <em>See Corbello</em>, 974 F.3d at 975. Moreover, even those storylines develop entirely differently: in <em>One Italian Summer</em>, the question of Katy&apos;s marriage dominates much of the narrative and resolves with her happy reunion with Eric; in <em>Eat the Lemon</em>, Brad scarcely appears after Love decides to return to Italy alone, and the two do not reconcile. Similarly, both works include a scene in which the protagonist cooks with a mother figure, but the nature of that scene is entirely different in each: in <em>One Italian Summer</em>, the mother figure is literally Katy&apos;s mother, and the scene explores the complexity of their relationship; in <em>Eat the Lemon</em>, the mother figure is Rosa, an older Italian woman whose warmth provides Love with the maternal connection she never had.
+                  </p>
+                  <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                    Other alleged similarities—that both mothers possess lemon-themed decorative items, that Aveeno face cream is mentioned in connection with both mother characters, that Frank Sinatra music plays during a dinner in each work, that each protagonist befriends a local boat driver named Antonio, and that both works use golden imagery—are precisely the kind of &quot;random similarities scattered throughout the works&quot; that cannot sustain a finding of substantial similarity. <em>Cavalier v. Random House, Inc.</em>, 297 F.3d 815, 825 (9th Cir. 2002) (quoting <em>Litchfield v. Spielberg</em>, 736 F.2d 1352, 1356 (9th Cir. 1984)); <em>see also Gallagher</em>, 2015 WL 12481504, at *14 (dismissing copyright claim where complaint listed &quot;thirty-three &apos;specific scene similarities&apos;&quot; between the works). These details—lemons, Sinatra, Italian sunshine—are scenes-a-faire endemic to any story set on the Amalfi Coast, and they are therefore unprotectable as a matter of law.
+                  </p>
+                  <p className="text-sm leading-relaxed text-[#212223]">
+                    The two works share no substantial similarity in their plots or sequences of events.
                   </p>
                 </div>
 
                 {/* b. Characters */}
-                <div className="mb-3 ml-4">
-                  <p className="mb-2 font-bold text-[#212223]">b. Characters</p>
+                <div className="mb-4 ml-4">
+                  <p className="mb-3 font-bold text-[#212223]">b. Characters</p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    Literary characters are generally not subject to copyright protection unless they are &quot;especially distinctive.&quot; <em>Olson v. NBC</em>, 855 F.2d 1446, 1451–52 (9th Cir. 1988). Purported similarities between minor characters are afforded even less weight. <em>See Cavalier</em>, 297 F.3d at 825.
+                  </p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    Love and Katy share one trait in common: each is a woman processing the loss of a mother who died of cancer. That is a general plot point, not a protectable character attribute. In every other significant respect, the protagonists are drawn from entirely different wells of experience. Love&apos;s story is one of trauma and emotional deprivation—an absent father, an abusive stepfather, a cold and distant mother. Katy&apos;s story begins from the opposite place: she has had a warm, loving, all-defining relationship with her mother, and the loss of that relationship threatens to destabilize everything she knows about herself.
+                  </p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    The mother characters are equally distinct. Both can cook, but in <em>One Italian Summer</em>, cooking is part of a portrait of a woman who excels at domestic life while quietly sacrificing her professional ambitions; in <em>Eat the Lemon</em>, cooking is the thread that connects Love to her mother&apos;s time in Italy and drives the memoir&apos;s central quest. More fundamentally, while Katy&apos;s mother is portrayed as warm, capable, and loving—if not without complexity—Love&apos;s mother is depicted throughout as cold, unhappy, and emotionally unavailable. That disparity is so central to <em>Eat the Lemon</em> that a pivotal moment in the work is Love&apos;s quiet joy upon learning, for the first time, that her mother was once happy.
+                  </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    Nor are there protectable similarities between the characters across the two works, especially considering that characters are generally not subject to copyright protection unless they are &quot;especially distinctive.&quot; <a href="#" className="text-[#0062c4] hover:underline"><em>Olson v. NBC</em>, 855 F.2d 1446, 1451, 1452 (9th Cir. 1988)</a>. While both Love and Katy grieve over losing a mother to cancer, that is a general plot point that is not subject to copyright protection. The characters are otherwise portrayed quite differently, particularly with respect to the family situations that form the context for their travels to Italy.
+                    As to minor characters, Love&apos;s allegation that Adam (in <em>One Italian Summer</em>) and Peppe (in <em>Eat the Lemon</em>) are similar because each is a love interest identifies only the most generic of shared attributes. The two characters otherwise bear no resemblance. And that each work features a friendly, attractive hotel manager is an unremarkable scene-a-faire common to any travel narrative. The works are not substantially similar at the level of character.
                   </p>
                 </div>
 
                 {/* c. Dialogue */}
-                <div className="mb-3 ml-4">
-                  <p className="mb-2 font-bold text-[#212223]">c. Dialogue</p>
+                <div className="mb-4 ml-4">
+                  <p className="mb-3 font-bold text-[#212223]">c. Dialogue</p>
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    Love does not allege any similar dialogue between the works.
+                    Love identifies no similar dialogue between the two works. This element provides no basis for a substantial similarity finding.
                   </p>
                 </div>
 
                 {/* d. Setting */}
-                <div className="mb-3 ml-4">
-                  <p className="mb-2 font-bold text-[#212223]">d. Setting</p>
+                <div className="mb-4 ml-4">
+                  <p className="mb-3 font-bold text-[#212223]">d. Setting</p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    &quot;The mere fact that&quot; two works are &quot;set in the same city does not give rise to a finding of substantial similarity.&quot; <em>Silas v. HBO</em>, 201 F. Supp. 3d 1158, 1176 (C.D. Cal. 2016). A setting that &quot;naturally and necessarily flows from the basic plot premise . . . constitutes scenes-a-faire and cannot support a finding of substantial similarity.&quot; <em>Cavalier</em>, 297 F.3d at 824.
+                  </p>
+                  <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                    Both works are set in part on Italy&apos;s Amalfi Coast, but the specifics of that setting diverge considerably. <em>One Italian Summer</em> takes place entirely in Positano, where Katy stays at a particular hotel. <em>Eat the Lemon</em> follows Love across a broader stretch of the Amalfi Coast over multiple trips spanning a year and a half, with Love staying not in a hotel but in a rented apartment. Any setting associated with the Amalfi Coast—hotel terraces, lemon groves, the Italian sea—flows naturally from the premise and locale and is therefore unprotectable. Beyond geography, the temporal settings also diverge: <em>Eat the Lemon</em> is set in the present, with periodic flashbacks; <em>One Italian Summer</em> operates across two distinct timelines, one contemporary and one set in 1992.
+                  </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    There are also no protectable similarities at the level of setting. While Love asserts that both works &quot;are set on the Amalfi Coast of Italy in quaint, family-run hotels,&quot; <a href="#" className="text-[#0062c4] hover:underline">FAC ¶ 81</a>, that is misleading. In One Italian Summer, Katy spends all her time in Positano, while, in <em>Eat the Lemon</em>, the protagonist travels widely across the Amalfi Coast, and stays in a rental apartment, not a family-run hotel. At any rate, &quot;[t]he mere fact that&quot; two works may be &quot;set in the same city does not give rise to a finding of substantial similarity of copyrightable expression.&quot; <a href="#" className="text-[#0062c4] hover:underline"><em>Silas v. HBO</em>, 201 F. Supp. 3d 1158, 1176 (C.D. Cal. 2016)</a>.
+                    The two works are not substantially similar in their protected setting elements.
                   </p>
                 </div>
 
                 {/* e. Theme */}
-                <div className="mb-3 ml-4">
-                  <p className="mb-2 font-bold text-[#212223]">e. Theme</p>
+                <div className="mb-4 ml-4">
+                  <p className="mb-3 font-bold text-[#212223]">e. Theme</p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    A general thematic similarity that is &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a finding of substantial similarity. <em>Masterson</em>, 821 F. App&apos;x at 782. The general idea of a woman traveling to Italy to reach a greater understanding of—and peace with—her deceased mother is not protectable.
+                  </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    Nor are there protectable similarities at the level of theme. The general theme of a female protagonist coming to feel greater connection to her deceased mother by visiting the Amalfi Coast is not protectable. <a href="#" className="text-[#0062c4] hover:underline"><em>See Masterson</em>, 821 F. App&apos;x at 782</a> (&quot;Though the works share a general theme—i.e., every feeling has a reason—such a theme is too general to be protectible for the purposes of the extrinsic test.&quot;). Beyond that, the works&apos; themes are quite different. <em>One Italian Summer</em> is about Katy coming to see her mother as a flawed person with interests, desires, and passions beyond her and her father, and the way that realization empowers Katy to similarly see herself as her own person. In <em>Eat the Lemon</em>, Love is not similarly burdened by an idealized picture of her mother she must break out of. Quite the contrary, Eat the Lemon is about the narrator&apos;s overcoming her unhappy memories of her mother.
+                    Moreover, the specific thematic preoccupations of the two works are meaningfully different. <em>One Italian Summer</em> is fundamentally about dismantling an idealized image of a beloved mother in order to see her, for the first time, as an autonomous person—and about how that act of perception liberates Katy to claim her own autonomy. <em>Eat the Lemon</em> operates from an entirely different emotional premise. Love does not need to dismantle an idealized image; she carries no idealization to begin with. Her memoir is instead about the possibility of overcoming deeply unhappy memories of a difficult, emotionally distant mother—and about discovering, through her Italian family of choice, what real warmth and belonging feel like for the first time. The works are not substantially similar as to theme.
                   </p>
                 </div>
 
                 {/* f. Mood and Pace */}
-                <div className="mb-3 ml-4">
-                  <p className="mb-2 font-bold text-[#212223]">f. Mood and Pace</p>
+                <div className="mb-4 ml-4">
+                  <p className="mb-3 font-bold text-[#212223]">f. Mood and Pace</p>
+                  <p className="mb-3 text-sm leading-relaxed text-[#212223]">
+                    The two works differ substantially in both mood and pace. <em>One Italian Summer</em> is a novel driven by narrative momentum and plot mechanics: time-travel, revelation, and a series of escalating dramatic confrontations. Readers are propelled forward by the awareness that the alternate timeline will not last, that Katy must decide what to do with the knowledge she has gained, and that she must ultimately choose what kind of life she wants to live. <em>Eat the Lemon</em>, by contrast, is a darker and more contemplative work, structured as a series of vignettes rather than a propulsive narrative. Its emotional weight derives from Love&apos;s documented traumas—watching her mother endure brutal cancer treatments, surviving years of emotional abuse from her stepfather—and the story builds not toward dramatic resolution but toward a quiet and hard-won measure of peace.
+                  </p>
                   <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                    The mood of the two works is also significantly different. <em>One Italian Summer</em> builds drama and suspense through various plot twists, such as Katy meeting the younger version of her mother and discovering that her mother had left her as a baby to travel to Italy. There is no similar drama and suspense in Love&apos;s work, which is told more as a series of vignettes. Likewise, while both works are occasionally somber when the protagonist relives memories of her mother, <em>Eat the Lemon</em> is a much darker work, as the protagonist is depicted as traumatized by having to watch her mother endure painful cancer treatments and by the emotional abuse and economic exploitation she experienced from her stepfather.
+                    The pace of the two works is likewise different. <em>One Italian Summer</em> unfolds over a matter of weeks and moves inexorably toward resolution. <em>Eat the Lemon</em> spans roughly eighteen months of intermittent travel and contains no equivalent narrative urgency.
                   </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
-                    The pace of the two works is different as well. <em>One Italian Summer</em> takes place over a few weeks and the plot moves steadily toward a resolution—readers know, or at least suspect, that the younger version of Katy&apos;s mother is only there for a short while, that there is some lesson Katy must learn before she is gone, and that Katy will soon have to decide whether to go back to her husband. <em>Eat the Lemon</em> takes place over a year and a half, through Love&apos;s three separate visits to the Amalfi Coast, and does not feature any plotlines that speed toward resolution.
+                    The works are not substantially similar in mood or pace.
                   </p>
                 </div>
+
+                <hr className="my-4 border-t border-[#e0e0e0]" />
+
+                <p className="text-sm leading-relaxed text-[#212223]">
+                  In sum, beyond the unprotectable premise of a woman who travels alone to the Amalfi Coast to come to terms with the death of her mother, <em>Eat the Lemon</em> and <em>One Italian Summer</em> are fundamentally different works in every dimension that the extrinsic test examines. The copyright infringement claim fails as a matter of law and should be dismissed with prejudice. <em>See Eden Film Prod. LLC v. Lockjaw LLC</em>, 2025 WL 1386018, at *7 (C.D. Cal. Apr. 25, 2025) (dismissal with prejudice warranted where deficiencies &quot;stem from the fundamental characteristics of the works themselves&quot;); <em>Hankins</em>, 2025 U.S. Dist. LEXIS 147690, at *37.
+                </p>
               </div>
             </div>
 
+            <hr className="my-6 border-t border-[#e0e0e0]" />
+
             {/* B. State Law Claims */}
             <div className="mb-6">
-              <h3 className="mb-4 font-bold text-[#212223]">B. None Of Love&apos;s State Law Claims Presents A Plausible Claim For Relief Against S&amp;S.</h3>
+              <h3 className="mb-4 font-bold text-[#212223]">B. None of Love&apos;s State Law Claims States a Plausible Claim for Relief Against S&amp;S.</h3>
               <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                To the extent this Court chooses to reach Love&apos;s state law claims, notwithstanding that federal jurisdiction is premised exclusively on the copyright claim, those claims, likewise, fail as a matter of law.
+                To the extent this Court elects to address Love&apos;s thirteen state law claims notwithstanding that federal jurisdiction rests entirely on the copyright count, those claims fail independently on multiple grounds.
               </p>
 
               {/* 1. Conspiracy Allegations */}
               <div className="mb-4 ml-4">
-                <p className="mb-2 font-bold text-[#212223]">1. Love&apos;s Conspiracy Allegations Are Fundamentally Implausible.</p>
+                <h4 className="mb-3 font-bold text-[#212223]">1. The Conspiracy Allegations Are Fundamentally Implausible.</h4>
                 <p className="text-sm leading-relaxed text-[#212223]">
-                  Every one of Love&apos;s state law claims is based on conduct purportedly undertaken in service of the alleged conspiracy both to infringe on her copyright and to intimidate her into silence about the conspiracy. <em>See</em> <a href="#" className="text-[#0062c4] hover:underline">FAC ¶¶ 46, 63-66, 76, 126, 143-44, 158, 173, 183-84, 187, 195, 199, 209-10, 216-17, 223, 229, 237, 243, 247, 253, 261</a>. However, as set forth above, there was no copyright infringement.
+                  Every state law claim Love asserts against S&amp;S is premised on the allegation that it was a knowing participant in a conspiracy to infringe her copyright and then silence her about that infringement. <em>See, e.g.</em>, FAC ¶¶ 46, 63–66, 76, 126, 143–44, 158, 173, 183–84, 187, 195, 199, 209–10, 216–17, 223, 229, 237, 243, 247, 253, 261. But, as demonstrated above, no infringement occurred as a matter of law. And where no infringement occurred, it is implausible that &quot;a complex web of intentional misrepresentations, breaches of contract, and breaches of confidence occurred in concealing&quot; it. <em>Briggs v. Cameron</em>, 2020 WL 611849 (N.D. Cal. Feb. 10, 2020). Love has not plausibly alleged any predicate wrongdoing to conspire about or conceal. Each of her state law claims should be dismissed on this basis alone.
                 </p>
               </div>
 
               {/* 2. No Alleged Conduct */}
               <div className="mb-4 ml-4">
-                <p className="mb-2 font-bold text-[#212223]">2. Love Has Not Alleged Conduct By S&amp;S That Could Make It Liable For Her State Law Claims.</p>
+                <h4 className="mb-3 font-bold text-[#212223]">2. Love Has Not Alleged Conduct by S&amp;S That Could Support Liability.</h4>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                  The state law claims Love asserts against S&amp;S should be dismissed for the additional reason that she has not alleged conduct by S&amp;S that could render it liable for those claims. Beyond the conclusory assertion that &quot;S&amp;S was and is an agent for the infringing and unlawful projects at issue,&quot; <a href="#" className="text-[#0062c4] hover:underline">FAC ¶ 11</a>, the only allegations Love makes regarding conduct by S&amp;S specifically are that (1) one of its divisions published <em>One Italian Summer</em> and (2) one of its editors is married to a former literary agent of Love&apos;s, while another rejected her manuscript two weeks before the book announcement for <em>One Italian Summer</em> came out. <a href="#" className="text-[#0062c4] hover:underline"><em>Id.</em> ¶¶ 47-48, 60, 78</a>. Love cannot proceed with her state law claims against S&amp;S based on such threadbare allegations. In particular:
+                  The state law claims should be dismissed for the additional reason that Love has not pleaded facts sufficient to establish S&amp;S&apos;s liability on any individual claim. The only allegations in the FAC directed specifically at S&amp;S are: (1) that S&amp;S published <em>One Italian Summer</em>; (2) that an S&amp;S editor is married to a former Love literary agent; and (3) that a different S&amp;S editor rejected Love&apos;s manuscript approximately two weeks before the announcement of <em>One Italian Summer</em>. FAC ¶¶ 47–48, 60, 78. Beyond those three facts, Love&apos;s FAC relies on collective, undifferentiated allegations that do not specify what S&amp;S itself did or failed to do. Such &quot;everyone did everything&quot; pleading is improper and cannot sustain Love&apos;s claims. <em>Destfino v. Reiswig</em>, 630 F.3d 952, 958–59 (9th Cir. 2011); <em>Sebastian Brown Prods., LLC v. Muzooka, Inc.</em>, 143 F. Supp. 3d 1026, 1037 (N.D. Cal. 2015).
                 </p>
-                <ul className="ml-6 space-y-2 text-sm text-[#212223]">
-                  <li className="list-disc"><strong>Breach of Fiduciary Duty:</strong> This claim should be dismissed because the circumstances purportedly giving rise to a fiduciary duty on S&amp;S&apos;s part to Love—that S&amp;S supposedly &quot;possessed and reviewed&quot; her manuscript, <a href="#" className="text-[#0062c4] hover:underline">FAC ¶ 141</a>—cannot, as a matter of law, give rise to such a duty. <a href="#" className="text-[#0062c4] hover:underline"><em>See Blatty v. Warner Bros. Ent.</em>, 2011 WL 13217379, at *8-9 (C.D. Cal. Apr. 21, 2011)</a></li>
-                  <li className="list-disc"><strong>Intentional Interference with Contractual Relations and Business Advantage:</strong> These claims should be dismissed because no facts are alleged indicating either that S&amp;S had knowledge of the contract or business relationship that was allegedly interfered with, or that S&amp;S undertook intentional acts designed to disrupt that contractual or business relationship.</li>
-                  <li className="list-disc"><strong>Intentional and Negligent Misrepresentation:</strong> These claims should be dismissed because no facts are alleged indicating that S&amp;S made any misrepresentation to Love, let alone facts indicating that Love relied on that misrepresentation to her detriment.</li>
-                  <li className="list-disc"><strong>Negligence:</strong> This claim should be dismissed because no facts are alleged indicating either that S&amp;S owed Love a duty of care or what specifically S&amp;S did to breach it.</li>
-                  <li className="list-disc"><strong>Intentional Infliction of Emotional Distress:</strong> This claim should be dismissed because no facts are alleged ascribing conduct to S&amp;S specifically that could qualify as &quot;extreme and outrageous.&quot;</li>
-                  <li className="list-disc"><strong>Stalking:</strong> This claim should be dismissed because no facts are alleged ascribing conduct to S&amp;S that could constitute stalking, let alone a &quot;pattern&quot; of such conduct.</li>
-                  <li className="list-disc"><strong>Conspiracy:</strong> This claim should be dismissed because Love not only has failed to allege any underlying tortious act by S&amp;S, she has also failed to allege any facts indicating an agreement involving S&amp;S to engage in any tortious act.</li>
-                  <li className="list-disc"><strong>Unfair Business Practices under California Business and Professions Code § 17200:</strong> This claim should be dismissed because Love has not adequately alleged any predicate violations by S&amp;S.</li>
-                  <li className="list-disc"><strong>Accounting and Constructive Trust:</strong> These claims should be dismissed because they depend entirely on the success of Love&apos;s copyright claims, and, as explained above, the copyright claim fails as a matter of law.</li>
-                  <li className="list-disc"><strong>Declaratory Judgment:</strong> Love&apos;s claim for declaratory judgment fails for the reason that Love seeks only a declaration to &quot;ascertain her rights&quot; and defendants&apos; &quot;duties under the alleged agreements,&quot; <a href="#" className="text-[#0062c4] hover:underline">FAC ¶ 264</a>, yet the FAC alleges no agreements with S&amp;S.</li>
-                </ul>
+
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  Examining the individual claims against S&amp;S confirms this deficiency:
+                </p>
+
+                <div className="ml-4 space-y-4 text-sm leading-relaxed text-[#212223]">
+                  <div>
+                    <p className="font-bold"><em>Breach of Fiduciary Duty.</em></p>
+                    <p>Love alleges that S&amp;S &quot;possessed and reviewed&quot; her manuscript, giving rise to a fiduciary duty. FAC ¶ 141. But a publisher&apos;s review of an unsolicited or submitted manuscript does not give rise to a fiduciary obligation. A fiduciary duty requires facts showing that the defendant &quot;knowingly undertook to act on behalf of and for the benefit of&quot; the plaintiff. <em>Blatty v. Warner Bros. Ent.</em>, 2011 WL 13217379, at *8–9 (C.D. Cal. Apr. 21, 2011). Love has alleged no such undertaking by S&amp;S.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Intentional Interference with Contractual Relations and Tortious Interference with Business Advantage.</em></p>
+                    <p>These claims require, respectively, knowledge of the specific contractual or business relationship purportedly disrupted and intentional acts directed at causing that disruption. <em>Disney Enters., Inc. v. Redbox Automated Retail, LLC</em>, 2018 WL 1942139, at *9 (C.D. Cal. Feb. 20, 2018); <em>Celebrity Chefs Tour, LLC v. Macy&apos;s, Inc.</em>, 2015 WL 11237460, at *19 (S.D. Cal. Aug. 10, 2015). Love does not allege that S&amp;S was aware of any specific contract or business relationship, let alone that it took deliberate steps to interfere with one.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Intentional and Negligent Misrepresentation.</em></p>
+                    <p>Both claims require a specific misrepresentation by the defendant on which the plaintiff relied to her detriment. <em>Solo v. Dawson</em>, 2010 WL 11508000, at *21 (C.D. Cal. Feb. 8, 2010); <em>Ryder v. Lightstorm Ent., Inc.</em>, 246 Cal. App. 4th 1064, 1079 (2016). Love does not allege that S&amp;S made any representation to her, let alone one she acted upon.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Negligence.</em></p>
+                    <p>A negligence claim requires, among other elements, a duty of care owed by the defendant to the plaintiff and a specific breach of that duty. <em>McCormick v. Sony Pictures Entm&apos;t</em>, 2008 WL 11336160, at *7 (C.D. Cal. Nov. 17, 2008). Love has not alleged facts establishing any duty S&amp;S owed to her, nor has she identified any specific act or omission by S&amp;S constituting a breach.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Intentional Infliction of Emotional Distress.</em></p>
+                    <p>IIED requires conduct that is &quot;extreme and outrageous&quot;—conduct so beyond the bounds of decency as to be considered atrocious and utterly intolerable in a civilized community. <em>McCrudden v. DeMarco</em>, 2022 WL 17369135, at *13 (C.D. Cal. Oct. 6, 2022). Love has alleged no such conduct by S&amp;S specifically.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Stalking.</em></p>
+                    <p>A civil stalking claim requires a pattern of conduct by the defendant directed at following, alarming, surveilling, or harassing the plaintiff. Cal. Civ. Code § 1708.7(a). Love has made no factual allegation connecting S&amp;S to any such conduct.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Civil Conspiracy.</em></p>
+                    <p>A conspiracy claim requires both an agreement to commit a tortious act and the commission of that act. <em>Idema v. Dreamworks, Inc.</em>, 162 F. Supp. 2d 1129, 1197 (C.D. Cal. 2001). Love has not alleged facts plausibly showing that S&amp;S entered into any agreement to commit a tort, nor that it committed one.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Unfair Business Practices (Cal. Bus. &amp; Prof. Code § 17200).</em></p>
+                    <p>A UCL claim depends entirely on the viability of the predicate legal violations alleged. Where the plaintiff cannot establish the predicate violations, the UCL claim fails alongside them. <em>Eidmann v. Walgreen Co.</em>, 522 F. Supp. 3d 634, 647 (N.D. Cal. 2021). Because Love has not adequately alleged any predicate violation by S&amp;S, her UCL claim fails.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Accounting and Constructive Trust.</em></p>
+                    <p>Both of these equitable remedies depend on the success of a substantive underlying claim. <em>Glue-Fold, Inc. v. Slautterback Corp.</em>, 82 Cal. App. 4th 1018, 1023 n.3 (2000). Because Love&apos;s copyright infringement claim and all predicate state law claims fail, these derivative claims fail with them.</p>
+                  </div>
+
+                  <div>
+                    <p className="font-bold"><em>Declaratory Judgment.</em></p>
+                    <p>Love seeks a declaration as to her rights and S&amp;S&apos;s obligations under alleged agreements between them. FAC ¶ 264. The FAC identifies no agreement between Love and S&amp;S. This claim fails for that reason.</p>
+                  </div>
+                </div>
               </div>
 
-              {/* 3. Time-barred claims */}
+              {/* 3. Untimeliness and Preemption */}
               <div className="mb-4 ml-4">
-                <p className="mb-2 font-bold text-[#212223]">3. Many of Love&apos;s State Law Claims Are Untimely and/or Subject to Copyright Preemption.</p>
+                <h4 className="mb-3 font-bold text-[#212223]">3. Many State Law Claims Are Also Untimely and/or Preempted.</h4>
                 <p className="text-sm leading-relaxed text-[#212223]">
-                  Finally, as set forth in CAA&apos;s Motion to Dismiss, many of Love&apos;s state law claims are barred by the applicable statutes of limitation and/or preempted by the Copyright Act. Specifically, her claims for constructive trust, intentional interference with contractual relations, tortious interference with business advantage, negligence, intentional infliction of emotional distress, and intentional and negligent misrepresentation are each time barred. And her claims for breach of fiduciary duty, intentional interference with contractual relationship, tortious interference with prospective business advantage, negligence, intentional infliction of emotional distress, conspiracy, Business &amp; Professions Code § 17200, accounting, and constructive trust are each subject to copyright preemption. Each of those claims is subject to dismissal on these additional bases.
+                  As set forth in the motion to dismiss filed by CAA, which S&amp;S joins in its entirety, many of Love&apos;s state law claims face independent obstacles of untimeliness and preemption. Specifically, the following claims are barred by the applicable statutes of limitation: constructive trust, intentional interference with contractual relations, tortious interference with business advantage, negligence, IIED, and intentional and negligent misrepresentation. In addition, the following claims are preempted by the Copyright Act: breach of fiduciary duty, intentional interference with contractual relations, tortious interference with prospective business advantage, negligence, IIED, civil conspiracy, UCL § 17200, accounting, and constructive trust. Each of these claims is subject to dismissal on these additional, independent grounds.
                 </p>
               </div>
             </div>
