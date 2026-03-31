@@ -647,10 +647,9 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <div className="ml-4">
                         <p className="mb-2 text-sm font-medium text-[#212223]">f. Mood and Pace</p>
                         <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
-                          <li>One Italian Summer is driven by plot twists, drama, and suspense across a compressed timeline of a few weeks. Eat the Lemon is a darker, trauma-inflected work told as episodic vignettes across eighteen months, with no driving plotlines toward resolution.</li>
-                          <li>The mood and pace of the two works are fundamentally different and share no protectable expression.</li>
-                        </ul>
-                      </div>
+                        <li>One Italian Summer is driven by plot twists, drama, and suspense across a compressed timeline of a few weeks. Eat the Lemon is a darker, trauma-inflected work told as episodic vignettes across eighteen months, with no driving plotlines toward resolution.</li>
+                      </ul>
+                    </div>
                     </div>
                   </div>
 
