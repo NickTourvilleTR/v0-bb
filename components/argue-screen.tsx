@@ -332,14 +332,18 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
               ))
             )}
           </div>
-          {/* Add additional argument/claim button */}
-          <button
-            onClick={() => onQuote?.(flowType === "judicial" ? "Add additional claim" : "Add additional argument")}
-            className="mt-2 mb-6 flex items-center gap-2 text-sm text-[#404040] hover:text-[#212223]"
-          >
-            <Plus className="size-4" />
-            <span>{flowType === "judicial" ? "Add additional claim" : "Add additional argument"}</span>
-          </button>
+{/* Add additional argument/claim button */}
+  <div className="mt-4 mb-6">
+  <Button
+  variant="outline"
+  size="sm"
+  onClick={() => onQuote?.(flowType === "judicial" ? "Add additional claim" : "Add additional argument")}
+  className="rounded-full border-[#e5e5e5] px-4 text-[#212223] hover:bg-[#f7f7f7]"
+  >
+  <Plus className="mr-2 size-3" />
+  {flowType === "judicial" ? "Add additional claim" : "Add additional argument"}
+  </Button>
+  </div>
 
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-4">
