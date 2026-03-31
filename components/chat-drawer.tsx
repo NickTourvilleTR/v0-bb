@@ -458,7 +458,7 @@ export function ChatDrawer({
             {flowType !== "judicial" && (
               <Button variant="outline" size="sm" onClick={onSkipToGenerateDraft} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to generate draft</Button>
             )}
-            <Button size="sm" onClick={onNextSupportingAuthority} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: {flowType === "judicial" ? "Decide on selected claims" : "Supporting authority"}</Button>
+            <Button size="sm" onClick={onNextSupportingAuthority} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: {flowType === "judicial" ? "Decide on selected claims" : "Develop"}</Button>
           </div>
         </div>
       )}

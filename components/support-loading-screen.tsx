@@ -40,7 +40,7 @@ export function SupportLoadingScreen({
 
         {/* Title */}
         <h1 className="mb-2 text-center text-2xl font-semibold text-[#212223]">
-          Generating supporting authorities
+          Generating details for development
         </h1>
 
         {/* Subtitle */}

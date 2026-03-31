@@ -272,7 +272,7 @@ function AuthenticatedApp() {
   };
 
   const handleNextSupportingAuthority = () => {
-    const buttonLabel = flowType === "judicial" ? "Next: Decide on selected claims" : "Next: Supporting authority";
+    const buttonLabel = flowType === "judicial" ? "Next: Decide on selected claims" : "Next: Develop";
     addChatMessage("user", buttonLabel);
     if (flowType === "judicial") {
       addChatMessage("assistant", "Decide how to resolve disputed issues.");
