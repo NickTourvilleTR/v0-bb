@@ -343,7 +343,6 @@ export function ChatDrawer({
             <div className="flex flex-col gap-1">
               {[
                 { name: "Gyant v. NFM - Complaint.pdf", metadata: "Uploaded at 9:17 a.m." },
-                { name: "Gyant v. NFM - Complaint.pdf (Copy)", metadata: "Uploaded at 9:17 a.m." },
                 { name: "Metcalf v. Bochco", metadata: "United States Court of Appeals, Ninth Circuit. | June 12, 2002 | 294 F.3d 1069 | 2002 Copr.L.Dec. P 28,447 | 63 U.S.P.Q.2d 1412" },
                 { name: "Hansen Deposition.pdf", metadata: "Uploaded at 9:17 a.m." },
                 { name: "Policy Endorsement - Wind/Hail, Notice of Claim.pdf", metadata: "Uploaded at 9:17 a.m." },
@@ -424,7 +423,7 @@ export function ChatDrawer({
 
             {/* Document Content - continuous scroll */}
             <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
-              {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" || openedDocument.name === "Gyant v. NFM - Complaint.pdf (Copy)" ? gyantComplaintPages : []).map((page, index) => (
+              {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : []).map((page, index) => (
                 <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
                   <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
                   <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
