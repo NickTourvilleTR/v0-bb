@@ -79,7 +79,14 @@ const complianceItems = [
   {
     title: "Table of Authorities",
     status: "Compliant" as const,
-    content: null,
+    content: {
+      rule: { label: "Local Rule 11-3.2", href: "#" },
+      rows: [
+        { icon: "info", text: "Requirement: Required for motions exceeding 10 pages" },
+        { icon: "info", text: "Current: Included" },
+        { icon: "check", text: "Table of authorities is present and complete." },
+      ],
+    },
   },
   {
     title: "Notice of Motion",
