@@ -14,7 +14,9 @@ interface VerifyPanelProps {
 export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline }: VerifyPanelProps) {
   const [showOutlinePreview, setShowOutlinePreview] = useState(false);
   const [showVerificationDetails, setShowVerificationDetails] = useState(false);
+  const [showMastersonVerificationDetails, setShowMastersonVerificationDetails] = useState(false);
   const verificationDetailsRef = useRef<HTMLDivElement>(null);
+  const mastersonVerificationDetailsRef = useRef<HTMLDivElement>(null);
 
   const handleWarningClick = () => {
     const newState = !showVerificationDetails;
@@ -22,6 +24,16 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
     if (newState) {
       setTimeout(() => {
         verificationDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
+    }
+  };
+
+  const handleMastersonWarningClick = () => {
+    const newState = !showMastersonVerificationDetails;
+    setShowMastersonVerificationDetails(newState);
+    if (newState) {
+      setTimeout(() => {
+        mastersonVerificationDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 50);
     }
   };
@@ -199,7 +211,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                   While in Italy, Love and Brad befriend Adele, a woman who rents them an apartment, and Love confides to Adele that her mother once studied cooking in Amalfi. Id. at 11, 34–37. Shortly after Love and Brad return to San Francisco, Love decides to go back to Italy alone, this time with a specific mission: to locate her mother&apos;s former cooking teacher and complete a cookbook her mother had assembled during her time in Italy. Id. at 45. Brad largely disappears from the narrative at this point.
                 </p>
                 <p className="text-sm leading-relaxed text-[#212223]">
-                  The remainder of the memoir follows Love&apos;s deepening connection to Adele, her family, and the rhythms of Italian life. On her mother&apos;s birthday, Love hosts a dinner party and prepares a recipe from her mother&apos;s cookbook; Adele&apos;s mother Rosa, who is an experienced cook, steps in to lead the preparation. Id. at 70, 73–78. Rosa later teaches Love to cook—offering a form of maternal warmth Love had never received from her own mother. Id. at 80–81, 93. Love also befriends a local woman named Anita, who helps her track down the identity of her mother&apos;s cooking teacher, only to learn that the teacher has died. Id. at 85–86. After a brief return to California, Love travels back to Italy and is introduced to Marietta, who was the cooking teacher&apos;s assistant and knew Love&apos;s mother during her time in Amalfi. Id. at 89–90, 94–95. From Marietta, Love learns that her mother was happy during the period Marietta knew her����a revelation that provides Love with a measure of peace she had not previously found. Id. at 95. The memoir ends with Love cherishing this new understanding of her mother and embracing Rosa as the mother figure she never had. Id. at 100.
+                  The remainder of the memoir follows Love&apos;s deepening connection to Adele, her family, and the rhythms of Italian life. On her mother&apos;s birthday, Love hosts a dinner party and prepares a recipe from her mother&apos;s cookbook; Adele&apos;s mother Rosa, who is an experienced cook, steps in to lead the preparation. Id. at 70, 73–78. Rosa later teaches Love to cook—offering a form of maternal warmth Love had never received from her own mother. Id. at 80–81, 93. Love also befriends a local woman named Anita, who helps her track down the identity of her mother&apos;s cooking teacher, only to learn that the teacher has died. Id. at 85–86. After a brief return to California, Love travels back to Italy and is introduced to Marietta, who was the cooking teacher&apos;s assistant and knew Love&apos;s mother during her time in Amalfi. Id. at 89–90, 94–95. From Marietta, Love learns that her mother was happy during the period Marietta knew her�����a revelation that provides Love with a measure of peace she had not previously found. Id. at 95. The memoir ends with Love cherishing this new understanding of her mother and embracing Rosa as the mother figure she never had. Id. at 100.
                 </p>
               </div>
 
@@ -372,11 +384,34 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
                 <div className="mb-4 ml-4">
                   <p className="mb-3 font-bold text-[#212223]">e. Theme</p>
                   <p className="mb-3 text-sm leading-relaxed text-[#212223]">
-                    A general thematic similarity that is &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a finding of substantial similarity. <span className="inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Masterson</em>, 821 F. App&apos;x at 782</a><AlertTriangle className="inline size-4 text-[#ab3300]" /></span>. The general idea of a woman traveling to Italy to reach a greater understanding of—and peace with—her deceased mother is not protectable.
+                    A general thematic similarity that is &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a finding of substantial similarity. <span className="inline-flex items-center gap-1"><a href="#" className="text-[#0062c4] hover:underline"><em>Masterson</em>, 821 F. App&apos;x at 782</a><button onClick={handleMastersonWarningClick} className="inline-flex items-center justify-center transition-transform duration-150 hover:scale-125"><AlertTriangle className="inline size-4 text-[#ab3300]" /></button></span>. The general idea of a woman traveling to Italy to reach a greater understanding of—and peace with—her deceased mother is not protectable.
                   </p>
                   <p className="text-sm leading-relaxed text-[#212223]">
                     Moreover, the specific thematic preoccupations of the two works are meaningfully different. <em>One Italian Summer</em> is fundamentally about dismantling an idealized image of a beloved mother in order to see her, for the first time, as an autonomous person—and about how that act of perception liberates Katy to claim her own autonomy. <em>Eat the Lemon</em> operates from an entirely different emotional premise. Love does not need to dismantle an idealized image; she carries no idealization to begin with. Her memoir is instead about the possibility of overcoming deeply unhappy memories of a difficult, emotionally distant mother—and about discovering, through her Italian family of choice, what real warmth and belonging feel like for the first time. The works are not substantially similar as to theme.
                   </p>
+                  
+                  {showMastersonVerificationDetails && (
+                    <div ref={mastersonVerificationDetailsRef} className="my-4 rounded-lg border border-solid border-[#cccccc] bg-[#fafafa] p-6 text-sm">
+                      <div className="mb-4 flex items-center justify-between">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-[#737373]">VERIFICATION DETAILS:</p>
+                        <button onClick={() => setShowMastersonVerificationDetails(false)} className="flex items-center justify-center rounded-md p-1 text-[#737373] transition-colors hover:bg-[#e5e5e5] hover:text-[#212223]">
+                          <X className="size-4" />
+                        </button>
+                      </div>
+                      
+                      <p className="mb-6 leading-relaxed text-[#212223]">
+                        <span className="font-bold">Statement:</span> A general thematic similarity that is &quot;too general to be protectible for the purposes of the extrinsic test&quot; cannot support a finding of substantial similarity.
+                      </p>
+                      
+                      <div className="flex gap-3">
+                        <AlertTriangle className="mt-0.5 size-4 shrink-0 text-[#ab3300]" />
+                        <div>
+                          <p className="font-bold text-[#212223]">Problematic</p>
+                          <p className="text-[#212223]">The Masterson case actually supports the proposition that general thematic similarities are not protectable. However, it also affirms that when multiple unprotectable elements are combined in a specific sequence, that arrangement may itself warrant copyright protection. This could potentially undermine the argument if opposing counsel argues that the combination of elements in Love&apos;s work constitutes a protectable arrangement.</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* f. Mood and Pace */}
