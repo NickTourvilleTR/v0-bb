@@ -684,7 +684,20 @@ export function OutlineEditor({ className, onNextDraft, flowType = "brief" }: Ou
                       <ul className="space-y-2 list-disc list-inside text-sm text-[#212223]">
                         <li>&quot;Everyone did everything&quot; group pleading is improper and warrants dismissal. Destfino v. Reiswig, 630 F.3d 952, 958–59 (9th Cir. 2011). A plaintiff &quot;must identify what action each Defendant took that caused Plaintiffs&apos; harm.&quot; Sebastian Brown Prods. v. Muzooka, 143 F. Supp. 3d 1026, 1037 (N.D. Cal. 2015).</li>
                         <li>The only S&S-specific allegations are: (1) S&S published One Italian Summer; (2) one S&S editor is married to a former Love literary agent; and (3) another S&S editor rejected Love&apos;s manuscript two weeks before the One Italian Summer announcement.</li>
-                        <li>Individual state law claims fail for additional reasons: Breach of Fiduciary Duty (no duty created by possessing manuscript); Intentional/Tortious Interference (no knowledge or intentional disruption); Misrepresentation (no statement to Love); Negligence (no duty alleged); IIED (no extreme conduct); Stalking (no pattern); Civil Conspiracy (no agreement); UCL § 17200 (no predicate violation); Accounting/Constructive Trust (derivative of failed copyright claim); Declaratory Judgment (no agreements with S&S).</li>
+                        <li>Individual state law claims fail for the following additional reasons:
+                          <ul className="mt-2 ml-4 space-y-2 list-disc list-inside">
+                            <li>Breach of Fiduciary Duty: A publisher that &quot;possessed and reviewed&quot; a manuscript did not thereby undertake to act on behalf of the author. Blatty v. Warner Bros., 2011 WL 13217379 (C.D. Cal. 2011).</li>
+                            <li>Intentional/Tortious Interference: No allegations that S&S knew of or intentionally acted to disrupt any specific contract or business relationship. Disney Enters. v. Redbox, 2018 WL 1942139 (C.D. Cal. 2018); Celebrity Chefs Tour v. Macy&apos;s, 2015 WL 11237460 (S.D. Cal. 2015).</li>
+                            <li>Intentional/Negligent Misrepresentation: No allegation that S&S made any specific misrepresentation to Love, or that she relied on one. Solo v. Dawson, 2010 WL 11508000 (C.D. Cal. 2010); Ryder v. Lightstorm, 246 Cal. App. 4th 1064 (2016).</li>
+                            <li>Negligence: No allegation that S&S owed Love a duty of care or what it did to breach it. McCormick v. Sony Pictures, 2008 WL 11336160 (C.D. Cal. 2008).</li>
+                            <li>Intentional Infliction of Emotional Distress: No allegation of &quot;extreme and outrageous&quot; conduct by S&S specifically. McCrudden v. DeMarco, 2022 WL 17369135 (C.D. Cal. 2022).</li>
+                            <li>Stalking: No allegation of any conduct by S&S constituting a &quot;pattern&quot; of following, alarming, surveilling, or harassing Love. Cal. Civ. Code § 1708.7.</li>
+                            <li>Civil Conspiracy: No allegation of an agreement involving S&S to engage in any tortious act. Idema v. Dreamworks, 162 F. Supp. 2d 1129, 1197 (C.D. Cal. 2001).</li>
+                            <li>UCL § 17200: No adequately alleged predicate violation by S&S. Eidmann v. Walgreen Co., 522 F. Supp. 3d 634, 647 (N.D. Cal. 2021).</li>
+                            <li>Accounting/Constructive Trust: Entirely derivative of the copyright claim, which fails as a matter of law. Glue-Fold v. Slautterback, 82 Cal. App. 4th 1018, 1023 n.3 (2000).</li>
+                            <li>Declaratory Judgment: Love seeks a declaration regarding &quot;duties under alleged agreements,&quot; but alleges no agreements with S&S.</li>
+                          </ul>
+                        </li>
                         <li>Each state law claim fails independently for lack of any plausible, S&S-specific factual allegation sufficient to support liability.</li>
                       </ul>
                     </div>
