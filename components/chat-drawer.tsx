@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { gyantComplaintPages } from "@/lib/document-content";
+import { gyantComplaintPages, metcalfVBochcoPages } from "@/lib/document-content";
 import { Logo } from "@/components/logo";
 import { Paperclip, ArrowUp, X, Notebook, RotateCcw, FileText, ChevronDown, ChevronUp, Download, Reply, Flag, Grip, Mail, ArrowLeft, Undo2, Redo2, ZoomIn, ZoomOut, ExternalLink } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -424,7 +424,7 @@ export function ChatDrawer({
 
             {/* Document Content - continuous scroll */}
             <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
-              {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" || openedDocument.name === "Metcalf v. Bochco" ? gyantComplaintPages : []).map((page, index) => (
+              {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : openedDocument.name === "Metcalf v. Bochco" ? metcalfVBochcoPages : []).map((page, index) => (
                 <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
                   <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
                   <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
