@@ -44,6 +44,8 @@ interface AppLayoutWrapperProps {
   }>;
   className?: string;
   onSendMessage?: (message: string) => void;
+  openSourceRequest?: { name: string; scrollToHighlight?: boolean } | null;
+  onClearSourceRequest?: () => void;
 }
 
 export function AppLayoutWrapper({
@@ -77,6 +79,8 @@ export function AppLayoutWrapper({
   messages = [],
   className,
   onSendMessage,
+  openSourceRequest,
+  onClearSourceRequest,
 }: AppLayoutWrapperProps) {
   const [drawerTab, setDrawerTab] = React.useState<"chat" | "notes" | "versions" | "sources">("chat");
   const [drawerWidth, setDrawerWidth] = React.useState(380);
@@ -240,6 +244,8 @@ export function AppLayoutWrapper({
         onDocumentOpen={handleDocumentOpen}
         onDocumentClose={handleDocumentClose}
         onTabChange={setDrawerTab}
+        openSourceRequest={openSourceRequest}
+        onClearSourceRequest={onClearSourceRequest}
       />
     </div>
   );

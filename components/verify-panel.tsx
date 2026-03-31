@@ -9,9 +9,10 @@ interface VerifyPanelProps {
   onNextOpposition?: () => void;
   onSkipToFinalize?: () => void;
   onEditOutline?: () => void;
+  onOpenMetcalfSource?: () => void;
 }
 
-export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline }: VerifyPanelProps) {
+export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline, onOpenMetcalfSource }: VerifyPanelProps) {
   const [showOutlinePreview, setShowOutlinePreview] = useState(false);
   const [showVerificationDetails, setShowVerificationDetails] = useState(false);
   const [showMastersonVerificationDetails, setShowMastersonVerificationDetails] = useState(false);
@@ -25,6 +26,8 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
       setTimeout(() => {
         verificationDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 50);
+      // Open the Metcalf v. Bochco source and scroll to the highlighted paragraph
+      onOpenMetcalfSource?.();
     }
   };
 

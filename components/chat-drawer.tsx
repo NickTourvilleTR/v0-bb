@@ -50,6 +50,8 @@ interface ChatDrawerProps {
   onDocumentClose?: () => void;
   onTabChange?: (tab: "chat" | "notes" | "versions" | "sources") => void;
   onSendMessage?: (message: string) => void;
+  openSourceRequest?: { name: string; scrollToHighlight?: boolean } | null;
+  onClearSourceRequest?: () => void;
 }
 
 export function ChatDrawer({
@@ -83,6 +85,8 @@ export function ChatDrawer({
   onDocumentClose,
   onTabChange,
   onSendMessage,
+  openSourceRequest,
+  onClearSourceRequest,
 }: ChatDrawerProps) {
   const [activeTab, setActiveTabInternal] = React.useState<"chat" | "notes" | "versions" | "sources">(defaultTab);
   const setActiveTab = React.useCallback((tab: "chat" | "notes" | "versions" | "sources") => {
@@ -93,9 +97,28 @@ export function ChatDrawer({
   const [internalQuotedText, setInternalQuotedText] = React.useState<string | null>(null);
   const [sourcesView, setSourcesView] = React.useState<"uploaded" | "cases">("uploaded");
   const [sourcesDropdownOpen, setSourcesDropdownOpen] = React.useState(false);
-  const [openedDocument, setOpenedDocument] = React.useState<{ name: string; time: string } | null>(null);
+  const [openedDocument, setOpenedDocument] = React.useState<{ name: string; metadata: string } | null>(null);
   const sourcesDropdownRef = React.useRef<HTMLDivElement>(null);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
+  const highlightRef = React.useRef<HTMLDivElement>(null);
+
+  // Handle openSourceRequest from parent
+  React.useEffect(() => {
+    if (openSourceRequest) {
+      setActiveTab("sources");
+      const doc = { name: openSourceRequest.name, metadata: openSourceRequest.name === "Metcalf v. Bochco" ? "United States Court of Appeals, Ninth Circuit. | June 12, 2002 | 294 F.3d 1069 | 2002 Copr.L.Dec. P 28,447 | 63 U.S.P.Q.2d 1412" : "Uploaded at 9:17 a.m." };
+      setOpenedDocument(doc);
+      onDocumentOpen?.();
+      
+      if (openSourceRequest.scrollToHighlight) {
+        setTimeout(() => {
+          highlightRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+      
+      onClearSourceRequest?.();
+    }
+  }, [openSourceRequest, onClearSourceRequest, onDocumentOpen, setActiveTab]);
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
@@ -428,11 +451,18 @@ export function ChatDrawer({
                 <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
                   <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
                   <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
-                    {page.content.split('\n').map((line, lineIndex) => (
-                      <div key={lineIndex} className={line.startsWith('[1] [2] 1.') ? 'bg-yellow-100 px-3 py-2 rounded mb-2' : ''}>
-                        {line}
-                      </div>
-                    ))}
+                    {page.content.split('\n').map((line, lineIndex) => {
+                      const isHighlighted = line.startsWith('[1] [2] 1.');
+                      return (
+                        <div 
+                          key={lineIndex} 
+                          ref={isHighlighted ? highlightRef : undefined}
+                          className={isHighlighted ? 'bg-yellow-100 px-3 py-2 rounded mb-2' : ''}
+                        >
+                          {line}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               ))}
