@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, AlertTriangle, List } from "lucide-react";
+import { FileText, AlertTriangle, List, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
@@ -53,180 +53,234 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
           </div>
         </div>
 
-        {/* Legal Document - White paper style */}
-        <div className="mx-auto max-w-[816px] bg-white shadow-lg" style={{ fontFamily: "Times New Roman, serif" }}>
-          <div className="px-16 py-12">
-            {/* Form Header */}
-            <div className="mb-2 text-left text-[10px] leading-tight text-[#666]">
-              <p>[Form OP-1]</p>
-              <p>[Essential LR Form]</p>
-              <p>Revised 06/01/2014</p>
-              <p>Revised 02/03/2022</p>
-            </div>
+        {/* Legal Document */}
+        <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
+          {/* Party/Attorney Fields */}
+          <div className="mb-8 space-y-2 text-sm text-[#212223]">
+            <p>[Party/Attorney]</p>
+            <p>[Email]</p>
+            <p>[Street/Address]</p>
+            <p>[Telephone]</p>
+            <p>[Facsimile]</p>
+          </div>
 
-            {/* Court Header */}
-            <div className="mb-6 text-center">
-              <p className="text-xs font-bold uppercase tracking-wide text-[#212223]">UNITED STATES DISTRICT COURT</p>
-              <p className="text-xs font-bold uppercase tracking-wide text-[#212223]">CENTRAL DISTRICT OF CALIFORNIA</p>
-            </div>
+          {/* Add Party Button */}
+          <button className="mb-8 flex items-center gap-2 rounded-md border border-[#cccccc] px-3 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]">
+            <Plus className="size-4" />
+            Add a Party/Attorney
+          </button>
 
-            {/* Case Caption Box */}
-            <div className="mb-6 flex border border-[#212223]">
-              {/* Left side - parties */}
-              <div className="flex-1 border-r border-[#212223] p-4">
-                <p className="text-xs text-[#212223]">CAROLINE LEWIS,</p>
-                <p className="ml-8 text-xs italic text-[#212223]">Plaintiff,</p>
-                <p className="my-2 text-xs text-[#212223]">vs.</p>
-                <p className="text-xs text-[#212223]">MIRAMAX, INC., et al.,</p>
-                <p className="ml-8 text-xs italic text-[#212223]">Defendants.</p>
-              </div>
-              {/* Right side - case info */}
-              <div className="flex-1 p-4">
-                <p className="text-xs text-[#212223]">Case No: 5:23-cv-01234-AB-SHKx</p>
-                <p className="mb-2 text-xs text-[#212223]">Assigned to: Hon. André Birotte Jr.</p>
-                <p className="text-xs font-bold text-[#212223]">DEFENDANT MIRAMAX&apos;S OPPOSITION</p>
-                <p className="text-xs font-bold text-[#212223]">TO PLAINTIFF&apos;S MOTION FOR</p>
-                <p className="text-xs font-bold text-[#212223]">SUMMARY JUDGMENT RE:</p>
-                <p className="text-xs font-bold text-[#212223]">COMPLAINT; INFRINGEMENT OF POINTS AND</p>
-                <p className="mb-2 text-xs font-bold text-[#212223]">AUTHORITIES</p>
-                <p className="text-[10px] text-[#666]">Hearing Date: January 15, 2024</p>
-                <p className="text-[10px] text-[#666]">Hearing Time: 10:00 a.m.</p>
-                <p className="text-[10px] text-[#666]">Courtroom: 7A, 7th Floor</p>
-              </div>
-            </div>
+          {/* Court Header */}
+          <div className="mb-8 text-center">
+            <p className="text-lg font-semibold text-[#212223]">UNITED STATES DISTRICT COURT</p>
+            <p className="text-lg font-semibold text-[#212223]">CENTRAL DISTRICT OF CALIFORNIA</p>
+          </div>
 
-            {/* Document Title */}
-            <div className="mb-8 text-center">
-              <p className="text-sm font-bold uppercase text-[#212223]">MEMORANDUM OF POINTS AND AUTHORITIES</p>
-            </div>
-
-            {/* Section I */}
-            <div className="mb-6">
-              <p className="mb-3 text-xs font-bold uppercase text-[#212223]">I. INTRODUCTORY STATEMENT</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Plaintiff Caroline Lewis (&quot;Plaintiff&quot; or &quot;Lewis&quot;) filed this action against Defendants Miramax, Inc. (&quot;Miramax&quot;) and Searchlight Pictures, Inc. (&quot;Searchlight&quot;) (collectively, &quot;Defendants&quot;), alleging that Defendants infringed her copyright in her unpublished screenplay entitled &quot;Coastal Dreams&quot; (the &quot;Lewis Screenplay&quot;). Lewis claims that the 2019 film &quot;A Hidden Life&quot; (the &quot;Film&quot;), directed by Terrence Malick and distributed by Fox Searchlight Pictures, Inc. (&quot;Fox Searchlight&quot;), infringed her copyright in the Lewis Screenplay.
+          {/* Case Information */}
+          <div className="mb-8 flex gap-8">
+            {/* Left Column - Parties */}
+            <div className="flex-1 border-r border-[#e5e5e5] pr-8">
+              <p className="mb-4 text-sm text-[#212223]">
+                <span className="font-medium">ADRIENNE LOVE</span>,
               </p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Lewis asserts that despite a dearth of evidentiary support that Miramax had access to her unpublished screenplay, Miramax is liable for willful copyright infringement. Lewis also claims that Defendants misappropriated her ideas and violated California&apos;s unfair competition law. The Court should grant summary judgment in favor of Defendants because Lewis cannot satisfy her burden of proving that Defendants had access to her screenplay, that the two works are substantially similar as a matter of law, and that any similarities involve protectable expression rather than unprotectable ideas, stock characters, and scenes à faire.
+              <p className="mb-4 ml-16 text-sm text-[#212223]">Plaintiff,</p>
+              <p className="mb-4 ml-8 text-sm text-[#212223]">v.</p>
+              <p className="mb-4 text-sm text-[#212223]">
+                <span className="font-medium">AIRBNB, INC., et al.</span>,
               </p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                For all of these reasons, the Motion for Summary Judgment should be DENIED.
-              </p>
+              <p className="ml-16 text-sm text-[#212223]">Defendants.</p>
             </div>
 
-            {/* Section II */}
-            <div className="mb-6">
-              <p className="mb-3 text-xs font-bold uppercase text-[#212223]">II. FACTUAL BACKGROUND</p>
+            {/* Right Column - Case Details */}
+            <div className="flex-1">
+              <p className="mb-2 text-sm text-[#212223]">Case No. 2:25-cv-01779-AB(KSx)</p>
+              <p className="mb-6 text-sm text-[#212223]">Hon. André Birotte Jr.</p>
+              <p className="mb-2 text-sm font-semibold uppercase text-[#212223]">
+                DEFENDANT DEFENDANT&apos;S JOINDER IN<br/>
+                CREATIVE ARTISTS AGENCY, LLC&apos;S MOTION TO<br/>
+                DISMISS FIRST AMENDED COMPLAINT AND<br/>
+                MOTION TO DISMISS FIRST AMENDED<br/>
+                COMPLAINT; MEMORANDUM OF POINTS AND<br/>
+                AUTHORITIES IN SUPPORT THEREOF
+              </p>
+              <p className="mt-6 text-sm text-[#212223]">Hearing Date: October 31, 2025</p>
+              <p className="text-sm text-[#212223]">Hearing Time: 10:00 a.m.</p>
+              <p className="text-sm text-[#212223]">Courtroom: 7B</p>
+            </div>
+          </div>
+
+          {/* MEMORANDUM OF POINTS AND AUTHORITIES */}
+          <div className="mb-8 text-center border-t border-b border-[#e5e5e5] py-4">
+            <h2 className="text-base font-bold text-[#212223] underline">
+              MEMORANDUM OF POINTS AND AUTHORITIES
+            </h2>
+          </div>
+
+          {/* I. PRELIMINARY STATEMENT */}
+          <div className="mb-8">
+            <h2 className="mb-4 text-lg font-bold text-[#212223]">I. PRELIMINARY STATEMENT</h2>
+            
+            {/* Bulleted Points */}
+            <ul className="space-y-3">
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  Plaintiff Adrienne Love alleges a vast conspiracy — encompassing the author, publisher, literary agents, editors, and a movie studio — to steal her life story as depicted in her unpublished memoir Eat the Lemon and exploit it in Rebecca Serle&apos;s novel One Italian Summer, published by S&amp;S. <span className="text-[#737373]">(FAC ¶¶46-48)</span>
+                </span>
+              </li>
               
-              <p className="mb-2 text-xs font-bold text-[#212223]">A. The Alleged Similarities</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Lewis alleges that her screenplay &quot;Coastal Dreams&quot; was infringed upon by Miramax&apos;s film &quot;A Hidden Life.&quot; Lewis registered her screenplay with the U.S. Copyright Office on March 15, 2018, and claims she submitted it to several production companies, including a company that was later acquired by Miramax. However, Lewis cannot establish that any employee of Miramax ever received, reviewed, or had access to her screenplay prior to the Film&apos;s production.
-              </p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                The Film, &quot;A Hidden Life,&quot; premiered at the Cannes Film Festival in May 2019 and was released theatrically in December 2019. The Film was written and directed by Terrence Malick and is based on the true story of Franz Jägerstätter, an Austrian conscientious objector who was executed for refusing to fight for the Nazis during World War II. Malick began researching Jägerstätter&apos;s life in 2016 and wrote the screenplay between 2016 and 2017, well before Lewis claims to have submitted her screenplay.
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">B. The Works at Issue</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Lewis&apos;s screenplay tells a fictional story of a contemporary conscientious objector who refuses military service during a modern conflict. The protagonist faces social ostracism, legal consequences, and family pressure, ultimately choosing imprisonment over compromising his beliefs. The Film depicts the true story of Franz Jägerstätter, an Austrian farmer who refused to serve in the Nazi military. The historical record of Jägerstätter&apos;s life is extensively documented in historical sources.
-              </p>
-            </div>
-
-            {/* Section III */}
-            <div className="mb-6">
-              <p className="mb-3 text-xs font-bold uppercase text-[#212223]">III. ARGUMENT</p>
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  Love further alleges that the conspirators stalked her, sent strangers claiming to work for the FBI to confront her, and caused two mysterious deaths to intimidate her into silence. <span className="text-[#737373]">(FAC ¶¶63, 65)</span>
+                </span>
+              </li>
               
-              <p className="mb-2 text-xs font-bold text-[#212223]">A. Lewis&apos;s Copyright Infringement Claims Fails As A Matter Of Law</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                A copyright plaintiff must establish &quot;(1) ownership of a valid copyright; and (2) copying of constituent elements of the work that are original.&quot; <span className="italic text-[#0062c4]">Feist Publ&apos;ns, Inc. v. Rural Tel. Serv. Co.</span>, 499 U.S. 340, 361 (1991). To prove copying, a plaintiff must show that the defendant actually copied the plaintiff&apos;s work and that the copying amounts to an improper appropriation. <span className="italic text-[#0062c4]">Rentmeester v. Nike, Inc.</span>, 883 F.3d 1111, 1117 (9th Cir. 2018).
-              </p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                To establish copyright infringement, a plaintiff must demonstrate that the defendant copied protected elements of the work by satisfying both the extrinsic and intrinsic tests for substantial similarity. <span className="italic text-[#0062c4]">Corbello v. Valli</span>, 974 F.3d 965, 974 (9th Cir. 2020). The extrinsic test is an objective comparison of specific expressive elements—including plot, theme, dialogue, mood, setting, pace, characters, and sequence of events—after filtering out unprotectable material such as facts, ideas, and scènes à faire; the intrinsic test asks whether an ordinary reasonable person would find the works substantially similar in their total concept and feel.
-              </p>
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  Love has now filed a First Amended Complaint that is substantially identical to her original complaint, asserting copyright infringement and 13 state law claims against S&amp;S. <span className="text-[#737373]">(FAC ¶¶130-264)</span>
+                </span>
+              </li>
+              
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  A complaint must be dismissed under Rule 12(b)(6) where it fails to state a claim for relief. The FAC&apos;s fatal defects are apparent from the face of the pleading and the works themselves, without any need for discovery. <span className="text-[#0062c4]">(FRCP 12(b)(6))</span>
+                </span>
+              </li>
+              
+              <li className="flex items-baseline gap-2 text-sm text-[#212223]">
+                <span className="mt-px shrink-0 text-[#212223]">•</span>
+                <span>
+                  Because (1) the two works are not substantially similar in protectable expression, (2) the state law claims lack specific allegations of conduct by S&amp;S, and (3) many state law claims are untimely and/or preempted, the FAC should be dismissed with prejudice.
+                </span>
+              </li>
+            </ul>
+          </div>
 
-              <p className="mb-2 text-xs font-bold text-[#212223]">B. The Two Works Are Not Substantially Similar</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                The extrinsic test is an objective one that focuses on &quot;articulable similarities between the plot, themes, dialogue, mood, setting, pace, characters, and sequence of events.&quot; <span className="italic text-[#0062c4]">Kouf v. Walt Disney Pictures &amp; Television</span>, 16 F.3d 1042, 1045 (9th Cir. 1994). Under the extrinsic test, the court must first &quot;filter out&quot; the unprotectable elements of the plaintiff&apos;s work—including ideas, facts, public domain elements, merger material, scenes à faire, and other unoriginal elements. <span className="italic text-[#0062c4]">Cavalier v. Random House, Inc.</span>, 297 F.3d 815, 822 (9th Cir. 2002). Only after this filtration can the court meaningfully compare the two works.
+          {/* II. FACTUAL BACKGROUND */}
+          <div className="mb-8">
+            <h2 className="mb-4 text-lg font-bold text-[#212223]">II. FACTUAL BACKGROUND</h2>
+            
+            {/* A. The Parties */}
+            <div className="mb-6">
+              <h3 className="mb-2 font-bold text-[#212223]">A. The Parties</h3>
+              <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                Love is the author of <em>Eat the Lemon</em>, an unpublished memoir she describes as a personal account of her own life experiences. FAC ¶¶ 33–34. She has registered two manuscript versions with the U.S. Copyright Office—a July 2020 draft and a February 2021 draft—and represents that the work was completed in 2021. Id. Ex. A.
               </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">C. Plot and Sequence of Events</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                The basic plot sequence—person of conscience refuses military service, faces legal consequences, is imprisoned, and maintains conviction despite pressure—is not protectable. This sequence derives from the historical facts of countless conscientious objector cases and is a standard narrative structure for stories in this genre. See <span className="italic text-[#0062c4]">Berkic v. Crichton</span>, 761 F.2d 1289, 1293 (9th Cir. 1985).
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">D. Characters</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                The character types in both works—a principled objector, a supportive spouse, disapproving community members, and legal/military authorities—are stock characters inherent to any conscientious objector narrative. Stock characters are not protectable. <span className="italic text-[#0062c4]">Cavalier</span>, 297 F.3d at 823.
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">E. Mood and Theme</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                The themes of conscience, sacrifice, and standing firm against authority are ideas that cannot be copyrighted. 17 U.S.C. § 102(b); <span className="italic text-[#0062c4]">Satava v. Lowry</span>, 323 F.3d 805, 810 (9th Cir. 2003).
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">F. Select of Lewis&apos;s State Law Claims Preempted by Federal Copyright Law</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Lewis&apos;s state law claims for unfair competition and unjust enrichment are preempted by federal copyright law because they are based on the same allegations of copying that underlie her copyright claim. <span className="italic text-[#0062c4]">Laws v. Sony Music Entm&apos;t, Inc.</span>, 448 F.3d 1134, 1143-44 (9th Cir. 2006).
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">G. Lewis&apos;s Compulsory Arbitration Are Independently Subject to Copyright Preemption</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Section 301(a) of the Copyright Act preempts all state law claims that (1) fall within the subject matter of copyright as defined in sections 102 and 103, and (2) assert rights that are equivalent to any of the exclusive rights granted to copyright holders under section 106. 17 U.S.C. § 301(a).
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">H. Breach of Fiduciary Duty: The Confidential Relations and Business Advantage Theory Fails</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Lewis cannot establish any fiduciary or confidential relationship with Defendants. The submission of an unsolicited screenplay to a studio&apos;s general submissions portal does not create a fiduciary duty. <span className="italic text-[#0062c4]">Benay v. Warner Bros. Entm&apos;t, Inc.</span>, 607 F.3d 620, 629 (9th Cir. 2010).
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">I. Implied-in-Fact Contract Requires California Business and Professions Code § 17200</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Lewis cannot state a claim for breach of implied contract because there was no &quot;meeting of the minds&quot; between the parties. Lewis admits she never received any response from Miramax. <span className="italic text-[#0062c4]">Chandler v. Roach</span>, 156 Cal. App. 2d 435, 441 (1957).
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">J. Accounting and Declaratory Relief: These Claims Are Derivative and Fail</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Lewis&apos;s claims for an accounting and declaratory relief are derivative of her substantive claims and must fail with them. <span className="italic text-[#0062c4]">Civic W. Corp. v. Zila Indus., Inc.</span>, 66 Cal. App. 3d 1, 14 (1977).
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">K. Many of Lewis&apos;s State Law Claims Are Ultimately and/or Subject to Copyright Preemption</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                All of Lewis&apos;s state law claims that depend on allegations that Defendants copied protected expression from the Lewis Screenplay are preempted by 17 U.S.C. § 301.
-              </p>
-
-              <p className="mb-2 text-xs font-bold text-[#212223]">L. Lewis Has Not Alleged Contract By Deed That Could Make It Liable For State Law Claims</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Searchlight is entitled to summary judgment on all state law claims because it had no contact with Lewis or her screenplay. Lewis admits her only submission was to Miramax&apos;s portal, not Searchlight.
+              <p className="text-sm leading-relaxed text-[#212223]">
+                S&amp;S is the publisher of <em>One Italian Summer</em>, a novel authored by Rebecca Serle. FAC ¶¶ 11, 31, 78. The novel was first publicly announced in March 2021, when a sample chapter was released; it was published in March 2022. Id. ¶¶ 48, 50.
               </p>
             </div>
 
-            {/* Section IV */}
-            <div className="mb-8">
-              <p className="mb-3 text-xs font-bold uppercase text-[#212223]">IV. CONCLUSION</p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                Lewis offers derivative Constitutionally-protected opinions and ideas on a topic of interest, no more. Her claims are barred by copyright law preemption and fail as a matter of copyright and state contract law. The mere use of similar ideas or themes of conscientious objection and conviction does not constitute copyright infringement. An alleged infringer has no obligation not to copy mere themes, plot sequence, or stock characters, which constitute unprotectable elements under Ninth Circuit copyright law.
+            {/* B. The Alleged Conspiracy */}
+            <div className="mb-6">
+              <h3 className="mb-2 font-bold text-[#212223]">B. The Alleged Conspiracy</h3>
+              <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                Love&apos;s central allegation is that a network of conspirators—including individuals she had trusted as her own advisors—decided that her life story would fetch greater commercial returns if told by Serle, an established novelist, rather than by Love herself. FAC ¶ 46. She contends that these conspirators arranged to funnel her manuscript to Serle, who then appropriated it for both <em>One Italian Summer</em> and a related film project currently in development. Id. ¶¶ 37–48, 50, 57–61, 78–79.
               </p>
-              <p className="mb-3 text-justify text-xs leading-relaxed text-[#212223]">
-                For the foregoing reasons, Defendant Miramax, Inc. and Searchlight Pictures, Inc. respectfully request that this Court grant summary judgment in their favor on all of Plaintiff&apos;s claims.
+              <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                The alleged conspiracy goes well beyond literary theft. Love asserts that to silence her, the conspirators arranged for her to be surveilled, confronted by strangers claiming to work for the FBI, and subjected to other forms of physical and emotional intimidation. Id. ¶¶ 63, 66, 76, 126.
               </p>
             </div>
 
-            {/* Signature Block */}
-            <div className="mb-8">
-              <p className="mb-4 text-xs text-[#212223]">DATED: September 16, 2023</p>
-              <p className="mb-4 text-right text-xs font-bold text-[#212223]">KIRKLAND ASSOCIATES LLP</p>
-              <div className="text-right">
-                <p className="text-xs text-[#212223]">By: _______________________</p>
-                <p className="text-xs text-[#212223]">Sarah Mitchell</p>
-                <p className="text-xs text-[#666]">Attorneys for Defendant</p>
-                <p className="text-xs text-[#666]">MIRAMAX, INC.</p>
+            {/* C. The Two Works Compared */}
+            <div className="mb-6">
+              <h3 className="mb-2 font-bold text-[#212223]">C. The Two Works Compared</h3>
+              
+              {/* 1. Eat the Lemon */}
+              <div className="mb-6 ml-4">
+                <p className="mb-4 font-semibold text-[#212223]">1. <em>Eat the Lemon</em></p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  <em>Eat the Lemon</em> is, by Love&apos;s own description, a &quot;personal memoir&quot; recounting her true experiences. FAC ¶¶ 33, 36. The work centers on Love&apos;s efforts to come to terms with the loss of her mother—who died of cancer roughly a decade before the events described—and with the broader trauma of her family life, through extended periods of immersion in the culture and landscape of Italy&apos;s Amalfi Coast. Id. ¶¶ 112, 118, 124.
+                </p>
+              </div>
+
+              {/* 2. One Italian Summer */}
+              <div className="ml-4">
+                <p className="mb-4 font-semibold text-[#212223]">2. <em>One Italian Summer</em></p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  <em>One Italian Summer</em> is an avowed work of fiction built around an extended device of magical realism. The novel opens with Katy, the narrator, in the immediate aftermath of her mother&apos;s death from cancer—a loss that has upended her sense of self and strained her marriage to Eric. OIS at 1, 3. Before her mother died, she and Katy had planned a trip together to Positano, Italy, where her mother had spent a meaningful summer as a young woman. Id. at 10–13.
+                </p>
               </div>
             </div>
 
-            {/* Certificate of Compliance */}
-            <div className="border-t border-[#ccc] pt-6 text-center">
-              <p className="mb-4 text-xs font-bold uppercase text-[#212223]">CERTIFICATE OF COMPLIANCE</p>
-              <p className="text-[10px] text-[#666]">[Certificate content]</p>
+            {/* D. Procedural History */}
+            <div className="mb-6">
+              <h3 className="mb-2 font-bold text-[#212223]">D. Procedural History</h3>
+              <p className="text-sm leading-relaxed text-[#212223]">
+                Love filed her original Complaint on February 28, 2025. S&amp;S accepted service in June 2025 and filed a Motion to Dismiss the original Complaint on June 30, 2025. ECF Nos. 19, 27–28. Love filed an Opposition on August 18, 2025, and two days later filed the First Amended Complaint, which is now the operative pleading. ECF Nos. 43–44.
+              </p>
+            </div>
+          </div>
+
+          {/* III. ARGUMENT */}
+          <div className="mb-8">
+            <h2 className="mb-4 text-lg font-bold text-[#212223]">III. ARGUMENT</h2>
+            
+            {/* A. Copyright Claim */}
+            <div className="mb-6">
+              <h3 className="mb-4 font-bold text-[#212223]">A. Love&apos;s Copyright Infringement Claim Fails As A Matter Of Law.</h3>
+              <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                To state a claim for copyright infringement, a plaintiff is required to plead &quot;among other things, (1) the copying of copyrighted material and (2) the unlawful appropriation of it.&quot; <a href="#" className="text-[#0062c4] hover:underline">Woodland v. Hill, 136 F.4th 1199, 1205 (9th Cir. 2025)</a>. &quot;To show unlawful appropriation, the plaintiff must prove that the defendant copied enough of the protected expression in the work to render the two works &apos;substantially similar.&apos;&quot; <em>Id.</em> at 1206.
+              </p>
+              
+              {/* 1. Biographical Facts */}
+              <div className="mb-4 ml-4">
+                <p className="mb-2 font-bold text-[#212223]">1. The Details Allegedly Copied Are Biographical Facts That Are Not Protectable.</p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  Love&apos;s copyright claim fails on the threshold ground that the alleged copying involved the facts of her biography, which are not subject to copyright protection. Love&apos;s First Amended Complaint is explicit that the narrative details <em>One Italian Summer</em> supposedly lifted from <em>Eat the Lemon</em> correspond to the facts of her own life. <a href="#" className="text-[#0062c4] hover:underline">FAC ¶¶ 33, 75</a>
+                </p>
+              </div>
+
+              {/* 2. No Substantial Similarity */}
+              <div className="mb-4 ml-4">
+                <p className="mb-2 font-bold text-[#212223]">2. Even If Eat the Lemon Were Entitled To The Protection Afforded Fictional Works, There Would Still Be No Substantial Similarity.</p>
+                <p className="mb-4 text-sm leading-relaxed text-[#212223]">
+                  Even if <em>Eat the Lemon</em> is analyzed as if it were a fictional work, notwithstanding Love&apos;s emphatic representations about its non-fictional status, the result does not change.
+                </p>
+
+                {/* a. Plot */}
+                <div className="mb-3 ml-4">
+                  <p className="mb-2 font-bold text-[#212223]">a. Plot and Sequence of Events</p>
+                  <p className="mb-2 text-sm leading-relaxed text-[#212223]">
+                    It is fundamental that &quot;[n]o one can own the basic idea for a story. General plot ideas are not protected by copyright law; they remain forever the common property of artistic mankind.&quot; <a href="#" className="text-[#0062c4] hover:underline"><em>Berkic v. Crichton</em>, 761 F.2d 1289, 1293 (9th Cir. 1985)</a>.
+                  </p>
+                </div>
+
+                {/* b. Characters */}
+                <div className="mb-3 ml-4">
+                  <p className="mb-2 font-bold text-[#212223]">b. Characters</p>
+                  <p className="text-sm leading-relaxed text-[#212223]">
+                    Nor are there protectable similarities between the characters across the two works, especially considering that characters are generally not subject to copyright protection unless they are &quot;especially distinctive.&quot; <a href="#" className="text-[#0062c4] hover:underline"><em>Olson v. NBC</em>, 855 F.2d 1446, 1451, 1452 (9th Cir. 1988)</a>.
+                  </p>
+                </div>
+
+                {/* c. Dialogue */}
+                <div className="mb-3 ml-4">
+                  <p className="mb-2 font-bold text-[#212223]">c. Dialogue</p>
+                  <p className="text-sm leading-relaxed text-[#212223]">
+                    Love does not allege any similar dialogue between the works.
+                  </p>
+                </div>
+
+                {/* d. Setting */}
+                <div className="mb-3 ml-4">
+                  <p className="mb-2 font-bold text-[#212223]">d. Setting</p>
+                  <p className="text-sm leading-relaxed text-[#212223]">
+                    There are also no protectable similarities at the level of setting. While Love asserts that both works &quot;are set on the Amalfi Coast of Italy in quaint, family-run hotels,&quot; <a href="#" className="text-[#0062c4] hover:underline">FAC ¶ 81</a>, that is misleading.
+                  </p>
+                </div>
+
+                {/* e. Theme */}
+                <div className="mb-3 ml-4">
+                  <p className="mb-2 font-bold text-[#212223]">e. Theme</p>
+                  <p className="text-sm leading-relaxed text-[#212223]">
+                    Nor are there protectable similarities at the level of theme. The general theme of a female protagonist coming to feel greater connection to her deceased mother by visiting the Amalfi Coast is not protectable.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
