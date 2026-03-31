@@ -16,7 +16,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
-      <div className="mx-auto flex w-full max-w-6xl gap-6 px-6 py-8">
+      <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8">
         {/* Left sidebar buttons - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
           <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
@@ -25,7 +25,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline 
         </div>
 
         {/* Main content column */}
-        <div className="mx-auto max-w-3xl flex-1">
+        <div className="flex-1 max-w-3xl">
         {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
