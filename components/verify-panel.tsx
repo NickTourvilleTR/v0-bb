@@ -639,7 +639,6 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
               </div>
             </div>
           </div>
-        </div>
 
           {/* Bottom Action Buttons */}
           <div className="flex items-center justify-center gap-3 pb-8 pt-6">
@@ -657,6 +656,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
               Next: Opposition brief
             </Button>
           </div>
+        </div>
         </div>
       </div>
       {showOutlinePreview && (
