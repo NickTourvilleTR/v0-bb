@@ -138,8 +138,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
 
       {/* Document Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-8">
-        <div className="mx-auto flex justify-center px-8">
-          <div className="flex w-full gap-6">
+        <div className="mx-auto flex max-w-5xl gap-6">
           {/* Left sidebar button - sticky */}
           <div className="sticky top-8 flex h-fit flex-col gap-2">
             <JumpToMenu 
@@ -162,7 +161,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
           </div>
 
           {/* Main content column */}
-          <div style={{ width: "800px", maxWidth: "100%" }} className="flex-shrink-0">
+          <div className="flex-1" style={{ width: `min(${zoom}%, 800px)`, maxWidth: "calc(100% - 2rem)" }}>
           {/* Header — above the white card, same width */}
           <div className="mb-4">
             {flowType === "judicial" ? (
@@ -710,7 +709,6 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
           >
             {flowType === "judicial" ? "Verify opinion" : "Verify brief"}
           </Button>
-        </div>
         </div>
         </div>
         </div>

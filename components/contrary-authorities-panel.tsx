@@ -16,8 +16,8 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
   const contentRef = React.useRef<HTMLDivElement>(null);
   const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
   return (
-    <div className={cn("flex h-full flex-col items-center overflow-y-auto px-8 py-8", className)}>
-      <div ref={contentRef} className="flex w-full gap-6">
+    <div className={cn("flex h-full flex-col overflow-y-auto", className)}>
+      <div ref={contentRef} className="mx-auto flex max-w-5xl gap-6 px-6 py-8">
         {/* Left sidebar button - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
           <JumpToMenu 
@@ -30,7 +30,7 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
         </div>
 
         {/* Main content column */}
-        <div style={{ width: "800px", maxWidth: "100%" }} className="flex-shrink-0">
+        <div className="flex-1">
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -40,9 +40,6 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
               Review anticipated challenges
             </h1>
           </div>
-
-          {/* White document card */}
-          <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
 
           {/* Party/Attorney Form Fields */}
           <div id="opposition-party-attorney" className="mb-6 space-y-2">
@@ -133,7 +130,6 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
               </Button>
             </div>
           </div>
-          </div>{/* end white document card */}
         </div>
       </div>
       <SelectionContextMenu

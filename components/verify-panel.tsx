@@ -76,8 +76,8 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
   };
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col items-center overflow-y-auto px-8 py-8">
-      <div className="flex w-full gap-6">
+    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
+      <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8">
         {/* Left sidebar buttons - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
           <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
@@ -86,7 +86,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
         </div>
 
         {/* Main content column */}
-        <div style={{ width: "800px", maxWidth: "100%" }} className="flex-shrink-0">
+        <div className="flex-1">
           {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -262,7 +262,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
                 In a contradiction the FAC never resolves, Love simultaneously claims that <em>One Italian Summer</em> is an unlawful copy of <em>Eat the Lemon</em> and that it deliberately distorts the facts of her life to cast her in a negative light. Id. ¶¶ 64, 76, 126.
               </p>
               <p className="text-sm leading-relaxed text-[#212223]">
-                Notably, correspondence between Serle and her literary agent demonstrates that Serle had already formulated the concept and basic plot of <em>One Italian Summer</em> in June 2019—before Love&apos;s manuscript was allegedly circulating in Serle&apos;s orbit. That correspondence was shared with Love&apos;s counsel in an effort to resolve this matter without litigation, to no avail. As explained below, however, the Court need not resolve the question of independent creation because the two works are not substantially similar as a matter of law.
+                Notably, correspondence between Serle and her literary agent demonstrates that Serle had already formulated the concept and basic plot of <em>One Italian Summer</em> in June 2019��before Love&apos;s manuscript was allegedly circulating in Serle&apos;s orbit. That correspondence was shared with Love&apos;s counsel in an effort to resolve this matter without litigation, to no avail. As explained below, however, the Court need not resolve the question of independent creation because the two works are not substantially similar as a matter of law.
               </p>
             </div>
 
@@ -654,10 +654,10 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
               >
                 Next: Opposition brief
               </Button>
-            </div>
           </div>
         </div>
       </div>
+    </div>
       {showOutlinePreview && (
         <OutlinePreviewModal
           onClose={() => setShowOutlinePreview(false)}
