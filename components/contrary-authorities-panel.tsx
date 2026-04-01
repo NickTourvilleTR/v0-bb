@@ -17,7 +17,7 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
   const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
   return (
     <div className={cn("flex flex-1 flex-col items-center justify-center px-8 py-12 overflow-y-auto", className)}>
-      <div style={{ width: "800px", maxWidth: "100%" }} className="w-full flex flex-col">
+      <div style={{ width: "800px", maxWidth: "100%" }} className="w-full flex flex-col" ref={contentRef}>
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
