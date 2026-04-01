@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { FileText, AlertTriangle, List, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
+import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface VerifyPanelProps {
   onNextOpposition?: () => void;
