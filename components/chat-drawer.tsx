@@ -479,7 +479,6 @@ export function ChatDrawer({
                   ))}
                 </div>
               </div>
-            </div>
           )}
 
           {activeTab === "versions" && (
