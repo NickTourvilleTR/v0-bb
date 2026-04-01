@@ -117,6 +117,7 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
                 Next: Finalize
               </Button>
             </div>
+          </div>
         </div>
       </div>
     </div>
