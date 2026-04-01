@@ -212,8 +212,8 @@ export function FinalizePanel({ flowType = "brief" }: FinalizePanelProps) {
   const isJudicial = flowType === "judicial";
 
   return (
-    <div className="flex-1 overflow-y-auto p-6">
-      <div className="mx-auto max-w-4xl">
+    <div className="flex flex-1 flex-col items-center overflow-y-auto px-8 py-8">
+      <div style={{ width: "800px", maxWidth: "100%" }} className="w-full">
         {/* Title */}
         <h1 className="mb-6 text-3xl font-semibold text-[#212223]">
           Finalize the document
