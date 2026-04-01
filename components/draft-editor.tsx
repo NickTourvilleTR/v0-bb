@@ -138,7 +138,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
 
       {/* Document Content */}
       <div className="flex-1 overflow-y-auto bg-[#fcfcfc] p-8">
-        <div className="mx-auto flex max-w-5xl gap-6">
+        <div className="mx-auto flex gap-6" style={{ width: "872px", maxWidth: "100%" }}>
           {/* Left sidebar button - sticky */}
           <div className="sticky top-8 flex h-fit flex-col gap-2">
             <JumpToMenu 
