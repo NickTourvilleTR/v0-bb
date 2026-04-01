@@ -75,8 +75,8 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
   };
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
-      <div className="mx-auto flex max-w-4xl gap-6 px-6 py-8">
+    <div className="flex min-h-0 flex-1 flex-col items-center overflow-y-auto px-8 py-8">
+      <div style={{ width: "800px", maxWidth: "100%" }} className="w-full flex gap-6">
         {/* Left sidebar buttons - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
           <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
@@ -85,7 +85,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
         </div>
 
         {/* Main content column */}
-        <div className="flex-1 max-w-3xl">
+        <div className="flex-1">
         {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -657,6 +657,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
             </Button>
           </div>
         </div>
+        </div>
       </div>
       {showOutlinePreview && (
         <OutlinePreviewModal
@@ -667,8 +668,6 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
           }}
         />
       )}
-
-
     </div>
   );
 }
