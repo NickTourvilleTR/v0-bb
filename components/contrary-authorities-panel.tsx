@@ -16,23 +16,10 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
   const contentRef = React.useRef<HTMLDivElement>(null);
   const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
   return (
-    <div className={cn("flex h-full flex-col overflow-y-auto", className)}>
-      <div className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
-        {/* Left sidebar button - sticky */}
-        <div className="sticky top-8 flex h-fit flex-col gap-2">
-          <JumpToMenu 
-            sections={[
-              { id: "opposition-party-attorney", label: "Party/Attorney", level: "top" },
-              { id: "opposition-court-header", label: "Court Header", level: "top" },
-              { id: "opposition-brief-content", label: "Brief Content", level: "top" },
-            ] as JumpToSection[]}
-          />
-        </div>
-
-        {/* Main content column */}
-        <div ref={contentRef} className="flex-1">
-          {/* Header — above the white card, same width */}
-          <div className="mb-4">
+    <div className={cn("flex flex-1 flex-col items-center justify-center px-8 py-12 overflow-y-auto", className)}>
+      <div style={{ width: "800px", maxWidth: "100%" }} className="w-full flex flex-col">
+          {/* Header */}
+          <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
               OPPOSITION
             </p>
@@ -41,28 +28,26 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
             </h1>
           </div>
 
-          {/* White document card — matches draft editor */}
-          <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
-            {/* Party/Attorney Form Fields */}
-            <div id="opposition-party-attorney" className="mb-6 space-y-2">
-              <p className="text-sm text-[#212223]">[Party/Attorney]</p>
-              <p className="text-sm text-[#212223]">[Email]</p>
-              <p className="text-sm text-[#212223]">[Street/Address]</p>
-              <p className="text-sm text-[#212223]">[Telephone]</p>
-              <p className="text-sm text-[#212223]">[Facsimile]</p>
-            </div>
+          {/* Party/Attorney Form Fields */}
+          <div id="opposition-party-attorney" className="mb-6 space-y-2">
+            <p className="text-base text-[#212223]">[Party/Attorney]</p>
+            <p className="text-base text-[#212223]">[Email]</p>
+            <p className="text-base text-[#212223]">[Street/Address]</p>
+            <p className="text-base text-[#212223]">[Telephone]</p>
+            <p className="text-base text-[#212223]">[Facsimile]</p>
+          </div>
 
-            {/* Add Party/Attorney Button */}
-            <Button
-              variant="outline"
-              className="mb-8 flex items-center gap-2 rounded-md border-[#cccccc] px-3 py-2 text-sm text-[#212223] hover:bg-[#f2f2f2]"
-            >
-              <Plus className="size-4" />
-              Add a Party/Attorney
-            </Button>
+          {/* Add Party/Attorney Button */}
+          <Button
+            variant="outline"
+            className="mb-12 rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
+          >
+            <Plus className="mr-2 size-4" />
+            Add a Party/Attorney
+          </Button>
 
-            {/* Court Document Preview */}
-            <div className="space-y-8">
+          {/* Court Document Preview */}
+          <div className="space-y-8">
               {/* Court Header */}
               <div id="opposition-court-header" className="text-center">
                 <p className="text-lg font-semibold uppercase tracking-wide text-[#212223]">
@@ -122,25 +107,19 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
                 </p>
               </div>
 
-              {/* Bottom Action Button */}
-              <div className="flex items-center justify-center gap-3 pb-4 pt-8">
-                <Button
-                  onClick={onNextFinalize}
-                  className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-                >
-                  Next: Finalize
-                </Button>
-              </div>
+            {/* Bottom Action Button */}
+            <div className="flex items-center justify-center gap-3 pb-8 pt-8">
+              <Button
+                onClick={onNextFinalize}
+                className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+              >
+                Next: Finalize
+              </Button>
             </div>
           </div>
         </div>
       </div>
-      <SelectionContextMenu
-        position={position}
-        onAddFacts={hide}
-        onAddAuthorities={hide}
-        onAskQuestion={hide}
-      />
+      </div>
     </div>
   );
 }

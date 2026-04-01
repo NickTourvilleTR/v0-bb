@@ -75,17 +75,8 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
   };
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
-      <div className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
-        {/* Left sidebar buttons - sticky */}
-        <div className="sticky top-8 flex h-fit flex-col gap-2">
-          <button className="flex size-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white hover:bg-[#f7f7f7]">
-            <List className="size-5 text-[#212223]" />
-          </button>
-        </div>
-
-        {/* Main content column */}
-        <div className="flex-1">
+    <div className="flex min-h-0 flex-1 flex-col items-center justify-center overflow-y-auto px-8 py-12">
+      <div style={{ width: "800px", maxWidth: "100%" }} className="w-full flex flex-col">
         {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -635,40 +626,8 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
                 <p className="mt-4 text-sm italic text-[#212223]">/s/ Elizabeth L. Schilken</p>
                 <p className="text-sm text-[#212223]">Elizabeth L. Schilken</p>
                 <p className="mt-4 text-sm italic text-[#212223]">Attorneys for Simon &amp; Schuster, LLC</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-          {/* Bottom Action Buttons */}
-          <div className="flex items-center justify-center gap-3 pb-8 pt-6">
-            <Button
-              variant="outline"
-              onClick={onSkipToFinalize}
-              className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
-            >
-              Skip to finalize
-            </Button>
-            <Button
-              onClick={onNextOpposition}
-              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-            >
-              Next: Opposition brief
-            </Button>
-          </div>
         </div>
       </div>
-      {showOutlinePreview && (
-        <OutlinePreviewModal
-          onClose={() => setShowOutlinePreview(false)}
-          onEdit={() => {
-            setShowOutlinePreview(false);
-            onEditOutline?.();
-          }}
-        />
-      )}
-
-
     </div>
   );
 }
