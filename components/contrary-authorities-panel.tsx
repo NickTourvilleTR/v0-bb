@@ -18,8 +18,8 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
   return (
     <div className={cn("flex flex-1 flex-col items-center justify-center px-8 py-12 overflow-y-auto", className)}>
       <div style={{ width: "800px", maxWidth: "100%" }} className="w-full flex flex-col" ref={contentRef}>
-          {/* Header */}
-          <div className="mb-6">
+        {/* Header */}
+        <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
               OPPOSITION
             </p>
@@ -28,28 +28,28 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
             </h1>
           </div>
 
-          {/* Party/Attorney Form Fields */}
-          <div id="opposition-party-attorney" className="mb-6 space-y-2">
-            <p className="text-base text-[#212223]">[Party/Attorney]</p>
-            <p className="text-base text-[#212223]">[Email]</p>
-            <p className="text-base text-[#212223]">[Street/Address]</p>
-            <p className="text-base text-[#212223]">[Telephone]</p>
-            <p className="text-base text-[#212223]">[Facsimile]</p>
-          </div>
+        {/* Party/Attorney Form Fields */}
+        <div id="opposition-party-attorney" className="mb-6 space-y-2">
+          <p className="text-base text-[#212223]">[Party/Attorney]</p>
+          <p className="text-base text-[#212223]">[Email]</p>
+          <p className="text-base text-[#212223]">[Street/Address]</p>
+          <p className="text-base text-[#212223]">[Telephone]</p>
+          <p className="text-base text-[#212223]">[Facsimile]</p>
+        </div>
 
-          {/* Add Party/Attorney Button */}
-          <Button
-            variant="outline"
-            className="mb-12 rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
-          >
-            <Plus className="mr-2 size-4" />
-            Add a Party/Attorney
-          </Button>
+        {/* Add Party/Attorney Button */}
+        <Button
+          variant="outline"
+          className="mb-12 rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
+        >
+          <Plus className="mr-2 size-4" />
+          Add a Party/Attorney
+        </Button>
 
-          {/* Court Document Preview */}
-          <div className="space-y-8">
-              {/* Court Header */}
-              <div id="opposition-court-header" className="text-center">
+        {/* Court Document Preview */}
+        <div className="space-y-8">
+            {/* Court Header */}
+            <div id="opposition-court-header" className="text-center">
                 <p className="text-lg font-semibold uppercase tracking-wide text-[#212223]">
                   IN THE UNITED STATES DISTRICT COURT
                 </p>
@@ -117,7 +117,6 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
                 Next: Finalize
               </Button>
             </div>
-          </div>
         </div>
       </div>
     </div>
