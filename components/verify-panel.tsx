@@ -633,6 +633,5 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
     </div>
   );
 }
-    </div>
   );
 }
