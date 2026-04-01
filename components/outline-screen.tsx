@@ -88,6 +88,9 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowT
           Review the actions you've taken and revisit any earlier steps to make changes as desired, then generate your outline to continue.
         </p>
 
+        {/* White card with content */}
+        <div className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
+
         {/* Draft contents list */}
         <div className="mb-8">
           <h2 className="mb-4 font-semibold text-[#212223]">Your draft will include:</h2>
@@ -115,7 +118,7 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowT
         </div>
 
         {/* Bottom Action Buttons */}
-        <div className="flex items-center justify-center gap-3 pb-8 pt-4">
+        <div className="flex items-center justify-center gap-3 pb-4 pt-8">
           <Button
             variant="outline"
             onClick={onNextDraft}
@@ -130,6 +133,8 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowT
             Generate outline
           </Button>
         </div>
+        </div>
+        {/* end white card */}
       </div>
     </div>
   );
