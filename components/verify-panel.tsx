@@ -4,7 +4,6 @@ import { useState, useRef } from "react";
 import { FileText, AlertTriangle, List, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
-import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 
 interface VerifyPanelProps {
   onNextOpposition?: () => void;
@@ -14,7 +13,6 @@ interface VerifyPanelProps {
 }
 
 export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline, onOpenMetcalfSource }: VerifyPanelProps) {
-  const [showOutlinePreview, setShowOutlinePreview] = useState(false);
   const [showVerificationDetails, setShowVerificationDetails] = useState(false);
   const [showMastersonVerificationDetails, setShowMastersonVerificationDetails] = useState(false);
   const [showIssuesNavBar, setShowIssuesNavBar] = useState(false);
