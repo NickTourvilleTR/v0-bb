@@ -397,21 +397,53 @@ export function ChatDrawer({
 
           {/* Document Viewer */}
           {activeTab === "sources" && openedDocument && (
-            <div className="flex flex-col gap-4">
-              {/* Back to Sources */}
-              <button
+            <div className="flex flex-col">
+              {/* Toolbar */}
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#e5e5e5] bg-white px-4 py-2">
+                <div className="flex items-center gap-1">
+                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                    <Undo2 className="size-4" />
+                  </button>
+                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                    <Redo2 className="size-4" />
+                  </button>
+                  <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                    <ZoomOut className="size-4" />
+                  </button>
+                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                    <ZoomIn className="size-4" />
+                  </button>
+                  <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                    <Download className="size-4" />
+                  </button>
+                </div>
+                <button 
+                  onClick={() => {
+                    setOpenedDocument(null);
+                    onDocumentClose?.();
+                  }}
+                  className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+
+            {/* Back to Sources */}
+            <button
               onClick={() => {
                 setOpenedDocument(null);
                 onDocumentClose?.();
               }}
-              className="flex items-center gap-2 text-sm text-[#212223] hover:text-[#1d4b34] transition-colors"
+              className="flex items-center gap-2 text-sm text-[#212223] hover:text-[#1d4b34] transition-colors mt-4"
             >
               <ArrowLeft className="size-4" />
               Back to Sources
             </button>
 
             {/* Document title */}
-            <div>
+            <div className="mt-4">
               <a
                 href="#"
                 className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#1d4b34] underline decoration-[#1d4b34] underline-offset-2 hover:text-[#163d2a]"
@@ -422,31 +454,8 @@ export function ChatDrawer({
               <p className="mt-1 text-sm text-[#737373]">{openedDocument.metadata}</p>
             </div>
 
-            {/* Toolbar */}
-            <div className="sticky top-0 z-10 flex items-center justify-between rounded-lg border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2">
-              <div className="flex items-center gap-1">
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <Undo2 className="size-4" />
-                </button>
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <Redo2 className="size-4" />
-                </button>
-                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <ZoomOut className="size-4" />
-                </button>
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <ZoomIn className="size-4" />
-                </button>
-                <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
-                <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                  <Download className="size-4" />
-                </button>
-              </div>
-            </div>
-
             {/* Document Content - continuous scroll */}
-            <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
+            <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 mt-4">
               {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : openedDocument.name === "Metcalf v. Bochco" ? metcalfVBochcoPages : []).map((page, index) => (
                 <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
                   <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
