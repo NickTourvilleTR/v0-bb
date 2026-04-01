@@ -123,3 +123,6 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
     </div>
   );
 }
+    </div>
+  );
+}
