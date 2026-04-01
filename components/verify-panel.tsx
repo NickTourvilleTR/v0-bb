@@ -86,7 +86,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
         </div>
 
         {/* Main content column */}
-        <div style={{ width: "800px", maxWidth: "100%" }} className="flex-1">
+        <div style={{ width: "800px", maxWidth: "100%" }} className="flex-shrink-0">
           {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
@@ -656,7 +656,6 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
               </Button>
             </div>
           </div>
-        </div>
         </div>
       </div>
       {showOutlinePreview && (

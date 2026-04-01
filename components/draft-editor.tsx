@@ -162,7 +162,7 @@ export function DraftEditor({ className, onVerifyBrief, flowType = "brief", onOp
           </div>
 
           {/* Main content column */}
-          <div style={{ width: "800px", maxWidth: "100%" }} className="flex-1">
+          <div style={{ width: "800px", maxWidth: "100%" }} className="flex-shrink-0">
           {/* Header — above the white card, same width */}
           <div className="mb-4">
             {flowType === "judicial" ? (

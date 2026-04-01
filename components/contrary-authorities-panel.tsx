@@ -30,7 +30,7 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
         </div>
 
         {/* Main content column */}
-        <div style={{ width: "800px", maxWidth: "100%" }} className="flex-1">
+        <div style={{ width: "800px", maxWidth: "100%" }} className="flex-shrink-0">
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
