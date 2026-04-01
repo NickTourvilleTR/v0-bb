@@ -626,6 +626,9 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
                 <p className="mt-4 text-sm italic text-[#212223]">/s/ Elizabeth L. Schilken</p>
                 <p className="text-sm text-[#212223]">Elizabeth L. Schilken</p>
                 <p className="mt-4 text-sm italic text-[#212223]">Attorneys for Simon &amp; Schuster, LLC</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
