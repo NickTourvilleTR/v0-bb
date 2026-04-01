@@ -250,6 +250,40 @@ export function ChatDrawer({
 
       {/* Messages Area */}
       <TooltipProvider delayDuration={300}>
+        {/* Toolbar for document view - positioned outside scrollable area */}
+        {activeTab === "sources" && openedDocument && (
+          <div className="flex items-center justify-between border-b border-[#e5e5e5] bg-white px-4 py-2">
+            <div className="flex items-center gap-1">
+              <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                <Undo2 className="size-4" />
+              </button>
+              <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                <Redo2 className="size-4" />
+              </button>
+              <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+              <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                <ZoomOut className="size-4" />
+              </button>
+              <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                <ZoomIn className="size-4" />
+              </button>
+              <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
+              <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
+                <Download className="size-4" />
+              </button>
+            </div>
+            <button 
+              onClick={() => {
+                setOpenedDocument(null);
+                onDocumentClose?.();
+              }}
+              className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
+            >
+              <X className="size-4" />
+            </button>
+          </div>
+        )}
+
         <div className="flex-1 overflow-y-auto p-4">
           {activeTab === "chat" && (
             <>
@@ -397,41 +431,7 @@ export function ChatDrawer({
 
           {/* Document Viewer */}
           {activeTab === "sources" && openedDocument && (
-            <div className="flex flex-col gap-0">
-              {/* Toolbar - flush to top */}
-              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#e5e5e5] bg-white px-4 py-2">
-                <div className="flex items-center gap-1">
-                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                    <Undo2 className="size-4" />
-                  </button>
-                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                    <Redo2 className="size-4" />
-                  </button>
-                  <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
-                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                    <ZoomOut className="size-4" />
-                  </button>
-                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                    <ZoomIn className="size-4" />
-                  </button>
-                  <div className="mx-1 h-5 w-px bg-[#e5e5e5]" />
-                  <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
-                    <Download className="size-4" />
-                  </button>
-                </div>
-                <button 
-                  onClick={() => {
-                    setOpenedDocument(null);
-                    onDocumentClose?.();
-                  }}
-                  className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]"
-                >
-                  <X className="size-4" />
-                </button>
-              </div>
-
-              {/* Content with padding */}
-              <div className="flex flex-col gap-4 p-4">
+            <div className="flex flex-col gap-4">
                 {/* Back to Sources */}
                 <button
                   onClick={() => {
