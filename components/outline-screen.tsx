@@ -68,6 +68,9 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowT
   return (
     <div className={cn("flex flex-1 flex-col items-center overflow-y-auto px-8 py-12", className)}>
       <div style={{ width: "800px", maxWidth: "100%" }} className="w-full flex flex-col">
+        {/* White card with all content */}
+        <div className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
+
           {/* Icon */}
           <div className="mb-6 flex justify-center">
             <ListTree className="size-16 text-[#737373]" strokeWidth={1} />
@@ -78,21 +81,18 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowT
             Create your outline
           </h1>
 
-        {/* Subtitle */}
-        <p className="mb-6 text-center text-[#737373]">
-          Based on your selections, this may take up to 15 minutes
-        </p>
+          {/* Subtitle */}
+          <p className="mb-6 text-center text-[#737373]">
+            Based on your selections, this may take up to 15 minutes
+          </p>
 
-        {/* Description */}
-        <p className="mb-8 text-center text-[#212223]">
-          Review the actions you've taken and revisit any earlier steps to make changes as desired, then generate your outline to continue.
-        </p>
+          {/* Description */}
+          <p className="mb-8 text-center text-[#212223]">
+            Review the actions you've taken and revisit any earlier steps to make changes as desired, then generate your outline to continue.
+          </p>
 
-        {/* White card with content */}
-        <div className="rounded-lg border border-[#e5e5e5] bg-white p-8 shadow-sm">
-
-        {/* Draft contents list */}
-        <div className="mb-8">
+          {/* Draft contents list */}
+          <div className="mb-8">
           <h2 className="mb-4 font-semibold text-[#212223]">Your draft will include:</h2>
           
           <div className="space-y-4">
@@ -117,22 +117,22 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowT
           </div>
         </div>
 
-        {/* Bottom Action Buttons */}
-        <div className="flex items-center justify-center gap-3 pb-4 pt-8">
-          <Button
-            variant="outline"
-            onClick={onNextDraft}
-            className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
-          >
-            Skip to generate draft
-          </Button>
-          <Button
-            onClick={onGenerateOutline}
-            className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
-          >
-            Generate outline
-          </Button>
-        </div>
+          {/* Bottom Action Buttons */}
+          <div className="flex items-center justify-center gap-3 pb-4 pt-8">
+            <Button
+              variant="outline"
+              onClick={onNextDraft}
+              className="rounded-full border-[#cccccc] px-6 text-[#212223] hover:bg-[#f7f7f7]"
+            >
+              Skip to generate draft
+            </Button>
+            <Button
+              onClick={onGenerateOutline}
+              className="rounded-full bg-[#1d4b34] px-6 text-white hover:bg-[#163d2a]"
+            >
+              Generate outline
+            </Button>
+          </div>
         </div>
         {/* end white card */}
       </div>
