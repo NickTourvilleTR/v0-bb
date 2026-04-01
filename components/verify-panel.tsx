@@ -99,9 +99,8 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
         </div>
 
         {/* Legal Document */}
-        <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-sm">
-          {/* Issues Navigation Bar */}
-          {showIssuesNavBar && (
+        {/* Issues Navigation Bar */}
+            {showIssuesNavBar && (
             <div className="sticky top-4 z-10 -mt-2 mb-6 flex items-center justify-center">
               <div className="flex items-center gap-3 rounded-full border border-[#cccccc] bg-white px-4 py-2 shadow-lg">
                 <button 
