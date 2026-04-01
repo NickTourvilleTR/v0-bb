@@ -397,8 +397,8 @@ export function ChatDrawer({
 
           {/* Document Viewer */}
           {activeTab === "sources" && openedDocument && (
-            <div className="flex flex-col">
-              {/* Toolbar */}
+            <div className="flex flex-col gap-0">
+              {/* Toolbar - flush to top */}
               <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#e5e5e5] bg-white px-4 py-2">
                 <div className="flex items-center gap-1">
                   <button className="flex size-8 items-center justify-center rounded-md text-[#737373] hover:bg-[#e5e5e5] hover:text-[#212223]">
@@ -430,52 +430,55 @@ export function ChatDrawer({
                 </button>
               </div>
 
-            {/* Back to Sources */}
-            <button
-              onClick={() => {
-                setOpenedDocument(null);
-                onDocumentClose?.();
-              }}
-              className="flex items-center gap-2 text-sm text-[#212223] hover:text-[#1d4b34] transition-colors mt-4"
-            >
-              <ArrowLeft className="size-4" />
-              Back to Sources
-            </button>
+              {/* Content with padding */}
+              <div className="flex flex-col gap-4 p-4">
+                {/* Back to Sources */}
+                <button
+                  onClick={() => {
+                    setOpenedDocument(null);
+                    onDocumentClose?.();
+                  }}
+                  className="flex items-center gap-2 text-sm text-[#212223] hover:text-[#1d4b34] transition-colors"
+                >
+                  <ArrowLeft className="size-4" />
+                  Back to Sources
+                </button>
 
-            {/* Document title */}
-            <div className="mt-4">
-              <a
-                href="#"
-                className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#1d4b34] underline decoration-[#1d4b34] underline-offset-2 hover:text-[#163d2a]"
-              >
-                {openedDocument.name}
-                <ExternalLink className="size-4" />
-              </a>
-              <p className="mt-1 text-sm text-[#737373]">{openedDocument.metadata}</p>
-            </div>
-
-            {/* Document Content - continuous scroll */}
-            <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 mt-4">
-              {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : openedDocument.name === "Metcalf v. Bochco" ? metcalfVBochcoPages : []).map((page, index) => (
-                <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
-                  <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
-                  <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
-                    {page.content.split('\n').map((line, lineIndex) => {
-                      const isHighlighted = line.startsWith('[1] [2] 1.');
-                      return (
-                        <div 
-                          key={lineIndex} 
-                          ref={isHighlighted ? highlightRef : undefined}
-                          className={isHighlighted ? 'bg-yellow-100 px-3 py-2 rounded mb-2' : ''}
-                        >
-                          {line}
-                        </div>
-                      );
-                    })}
-                  </div>
+                {/* Document title */}
+                <div>
+                  <a
+                    href="#"
+                    className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#1d4b34] underline decoration-[#1d4b34] underline-offset-2 hover:text-[#163d2a]"
+                  >
+                    {openedDocument.name}
+                    <ExternalLink className="size-4" />
+                  </a>
+                  <p className="mt-1 text-sm text-[#737373]">{openedDocument.metadata}</p>
                 </div>
-              ))}
-            </div>
+
+                {/* Document Content - continuous scroll */}
+                <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
+                  {(openedDocument.name === "Gyant v. NFM - Complaint.pdf" ? gyantComplaintPages : openedDocument.name === "Metcalf v. Bochco" ? metcalfVBochcoPages : []).map((page, index) => (
+                    <div key={index} className={index > 0 ? "mt-8 border-t border-[#e5e5e5] pt-8" : ""}>
+                      <p className="mb-3 text-xs text-[#737373]">{page.pageHeader}</p>
+                      <div className="whitespace-pre-line text-sm leading-relaxed text-[#212223]">
+                        {page.content.split('\n').map((line, lineIndex) => {
+                          const isHighlighted = line.startsWith('[1] [2] 1.');
+                          return (
+                            <div 
+                              key={lineIndex} 
+                              ref={isHighlighted ? highlightRef : undefined}
+                              className={isHighlighted ? 'bg-yellow-100 px-3 py-2 rounded mb-2' : ''}
+                            >
+                              {line}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
 
