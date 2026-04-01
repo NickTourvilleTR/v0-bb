@@ -657,6 +657,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
             </div>
           </div>
         </div>
+        </div>
       </div>
       {showOutlinePreview && (
         <OutlinePreviewModal
