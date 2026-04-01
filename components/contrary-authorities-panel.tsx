@@ -17,7 +17,7 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
   const { position, hide } = useSelectionContextMenu(contentRef as React.RefObject<HTMLElement>);
   return (
     <div className={cn("flex h-full flex-col items-center overflow-y-auto px-8 py-8", className)}>
-      <div ref={contentRef} style={{ width: "800px", maxWidth: "100%" }} className="w-full flex gap-6">
+      <div ref={contentRef} className="flex w-full gap-6">
         {/* Left sidebar button - sticky */}
         <div className="sticky top-8 flex h-fit flex-col gap-2">
           <JumpToMenu 
@@ -30,7 +30,7 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
         </div>
 
         {/* Main content column */}
-        <div className="flex-1">
+        <div style={{ width: "800px", maxWidth: "100%" }} className="flex-1">
           {/* Header */}
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-[#737373]">
