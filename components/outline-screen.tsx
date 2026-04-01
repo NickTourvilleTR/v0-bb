@@ -66,11 +66,8 @@ interface OutlineScreenProps {
 export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowType = "brief" }: OutlineScreenProps) {
   const outlineItems = flowType === "judicial" ? judicialOutlineItems : briefOutlineItems;
   return (
-    <div className={cn("flex flex-1 flex-col overflow-y-auto", className)}>
-      <div className="mx-auto flex w-full max-w-5xl gap-6 px-6 py-8">
-      {/* Left sidebar spacer - matches draft editor layout */}
-      <div className="flex h-fit w-12 shrink-0 flex-col gap-2" />
-      <div className="flex flex-1 flex-col">
+    <div className={cn("flex flex-1 flex-col items-center justify-center px-8 py-12 overflow-y-auto", className)}>
+      <div style={{ width: "800px", maxWidth: "100%" }} className="w-full flex flex-col">
           {/* Icon */}
           <div className="mb-6 flex justify-center">
             <ListTree className="size-16 text-[#737373]" strokeWidth={1} />
@@ -133,7 +130,6 @@ export function OutlineScreen({ className, onGenerateOutline, onNextDraft, flowT
             Generate outline
           </Button>
         </div>
-      </div>
       </div>
     </div>
   );
