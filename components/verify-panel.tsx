@@ -86,7 +86,7 @@ export function VerifyPanel({ onNextOpposition, onSkipToFinalize, onEditOutline,
 
         {/* Main content column */}
         <div className="flex-1">
-        {/* Header */}
+          {/* Header */}
         <div className="mb-6">
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[#737373]">
             VERIFY
