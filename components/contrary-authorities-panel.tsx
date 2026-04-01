@@ -106,7 +106,6 @@ export function ContraryAuthoritiesPanel({ className, onNextFinalize }: Contrary
                   Finally, dismissal at the pleading stage is appropriate only where it is clear as a matter of law that no substantial similarity exists between the protectable elements of the works. <em>Woodland v. Hill</em>, 136 F.4th 1199, 1210 (9th Cir. 2025). Where, as here, the complaint identifies a substantial number of specific correspondences whose protectability — individually or in combination — cannot be resolved without a careful comparative analysis of both works in their entirety, the motion to dismiss should be denied. <em>See Zindel v. Fox Searchlight Pictures, Inc.</em>, No. 18-56087, 2020 WL 4502108, at *1 (9th Cir. Aug. 5, 2020) (reversing dismissal where &quot;reasonable minds could differ on the issue of substantial similarity&quot; and expert testimony could bear on the qualitative significance of the shared elements). Love is entitled to the opportunity to make that showing.
                 </p>
               </div>
-            </div>
 
             {/* Bottom Action Button */}
             <div className="flex items-center justify-center gap-3 pb-8 pt-8">
