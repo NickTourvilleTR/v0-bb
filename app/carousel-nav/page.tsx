@@ -12,7 +12,7 @@ import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-comb
 import { BriefBuilderProgressCard } from "@/components/brief-builder-progress-card";
 import { BriefBuilderReadyCard } from "@/components/brief-builder-ready-card";
 import { BriefBuilderGeneratingCard } from "@/components/brief-builder-generating-card";
-import { BriefCarouselNav, judicialCarouselSteps } from "@/components/brief-carousel-nav";
+
 import { ArgumentsPanel } from "@/components/arguments-panel";
 import { SupportingAuthoritiesPanel } from "@/components/supporting-authorities-panel";
 import { SupportLoadingScreen } from "@/components/support-loading-screen";
@@ -447,9 +447,8 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="intake" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
-          <AppLayoutWrapper
+<CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+<AppLayoutWrapper
             drawerOpen={drawerOpen}
             setDrawerOpen={setDrawerOpen}
             notesOpen={notesOpen}
@@ -495,7 +494,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="outline" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -533,7 +532,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="outline" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -559,7 +558,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="outline" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -595,7 +594,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -627,7 +626,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -653,7 +652,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="draft" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -706,7 +705,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="verify" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -796,7 +795,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} />
-          <BriefCarouselNav currentStep="finalize" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -822,7 +821,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="opposition" onStepClick={handleStepperClick} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -859,7 +858,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="develop" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -885,7 +884,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="develop" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
@@ -928,7 +927,7 @@ function AuthenticatedApp() {
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
           <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
-          <BriefCarouselNav currentStep="argue2" onStepClick={handleStepperClick} customSteps={flowType === "judicial" ? judicialCarouselSteps : undefined} />
+          
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
           setDrawerOpen={setDrawerOpen}
