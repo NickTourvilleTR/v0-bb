@@ -30,7 +30,6 @@ interface AppLayoutWrapperProps {
   onVerifyBrief?: () => void;
   hideInput?: boolean;
   showVersionsTab?: boolean;
-  hideHistoryButton?: boolean;
   quotedText?: string | null;
   onClearQuote?: () => void;
   prefillText?: string;
@@ -71,7 +70,6 @@ export function AppLayoutWrapper({
   onVerifyBrief,
   hideInput = false,
   showVersionsTab = false,
-  hideHistoryButton = false,
   quotedText = null,
   onClearQuote,
   prefillText,
@@ -91,16 +89,6 @@ export function AppLayoutWrapper({
 
   const handleChatClick = () => {
     setDrawerTab("chat");
-    setDrawerOpen(true);
-  };
-
-  const handleNotesClick = () => {
-    setDrawerTab("notes");
-    setDrawerOpen(true);
-  };
-
-  const handleSourcesClick = () => {
-    setDrawerTab("sources");
     setDrawerOpen(true);
   };
 
@@ -195,10 +183,7 @@ export function AppLayoutWrapper({
       {/* Right Toolbar - hidden when drawer is open */}
       <RightToolbar
         onChatClick={handleChatClick}
-        onNotesClick={handleNotesClick}
-        onLibraryClick={handleSourcesClick}
         hidden={drawerOpen}
-        hideHistoryButton={hideHistoryButton}
       />
 
       {/* Resize handle - only visible when drawer is open */}
