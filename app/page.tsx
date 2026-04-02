@@ -1100,15 +1100,7 @@ function AuthenticatedApp() {
                     Analyze document sets...
                   </button>
                 </div>
-                <div className="flex w-full justify-start">
-                  <button
-                    onClick={handleJudicialDraftingSubmit}
-                    className="flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white px-4 py-2 text-sm text-[#212223] hover:bg-[#f7f7f7]"
-                  >
-                    <Gavel className="size-4 text-[#737373]" />
-                    Help me with judicial drafting
-                  </button>
-                </div>
+                
               </div>
             </div>
           </main>
