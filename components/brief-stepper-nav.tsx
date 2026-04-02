@@ -18,7 +18,7 @@ interface Step {
   icon: React.ReactNode;
 }
 
-const steps: Step[] = [
+export const steps: Step[] = [
   { id: "intake", label: "Intake", icon: <ClipboardList className="size-5" /> },
   { id: "argue2", label: "Argue", icon: <MessagesSquare className="size-5" /> },
   { id: "develop", label: "Develop", icon: <Scale className="size-5" /> },
