@@ -12,7 +12,6 @@ interface CocoHeaderProps {
   onNextStep?: () => void;
   hasPrevStep?: boolean;
   hasNextStep?: boolean;
-  currentStepLabel?: string;
 }
 
 export function CocoHeader({ 
@@ -23,7 +22,6 @@ export function CocoHeader({
   onNextStep,
   hasPrevStep = false,
   hasNextStep = false,
-  currentStepLabel,
 }: CocoHeaderProps) {
   return (
     <header
@@ -32,39 +30,33 @@ export function CocoHeader({
         className
       )}
     >
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <a href="#" className="text-base font-medium text-[#2e6b5c] hover:underline">
           {title}
         </a>
-        {currentStepLabel && (
-          <>
-            <span className="text-[#737373]">/</span>
-            <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="size-7 text-[#737373] hover:bg-[#f2f2f2] disabled:opacity-40 disabled:cursor-not-allowed"
-                onClick={onPrevStep}
-                disabled={!hasPrevStep}
-                aria-label="Previous step"
-              >
-                <ChevronLeft className="size-4" />
-              </Button>
-              <span className="text-sm font-medium text-[#212223] min-w-[80px] text-center">
-                {currentStepLabel}
-              </span>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="size-7 text-[#737373] hover:bg-[#f2f2f2] disabled:opacity-40 disabled:cursor-not-allowed"
-                onClick={onNextStep}
-                disabled={!hasNextStep}
-                aria-label="Next step"
-              >
-                <ChevronRight className="size-4" />
-              </Button>
-            </div>
-          </>
+        {(hasPrevStep || hasNextStep) && (
+          <div className="flex items-center gap-1 ml-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-7 text-[#737373] hover:bg-[#f2f2f2] disabled:opacity-40 disabled:cursor-not-allowed"
+              onClick={onPrevStep}
+              disabled={!hasPrevStep}
+              aria-label="Previous step"
+            >
+              <ChevronLeft className="size-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-7 text-[#737373] hover:bg-[#f2f2f2] disabled:opacity-40 disabled:cursor-not-allowed"
+              onClick={onNextStep}
+              disabled={!hasNextStep}
+              aria-label="Next step"
+            >
+              <ChevronRight className="size-4" />
+            </Button>
+          </div>
         )}
       </div>
 

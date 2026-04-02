@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { MessageSquareText, Reply } from "lucide-react";
+import { Pencil, Reply } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
@@ -137,19 +137,19 @@ export function BriefBuilderCard({
           </button>
         ))}
 
-        {/* Draft a different motion type - no radio button */}
+        {/* Go to draft another motion type - no radio button */}
         <button
           onClick={() => handleMotionSelect("other")}
           className="flex w-full items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors hover:bg-[#f7f7f7]"
         >
-          <div className="flex items-start gap-3">
-            <MessageSquareText className="size-5 text-[#737373] mt-0.5 shrink-0" />
-            <div>
-              <h4 className="font-semibold text-[#212223]">Draft a different motion type</h4>
-              <p className="mt-1 text-sm text-[#737373]">Describe the motion type in the chat. CoCounsel is optimized for the motion types listed above, but can create others via the general brief drafting skill.</p>
+          <div>
+            <div className="flex items-center gap-2">
+              <Pencil className="size-4 text-[#737373]" />
+              <h4 className="font-semibold text-[#212223]">Go to draft a different motion type</h4>
             </div>
+            <p className="mt-1 text-sm text-[#737373]">Describe the kind of motion that your brief will support.</p>
           </div>
-          <Badge variant="secondary" className="shrink-0">Workflow</Badge>
+          <Badge variant="secondary" className="shrink-0">CoCounsel Drafting</Badge>
         </button>
       </div>
     </div>
