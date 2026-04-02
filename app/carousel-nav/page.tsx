@@ -411,6 +411,28 @@ function AuthenticatedApp() {
   const isAtOrPast = (screen: Screen) =>
     screenIndex[currentScreen] >= screenIndex[screen];
 
+  // Step navigation for header controls
+  // Define the main workflow steps in order (excluding loading/transitional screens)
+  const workflowSteps: Screen[] = flowType === "judicial" 
+    ? ["intake", "argue2", "support", "outline-ready", "draft-ready", "verify", "finalize"]
+    : ["intake", "argue2", "support", "distinguish", "outline-ready", "draft-ready", "verify", "finalize"];
+  
+  const currentStepIndex = workflowSteps.indexOf(currentScreen);
+  const hasPrevStep = currentStepIndex > 0;
+  const hasNextStep = currentStepIndex >= 0 && currentStepIndex < workflowSteps.length - 1;
+  
+  const handlePrevStep = () => {
+    if (currentStepIndex > 0) {
+      setCurrentScreen(workflowSteps[currentStepIndex - 1]);
+    }
+  };
+  
+  const handleNextStep = () => {
+    if (currentStepIndex >= 0 && currentStepIndex < workflowSteps.length - 1) {
+      setCurrentScreen(workflowSteps[currentStepIndex + 1]);
+    }
+  };
+
   // Library layout
   if (currentScreen === "library") {
     return (
@@ -447,7 +469,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-<CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+<CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
 <AppLayoutWrapper
             drawerOpen={drawerOpen}
             setDrawerOpen={setDrawerOpen}
@@ -493,7 +515,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -531,7 +553,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -557,7 +579,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -593,7 +615,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -625,7 +647,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -651,7 +673,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -704,7 +726,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -794,7 +816,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} />
+          <CocoHeader title={headerTitle} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -820,7 +842,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -857,7 +879,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -883,7 +905,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -926,7 +948,7 @@ function AuthenticatedApp() {
       <div className="flex h-screen bg-white">
         <CocoSideNav onLogoClick={handleReset} onHomeClick={handleReset} onLibraryClick={handleLibraryClick} />
         <div className="flex flex-1 flex-col">
-          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+          <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
           
         <AppLayoutWrapper
           drawerOpen={drawerOpen}
@@ -1066,7 +1088,7 @@ function AuthenticatedApp() {
         ) : (
           /* Conversation Screen */
           <>
-            <CocoHeader title={headerTitle} onDownload={handleNextFinalize} />
+            <CocoHeader title={headerTitle} onDownload={handleNextFinalize} onPrevStep={handlePrevStep} onNextStep={handleNextStep} hasPrevStep={hasPrevStep} hasNextStep={hasNextStep} />
             <AppLayoutWrapper
               drawerOpen={drawerOpen}
               setDrawerOpen={setDrawerOpen}
