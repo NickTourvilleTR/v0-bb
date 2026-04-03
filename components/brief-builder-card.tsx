@@ -143,7 +143,7 @@ export function BriefBuilderCard({
             <MessageSquareText className="size-5 text-[#737373] mt-0.5 shrink-0" />
             <div>
               <h4 className="font-semibold text-[#212223]">Draft a different motion type</h4>
-              <p className="mt-1 text-sm text-[#737373]">Describe the motion type in the chat. CoCounsel is optimized for the motion types listed above, but can create others via the general brief drafting skill.</p>
+              <p className="mt-1 text-sm text-[#737373]">Describe the motion type in the chat. CoCounsel is optimized for the motion types listed above but can create others via the general brief drafting skill.</p>
             </div>
           </div>
         </button>
