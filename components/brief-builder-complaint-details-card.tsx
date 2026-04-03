@@ -70,7 +70,7 @@ export function BriefBuilderComplaintDetailsCard({
                   type="checkbox"
                   checked={selectedParty === party.name}
                   onChange={() => handleToggle(party.name, party.functional)}
-                  disabled={party.disabled || (!party.functional) || disabled}
+                  disabled={party.disabled || disabled}
                   className={cn(
                     "size-4 rounded border-[#a3a3a3] accent-[#1d4b34]",
                     !party.functional && !party.disabled && "cursor-not-allowed",
