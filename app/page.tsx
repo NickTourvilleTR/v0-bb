@@ -12,7 +12,6 @@ import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-comb
 import { BriefBuilderComplaintDetailsCard } from "@/components/brief-builder-complaint-details-card";
 import { BriefBuilderAdditionalCard } from "@/components/brief-builder-additional-card";
 import { BriefBuilderProgressCard } from "@/components/brief-builder-progress-card";
-import { BriefBuilderReadyCard } from "@/components/brief-builder-ready-card";
 import { BriefBuilderGeneratingCard } from "@/components/brief-builder-generating-card";
 
 import { ArgumentsPanel } from "@/components/arguments-panel";
@@ -48,13 +47,7 @@ type Screen =
   | "complaint-details"
   | "additional-details"
   | "case-details"
-  | "ready-to-build"
   | "generating"
-  | "intake"
-  | "argue2"
-  | "support-loading"
-  | "support"
-  | "distinguish"
   | "outline"
   | "outline-loading"
   | "outline-ready"
@@ -256,16 +249,6 @@ function AuthenticatedApp() {
 
   const handleCaseDetailsContinue = (selectedParty: string, additionalDetails: string) => {
     addChatMessage("user", additionalDetails ? `Case details confirmed with additional context: ${additionalDetails}` : "Case details confirmed");
-    setCurrentScreen("ready-to-build");
-  };
-
-  const handleCaseDetailsSkip = () => {
-    addChatMessage("user", "Skipped additional details");
-    setCurrentScreen("ready-to-build");
-  };
-
-  const handleStartBuilding = () => {
-    addChatMessage("user", "I'm ready, let's start building");
     addChatMessage("assistant", "Generating your brief intake summary...");
     setCurrentScreen("generating");
     setTimeout(() => {
@@ -274,14 +257,22 @@ function AuthenticatedApp() {
     }, 2000);
   };
 
-
-
-  const handleReadyToBuild = () => {
-    addChatMessage("assistant", "Building your brief now...");
+  const handleCaseDetailsSkip = () => {
+    addChatMessage("user", "Skipped additional details");
+    addChatMessage("assistant", "Generating your brief intake summary...");
     setCurrentScreen("generating");
-    // Simulate generating, then show intake
     setTimeout(() => {
-      addChatMessage("assistant", "Your brief intake is ready. Review your intake summary and select your next steps.");
+      addChatMessage("assistant", "Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims. Review the summary and proceed to select your arguments.");
+      setCurrentScreen("intake");
+    }, 2000);
+  };
+
+  const handleAdditionalDetailsSkip = () => {
+    addChatMessage("user", "Skipped additional details");
+    addChatMessage("assistant", "Generating your brief intake summary...");
+    setCurrentScreen("generating");
+    setTimeout(() => {
+      addChatMessage("assistant", "Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims. Review the summary and proceed to select your arguments.");
       setCurrentScreen("intake");
     }, 2000);
   };
@@ -474,9 +465,8 @@ function AuthenticatedApp() {
     "uploading": 3,
     "complaint-details": 4,
     "additional-details": 5,
-  "case-details": 6,
-  "ready-to-build": 5,
-    "generating": 8,
+    "case-details": 6,
+    "generating": 7,
 "intake": 9,
   "argue2": 10,
     "support-loading": 11,
@@ -1242,13 +1232,6 @@ function AuthenticatedApp() {
                       onContinue={handleCaseDetailsContinue}
                       onSkip={handleCaseDetailsSkip}
                     />
-                  </div>
-                )}
-
-                {/* Ready to Build Card */}
-                {isAtOrPast("ready-to-build") && !isAtOrPast("generating") && (
-                  <div className="mb-6">
-                    <BriefBuilderReadyCard onStartBuilding={handleStartBuilding} />
                   </div>
                 )}
 
