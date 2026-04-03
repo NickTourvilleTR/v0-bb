@@ -139,7 +139,7 @@ export function BriefBuilderCard({
 
         {/* Draft a different motion type - no radio button */}
         <button
-          className="flex w-full items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors cursor-not-allowed opacity-60"
+          className="flex w-full items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors cursor-not-allowed"
         >
           <div className="flex items-start gap-3">
             <MessageSquareText className="size-5 text-[#737373] mt-0.5 shrink-0" />

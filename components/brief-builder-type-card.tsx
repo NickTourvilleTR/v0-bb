@@ -4,9 +4,9 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const briefTypes = [
-  { id: "primary", label: "Supporting" },
-  { id: "opposition", label: "Opposition" },
-  { id: "reply", label: "Reply" },
+  { id: "primary", label: "Supporting", functional: true },
+  { id: "opposition", label: "Opposition", functional: false },
+  { id: "reply", label: "Reply", functional: false },
 ];
 
 interface BriefBuilderTypeCardProps {
@@ -23,7 +23,8 @@ export function BriefBuilderTypeCard({
   const [selected, setSelected] = React.useState<string | null>(selectedValue || null);
   const [letterBrief, setLetterBrief] = React.useState(false);
 
-  const handleSelect = (type: string) => {
+  const handleSelect = (type: string, functional: boolean) => {
+    if (!functional) return;
     setSelected(type);
     if (onSubmit) {
       setTimeout(() => {
@@ -55,14 +56,16 @@ export function BriefBuilderTypeCard({
         {briefTypes.map((type) => (
           <label
             key={type.id}
-            className="flex cursor-pointer items-center gap-3"
+            className={`flex items-center gap-3 ${type.functional ? 'cursor-pointer' : 'cursor-not-allowed'}`}
           >
             <span
               role="radio"
               aria-checked={selected === type.id}
-              onClick={() => handleSelect(type.id)}
+              onClick={() => handleSelect(type.id, type.functional)}
               className={cn(
-                "flex size-[18px] flex-shrink-0 cursor-pointer items-center justify-center rounded-full border-2 transition-colors",
+                "flex size-[18px] flex-shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                type.functional && "cursor-pointer",
+                !type.functional && "cursor-not-allowed",
                 selected === type.id
                   ? "border-[#1d4b34]"
                   : "border-[#aaaaaa]"
@@ -74,7 +77,7 @@ export function BriefBuilderTypeCard({
             </span>
             <span
               className="text-sm text-[#212223]"
-              onClick={() => handleSelect(type.id)}
+              onClick={() => handleSelect(type.id, type.functional)}
             >
               {type.label}
             </span>
