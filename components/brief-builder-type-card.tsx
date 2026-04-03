@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Pencil } from "lucide-react";
 
 const briefTypes = [
   { id: "primary", label: "Supporting" },
@@ -22,11 +21,11 @@ export function BriefBuilderTypeCard({
   selectedValue,
 }: BriefBuilderTypeCardProps) {
   const [selected, setSelected] = React.useState<string | null>(selectedValue || null);
+  const [letterBrief, setLetterBrief] = React.useState(false);
 
   const handleSelect = (type: string) => {
     setSelected(type);
     if (onSubmit) {
-      // Small delay to show selection before transitioning
       setTimeout(() => {
         onSubmit(type);
       }, 150);
@@ -40,53 +39,89 @@ export function BriefBuilderTypeCard({
         className
       )}
     >
-      {/* Header */}
-      <h3 className="mb-4 text-lg font-semibold text-[#212223]">Select brief type</h3>
+      {/* Title */}
+      <h3 className="mb-3 text-base font-semibold text-[#212223]">
+        What&apos;s the role of your brief?
+      </h3>
 
-      {/* Question */}
-      <p className="mb-6 text-[#212223]">
-        To ensure the draft fits your scenario, are you drafting a <strong>Supporting</strong>, <strong>Opposition</strong>, <strong>Reply</strong>, or another type of brief?
+      {/* Description */}
+      <p className="mb-5 text-sm leading-relaxed text-[#212223]">
+        I can help you draft a brief supporting of a Motion for Summary Judgment. To ensure the brief fits your scenario, are you drafting a{" "}
+        <strong>Supporting</strong>, <strong>Reply</strong>, or <strong>Opposition</strong> brief?
       </p>
 
-      {/* Clickable Options */}
-      <div className="space-y-3">
+      {/* Radio Options */}
+      <div className="space-y-4">
         {briefTypes.map((type) => (
-          <button
+          <label
             key={type.id}
-            onClick={() => handleSelect(type.id)}
-            className={cn(
-              "flex w-full items-center gap-3 rounded-lg border bg-white px-4 py-3 text-left transition-colors",
-              selected === type.id 
-                ? "border-[#1d4b34] bg-[#f0f5f3]" 
-                : "border-[#e5e5e5] hover:bg-[#f7f7f7]"
-            )}
+            className="flex cursor-pointer items-center gap-3"
           >
-            <div className={cn(
-              "flex size-4 items-center justify-center rounded-full border-2 flex-shrink-0",
-              selected === type.id 
-                ? "border-[#1d4b34]" 
-                : "border-[#737373]"
-            )}>
-              {selected === type.id && (
-                <div className="size-2 rounded-full bg-[#1d4b34]" />
+            <span
+              role="radio"
+              aria-checked={selected === type.id}
+              onClick={() => handleSelect(type.id)}
+              className={cn(
+                "flex size-[18px] flex-shrink-0 cursor-pointer items-center justify-center rounded-full border-2 transition-colors",
+                selected === type.id
+                  ? "border-[#1d4b34]"
+                  : "border-[#aaaaaa]"
               )}
-            </div>
-            <span className="text-[#212223]">{type.label}</span>
-          </button>
+            >
+              {selected === type.id && (
+                <span className="block size-[9px] rounded-full bg-[#1d4b34]" />
+              )}
+            </span>
+            <span
+              className="text-sm text-[#212223]"
+              onClick={() => handleSelect(type.id)}
+            >
+              {type.label}
+            </span>
+          </label>
         ))}
-        <button
-          onClick={() => handleSelect("another")}
+      </div>
+
+      {/* Divider */}
+      <div className="my-5 border-t border-[#e5e5e5]" />
+
+      {/* Letter brief checkbox */}
+      <label className="flex cursor-pointer items-center gap-3">
+        <span
+          role="checkbox"
+          aria-checked={letterBrief}
+          onClick={() => setLetterBrief((v) => !v)}
           className={cn(
-            "flex w-full items-center gap-3 rounded-lg border bg-white px-4 py-3 text-left transition-colors",
-            selected === "another" 
-              ? "border-[#1d4b34] bg-[#f0f5f3]" 
-              : "border-[#e5e5e5] hover:bg-[#f7f7f7]"
+            "flex size-[18px] flex-shrink-0 cursor-pointer items-center justify-center rounded border-2 transition-colors",
+            letterBrief ? "border-[#1d4b34] bg-[#1d4b34]" : "border-[#aaaaaa] bg-white"
           )}
         >
-          <Pencil className="size-4 flex-shrink-0 text-[#737373]" />
-          <span className="text-[#212223]">Another type of brief</span>
-        </button>
-      </div>
+          {letterBrief && (
+            <svg
+              width="10"
+              height="8"
+              viewBox="0 0 10 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M1 4L3.5 6.5L9 1"
+                stroke="white"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </span>
+        <span
+          className="text-sm text-[#212223]"
+          onClick={() => setLetterBrief((v) => !v)}
+        >
+          Format as letter brief
+        </span>
+      </label>
     </div>
   );
 }
