@@ -34,7 +34,7 @@ export function CocoChatMessage({
           </div>
         ) : (
           <div className="flex size-8 items-center justify-center">
-            <Logo icon />
+            <Logo icon className="size-8" />
           </div>
         )}
         <div className="flex items-center gap-2 text-sm">
