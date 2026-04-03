@@ -950,7 +950,7 @@ export function SupportingAuthoritiesPanel({
             {flowType !== "judicial" && (
               <>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                  Review the supporting and contrary facts and authorities to bolster your arguments. Move the authority and fact cards below to outline each argument, and use the{" "}
+                  Review the supporting and contrary facts and authorities for the arguments. Move the authority and fact cards below to outline each argument, and use the{" "}
                   <span className="font-medium">View related</span> buttons to find additional support for each statement. Use{" "}
                   <span className="font-medium">Add facts or authorities</span> to find new facts and authorities.
                 </p>
