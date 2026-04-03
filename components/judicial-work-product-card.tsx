@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Pencil, MessageCircleEllipsis } from "lucide-react";
+import { Pencil, MessageCircleMore } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
@@ -74,7 +74,7 @@ export function JudicialWorkProductCard({
           className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
           title="Ask CoCounsel"
         >
-          <MessageCircleEllipsis className="size-4" />
+          <MessageCircleMore className="size-4" />
         </button>
       )}
 

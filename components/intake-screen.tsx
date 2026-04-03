@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ChevronRight, CircleCheck, FileText, MessageCircleEllipsis, Upload } from "lucide-react";
+import { ArrowRight, ChevronRight, CircleCheck, FileText, MessageCircleMore, Upload } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
@@ -31,7 +31,7 @@ function QuotableCard({ children, label, onQuote, className }: { children: React
           className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
           title="Ask CoCounsel"
         >
-          <MessageCircleEllipsis className="size-4" />
+          <MessageCircleMore className="size-4" />
         </button>
       )}
       {children}
