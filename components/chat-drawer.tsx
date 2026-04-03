@@ -486,7 +486,8 @@ export function ChatDrawer({
           )}
         </div>
       </TooltipProvider>
-      {currentStep === "intake" && activeTab === "chat" && (
+      {/* Fixed action buttons - hidden, kept for easy re-enable */}
+      {false && currentStep === "intake" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
             {flowType !== "judicial" && (
@@ -498,7 +499,7 @@ export function ChatDrawer({
       )}
 
       {/* Argue Step Card - above input */}
-      {currentStep === "argue" && activeTab === "chat" && (
+      {false && currentStep === "argue" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
             {flowType !== "judicial" && (
@@ -510,7 +511,7 @@ export function ChatDrawer({
       )}
 
       {/* Develop Step Card - above input */}
-      {(currentStep === "support" || currentStep === "support-loading") && activeTab === "chat" && (
+      {false && (currentStep === "support" || currentStep === "support-loading") && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
             {flowType !== "judicial" && (
@@ -522,7 +523,7 @@ export function ChatDrawer({
       )}
 
       {/* Outline Step Card - above input */}
-      {(currentStep === "outline-loading" || currentStep === "outline-ready") && activeTab === "chat" && (
+      {false && (currentStep === "outline-loading" || currentStep === "outline-ready") && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
             <Button size="sm" onClick={onNextDraft} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Draft</Button>
@@ -531,7 +532,7 @@ export function ChatDrawer({
       )}
 
       {/* Draft Step Card - above input */}
-      {(currentStep === "draft" || currentStep === "draft-loading" || currentStep === "draft-ready") && activeTab === "chat" && (
+      {false && (currentStep === "draft" || currentStep === "draft-loading" || currentStep === "draft-ready") && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
             <Button size="sm" onClick={onNextVerify} className="h-8 rounded-full bg-[#1d4b34] px-4 text-sm text-white hover:bg-[#163d2a] shrink-0">Next: Verify</Button>
@@ -540,7 +541,7 @@ export function ChatDrawer({
       )}
 
       {/* Verify Step Card - above input */}
-      {currentStep === "verify" && activeTab === "chat" && (
+      {false && currentStep === "verify" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
             <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to finalize</Button>
@@ -550,7 +551,7 @@ export function ChatDrawer({
       )}
 
       {/* Opposition Step Card - above input */}
-      {currentStep === "opposition" && activeTab === "chat" && (
+      {false && currentStep === "opposition" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
             <Button variant="outline" size="sm" onClick={onSkipToFinalize} className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">Skip to finalize</Button>
@@ -560,7 +561,7 @@ export function ChatDrawer({
       )}
 
       {/* Finalize Step Card - above input */}
-      {currentStep === "finalize" && activeTab === "chat" && (
+      {false && currentStep === "finalize" && activeTab === "chat" && (
         <div className="border-t border-[#e5e5e5] p-4">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
             <Button size="sm" variant="outline" className="h-8 rounded-full border-[#cccccc] px-4 text-sm text-[#212223] hover:bg-[#f2f2f2] shrink-0">
