@@ -267,16 +267,6 @@ function AuthenticatedApp() {
     }, 2000);
   };
 
-  const handleAdditionalDetailsSkip = () => {
-    addChatMessage("user", "Skipped additional details");
-    addChatMessage("assistant", "Generating your brief intake summary...");
-    setCurrentScreen("generating");
-    setTimeout(() => {
-      addChatMessage("assistant", "Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims. Review the summary and proceed to select your arguments.");
-      setCurrentScreen("intake");
-    }, 2000);
-  };
-
   const handleReset = () => {
     setCurrentScreen("start");
     setChatMessages([]);
