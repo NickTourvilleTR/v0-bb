@@ -3,7 +3,6 @@
 import * as React from "react";
 import { MessageSquareText, MessageCircleQuestion } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 
 const motionTypes = [
   {
@@ -110,7 +109,7 @@ export function BriefBuilderCard({
             key={motion.id}
             onClick={() => handleMotionSelect(motion.id, motion.functional)}
             className={cn(
-              "flex w-full items-start justify-between gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
+              "flex w-full items-start gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
               selected === motion.id
                 ? "border-[#1d4b34] bg-[#f0f5f3]"
                 : "border-[#e5e5e5] hover:bg-[#f7f7f7]",
@@ -133,13 +132,12 @@ export function BriefBuilderCard({
                 <p className="mt-1 text-sm text-[#737373]">{motion.description}</p>
               </div>
             </div>
-            <Badge variant="outline" className="shrink-0">Workflow</Badge>
           </button>
         ))}
 
         {/* Draft a different motion type - no radio button */}
         <button
-          className="flex w-full items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors cursor-not-allowed"
+          className="flex w-full items-start gap-3 rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors cursor-not-allowed"
         >
           <div className="flex items-start gap-3">
             <MessageSquareText className="size-5 text-[#737373] mt-0.5 shrink-0" />
@@ -148,7 +146,6 @@ export function BriefBuilderCard({
               <p className="mt-1 text-sm text-[#737373]">Describe the motion type in the chat. CoCounsel is optimized for the motion types listed above, but can create others via the general brief drafting skill.</p>
             </div>
           </div>
-          <Badge variant="secondary" className="shrink-0">Workflow</Badge>
         </button>
       </div>
     </div>
