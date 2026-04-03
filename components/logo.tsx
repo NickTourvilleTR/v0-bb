@@ -1,9 +1,8 @@
-export function Logo({ icon }: { icon?: boolean }) {
+export function Logo({ icon, className = "w-8 h-8" }: { icon?: boolean; className?: string }) {
   if (icon) {
     return (
       <svg
-        width="32"
-        height="32"
+        className={className}
         viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -17,8 +16,7 @@ export function Logo({ icon }: { icon?: boolean }) {
 
   return (
     <svg
-      width="32"
-      height="32"
+      className={className}
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
