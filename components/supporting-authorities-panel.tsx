@@ -448,7 +448,7 @@ function CitationSubCard({
                   <button
                     className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
                   >
-                    <Reply className="size-3.5" />
+                    <MessageCircleQuestion className="size-3.5" />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="text-center">
@@ -630,7 +630,7 @@ function AuthorityCard({
                   <button
                     className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
                   >
-                    <Reply className="size-3.5" />
+                    <MessageCircleQuestion className="size-3.5" />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="text-center">
