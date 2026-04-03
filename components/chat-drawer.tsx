@@ -203,7 +203,7 @@ export function ChatDrawer({
       {!openedDocument && (
         <div className="flex items-center justify-between border-b border-[#e5e5e5] px-4 py-3">
           <div className="flex items-center gap-2">
-            <Logo className="size-5" />
+            <Logo className="size-8" />
             <span className="text-sm font-medium text-[#212223]">CoCounsel</span>
           </div>
           <button
@@ -302,9 +302,9 @@ export function ChatDrawer({
             {messages.map((msg) => (
               <div key={msg.id} className="mb-4 flex items-start gap-2">
                 {msg.type === "assistant" ? (
-                  <Logo className="mt-0.5 size-5 shrink-0" />
+              <Logo className="size-8 shrink-0" />
                 ) : (
-                  <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
+                  <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#1f1f1f] text-xs font-medium text-white">
                     {msg.userName ? msg.userName.split(" ").map(n => n[0]).join("") : "U"}
                   </div>
                 )}
