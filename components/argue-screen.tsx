@@ -270,10 +270,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                         <div
                           key={claim.id}
                           id={`argue-${claim.id}`}
-                          className={cn(
-                            "rounded-lg border p-5",
-                            isChecked ? "border-[#1d4b34] bg-[#f5f7f6]" : "border-[#e5e5e5] bg-white"
-                          )}
+                          className="rounded-lg border border-[#e5e5e5] bg-white p-5"
                         >
                           <div className="flex items-start gap-3">
                             <Checkbox 
@@ -322,10 +319,7 @@ export function ArgueScreen({ className, onNextSupportingAuthority, onSkipToGene
                 <div
                   key={argument.id}
                   id={`argue-${argument.id}`}
-                  className={cn(
-                    "rounded-lg border p-5",
-                    argument.checked ? "border-[#1d4b34] bg-[#f5f7f6]" : "border-[#e5e5e5] bg-white"
-                  )}
+                  className="rounded-lg border border-[#e5e5e5] bg-white p-5"
                 >
                   <div className="flex items-start gap-3">
                     <Checkbox 
