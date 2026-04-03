@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 const motionTypes = [
   {
     id: "dismiss",
-    title: "Motion to Dismiss",
+    title: "Motion to Dismiss*",
     description: "Ask the court to dismiss the case before trial by challenging the sufficiency of the opposing party's claims.",
     functional: true,
   },
