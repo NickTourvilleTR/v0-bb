@@ -950,9 +950,7 @@ export function SupportingAuthoritiesPanel({
             {flowType !== "judicial" && (
               <>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                  Review the supporting and contrary facts and authorities for the arguments. Move the authority and fact cards below to outline each argument, and use the{" "}
-                  <span className="font-medium">View related</span> buttons to find additional support for each statement. Use{" "}
-                  <span className="font-medium">Add facts or authorities</span> to find new facts and authorities.
+                  Review the supporting and contrary facts and authorities for the arguments.
                 </p>
                 <div className="flex items-center gap-2">
                   <button onClick={expandAll} className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
