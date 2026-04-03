@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ChevronRight, CircleCheck, FileText, Paperclip, MessageCircleQuestion, Upload } from "lucide-react";
+import { ArrowRight, ChevronRight, CircleCheck, FileText, MessageCircleQuestion, Upload } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 import { JumpToMenu, type JumpToSection } from "@/components/jump-to-menu";
@@ -211,33 +211,15 @@ const complaintContent: { [key: string]: string[] } = {
   ],
 };
 
-const briefParties = [
-  { label: "Plaintiff 1", name: "Adrienne Love", functional: false, disabled: true },
-  { label: "Defendant 1", name: "Airbnb, Inc.", functional: false, disabled: false },
-  { label: "Defendant 2", name: "Simon & Schuster, LLC", functional: true, disabled: false },
-  { label: "Defendant 3", name: "Sound Made Public, Inc.", functional: false, disabled: false },
-  { label: "Defendant 4", name: "Folio Literary Agency", functional: false, disabled: false },
-  { label: "Defendant 5", name: "The Gotham Group, LLC", functional: false, disabled: false },
-  { label: "Defendant 6", name: "3 Arts Entertainment, LLC", functional: false, disabled: false },
-  { label: "Defendant 7", name: "Creative Artists Agency, LLC", functional: false, disabled: false },
-  { label: "Defendant 8", name: "William Morris Endeavor Entertainment, LLC", functional: false, disabled: false },
-];
 
 export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   const [selectedJurisdiction, setSelectedJurisdiction] = React.useState("9th-circuit");
   const [expandedSections, setExpandedSections] = React.useState<string[]>([]);
-  const [selectedParties, setSelectedParties] = React.useState<string[]>([]);
-  const [additionalDetails, setAdditionalDetails] = React.useState("");
 
   const toggleSection = (section: string) =>
     setExpandedSections((prev) =>
       prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
-    );
-
-  const toggleParty = (name: string) =>
-    setSelectedParties((prev) =>
-      prev.includes(name) ? prev.filter((p) => p !== name) : [...prev, name]
     );
   return (
     <div className={cn("flex h-full flex-1 flex-col overflow-hidden bg-[#fcfcfc]", className)}>
@@ -257,8 +239,6 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     ] as JumpToSection[]
                   : [
                       { id: "intake-complaint-summary", label: "Complaint Summary", level: "top" },
-                      { id: "intake-complaint-details", label: "Complaint Details", level: "top" },
-                      { id: "intake-additional-details", label: "Additional Details", level: "top" },
                     ] as JumpToSection[]
               } 
             />
@@ -310,85 +290,6 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                   ))}
                 </div>
 
-                {/* Jurisdiction and Party Selection Section */}
-                <h4 id="intake-complaint-details" className="mb-3 text-sm font-semibold text-[#212223]">Complaint details</h4>
-                <div className="mb-8 rounded-lg border border-[#e5e5e5] bg-white p-5">
-                  <div className="space-y-4">
-                    {/* Jurisdiction */}
-                    <div>
-                      <p className="text-sm">
-                        <span className="font-semibold text-[#212223]">Jurisdiction:</span>{" "}
-                        <span className="text-[#212223]">California</span>
-                      </p>
-                    </div>
-
-                    {/* Party you represent */}
-                    <div>
-                      <p className="mb-3 text-sm font-semibold text-[#212223]">Party you represent:</p>
-                      <div className="space-y-2.5">
-                        {briefParties.map((party) => (
-                          <label
-                            key={party.name}
-                            className={cn(
-                              "flex items-center gap-3",
-                              party.functional ? "cursor-pointer" : party.disabled ? "cursor-default" : "cursor-not-allowed"
-                            )}
-                          >
-                            <input
-                              type="checkbox"
-                              checked={selectedParties.includes(party.name)}
-                              onChange={() => party.functional && toggleParty(party.name)}
-                              disabled={party.disabled}
-                              className={cn(
-                                "size-4 rounded border-[#a3a3a3] accent-[#1d4b34]",
-                                !party.functional && !party.disabled && "cursor-not-allowed",
-                                party.disabled && "opacity-30"
-                              )}
-                            />
-                            <span className={cn(
-                              "text-sm",
-                              party.disabled ? "text-[#a3a3a3]" : "text-[#212223]"
-                            )}>
-                              <span className="font-medium">{party.label}:</span> {party.name}
-                            </span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Additional details section */}
-                <div>
-                  <div className="mb-2 flex items-center gap-2">
-                    <h4 id="intake-additional-details" className="text-sm font-semibold text-[#212223]">Additional details</h4>
-                    <span className="rounded bg-[#f2f2f2] px-2 py-0.5 text-xs text-[#737373]">Optional</span>
-                  </div>
-                  <p className="mb-3 text-sm text-[#212223]">
-                    <span className="font-semibold">Are there any other key details you can provide?</span>{" "}
-                    These will help tailor the brief to your scenario. You can enter additional information such as:
-                  </p>
-                  <ul className="mb-3 ml-5 list-disc space-y-1 text-sm text-[#212223]">
-                    <li>Pertinent facts</li>
-                    <li>Relevant context</li>
-                    <li>Theory of the case</li>
-                    <li>Client&apos;s side of the story</li>
-                    <li>Contested facts and issues</li>
-                    <li>Strategic objectives or considerations</li>
-                  </ul>
-                  <div className="relative rounded-lg border border-[#e5e5e5]">
-                    <textarea
-                      value={additionalDetails}
-                      onChange={(e) => setAdditionalDetails(e.target.value)}
-                      placeholder="Enter additional details here..."
-                      rows={4}
-                      className="w-full resize-none rounded-lg bg-white px-4 py-3 pr-10 text-sm text-[#212223] placeholder:text-[#a3a3a3] focus:outline-none"
-                    />
-                    <button className="absolute bottom-3 right-3 text-[#a3a3a3] hover:text-[#737373]">
-                      <Paperclip className="size-4" />
-                    </button>
-                  </div>
-                </div>
               </QuotableCard>
             )}
 

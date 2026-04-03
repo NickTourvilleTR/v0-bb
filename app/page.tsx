@@ -9,6 +9,8 @@ import { JudicialWorkProductCard } from "@/components/judicial-work-product-card
 import { BriefBuilderTypeCard } from "@/components/brief-builder-type-card";
 import { BriefBuilderUploadCard, judicialDefaultFiles } from "@/components/brief-builder-upload-card";
 import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-combined-details-card";
+import { BriefBuilderComplaintDetailsCard } from "@/components/brief-builder-complaint-details-card";
+import { BriefBuilderAdditionalCard } from "@/components/brief-builder-additional-card";
 import { BriefBuilderProgressCard } from "@/components/brief-builder-progress-card";
 import { BriefBuilderReadyCard } from "@/components/brief-builder-ready-card";
 import { BriefBuilderGeneratingCard } from "@/components/brief-builder-generating-card";
@@ -43,6 +45,8 @@ type Screen =
   | "brief-type"
   | "file-upload"
   | "uploading"
+  | "complaint-details"
+  | "additional-details"
   | "case-details"
   | "ready-to-build"
   | "generating"
@@ -228,12 +232,26 @@ function AuthenticatedApp() {
     } else {
       addChatMessage("user", "Uploaded 6 documents");
       setCurrentScreen("uploading");
-      // Simulate analyzing documents, then go straight to intake
+      // Simulate analyzing documents, then show complaint details card
       setTimeout(() => {
-        addChatMessage("assistant", "I've analyzed the uploaded documents. Review and make your selections to proceed.");
-        setCurrentScreen("intake");
+        addChatMessage("assistant", "I've analyzed the uploaded documents. Please review the complaint details below.");
+        setCurrentScreen("complaint-details");
       }, 3000);
     }
+  };
+
+  const handleComplaintDetailsSelect = (_party: string) => {
+    setCurrentScreen("additional-details");
+  };
+
+  const handleAdditionalDetailsSubmit = (_details: string) => {
+    addChatMessage("assistant", "Details received. Review and make your selections to proceed.");
+    setCurrentScreen("intake");
+  };
+
+  const handleAdditionalDetailsSkip = () => {
+    addChatMessage("assistant", "Review and make your selections to proceed.");
+    setCurrentScreen("intake");
   };
 
   const handleCaseDetailsContinue = (selectedParty: string, additionalDetails: string) => {
@@ -454,7 +472,9 @@ function AuthenticatedApp() {
     "brief-type": 2,
     "file-upload": 2,
     "uploading": 3,
-  "case-details": 4,
+    "complaint-details": 4,
+    "additional-details": 5,
+  "case-details": 6,
   "ready-to-build": 5,
     "generating": 8,
 "intake": 9,
@@ -1187,6 +1207,28 @@ function AuthenticatedApp() {
                     <BriefBuilderProgressCard 
                       progress={40} 
                       tags={flowType === "judicial" ? [{ label: "Opinion", color: "#1d4b34" }] : [{ label: "Motion to dismiss", color: "#1d4b34" }, { label: "Supporting brief", color: "#1d4b34" }]}
+                    />
+                  </div>
+                )}
+
+                {/* Complaint Details Card */}
+                {flowType === "brief" && isAtOrPast("complaint-details") && (
+                  <div className="mb-6">
+                    <BriefBuilderComplaintDetailsCard
+                      onSelect={handleComplaintDetailsSelect}
+                      disabled={isAtOrPast("additional-details")}
+                      defaultSelected={isAtOrPast("additional-details") ? "Simon & Schuster, LLC" : ""}
+                    />
+                  </div>
+                )}
+
+                {/* Additional Details Card */}
+                {flowType === "brief" && isAtOrPast("additional-details") && (
+                  <div className="mb-6">
+                    <BriefBuilderAdditionalCard
+                      showTags={false}
+                      onSubmit={handleAdditionalDetailsSubmit}
+                      onSkip={handleAdditionalDetailsSkip}
                     />
                   </div>
                 )}

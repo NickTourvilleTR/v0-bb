@@ -10,6 +10,7 @@ interface BriefBuilderAdditionalCardProps {
   className?: string;
   onInputChange?: (value: string) => void;
   onSkip?: () => void;
+  onSubmit?: (value: string) => void;
 }
 
 export function BriefBuilderAdditionalCard({
@@ -17,6 +18,7 @@ export function BriefBuilderAdditionalCard({
   className,
   onInputChange,
   onSkip,
+  onSubmit,
 }: BriefBuilderAdditionalCardProps) {
   const [inputValue, setInputValue] = React.useState("");
 
@@ -32,18 +34,8 @@ export function BriefBuilderAdditionalCard({
       )}
     >
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-[#212223]">Additional details</h3>
-        {showTags && (
-          <div className="flex items-center gap-2">
-            <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-              Motion to dismiss
-            </span>
-            <span className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-              Supporting brief
-            </span>
-          </div>
-        )}
+      <div className="mb-4">
+        <h3 className="text-base font-semibold text-[#212223]">Additional details</h3>
       </div>
 
       {/* Question */}
@@ -85,6 +77,7 @@ export function BriefBuilderAdditionalCard({
           </Button>
           <Button
             className="h-11 flex-1 bg-[#1d4b34] text-white hover:bg-[#163d2a]"
+            onClick={() => onSubmit?.(inputValue)}
           >
             Submit
           </Button>
