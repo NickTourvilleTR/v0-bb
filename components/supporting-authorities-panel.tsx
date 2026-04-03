@@ -452,8 +452,7 @@ function CitationSubCard({
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="text-center">
-                  <p><strong>Open chat</strong></p>
-                  <p className="text-xs opacity-80">to ask about this section</p>
+                  <p><strong>Ask CoCounsel</strong></p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -634,8 +633,7 @@ function AuthorityCard({
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="text-center">
-                  <p><strong>Open chat</strong></p>
-                  <p className="text-xs opacity-80">to ask about this section</p>
+                  <p><strong>Ask CoCounsel</strong></p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
