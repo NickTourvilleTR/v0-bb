@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const briefTypes = [
-  { id: "primary", label: "Supporting", functional: true },
+  { id: "primary", label: "Supporting*", functional: true },
   { id: "opposition", label: "Opposition", functional: false },
   { id: "reply", label: "Reply", functional: false },
 ];
