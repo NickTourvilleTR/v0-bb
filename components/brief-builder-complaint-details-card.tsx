@@ -74,7 +74,7 @@ export function BriefBuilderComplaintDetailsCard({
                   className={cn(
                     "size-4 rounded border-[#a3a3a3] accent-[#1d4b34]",
                     !party.functional && !party.disabled && "cursor-not-allowed",
-                    party.disabled && "opacity-30"
+                    party.disabled && "opacity-30 cursor-not-allowed"
                   )}
                 />
                 <span
