@@ -289,7 +289,7 @@ export function ChatDrawer({
             <>
               {/* CoCounsel intro message */}
             <div className="mb-4 flex items-start gap-2">
-              <Logo className="mt-0.5 size-5 shrink-0" />
+              <Logo className="size-8 shrink-0" />
               <div>
                 <p className="text-xs text-[#737373]">CoCounsel</p>
                 <p className="text-sm text-[#212223]">
