@@ -119,6 +119,7 @@ function AuthenticatedApp() {
   }>>([]);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
+  const motionSearchRef = React.useRef<HTMLDivElement>(null);
   
   // Helper function to add a message to the chat
   const addChatMessage = (type: "user" | "assistant", content: string) => {
@@ -161,15 +162,17 @@ function AuthenticatedApp() {
     }
   };
 
-  // Auto-scroll to bottom when screen changes with smooth animation
+  // Auto-scroll when screen changes with smooth animation
   React.useEffect(() => {
-    if (scrollEndRef.current) {
-      // Small delay to ensure new content is rendered before scrolling
-      const timer = setTimeout(() => {
-        scrollEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-      }, 100);
-      return () => clearTimeout(timer);
-    }
+    // Small delay to ensure new content is rendered before scrolling
+    const timer = setTimeout(() => {
+      if (currentScreen === "motion-search" && motionSearchRef.current) {
+        motionSearchRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else if (scrollEndRef.current) {
+        scrollEndRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+      }
+    }, 100);
+    return () => clearTimeout(timer);
   }, [currentScreen]);
 
   const handleStartSubmit = () => {
@@ -1143,7 +1146,7 @@ function AuthenticatedApp() {
 
                 {/* Motion Search Card */}
                 {flowType === "brief" && isAtOrPast("motion-search") && (
-                  <div className="mb-6">
+                  <div ref={motionSearchRef} className="mb-6">
                     <BriefBuilderCard
                       onSubmit={handleMotionSearchSubmit}
                       onQuote={handleQuote}
