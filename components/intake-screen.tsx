@@ -215,7 +215,7 @@ const complaintContent: { [key: string]: string[] } = {
 export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerateDraft, onGenerateDraft, onEditOutline, onQuote, flowType = "brief" }: IntakeScreenProps) {
   const [showOutlinePreview, setShowOutlinePreview] = React.useState(false);
   const [selectedJurisdiction, setSelectedJurisdiction] = React.useState("9th-circuit");
-  const [expandedSections, setExpandedSections] = React.useState<string[]>([]);
+  const [expandedSections, setExpandedSections] = React.useState<string[]>(complaintSections);
 
   const toggleSection = (section: string) =>
     setExpandedSections((prev) =>
@@ -269,13 +269,13 @@ export function IntakeScreen({ className, onNextSelectArguments, onSkipToGenerat
                     <div key={section}>
                       <button
                         onClick={() => toggleSection(section)}
-                        className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-[#f7f7f7]"
+                        className="flex w-full items-center gap-3 bg-[#f7f7f7] px-4 py-3 text-left hover:bg-[#f0f0f0]"
                       >
                         <ChevronRight className={cn("size-4 shrink-0 text-[#737373] transition-transform", expandedSections.includes(section) && "rotate-90")} />
                         <span className="text-sm text-[#212223]">{section}</span>
                       </button>
                       {expandedSections.includes(section) && complaintContent[section].length > 0 && (
-                        <div className="border-t border-[#e5e5e5] bg-[#f7f7f7] px-4 py-3">
+                        <div className="border-t border-[#e5e5e5] bg-white px-4 py-3">
                           <ul className="space-y-2">
                             {complaintContent[section].map((bullet, idx) => (
                               <li key={idx} className="flex gap-2 text-sm text-[#212223]">
