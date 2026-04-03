@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
+import { Notebook, Plus, Pencil, ExternalLink, Sparkles, MessageCircleQuestion, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -448,12 +448,11 @@ function CitationSubCard({
                   <button
                     className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
                   >
-                    <Reply className="size-3.5" />
+                    <MessageCircleQuestion className="size-3.5" />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="text-center">
-                  <p><strong>Open chat</strong></p>
-                  <p className="text-xs opacity-80">to ask about this section</p>
+                  <p><strong>Ask CoCounsel</strong></p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -630,12 +629,11 @@ function AuthorityCard({
                   <button
                     className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
                   >
-                    <Reply className="size-3.5" />
+                    <MessageCircleQuestion className="size-3.5" />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="text-center">
-                  <p><strong>Open chat</strong></p>
-                  <p className="text-xs opacity-80">to ask about this section</p>
+                  <p><strong>Ask CoCounsel</strong></p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -950,9 +948,7 @@ export function SupportingAuthoritiesPanel({
             {flowType !== "judicial" && (
               <>
                 <p className="mb-4 text-sm leading-relaxed text-[#212223]">
-                  Review the supporting and contrary facts and authorities to bolster your arguments. Move the authority and fact cards below to outline each argument, and use the{" "}
-                  <span className="font-medium">View related</span> buttons to find additional support for each statement. Use{" "}
-                  <span className="font-medium">Add facts or authorities</span> to find new facts and authorities.
+                  Review the supporting and contrary facts and authorities for the arguments.
                 </p>
                 <div className="flex items-center gap-2">
                   <button onClick={expandAll} className="inline-flex items-center gap-1.5 rounded-md bg-[#f0f5f3] px-3 py-2 text-sm font-medium text-[#1d4b34] hover:bg-[#e5efe9]">
@@ -1108,9 +1104,9 @@ export function SupportingAuthoritiesPanel({
                             : "Decision on breach of the implied covenant of good faith and fair dealing"
                         )}
                         className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
-                        title="Quote this message"
+                        title="Ask CoCounsel"
                       >
-                        <Reply className="size-4" />
+                        <MessageCircleQuestion className="size-4" />
                       </button>
                     )}
                     <div className="mb-3">

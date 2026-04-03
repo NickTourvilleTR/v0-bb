@@ -1,14 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { MessageSquareText, Reply } from "lucide-react";
+import { MessageSquareText, MessageCircleQuestion } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 
 const motionTypes = [
   {
     id: "dismiss",
-    title: "Motion to Dismiss",
+    title: "Motion to Dismiss*",
     description: "Ask the court to dismiss the case before trial by challenging the sufficiency of the opposing party's claims.",
     functional: true,
   },
@@ -95,9 +94,9 @@ export function BriefBuilderCard({
         <button
           onClick={handleQuoteClick}
           className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
-          title="Quote this message"
+          title="Ask CoCounsel"
         >
-          <Reply className="size-4" />
+          <MessageCircleQuestion className="size-4" />
         </button>
       )}
       {/* Header */}
@@ -110,7 +109,7 @@ export function BriefBuilderCard({
             key={motion.id}
             onClick={() => handleMotionSelect(motion.id, motion.functional)}
             className={cn(
-              "flex w-full items-start justify-between gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
+              "flex w-full items-start gap-3 rounded-lg border bg-white p-4 text-left transition-colors",
               selected === motion.id
                 ? "border-[#1d4b34] bg-[#f0f5f3]"
                 : "border-[#e5e5e5] hover:bg-[#f7f7f7]",
@@ -133,23 +132,20 @@ export function BriefBuilderCard({
                 <p className="mt-1 text-sm text-[#737373]">{motion.description}</p>
               </div>
             </div>
-            <Badge variant="outline" className="shrink-0">Workflow</Badge>
           </button>
         ))}
 
         {/* Draft a different motion type - no radio button */}
         <button
-          onClick={() => handleMotionSelect("other")}
-          className="flex w-full items-start justify-between gap-3 rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors hover:bg-[#f7f7f7]"
+          className="flex w-full items-start gap-3 rounded-lg border border-[#e5e5e5] bg-white p-4 text-left transition-colors cursor-not-allowed"
         >
           <div className="flex items-start gap-3">
             <MessageSquareText className="size-5 text-[#737373] mt-0.5 shrink-0" />
             <div>
               <h4 className="font-semibold text-[#212223]">Draft a different motion type</h4>
-              <p className="mt-1 text-sm text-[#737373]">Describe the motion type in the chat. CoCounsel is optimized for the motion types listed above, but can create others via the general brief drafting skill.</p>
+              <p className="mt-1 text-sm text-[#737373]">Describe the motion type in the chat. CoCounsel is optimized for the motion types listed above but can create others via the general brief drafting skill.</p>
             </div>
           </div>
-          <Badge variant="secondary" className="shrink-0">Workflow</Badge>
         </button>
       </div>
     </div>

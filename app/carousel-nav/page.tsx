@@ -9,8 +9,9 @@ import { JudicialWorkProductCard } from "@/components/judicial-work-product-card
 import { BriefBuilderTypeCard } from "@/components/brief-builder-type-card";
 import { BriefBuilderUploadCard, judicialDefaultFiles } from "@/components/brief-builder-upload-card";
 import { BriefBuilderCombinedDetailsCard } from "@/components/brief-builder-combined-details-card";
+import { BriefBuilderComplaintDetailsCard } from "@/components/brief-builder-complaint-details-card";
+import { BriefBuilderAdditionalCard } from "@/components/brief-builder-additional-card";
 import { BriefBuilderProgressCard } from "@/components/brief-builder-progress-card";
-import { BriefBuilderReadyCard } from "@/components/brief-builder-ready-card";
 import { BriefBuilderGeneratingCard } from "@/components/brief-builder-generating-card";
 
 import { ArgumentsPanel } from "@/components/arguments-panel";
@@ -43,8 +44,9 @@ type Screen =
   | "brief-type"
   | "file-upload"
   | "uploading"
+  | "complaint-details"
+  | "additional-details"
   | "case-details"
-  | "ready-to-build"
   | "generating"
   | "intake"
   | "argue2"
@@ -87,7 +89,7 @@ export default function CarouselNavPrototype() {
 
 function AuthenticatedApp() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [notesOpen, setNotesOpen] = React.useState(false);
   const [showUserArgument, setShowUserArgument] = React.useState(false);
   const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
@@ -119,6 +121,7 @@ function AuthenticatedApp() {
   }>>([]);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const scrollEndRef = React.useRef<HTMLDivElement>(null);
+  const motionSearchRef = React.useRef<HTMLDivElement>(null);
   
   // Helper function to add a message to the chat
   const addChatMessage = (type: "user" | "assistant", content: string) => {
@@ -161,15 +164,17 @@ function AuthenticatedApp() {
     }
   };
 
-  // Auto-scroll to bottom when screen changes with smooth animation
+  // Auto-scroll when screen changes with smooth animation
   React.useEffect(() => {
-    if (scrollEndRef.current) {
-      // Small delay to ensure new content is rendered before scrolling
-      const timer = setTimeout(() => {
-        scrollEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-      }, 100);
-      return () => clearTimeout(timer);
-    }
+    // Small delay to ensure new content is rendered before scrolling
+    const timer = setTimeout(() => {
+      if (currentScreen === "motion-search" && motionSearchRef.current) {
+        motionSearchRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else if (scrollEndRef.current) {
+        scrollEndRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+      }
+    }, 100);
+    return () => clearTimeout(timer);
   }, [currentScreen]);
 
   const handleStartSubmit = () => {
@@ -225,26 +230,30 @@ function AuthenticatedApp() {
     } else {
       addChatMessage("user", "Uploaded 6 documents");
       setCurrentScreen("uploading");
-      // Simulate analyzing documents, then go straight to intake
+      // Simulate analyzing documents, then show complaint details card
       setTimeout(() => {
-        addChatMessage("assistant", "I've analyzed the uploaded documents. Review and make your selections to proceed.");
-        setCurrentScreen("intake");
+        addChatMessage("assistant", "I've analyzed the uploaded documents. Please review the complaint details below.");
+        setCurrentScreen("complaint-details");
       }, 3000);
     }
   };
 
+  const handleComplaintDetailsSelect = (_party: string) => {
+    setCurrentScreen("additional-details");
+  };
+
+  const handleAdditionalDetailsSubmit = (_details: string) => {
+    addChatMessage("assistant", "Details received. Review and make your selections to proceed.");
+    setCurrentScreen("intake");
+  };
+
+  const handleAdditionalDetailsSkip = () => {
+    addChatMessage("assistant", "Review and make your selections to proceed.");
+    setCurrentScreen("intake");
+  };
+
   const handleCaseDetailsContinue = (selectedParty: string, additionalDetails: string) => {
     addChatMessage("user", additionalDetails ? `Case details confirmed with additional context: ${additionalDetails}` : "Case details confirmed");
-    setCurrentScreen("ready-to-build");
-  };
-
-  const handleCaseDetailsSkip = () => {
-    addChatMessage("user", "Skipped additional details");
-    setCurrentScreen("ready-to-build");
-  };
-
-  const handleStartBuilding = () => {
-    addChatMessage("user", "I'm ready, let's start building");
     addChatMessage("assistant", "Generating your brief intake summary...");
     setCurrentScreen("generating");
     setTimeout(() => {
@@ -253,14 +262,22 @@ function AuthenticatedApp() {
     }, 2000);
   };
 
-
-
-  const handleReadyToBuild = () => {
-    addChatMessage("assistant", "Building your brief now...");
+  const handleCaseDetailsSkip = () => {
+    addChatMessage("user", "Skipped additional details");
+    addChatMessage("assistant", "Generating your brief intake summary...");
     setCurrentScreen("generating");
-    // Simulate generating, then show intake
     setTimeout(() => {
-      addChatMessage("assistant", "Your brief intake is ready. Review your intake summary and select your next steps.");
+      addChatMessage("assistant", "Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims. Review the summary and proceed to select your arguments.");
+      setCurrentScreen("intake");
+    }, 2000);
+  };
+
+  const handleAdditionalDetailsSkip = () => {
+    addChatMessage("user", "Skipped additional details");
+    addChatMessage("assistant", "Generating your brief intake summary...");
+    setCurrentScreen("generating");
+    setTimeout(() => {
+      addChatMessage("assistant", "Your intake summary is ready. I've analyzed the complaint and identified the key facts, parties, and claims. Review the summary and proceed to select your arguments.");
       setCurrentScreen("intake");
     }, 2000);
   };
@@ -390,9 +407,10 @@ function AuthenticatedApp() {
     "brief-type": 2,
     "file-upload": 2,
     "uploading": 3,
-  "case-details": 4,
-  "ready-to-build": 5,
-    "generating": 8,
+    "complaint-details": 4,
+    "additional-details": 5,
+    "case-details": 6,
+    "generating": 7,
 "intake": 9,
   "argue2": 10,
     "support-loading": 11,
@@ -1116,7 +1134,7 @@ function AuthenticatedApp() {
 
                 {/* Motion Search Card */}
                 {flowType === "brief" && isAtOrPast("motion-search") && (
-                  <div className="mb-6">
+                  <div ref={motionSearchRef} className="mb-6">
                     <BriefBuilderCard
                       onSubmit={handleMotionSearchSubmit}
                       onQuote={handleQuote}
@@ -1161,6 +1179,28 @@ function AuthenticatedApp() {
                   </div>
                 )}
 
+                {/* Complaint Details Card */}
+                {flowType === "brief" && isAtOrPast("complaint-details") && (
+                  <div className="mb-6">
+                    <BriefBuilderComplaintDetailsCard
+                      onSelect={handleComplaintDetailsSelect}
+                      disabled={isAtOrPast("additional-details")}
+                      defaultSelected={isAtOrPast("additional-details") ? "Simon & Schuster, LLC" : ""}
+                    />
+                  </div>
+                )}
+
+                {/* Additional Details Card */}
+                {flowType === "brief" && isAtOrPast("additional-details") && (
+                  <div className="mb-6">
+                    <BriefBuilderAdditionalCard
+                      showTags={false}
+                      onSubmit={handleAdditionalDetailsSubmit}
+                      onSkip={handleAdditionalDetailsSkip}
+                    />
+                  </div>
+                )}
+
                 {/* Combined Case Details and Additional Details Card */}
                 {isAtOrPast("case-details") && (
                   <div className="mb-6">
@@ -1170,13 +1210,6 @@ function AuthenticatedApp() {
                       onContinue={handleCaseDetailsContinue}
                       onSkip={handleCaseDetailsSkip}
                     />
-                  </div>
-                )}
-
-                {/* Ready to Build Card */}
-                {isAtOrPast("ready-to-build") && !isAtOrPast("generating") && (
-                  <div className="mb-6">
-                    <BriefBuilderReadyCard onStartBuilding={handleStartBuilding} />
                   </div>
                 )}
 

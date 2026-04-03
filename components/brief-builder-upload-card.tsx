@@ -72,17 +72,8 @@ export function BriefBuilderUploadCard({
       )}
     >
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4">
         <h3 className="text-lg font-semibold text-[#212223]">{headerTitle}</h3>
-        {showTags && tags.length > 0 && (
-          <div className="flex items-center gap-2">
-            {tags.map((tag, idx) => (
-              <span key={idx} className="rounded-full bg-[#ebf0ed] px-3 py-1 text-xs text-[#1d4b34]">
-                {tag.label}
-              </span>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Description */}
