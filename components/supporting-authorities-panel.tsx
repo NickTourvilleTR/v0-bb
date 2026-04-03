@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, Plus, Pencil, ExternalLink, Sparkles, Reply, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
+import { Notebook, Plus, Pencil, ExternalLink, Sparkles, HelpCircle, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -1108,9 +1108,9 @@ export function SupportingAuthoritiesPanel({
                             : "Decision on breach of the implied covenant of good faith and fair dealing"
                         )}
                         className="absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-[#1d4b34] text-white transition-transform duration-200 hover:scale-110 hover:bg-[#163d2a]"
-                        title="Quote this message"
+                        title="Ask CoCounsel"
                       >
-                        <Reply className="size-4" />
+                        <HelpCircle className="size-4" />
                       </button>
                     )}
                     <div className="mb-3">
