@@ -215,8 +215,8 @@ export function ChatDrawer({
         </div>
       )}
 
-      {/* Tabs - hidden when document is open */}
-      {!openedDocument && (
+      {/* Tabs - hidden for now, kept for easy re-enable */}
+      {false && !openedDocument && (
         <div className="flex border-b border-[#e5e5e5]">
           {(["chat", "sources", "notes"] as const).map((tab) => (
             <button

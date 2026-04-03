@@ -46,47 +46,52 @@ export function RightToolbar({
             <p>Chat</p>
           </TooltipContent>
         </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              onClick={onNotesClick}
-              className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
-            >
-              <Notebook className="size-5" />
-            </button>
-          </TooltipTrigger>
-          <TooltipContent side="left">
-            <p>Notes</p>
-          </TooltipContent>
-        </Tooltip>
-        {!hideHistoryButton && (
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                onClick={onHistoryClick}
-                className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
-              >
-                <History className="size-5" />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="left">
-              <p>History</p>
-            </TooltipContent>
-          </Tooltip>
+        {/* Hidden buttons - kept for easy re-enable */}
+        {false && (
+          <>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={onNotesClick}
+                  className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
+                >
+                  <Notebook className="size-5" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="left">
+                <p>Notes</p>
+              </TooltipContent>
+            </Tooltip>
+            {!hideHistoryButton && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={onHistoryClick}
+                    className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
+                  >
+                    <History className="size-5" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="left">
+                  <p>History</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={onLibraryClick}
+                  className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
+                >
+                  <FileStack className="size-5" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="left">
+                <p>Sources</p>
+              </TooltipContent>
+            </Tooltip>
+          </>
         )}
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              onClick={onLibraryClick}
-              className="flex size-10 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white text-[#737373] hover:bg-[#f7f7f7]"
-            >
-              <FileStack className="size-5" />
-            </button>
-          </TooltipTrigger>
-          <TooltipContent side="left">
-            <p>Sources</p>
-          </TooltipContent>
-        </Tooltip>
       </div>
     </TooltipProvider>
   );

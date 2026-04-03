@@ -84,7 +84,7 @@ export default function BriefBuilderPrototype() {
 
 function AuthenticatedApp() {
   const [currentScreen, setCurrentScreen] = React.useState<Screen>("start");
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [notesOpen, setNotesOpen] = React.useState(false);
   const [showUserArgument, setShowUserArgument] = React.useState(false);
   const [selectedMotion, setSelectedMotion] = React.useState<string | null>(null);
