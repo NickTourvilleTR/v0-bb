@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Notebook, Plus, Pencil, ExternalLink, Sparkles, MessageCircleQuestion, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
+import { Notebook, Plus, Pencil, ExternalLink, Sparkles, MessageCircleEllipsis, GripVertical, Move, Trash2, ChevronUp, ChevronDown, X, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
 import { OutlinePreviewModal } from "@/components/outline-preview-modal";
 import { FilePreviewIcon } from "@/components/file-preview-icon";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -448,7 +448,7 @@ function CitationSubCard({
                   <button
                     className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
                   >
-                    <MessageCircleQuestion className="size-3.5" />
+                    <MessageCircleEllipsis className="size-3.5" />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="text-center">
@@ -629,7 +629,7 @@ function AuthorityCard({
                   <button
                     className="flex size-7 items-center justify-center rounded-full bg-[#1d4b34] text-white hover:bg-[#163d2a]"
                   >
-                    <MessageCircleQuestion className="size-3.5" />
+                    <MessageCircleEllipsis className="size-3.5" />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="text-center">
