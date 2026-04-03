@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const briefParties = [
   { label: "Plaintiff 1", name: "Adrienne Love", functional: false, disabled: true },
   { label: "Defendant 1", name: "Airbnb, Inc.", functional: false, disabled: false },
-  { label: "Defendant 2", name: "Simon & Schuster, LLC", functional: true, disabled: false },
+  { label: "Defendant 2", name: "Simon & Schuster, LLC*", functional: true, disabled: false },
   { label: "Defendant 3", name: "Sound Made Public, Inc.", functional: false, disabled: false },
   { label: "Defendant 4", name: "Folio Literary Agency", functional: false, disabled: false },
   { label: "Defendant 5", name: "The Gotham Group, LLC", functional: false, disabled: false },
